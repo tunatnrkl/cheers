@@ -431,6 +431,65 @@ const CURATED: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+
+  // ───────────── EKLENEN ELLER (saatlik) ─────────────
+  {
+    id: "c34", title: "Kuru board'da AK yüksek: küçük c-bet", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "AsKd", board: "9h6c2d", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F 9h6c2d", "BB x"],
+    options: ["Check", "1/3 pot bahis (≈1.8 BB)", "Pot bahis (5.5 BB)"], correct: 1, topic: "cbet", level: 1,
+    reasoning: "9-6-2 gibi kuru ve bağlantısız bir board, butonun açılış aralığına BB'nin aralığından çok daha uygundur: AA, KK, 99 gibi güçlü eller bizde daha sık bulunur. Böyle board'larda küçük bahis, düşük maliyetle sık sık pot kazandırır. AK henüz per değil ama iki overcard'ı ve as/papaz blocker'ları var; büyük bahis zayıf aralıkları fold ettirmek için gerekenden pahalıdır.",
+  },
+  {
+    id: "c35", title: "Kuru board'da set: boyut seçimi", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "7h7d", board: "7c4d2s", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F 7c4d2s", "BB x"],
+    options: ["Check (slowplay)", "1/4 pot bahis (≈1.4 BB)", "2/3 pot bahis (≈3.7 BB)"], correct: 2, topic: "value", level: 2,
+    reasoning: "Üç kişilik değil, heads-up bir pottasın ve board kuru; BB'nin çoğu eli (A7 hariç) ya hiç bağlanmamış ya da zayıf bir per/çekişle gelmiştir. Slowplay burada chip kaybettirir çünkü bedava kart verirsin ve rakibin devam eden eli az olduğu için bahis almak zordur. 2/3 pot, per ve çekişlerden hem fiyat alır hem de turn ve river'da rahatça stack'leri ortaya getirmene yol açar.",
+  },
+  {
+    id: "c36", title: "BB'de Q8 offsuit, UTG açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Qc8d", potBB: 4, seq: ["UTG r2.5", "HJ f", "CO f", "BTN f", "SB f"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 10 BB"], correct: 0, topic: "savunma", level: 1,
+    reasoning: "Fiyat (1.5 BB'ye 4 BB'lik pot) cazip görünür ama UTG'nin aralığı dardır ve Q8o onun QJ, QT, AQ, KQ gibi ellerine karşı domine durumdadır. Pozisyon dışında oynayacak ve çoğu flop'ta zor kararlarla karşılaşacaksın. Fiyat avantajı, aralığın gücünden gelen dezavantajı kapatmaz; butona karşı savunacağın eller, UTG'ye karşı fold'dur.",
+  },
+  {
+    id: "c37", title: "Squeeze: açılış ve call'ın arkasında AK", game: "cash", street: "preflop", heroPos: "BTN", stackBB: 100,
+    hero: "AhKc", potBB: 6.5, seq: ["HJ r2.5", "CO c"],
+    options: ["Fold", "Call (2.5 BB)", "3-bet (squeeze) 11 BB"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "Açılış ve call'dan sonra pot 6.5 BB: ölü para var ve call eden oyuncunun aralığı sınırlıdır (genelde 3-bet atmayacağı eller). AK bu aralığa karşı çok iyi bir value elidir ve 11 BB'ye squeeze, iki rakibi de zor durumda bırakır. Sadece call etmek ise blind'lara squeeze fırsatı verir ve AK'yı büyük potlarda oynama şansından yoksun bırakır; boyut normal 3-bet'ten büyük olmalı çünkü iki rakip var.",
+  },
+  {
+    id: "c38", title: "Nut floş çekişiyle check-raise", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
+    hero: "KdJd", board: "Ad7d2c", potBB: 7.3, seq: ["BTN r2.5", "SB f", "BB c", "F Ad7d2c", "BB x", "BTN b1.8"],
+    options: ["Fold", "Call (1.8 BB)", "Check-raise 7 BB"], correct: 2, topic: "blof", level: 2,
+    reasoning: "Butonun küçük bahsi çoğu zaman her şeyle yapılan bir c-bet'tir. Papaz yüksek olarak nut floş çekişine sahipsin ve board'da as var, yani rakibin birçok eli zayıf. Check-raise, fold equity (zayıf elleri bırakır) ve görülürse bile 9 floş out'u + overcard'larla güçlü equity birleştiren klasik bir semi-blöftür. Sadece call etmek de kârlıdır ama inisiyatifi butona bırakır.",
+  },
+  {
+    id: "c39", title: "River'da sıkı oyuncunun büyük bahsi", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
+    hero: "KsTc", board: "Kd8s4h2c9d", potBB: 39, seq: ["BTN r2.5", "SB f", "BB c", "F Kd8s4h", "BB x", "BTN b2.75", "BB c", "T 2c", "BB x", "BTN b5.5", "BB c", "R 9d", "BB x", "BTN b17"],
+    note: "Buton çok sıkı ve pasif; river'da böyle büyük bahsi nadiren blöf olarak atıyor.",
+    options: ["Fold", "Call (17 BB)", "All-in"], correct: 0, topic: "blof", level: 2,
+    reasoning: "Pot 39 BB ve 17 BB ödeyeceksin: yaklaşık %30 equity gerekir (17 / 56). Ama pasif ve sıkı bir oyuncunun üç sokak boyunca bahis atıp river'da büyütmesi, aralığını neredeyse tamamen AK, KQ ve setlere indirir. Papaz-on bunların çoğuna yenilir; blöf oranı o kadar düşük ki pot odds yetmez. Rakip tipi bu kararda matematikten ağır basar.",
+  },
+  {
+    id: "c40", title: "Turn'de ikinci barrel: korkutucu olmayan kart", game: "cash", street: "turn", heroPos: "CO", stackBB: 100,
+    hero: "AcJc", board: "Qh7s3d2s", potBB: 9.5, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Qh7s3d", "BB x", "CO b2", "BB c", "T 2s", "BB x"],
+    options: ["Check", "Yarım pot bahis (≈5 BB)", "All-in"], correct: 1, topic: "cbet", level: 2,
+    reasoning: "Flop'ta bahsini gören BB'nin aralığı çoğunlukla Q'lu zayıf per'ler, 7'li ve çekişlerdir. Turn kartı (2♠) pek bir şeyi değiştirmedi; aralık avantajın devam ediyor. AJ'nin kendi başına per değil ama blocker'ları ve gelecekte as/vale tutarsa kazanma şansı var; orta boyutlu bir ikinci barrel, zayıf per'leri ve çekişleri bırakmaya zorlar. Check, pozisyonda elini bedava bırakmak olurdu.",
+  },
+  {
+    id: "t25", title: "8 BB ile SB'de Q9 offsuit", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 8,
+    hero: "Qd9s", potBB: 2.5, seq: [],
+    ante: 1,
+    options: ["Fold", "Limp", "All-in (8 BB)"], correct: 2, topic: "pushfold", level: 1,
+    reasoning: "8 BB'de SB'nin push aralığı çok geniştir; Q9o bu aralığın içinde rahatça yer alır. Ante'li pot 2.5 BB: BB'nin görmek için ödeyeceği fiyat ve fold equity'n, kısa stack'te bekleyip eriyen bir stack'ten çok daha değerlidir. Limp ise zayıf elini pozisyon dışında oynamak anlamına gelir.",
+  },
+  {
+    id: "t26", title: "BB'de K8 offsuit: SB 6 BB ile all-in", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 30,
+    hero: "Kc8d", potBB: 7, seq: ["SB a"],
+    stacks: {SB: 6},
+    options: ["Fold", "Call (5 BB daha)"], correct: 1, topic: "callshove", level: 1,
+    reasoning: "7 BB'lik pota 5 BB ödüyorsun: gereken equity %42 civarı. 6 BB'lik bir SB çok geniş bir aralıkla push eder ve K8o bu aralığa karşı genelde %50'nin üstündedir. Üstelik stack'in 30 BB, yani kaybetsen bile oyunda kalırsın. Call bu fiyatta açık biçimde kârlı.",
+  },
 ];
 
 export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[])];
