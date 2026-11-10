@@ -1,43 +1,60 @@
 @import "tailwindcss";
 
-/* Renkler CSS değişkeni olarak tanımlı; tema değişince yalnızca değişkenler değişir. */
+/* ───────── Tasarım değişkenleri ─────────
+   Site genelinde açık/koyu tema; alıştırma masası (--t-*) her zaman koyu. */
 :root {
-  --bg: #f5f3ec;
+  --bg: #f4f5f2;
   --surface: #ffffff;
-  --ink: #1b2320;
-  --muted: #56615c;
-  --line: #d9d5c8;
-  --accent: #14664a;
+  --surface-2: #f8f9f7;
+  --ink: #111614;
+  --muted: #5a6661;
+  --line: #e2e6e1;
+  --accent: #0d7a50;
   --accent-ink: #ffffff;
-  --soft: #e1eee7;
-  --danger: #b3261e;
-  --danger-soft: #fbe9e7;
-  --card-red: #c62828;
-  --card-black: #1b2320;
-  --card-face: #ffffff;
+  --soft: #e4f2ea;
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+  --shadow: 0 1px 2px rgb(16 24 20 / 0.04), 0 4px 16px rgb(16 24 20 / 0.06);
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #101513;
-  --surface: #19201d;
-  --ink: #ebefe9;
-  --muted: #a5afa9;
-  --line: #2d3733;
-  --accent: #4fc693;
-  --accent-ink: #07120d;
-  --soft: #1d3128;
-  --danger: #ff8a80;
-  --danger-soft: #3a1c1a;
-  --card-red: #d32f2f;
-  --card-black: #1b2320;
-  --card-face: #f4f2ea;
+  --bg: #0b0e0d;
+  --surface: #141917;
+  --surface-2: #181e1c;
+  --ink: #e8eeea;
+  --muted: #95a29c;
+  --line: #242c29;
+  --accent: #3ccf8e;
+  --accent-ink: #03130b;
+  --soft: #15291f;
+  --danger: #ff8a7a;
+  --danger-soft: #35191a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+  color-scheme: dark;
+}
+
+/* Alıştırma masası paleti (temadan bağımsız) */
+.trainer {
+  --t-bg: #0d1110;
+  --t-panel: #141a18;
+  --t-panel-2: #1b2220;
+  --t-line: #27302d;
+  --t-ink: #e9efeb;
+  --t-muted: #8f9c96;
+  --t-accent: #3ccf8e;
+  --t-fold: #4b5b70;
+  --t-call: #1f9a5e;
+  --t-raise: #d8632a;
+  --t-allin: #b8262e;
+  --t-act: #f2a33a;
   color-scheme: dark;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
@@ -46,7 +63,20 @@
   --color-soft: var(--soft);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
+  --color-t-bg: var(--t-bg);
+  --color-t-panel: var(--t-panel);
+  --color-t-panel-2: var(--t-panel-2);
+  --color-t-line: var(--t-line);
+  --color-t-ink: var(--t-ink);
+  --color-t-muted: var(--t-muted);
+  --color-t-accent: var(--t-accent);
+  --color-t-fold: var(--t-fold);
+  --color-t-call: var(--t-call);
+  --color-t-raise: var(--t-raise);
+  --color-t-allin: var(--t-allin);
+  --color-t-act: var(--t-act);
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --shadow-card: var(--shadow);
 }
 
 html {
@@ -59,57 +89,68 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+.trainer :focus-visible {
+  outline-color: var(--t-accent);
 }
 
 @layer components {
   /* Tüm dokunma hedefleri en az 44px */
   .btn {
-    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border border-line bg-surface px-4 py-2 text-base font-medium text-ink transition-colors hover:border-accent disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border border-line bg-surface px-4 py-2 text-[15px] font-semibold text-ink transition hover:border-muted/50 hover:bg-surface-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply border-accent bg-accent text-accent-ink hover:opacity-90;
+    @apply border-transparent bg-accent text-accent-ink hover:bg-accent hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply border-transparent bg-transparent hover:bg-surface-2;
   }
   .btn-lg {
-    @apply min-h-14 px-5 text-lg;
+    @apply min-h-13 px-6 text-base;
   }
   .card {
-    @apply rounded-2xl border border-line bg-surface p-4 sm:p-5;
+    @apply rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6;
   }
   .chip {
-    @apply inline-flex min-h-11 cursor-pointer items-center rounded-full border border-line bg-surface px-4 text-sm font-medium text-ink transition-colors hover:border-accent;
+    @apply inline-flex min-h-11 cursor-pointer items-center rounded-full border border-line bg-surface px-4 text-sm font-semibold text-ink transition hover:border-muted/50;
   }
   .chip-on {
-    @apply border-accent bg-accent text-accent-ink;
+    @apply border-ink bg-ink text-bg hover:border-ink;
   }
   .tag {
-    @apply inline-flex items-center rounded-full bg-soft px-2.5 py-0.5 text-xs font-medium text-ink;
+    @apply inline-flex items-center rounded-full bg-soft px-2.5 py-0.5 text-xs font-semibold text-accent;
   }
   .field {
-    @apply min-h-11 w-full rounded-xl border border-line bg-surface px-3 py-2 text-base text-ink placeholder:text-muted;
+    @apply min-h-11 w-full rounded-xl border border-line bg-surface px-3.5 py-2 text-base text-ink placeholder:text-muted/80 focus:border-accent;
   }
   .label {
-    @apply mb-1 block text-sm font-medium text-ink;
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+  .eyebrow {
+    @apply text-xs font-bold tracking-[0.12em] text-accent uppercase;
   }
   .h1 {
-    @apply text-2xl font-bold tracking-tight text-balance sm:text-3xl;
+    @apply text-[28px] leading-tight font-bold tracking-tight text-balance sm:text-4xl;
   }
   .h2 {
-    @apply text-lg font-semibold tracking-tight sm:text-xl;
+    @apply text-lg leading-snug font-bold tracking-tight sm:text-xl;
   }
   .lead {
-    @apply text-muted;
+    @apply text-base text-muted sm:text-lg;
   }
   .link {
-    @apply font-medium text-accent underline underline-offset-2;
+    @apply font-semibold text-accent underline-offset-4 hover:underline;
   }
   .term {
-    @apply cursor-help text-inherit underline decoration-accent decoration-dotted underline-offset-4;
+    @apply cursor-help text-inherit underline decoration-current/40 decoration-dotted underline-offset-4;
   }
 }
 
@@ -117,5 +158,6 @@ body {
   * {
     transition: none !important;
     animation: none !important;
+    scroll-behavior: auto !important;
   }
 }

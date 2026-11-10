@@ -16,12 +16,12 @@ export default function Page() {
         {
           title: "Blind yapısı",
           text: "Turnuvada blind'lar belirli aralıklarla (blind seviyesi) artar; çoğu yapıda ante de eklenir. Stack'in chip olarak aynı kalsa bile BB cinsinden küçülür. Bu yüzden stack'ini her zaman BB ile düşün ve bir sonraki seviyede kaç BB'n kalacağını hesaba kat. Ante'ler potu büyüttüğü için çalmak daha değerli hale gelir.",
-          links: [["/kutuphane?oyun=turnuva&konu=acilis", "Açılış ve çalma elleri"]],
+          links: [["/alistirma?oyun=turnuva&konu=acilis", "Açılış ve çalma spotları"]],
         },
         {
           title: "Push/fold",
           text: "Kabaca 10–12 BB'nin altında en sade strateji all-in ya da fold'dur. All-in iki yoldan kazanır: herkes fold eder ya da görülür ve elin tutar. Push aralığını en çok pozisyon belirler: arkanda ne kadar az oyuncu varsa o kadar geniş itersin.",
-          links: [["/range", "Push/fold aralıkları"], ["/kutuphane?oyun=turnuva&konu=pushfold", "Push/fold elleri"], ["/blog/push-fold-temelleri", "Yazıyı oku"]],
+          links: [["/range", "Push/fold aralıkları"], ["/alistirma?oyun=turnuva&konu=pushfold", "Push/fold alıştırması"], ["/alistirma?oyun=turnuva&konu=callshove", "All-in'e karşı call"], ["/blog/push-fold-temelleri", "Yazıyı oku"]],
         },
         {
           title: "ICM",
@@ -31,7 +31,7 @@ export default function Page() {
         {
           title: "Bubble",
           text: "Ödüle bir ya da birkaç kişi kala baskı en yüksektir. Orta stack'ler en sıkı oynaması gereken gruptur: kaybedecek çok şeyleri vardır. Chip lideri bu korkuyu geniş açılışlarla kullanır. Çok kısa stack isen, senden kısa biri varken marjinal elleri bırakıp beklemek mantıklı olabilir.",
-          links: [["/kutuphane?oyun=turnuva&konu=icm", "ICM ve bubble elleri"]],
+          links: [["/alistirma?oyun=turnuva&konu=icm", "ICM ve bubble spotları"]],
         },
         {
           title: "Final masası",

@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="lead mt-2">Aradığın sayfa taşınmış ya da hiç olmamış olabilir.</p>
       <div className="mt-5 flex flex-wrap justify-center gap-2">
         <Link href="/" className="btn btn-primary">Ana sayfa</Link>
-        <Link href="/kutuphane" className="btn">El kütüphanesi</Link>
+        <Link href="/alistirma" className="btn">Alıştırma masası</Link>
       </div>
     </div>
   );

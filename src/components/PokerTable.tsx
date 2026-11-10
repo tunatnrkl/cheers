@@ -1,143 +1,166 @@
-import { POSITIONS, type Hand, type Pos } from "@/data/hands";
+import type { Hand } from "@/data/hands";
 import { splitCards } from "@/lib/poker/cards";
-import { PlayingCard } from "./Cards";
+import { SEATS, entryLabel, fmt, type ActKind, type Replay, type Seat } from "@/lib/poker/replay";
+import { CardBack, PlayingCard } from "./Cards";
 
-// 6 kişilik masa. Kahraman her zaman altta ortada; diğer koltuklar saat yönünde dizilir.
+// 6 kişilik masa. Kahraman her zaman altta ortada, diğerleri saat yönünde.
 // Koordinatlar masa kutusuna göre yüzde (sol, üst).
 const SLOTS: [number, number][] = [
-  [50, 85], // kahraman
-  [10, 64],
-  [10, 26],
+  [50, 87],
+  [11, 67],
+  [11, 27],
   [50, 12],
-  [90, 26],
-  [90, 64],
+  [89, 27],
+  [89, 67],
 ];
+const CENTER: [number, number] = [50, 47];
 
-type SeatState = "hero" | "active" | "folded" | "idle";
+export const KIND_BG: Record<ActKind, string> = {
+  fold: "bg-t-fold",
+  check: "bg-t-call",
+  call: "bg-t-call",
+  limp: "bg-t-call",
+  raise: "bg-t-raise",
+  bet: "bg-t-raise",
+  allin: "bg-t-allin",
+};
+export const KIND_TEXT: Record<ActKind, string> = {
+  fold: "text-[#9fb0c6]",
+  check: "text-[#5fd497]",
+  call: "text-[#5fd497]",
+  limp: "text-[#5fd497]",
+  raise: "text-[#ff9a5c]",
+  bet: "text-[#ff9a5c]",
+  allin: "text-[#ff7076]",
+};
 
-// "2.5 BB", "100 BB" gibi birim kullanımlarını pozisyon sanmamak için BB'den önce sayı olmamalı.
-function posRegex(p: Pos) {
-  return p === "BB" ? /(?<![\d.,]\s*)\bBB\b/g : new RegExp(`\\b${p}\\b`, "g");
-}
-
-/** Aksiyon metinlerinden hangi rakibin elde kaldığını, hangisinin fold ettiğini çıkarır. */
-export function seatStates(hand: Hand): Record<Pos, SeatState> {
-  const text = hand.actions.join(" | ");
-  const states = {} as Record<Pos, SeatState>;
-  for (const p of POSITIONS) {
-    if (p === hand.heroPos) {
-      states[p] = "hero";
-      continue;
-    }
-    let state: SeatState = "idle";
-    for (const m of text.matchAll(posRegex(p))) {
-      const after = text.slice(m.index + m[0].length);
-      state = /^\s*(\([^)]*\)\s*)?fold/i.test(after) ? "folded" : "active";
-    }
-    if (state === "idle" && /Blind'lar fold/i.test(text) && (p === "SB" || p === "BB")) state = "folded";
-    states[p] = state;
-  }
-  return states;
-}
-
-export type OptionKind = "fold" | "passive" | "aggressive" | "allin";
-
-export function optionKind(option: string): OptionKind {
+/** Seçenek metninden aksiyon türü: buton rengi için. */
+export function optionKind(option: string): ActKind {
   const o = option.toLocaleLowerCase("tr");
   if (o.startsWith("fold")) return "fold";
   if (o.includes("all-in")) return "allin";
-  if (o.startsWith("check-raise")) return "aggressive";
-  if (o.startsWith("check") || o.startsWith("call") || o.startsWith("limp")) return "passive";
-  return "aggressive";
+  if (o.startsWith("check-raise")) return "raise";
+  if (o.startsWith("check")) return "check";
+  if (o.startsWith("call") || o.startsWith("limp")) return "call";
+  if (o.includes("bahis") || o.startsWith("bet")) return "bet";
+  return "raise";
 }
 
-function Seat({ pos, state, stack, button }: { pos: Pos; state: SeatState; stack: number; button: boolean }) {
-  const ring =
-    state === "hero"
-      ? "border-[#4fc693] text-white"
-      : state === "active"
-        ? "border-[#f0a03c] text-white"
-        : "border-white/15 text-white/35";
-  return (
-    <div className="relative flex flex-col items-center">
-      <div
-        className={`grid size-14 place-items-center rounded-full border-[3px] bg-[#1b221f] text-center leading-tight sm:size-[72px] ${ring}`}
-      >
-        <span className="text-xs font-bold sm:text-sm">{state === "hero" ? "Sen" : pos}</span>
-        {(state === "hero" || state === "active") && <span className="text-[11px] sm:text-xs">{stack} BB</span>}
-        {state === "hero" && <span className="sr-only">({pos})</span>}
-      </div>
-      {state === "hero" && <span className="mt-0.5 text-[10px] font-semibold text-[#4fc693] sm:text-xs">{pos}</span>}
-      {state === "folded" && <span className="mt-0.5 text-[10px] text-white/40 sm:text-xs">fold</span>}
-      {button && (
-        <span
-          aria-label="Dağıtıcı butonu"
-          className="absolute -right-2 -top-1 grid size-5 place-items-center rounded-full bg-white text-[10px] font-bold text-black sm:size-6 sm:text-xs"
-        >
-          D
-        </span>
-      )}
-    </div>
-  );
+function lastAction(r: Replay, s: Seat) {
+  for (let i = r.entries.length - 1; i >= 0; i--) {
+    const e = r.entries[i];
+    if (e.kind === "street") return null;
+    if (e.pos === s) return e;
+  }
+  return null;
 }
 
-export function PokerTable({ hand }: { hand: Hand }) {
-  const states = seatStates(hand);
-  const heroIdx = POSITIONS.indexOf(hand.heroPos);
+export function PokerTable({ hand, r }: { hand: Hand; r: Replay }) {
+  const heroIdx = SEATS.indexOf(hand.heroPos);
   const board = splitCards(hand.board);
 
   return (
-    <div className="rounded-2xl bg-[#121614] p-2 sm:p-4">
-      {/* Aksiyon geçmişi şeridi */}
-      <ol aria-label="Aksiyon sırası" className="flex gap-1.5 overflow-x-auto pb-2">
-        {hand.actions.map((a, i) => (
-          <li key={i} className="shrink-0 rounded-lg bg-white/8 px-2.5 py-1.5 text-xs text-white/85 sm:text-sm">
-            {a}
-          </li>
-        ))}
-        <li className="shrink-0 rounded-lg border border-[#4fc693] px-2.5 py-1.5 text-xs font-semibold text-[#4fc693] sm:text-sm">
-          {hand.heroPos} · Sıra sende
-        </li>
-      </ol>
-
+    // Masaüstünde masa, butonlar ekrana sığacak şekilde ekran yüksekliğine göre ölçeklenir.
+    <div
+      className="relative mx-auto aspect-[6/5] w-full sm:aspect-[16/10]"
+      style={{ maxWidth: "min(860px, max(440px, calc((100dvh - 390px) * 1.6)))" }}
+    >
       {/* Masa */}
-      <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl sm:aspect-[16/10]">
-        <div className="absolute inset-x-[12%] inset-y-[14%] rounded-[999px] border-[6px] border-[#2a3430] bg-[radial-gradient(ellipse_at_center,#1f5a43_0%,#164233_70%)] shadow-[inset_0_0_40px_rgba(0,0,0,0.45)]" />
+      <div className="absolute inset-x-[13%] inset-y-[17%] rounded-[999px] bg-[#0a0d0c] p-[1.2%] shadow-[0_20px_60px_rgb(0_0_0/0.5)] sm:inset-x-[15%]">
+        <div className="size-full rounded-[999px] border border-white/5 bg-[radial-gradient(ellipse_at_50%_40%,#1d5c45_0%,#154535_55%,#0f3428_100%)] shadow-[inset_0_0_50px_rgb(0_0_0/0.5)]" />
+      </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-white">
-          <p className="text-[11px] text-white/60 sm:text-sm">
-            {hand.game === "cash" ? "Cash" : "Turnuva"} · {hand.stackBB} BB efektif
-          </p>
-          <p className="text-base font-bold sm:text-xl">Pot {hand.potBB} BB</p>
-          {board.length > 0 && (
-            <div className="flex gap-1" aria-label="Board">
-              {board.map((c, i) => (
-                <PlayingCard key={i} card={c} small />
-              ))}
-            </div>
-          )}
-        </div>
+      {/* Orta: pot ve board */}
+      <div
+        className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 sm:gap-2"
+        style={{ left: `${CENTER[0]}%`, top: `${CENTER[1]}%` }}
+      >
+        <p className="rounded-full bg-black/35 px-3 py-0.5 text-xs font-bold text-white tabular-nums sm:text-sm">
+          Pot {fmt(r.pot)} BB
+        </p>
+        {board.length > 0 && (
+          <div className="flex gap-1" aria-label="Board">
+            {board.map((c, i) => (
+              <PlayingCard key={i} card={c} size="sm" />
+            ))}
+          </div>
+        )}
+      </div>
 
-        {SLOTS.map(([x, y], slot) => {
-          const pos = POSITIONS[(heroIdx + slot) % POSITIONS.length];
-          return (
-            <div key={pos} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: `${x}%`, top: `${y}%` }}>
-              {slot === 0 ? (
-                <div className="flex items-center gap-2">
-                  <Seat pos={pos} state="hero" stack={hand.stackBB} button={pos === "BTN"} />
-                  <div className="flex gap-1" aria-label="Senin kartların">
-                    {splitCards(hand.hero).map((c, i) => (
-                      <PlayingCard key={i} card={c} />
+      {SLOTS.map(([x, y], slot) => {
+        const pos = SEATS[(heroIdx + slot) % SEATS.length];
+        const st = r.seats[pos];
+        if (!st.present) return null;
+        const hero = slot === 0;
+        const last = lastAction(r, pos);
+        const out = st.folded;
+        // Bahis fişi: koltuktan merkeze doğru
+        const bx = x + (CENTER[0] - x) * (hero ? 0.42 : 0.4);
+        const by = y + (CENTER[1] - y) * (hero ? 0.42 : 0.4);
+        return (
+          <div key={pos}>
+            {st.bet > 0 && (
+              <div
+                className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-black/45 py-0.5 pr-2 pl-0.5 text-[11px] font-bold text-white tabular-nums sm:text-xs"
+                style={{ left: `${bx}%`, top: `${by}%` }}
+              >
+                <span aria-hidden="true" className="size-3.5 rounded-full border-2 border-dashed border-white/80 bg-[#c0392b] sm:size-4" />
+                {fmt(st.bet)}
+              </div>
+            )}
+
+            <div className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 sm:gap-2" style={{ left: `${x}%`, top: `${y}%` }}>
+              <div className="relative flex flex-col items-center">
+                {!hero && !out && hand.villain?.pos === pos ? (
+                  <div className="absolute -top-8 z-20 flex gap-0.5 sm:-top-11" aria-label={`${pos} kartları`}>
+                    {splitCards(hand.villain.cards).map((c) => (
+                      <PlayingCard key={c} card={c} size="xs" />
                     ))}
                   </div>
+                ) : (
+                  !hero &&
+                  !out && (
+                    <div className="absolute -top-4 flex -space-x-2 sm:-top-6">
+                      <CardBack className="-rotate-6" />
+                      <CardBack className="rotate-6" />
+                    </div>
+                  )
+                )}
+                <div
+                  className={`relative z-10 flex min-w-[58px] flex-col items-center rounded-xl border px-1.5 py-0.5 text-center sm:min-w-[84px] sm:px-2 sm:py-1.5 ${
+                    hero
+                      ? "border-t-accent bg-t-panel-2 shadow-[0_0_0_3px_rgb(60_207_142/0.25)]"
+                      : out
+                        ? "border-t-line bg-t-panel/70 opacity-45"
+                        : "border-t-line bg-t-panel-2"
+                  }`}
+                >
+                  <span className={`text-[11px] font-bold sm:text-xs ${hero ? "text-t-accent" : "text-t-muted"}`}>{hero ? `${pos} · Sen` : pos}</span>
+                  <span className="text-[13px] font-bold text-t-ink tabular-nums sm:text-[15px]">{st.allin ? "All-in" : fmt(st.stack)}</span>
+                  {last && !hero && (
+                    <span className={`text-[10px] font-semibold sm:text-[11px] ${KIND_TEXT[last.act]}`}>{entryLabel(last)}</span>
+                  )}
                 </div>
-              ) : (
-                <Seat pos={pos} state={states[pos]} stack={hand.stackBB} button={pos === "BTN"} />
+                {pos === "BTN" && (
+                  <span
+                    aria-label="Dağıtıcı butonu"
+                    className="absolute -right-2 -bottom-1.5 z-20 grid size-5 place-items-center rounded-full bg-white text-[10px] font-extrabold text-black shadow sm:size-6 sm:text-[11px]"
+                  >
+                    D
+                  </span>
+                )}
+              </div>
+              {hero && (
+                <div className="flex gap-1" aria-label="Senin kartların">
+                  {splitCards(hand.hero).map((c, i) => (
+                    <PlayingCard key={i} card={c} size="lg" />
+                  ))}
+                </div>
               )}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -223,7 +223,7 @@ export function Profile() {
                   {weak.length ? (
                     <p className="mt-1 text-sm">
                       Zayıf konun: <strong>{weak.slice(0, 2).map((w) => TOPICS[w.topic]).join(", ")}</strong>.{" "}
-                      <Link href={`/kutuphane?konu=${weak[0].topic}`} className="link">Bu konudaki elleri incele</Link>, ardından alıştırmada aynı konuyu seç.
+                      <Link href={`/alistirma?konu=${weak[0].topic}`} className="link">Bu spotu masada çalış</Link>; hatalar tekrar karşına çıkar.
                     </p>
                   ) : (
                     <p className="mt-1 text-sm">Belirgin bir zayıf konu yok. Daha fazla soru çözdükçe tablo netleşir.</p>
@@ -282,17 +282,17 @@ export function Profile() {
             ))}
 
           <section className="card" aria-label="Kaydedilen eller">
-            <h2 className="h2">Kaydedilen eller ve notlar</h2>
+            <h2 className="h2">Kaydedilen eller</h2>
             {p.saved.length === 0 ? (
               <p className="mt-2 text-muted">
-                Henüz kayıtlı el yok. Bir elin sayfasında “Eli kaydet” ile buraya ekleyebilirsin.
+                Henüz kayıtlı el yok. Alıştırma masasında yer imi simgesine dokunarak bir eli buraya ekleyebilirsin.
               </p>
             ) : (
               <ul className="mt-2 divide-y divide-line">
                 {p.saved.map((s) => (
                   <li key={s.handId} className="flex items-start justify-between gap-3 py-3">
                     <div className="min-w-0">
-                      <Link href={`/kutuphane/${s.handId}`} className="link">
+                      <Link href={`/alistirma?el=${s.handId}`} className="link">
                         {HAND_BY_ID.get(s.handId)?.title ?? s.handId}
                       </Link>
                       {s.note && <p className="mt-0.5 whitespace-pre-wrap text-sm text-muted">{s.note}</p>}

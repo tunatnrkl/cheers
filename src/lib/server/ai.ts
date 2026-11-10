@@ -5,13 +5,14 @@ import { GLOSSARY } from "@/data/glossary";
 import { GAMES, HAND_BY_ID, STREETS, TOPICS, type Hand } from "@/data/hands";
 import ranges from "@/data/ranges.json";
 import { rangePercent } from "@/lib/poker/cards";
+import { describeSeq, fmt, replay } from "@/lib/poker/replay";
 import { db } from "./db";
 import { sha256 } from "./auth";
 
 // ───────────── Model ve sınırlar ─────────────
 export const AI_MODEL = process.env.AI_MODEL || "claude-opus-5-5";
 // Kısa yanıt ve "Detaylı anlat" için çıktı token sınırı (düşünme dahil)
-const MAX_TOKENS = { short: 1500, detailed: 4000 };
+const MAX_TOKENS = { drill: 700, short: 1500, detailed: 4000 };
 // Sunucu taraflı fallback'i destekleyen modeller: ana model bir isteği reddederse
 // API aynı çağrı içinde yedek modele geçer.
 const SUPPORTS_FALLBACK = /^claude-(opus-5|fable-5|sonnet-5-5)/.test(AI_MODEL);
@@ -31,6 +32,13 @@ const SYSTEM_PROMPT = `Sen "Poker Defteri" adlı Türkçe Texas Hold'em çalış
 - Sağlıklı bir yanıt için gereken bilgi eksikse (stack derinliği, pozisyon, rakibin tarzı, aksiyon sırası) önce sor. Tek mesajda en fazla iki soru sor. Makul bir varsayımla ilerleyebiliyorsan varsayımını söyleyip yanıtla.
 - Kullanıcının hatasını yargılamadan, yapıcı biçimde açıkla: neyin eksik değerlendirildiğini ve bir dahaki sefere neye bakılacağını söyle. Kısa vadeli sonuçla (kazandı/kaybetti) kararın kalitesini ayır.
 - Kartları "A♠ K♦" ya da "AKs / AKo" biçiminde, miktarları BB cinsinden yaz.
+
+# Alıştırma masası sohbeti
+<baglam> "Alıştırma masası" ile başlıyorsa kullanıcı masada bir eli çözüyor ve sohbet o ele aittir:
+- Çok kısa ve sade yaz: en fazla 2-3 kısa cümle. Başlık, liste, tablo kullanma. Gerekirse tek bir sayı ver (pot odds, equity gibi).
+- Yalnızca bu el ve poker hakkında konuş. Başka bir konu sorulursa tek cümleyle "Burada yalnızca bu el ve poker hakkında konuşabiliriz." de.
+- Kullanıcı henüz cevap vermediyse doğru hamleyi söyleme ve ima etme; düşünmesine yardım edecek bir ipucu ver (neye bakmalı: pozisyon, stack, pot odds gibi).
+- Kullanıcı cevap verdiyse "neden" sorusuna önce doğru hamleyi, sonra tek temel gerekçeyi yaz. Kullanıcı yanlış seçtiyse onun seçiminin neden daha zayıf olduğunu yargılamadan bir cümleyle ekle.
 
 # Alıştırma analizi
 Kullanıcı alıştırma sonuçlarını gönderdiğinde: önce doğru ve yanlış sayısını ver, sonra en zayıf bir-iki konuyu adlandır, ardından somut ve yapılabilir tek bir çalışma önerisi sun (ör. "Kütüphanede 'Pot odds ve çekişler' konulu elleri incele, sonra hesap makinesinde üç örnek çöz"). Yanlışların ortak bir nedeni varsa onu söyle.
@@ -65,7 +73,13 @@ export const chatSchema = z.object({
     .default([]),
   context: z
     .discriminatedUnion("type", [
-      z.object({ type: z.literal("hand"), handId: z.string().max(10) }),
+      z.object({ type: z.literal("hand"), handId: z.string().max(24) }),
+      z.object({
+        type: z.literal("drill"),
+        handId: z.string().max(24),
+        // Kullanıcının seçtiği seçenek; yoksa henüz cevap vermemiştir
+        chosen: z.number().int().min(0).max(5).optional(),
+      }),
       z.object({
         type: z.literal("form"),
         game: z.enum(["cash", "turnuva"]).optional(),
@@ -79,7 +93,7 @@ export const chatSchema = z.object({
       z.object({
         type: z.literal("practice"),
         attempts: z
-          .array(z.object({ handId: z.string().max(10), chosen: z.number().int().min(0).max(5) }))
+          .array(z.object({ handId: z.string().max(24), chosen: z.number().int().min(0).max(5) }))
           .min(1)
           .max(200),
       }),
@@ -96,16 +110,19 @@ export const chatSchema = z.object({
 export type ChatInput = z.infer<typeof chatSchema>;
 
 // ───────────── Bağlam metni ─────────────
-function describeHand(h: Hand, withAnswer: boolean): string {
+function describeHand(h: Hand, reveal: boolean): string {
+  const r = replay(h);
   const lines = [
     `El: ${h.title} (${GAMES[h.game]}, ${STREETS[h.street]})`,
-    `Kahraman: ${h.heroPos}, kartlar ${h.hero}, efektif stack ${h.stackBB} BB`,
+    h.note ? `Durum: ${h.note}` : null,
+    `Kahraman: ${h.heroPos}, kartlar ${h.hero}, efektif stack ${h.stackBB} BB${h.ante ? `, toplam ante ${h.ante} BB` : ""}`,
     h.board ? `Board: ${h.board}` : null,
-    `Karar anındaki pot: ${h.potBB} BB`,
-    `Aksiyonlar: ${h.actions.join(" → ")}`,
+    h.villain ? `Açık rakip kartları: ${h.villain.pos} ${h.villain.cards}` : null,
+    `Aksiyonlar: ${describeSeq(r)}`,
+    `Karar anı: pot ${fmt(r.pot)} BB${r.toCall > 0 ? `, görmek için ${fmt(r.toCall)} BB` : ""}`,
     `Seçenekler: ${h.options.join(" | ")}`,
   ];
-  if (withAnswer) {
+  if (reveal) {
     lines.push(`Sitenin önerdiği hamle: ${h.options[h.correct]}`, `Sitenin gerekçesi: ${h.reasoning}`);
   }
   return lines.filter(Boolean).join("\n");
@@ -117,6 +134,18 @@ export function buildContext(ctx: ChatInput["context"]): string | null {
     case "hand": {
       const h = HAND_BY_ID.get(ctx.handId);
       return h ? describeHand(h, true) : null;
+    }
+    case "drill": {
+      const h = HAND_BY_ID.get(ctx.handId);
+      if (!h) return null;
+      const answered = ctx.chosen !== undefined && ctx.chosen < h.options.length;
+      return [
+        "Alıştırma masası",
+        describeHand(h, answered),
+        answered
+          ? `Kullanıcı "${h.options[ctx.chosen!]}" seçti (${ctx.chosen === h.correct ? "doğru" : "yanlış"}).`
+          : "Kullanıcı henüz cevap vermedi: doğru hamleyi söyleme.",
+      ].join("\n");
     }
     case "form": {
       const lines = [
@@ -185,9 +214,12 @@ export function buildContext(ctx: ChatInput["context"]): string | null {
 
 export function buildUserMessage(input: ChatInput): string {
   const ctx = buildContext(input.context);
-  const mode = input.detailed
-    ? "[Yanıt modu: detaylı]"
-    : "[Yanıt modu: kısa — toplam 3-5 cümle]";
+  const mode =
+    input.context?.type === "drill"
+      ? "[Yanıt modu: alıştırma — en fazla 2-3 kısa cümle, sade dil]"
+      : input.detailed
+        ? "[Yanıt modu: detaylı]"
+        : "[Yanıt modu: kısa — toplam 3-5 cümle]";
   return `${ctx ? `<baglam>\n${ctx}\n</baglam>\n\n` : ""}${input.question}\n\n${mode}`;
 }
 
@@ -199,10 +231,12 @@ const CACHE_DAYS = 30;
 
 export function cacheKey(input: ChatInput): string | null {
   if (input.history.length) return null;
-  if (input.context && input.context.type !== "hand") return null;
+  const c = input.context;
+  if (c && c.type !== "hand" && c.type !== "drill") return null;
   const q = input.question.toLocaleLowerCase("tr").replace(/\s+/g, " ").replace(/[?.!\s]+$/, "");
-  const handId = input.context?.type === "hand" ? input.context.handId : "";
-  return sha256(JSON.stringify([AI_MODEL, input.detailed, handId, q]));
+  const handId = c?.type === "hand" || c?.type === "drill" ? c.handId : "";
+  const chosen = c?.type === "drill" ? (c.chosen ?? -1) : null;
+  return sha256(JSON.stringify([AI_MODEL, input.detailed, c?.type ?? "", handId, chosen, q]));
 }
 
 export async function cacheGet(key: string): Promise<string | null> {
@@ -251,8 +285,9 @@ export async function* streamAnswer(input: ChatInput): AsyncGenerator<string, bo
 
   const stream = client.beta.messages.stream({
     model: AI_MODEL,
-    max_tokens: input.detailed ? MAX_TOKENS.detailed : MAX_TOKENS.short,
-    output_config: { effort: input.detailed ? "medium" : "low" },
+    max_tokens:
+      input.context?.type === "drill" ? MAX_TOKENS.drill : input.detailed ? MAX_TOKENS.detailed : MAX_TOKENS.short,
+    output_config: { effort: input.detailed && input.context?.type !== "drill" ? "medium" : "low" },
     ...(SUPPORTS_FALLBACK
       ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" as const }
       : {}),

@@ -18,7 +18,7 @@ export async function GET() {
 }
 
 const schema = z.object({
-  handId: z.string().max(10),
+  handId: z.string().max(24),
   note: z.string().max(2000).default(""),
 });
 

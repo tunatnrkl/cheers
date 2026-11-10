@@ -21,7 +21,7 @@ const schema = z.object({
   items: z
     .array(
       z.object({
-        handId: z.string().max(10),
+        handId: z.string().max(24),
         chosen: z.number().int().min(0).max(5),
         at: z.string().datetime().optional(),
       }),

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { Main } from "@/components/Main";
 import { Nav } from "@/components/Nav";
 import { SITE_DESC, SITE_NAME, siteUrl } from "@/lib/site";
 
@@ -17,8 +18,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f3ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#101513" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f5f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0e0d" },
   ],
 };
 
@@ -36,11 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           İçeriğe geç
         </a>
         <Nav />
-        <main id="icerik" className="mx-auto w-full max-w-5xl px-4 py-5 sm:py-8">
-          {children}
-        </main>
-        <footer className="mx-auto w-full max-w-5xl px-4 pb-8 pt-4 text-sm text-muted">
-          <div className="border-t border-line pt-4">
+        <Main>{children}</Main>
+        <footer className="mx-auto w-full max-w-6xl px-4 pb-8 pt-6 text-sm text-muted">
+          <div className="border-t border-line pt-6">
             <p>
               <strong className="text-ink">18+</strong> · {SITE_NAME} bir strateji çalışma aracıdır. Gerçek parayla oyun
               oynatmaz, bahis önermez, kazanç vaat etmez.
@@ -53,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 ["/blog", "Blog"],
                 ["/araclar", "Hesap makineleri"],
                 ["/range", "Range matrisi"],
+                ["/ogren", "Öğren"],
               ].map(([href, label]) => (
                 <Link key={href} href={href} className="inline-flex min-h-11 items-center underline underline-offset-2">
                   {label}

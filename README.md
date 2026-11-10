@@ -1,6 +1,6 @@
 # Poker Defteri
 
-Türkçe, sade bir Texas Hold'em çalışma sitesi: örnek eller, alıştırma modu, range matrisi, hesap makineleri, sözlük, blog ve Claude tabanlı yapay zeka asistanı. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 575 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -36,9 +36,9 @@ scripts/
 src/
   app/                        Sayfalar ve API (Next.js App Router)
     page.tsx                  Ana sayfa
-    kutuphane/                El kütüphanesi (liste + [id] detay)
-    alistirma/                Alıştırma modu
-    yapay-zeka/               Asistan (serbest soru, el formu, sonuç analizi)
+    alistirma/                Alıştırma masası (Trainer.tsx)
+    ogren/                    Rehber, araç ve okuma merkezi
+    yapay-zeka/               Kendi elini sor (form ve serbest soru)
     profil/                   Giriş, ilerleme, kayıtlı eller, dışa aktarma
     range/                    13x13 range matrisi
     araclar/                  Hesap makineleri
@@ -53,10 +53,12 @@ src/
       attempts/               GET/POST — alıştırma cevapları
       saved/                  GET/PUT/DELETE — kayıtlı eller ve notlar
       hands/ (+[id])          GET — el kütüphanesi
-  components/                 Nav, AiPanel, HandView, Cards, RichText, ...
-  data/                       İçerik: hands.ts, glossary.ts, blog.ts, ranges.json
+  components/                 PokerTable, ActionStrip, CoachChat, AiPanel, Cards, Nav, ...
+  data/                       hands.ts (elle yazılan spotlar), drills.json (üretilen spotlar),
+                              ranges.json, glossary.ts, blog.ts
   lib/
-    poker/                    evaluator.ts, math.ts (+test), cards.ts
+    poker/                    evaluator.ts, replay.ts (aksiyon motoru), math.ts, cards.ts
+                              hands.test.ts: tüm spotların doğrulaması
     server/                   db.ts, auth.ts, http.ts, ai.ts  (yalnızca sunucu)
     client/store.ts           İlerleme deposu (API ya da localStorage)
     glossaryLinker.ts         Metindeki terimleri sözlüğe bağlar
@@ -82,12 +84,11 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 
 | Adres | Ne yapar |
 |---|---|
-| `/` | "Bugün ne çalışmak istersin?" → El incele / Alıştırma yap / Yapay zekaya sor; günün eli; araçlara kısayollar |
-| `/kutuphane` | 54 el; oyun tipi sekmeleri ve sokak, pozisyon, stack derinliği, konu filtreleri (adres çubuğunda tutulur) |
-| `/kutuphane/[id]` | Kartlar, pozisyon, stack, aksiyon sırası, önerilen hamle ve gerekçe; yanında asistan; eli kaydet ve not al |
-| `/alistirma` | Senaryo → seçenekler → doğru cevap ve gerekçe; sonuç ekranında konu dökümü, zayıf konu, çalışma önerisi, yapay zeka analizi |
+| `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
+| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
-| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, konu bazında oran, kayıtlı eller; CSV/JSON indirme; hesap silme |
+| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran, kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
+| `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
 | `/range` | Pozisyona göre açılış (cash) ve push/fold (turnuva) aralıkları; kendi range'ini işaretle, karşılaştır, asistana değerlendir |
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
@@ -134,37 +135,42 @@ curl -N -X POST http://localhost:3000/api/ai/chat \
 - **Kısa / detaylı.** Varsayılan yanıt 3–5 cümledir; "Detaylı anlat" aynı sohbeti `detailed: true` ile sürdürür.
 - **Önbellek.** Bir ele ya da genel bir kavrama dair ilk soru, normalleştirilmiş metnin özetiyle `ai_cache` tablosunda 30 gün tutulur (veritabanı yoksa bellekte). Sistem talimatı ayrıca prompt cache ile işaretlidir.
 - **Sınırlar.** Soru 1500 karakter, geçmiş 8 mesaj; misafir için 10 dakikada 12, üye için 30 istek.
+- **Alıştırma koçu:** Masadaki sohbet `drill` bağlamıyla gider: yanıt en fazla 2-3 kısa cümle (700 token sınırı), konu o el ve poker ile sınırlı. Kullanıcı henüz cevap vermediyse bağlamdan doğru cevap çıkarılır ve koç yalnızca ipucu verir.
 - **Sistem talimatı** şartnamedeki maddeleri içerir: önce kısa cevap, kesinlik iddia etmeme, eksik bilgide en fazla iki soru, yargılamayan dil, alıştırma analizi biçimi, kumar teşviki ve kazanç vaadi yasağı, bağımlılık belirtisinde destek kaynağına yönlendirme (YEDAM 115), 18+ hatırlatması. Sözlük terimleri talimata eklidir; böylece yanıttaki terimler sitedeki sözlükle aynı yazılır ve otomatik bağlanır.
 
-## 4. Örnek el kaydı (JSON)
+## 4. Spotlar ve doğruluk
 
-`GET /api/hands/c17`
+Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/poker/replay.ts` diziyi oynatır; masa, aksiyon şeridi ve yapay zeka bağlamı buradan çizilir.
 
 ```json
 {
   "id": "c17",
   "title": "Nut floş çekişi ve pot odds",
-  "game": "cash",
-  "street": "flop",
-  "heroPos": "BB",
-  "stackBB": 100,
-  "hero": "Ah5h",
-  "board": "Kh9h3c",
-  "potBB": 9.2,
-  "actions": [
-    "BTN 2.5 BB açtı, sen BB'den call ettin (pot 5.5 BB)",
-    "Flop: K♥ 9♥ 3♣",
-    "Sen check, BTN 3.7 BB bahis yaptı"
-  ],
+  "game": "cash", "street": "flop", "heroPos": "BB", "stackBB": 100,
+  "hero": "Ah5h", "board": "Kh9h3c", "potBB": 9.2,
+  "seq": ["BTN r2.5", "SB f", "BB c", "F Kh9h3c", "BB x", "BTN b3.7"],
   "options": ["Fold", "Call (3.7 BB)", "All-in"],
   "correct": 1,
-  "reasoning": "9.2 BB'lik pota 3.7 BB ödüyorsun: gereken equity yaklaşık %29. ...",
   "topic": "odds",
-  "level": 1
+  "reasoning": "9.2 BB'lik pota 3.7 BB ödüyorsun: gereken equity yaklaşık %29. ..."
 }
 ```
 
-Aynı kayıt hem kütüphanede (önerilen hamle + gerekçe) hem alıştırmada (seçenekler + doğru cevap) kullanılır. Yeni el eklemek için `src/data/hands.ts` dosyasına bir nesne eklemek yeterlidir.
+Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
+
+**575 spot:**
+
+| Tür | Sayı | Doğru cevap nasıl belirlenir |
+|---|---|---|
+| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 53 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
+| Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
+| Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
+| All-in'e karşı call (BB) | 126 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
+| Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
+
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla yeniden kontrol edilir.
+
+Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
 ## 5. Güvenlik ve KVKK
 
@@ -190,8 +196,8 @@ Aynı kayıt hem kütüphanede (önerilen hamle + gerekçe) hem alıştırmada (
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli: `Hand` tipi ve 50+ el (54 yazıldı) | ✅ |
-| 4 | Kütüphane listesi, filtreler ve el detay sayfası | ✅ |
+| 3 | Veri modeli ve 50+ el (575 spot, hepsi testli) | ✅ |
+| 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |
 | 7 | Yapay zeka: sistem talimatı, `/api/ai/chat`, akış, önbellek, sınırlar, sohbet paneli | ✅ |
