@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AiPanel, type AiContext } from "@/components/AiPanel";
 import { CardRow } from "@/components/Cards";
@@ -146,9 +147,9 @@ export function Assistant() {
           ) : recent.length === 0 ? (
             <div className="card">
               <p>Henüz çözülmüş alıştırman yok.</p>
-              <a href="/alistirma" className="btn btn-primary mt-3">
+              <Link href="/alistirma" className="btn btn-primary mt-3">
                 Alıştırmaya başla
-              </a>
+              </Link>
             </div>
           ) : (
             <>

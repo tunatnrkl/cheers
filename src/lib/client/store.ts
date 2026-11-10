@@ -2,6 +2,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { HAND_BY_ID, type Topic } from "@/data/hands";
+import { STATIC_SITE } from "./env";
 
 // İlerleme deposu. Giriş yapılmışsa veriler REST API üzerinden PostgreSQL'de,
 // misafir kullanımda tarayıcının localStorage'ında tutulur. Bileşenler farkı bilmez.
@@ -59,7 +60,7 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
 export async function refresh(): Promise<void> {
   let me = { user: null as User | null, accounts: false, google: false };
   try {
-    me = await api("/api/auth/me");
+    if (!STATIC_SITE) me = await api("/api/auth/me");
   } catch {}
   if (me.user) {
     try {

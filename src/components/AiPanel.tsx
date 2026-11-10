@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { STATIC_SITE } from "@/lib/client/env";
 import { RichText } from "./RichText";
 
 export type AiContext =
@@ -86,6 +88,22 @@ export function AiPanel({ title = "Yapay zekaya sor", context, suggestions = [],
   useEffect(() => {
     if (messages.length) endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }, [messages]);
+
+  if (STATIC_SITE) {
+    return (
+      <section className="card" aria-label={title}>
+        <h2 className="h2 flex items-center gap-2">
+          <span aria-hidden="true" className="grid size-7 place-items-center rounded-lg bg-soft text-sm">✦</span>
+          {title}
+        </h2>
+        <p className="mt-2 text-muted">
+          Yapay zeka asistanı bu demo sürümünde kapalı: asistan bir sunucu ve API anahtarı gerektirir. Eller, alıştırma,
+          range matrisi, hesap makineleri, sözlük ve blog çalışır.
+        </p>
+        <Link href="/sozluk" className="btn mt-3">Bunun yerine sözlüğe bak</Link>
+      </section>
+    );
+  }
 
   const last = messages[messages.length - 1];
   const canDeepen = !busy && last?.role === "assistant" && !last.detailed && !last.error && !!last.content;

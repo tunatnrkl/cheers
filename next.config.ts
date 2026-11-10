@@ -7,12 +7,19 @@ const securityHeaders = [
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
 ];
 
+// GitHub Pages sürümü: STATIC_EXPORT=1 ile saf statik dosya üretilir (sunucu, API ve veritabanı yok).
+const staticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ["pg"],
-  async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
-  },
+  ...(staticExport
+    ? { output: "export", basePath: "/cheers", trailingSlash: true, images: { unoptimized: true } }
+    : {
+        async headers() {
+          return [{ source: "/(.*)", headers: securityHeaders }];
+        },
+      }),
 };
 
 export default nextConfig;

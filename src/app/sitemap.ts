@@ -3,6 +3,8 @@ import { POSTS } from "@/data/blog";
 import { HANDS } from "@/data/hands";
 import { siteUrl } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
   const pages = ["", "/kutuphane", "/alistirma", "/yapay-zeka", "/range", "/araclar", "/cash", "/turnuva", "/sozluk", "/blog", "/sorumlu-oyun", "/gizlilik"];
