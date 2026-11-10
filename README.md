@@ -83,7 +83,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | Adres | Ne yapar |
 |---|---|
 | `/` | "Bugün ne çalışmak istersin?" → El incele / Alıştırma yap / Yapay zekaya sor; günün eli; araçlara kısayollar |
-| `/kutuphane` | 54 el; oyun tipi sekmeleri ve sokak, pozisyon, stack derinliği, konu filtreleri (adres çubuğunda tutulur) |
+| `/kutuphane` | 64 el; oyun tipi sekmeleri ve sokak, pozisyon, stack derinliği, konu filtreleri (adres çubuğunda tutulur) |
 | `/kutuphane/[id]` | Kartlar, pozisyon, stack, aksiyon sırası, önerilen hamle ve gerekçe; yanında asistan; eli kaydet ve not al |
 | `/alistirma` | Senaryo → seçenekler → doğru cevap ve gerekçe; sonuç ekranında konu dökümü, zayıf konu, çalışma önerisi, yapay zeka analizi |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
@@ -190,7 +190,7 @@ Aynı kayıt hem kütüphanede (önerilen hamle + gerekçe) hem alıştırmada (
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli: `Hand` tipi ve 50+ el (54 yazıldı) | ✅ |
+| 3 | Veri modeli: `Hand` tipi ve 50+ el (64 yazıldı) | ✅ |
 | 4 | Kütüphane listesi, filtreler ve el detay sayfası | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |
