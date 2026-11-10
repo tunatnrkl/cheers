@@ -265,6 +265,31 @@ const CURATED: Hand[] = [
     options: ["Fold", "Call (4 BB)", "Raise 16 BB"], correct: 1, topic: "blof", level: 2,
     reasoning: "16 BB'lik pota 4 BB ödüyorsun; elinin yalnızca %20 oranında iyi olması yetiyor. Rakip turn'de check dediği için aralığında güçlü dam'lar azaldı; küçük bahis blöfler ve daha zayıf per'lerle de yapılır. Bu fiyata ikinci per'i fold etmek fazla sıkı olur. Raise ise elini gereksiz yere blöfe çevirir.",
   },
+  {
+    id: "n01", title: "Kuru flop'ta as yüksek: küçük c-bet", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "AdJs", board: "Ah7d2c", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F Ah7d2c", "BB x"],
+    options: ["Check", "1/3 pot bahis (1.8 BB)", "Pot bahis (5.5 BB)"], correct: 1, topic: "cbet", level: 1,
+    reasoning: "A-7-2 kuru bir flop: pozisyonda ve inisiyatifte olan sen, aralık avantajına sahipsin. Top pair iyi kicker ile elin güçlü ama BB'nin aralığında seni yenen çok az el var; küçük bahis, 7'li ve küçük çiftlerle devam eden ellerden değer toplar ve blöflerinle de aynı boyutu kullanmana izin verir. Pot boyutunda bahis, zayıf ellerin hepsini kaçırır.",
+  },
+  {
+    id: "n02", title: "River'da JJ ile ince value bet", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "JhJs", board: "Td6s2h2c9d", potBB: 18.1, seq: ["BTN r2.5", "SB f", "BB c", "F Td6s2h", "BB x", "BTN b1.8", "BB c", "T 2c", "BB x", "BTN b4.5", "BB c", "R 9d", "BB x"],
+    options: ["Check (kartları aç)", "1/3 pot bahis (6 BB)", "Pot bahis (18 BB)"], correct: 1, topic: "value", level: 2,
+    reasoning: "Rakip iki sokak call etti ve river'da check dedi: aralığında 9'lu ve T'li per'ler, 77-88 gibi orta çiftler ve ıska çekişler var. JJ bunların çoğunu yener. Küçük bahis, bu ellerin call etmesini sağlar; büyük bahis yalnızca seni yenen elleri (TT, 99 set'i vb.) bırakır. Check ile ise value'yu boşa harcarsın.",
+  },
+  {
+    id: "n03", title: "CO'dan açtın, buton 3-bet attı: AJ offsuit", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "AhJc", potBB: 12, seq: ["CO r2.5", "BTN r8", "SB f", "BB f"],
+    note: "Buton sıkı bir oyuncu; 3-bet aralığı çoğunlukla değer elleri.",
+    options: ["Fold", "Call (5.5 BB daha)", "4-bet 20 BB"], correct: 0, topic: "3bet", level: 2,
+    reasoning: "AJo, sıkı bir 3-bet aralığına (QQ+, AK, bazen AQ) karşı hâlâ domine edilen bir el: as tutsan bile AK/AQ'ya kaybedersin. Pozisyonun yok ve call için 5.5 BB'yi 17.5 BB'lik pota yatırıyorsun (≈%31 equity gerekir), oysa gerçek equity'n bunun altında. 4-bet ise seni yalnızca daha iyi ellerin göreceği bir blöfe çevirir. Fold en doğru hamle.",
+  },
+  {
+    id: "n04", title: "BB'de K9 suited: buton açışına savunma", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Kd9d", potBB: 4, seq: ["BTN r2.5", "SB f"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 10 BB"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "4 BB'lik pota 1.5 BB ödüyorsun: gereken equity yaklaşık %27. K9s, butonun geniş açılış aralığına karşı bundan fazlasını taşır ve floş/per potansiyeli ile iyi oynanır. 3-bet için fazla zayıf (call eden ellere hâkim olamaz), fold ise iyi fiyatı çöpe atmak olur.",
+  },
 
   // ───────────── TURNUVA · PUSH/FOLD ─────────────
   {
