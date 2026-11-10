@@ -396,6 +396,61 @@ export const HANDS: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+  // ───────────── YENİ EKLEMELER ─────────────
+  {
+    id: "c34", title: "UTG'de KQ offsuit", game: "cash", street: "preflop", heroPos: "UTG", stackBB: 100,
+    hero: "KsQd", potBB: 1.5, actions: ["İlk konuşan sensin."],
+    options: ["Fold", "Limp (1 BB)", "2.5 BB aç"], correct: 2, topic: "acilis", level: 1,
+    reasoning: "KQo erken pozisyonda sınırda ama açılış aralığının içinde sayılır: iki geniş kartın hem pair hem de iyi bir kicker'la top pair yapma ihtimali yüksek. Limp, inisiyatifi ve pot kontrolünü rakiplere bırakır. Standart boyutta açmak en sağlıklı seçenek; 3-bet gelirse rahatça fold edebilirsin.",
+  },
+  {
+    id: "c35", title: "HJ'de 33: UTG açtı", game: "cash", street: "preflop", heroPos: "HJ", stackBB: 100,
+    hero: "3s3h", potBB: 4, actions: ["UTG 2.5 BB açtı"],
+    options: ["Fold", "Call (2.5 BB)", "3-bet (9 BB)"], correct: 1, topic: "odds", level: 2,
+    reasoning: "Küçük çiftle call etmenin amacı set tutturmak; yaklaşık 8'de 1 ihtimalle flop'ta set gelir. 100 BB stack'le set geldiğinde ödeme çok büyük olabilir, yani implied odds yeterli. 3-bet ise 33'ü, seni yalnızca daha iyi ellerin göreceği bir pota sokar. Stack 30-40 BB'ye düşseydi call'un değeri azalırdı.",
+  },
+  {
+    id: "c36", title: "AKo ile 4-bet", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "AcKd", potBB: 12, actions: ["Sen CO'dan 2.5 BB açtın", "Buton 8 BB'ye 3-bet attı", "Blind'lar fold"],
+    options: ["Fold", "Call (5.5 BB daha)", "4-bet (19 BB)"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "AKo, 3-bet aralığının büyük kısmına karşı iyi durumda ve onu bloke ediyor: AA ve KK ihtimallerini azaltır. Call edersen pozisyon dışında büyük bir potu oynarsın. 4-bet hem zayıf 3-bet'leri fold ettirir hem de 5-bet all-in gelirse rahat call edebileceğin bir el olduğunu gösterir.",
+  },
+  {
+    id: "c37", title: "As yüksek kuru board'da c-bet boyutu", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "KhQh", board: "As7d2c", potBB: 5.5, actions: ["Sen BTN'den 2.5 BB açtın, BB call etti", "Flop: A♠ 7♦ 2♣", "BB check"],
+    options: ["Check", "1/3 pot bahis (≈1.8 BB)", "3/4 pot bahis (≈4 BB)"], correct: 1, topic: "cbet", level: 2,
+    reasoning: "As yüksek kuru board'da açan taraf olarak aralık avantajın büyük; bu yüzden küçük bahis neredeyse tüm aralığınla yapılabilir. K-Q yüksek eller showdown'da çoğu zaman geride ama ucuz bir bahisle 7'li ve 2'li gibi zayıf ellerden fold alabilir, ayrıca bazı çekişleri fiyatlandırırsın. Büyük bahis, yalnızca seni yenen ellerin devam etmesine yol açar.",
+  },
+  {
+    id: "c38", title: "Nut floş çekişi: yarım pot bahse call", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
+    hero: "Ah5h", board: "Kh8h3c", potBB: 30, actions: ["Pot 20 BB iken rakip 10 BB bahis yaptı", "Sen BB'desin"],
+    options: ["Fold", "Call (10 BB)", "Raise"], correct: 1, topic: "odds", level: 1,
+    reasoning: "30 BB'lik potta 10 BB'yi ödemek için yaklaşık %25 equity gerekir. Nut floş çekişinin tek başına flop'tan river'a gelme ihtimali yaklaşık %35 ve as yüksek olarak ek değeri de var. Yani call matematiksel olarak açıkça kârlı. Raise de mümkün ama bu hand için en sade ve düşük riskli hamle call.",
+  },
+  {
+    id: "c39", title: "Kaçırılan çekişle river'da blöf", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "QcJd", board: "9h8h2cKs3d", potBB: 30, actions: ["Flop'ta sen bahis yaptın, BB call etti", "Turn K♠: BB check, sen de check", "River 3♦: BB check"],
+    options: ["Check", "Yarım pot bahis (15 BB)", "All-in"], correct: 1, topic: "blof", level: 2,
+    reasoning: "Elinde showdown değeri yok ve rakip iki sokaktır check yaparak aralığının sınırlı olduğunu gösterdi. Bu aralıkta kaçan çekişler ve zayıf perler çok; yarım pot bahis bunların büyük kısmını fold ettirir. Bu varsayımlarla bahis, check'ten daha çok kâr ettirir. Rakip calling station ise bu blöfü yapmamak daha doğru olurdu.",
+  },
+  {
+    id: "c40", title: "Düşük SPR'de top pair: raise?", game: "cash", street: "flop", heroPos: "BTN", stackBB: 30,
+    hero: "AdJs", board: "Jh8c4d", potBB: 16, actions: ["Pot 12 BB iken rakip 4 BB bahis yaptı", "Efektif stack'in 24 BB daha var (SPR 2 civarı)"],
+    options: ["Fold", "Call (4 BB)", "All-in (24 BB)"], correct: 2, topic: "spr", level: 2,
+    reasoning: "SPR 2'de top pair üst kicker'la çoğu zaman stack'leri koyacağın bir el. Call edip sonraki sokağı beklemek, rakibe ucuz kart verir ve karar noktasını zorlaştırır. All-in, zayıf J'leri, 8'leri ve çekişleri kötü fiyatla call etmeye zorlar. Bu strateji yalnızca düşük SPR'de geçerli; derin stack'te aynı el pot kontrolü ister.",
+  },
+  {
+    id: "t25", title: "9 BB ile SB'de A4 suited", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 9,
+    hero: "Ac4c", potBB: 1.5, actions: ["Herkes fold etti", "Sadece BB kaldı"],
+    options: ["Fold", "2 BB'ye aç", "All-in (9 BB)"], correct: 2, topic: "pushfold", level: 1,
+    reasoning: "9 BB'de oyun push/fold'a döner: küçük raise sonrası BB'nin 3-bet'ine karşı kalan stack zaten pot'a bağlı olur. A4s, BB'nin call aralığına karşı iyi bir equity'ye sahip, as bloklayıcısı da call aralığını daralttığı için all-in kârlı. Fold, blind'ları ücretsiz bırakmak olurdu.",
+  },
+  {
+    id: "t26", title: "BB'de Q9 suited: butonun min-raise'i", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 25,
+    hero: "Qh9h", potBB: 3.7, actions: ["Buton 2.2 BB'ye açtı", "SB fold", "Ante yok"],
+    options: ["Fold", "Call (1.2 BB daha)", "All-in (25 BB)"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "4.9 BB'lik potta 1.2 BB ödeyeceksin, yani yaklaşık %25 equity yeterli. Q9s bu fiyatı rahatça karşılar ve suited olduğu için floş potansiyeli var. All-in, 25 BB'yi bu el için gereksiz riske atar; fold ise matematiksel olarak hatalı olurdu. Pozisyonun olmaması nedeniyle yalnızca call ve postflop dikkatli oyun.",
+  },
 ];
 
 export const HAND_BY_ID = new Map(HANDS.map((h) => [h.id, h]));
