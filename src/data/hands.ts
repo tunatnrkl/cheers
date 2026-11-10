@@ -396,6 +396,49 @@ export const HANDS: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+  // ───────────── EK EL SETİ ─────────────
+  {
+    id: "c34", title: "SB'de A5 suited: butona karşı 3-bet", game: "cash", street: "preflop", heroPos: "SB", stackBB: 100,
+    hero: "Ah5h", potBB: 4, actions: ["UTG fold", "HJ fold", "CO fold", "BTN 2.5 BB açtı"],
+    options: ["Fold", "Call (2 BB daha)", "10 BB'ye 3-bet"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "Small blind'dan call etmek pozisyonsuz oynamak demek, üstelik arkandaki BB'nin squeeze etme ihtimali de var. A5s'in As'i AA ve AK gibi eller için rakibin kombinasyonlarını azaltır, suited olması da flop sonrası iyi çekişler verir. Sık fold'a gidecek bir butona karşı 3-bet hem değer hem blöf dengesi için doğal seçim.",
+  },
+  {
+    id: "c35", title: "BB'de Q8 offsuit: cutoff açılışı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Qs8d", potBB: 4, actions: ["UTG fold", "HJ fold", "CO 2.5 BB açtı", "BTN fold", "SB fold"],
+    options: ["Fold", "Call (1.5 BB daha)", "10 BB'ye 3-bet"], correct: 0, topic: "savunma", level: 1,
+    reasoning: "İndirimli fiyat cazip görünse de Q8o pozisyonsuz oynanır, domine edilmeye açıktır ve suited ya da bağlantılı eller gibi gerçekleşebilen eşitliği yoktur. Cutoff'un açılış aralığı geniş olsa da bu el sürekli ikinci en iyi pair yapıp pahalı kararlara götürür. Fold net bir seçim.",
+  },
+  {
+    id: "c36", title: "Flop'ta nut flush draw + overcard", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "Ah9h", board: "Kh7h2c", potBB: 12, actions: ["CO 2.5 BB açtı, sen butondan call ettin", "Flop K♥ 7♥ 2♣: CO 8 BB bahis (pot 12 BB)"],
+    options: ["Fold", "Call (8 BB)", "28 BB'ye raise"], correct: 1, topic: "odds", level: 1,
+    reasoning: "20 BB'lik potta 8 BB call etmen gerekiyor; kazanmak için yaklaşık %29 eşitlik yeter. Nut flush draw'ın 9 out'u iki kart kala yaklaşık %35 yapar, ayrıca As gelirse pair de oluşur. Call hem fiyatı doğru karşılar hem de pozisyonunu korur; raise bu pot büyüklüğünde gereksiz risk getirir.",
+  },
+  {
+    id: "c37", title: "River'da ince value bet", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "AcJs", board: "Jh8s3d2c6s", potBB: 30, actions: ["CO 2.5 BB açtı, sen butondan call ettin", "Flop J♥ 8♠ 3♦: CO bahis yaptı, call", "Turn 2♣: check-check", "River 6♠: CO check"],
+    options: ["Check", "10 BB bahis", "All-in (80 BB)"], correct: 1, topic: "value", level: 2,
+    reasoning: "Top pair iyi kicker'la; turn'de check-check olması rakibin elinin zayıf ya da orta olduğunu gösteriyor. Küçük bir bahis, J'nin daha zayıf kicker'larını ve 8x gibi eller call ettirir. All-in atarsan sadece seni yenen elleri çağırırsın, check ise değer kaçırmak olur.",
+  },
+  {
+    id: "c38", title: "Kaçan flush draw ile nut blocker blöfü", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "Ah4h", board: "Kh8h3cJd2s", potBB: 22, actions: ["CO açtı, sen butondan call ettin", "Flop ve turn'de CO bahis yaptı, sen ikisini de call ettin", "River 2♠: CO check"],
+    options: ["Check", "15 BB bahis", "All-in (60 BB)"], correct: 1, topic: "blof", level: 2,
+    reasoning: "Çekişin kaçtı ve As-high ile showdown değerin yok. Elindeki A♥ nut flush kombinasyonlarını engeller, yani rakibin elinde sana call ettirecek en güçlü eller azalır. River'da check eden rakibin aralığı çoğunlukla zayıf pair ve kaçan çekişlerden oluşur; orta büyüklükte bir bahis pek çoğunu fold ettirir. All-in gereğinden fazla risk.",
+  },
+  {
+    id: "t25", title: "10 BB ile butonda A7 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 10,
+    hero: "Ad7c", potBB: 1.5, actions: ["UTG fold", "HJ fold", "CO fold"],
+    options: ["Fold", "2 BB aç", "All-in (10 BB)"], correct: 2, topic: "pushfold", level: 1,
+    reasoning: "10 BB'de buton, push/fold bölgesinin klasik kararıdır. Blind'ların fold etmesi tek başına kâr sağlar; call edilirsen de A7o birçok el karşısında makul eşitliğe sahiptir. Küçük raise, stack'in büyük bölümünü pota koyup call'a karşı zor duruma sokar.",
+  },
+  {
+    id: "t26", title: "Chip leader olarak bubble'da call", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 60,
+    hero: "Ac9d", potBB: 12, actions: ["Bubble; ödemeye 2 kişi kaldı", "Küçük stack'li (9 BB) oyuncu SB'den all-in", "Diğer oyuncular fold"],
+    options: ["Fold", "Call (8 BB daha)"], correct: 1, topic: "icm", level: 3,
+    reasoning: "Stack'inin çok büyük olması ICM baskısını seni değil rakibini üzerinde yaratıyor; kaybetsen de elenmezsin. Küçük stack'in shove aralığı geniş olduğundan A9o bu aralığa karşı iyi bir favoridir ve pot odds de güçlüdür. Chip leader'ın bubble'da bu tip call'larla baskı kurması standart plandır.",
+  },
 ];
 
 export const HAND_BY_ID = new Map(HANDS.map((h) => [h.id, h]));
