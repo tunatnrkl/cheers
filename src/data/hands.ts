@@ -431,6 +431,95 @@ const CURATED: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+  // ───────────── 10 KASIM · EK ELLER (k-) ─────────────
+  {
+    id: "k-c01", title: "Butonda ikinci kicker'la ince river value", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "AcTc", board: "Ah8d3c5sKd", potBB: 9.1, seq: ["BTN r2.5", "SB f", "BB c", "F Ah8d3c", "BB x", "BTN b1.8", "BB c", "T 5s", "BB x", "BTN x", "R Kd", "BB x"],
+    options: ["Check", "1/3 pot bahis (3 BB)", "Pot bahis (9 BB)"], correct: 1, topic: "value", level: 2,
+    reasoning: "Turn'de check ederek potu küçük tuttun; BB'nin aralığında 8'li, 5'li per ve AT'den zayıf aslar bolca var. Küçük bahis bu ellerden call alır, pot boyutu ise yalnızca seni yenen AK, A8, A5 gibi ellere yakalanır. Check etmek, kazandığın elde değeri masada bırakmak olur.",
+  },
+  {
+    id: "k-c02", title: "BB'de top pair: river'da polarize bahis", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
+    hero: "KdTd", board: "Kc9d4s2h7c", potBB: 16.5, seq: ["BTN r2.5", "SB f", "BB c", "F Kc9d4s", "BB x", "BTN b2", "BB c", "T 2h", "BB x", "BTN x", "R 7c", "BB x", "BTN b7"],
+    options: ["Fold", "Call (7 BB)", "Raise 22 BB"], correct: 1, topic: "blof", level: 2,
+    reasoning: "Buton turn'de check ederek güçlü ellerinin çoğunu gösterme ihtimalini düşürdü; river bahsi kaçmış QJ, JT, T8 gibi düz çekişleri de içerir. 23.5 BB'lik pota 7 BB ödüyorsun, yani %30 kazanman yeter. Raise ise yalnızca seni yenen elleri tutar, blöfleri kaçırır; call en iyisi.",
+  },
+  {
+    id: "k-c03", title: "HJ'de AJ offsuit, UTG açtı", game: "cash", street: "preflop", heroPos: "HJ", stackBB: 100,
+    hero: "AdJs", potBB: 4, seq: ["UTG r2.5"],
+    note: "UTG sıkı bir oyuncu.",
+    options: ["Fold", "Call", "3-bet 8 BB"], correct: 0, topic: "3bet", level: 2,
+    reasoning: "Sıkı UTG aralığı AQ, AK ve büyük perlerden yoğundur; AJo bu ellere karşı domine durumdadır ve iyi bir as yaptığında bile çoğu zaman kaybeder. Call edersen arkadaki dört oyuncu squeeze yapabilir; 3-bet ise yalnızca seni yenen ellerden devam alır. Fold sade ve doğru seçenek.",
+  },
+  {
+    id: "k-c04", title: "CO'da QQ, butonun 3-bet'i", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "QhQc", potBB: 12, seq: ["CO r2.5", "BTN r8"],
+    options: ["Fold", "Call (5.5 BB daha)", "4-bet 20 BB"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "Butonun cutoff'a karşı 3-bet aralığı geniştir: AQ, AJs, KQs, orta perler ve suited as blöfleri. QQ bu aralığın çok önündedir; 4-bet hem value alır hem de pozisyon dışında oynamanı gerektiren zor flop'ları ortadan kaldırır. Fold açık bir hata, call ise değer kaçırır.",
+  },
+  {
+    id: "k-c05", title: "BB'de Q4 offsuit, UTG açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Qs4h", potBB: 4, seq: ["UTG r2.5"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 1,
+    reasoning: "Fiyat iyi görünür (yaklaşık %27 equity yeter) ama UTG'nin güçlü aralığına karşı Q4o kağıt üstündeki equity'sini gerçekleştiremez: pozisyon dışındasın, Q yaptığında kicker'ın kötü, ikinci per ise nadiren kazanır. BB savunmasında fiyat kadar rakibin aralığı da önemlidir; burada fold.",
+  },
+  {
+    id: "k-c06", title: "Üç yönlü potta ıslak flop'ta AK", game: "cash", street: "flop", heroPos: "CO", stackBB: 100,
+    hero: "AcKd", board: "9h8h7d", potBB: 8, seq: ["CO r2.5", "BTN c", "SB f", "BB c", "F 9h8h7d", "BB x"],
+    options: ["Check", "1/3 pot bahis (2.7 BB)", "3/4 pot bahis (6 BB)"], correct: 0, topic: "cbet", level: 2,
+    reasoning: "Bu board iki rakibin call aralığına (suited connector'lar, orta perler, T9, 65) çok iyi oturur; senin AK'n ise hiçbir şey yakalamadı. Üç yönlü potta c-bet çok daha sık görülür ve check-raise riski yüksektir. Check edip eli ucuza bırakmaya ya da ucuz bir kartla devam etmeye hazırlan.",
+  },
+  {
+    id: "k-c07", title: "Kuru K-high board'da range c-bet", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "Jh9h", board: "Kd7s2c", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F Kd7s2c", "BB x"],
+    options: ["Check", "1/3 pot bahis (1.8 BB)", "Pot bahis (5.5 BB)"], correct: 1, topic: "cbet", level: 1,
+    reasoning: "K72 rainbow, preflop açan oyuncuya çok yarar: güçlü K'lar ve büyük perler sende, BB'nin aralığı ise bu board'u nadiren yakalar. Bu tür board'larda küçük bahis neredeyse tüm aralıkla atılır; J9 gibi eller ucuza fold aldırır, turn'de de backdoor çekişlerle devam edebilir. Büyük bahis aynı fold'ları daha pahalıya alır.",
+  },
+  {
+    id: "k-c08", title: "Turn'de açık uçlu düz çekiş, küçük bahis", game: "cash", street: "turn", heroPos: "BB", stackBB: 100,
+    hero: "Th8h", board: "Jc9d3s2h", potBB: 12.5, seq: ["BTN r2.5", "SB f", "BB c", "F Jc9d3s", "BB x", "BTN b2", "BB c", "T 2h", "BB x", "BTN b3"],
+    options: ["Fold", "Call (3 BB)", "Check-raise 12 BB"], correct: 1, topic: "odds", level: 2,
+    reasoning: "Q ya da 7 gelirse düz yaparsın: 8 out, river'da yaklaşık %18. 15.5 BB'lik toplam pota 3 BB ödüyorsun, gereken %19.4; aradaki küçük fark, düz yaptığında kazanacağın ek chip'lerle (implied odds) rahatça kapanır. Check-raise ise rakibin bu küçük boyutta sık tuttuğu güçlü ellere karşı pahalı bir blöf olur.",
+  },
+  {
+    id: "k-c09", title: "4-bet potta overpair: SPR 2", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "QsQd", board: "Jd6c2s", potBB: 51.5, seq: ["CO r2.5", "BTN r8", "CO r20", "BTN c", "F Jd6c2s", "CO b10"],
+    options: ["Fold", "All-in (80 BB)"], correct: 1, topic: "spr", level: 1,
+    reasoning: "4-bet potta flop'a 41.5 BB'lik potla, arkada 80 BB ile girdin: SPR yaklaşık 2. Bu kadar düşük SPR'de overpair ile fold edilmez; rakibin AK, AQ ve blöf 4-bet'leri de bu bahsi atar. Stack'ler zaten pota bağlı, all-in ile eşit kartla gelen çekişleri de koruma altına alırsın.",
+  },
+  {
+    id: "k-c10", title: "River'da kaçmış floş çekişiyle blöf", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "6h5h", board: "Th8h3c2dKd", potBB: 25.5, seq: ["BTN r2.5", "SB f", "BB c", "F Th8h3c", "BB x", "BTN b3", "BB c", "T 2d", "BB x", "BTN b7", "BB c", "R Kd", "BB x"],
+    options: ["Check", "Bahis 18 BB (≈%70 pot)", "All-in (87.5 BB)"], correct: 1, topic: "blof", level: 3,
+    reasoning: "6-high ile check edersen neredeyse hiç kazanamazsın. BB iki sokak check-call ederek aralığını T'ler, 8'ler ve çekişlerle sınırladı; K ise senin aralığına (KT, KQ, K8 suited) daha çok yarar. Büyük ama all-in olmayan bir bahis orta güçteki elleri fold ettirmeye yeter ve blöfünü daha ucuza yapar.",
+  },
+  {
+    id: "k-c11", title: "Islak turn'de set: büyük value", game: "cash", street: "turn", heroPos: "BTN", stackBB: 100,
+    hero: "4h4c", board: "9s8s4dKh", potBB: 11.5, seq: ["BTN r2.5", "SB f", "BB c", "F 9s8s4d", "BB x", "BTN b3", "BB c", "T Kh", "BB x"],
+    options: ["Check", "1/3 pot bahis (4 BB)", "3/4 pot bahis (8.5 BB)"], correct: 2, topic: "value", level: 1,
+    reasoning: "Set'in şu an çok önde ama board floş ve düz çekişleriyle dolu; BB'nin call aralığında bunlar bol. Büyük bahis çekişlere kötü fiyat verir, 9x ve 8x gibi top pair'lerden de değer alır. Check ise bedava kart vererek en çok kaybettiren hatayı yapar.",
+  },
+  {
+    id: "k-t01", title: "25 BB'de turn'de all-in'e floş çekişi", game: "turnuva", street: "turn", heroPos: "BTN", stackBB: 25,
+    hero: "AsTs", board: "Qs8s3d2c", potBB: 32.5, seq: ["CO r2", "BTN c", "SB f", "BB f", "F Qs8s3d", "CO b3", "BTN c", "T 2c", "CO a"],
+    ante: 1,
+    options: ["Fold", "Call (20 BB)"], correct: 0, topic: "odds", level: 2,
+    reasoning: "Call için 52.5 BB'lik toplam pota 20 BB koyuyorsun: en az %38 equity gerekir. Nut floş çekişinin 9 out'u river'da yaklaşık %20 eder; as gelmesi yalnızca rakip AQ tutmuyorsa işe yarar ve toplam yine %27'yi geçmez. All-in'den sonra ek chip kazanma şansı (implied odds) yok; fold.",
+  },
+  {
+    id: "k-t02", title: "Bubble'da büyük stack'in reshove'u", game: "turnuva", street: "preflop", heroPos: "CO", stackBB: 25,
+    hero: "AhJc", potBB: 64.7, seq: ["CO r2.2", "BTN a"],
+    note: "Ödüle 1 kişi kaldı (bubble). UTG'nin 2 BB'si var, BTN 60 BB ile chip lideri.", ante: 1, stacks: {BTN: 60, UTG: 2},
+    options: ["Fold", "Call (22.8 BB daha)"], correct: 0, topic: "icm", level: 3,
+    reasoning: "Chip hesabıyla AJo, butonun geniş reshove aralığına karşı call'a yakın bir eldir. Ama bubble'dasın ve 2 BB'lik oyuncu her an elenebilir: kaybedersen ödülsüz çıkarsın, fold edersen ödüle neredeyse kesin girersin. Seni kapsayan lidere karşı risk primi yüksek; bu yüzden call için çok daha fazla equity gerekir. Fold.",
+  },
+  {
+    id: "k-t03", title: "SB'de 18 BB ile A9 offsuit: reshove", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 18,
+    hero: "Ad9c", potBB: 4.7, seq: ["BTN r2.2"],
+    ante: 1,
+    options: ["Fold", "Call (1.7 BB daha)", "All-in (18 BB)"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "Butonun çalma aralığı çok geniştir ve A9o buna karşı iyi durumdadır. 18 BB'de call etmek seni pozisyon dışında, stack'inin büyük kısmıyla zor flop kararlarına sokar. All-in ile ortadaki 4.7 BB'yi sık sık hemen alırsın, görüldüğünde de çoğu zaman yarışabilir equity'n olur.",
+  },
 ];
 
 export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[])];
