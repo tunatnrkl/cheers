@@ -396,6 +396,61 @@ export const HANDS: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+  // ───────────── EK EL'LER ─────────────
+  {
+    id: "c34", title: "BB'de Q9 suited: buton açılışına savunma", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Qd9d", potBB: 4, actions: ["UTG, HJ, CO fold", "BTN 2.5 BB açtı", "SB fold"],
+    options: ["Fold", "Call (1.5 BB)", "3-bet 10 BB"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "Pota 1.5 BB koyarak 5.5 BB'lik potu görüyorsun; yani eşikte yalnızca yaklaşık %27 equity gerekir. Buton geniş açar ve Q9s bu aralığa karşı hem iyi equity'ye hem suited olmanın verdiği floş potansiyeline sahip. Pozisyonun olmaması bir dezavantaj ama call, fold ve 3-bet arasında en dengeli seçim.",
+  },
+  {
+    id: "c35", title: "SB'de AQ offsuit: cutoff açılışına 3-bet", game: "cash", street: "preflop", heroPos: "SB", stackBB: 100,
+    hero: "AsQh", potBB: 4, actions: ["UTG ve HJ fold", "CO 2.5 BB açtı", "BTN fold"],
+    options: ["Fold", "Call (2 BB)", "3-bet 10 BB"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "SB'den call etmek hem pozisyonsuz oynamak hem de arkadaki BB'nin squeeze/call etme ihtimalini açık bırakmak demek. AQo, cutoff'ın call ettiği ellere (AJ, KQ, orta çiftler) karşı domine eden ya da önde olan bir el; 3-bet ile pot şişirir, inisiyatifi alır ve zayıf elleri atmaya zorlarsın. 4-bet gelirse genelde fold edilebilecek sınırda bir el.",
+  },
+  {
+    id: "c36", title: "River'da ince value: AQ ile dam per", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "AdQc", board: "Qh8s3d2c7h", potBB: 14, actions: ["Sen BTN'den açtın, BB call etti", "Flop ve turn: sen bahis yaptın, BB call etti", "River: 7♥, BB check"],
+    options: ["Check", "1/3 pot bahis (≈4.5 BB)", "Pot kadar bahis"], correct: 1, topic: "value", level: 2,
+    reasoning: "BB'nin turn'e kadar call eden aralığında daha zayıf damlar, 8'li eller ve yedili/üçlü çiftler var; bunlar küçük bir bahsi call eder. Pot kadar bahis ise çoğunu kaçırır, sadece sende yenilen elleri tutar. Check ise bu eli bedavaya göstermek anlamına gelir. Küçük bahis, ince value için en uygun denge.",
+  },
+  {
+    id: "c37", title: "Floş çekişi: pot bahsine call mı?", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
+    hero: "AhJh", board: "Kh7h2c", potBB: 15, actions: ["BTN 2.5 BB açtı, sen BB'den call ettin", "Flop: K♥ 7♥ 2♣, pota 10 BB", "Sen check, BTN 5 BB bahis yaptı"],
+    options: ["Fold", "Call (5 BB)", "All-in"], correct: 1, topic: "odds", level: 1,
+    reasoning: "5 BB call ederek 20 BB'lik potu görüyorsun, yani gereken equity yaklaşık %25. Dokuz floş out'un var ve iki kart kala bu yaklaşık %35 equity eder. Üstüne as gelirse ek şansın da var. All-in büyük bir yatırım isterken call, matematiğin açıkça kâr getirdiği bir hamle.",
+  },
+  {
+    id: "c38", title: "3-bet potunda AK ile as'lı flop", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "AsKd", board: "Ac7d2h", potBB: 16.5, actions: ["CO 2.5 BB açtı, sen BTN'den 8 BB'ye 3-bet ettin", "CO call etti", "Flop: A♣ 7♦ 2♥, CO check"],
+    options: ["Check", "1/3 pot bahis (≈5.5 BB)", "All-in"], correct: 1, topic: "spr", level: 2,
+    reasoning: "SPR yaklaşık 5.5 ve en iyi per'le tepedesin; bu, üç sokakta da stack'leri koymaya razı olacağın bir yapı. Küçük bahis, A'lı eller ve 7'li/2'li zayıf per'ler gibi call eden geniş bir aralığı pota sokar. Hemen all-in yapmak yalnızca seni yenebilecek ya da seni yendiğin için hiç call etmeyen elleri bırakır.",
+  },
+  {
+    id: "c39", title: "River'da küçük bahse bluff catch", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
+    hero: "JhJd", board: "Td7s3cKh2d", potBB: 20, actions: ["BTN açtı, sen BB'den call ettin", "Flop: T♦ 7♠ 3♣: sen check-call", "Turn: K♥, check-check", "River: 2♦, sen check, BTN 7 BB bahis yaptı"],
+    options: ["Fold", "Call (7 BB)", "Check-raise all-in"], correct: 1, topic: "blof", level: 3,
+    reasoning: "7 BB call ederek 34 BB'lik potu görüyorsun; yani yalnızca yaklaşık %21 oranında kazanman yeterli. Turn'de check-check olması BTN aralığını biraz sınırladı; river'daki küçük bahis hem value hem de ıska çekişlerinden gelen blöfleri içerir. Valet çifti bu aralığa karşı bluff catch olarak yeterince sık önde.",
+  },
+  {
+    id: "c40", title: "Cutoff'ta AK offsuit: buton 3-bet'ine karşı", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "AcKh", potBB: 12, actions: ["Sen CO'dan 2.5 BB açtın", "BTN 8 BB'ye 3-bet etti", "Blind'lar fold"],
+    options: ["Fold", "Call (5.5 BB)", "4-bet 19 BB"], correct: 2, topic: "3bet", level: 2,
+    reasoning: "Buton 3-bet aralığı geniştir ve AK bu aralığın büyük kısmına karşı hem equity hem blocker avantajı taşır (AA/KK/AQ ihtimalini azaltır). Call edersen pozisyonsuz oynarsın ve istediğin zaman büyük potlara girmen zorlaşır. 4-bet, fold equity ile birlikte 5-bet gelirse rahatça stack'e koyabileceğin bir seçim.",
+  },
+  {
+    id: "t25", title: "10 BB ile butonda K9 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 10,
+    hero: "Kd9s", potBB: 1.5, actions: ["Herkes fold etti, sıra sende"],
+    options: ["Fold", "2.2 BB min-raise", "All-in"], correct: 2, topic: "pushfold", level: 1,
+    reasoning: "10 BB'de butondan K9o all-in, iki blind'ın fold etme olasılığı ve call edildiğinde sahip olduğun makul equity sayesinde açıkça kârlıdır. Min-raise yaparsan 3-bet shove'una karşı zor bir karara gelirsin ve fold equity'ni kaybedersin. Kısa stack'te basit olan en iyi plandır.",
+  },
+  {
+    id: "t26", title: "40 BB ile BB'de QQ: buton açılışına 3-bet", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 40,
+    hero: "QsQd", potBB: 4.5, actions: ["Ante var", "BTN 2.2 BB açtı", "SB fold"],
+    options: ["Fold", "Call", "3-bet 8 BB"], correct: 2, topic: "3bet", level: 1,
+    reasoning: "40 BB'de QQ, butonun açılış aralığının büyük kısmına karşı çok yüksek equity'ye sahip. Call etmek flop'ta pozisyonsuz oynamak ve as/papaz çıktığında zor kararlar demektir. 3-bet, hem zayıf elleri atmaya zorlar hem de 4-bet shove'una karşı eli rahatça oynamanı sağlar.",
+  },
 ];
 
 export const HAND_BY_ID = new Map(HANDS.map((h) => [h.id, h]));
