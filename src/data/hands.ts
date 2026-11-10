@@ -431,6 +431,63 @@ const CURATED: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+
+  // ───────────── EK ELLER (otomatik eklenen seri) ─────────────
+  {
+    id: "x01", title: "HJ'de K♦J♣: UTG fold etti", game: "cash", street: "preflop", heroPos: "HJ", stackBB: 100,
+    hero: "KdJc", potBB: 1.5, seq: ["UTG f"],
+    options: ["Fold", "Limp (1 BB)", "2.5 BB aç"], correct: 2, topic: "acilis", level: 2,
+    reasoning: "HJ'den KJo açılış aralığının alt sınırında ama içinde. Arkanda dört oyuncu var; KJo, KQ ve AK'ya domine olabilir, buna karşılık iki yüksek kartı ve pozisyonu avantajlı. Limp inisiyatifi bırakır, fold ise kârlı bir açılışı atlar. Standart 2.5 BB açılış en dengeli seçim.",
+  },
+  {
+    id: "x02", title: "BB'de 7-2 offsuit, buton açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "7c2d", potBB: 4, seq: ["BTN r2.5", "SB f"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 1,
+    reasoning: "Fiyat iyi (yaklaşık %27 equity yeter) ama 72o butonun açılış aralığına karşı bu eşiğin altında kalır ve oynanması da zordur: ne floş ne kent potansiyeli taşır, per yaparsan çoğu zaman domine olursun. En zayıf elleri bırakmak, savunduğun aralığın kalitesini korur.",
+  },
+  {
+    id: "x03", title: "Kuru A-yüksek board'da 99: check back?", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "9s9c", board: "Ah7d3c", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F Ah7d3c", "BB x"],
+    options: ["Check", "1/3 pot bahis (≈1.8 BB)", "Pot kadar bahis (5.5 BB)"], correct: 0, topic: "spr", level: 2,
+    reasoning: "As gelen board BB'nin call aralığına (A-x elleri) çok uyar; 99 ise bahsinden fold ettirdiği ellerle yenilemeyeceğin, görenlerle de çoğunlukla yenildiğin bir orta güç el. Check back potu küçük tutar, showdown değerini korur ve turn'de daha rahat karar verirsin.",
+  },
+  {
+    id: "x04", title: "Turn'de top pair iyi kicker: bahis boyutu", game: "cash", street: "turn", heroPos: "BTN", stackBB: 100,
+    hero: "AhJh", board: "Js8d4c2h", potBB: 9.1, seq: ["BTN r2.5", "SB f", "BB c", "F Js8d4c", "BB x", "BTN b1.8", "BB c", "T 2h", "BB x"],
+    options: ["Check", "Yarım pot bahis (≈4.5 BB)", "Pot kadar bahis (9.1 BB)"], correct: 1, topic: "value", level: 2,
+    reasoning: "Üst per ve iyi kicker'la value alacak çok el var: daha zayıf J'ler, 8'li perler, cep çiftler. Yarım pot bahis bu ellerin çoğunu devam ettirir; pot kadar bahis ise yalnızca seni yenenleri ya da en iyi elleri çağırır. Check ise BB'nin çekişlerine bedava kart verir.",
+  },
+  {
+    id: "x05", title: "River'da üst per üst kicker: ince value", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: "AsKs", board: "Kd9c5h3s2d", potBB: 9.1, seq: ["BTN r2.5", "SB f", "BB c", "F Kd9c5h", "BB x", "BTN b1.8", "BB c", "T 3s", "BB x", "BTN x", "R 2d", "BB x"],
+    options: ["Check", "1/3 pot bahis (≈3 BB)", "Pot kadar bahis (9.1 BB)"], correct: 1, topic: "value", level: 2,
+    reasoning: "Rakip turn'de bahis yapmadı ve call aralığında K-x'in zayıf kicker'lıları, 9'lu perler ve cep çiftler var. Bunlar küçük bir bahsi call eder ama büyük bahsi fold eder. Üst per üst kicker'ın değeri showdown'da yüksek; küçük bahis hem bu ellerden chip toplar hem de seni zorlamaz.",
+  },
+  {
+    id: "x06", title: "Açık uçlu kent çekişi: flop'ta bahse karşı", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
+    hero: "8s7s", board: "Tc9d2h", potBB: 9.2, seq: ["BTN r2.5", "SB f", "BB c", "F Tc9d2h", "BB x", "BTN b3.7"],
+    options: ["Fold", "Call (3.7 BB)", "All-in"], correct: 1, topic: "odds", level: 1,
+    reasoning: "12.9 BB'lik pota 3.7 BB ödüyorsun: gereken equity yaklaşık %29. Açık uçlu kent çekişinin 8 out'u iki kartta yaklaşık %31 eder, üstelik tutarsan en iyi eli yapar ve ek chip kazanabilirsin. Call rahatça artıda; all-in gereksiz risk.",
+  },
+  {
+    id: "x07", title: "Hiçbir şeyi olmayan elle turn'de büyük bahis", game: "cash", street: "turn", heroPos: "BB", stackBB: 100,
+    hero: "8d7d", board: "KsQh3c2s", potBB: 21.9, seq: ["BTN r2.5", "SB f", "BB c", "F KsQh3c", "BB x", "BTN b3.7", "BB c", "T 2s", "BB x", "BTN b9"],
+    options: ["Fold", "Call (9 BB)", "Raise 27 BB"], correct: 0, topic: "blof", level: 1,
+    reasoning: "Elinde ne per ne anlamlı bir çekiş var. Flop'ta çağırdığın bahsin turn'de büyüyerek devam etmesi güçlü bir aralığı gösterir ve gereken equity %29'u aşar; 87o bunu sağlamaz. Raise ise saf blöf olur ve rakibin aralığı sende yeterince fold equity bırakmaz. Fold et.",
+  },
+  {
+    id: "x08", title: "12 BB ile butondan A8 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 12,
+    hero: "Ad8h", potBB: 1.5, seq: ["UTG f", "HJ f", "CO f"],
+    options: ["Fold", "2.2 BB aç", "All-in"], correct: 2, topic: "pushfold", level: 2,
+    reasoning: "12 BB'de buton açılışı ya all-in ya fold olur; küçük açılış 3-bet yersen elini bırakmaya zorlar. A8o butonun push aralığında yer alır: blind'ların fold etmesi sana çoğu zaman potu getirir, call edilirsen as içeren elin hâlâ makul equity taşır.",
+  },
+  {
+    id: "x09", title: "10 BB'lik shove'a BB'de AJ offsuit", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 50,
+    hero: "AdJh", potBB: 11.5, seq: ["UTG f", "HJ f", "CO a", "BTN f", "SB f"],
+    note: "Cutoff'un 10 BB'si var, geniş bir aralıkla all-in yapıyor. Turnuvada ICM baskısı düşük.", stacks: { CO: 10 },
+    options: ["Fold", "Call (9 BB daha)"], correct: 1, topic: "callshove", level: 1,
+    reasoning: "20.5 BB'lik pota 9 BB ödüyorsun: gereken equity yaklaşık %44. Kısa stack'in geniş shove aralığına karşı AJo %55-60 civarı equity'ye sahiptir. Stack'in 50 BB olduğu için kaybetsen de turnuvada kalırsın; call net olarak kârlı.",
+  },
 ];
 
 export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[])];
