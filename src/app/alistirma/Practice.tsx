@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AiPanel } from "@/components/AiPanel";
-import { HandView } from "@/components/HandView";
+import { PokerTable, optionKind, type OptionKind } from "@/components/PokerTable";
 import { RichText } from "@/components/RichText";
 import { GAMES, HANDS, TOPICS, type Hand, type Topic } from "@/data/hands";
+import { STATIC_SITE } from "@/lib/client/env";
 import { addAttempt, topicStats, useProgress, weakTopics } from "@/lib/client/store";
 
 type Answer = { hand: Hand; chosen: number };
@@ -28,6 +29,7 @@ export function Practice() {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
   const [analyze, setAnalyze] = useState(0);
+  const [why, setWhy] = useState(0);
 
   const pool = HANDS.filter((h) => (!game || h.game === game) && (!topic || h.topic === topic));
 
@@ -214,9 +216,10 @@ export function Practice() {
     );
   }
 
-  // ───────────── 2. Soru ekranı ─────────────
+  // ───────────── 2. Soru ekranı: poker masası ─────────────
   const hand = queue[answers.length];
   const answered = picked !== null;
+  const isLast = answers.length + 1 === queue.length;
 
   function choose(i: number) {
     if (answered) return;
@@ -227,32 +230,28 @@ export function Practice() {
   function next() {
     setAnswers((a) => [...a, { hand, chosen: picked! }]);
     setPicked(null);
+    setWhy(0);
     window.scrollTo({ top: 0 });
   }
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4">
-      <div>
-        <div className="flex items-center justify-between text-sm text-muted">
-          <span>
-            Soru {answers.length + 1} / {queue.length}
-          </span>
-          <button type="button" className="link min-h-11" onClick={() => setQueue(null)}>
-            Bırak
-          </button>
-        </div>
-        <div className="h-2 overflow-hidden rounded-full bg-soft" role="progressbar" aria-valuemin={0} aria-valuemax={queue.length} aria-valuenow={answers.length}>
+    <div className="mx-auto flex max-w-3xl flex-col gap-3">
+      <div className="flex items-center gap-3 text-sm text-muted">
+        <span className="shrink-0">
+          {answers.length + 1} / {queue.length}
+        </span>
+        <div className="h-2 flex-1 overflow-hidden rounded-full bg-soft" role="progressbar" aria-valuemin={0} aria-valuemax={queue.length} aria-valuenow={answers.length}>
           <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${(answers.length / queue.length) * 100}%` }} />
         </div>
+        <button type="button" className="link min-h-11 shrink-0" onClick={() => setQueue(null)}>
+          Bırak
+        </button>
       </div>
 
-      <h1 className="h2">{hand.title}</h1>
-      <section className="card">
-        <HandView hand={hand} />
-      </section>
+      <h1 className="sr-only">{hand.title}</h1>
+      <PokerTable hand={hand} />
 
-      <fieldset className="flex flex-col gap-2">
-        <legend className="label">Hamlen ne olurdu?</legend>
+      <div className={`grid gap-2 ${hand.options.length === 2 ? "grid-cols-2" : "grid-cols-3"}`} role="group" aria-label="Hamleni seç">
         {hand.options.map((o, i) => {
           const isCorrect = answered && i === hand.correct;
           const isWrong = answered && i === picked && i !== hand.correct;
@@ -262,29 +261,55 @@ export function Practice() {
               type="button"
               onClick={() => choose(i)}
               aria-disabled={answered}
-              className={`btn btn-lg justify-between text-left ${
-                isCorrect ? "border-accent bg-soft" : isWrong ? "border-danger bg-danger-soft" : ""
-              } ${answered && !isCorrect && !isWrong ? "opacity-60" : ""}`}
+              className={`flex min-h-16 flex-col items-center justify-center rounded-xl px-2 py-2 text-center text-sm font-bold leading-tight transition sm:text-base ${KIND_STYLE[optionKind(o)]} ${
+                answered ? (isCorrect ? "ring-4 ring-[#4fc693]" : isWrong ? "ring-4 ring-danger" : "opacity-35") : "hover:brightness-110"
+              }`}
             >
-              <span>{o}</span>
-              {isCorrect && <span className="text-sm font-semibold text-accent">✓ Önerilen</span>}
-              {isWrong && <span className="text-sm font-semibold text-danger">✕ Senin seçimin</span>}
+              {o}
+              {isCorrect && <span className="mt-1 text-xs font-semibold">✓ Doğru hamle</span>}
+              {isWrong && <span className="mt-1 text-xs font-semibold">✕ Senin seçimin</span>}
             </button>
           );
         })}
-      </fieldset>
+      </div>
 
       {answered && (
-        <section className="card" aria-live="polite">
-          <p className="font-semibold">
-            {picked === hand.correct ? "Doğru." : `Bu spotta önerilen: ${hand.options[hand.correct]}.`}
+        <div className="flex flex-col gap-3" aria-live="polite">
+          <p className={`rounded-xl px-4 py-3 text-center text-lg font-bold ${picked === hand.correct ? "bg-soft text-accent" : "bg-danger-soft text-danger"}`}>
+            {picked === hand.correct ? "Doğru!" : `Yanlış. Doğru hamle: ${hand.options[hand.correct]}`}
           </p>
-          <RichText text={hand.reasoning} className="mt-1" />
-          <button type="button" className="btn btn-primary btn-lg mt-4 w-full" onClick={next}>
-            {answers.length + 1 === queue.length ? "Sonuçları gör" : "Sonraki soru"}
-          </button>
-        </section>
+          <div className="grid grid-cols-2 gap-2">
+            <button type="button" className="btn btn-lg" disabled={why !== 0} onClick={() => setWhy(Date.now())}>
+              Neden?
+            </button>
+            <button type="button" className="btn btn-primary btn-lg" onClick={next}>
+              {isLast ? "Sonuçları gör" : "Sonraki el"}
+            </button>
+          </div>
+
+          {why !== 0 &&
+            (STATIC_SITE ? (
+              <section className="card" aria-label="Kısa açıklama">
+                <RichText text={hand.reasoning} />
+              </section>
+            ) : (
+              <AiPanel
+                key={hand.id}
+                title="Neden?"
+                context={{ type: "hand", handId: hand.id }}
+                autoAsk={{ id: why, question: `Bu spotta neden "${hand.options[hand.correct]}" öneriliyor? Sade anlat.` }}
+                placeholder="Takıldığın yeri sor…"
+              />
+            ))}
+        </div>
       )}
     </div>
   );
 }
+
+const KIND_STYLE: Record<OptionKind, string> = {
+  fold: "bg-[#3b6fb6] text-white",
+  passive: "bg-[#2f9e62] text-white",
+  aggressive: "bg-[#e0711f] text-white",
+  allin: "bg-[#b3261e] text-white",
+};
