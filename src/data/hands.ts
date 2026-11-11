@@ -169,7 +169,7 @@ const CURATED: Hand[] = [
     id: "c17", title: "Nut floş çekişi ve pot odds", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
     hero: "Ah5h", board: "Kh9h3c", potBB: 9.2, seq: ["BTN r2.5", "SB f", "BB c", "F Kh9h3c", "BB x", "BTN b3.7"],
     options: ["Fold", "Call (3.7 BB)", "All-in"], correct: 1, topic: "odds", level: 1,
-    reasoning: "9.2 BB'lik pota 3.7 BB ödüyorsun: gereken equity yaklaşık %29. Nut floş çekişinin 9 out'u river'a kadar kabaca %35 eder; as tutarsa kazanma ihtimalin de cabası. Call rahatça kârlı. Check-raise de bir seçenek ama all-in burada gereksiz büyük.",
+    reasoning: "9.2 BB'lik pota 3.7 BB ödüyorsun: gereken equity yaklaşık %29. Nut floş çekişinin 9 out'u river'a kadar kabaca %35 eder; ama bu oran iki kartı da bedava görmeyi varsayar. Turn'de yeni bir bahis gelebilir ve tek kartta tutma oranı yaklaşık %19'dur. Call'u yine de kârlı yapan, as gelirse bazı ellere karşı öne geçmen ve floş tuttuğunda kazanacağın ek chip'lerdir (implied odds). Check-raise de bir seçenek ama all-in burada gereksiz büyük.",
   },
   {
     id: "c18", title: "Gutshot'a pot kadar bahis", game: "cash", street: "turn", heroPos: "BB", stackBB: 90,
@@ -188,13 +188,13 @@ const CURATED: Hand[] = [
     hero: "AcKh", board: "Kd8s4c2h6d", potBB: 22, seq: ["BTN r2.5", "SB f", "BB c", "F Kd8s4c", "BB x", "BTN b2.75", "BB c", "T 2h", "BB x", "BTN b5.5", "BB c", "R 6d", "BB x"],
     note: "BB her bahsi gören, pasif bir oyuncu.",
     options: ["Check", "2/3 pot bahis (≈15 BB)", "All-in (≈85 BB)"], correct: 1, topic: "value", level: 1,
-    reasoning: "Çekişsiz bu board'da rakibin iki bahsi gören aralığı çoğunlukla KQ, KJ, KT gibi daha kötü per'lerden oluşur. Calling station'a karşı blöf yapılmaz ama value bet kaçırılmaz: orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
+    reasoning: "Floş çekişi olmayan, kent çekişi de az olan bu board'da rakibin iki bahsi gören aralığı çoğunlukla KQ, KJ, KT gibi daha kötü per'lerden oluşur. Calling station'a karşı blöf yapılmaz ama value bet kaçırılmaz: orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
   },
   {
     id: "c21", title: "River'da ikinci per: bluff catch?", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
-    hero: "Td9d", board: "AsTh6c3dKc", potBB: 36, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F AsTh6c", "BB x", "CO b6.25", "BB c", "T 3d", "BB x", "CO x", "R Kc", "BB x", "CO b18"],
+    hero: "Td9d", board: "AsTh6c3dKc", potBB: 27, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F AsTh6c", "BB x", "CO b4", "BB c", "T 3d", "BB x", "CO x", "R Kc", "BB x", "CO b13.5"],
     note: "CO çok sıkı, nadiren blöf yapan bir oyuncu.",
-    options: ["Fold", "Call (18 BB)", "Raise"], correct: 0, topic: "blof", level: 2,
+    options: ["Fold", "Call (13.5 BB)", "Raise"], correct: 0, topic: "blof", level: 2,
     reasoning: "Elin yalnızca blöfleri yenen bir bluff catcher. Pot kadar bahse call için rakibin en az 3'te 1 blöf yapıyor olması gerekir. Nadiren blöf yapan, sıkı bir oyuncu bu sıklığa ulaşmaz; as ve papaz da onun aralığına iyi oturur. Bu varsayımlarla fold doğru; agresif bir rakibe karşı karar değişebilirdi.",
   },
   {
@@ -232,7 +232,7 @@ const CURATED: Hand[] = [
     id: "c27", title: "Turn'de korkutucu kart: ikinci barrel", game: "cash", street: "turn", heroPos: "CO", stackBB: 100,
     hero: "AhJh", board: "Ts6d2cKs", potBB: 9.5, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Ts6d2c", "BB x", "CO b2", "BB c", "T Ks", "BB x"],
     options: ["Check", "2/3 pot bahis (≈6.5 BB)", "All-in"], correct: 1, topic: "cbet", level: 3,
-    reasoning: "Papaz senin açılış aralığına (AK, KQ, KJ) rakibin flop'ta call eden aralığından (T'li per, orta çiftler) çok daha iyi uyar. İkinci barrel, bu orta güçteki ellere zor bir karar verdirir. Görülürse de as, dam (kent) ve backdoor ihtimalleriyle tamamen boş değilsin.",
+    reasoning: "Papaz senin açılış aralığına (AK, KQ, KJ) rakibin flop'ta call eden aralığından (T'li per, orta çiftler) çok daha iyi uyar. İkinci barrel, bu orta güçteki ellere zor bir karar verdirir. Görülürse de river'da as (per) ya da dam (kent) gelirse tamamen boş değilsin.",
   },
   {
     id: "c28", title: "Calling station'a karşı blöfü bırak", game: "cash", street: "turn", heroPos: "BTN", stackBB: 100,
@@ -390,10 +390,10 @@ const CURATED: Hand[] = [
   },
   {
     id: "t22", title: "Bubble'da kısa stack'in all-in'i", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 4,
-    hero: "Th7d", potBB: 6.5, seq: ["UTG a"],
+    hero: "Ah2d", potBB: 6.5, seq: ["UTG a"],
     note: "Ödüle 1 kişi kaldı (bubble). Senin 50 BB'n var.", ante: 1, stacks: {BB: 50},
     options: ["Fold", "Call (3 BB daha)"], correct: 1, topic: "icm", level: 2,
-    reasoning: "9.5 BB'lik toplam pota 3 BB ödüyorsun: yaklaşık %32 equity yetiyor ve T7o çoğu push aralığına karşı bunu sağlar. Kaybetsen stack'inin yalnızca %6'sı gider, yani ICM baskısı senin için çok düşük. Büyük stack, kısa stack'in all-in'ini iyi fiyata gördüğünde hem chip hem de bubble'ı bitirme şansı kazanır.",
+    reasoning: "9.5 BB'lik toplam pota 3 BB ödüyorsun: yaklaşık %32 equity yetiyor. A2o, kısa stack'in makul push aralıklarına karşı bu eşiğin rahatça üzerindedir (kendi hesabımızla, referans 6 BB UTG push aralığına karşı yaklaşık %40). T7o gibi bir el ise aynı aralığa karşı eşiğin hemen üstünde kalır; o el sınırdadır. Kaybetsen stack'inin yalnızca %6'sı gider, yani ICM baskısı senin için çok düşük. Büyük stack, kısa stack'in all-in'ini iyi fiyata gördüğünde hem chip hem de bubble'ı bitirme şansı kazanır.",
   },
 
   // ───────────── TURNUVA · DİĞER ─────────────
