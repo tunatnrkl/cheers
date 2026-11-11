@@ -1,4 +1,4 @@
-export const SITE_NAME = "Poker Defteri";
+export const SITE_NAME = "Cheers";
 export const SITE_DESC =
   "Türkçe Texas Hold'em çalışma sitesi: örnek eller, alıştırmalar, range matrisi, hesap makineleri ve yapay zeka asistanı.";
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Gizlilik ve KVKK Aydınlatma Metni",
-  description: "Poker Defteri hangi verileri, hangi amaçla işler; verilerini nasıl indirir ve silersin.",
+  description: "Cheers hangi verileri, hangi amaçla işler; verilerini nasıl indirir ve silersin.",
 };
 
 const ROWS = [

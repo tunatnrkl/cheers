@@ -52,7 +52,7 @@ export default function Page() {
                     <span className="block text-lg font-bold">{t}</span>
                     <span className="block text-sm text-muted">{d}</span>
                   </span>
-                  <span aria-hidden="true" className="text-xl text-accent">
+                  <span aria-hidden="true" className="text-xl text-accent-text">
                     →
                   </span>
                 </Link>

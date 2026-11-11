@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sorumlu Oyun",
-  description: "Poker Defteri 18 yaş ve üzeri içindir ve yalnızca strateji çalışmak için tasarlanmıştır. Sorumlu oyun ilkeleri ve destek kaynakları.",
+  description: "Cheers 18 yaş ve üzeri içindir ve yalnızca strateji çalışmak için tasarlanmıştır. Sorumlu oyun ilkeleri ve destek kaynakları.",
 };
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
     <article className="mx-auto flex max-w-2xl flex-col gap-4">
       <h1 className="h1">Sorumlu oyun</h1>
       <p className="lead">
-        Poker Defteri bir strateji ve matematik çalışma aracıdır. Sitede gerçek parayla oyun oynanmaz, bahis önerilmez ve
+        Cheers bir strateji ve matematik çalışma aracıdır. Sitede gerçek parayla oyun oynanmaz, bahis önerilmez ve
         kazanç vaat edilmez. Site yalnızca <strong className="text-ink">18 yaş ve üzeri</strong> kullanıcılar içindir.
       </p>
 
