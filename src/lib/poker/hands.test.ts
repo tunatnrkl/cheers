@@ -267,6 +267,54 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
     expect(exact("KcJd", "Jh8s3c", wide) - need).toBeGreaterThan(0.2);
     expect(need - exact("KcJd", "Jh8s3c", strong)).toBeGreaterThan(0.035);
   });
+
+  it("t13: 88, nottaki SB resteal aralığına (ve daha dar bir aralığa) karşı gereken equity'nin belirgin üzerinde", () => {
+    const resteal = ["22", "33", "44", "55", "66", "77", "88", "99", "TT", "JJ", "QQ", "KK", "AA",
+      "A2s", "A3s", "A4s", "A5s", "A6s", "A7s", "A8s", "A9s", "ATs", "AJs", "AQs", "AKs",
+      "A8o", "A9o", "ATo", "AJo", "AQo", "AKo", "KTs", "KJs", "KQs", "KQo", "QJs"];
+    const narrow = ["55", "66", "77", "88", "99", "TT", "JJ", "QQ", "KK", "AA",
+      "A9s", "ATs", "AJs", "AQs", "AKs", "ATo", "AJo", "AQo", "AKo", "KQs"];
+    const need = required("t13");
+    expect(need).toBeCloseTo(11.8 / 30, 2);
+    const eq = equityVsRange("8d8c", resteal);
+    expect(eq).toBeGreaterThan(0.52);
+    expect(eq).toBeLessThan(0.58);
+    expect(equityVsRange("8d8c", narrow) - need).toBeGreaterThan(0.035);
+  });
+
+  it("t23: KT, CO'nun nottaki ikinci bahis aralığına karşı call (river kartı kesin sayım)", () => {
+    const value = ["AKs", "AKo", "KQs", "KQo", "KJs", "KJo", "K9s", "77", "44", "99", "97s"];
+    const draws = ["AsQs", "AsJs", "AsTs", "As8s", "As6s", "As5s", "QsJs", "JsTs", "Ts8s", "8s6s", "6s5s",
+      "QsTs", "Js8s", "8h6h", "8d6d", "8c6c", "Th8h", "Tc8c", "6h5h", "6d5d", "6c5c"];
+    const air = ["AQs", "AQo", "AJs", "ATs", "QJs", "QTs", "JTs", "A5s", "A4s", "A3s"];
+    const turnExact = (hero: string, board: string, range: string[]) => {
+      const h = cards(hero);
+      const b = cards(board);
+      const dead = new Set([...h, ...b]);
+      let score = 0;
+      let n = 0;
+      for (const v of range.flatMap((l) => (l.length === 4 ? [l] : combos(l))).map(cards)) {
+        if (dead.has(v[0]) || dead.has(v[1])) continue;
+        for (let c = 0; c < 52; c++) {
+          if (dead.has(c) || v.includes(c)) continue;
+          const x = evaluate7([...h, ...b, c]);
+          const y = evaluate7([...v, ...b, c]);
+          score += x > y ? 1 : x === y ? 0.5 : 0;
+          n++;
+        }
+      }
+      return score / n;
+    };
+    const need = required("t23");
+    expect(need).toBeCloseTo(4 / 17.9, 3);
+    const eq = turnExact("KdTd", "Kc7h4s9s", [...value, ...draws, ...air]);
+    expect(eq).toBeGreaterThan(0.54);
+    expect(eq).toBeLessThan(0.58);
+    // Seni yenen ellerin payı %75 olsa bile eşik geçiliyor mu? (karışım: 0,75 × value + 0,25 × geri kalan)
+    const vEq = turnExact("KdTd", "Kc7h4s9s", value);
+    const rest = turnExact("KdTd", "Kc7h4s9s", [...draws, ...air]);
+    expect(0.75 * vEq + 0.25 * rest).toBeGreaterThan(need);
+  });
 });
 
 // Seçenek metnindeki all-in tutarı, replay'deki kahraman stack'iyle uyumlu olmalı

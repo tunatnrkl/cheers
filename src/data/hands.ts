@@ -359,8 +359,9 @@ const CURATED: Hand[] = [
     id: "t13", title: "88 ile açtın, SB 14 BB all-in", game: "turnuva", street: "preflop", heroPos: "HJ", stackBB: 14,
     hero: "8d8c", potBB: 18.2, seq: ["HJ r2.2", "SB a", "BB f"],
     ante: 1, stacks: {HJ: 25},
+    note: "Varsayım: SB'nin bu derinlikte resteal aralığı 22+, A2s+, A8o+, KTs+, KQo ve QJs (ellerin yaklaşık %16'sı). ICM baskısı yok.",
     options: ["Fold", "Call (11,8 BB daha)"], correct: 1, topic: "pushfold", level: 2,
-    reasoning: "30 BB'lik toplam pota 11,8 BB ödüyorsun: gereken equity yaklaşık %39. 14 BB'lik bir resteal aralığı genelde orta çiftler, as'lı eller ve broadway'lerden oluşur; 88 bu aralığa karşı yarı yarıya civarındadır. Kaybetsen de 11 BB ile oyunda kalırsın. Ortada özel bir ICM baskısı yoksa call.",
+    reasoning: "30 BB'lik toplam pota 11,8 BB ödüyorsun: gereken equity yaklaşık %39. Nottaki resteal aralığına karşı 88'in equity'si %55 civarındadır; aralık 55+, A9s+, ATo+ ve KQs kadar daralsa bile %48 dolayında kalır. Kaybetsen de 11 BB ile oyunda kalırsın. Ortada özel bir ICM baskısı yoksa call.",
   },
   {
     id: "t18", title: "Heads-up'ta 8 BB ile Q5 offsuit", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 8,
@@ -452,9 +453,10 @@ const CURATED: Hand[] = [
   },
   {
     id: "t23", title: "30 BB ile top pair'de turn kararı", game: "turnuva", street: "turn", heroPos: "BB", stackBB: 30,
-    hero: "KdTd", board: "Kc7h4s9s", potBB: 12.9, seq: ["CO r2.2", "BTN f", "SB f", "BB c", "F Kc7h4s", "BB x", "CO b2", "BB c", "T 9s", "BB x", "CO b4"],
-    options: ["Fold", "Call (4 BB)", "All-in (25,8 BB)"], correct: 1, topic: "spr", level: 3,
-    reasoning: "Top pair'in iyi ama kicker'ın orta; rakibin value aralığında AK, KQ, KJ de var. Call ile blöflerini ve daha zayıf ellerini oyunda tutarsın. All-in atarsan zayıf eller fold eder, çoğunlukla seni yenen eller görür. 13 BB'lik pota 4 BB iyi bir fiyat; river'da duruma göre yeniden değerlendirirsin.",
+    hero: "KdTd", board: "Kc7h4s9s", potBB: 13.9, ante: 1, seq: ["CO r2.2", "BTN f", "SB f", "BB c", "F Kc7h4s", "BB x", "CO b2", "BB c", "T 9s", "BB x", "CO b4"],
+    note: "Varsayım: CO'nun ikinci bahsi seni yenen eller (AK, KQ, KJ, K9s, 99, 77, 44, 97s), maça ve kent çekişleri ile ıskalamış birkaç el (AQ, AJs, ATs, QJs, QTs, JTs, A5s–A3s) içeriyor.",
+    options: ["Fold", "Call (4 BB)", "All-in (24,8 BB)"], correct: 1, topic: "spr", level: 3,
+    reasoning: "Top pair'in iyi ama kicker'ın orta; rakibin value aralığında AK, KQ, KJ de var. 13,9 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %22. Nottaki aralığa karşı KT'nin equity'si %56 civarındadır; seni yenen eller CO'nun bahis aralığının dörtte üçünü geçmedikçe call kârlı kalır. All-in atarsan çekişler ve ıskalamış eller fold eder, çoğunlukla seni yenen eller görür. River'da duruma göre yeniden değerlendirirsin.",
   },
   {
     id: "t24", title: "Ante'li potta butondan çalma", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 35,

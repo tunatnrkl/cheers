@@ -31,7 +31,8 @@ function Row({ label, r }: { label: string; r: Rate }) {
   );
 }
 
-export function Growth({ attempts }: { attempts: StatAttempt[] }) {
+export function Growth({ attempts, total }: { attempts: StatAttempt[]; total?: number }) {
+  const truncated = total !== undefined && total > attempts.length;
   const [game, setGame] = useState<Game | "all">("all");
   // "Şimdi" panel açıldığında bir kez alınır; yeniden çizimde pencereler kaymaz.
   const [now] = useState(() => new Date());
@@ -45,6 +46,12 @@ export function Growth({ attempts }: { attempts: StatAttempt[] }) {
       <p className="mt-1 text-sm text-muted">
         {MIN_SAMPLE} cevaptan azında oran gösterilmez. {MIN_SAMPLE} cevapta bile oran kabaca ±25 puan oynayabilir; tek haftaya değil genel eğilime bak.
       </p>
+      {truncated && (
+        <p className="mt-2 text-sm text-muted">
+          Bu bölüm son {attempts.length.toLocaleString("tr-TR")} cevabına göre hesaplanır (toplam {total!.toLocaleString("tr-TR")}). Daha
+          eski cevaplar dahil olmadığından, önceden gördüğün bazı spotlar &quot;ilk görüş&quot; sayılabilir.
+        </p>
+      )}
 
       <h3 className="mt-4 font-semibold">İlk görüşte ve tekrarda</h3>
       <p className="mt-1 text-xs text-muted">Yanlışlar masada geri döner. İlk görüş oranı, yeni bir spotu ne kadar okuduğunu gösterir.</p>

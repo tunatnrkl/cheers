@@ -17,13 +17,16 @@ type State = {
   accounts: boolean; // sunucuda hesap sistemi (veritabanı) açık mı
   google: boolean;
   attempts: Attempt[];
+  // Sunucudaki tüm cevapların toplamı. `attempts` listesi 5000'de kesilir; toplam kesilmez (G-1).
+  // Misafirde null: liste tarayıcıdakinin tamamıdır.
+  totals: { total: number; ok: number } | null;
   saved: Saved[];
 };
 
 const LS_ATTEMPTS = "pd-cevaplar";
 const LS_SAVED = "pd-kayitli";
 
-let state: State = { ready: false, user: null, accounts: false, google: false, attempts: [], saved: [] };
+let state: State = { ready: false, user: null, accounts: false, google: false, attempts: [], totals: null, saved: [] };
 const listeners = new Set<() => void>();
 let loading: Promise<void> | null = null;
 
@@ -65,14 +68,14 @@ export async function refresh(): Promise<void> {
   if (me.user) {
     try {
       const [a, s] = await Promise.all([
-        api<{ attempts: Attempt[] }>("/api/attempts"),
+        api<{ attempts: Attempt[]; totals?: { total: number; ok: number } }>("/api/attempts"),
         api<{ saved: Saved[] }>("/api/saved"),
       ]);
-      set({ ...me, ready: true, attempts: a.attempts, saved: s.saved });
+      set({ ...me, ready: true, attempts: a.attempts, totals: a.totals ?? null, saved: s.saved });
       return;
     } catch {}
   }
-  set({ ...me, ready: true, attempts: readLocal<Attempt>(LS_ATTEMPTS), saved: readLocal<Saved>(LS_SAVED) });
+  set({ ...me, ready: true, attempts: readLocal<Attempt>(LS_ATTEMPTS), totals: null, saved: readLocal<Saved>(LS_SAVED) });
 }
 
 export function useProgress(): State {
@@ -100,7 +103,8 @@ export async function addAttempt(handId: string, chosen: number): Promise<void> 
     at: new Date().toISOString(),
   };
   const attempts = [item, ...state.attempts];
-  set({ attempts });
+  const t = state.totals;
+  set({ attempts, totals: t && { total: t.total + 1, ok: t.ok + (item.correct ? 1 : 0) } });
   if (state.user) {
     await api("/api/attempts", { method: "POST", body: JSON.stringify({ items: [{ handId, chosen }] }) }).catch(() => {});
   } else {
@@ -160,7 +164,7 @@ export function clearLocal(): void {
     localStorage.removeItem(LS_ATTEMPTS);
     localStorage.removeItem(LS_SAVED);
   } catch {}
-  if (!state.user) set({ attempts: [], saved: [] });
+  if (!state.user) set({ attempts: [], totals: null, saved: [] });
 }
 
 // ───────────── İstatistik ─────────────
