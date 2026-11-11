@@ -1,4 +1,4 @@
--- Poker Defteri veritabanı şeması (PostgreSQL 14+)
+-- Cheers veritabanı şeması (PostgreSQL 14+)
 -- Çalıştırma: npm run db:migrate   (tekrar çalıştırmak güvenlidir)
 -- İçerik (eller, sözlük, blog) depoda sürümlenen dosyalardadır; veritabanı yalnızca
 -- kullanıcıya ait veriyi ve yapay zeka önbelleğini tutar. Böylece KVKK kapsamındaki
@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS attempts (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS attempts_user_idx ON attempts(user_id, created_at DESC);
+-- Tam döküm (/api/attempts/export) id sırasıyla sayfalanır
+CREATE INDEX IF NOT EXISTS attempts_user_id_idx ON attempts(user_id, id DESC);
 
 -- Kaydedilen eller ve kullanıcının o ele düştüğü not
 CREATE TABLE IF NOT EXISTS saved_hands (

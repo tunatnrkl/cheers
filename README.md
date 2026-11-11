@@ -50,7 +50,8 @@ src/
       ai/chat/                POST  — asistan (akışlı düz metin)
       auth/{register,login,logout,me}/   e-posta ile hesap
       auth/google/ (+callback)           Google ile giriş
-      attempts/               GET/POST — alıştırma cevapları (GET: son 5000 + toplam)
+      attempts/               GET/POST — alıştırma cevapları (GET: son 5000 + toplam + konu toplamları)
+        export/               GET — kullanıcının bütün cevapları, imleçli sayfalar (?before=)
       saved/                  GET/PUT/DELETE — kayıtlı eller ve notlar
       hands/ (+[id])          GET — el kütüphanesi
   components/                 PokerTable, ActionStrip, CoachChat, AiPanel, Cards, Nav, ...
@@ -87,7 +88,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
 | `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). Belirli sayıda elden (varsayılan 20) ya da 25 dakikadan sonra engellemeyen bir ara kartı çıkar; sıklığı ayarlanabilir ya da kapatılabilir. Masaüstünde kart soluk masanın üstünde durur ve koç panelinde "Bu bölümü yorumla" kısayolu çıkar (statik sürümde yok). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
-| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran; gelişim kartı (son 8 haftanın kayan 7 günlük pencereleri, pozisyona göre doğruluk, ilk görüş / tekrar ayrımı; 10 cevaptan azında oran gösterilmez); kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
+| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran; gelişim kartı (son 8 haftanın kayan 7 günlük pencereleri, pozisyona göre doğruluk, ilk görüş / tekrar ayrımı; 10 cevaptan azında oran gösterilmez); kayıtlı eller (masada yeniden açılır); CSV/JSON indirme (üyede bütün cevaplar, sayfa sayfa); hesap silme |
 | `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
 | `/range` | Pozisyona göre açılış (cash) ve push/fold (turnuva) aralıkları; kendi range'ini işaretle, karşılaştır, asistana değerlendir |
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
@@ -219,7 +220,7 @@ Alıştırma modu, yapay zeka ile alıştırma analizi, kullanıcı hesabı (e-p
 
 ### Bilinen sınırlar
 
-- Üyenin cevap listesi son 5000 kayıtla sınırlıdır; "Çözülen soru" ve "Doğruluk" sunucu toplamından gelir, Gelişim kartı kesintiyi belirtir. Konu tablosu ve CSV/JSON dışa aktarma henüz son 5000 kayıtla sınırlıdır.
+- Üyenin cevap listesi son 5000 kayıtla sınırlıdır; "Çözülen soru" ve "Doğruluk" sunucu toplamından gelir, Gelişim kartı kesintiyi belirtir. Konu tablosu sunucunun konu toplamlarından gelir; CSV/JSON dışa aktarma `/api/attempts/export` ile bütün kayıtları sayfa sayfa indirir. Gelişim kartı hâlâ son 5000 kayıtla hesaplanır.
 - Asistan gerçek Claude API'ye karşı denenmedi (geliştirme ortamında anahtar yoktu); akış, önbellek ve hata yolları API'nin akış biçimini taklit eden yerel bir sunucuyla test edildi. Yanıt kalitesi ve sistem talimatı gerçek anahtarla gözden geçirilmeli.
 - Google ile giriş kodu yazıldı ancak gerçek Google kimlik bilgileriyle denenmedi.
 - Sayfa yükleme süresi gerçek mobil ağda ölçülmedi. İçerik sayfaları statik üretilir, harici font ya da görsel yoktur.

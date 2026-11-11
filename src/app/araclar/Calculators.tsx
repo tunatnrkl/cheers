@@ -149,6 +149,9 @@ function Icm() {
   const parse = (s: string) => s.split(/[\s;,]+/).map(Number).filter((n) => Number.isFinite(n) && n > 0);
   const st = parse(stacks).slice(0, 9);
   const pay = parse(payouts).slice(0, 9);
+  // Sıfır ya da sayı olmayan girişler atılır; kullanıcı numaraların kaydığını bilmeli (9. çalışma, açık iş 8).
+  const tokens = (s: string) => s.split(/[\s;,]+/).filter(Boolean).length;
+  const dropped = tokens(stacks) - parse(stacks).length;
   const valid = st.length >= 2 && pay.length >= 1;
   const res = valid ? icm(st, pay) : [];
   const totalChips = st.reduce((a, b) => a + b, 0);
@@ -186,6 +189,12 @@ function Icm() {
               </tbody>
             </table>
           </div>
+          {dropped > 0 && (
+            <p className="mt-3 text-sm text-muted">
+              {dropped} giriş hesaba katılmadı (0 ya da sayı değil); oyuncular kalan stack'lerin sırasıyla numaralandı. Elenen
+              oyuncu ICM'ye girmez: onun aldığı ödülü listeden çıkarıp yalnızca kalan ödülleri yaz.
+            </p>
+          )}
           <p className="mt-3 rounded-xl border border-line p-3 text-sm">
             <strong>Ne anlama geliyor? </strong>
             “ICM değeri”, o stack'in ödül havuzundan beklenen payıdır. Büyük stack'in ödül payı chip payından küçük, kısa

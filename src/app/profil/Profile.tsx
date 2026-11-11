@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { HAND_BY_ID, TOPICS } from "@/data/hands";
+import { buildExport, rankTopics } from "@/lib/client/progressData";
 import {
+  allAttempts,
   clearLocal,
   deleteAccount,
   signIn,
@@ -13,7 +15,6 @@ import {
   unsaveHand,
   useProgress,
   weakTopics,
-  type Attempt,
   type Saved,
 } from "@/lib/client/store";
 import { Growth } from "./Growth";
@@ -27,34 +28,39 @@ function download(name: string, mime: string, content: string) {
   URL.revokeObjectURL(url);
 }
 
-const csvCell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+function ExportButtons({ saved }: { saved: Saved[] }) {
+  const [busy, setBusy] = useState<"csv" | "json" | null>(null);
+  const [error, setError] = useState("");
 
-function exportData(format: "csv" | "json", attempts: Attempt[], saved: Saved[]) {
-  const rows = attempts.map((a) => {
-    const h = HAND_BY_ID.get(a.handId);
-    return {
-      tarih: a.at,
-      el: h?.title ?? a.handId,
-      konu: TOPICS[a.topic] ?? a.topic,
-      secim: h?.options[a.chosen] ?? a.chosen,
-      onerilen: h ? h.options[h.correct] : "",
-      dogru: a.correct ? "evet" : "hayır",
-    };
-  });
-  const notes = saved.map((s) => ({ tarih: s.at, el: HAND_BY_ID.get(s.handId)?.title ?? s.handId, not: s.note }));
-  const day = new Date().toISOString().slice(0, 10);
-
-  if (format === "json") {
-    download(`poker-defteri-${day}.json`, "application/json", JSON.stringify({ alistirmalar: rows, kaydedilenEller: notes }, null, 2));
-    return;
+  async function run(format: "csv" | "json") {
+    setBusy(format);
+    setError("");
+    try {
+      const attempts = await allAttempts();
+      const day = new Date().toISOString().slice(0, 10);
+      const content = buildExport(format, attempts, saved);
+      download(`cheers-${day}.${format}`, format === "json" ? "application/json" : "text/csv;charset=utf-8", content);
+    } catch {
+      setError("Dosya hazırlanamadı. Bağlantını kontrol edip yeniden dener misin?");
+    } finally {
+      setBusy(null);
+    }
   }
-  const lines = [
-    ["tur", "tarih", "el", "konu", "secim", "onerilen", "dogru", "not"].join(","),
-    ...rows.map((r) => ["alistirma", r.tarih, r.el, r.konu, r.secim, r.onerilen, r.dogru, ""].map(csvCell).join(",")),
-    ...notes.map((n) => ["kayitli-el", n.tarih, n.el, "", "", "", "", n.not].map(csvCell).join(",")),
-  ];
-  // BOM: Excel Türkçe karakterleri doğru göstersin
-  download(`poker-defteri-${day}.csv`, "text/csv;charset=utf-8", "﻿" + lines.join("\n"));
+
+  return (
+    <>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {(["csv", "json"] as const).map((f) => (
+          <button key={f} type="button" className="btn" disabled={busy !== null} aria-busy={busy === f} onClick={() => void run(f)}>
+            {busy === f ? "Hazırlanıyor…" : `${f.toUpperCase()} indir`}
+          </button>
+        ))}
+      </div>
+      {error && (
+        <p className="mt-2 rounded-xl bg-danger-soft px-3 py-2 text-sm text-danger" role="alert">{error}</p>
+      )}
+    </>
+  );
 }
 
 function AuthCard({ google }: { google: boolean }) {
@@ -162,7 +168,8 @@ export function Profile() {
   // Üyede toplamlar sunucudan gelir; liste 5000 cevapta kesildiği için listeden sayılmaz (G-1).
   const total = p.totals?.total ?? p.attempts.length;
   const ok = p.totals?.ok ?? p.attempts.filter((a) => a.correct).length;
-  const stats = topicStats(p.attempts);
+  // Konu tablosu da üyede sunucu toplamından: 5000 sınırından etkilenmez (G-2).
+  const stats = p.topics ? rankTopics(p.topics) : topicStats(p.attempts);
   const weak = weakTopics(stats);
 
   return (
@@ -211,7 +218,7 @@ export function Profile() {
                   {stats.map((s) => (
                     <li key={s.topic}>
                       <div className="flex justify-between text-sm">
-                        <span>{TOPICS[s.topic]}</span>
+                        <span>{TOPICS[s.topic] ?? s.topic}</span>
                         <span className="font-semibold">%{Math.round(s.rate * 100)} <span className="font-normal text-muted">({s.ok}/{s.total})</span></span>
                       </div>
                       <div className="mt-1 h-2 overflow-hidden rounded-full bg-soft" aria-hidden="true">
@@ -242,11 +249,8 @@ export function Profile() {
 
           <section className="card" aria-label="Veri">
             <h2 className="h2">Verilerin</h2>
-            <p className="mt-1 text-sm text-muted">Alıştırma cevaplarını, kayıtlı ellerini ve notlarını indirebilirsin.</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button type="button" className="btn" onClick={() => exportData("csv", p.attempts, p.saved)}>CSV indir</button>
-              <button type="button" className="btn" onClick={() => exportData("json", p.attempts, p.saved)}>JSON indir</button>
-            </div>
+            <p className="mt-1 text-sm text-muted">Alıştırma cevaplarının tamamını, kayıtlı ellerini ve notlarını indirebilirsin.</p>
+            <ExportButtons saved={p.saved} />
 
             <div className="mt-4 border-t border-line pt-4">
               {p.user ? (

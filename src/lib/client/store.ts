@@ -3,6 +3,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { HAND_BY_ID, type Topic } from "@/data/hands";
 import { STATIC_SITE } from "./env";
+import { collectPages, rankTopics, topicTotals, type Page, type TopicStat, type TopicTotal } from "./progressData";
 
 // İlerleme deposu. Giriş yapılmışsa veriler REST API üzerinden PostgreSQL'de,
 // misafir kullanımda tarayıcının localStorage'ında tutulur. Bileşenler farkı bilmez.
@@ -20,13 +21,15 @@ type State = {
   // Sunucudaki tüm cevapların toplamı. `attempts` listesi 5000'de kesilir; toplam kesilmez (G-1).
   // Misafirde null: liste tarayıcıdakinin tamamıdır.
   totals: { total: number; ok: number } | null;
+  // Sunucudaki tüm cevapların konu bazında toplamı (G-2). Misafirde null.
+  topics: TopicTotal[] | null;
   saved: Saved[];
 };
 
 const LS_ATTEMPTS = "pd-cevaplar";
 const LS_SAVED = "pd-kayitli";
 
-let state: State = { ready: false, user: null, accounts: false, google: false, attempts: [], totals: null, saved: [] };
+let state: State = { ready: false, user: null, accounts: false, google: false, attempts: [], totals: null, topics: null, saved: [] };
 const listeners = new Set<() => void>();
 let loading: Promise<void> | null = null;
 
@@ -68,14 +71,14 @@ export async function refresh(): Promise<void> {
   if (me.user) {
     try {
       const [a, s] = await Promise.all([
-        api<{ attempts: Attempt[]; totals?: { total: number; ok: number } }>("/api/attempts"),
+        api<{ attempts: Attempt[]; totals?: { total: number; ok: number }; topics?: TopicTotal[] }>("/api/attempts"),
         api<{ saved: Saved[] }>("/api/saved"),
       ]);
-      set({ ...me, ready: true, attempts: a.attempts, totals: a.totals ?? null, saved: s.saved });
+      set({ ...me, ready: true, attempts: a.attempts, totals: a.totals ?? null, topics: a.topics ?? null, saved: s.saved });
       return;
     } catch {}
   }
-  set({ ...me, ready: true, attempts: readLocal<Attempt>(LS_ATTEMPTS), totals: null, saved: readLocal<Saved>(LS_SAVED) });
+  set({ ...me, ready: true, attempts: readLocal<Attempt>(LS_ATTEMPTS), totals: null, topics: null, saved: readLocal<Saved>(LS_SAVED) });
 }
 
 export function useProgress(): State {
@@ -104,7 +107,13 @@ export async function addAttempt(handId: string, chosen: number): Promise<void> 
   };
   const attempts = [item, ...state.attempts];
   const t = state.totals;
-  set({ attempts, totals: t && { total: t.total + 1, ok: t.ok + (item.correct ? 1 : 0) } });
+  const ok = item.correct ? 1 : 0;
+  const topics =
+    state.topics &&
+    (state.topics.some((r) => r.topic === item.topic)
+      ? state.topics.map((r) => (r.topic === item.topic ? { ...r, total: r.total + 1, ok: r.ok + ok } : r))
+      : [...state.topics, { topic: item.topic, total: 1, ok }]);
+  set({ attempts, totals: t && { total: t.total + 1, ok: t.ok + ok }, topics });
   if (state.user) {
     await api("/api/attempts", { method: "POST", body: JSON.stringify({ items: [{ handId, chosen }] }) }).catch(() => {});
   } else {
@@ -164,23 +173,25 @@ export function clearLocal(): void {
     localStorage.removeItem(LS_ATTEMPTS);
     localStorage.removeItem(LS_SAVED);
   } catch {}
-  if (!state.user) set({ attempts: [], totals: null, saved: [] });
+  if (!state.user) set({ attempts: [], totals: null, topics: null, saved: [] });
 }
 
 // ───────────── İstatistik ─────────────
-export type TopicStat = { topic: Topic; ok: number; total: number; rate: number };
+export type { TopicStat };
 
 export function topicStats(attempts: { topic: Topic; correct: boolean }[]): TopicStat[] {
-  const map = new Map<Topic, { ok: number; total: number }>();
-  for (const a of attempts) {
-    const t = map.get(a.topic) ?? { ok: 0, total: 0 };
-    t.total++;
-    if (a.correct) t.ok++;
-    map.set(a.topic, t);
-  }
-  return [...map]
-    .map(([topic, v]) => ({ topic, ...v, rate: v.ok / v.total }))
-    .sort((a, b) => a.rate - b.rate || b.total - a.total);
+  return rankTopics(topicTotals(attempts));
+}
+
+/**
+ * Dışa aktarma için cevapların tamamı. Üyede sunucudan sayfa sayfa okunur (G-2);
+ * misafirde tarayıcıdaki liste zaten tamdır.
+ */
+export async function allAttempts(): Promise<Attempt[]> {
+  if (!state.user) return state.attempts;
+  return collectPages((before) =>
+    api<Page<Attempt>>(`/api/attempts/export${before ? `?before=${encodeURIComponent(before)}` : ""}`),
+  );
 }
 
 /** Zayıf konu: en az 2 soru çözülmüş ve doğruluk %60'ın altında. */
