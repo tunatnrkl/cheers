@@ -429,6 +429,33 @@ const CURATED: Hand[] = [
     reasoning: "9,5 BB'lik toplam pota 3 BB ödüyorsun: yaklaşık %32 equity yetiyor. A2o, kısa stack'in makul push aralıklarına karşı bu eşiğin rahatça üzerindedir (kendi hesabımızla, referans 6 BB UTG push aralığına karşı yaklaşık %40). T7o gibi bir el ise aynı aralığa karşı eşiğin hemen üstünde kalır; o el sınırdadır. Kaybetsen stack'inin yalnızca %6'sı gider, yani ICM baskısı senin için çok düşük. Büyük stack, kısa stack'in all-in'ini iyi fiyata gördüğünde hem chip hem de bubble'ı bitirme şansı kazanır.",
   },
 
+  // CS-3: aynı eller "All-in'e karşı call" konusunda ICM'siz call (s10-BTN-A3o, s15-BTN-KQo).
+  // Sayılar: docs/ekip/arac/icm-callfold.mts, rapor docs/ekip/2026-11-11/14-calisma-10-kapanis.md
+  {
+    id: "ib01", title: "Bubble'da A3 offsuit: eşit stack'in all-in'i", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 10,
+    hero: "As3h", potBB: 12.5, seq: ["BTN a", "SB f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: CO 45, SB 15, BTN 10, sen 10 BB. Varsayım: BTN, 10 BB ile ellerin yaklaşık %36'sıyla all-in yapıyor (referans BTN 10 BB aralığı). Toplam ante 1 BB.",
+    ante: 1, stacks: {CO: 45, SB: 15}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "Call (9 BB)"], correct: 0, topic: "icm", level: 3,
+    reasoning: "Yalnızca chip'e bakarsan call: 9 BB ödeyip 21,5 BB'lik pota giriyorsun, gereken equity yaklaşık %42; A3o bu aralığa karşı yaklaşık %46 taşır. ICM baskısı olmayan aynı spotta cevap call'dur. Burada kaybedersen ödülsüz 4. olursun, kazanırsan stack'in ikiye katlanır ama ödül payın katlanmaz. Kendi ICM hesabımızla fold ödül havuzunun yaklaşık %16,4'ünü, call yaklaşık %14,8'ini getirir; call'un kârlı olması için yaklaşık %51,5 equity gerekir. BTN ellerin yarısına yakınıyla itse bile A3o yaklaşık %48,5'te kalır. Bu varsayımlarla fold.",
+  },
+  {
+    id: "ib02", title: "Bubble'da KQ offsuit: 15 BB'lik all-in", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 15,
+    hero: "KsQd", potBB: 17.5, seq: ["BTN a", "SB f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: CO 30, SB 20, BTN 15, sen 15 BB. Varsayım: BTN, 15 BB ile ellerin yaklaşık %26'sıyla all-in yapıyor (referans BTN 15 BB aralığı). Toplam ante 1 BB.",
+    ante: 1, stacks: {CO: 30, SB: 20}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "Call (14 BB)"], correct: 0, topic: "icm", level: 3,
+    reasoning: "Chip hesabı: 14 BB ödeyip 31,5 BB'lik pota giriyorsun, gereken equity yaklaşık %44; KQo bu aralığa karşı yaklaşık %48 taşır, yani ICM'siz call. Bubble'da kaybedersen ödülsüz elenirsin. Kendi ICM hesabımızla fold ödül havuzunun yaklaşık %19,8'ini, call yaklaşık %17,1'ini getirir; call için yaklaşık %56 equity gerekir. Bu eşik, chip eşiğinden 12 puan yukarıda (risk primi). BTN ellerin yarısına yakınıyla itse bile KQo yaklaşık %55'te kalır: eşiğe yaklaşır ama geçemez. Bu varsayımlarla fold.",
+  },
+  {
+    id: "ib03", title: "Bubble'da chip lideri: kısa stack'in all-in'ine A7 suited", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 10,
+    hero: "Ah7h", potBB: 12.5, seq: ["BTN a", "SB f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: sen 40, CO 15, SB 15, BTN 10 BB. Varsayım: BTN, 10 BB ile ellerin yaklaşık %36'sıyla all-in yapıyor (referans BTN 10 BB aralığı). Toplam ante 1 BB.",
+    ante: 1, stacks: {BB: 40, CO: 15, SB: 15}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "Call (9 BB)"], correct: 1, topic: "icm", level: 3,
+    reasoning: "ICM her zaman fold demek değildir. Chip hesabı yaklaşık %42 equity ister. Kaybetsen de 30 BB ile hâlâ en büyük stack'sin; ICM eşiği bu yüzden yalnızca yaklaşık %45'e çıkar. A7s bu aralığa karşı yaklaşık %52 taşır: kendi ICM hesabımızla call ödül havuzunun yaklaşık %37,1'ini, fold yaklaşık %36,3'ünü getirir. Kazanırsan bir oyuncu elenir ve bubble biter. Sınır: BTN yalnızca ellerin yaklaşık %17'siyle itseydi equity'n yaklaşık %43'e iner ve fold doğru olurdu. Bu varsayımlarla call.",
+  },
+
   // ───────────── TURNUVA · DİĞER ─────────────
   {
     id: "t14", title: "Turnuvanın başında 66", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 150,

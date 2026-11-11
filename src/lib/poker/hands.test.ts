@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { HANDS } from "@/data/hands";
 import { replay } from "./replay";
+import { icm } from "./math";
 
 // Her el için: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi tutarlı,
 // kartlar geçerli ve tekrarsız, board sokağa uygun, doğru cevap seçeneklerden biri.
@@ -331,6 +332,60 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
     const vEq = turnExact("KdTd", "Kc7h4s9s", value);
     const rest = turnExact("KdTd", "Kc7h4s9s", [...draws, ...air]);
     expect(0.75 * vEq + 0.25 * rest).toBeGreaterThan(need);
+  });
+
+  // CS-3: bubble spotları. Ödüller (%50/%30/%20) ve rakip aralığı nottaki varsayım; ICM = Malmuth-Harville.
+  // Stack'ler replay'den; rakibin all-in'i kahramanın stack'inden küçük ya da eşit (iade yok).
+  const icmCall = (id: string) => {
+    const h = HANDS.find((x) => x.id === id)!;
+    const r = replay(h);
+    const seats = (h.players ?? []) as (keyof typeof r.seats)[];
+    const vil = seats.find((s) => r.seats[s].allin)!;
+    expect(r.seats[vil].stack).toBe(0);
+    const after = (hero: number, v: number) => seats.map((s) => (s === h.heroPos ? hero : s === vil ? v : r.seats[s].stack));
+    const me = seats.indexOf(h.heroPos);
+    const hs = r.seats[h.heroPos].stack;
+    const P = [50, 30, 20];
+    const F = icm(after(hs, r.pot), P)[me];
+    const W = icm(after(hs + r.pot, 0), P)[me];
+    const L = icm(after(hs - r.toCall, r.pot + r.toCall), P)[me];
+    return { chipReq: r.toCall / (r.pot + r.toCall), icmReq: (F - L) / (W - L), F, W, L, h };
+  };
+
+  it("ib01: A3o chip hesabıyla call, bubble'da ICM eşiğinin belirgin altında (fold)", () => {
+    const { chipReq, icmReq, h } = icmCall("ib01");
+    const eq = equityVsRange("As3h", push["10"].BTN);
+    expect(h.correct).toBe(0);
+    expect(eq).toBeGreaterThan(chipReq);
+    expect(icmReq - eq).toBeGreaterThan(0.035);
+    expect(icmReq).toBeGreaterThan(0.505);
+    expect(icmReq).toBeLessThan(0.525);
+    // Gerekçedeki iddia: BTN ellerin yarısına yakınıyla (6 BB aralığı, ~%48) itse bile eşiğin altında
+    expect(equityVsRange("As3h", push["6"].BTN)).toBeLessThan(icmReq);
+  });
+
+  it("ib02: KQo chip hesabıyla call, ICM eşiği ~%56 (fold)", () => {
+    const { chipReq, icmReq, h } = icmCall("ib02");
+    const eq = equityVsRange("KsQd", push["15"].BTN);
+    expect(h.correct).toBe(0);
+    expect(eq).toBeGreaterThan(chipReq);
+    expect(icmReq - eq).toBeGreaterThan(0.035);
+    expect(icmReq).toBeGreaterThan(0.555);
+    expect(icmReq).toBeLessThan(0.575);
+    expect(equityVsRange("KsQd", push["6"].BTN)).toBeLessThan(icmReq);
+  });
+
+  it("ib03: chip lideri A7s ile ICM eşiğinin belirgin üzerinde (call); dar aralıkta fold", () => {
+    const { chipReq, icmReq, h, F, W, L } = icmCall("ib03");
+    const eq = equityVsRange("Ah7h", push["10"].BTN);
+    expect(h.correct).toBe(1);
+    expect(eq - icmReq).toBeGreaterThan(0.035);
+    expect(icmReq - chipReq).toBeLessThan(0.05);
+    expect(F).toBeGreaterThan(36);
+    expect(F).toBeLessThan(36.6);
+    expect(eq * W + (1 - eq) * L).toBeGreaterThan(F);
+    // Gerekçedeki sınır: rakip yalnızca ~%17 ile (15 BB CO aralığı) itseydi fold
+    expect(equityVsRange("Ah7h", push["15"].CO)).toBeLessThan(icmReq);
   });
 });
 

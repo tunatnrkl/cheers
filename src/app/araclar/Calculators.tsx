@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { bluffBreakEven, icm, outsProbability, potOddsRatio, requiredEquity, spr } from "@/lib/poker/math";
+import { parseIcmList } from "@/lib/poker/icmInput";
 
 const pct = (x: number) => `%${(x * 100).toFixed(1).replace(".", ",")}`;
 const num = (s: string) => {
@@ -146,12 +147,13 @@ function Spr() {
 function Icm() {
   const [stacks, setStacks] = useState("5000, 3000, 1500, 500");
   const [payouts, setPayouts] = useState("50, 30, 20");
-  const parse = (s: string) => s.split(/[\s;,]+/).map(Number).filter((n) => Number.isFinite(n) && n > 0);
-  const st = parse(stacks).slice(0, 9);
-  const pay = parse(payouts).slice(0, 9);
-  // Sıfır ya da sayı olmayan girişler atılır; kullanıcı numaraların kaydığını bilmeli (9. çalışma, açık iş 8).
-  const tokens = (s: string) => s.split(/[\s;,]+/).filter(Boolean).length;
-  const dropped = tokens(stacks) - parse(stacks).length;
+  // Sıfır ya da sayı olmayan girişler atılır, 9'dan fazlası kesilir; kullanıcı numaraların kaydığını bilmeli (I-1).
+  // "5.000" binlik sayılır (I-2). Mantık ve testler: src/lib/poker/icmInput.ts
+  const sp = parseIcmList(stacks);
+  const pp = parseIcmList(payouts);
+  const st = sp.values;
+  const pay = pp.values;
+  const dropped = sp.dropped;
   const valid = st.length >= 2 && pay.length >= 1;
   const res = valid ? icm(st, pay) : [];
   const totalChips = st.reduce((a, b) => a + b, 0);
@@ -193,6 +195,18 @@ function Icm() {
             <p className="mt-3 text-sm text-muted">
               {dropped} giriş hesaba katılmadı (0 ya da sayı değil); oyuncular kalan stack'lerin sırasıyla numaralandı. Elenen
               oyuncu ICM'ye girmez: onun aldığı ödülü listeden çıkarıp yalnızca kalan ödülleri yaz.
+            </p>
+          )}
+          {sp.truncated + pp.truncated > 0 && (
+            <p className="mt-3 text-sm text-muted">
+              Hesap makinesi en fazla 9 oyuncu ve 9 ödül alır; fazladan {sp.truncated > 0 ? `${sp.truncated} stack` : ""}
+              {sp.truncated > 0 && pp.truncated > 0 ? " ve " : ""}
+              {pp.truncated > 0 ? `${pp.truncated} ödül` : ""} hesaba katılmadı.
+            </p>
+          )}
+          {pp.dropped > 0 && (
+            <p className="mt-3 text-sm text-muted">
+              Ödüllerden {pp.dropped} giriş hesaba katılmadı (0 ya da sayı değil).
             </p>
           )}
           <p className="mt-3 rounded-xl border border-line p-3 text-sm">
