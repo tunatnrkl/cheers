@@ -16,6 +16,7 @@ import {
   type Attempt,
   type Saved,
 } from "@/lib/client/store";
+import { Growth } from "./Growth";
 
 function download(name: string, mime: string, content: string) {
   const url = URL.createObjectURL(new Blob([content], { type: mime }));
@@ -235,6 +236,8 @@ export function Profile() {
               </>
             )}
           </section>
+
+          {total > 0 && <Growth attempts={p.attempts} />}
 
           <section className="card" aria-label="Veri">
             <h2 className="h2">Verilerin</h2>

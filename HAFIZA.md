@@ -2,11 +2,11 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-11, 6. çalışma**
+Son güncelleme: **2026-11-11, 7. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dallar birleştirilmeli (hâlâ açık, 6. çalışmada da hatırlatıldı).** Varsayılan dal `claude/charming-davinci-emhvz1` hâlâ `2b7d6b5`'te. Her çalışma oradan başlıyor. Zincir: `wcrqqc` (4) → `vrsaxz` (5) → **`claude/wizardly-meitner-9evl2r` (6, en güncel dal)**. Her dal bir öncekinin bütün commit'lerini içeriyor; yalnızca en günceli birleştirmek yeterli. Bir sonraki çalışma, dalı yoksa önce `git branch -r` ile en yeni `HAFIZA.md`'yi taşıyan dalı bulmalı (`git log -1 <dal>`) ve kendi dalını onun üzerine kurmalı (`git checkout -B <kendi dalı> origin/<en yeni dal>`).
+1. **Dallar birleştirilmeli (hâlâ açık, 7. çalışmada da hatırlatıldı).** Varsayılan dal `claude/charming-davinci-emhvz1` hâlâ `2b7d6b5`'te. Her çalışma oradan başlıyor. Zincir: `wcrqqc` (4) → `vrsaxz` (5) → `9evl2r` (6) → **`claude/wizardly-meitner-p01f35` (7, en güncel dal)**. Her dal bir öncekinin bütün commit'lerini içeriyor; yalnızca en günceli birleştirmek yeterli. `05x26x` ve `ch8abk` yan dallarını **birleştirme** (P-2). Bir sonraki çalışma, dalı yoksa önce `git branch -r` ile en yeni `HAFIZA.md`'yi taşıyan dalı bulmalı (`git log -1 <dal>`) ve kendi dalını onun üzerine kurmalı (`git checkout -B <kendi dalı> origin/<en yeni dal>`).
 2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı.** Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
@@ -15,11 +15,20 @@ Son güncelleme: **2026-11-11, 6. çalışma**
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
 - 577 spot (59 elle yazılmış + 518 üretilmiş; `callshove` 122), 138 sözlük terimi, 8 blog yazısı.
-- Sağlık (6. çalışma): `npm test` **617/617**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- `/profil`'de **Gelişim** kartı (7): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
+- Sağlık (7. çalışma): `npm test` **627/627**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 7. çalışma — rapor: [`docs/ekip/2026-11-11/11-calisma-7-kapanis.md`](docs/ekip/2026-11-11/11-calisma-7-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| Y-1 devamı: elle yazılmış spotlar + blog tarandı (18 farklı kullanım, hepsi doğru); `pctSuffixProblem` ve tüm metni tarayan test | Poker Uzmanı, QA | ✅ |
+| Gelişim istatistikleri spesifikasyonu (`10-gelisim-istatistikleri-spec.md`): davranış değerlendirmesi kanıt düzeyiyle, yerleşim, durumlar, erişilebilirlik, backend (yeni uç nokta yok) | Davranış Bilimleri, UI/UX, Frontend, Backend | ✅ |
+| `stats.ts` + 8 birim testi, `Growth.tsx`; Playwright 390/1366 px | Frontend, QA | ✅ (üye/PostgreSQL yolu denenmedi) |
 
 ### 6. çalışma — rapor: [`docs/ekip/2026-11-11/09-calisma-6-kapanis.md`](docs/ekip/2026-11-11/09-calisma-6-kapanis.md)
 
@@ -70,7 +79,7 @@ Son güncelleme: **2026-11-11, 6. çalışma**
 
 ## Devam eden / açık işler
 
-1. **Elle yazılmış spotlarda yüzde ekleri** (Y-1'in devamı): `text.test.ts`'teki ek testi şimdilik yalnızca üretilen spotlara bakıyor. Elle yazılmış metinler taranıp test bütün spotlara genişletilmeli.
+1. Gelişim kartı giriş yapmış kullanıcıyla (PostgreSQL) denenmedi. G-1: 5000 kayıt sınırı.
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
 4. **CS-3:** ICM'li call/fold varyantı için 8 ellik karşılaştırma seti hazır (04 raporu); henüz spot yok.
@@ -90,6 +99,7 @@ Son güncelleme: **2026-11-11, 6. çalışma**
 - Pot odds gerekçeleri tek sokak üzerinden; iki kartlık oran yalnızca all-in ya da iki sokak garantiliyse.
 - **Ödül döngüsü mekanikleri yok:** seri, rozet, liderlik tablosu, günlük hedef zinciri. Ara kartındaki iki seçenek eşit görsel ağırlıkta.
 - Oturum ritmi verisi yalnızca tarayıcıda (`localStorage["pd:rhythm"]`); sunucuya kişisel veri gitmez.
+- **İstatistik kuralları (7):** yeni veri toplanmaz, hesap istemcide; `MIN_SAMPLE = 10` altında oran yok; pencereler kayan 7 gün (takvim haftası, günlük ısı haritası yok); tek nötr renk, "düştün/yükseldin" vurgusu yok; ilk görüş ve tekrar ayrı gösterilir.
 - Ondalık ayırıcı: görünen metinde virgül (6. çalışmada uygulandı, testli). Veri alanlarında (`seq`, `potBB`, `stackBB`) nokta.
 - Blog yazıları `POSTS` dizisine kronolojik sırayla eklenir. Gövde yalnızca `{h, p}` blokları; tablo yerine `RichText` madde listesi (`\n- `) kullanılır.
 - Pozisyon kısaltmalarına ek, harf harf okunuşa göre: `SB'de`, `SB'nin`, `CO'nun`, `BTN'de`, `BTN'nin` (sitedeki 125 `BTN'de/BTN'den` kullanımıyla tutarlı; 04'teki "BTN'un" önerisi uygulanmadı).
@@ -113,11 +123,13 @@ Son güncelleme: **2026-11-11, 6. çalışma**
 | D-1…D-6 | c19, c20, c21, c27, t21, t22 | Düşük | Kapandı (3 ve 4) |
 | CS-4 | "SB'un", "CO'un" | Düşük | Düzeltildi (6) |
 | CS-5 | Ondalık ayırıcı tutarsız | Düşük | Düzeltildi (6) |
-| Y-1 | Üretilen 326 gerekçede ve 122 notta yüzde eki sabit ("%12'inde", "%54'iyle", "%0'inde") | Düşük | Üretilenlerde düzeltildi (6); elle yazılmışlar taranmadı |
+| Y-1 | Üretilen 326 gerekçede ve 122 notta yüzde eki sabit ("%12'inde", "%54'iyle", "%0'inde") | Düşük | Kapandı: üretilenler düzeltildi (6), elle yazılmışlar ve blog temiz çıktı, test hepsini kapsıyor (7) |
 | T-1 | t23 turnuva spotunda ante yok | Düşük | Açık |
 | UX-1 | Ara kartı masaüstünde masanın yerini alıyor, koç kısayolu yok | Düşük | Düzeltildi (6), tarayıcıda doğrulandı |
 | B-1 | Karışık stratejili spotlarda tek doğru cevap | Bilgi | Ürün kararı bekliyor |
-| P-1 | Çalışma dalları varsayılan dala alınmıyor (6 çalışma, 6 dal) | Orta | Açık — kullanıcı aksiyonu gerekiyor |
+| P-1 | Çalışma dalları varsayılan dala alınmıyor (7 çalışma) | Orta | Açık — kullanıcı aksiyonu gerekiyor |
+| P-2 | `05x26x`, `ch8abk` yan dalları ana zincirle çakışıyor | Bilgi | Birleştirilmemeli |
+| G-1 | `GET /api/attempts` 5000 kayıt sınırı: çok aktif üyede "ilk görüş" oranı eski kayıtları göremez | Düşük | Açık |
 
 ## Doğrulanamayan konular
 
@@ -127,19 +139,21 @@ Son güncelleme: **2026-11-11, 6. çalışma**
 - Push aralıklarının Nash tablolarına yakınlığı bilinmiyor.
 - CS-1'deki dar/geniş senaryo oranları (%60, %150) keyfi; gerçek oyuncu sapmasını temsil ettiği doğrulanamadı.
 - Set mining "15–20 kat" kuralının kaynağı.
+- Dunlosky ve ark. 2013 ile Kluger–DeNisi 1996 atıfları (10 numaralı spesifikasyon) hafızadan; kaynak açılıp doğrulanmadı.
 - Davranış önerilerindeki süreler (20–30 dk bölüm, 25 dk ara, günde 60–90 dk) genel öğrenme literatüründen; poker eğitimine özgü kanıt yok.
 
 ## Atlanan roller
 
-- **Data Analyst** (1–6): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
-- **Davranış Bilimleri** (2–6): yeni mekanik önerilmedi; 1. çalışmadaki spesifikasyon geçerli.
-- **Backend** (2–6): sunucu değişikliği gerekmedi.
+- **Data Analyst** (1–7): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
+- **Davranış Bilimleri** (2–6): yeni mekanik önerilmedi. 7'de gelişim kartı için çalıştı.
+- **Backend** (2–6): sunucu değişikliği gerekmedi. 7'de değerlendirdi: yeni uç nokta gerekmiyor.
+- **Poker Eğitim, Content** (7): B-1 kararı gelmeden yeni içerik eklenmedi.
 
 ## Sonraki öncelikler
 
-1. **Dal durumu kontrolü (P-1).** `claude/wizardly-meitner-9evl2r` ana dala alınmadıysa bu daldan devam et ve kullanıcıya yeniden hatırlat.
-2. **Elle yazılmış spotlarda Türkçe ek taraması** (Y-1 devamı) ve ek testinin bütün spotlara genişletilmesi. Küçük, hızlı bir iş.
-3. **Gelişmiş istatistikler (Aşama 3) spesifikasyonu:** pozisyon ve konu bazında zaman içinde eğilim (UI/UX → Frontend → Backend, en az yetki). Ödül döngüsü mekaniği olmadan; Davranış Bilimleri değerlendirmesiyle.
+1. **Dal durumu kontrolü (P-1).** `claude/wizardly-meitner-p01f35` ana dala alınmadıysa bu daldan devam et ve kullanıcıya yeniden hatırlat.
+2. **Gelişim kartını üye yoluyla denemek** (yerel PostgreSQL ile `npm run db:migrate`, kayıt, cevap, `/profil`) ve G-1 için karar: istatistik sorgusunu sunucuda özetlemek mi, sınırı belgelemek mi.
+3. **T-1 (t23 ante) ve t13 resteal aralığı:** küçük poker doğruluk işleri; Poker Uzmanı + QA.
 4. B-1 ürün kararı gelirse `acceptable` alanı + c39. CS-3 ICM varyantı bunlardan sonra.
 
 ## Agent sorumlulukları

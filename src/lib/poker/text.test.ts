@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { HANDS } from "@/data/hands";
-import { pctWithSuffix } from "@/lib/trSuffix";
+import { pctSuffixProblem, pctWithSuffix } from "@/lib/trSuffix";
+import { POSTS } from "@/data/blog";
 import { cardFromString, evaluate7 } from "./evaluator";
 import { replay } from "./replay";
 import ranges from "@/data/ranges.json";
@@ -29,6 +30,27 @@ describe("spot metinleri", () => {
           if (m[0] !== pctWithSuffix(Number(m[1]), kind)) bad.push(`${h.id}: ${m[0]}`);
         }
     expect(bad).toEqual([]);
+  });
+
+  it("bütün spotlarda ve blogda yüzdeye gelen ek okunuşa uyuyor (Y-1)", () => {
+    const texts = [...HANDS.flatMap((h) => visible(h).map((t) => [h.id, t])), ...POSTS.map((p) => [p.slug, JSON.stringify(p)])];
+    const bad: string[] = [];
+    let checked = 0;
+    for (const [id, t] of texts)
+      for (const m of t.matchAll(/%(\d+(?:,\d+)?)'(\p{L}+)/gu)) {
+        checked++;
+        const why = pctSuffixProblem(m[1], m[2]);
+        if (why) bad.push(`${id}: ${m[0]} (${why})`);
+      }
+    expect(checked).toBeGreaterThan(400);
+    expect(bad).toEqual([]);
+  });
+
+  it("ek denetleyicisi: örnek vakalar", () => {
+    for (const [n, s] of [["19", "a"], ["19", "dur"], ["27,3", "lük"], ["34", "e"], ["40", "ın"], ["50", "nin"], ["6", "sı"], ["90", "ından"], ["74", "lük"], ["86", "ya"], ["43", "te"], ["30", "da"], ["12", "sinde"]])
+      expect(pctSuffixProblem(n, s), `%${n}'${s}`).toBeNull();
+    for (const [n, s] of [["12", "inde"], ["54", "iyle"], ["0", "inde"], ["40", "sı"], ["43", "de"], ["30", "ta"], ["19", "e"], ["27,3", "lik"], ["6", "ı"]])
+      expect(pctSuffixProblem(n, s), `%${n}'${s}`).not.toBeNull();
   });
 
   it("ek yardımcısı: örnek vakalar", () => {

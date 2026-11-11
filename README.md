@@ -87,7 +87,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
 | `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). Belirli sayıda elden (varsayılan 20) ya da 25 dakikadan sonra engellemeyen bir ara kartı çıkar; sıklığı ayarlanabilir ya da kapatılabilir. Masaüstünde kart soluk masanın üstünde durur ve koç panelinde "Bu bölümü yorumla" kısayolu çıkar (statik sürümde yok). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
-| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran, kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
+| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran; gelişim kartı (son 8 haftanın kayan 7 günlük pencereleri, pozisyona göre doğruluk, ilk görüş / tekrar ayrımı; 10 cevaptan azında oran gösterilmez); kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
 | `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
 | `/range` | Pozisyona göre açılış (cash) ve push/fold (turnuva) aralıkları; kendi range'ini işaretle, karşılaştır, asistana değerlendir |
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
@@ -168,7 +168,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
 | Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`) testle denetlenir.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda ve blog yazılarında testle denetlenir.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
@@ -215,7 +215,7 @@ Alıştırma modu, yapay zeka ile alıştırma analizi, kullanıcı hesabı (e-p
 |---|---|
 | Turnuva modülü ve ICM hesabı | ✅ temel hali |
 | Hand history içe aktarma | ⬜ |
-| Gelişmiş istatistikler (zaman içinde eğilim, pozisyon bazında döküm) | ⬜ |
+| Gelişmiş istatistikler (zaman içinde eğilim, pozisyon bazında döküm) | ✅ temel hali (`src/lib/client/stats.ts`, yeni veri toplanmaz) |
 
 ### Bilinen sınırlar
 
