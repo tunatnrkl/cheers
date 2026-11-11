@@ -49,6 +49,8 @@ export function Trainer() {
   // Oturum ritmi: belirli sayıda elden ya da 25 dakikadan sonra engellemeyen bir ara kartı
   const [every, setEvery] = useState<RhythmEvery>(20);
   const [showBreak, setShowBreak] = useState(false);
+  // Ara kartındaki "Bu bölümü yorumla" kısayolu: 0 = sorulmadı
+  const [breakAsk, setBreakAsk] = useState(0);
   const block = useRef<Block>({ start: 0, answers: 0 });
   const sessionStart = useRef(0);
   useEffect(() => {
@@ -120,6 +122,7 @@ export function Trainer() {
     const now = Date.now();
     if (staleEmptyBlock(block.current, now)) block.current = { start: now, answers: 0 };
     if (shouldBreak(every, block.current, now)) {
+      setBreakAsk(0);
       setShowBreak(true);
       return;
     }
@@ -129,12 +132,14 @@ export function Trainer() {
   function continueAfterBreak() {
     block.current = { start: Date.now(), answers: 0 };
     setShowBreak(false);
+    setBreakAsk(0);
     show(pickNext(pool));
   }
 
   function stopAfterBreak() {
     block.current = { start: Date.now(), answers: 0 };
     setShowBreak(false);
+    setBreakAsk(0);
     setSummary(true);
   }
 
@@ -177,6 +182,7 @@ export function Trainer() {
   });
 
   const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
+  const blockAnswers = showBreak ? answers.slice(Math.max(0, answers.length - block.current.answers)) : [];
   const saved = !!hand && progress.saved.some((s) => s.handId === hand.id);
 
   return (
@@ -268,27 +274,36 @@ export function Trainer() {
           analyze={analyze}
           setAnalyze={setAnalyze}
         />
-      ) : showBreak ? (
-        <BreakCard
-          answers={answers.slice(answers.length - block.current.answers)}
-          minutes={Math.max(1, Math.round((Date.now() - block.current.start) / 60000))}
-          longSession={isLongSession(sessionStart.current, Date.now())}
-          every={every}
-          onEvery={changeEvery}
-          onContinue={continueAfterBreak}
-          onStop={stopAfterBreak}
-        />
       ) : !hand || !r ? (
         <p className="p-10 text-center text-t-muted">{pool.length ? "Yükleniyor…" : "Bu seçimde el yok."}</p>
       ) : (
         <>
-          <div className="border-b border-t-line">
+          <div className={`border-b border-t-line ${showBreak ? "hidden opacity-25 lg:block" : ""}`} inert={showBreak}>
             <ActionStrip r={r} heroPos={hand.heroPos} />
           </div>
 
           <div className="grid lg:grid-cols-[minmax(0,1fr)_380px]">
+            <div className="relative min-w-0">
+            {/* Ara kartı: mobilde masanın yerini alır, masaüstünde soluk masanın üstünde durur */}
+            {showBreak && (
+              <div className="lg:absolute lg:inset-0 lg:z-10 lg:flex lg:items-start lg:justify-center lg:pt-6">
+                <BreakCard
+                  answers={blockAnswers}
+                  minutes={Math.max(1, Math.round((Date.now() - block.current.start) / 60000))}
+                  longSession={isLongSession(sessionStart.current, Date.now())}
+                  every={every}
+                  onEvery={changeEvery}
+                  onContinue={continueAfterBreak}
+                  onStop={stopAfterBreak}
+                />
+              </div>
+            )}
             {/* ── Masa ve kararlar ── */}
-            <section aria-label="Masa" className="flex min-w-0 flex-col gap-2.5 p-2.5 sm:gap-3 sm:p-5">
+            <section
+              aria-label="Masa"
+              inert={showBreak}
+              className={`flex min-w-0 flex-col gap-2.5 p-2.5 sm:gap-3 sm:p-5 ${showBreak ? "hidden opacity-25 select-none lg:flex" : ""}`}
+            >
               <div className="flex items-center gap-x-3 text-[13px] text-t-muted">
                 <span className="truncate font-bold text-t-ink">{hand.title}</span>
                 <span className="shrink-0">
@@ -384,13 +399,40 @@ export function Trainer() {
                 Kısayollar: 1–{hand.options.length} hamle seçer, Enter sonraki ele geçer.
               </p>
             </section>
+            </div>
 
             {/* ── Koç sohbeti ── */}
             <aside
               ref={chatRef}
               className="h-[440px] scroll-mt-20 border-t border-t-line bg-t-panel/60 lg:h-[calc(100dvh-190px)] lg:max-h-[860px] lg:min-h-[560px] lg:border-t-0 lg:border-l"
             >
-              <CoachChat hand={hand} chosen={picked} trigger={why} />
+              {showBreak && breakAsk ? (
+                <div className="h-full overflow-y-auto p-3 text-ink">
+                  <AiPanel
+                    title="Bu bölümün yorumu"
+                    context={{ type: "practice", attempts: blockAnswers.map((a) => ({ handId: a.hand.id, chosen: a.chosen })) }}
+                    autoAsk={{ id: breakAsk, question: "Bu bölümdeki sonuçlarımı kısaca yorumlar mısın?" }}
+                    placeholder="Bu bölüm hakkında sor…"
+                  />
+                </div>
+              ) : (
+                <div className="flex h-full min-h-0 flex-col">
+                  {showBreak && !STATIC_SITE && blockAnswers.length > 0 && (
+                    <div className="border-b border-t-line p-3">
+                      <button
+                        type="button"
+                        onClick={() => setBreakAsk(Date.now())}
+                        className="min-h-11 w-full rounded-xl border border-t-line bg-t-panel-2 px-4 text-sm font-bold text-t-ink transition hover:border-t-accent"
+                      >
+                        Bu bölümü yorumla
+                      </button>
+                    </div>
+                  )}
+                  <div className="min-h-0 flex-1">
+                    <CoachChat hand={hand} chosen={picked} trigger={why} />
+                  </div>
+                </div>
+              )}
             </aside>
           </div>
         </>
@@ -536,17 +578,23 @@ function BreakCard({
 }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [settings, setSettings] = useState(false);
-  useEffect(() => headingRef.current?.focus(), []);
+  const cardRef = useRef<HTMLElement>(null);
+  // Odak başlığa taşınır; kaydırma, kart sabit üst menünün altında kalmayacak biçimde ayrıca yapılır.
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+    cardRef.current?.scrollIntoView({ block: "nearest" });
+  }, []);
   const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
   const weak = weakTopics(topicStats(answers.map((a) => ({ topic: a.hand.topic, correct: a.chosen === a.hand.correct }))));
 
   return (
     <div className="flex justify-center p-3 sm:p-8">
       <section
+        ref={cardRef}
         role="dialog"
         aria-modal="false"
         aria-labelledby="break-title"
-        className="flex w-full max-w-[480px] flex-col gap-4 rounded-2xl border border-t-line bg-t-panel p-5"
+        className="flex w-full max-w-[480px] scroll-mt-28 flex-col gap-4 rounded-2xl border border-t-line bg-t-panel p-5 lg:shadow-[0_20px_60px_rgb(0_0_0/0.45)] motion-safe:animate-[fadein_160ms_ease-out]"
       >
         <h2 id="break-title" ref={headingRef} tabIndex={-1} className="text-xl font-extrabold outline-none">
           Kısa bir durak
