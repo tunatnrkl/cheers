@@ -1,6 +1,6 @@
 # Poker Defteri
 
-Türkçe bir Texas Hold'em alıştırma masası: 575 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 578 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -85,7 +85,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | Adres | Ne yapar |
 |---|---|
 | `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
-| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
+| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. 20 elde bir ya da 25 dakikada bir (hangisi önce gelirse) engellemeyen bir ara kartı bölümün özetini ve en zayıf konuyu gösterir; "Devam et" ya da "Burada bırak" seçilir, sıklık 10 / 20 / 40 el ya da kapalı olarak ayarlanır (tarayıcıda tutulur). Seri sayacı, rozet ya da puan yok. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter; ara kartında Enter devam, Esc bırak). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
 | `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran, kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
 | `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
@@ -158,11 +158,11 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**575 spot:**
+**578 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
-| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 53 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
+| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 56 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
 | Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
 | All-in'e karşı call (BB) | 126 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
@@ -196,7 +196,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (575 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (578 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |

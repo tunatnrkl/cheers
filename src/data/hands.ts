@@ -266,6 +266,20 @@ const CURATED: Hand[] = [
     reasoning: "16 BB'lik pota 4 BB ödüyorsun; elinin yalnızca %20 oranında iyi olması yetiyor. Rakip turn'de check dediği için aralığında güçlü dam'lar azaldı; küçük bahis blöfler ve daha zayıf per'lerle de yapılır. Bu fiyata ikinci per'i fold etmek fazla sıkı olur. Raise ise elini gereksiz yere blöfe çevirir.",
   },
 
+  // ───────────── CASH · SAVUNMA ─────────────
+  {
+    id: "c35", title: "BB'de J4 offsuit: UTG açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Jd4c", potBB: 4, seq: ["UTG r2.5"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 1,
+    reasoning: "Fiyat butona karşı savunmadakiyle aynı (yaklaşık %27), ama UTG'nin aralığı çok daha güçlü. J4o bu aralığa karşı ham olarak %29 civarındadır ve sık sık domine durumdadır: J'li per yaptığında bile rakipte daha iyi kicker olur. Pozisyon dışında bu eşiği tutturmak gerçekçi değil. Savunma aralığını fiyat kadar açanın pozisyonu da belirler.",
+  },
+  {
+    id: "c36", title: "BB'de 65 suited: açılış ve call var", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "6s5s", potBB: 6.5, seq: ["CO r2.5", "BTN c", "SB f"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 13 BB"], correct: 1, topic: "savunma", level: 2,
+    reasoning: "Pota 1.5 BB ekleyip 8 BB'lik pot için oynuyorsun: gereken equity yaklaşık %19. Çok kişili potta iki rakibe karşı equity'n düşer, ama 65s gibi suited connector'lar kent ve floş yaptığında büyük pot kazanabilir; tek per'e bel bağlamazlar. Bu fiyata call rahat. 3-bet ise iki rakibe karşı bu eli gereksiz yere blöfe çevirir.",
+  },
+
   // ───────────── TURNUVA · PUSH/FOLD ─────────────
   {
     id: "t01", title: "10 BB ile butonda A7 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 10,
@@ -430,6 +444,13 @@ const CURATED: Hand[] = [
     note: "Blind'lardaki oyuncular sıkı oynuyor.", ante: 1,
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
+  },
+  {
+    id: "t25", title: "BB'de K4 offsuit: ante'li potta buton açtı", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 30,
+    hero: "Kd4c", potBB: 4.7, seq: ["BTN r2.2", "SB f"],
+    ante: 1,
+    options: ["Fold", "Call (1.2 BB daha)", "All-in (30 BB)"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "Ante ve küçük açılış sayesinde 5.9 BB'lik pot için 1.2 BB ödüyorsun: gereken equity yaklaşık %20. K4o butonun geniş aralığına karşı ham olarak %40 civarındadır; pozisyon dışında equity'nin bir kısmını kaybetsen de eşik rahatça geçilir. 30 BB ile all-in ise yalnızca daha iyi ellerin göreceği, gereksiz büyük bir risk olur.",
   },
 ];
 

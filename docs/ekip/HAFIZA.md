@@ -7,8 +7,8 @@ Son güncelleme: **2026-11-11** (1. çalışma)
 ## Mevcut durum
 
 - Uygulama: Next.js 16 + React 19, PostgreSQL, Claude API koçu. Ayrıntılar `README.md` içinde.
-- İçerik: 575 spot (53 elle yazılmış + 522 üretilmiş), 138 sözlük terimi, 6 blog yazısı.
-- Sağlık (2026-11-11): `npm test` 589/589 geçti, `tsc --noEmit` temiz.
+- İçerik: 578 spot (56 elle yazılmış + 522 üretilmiş), 138 sözlük terimi, 6 blog yazısı.
+- Sağlık (2026-11-11, Claude Code sonrası): `npm test` 601/601 geçti, `tsc --noEmit` temiz, `npm run build` başarılı.
 - Yayın (README Aşama 1, adım 10) hâlâ yapılmadı. Asistan gerçek API anahtarıyla denenmedi.
 - Kullanıcı verisi (VPIP/PFR, alıştırma geçmişi dökümü) ekibe hiç sağlanmadı.
 
@@ -22,12 +22,12 @@ Son güncelleme: **2026-11-11** (1. çalışma)
 
 ## Devam edenler / devredilen işler (Claude Code)
 
-1. **Spot metin düzeltmeleri.** Denetim bulguları O-1, O-2, O-3 ve D-1…D-7, `src/data/hands.ts` içinde düzeltilecek. QA'nın önerdiği iki yeni test eklenecek (seçenekteki stack değeri `replay` ile ±1 BB; ondalık virgül yasağı).
+1. **Spot metin düzeltmeleri.** ✅ O-1, O-2, O-3 ve D-1…D-7 düzeltildi, iki QA testi eklendi (commit f966c72; bkz. "Tespit edilen hatalar").
 2. **`acceptable?: number[]` alanı** (bulgu B-1). Karışık stratejili spotlarda ikinci seçenek "kabul edilebilir" sayılacak. Etkilenen spotlar: c09, c23, c24, ileride c34.
-3. **Blind savunması spotları.** c35, c36 ve t25 eklenmeye hazır. c34 için önce revizyon gerekiyor: 3 BB açılışa çevrilecek ya da `acceptable` alanı beklenecek.
-4. **Ara kartı (`BreakCard`) ve `Seri` sayacının kaldırılması.** Spesifikasyon ve 7 kabul ölçütü `03-oturum-ritmi-spec.md` içinde.
+3. **Blind savunması spotları.** ✅ c35, c36 (CASH · SAVUNMA bölümü) ve t25 (TURNUVA · DİĞER, t20'nin yanında) `src/data/hands.ts` içine eklendi; `npm test` doğruluyor. `savunma` havuzu 2'den 5'e çıktı. ⏳ c34 hâlâ revizyon bekliyor (3 BB açılış ya da `acceptable` alanı); eklenmedi.
+4. **Ara kartı (`BreakCard`) ve `Seri` sayacının kaldırılması.** ✅ Yapıldı (2026-11-11, Claude Code). `Seri` sayacı kaldırıldı. Ara kartı `src/app/alistirma/BreakCard.tsx`, karar mantığı `src/lib/client/rhythm.ts` (birim testleri `rhythm.test.ts`: QA 1, 2, 4, 5, 7). Sıklık `localStorage["pd:rhythm"]` (10/20/40/kapalı, varsayılan 20). Masaüstünde koç panelinde "Bu bölümü yorumla" (statik sitede gizli). 7 kabul ölçütü Playwright ile 390px ve 1366px genişlikte doğrulandı (saat sahtelenerek). Not: "Burada bırak" bölümü de sıfırlar; böylece özetten masaya dönünce kart hemen yeniden açılmaz. Açık konu: sıklık ayarı yalnızca ara kartından değiştirilebiliyor; "Kapalı" seçen kullanıcı için başka bir yerden geri açma yolu yok.
 
-Bu çalışmada kod yazılmadı. Yukarıdaki 4 iş Claude Code görevine devredildi.
+Yalnızca 2 numaralı iş (`acceptable` alanı) ve c34 revizyonu açık.
 
 ## Alınan teknik ve ürün kararları
 
@@ -61,7 +61,7 @@ Bu çalışmada kod yazılmadı. Yukarıdaki 4 iş Claude Code görevine devredi
 
 ## Sonraki öncelikler
 
-1. Devredilen 4 işin uygulanıp uygulanmadığını kontrol et (`git log`, `src/data/hands.ts`). Uygulandıysa bulguları "Kapandı" olarak işaretle.
+1. Kalan devredilen işleri (2 ve c34) kontrol et (`git log`, `src/data/hands.ts`). Uygulandıysa bulguları "Kapandı" olarak işaretle.
 2. Üretilen 522 spot için örneklem denetimi: özellikle `callshove` grubunda, eşiğe 3.5 puan mesafe kuralının aralık varsayımlarına ne kadar duyarlı olduğu.
 3. Zayıf kalan `value` (3 spot) ve `spr` (4 spot) konuları için Eğitim ve Content paketi; ayrıca blind savunması rehber yazısı.
 4. Gelecekte: README Aşama 3'teki "gelişmiş istatistikler" (zaman içinde eğilim, pozisyon bazında döküm) için UI/UX ve Backend spesifikasyonu. Kullanıcı verisi olmadan Data Analyst çalışmaz.
