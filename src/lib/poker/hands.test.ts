@@ -85,3 +85,23 @@ describe("üretilen ellerin cevapları", () => {
     }
   });
 });
+
+describe("BB savunması elleri (defense.json)", () => {
+  it("100 el, cevaplar ve pot odds tutarlı", () => {
+    const list = HANDS.filter((h) => h.id.startsWith("d-"));
+    expect(list.length).toBe(100);
+    for (const h of list) {
+      const r = replay(h);
+      expect(h.topic, h.id).toBe("savunma");
+      expect(h.heroPos, h.id).toBe("BB");
+      // Açıklamadaki gereken equity, masadaki fiyattan hesaplananla aynı olmalı.
+      const req = Math.round((r.toCall / (r.pot + r.toCall)) * 100);
+      expect(h.reasoning, h.id).toContain(`gereken equity %${req}`);
+      // Açıklamadaki equity ile cevap uyumlu: 3-bet güçlü, fold zayıf ellerde.
+      const eq = Number(h.reasoning.match(/~%(\d+) equity/)![1]);
+      if (h.correct === 2) expect(eq, h.id).toBeGreaterThanOrEqual(66);
+      if (h.correct === 1) expect(eq, h.id).toBeGreaterThan(req);
+      if (h.correct === 0) expect(eq, h.id).toBeLessThanOrEqual(req + 12);
+    }
+  });
+});

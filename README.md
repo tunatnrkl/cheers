@@ -1,6 +1,6 @@
 # Poker Defteri
 
-Türkçe bir Texas Hold'em alıştırma masası: 591 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 691 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -158,7 +158,7 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**591 spot:**
+**691 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
@@ -167,6 +167,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
 | All-in'e karşı call (BB) | 126 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
 | Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
+| BB savunması: açılışa fold / call / 3-bet (cash 100 BB + turnuva 30 BB) | 100 | `scripts/generate-defense.mts` (`npm run defense`): elin açanın aralığına karşı Monte Carlo equity'si, pozisyon dışı gerçekleşme katsayısıyla düşürülür ve pot odds ile karşılaştırılır. Gereken equity'ye 6 puandan yakın eller ve call/3-bet arasında kalanlar dışarıda |
 
 `npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla yeniden kontrol edilir.
 

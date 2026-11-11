@@ -1,6 +1,7 @@
-// Alıştırma elleri. Elle yazılanlar (CURATED) ve kendi hesaplarımızla üretilenler (drills.json).
+// Alıştırma elleri. Elle yazılanlar (CURATED) ve kendi hesaplarımızla üretilenler (drills.json, defense.json).
 // Tüm senaryolar ve açıklamalar bu proje için özgündür. Doğruluk testi: src/lib/poker/hands.test.ts
 import drills from "./drills.json";
+import defense from "./defense.json";
 
 export type Game = "cash" | "turnuva";
 export type Street = "preflop" | "flop" | "turn" | "river";
@@ -539,7 +540,7 @@ const CURATED: Hand[] = [
   },
 ];
 
-export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[])];
+export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[]), ...(defense as Hand[])];
 export const HAND_BY_ID = new Map(HANDS.map((h) => [h.id, h]));
 
 export type StackBucket = "0-20" | "21-50" | "51-100" | "100+";

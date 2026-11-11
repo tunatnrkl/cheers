@@ -1,0 +1,2352 @@
+[
+ {
+  "id": "d-c-UTG-KK",
+  "title": "UTG 2,5 BB açtı, BB'de KK",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KhKd",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♥ K♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%74 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-UTG-QQ",
+  "title": "UTG 2,5 BB açtı, BB'de QQ",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "QcQs",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. Q♣ Q♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%69 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-UTG-AQo",
+  "title": "UTG 2,5 BB açtı, BB'de AQo",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "AhQs",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♥ Q♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%54 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-UTG-KJs",
+  "title": "UTG 2,5 BB açtı, BB'de KJs",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KhJh",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♥ J♥, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%44 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-UTG-A2s",
+  "title": "UTG 2,5 BB açtı, BB'de A2s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Ad2d",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♦ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%41 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-UTG-77",
+  "title": "UTG 2,5 BB açtı, BB'de 77",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "7s7c",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 7♠ 7♣, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%50 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-UTG-74o",
+  "title": "UTG 2,5 BB açtı, BB'de 74o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "7s4h",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 7♠ 4♥, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-UTG-53o",
+  "title": "UTG 2,5 BB açtı, BB'de 53o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "5c3d",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 5♣ 3♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-UTG-62o",
+  "title": "UTG 2,5 BB açtı, BB'de 62o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "6h2s",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 6♥ 2♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%27 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-UTG-J7o",
+  "title": "UTG 2,5 BB açtı, BB'de J7o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Jh7c",
+  "potBB": 4,
+  "seq": [
+   "UTG r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. UTG, UTG'den ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. J♥ 7♣, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-HJ-QQ",
+  "title": "HJ 2,5 BB açtı, BB'de QQ",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "QcQs",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. Q♣ Q♠, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%70 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-HJ-KK",
+  "title": "HJ 2,5 BB açtı, BB'de KK",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KdKc",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♦ K♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%76 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-HJ-77",
+  "title": "HJ 2,5 BB açtı, BB'de 77",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "7s7c",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 7♠ 7♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%51 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-HJ-66",
+  "title": "HJ 2,5 BB açtı, BB'de 66",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "6s6d",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 6♠ 6♦, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%49 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-HJ-A3s",
+  "title": "HJ 2,5 BB açtı, BB'de A3s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Ac3c",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♣ 3♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%43 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-HJ-AJs",
+  "title": "HJ 2,5 BB açtı, BB'de AJs",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "AcJc",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♣ J♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%55 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-HJ-62o",
+  "title": "HJ 2,5 BB açtı, BB'de 62o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "6c2s",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 6♣ 2♠, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%28 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-HJ-85o",
+  "title": "HJ 2,5 BB açtı, BB'de 85o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "8d5h",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 8♦ 5♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-HJ-74o",
+  "title": "HJ 2,5 BB açtı, BB'de 74o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "7s4h",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 7♠ 4♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-HJ-Q4o",
+  "title": "HJ 2,5 BB açtı, BB'de Q4o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Qd4h",
+  "potBB": 4,
+  "seq": [
+   "HJ r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. HJ, HJ'den ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. Q♦ 4♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-CO-KK",
+  "title": "CO 2,5 BB açtı, BB'de KK",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KcKd",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♣ K♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%76 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-CO-QQ",
+  "title": "CO 2,5 BB açtı, BB'de QQ",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "QhQc",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. Q♥ Q♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%72 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-CO-K8s",
+  "title": "CO 2,5 BB açtı, BB'de K8s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Kd8d",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♦ 8♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%43 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-CO-ATs",
+  "title": "CO 2,5 BB açtı, BB'de ATs",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "AdTd",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♦ 10♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%56 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-CO-T9s",
+  "title": "CO 2,5 BB açtı, BB'de T9s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Th9h",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♥ 9♥, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%40 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-CO-A8s",
+  "title": "CO 2,5 BB açtı, BB'de A8s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Ac8c",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♣ 8♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%50 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-CO-92o",
+  "title": "CO 2,5 BB açtı, BB'de 92o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "9s2d",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 9♠ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-CO-T2o",
+  "title": "CO 2,5 BB açtı, BB'de T2o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Ts2c",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♠ 2♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-CO-T6o",
+  "title": "CO 2,5 BB açtı, BB'de T6o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Tc6h",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♣ 6♥, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-CO-82o",
+  "title": "CO 2,5 BB açtı, BB'de 82o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "8c2h",
+  "potBB": 4,
+  "seq": [
+   "CO r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. CO, CO'dan ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 8♣ 2♥, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-BTN-TT",
+  "title": "Buton 2,5 BB açtı, BB'de TT",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "TsTh",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♠ 10♥, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%67 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-BTN-KK",
+  "title": "Buton 2,5 BB açtı, BB'de KK",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KhKd",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♥ K♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%78 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-BTN-K2s",
+  "title": "Buton 2,5 BB açtı, BB'de K2s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Kd2d",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. K♦ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%44 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-BTN-T7s",
+  "title": "Buton 2,5 BB açtı, BB'de T7s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Ts7s",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♠ 7♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%40 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-BTN-Q2s",
+  "title": "Buton 2,5 BB açtı, BB'de Q2s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Qd2d",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. Q♦ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%39 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-BTN-A5s",
+  "title": "Buton 2,5 BB açtı, BB'de A5s",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "As5s",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. A♠ 5♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%52 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-BTN-73o",
+  "title": "Buton 2,5 BB açtı, BB'de 73o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "7s3c",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 7♠ 3♣, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-BTN-T2o",
+  "title": "Buton 2,5 BB açtı, BB'de T2o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Th2c",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 10♥ 2♣, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-BTN-62o",
+  "title": "Buton 2,5 BB açtı, BB'de 62o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "6h2d",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 6♥ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-BTN-94o",
+  "title": "Buton 2,5 BB açtı, BB'de 94o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "9c4h",
+  "potBB": 4,
+  "seq": [
+   "BTN r2.5"
+  ],
+  "note": "6-max cash game, 100 BB. BTN, butondan ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (1,5 BB)",
+   "3-bet 11 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 2,5 BB'ye açtı; 4 BB'lik pota 1,5 BB ödüyorsun, gereken equity %27. 9♣ 4♥, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-SB-QQ",
+  "title": "SB 3 BB açtı, BB'de QQ",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "QsQh",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. Q♠ Q♥, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%73 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-SB-TT",
+  "title": "SB 3 BB açtı, BB'de TT",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "TcTh",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 10♣ 10♥, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%67 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-c-SB-KJo",
+  "title": "SB 3 BB açtı, BB'de KJo",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "KhJd",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. K♥ J♦, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%51 equity taşır. Pozisyonda equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-SB-66",
+  "title": "SB 3 BB açtı, BB'de 66",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "6h6d",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 6♥ 6♦, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%54 equity taşır. Pozisyonda equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-SB-QJs",
+  "title": "SB 3 BB açtı, BB'de QJs",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "QdJd",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. Q♦ J♦, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%50 equity taşır. Pozisyonda equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-SB-JTs",
+  "title": "SB 3 BB açtı, BB'de JTs",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "JcTc",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. J♣ 10♣, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%46 equity taşır. Pozisyonda equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-c-SB-54o",
+  "title": "SB 3 BB açtı, BB'de 54o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "5h4s",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 5♥ 4♠, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%34 equity taşır. Kâğıt üzerinde yakın görünse de bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-SB-95o",
+  "title": "SB 3 BB açtı, BB'de 95o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "9h5d",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 9♥ 5♦, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%33 equity taşır. Kâğıt üzerinde yakın görünse de bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-SB-84o",
+  "title": "SB 3 BB açtı, BB'de 84o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "8c4d",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 8♣ 4♦, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-c-SB-T5o",
+  "title": "SB 3 BB açtı, BB'de T5o",
+  "game": "cash",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 100,
+  "hero": "Tc5s",
+  "potBB": 4,
+  "seq": [
+   "SB r3"
+  ],
+  "note": "6-max cash game, 100 BB. SB, SB'den ellerin en iyi ~%38 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "SB 3 BB'ye açtı; 4 BB'lik pota 2 BB ödüyorsun, gereken equity %33. 10♣ 5♠, açan oyuncunun aralığına (ellerin en iyi ~%38) karşı ~%33 equity taşır. Kâğıt üzerinde yakın görünse de bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-UTG-AA",
+  "title": "UTG 3 BB açtı, BB'de AA",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "AhAs",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♥ A♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%84 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-UTG-QQ",
+  "title": "UTG 3 BB açtı, BB'de QQ",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "QhQd",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. Q♥ Q♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%69 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-UTG-A3s",
+  "title": "UTG 3 BB açtı, BB'de A3s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ac3c",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ 3♣, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%41 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-UTG-88",
+  "title": "UTG 3 BB açtı, BB'de 88",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8h8d",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♥ 8♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%52 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-UTG-K9s",
+  "title": "UTG 3 BB açtı, BB'de K9s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ks9s",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. K♠ 9♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%40 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-UTG-QTs",
+  "title": "UTG 3 BB açtı, BB'de QTs",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "QsTs",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. Q♠ 10♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%41 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-UTG-77",
+  "title": "UTG 3 BB açtı, BB'de 77",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "7c7s",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 7♣ 7♠, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%50 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-UTG-94o",
+  "title": "UTG 3 BB açtı, BB'de 94o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "9s4c",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 9♠ 4♣, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%27 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-UTG-82o",
+  "title": "UTG 3 BB açtı, BB'de 82o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8d2c",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♦ 2♣, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%27 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-UTG-T6o",
+  "title": "UTG 3 BB açtı, BB'de T6o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Th6d",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♥ 6♦, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-UTG-J6o",
+  "title": "UTG 3 BB açtı, BB'de J6o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Js6h",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♠ 6♥, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-UTG-84o",
+  "title": "UTG 3 BB açtı, BB'de 84o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8s4h",
+  "potBB": 5.5,
+  "seq": [
+   "UTG r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. UTG, ellerin en iyi ~%15 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "UTG 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♠ 4♥, açan oyuncunun aralığına (ellerin en iyi ~%15) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-HJ-KK",
+  "title": "HJ 3 BB açtı, BB'de KK",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "KhKs",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. K♥ K♠, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%77 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-HJ-AA",
+  "title": "HJ 3 BB açtı, BB'de AA",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "AcAs",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ A♠, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%84 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-HJ-88",
+  "title": "HJ 3 BB açtı, BB'de 88",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8d8c",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♦ 8♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%54 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-HJ-Q9s",
+  "title": "HJ 3 BB açtı, BB'de Q9s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Qh9h",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. Q♥ 9♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%39 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-HJ-55",
+  "title": "HJ 3 BB açtı, BB'de 55",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "5d5h",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 5♦ 5♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%47 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-HJ-A2s",
+  "title": "HJ 3 BB açtı, BB'de A2s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ad2d",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♦ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%43 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-HJ-A4s",
+  "title": "HJ 3 BB açtı, BB'de A4s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ac4c",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ 4♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%44 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-HJ-J7o",
+  "title": "HJ 3 BB açtı, BB'de J7o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Jc7s",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♣ 7♠, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%32 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-HJ-J6o",
+  "title": "HJ 3 BB açtı, BB'de J6o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Jd6h",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♦ 6♥, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-HJ-T5o",
+  "title": "HJ 3 BB açtı, BB'de T5o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ts5d",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♠ 5♦, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-HJ-85o",
+  "title": "HJ 3 BB açtı, BB'de 85o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8h5d",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♥ 5♦, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-HJ-J5o",
+  "title": "HJ 3 BB açtı, BB'de J5o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Jd5c",
+  "potBB": 5.5,
+  "seq": [
+   "HJ r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. HJ, ellerin en iyi ~%19 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "HJ 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♦ 5♣, açan oyuncunun aralığına (ellerin en iyi ~%19) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-QQ",
+  "title": "CO 3 BB açtı, BB'de QQ",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "QdQc",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. Q♦ Q♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%72 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-CO-KK",
+  "title": "CO 3 BB açtı, BB'de KK",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "KdKs",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. K♦ K♠, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%77 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-CO-A8s",
+  "title": "CO 3 BB açtı, BB'de A8s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ac8c",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ 8♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%50 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-CO-ATo",
+  "title": "CO 3 BB açtı, BB'de ATo",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "AdTc",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♦ 10♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%54 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-CO-JTs",
+  "title": "CO 3 BB açtı, BB'de JTs",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "JhTh",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♥ 10♥, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%43 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-CO-K4s",
+  "title": "CO 3 BB açtı, BB'de K4s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ks4s",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. K♠ 4♠, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%41 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-CO-77",
+  "title": "CO 3 BB açtı, BB'de 77",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "7s7d",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 7♠ 7♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%54 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-CO-J2o",
+  "title": "CO 3 BB açtı, BB'de J2o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Jh2c",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. J♥ 2♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-82o",
+  "title": "CO 3 BB açtı, BB'de 82o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8h2d",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♥ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-63o",
+  "title": "CO 3 BB açtı, BB'de 63o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "6s3h",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 6♠ 3♥, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-72o",
+  "title": "CO 3 BB açtı, BB'de 72o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "7h2s",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 7♥ 2♠, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-T3o",
+  "title": "CO 3 BB açtı, BB'de T3o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Td3c",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♦ 3♣, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-CO-T2o",
+  "title": "CO 3 BB açtı, BB'de T2o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ts2d",
+  "potBB": 5.5,
+  "seq": [
+   "CO r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. CO, ellerin en iyi ~%27 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "CO 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♠ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%27) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-BTN-TT",
+  "title": "Buton 3 BB açtı, BB'de TT",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "ThTs",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♥ 10♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%67 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-BTN-AA",
+  "title": "Buton 3 BB açtı, BB'de AA",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "AcAs",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 2,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ A♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%84 equity taşır; bu aralığın büyük kısmına karşı önde. Call da kâr eder ama 3-bet ile potu önde olduğun anda büyütür, daha zayıf ellerden value alırsın ve rakibe zor kararlar bırakırsın."
+ },
+ {
+  "id": "d-t-BTN-55",
+  "title": "Buton 3 BB açtı, BB'de 55",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "5c5s",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 5♣ 5♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%53 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-86s",
+  "title": "Buton 3 BB açtı, BB'de 86s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8h6h",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♥ 6♥, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%39 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-A7s",
+  "title": "Buton 3 BB açtı, BB'de A7s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ac7c",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♣ 7♣, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%54 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-A4s",
+  "title": "Buton 3 BB açtı, BB'de A4s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Ad4d",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. A♦ 4♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%51 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-Q5s",
+  "title": "Buton 3 BB açtı, BB'de Q5s",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Qc5c",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. Q♣ 5♣, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%41 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-KJo",
+  "title": "Buton 3 BB açtı, BB'de KJo",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "KhJd",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 1,
+  "topic": "savunma",
+  "level": 2,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. K♥ J♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%51 equity taşır. Pozisyon dışında equity'nin bir kısmını kaybetsen de gerekenin rahatça üstünde kalır, call kârlı. 3-bet için ise aralığın tepesine karşı yeterince güçlü değil; görüldüğünde çoğu zaman geride olursun."
+ },
+ {
+  "id": "d-t-BTN-62o",
+  "title": "Buton 3 BB açtı, BB'de 62o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "6s2c",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 6♠ 2♣, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%30 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-BTN-83o",
+  "title": "Buton 3 BB açtı, BB'de 83o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "8c3h",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 8♣ 3♥, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-BTN-T2o",
+  "title": "Buton 3 BB açtı, BB'de T2o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "Tc2d",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 10♣ 2♦, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-BTN-52o",
+  "title": "Buton 3 BB açtı, BB'de 52o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "5d2s",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 5♦ 2♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%31 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ },
+ {
+  "id": "d-t-BTN-72o",
+  "title": "Buton 3 BB açtı, BB'de 72o",
+  "game": "turnuva",
+  "street": "preflop",
+  "heroPos": "BB",
+  "stackBB": 30,
+  "hero": "7h2s",
+  "potBB": 5.5,
+  "seq": [
+   "BTN r3"
+  ],
+  "ante": 1,
+  "note": "Turnuva, 30 BB, toplam ante 1 BB, ICM baskısı yok. BTN, ellerin en iyi ~%43 kadarını açan standart bir oyuncu; diğerleri fold etti.",
+  "options": [
+   "Fold",
+   "Call (2 BB)",
+   "3-bet 9 BB"
+  ],
+  "correct": 0,
+  "topic": "savunma",
+  "level": 1,
+  "reasoning": "BTN 3 BB'ye açtı; 5,5 BB'lik pota 2 BB ödüyorsun, gereken equity %27. 7♥ 2♠, açan oyuncunun aralığına (ellerin en iyi ~%43) karşı ~%29 equity taşır. Kâğıt üzerinde yakın görünse de pozisyon dışında, bu el equity'sinin önemli kısmını gerçekleştiremez: per yaptığında sık sık domine olur, iyi floş ve kent ihtimali azdır. Bu fiyata savunmak uzun vadede chip kaybettirir."
+ }
+]
