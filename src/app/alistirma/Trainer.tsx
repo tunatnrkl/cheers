@@ -8,7 +8,19 @@ import { AiPanel } from "@/components/AiPanel";
 import { CoachChat } from "@/components/CoachChat";
 import { KIND_BG, PokerTable, optionKind } from "@/components/PokerTable";
 import { HAND_BY_ID, HANDS, TOPICS, type Game, type Hand, type Topic } from "@/data/hands";
+import { TOPIC_NOTES } from "@/data/topicNotes";
 import { STATIC_SITE } from "@/lib/client/env";
+import {
+  RHYTHM_CHOICES,
+  everyLabel,
+  isLongSession,
+  readEvery,
+  shouldBreak,
+  staleEmptyBlock,
+  writeEvery,
+  type Block,
+  type RhythmEvery,
+} from "@/lib/client/rhythm";
 import { addAttempt, saveHand, topicStats, unsaveHand, useProgress, weakTopics } from "@/lib/client/store";
 import { fmt, replay } from "@/lib/poker/replay";
 
@@ -34,6 +46,15 @@ export function Trainer() {
   const [analyze, setAnalyze] = useState(0);
   const recent = useRef<string[]>([]);
   const chatRef = useRef<HTMLDivElement>(null);
+  // Oturum ritmi: belirli sayıda elden ya da 25 dakikadan sonra engellemeyen bir ara kartı
+  const [every, setEvery] = useState<RhythmEvery>(20);
+  const [showBreak, setShowBreak] = useState(false);
+  const block = useRef<Block>({ start: 0, answers: 0 });
+  const sessionStart = useRef(0);
+  useEffect(() => {
+    setEvery(readEvery());
+    block.current.start = sessionStart.current = Date.now();
+  }, []);
 
   const pool = useMemo(() => HANDS.filter((h) => inPool(h, game, topic)), [game, topic]);
   const topicsForGame = useMemo(() => {
@@ -91,11 +112,35 @@ export function Trainer() {
     if (!hand || answered) return;
     setPicked(i);
     setAnswers((a) => [...a, { hand, chosen: i }]);
+    block.current.answers++;
     void addAttempt(hand.id, i);
   }
 
   function next() {
+    const now = Date.now();
+    if (staleEmptyBlock(block.current, now)) block.current = { start: now, answers: 0 };
+    if (shouldBreak(every, block.current, now)) {
+      setShowBreak(true);
+      return;
+    }
     show(pickNext(pool));
+  }
+
+  function continueAfterBreak() {
+    block.current = { start: Date.now(), answers: 0 };
+    setShowBreak(false);
+    show(pickNext(pool));
+  }
+
+  function stopAfterBreak() {
+    block.current = { start: Date.now(), answers: 0 };
+    setShowBreak(false);
+    setSummary(true);
+  }
+
+  function changeEvery(e: RhythmEvery) {
+    setEvery(e);
+    writeEvery(e);
   }
 
   function askWhy() {
@@ -110,6 +155,15 @@ export function Trainer() {
     function onKey(e: KeyboardEvent) {
       const t = e.target as HTMLElement;
       if (t.closest("input, textarea, select") || summary || !hand) return;
+      if (showBreak) {
+        // Ara kartı açıkken 1-3 hiçbir cevap kaydetmez
+        if (e.key === "Escape") stopAfterBreak();
+        else if (e.key === "Enter" && !t.closest("button, a")) {
+          e.preventDefault();
+          continueAfterBreak();
+        }
+        return;
+      }
       const n = Number(e.key);
       if (!answered && n >= 1 && n <= hand.options.length) choose(n - 1);
       else if (answered && (e.key === "Enter" || e.key === " ")) {
@@ -123,8 +177,6 @@ export function Trainer() {
   });
 
   const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
-  let streak = 0;
-  for (let i = answers.length - 1; i >= 0 && answers[i].chosen === answers[i].hand.correct; i--) streak++;
   const saved = !!hand && progress.saved.some((s) => s.handId === hand.id);
 
   return (
@@ -171,7 +223,6 @@ export function Trainer() {
               <span className="text-t-muted">/{answers.length}</span>
             </span>
             {answers.length > 0 && <span className="text-t-muted">%{Math.round((ok / answers.length) * 100)}</span>}
-            {streak >= 2 && <span className="text-t-act">Seri {streak}</span>}
           </p>
           <button
             type="button"
@@ -216,6 +267,16 @@ export function Trainer() {
           onTopic={(t) => changeFilter("", t)}
           analyze={analyze}
           setAnalyze={setAnalyze}
+        />
+      ) : showBreak ? (
+        <BreakCard
+          answers={answers.slice(answers.length - block.current.answers)}
+          minutes={Math.max(1, Math.round((Date.now() - block.current.start) / 60000))}
+          longSession={isLongSession(sessionStart.current, Date.now())}
+          every={every}
+          onEvery={changeEvery}
+          onContinue={continueAfterBreak}
+          onStop={stopAfterBreak}
         />
       ) : !hand || !r ? (
         <p className="p-10 text-center text-t-muted">{pool.length ? "Yükleniyor…" : "Bu seçimde el yok."}</p>
@@ -452,6 +513,102 @@ function Summary({
           placeholder="Sonuçların hakkında sor…"
         />
       </div>
+    </div>
+  );
+}
+
+function BreakCard({
+  answers,
+  minutes,
+  longSession,
+  every,
+  onEvery,
+  onContinue,
+  onStop,
+}: {
+  answers: Answer[];
+  minutes: number;
+  longSession: boolean;
+  every: RhythmEvery;
+  onEvery: (e: RhythmEvery) => void;
+  onContinue: () => void;
+  onStop: () => void;
+}) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [settings, setSettings] = useState(false);
+  useEffect(() => headingRef.current?.focus(), []);
+  const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
+  const weak = weakTopics(topicStats(answers.map((a) => ({ topic: a.hand.topic, correct: a.chosen === a.hand.correct }))));
+
+  return (
+    <div className="flex justify-center p-3 sm:p-8">
+      <section
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="break-title"
+        className="flex w-full max-w-[480px] flex-col gap-4 rounded-2xl border border-t-line bg-t-panel p-5"
+      >
+        <h2 id="break-title" ref={headingRef} tabIndex={-1} className="text-xl font-extrabold outline-none">
+          Kısa bir durak
+        </h2>
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            ["Bu bölümde el", String(answers.length)],
+            ["Doğru", String(ok)],
+            ["Süre", `${minutes} dk`],
+          ].map(([k, v]) => (
+            <div key={k} className="rounded-xl bg-t-panel-2 px-2 py-3 text-center">
+              <p className="text-2xl font-extrabold tabular-nums">{v}</p>
+              <p className="text-xs font-semibold text-t-muted">{k}</p>
+            </div>
+          ))}
+        </div>
+        {weak.length ? (
+          <p className="text-[15px] leading-relaxed">
+            Bu bölümde en çok zorlandığın konu: <strong>{TOPICS[weak[0].topic]}</strong>. {TOPIC_NOTES[weak[0].topic]}
+          </p>
+        ) : (
+          <p className="text-[15px] leading-relaxed">Bu bölümde belirgin bir zayıf konu yok.</p>
+        )}
+        {longSession && (
+          <p className="rounded-xl border border-t-line px-3 py-2 text-sm text-t-ink/90">
+            Bir saattir çalışıyorsun; kısa bir mola, öğrendiklerini pekiştirmeye yardımcı olabilir.{" "}
+            <Link href="/sorumlu-oyun" className="text-t-muted underline hover:text-t-ink">
+              Sorumlu oyun
+            </Link>
+          </p>
+        )}
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" onClick={onContinue} className="min-h-12 rounded-xl border border-t-line bg-t-panel-2 text-sm font-extrabold text-t-ink transition hover:border-t-accent">
+            Devam et
+          </button>
+          <button type="button" onClick={onStop} className="min-h-12 rounded-xl border border-t-line bg-t-panel-2 text-sm font-extrabold text-t-ink transition hover:border-t-accent">
+            Burada bırak
+          </button>
+        </div>
+        <div className="text-center text-sm">
+          <button type="button" aria-expanded={settings} onClick={() => setSettings((v) => !v)} className="min-h-11 px-2 text-t-muted underline hover:text-t-ink">
+            Sıklığı ayarla ({everyLabel(every)})
+          </button>
+          {settings && (
+            <div role="radiogroup" aria-label="Ara kartı sıklığı" className="mt-2 grid grid-cols-4 gap-1 rounded-xl bg-t-panel-2 p-1">
+              {RHYTHM_CHOICES.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  role="radio"
+                  aria-checked={every === c}
+                  onClick={() => onEvery(c)}
+                  className={`min-h-11 rounded-lg text-xs font-bold ${every === c ? "bg-t-bg text-t-ink" : "text-t-muted hover:text-t-ink"}`}
+                >
+                  {c === 0 ? "Kapalı" : `${c} el`}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <p className="text-center text-xs text-t-muted">Enter devam eder, Esc oturum özetine geçer.</p>
+      </section>
     </div>
   );
 }

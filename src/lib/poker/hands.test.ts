@@ -175,3 +175,24 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
     expect(score / n).toBeGreaterThan(0.5);
   });
 });
+
+// Seçenek metnindeki all-in tutarı, replay'deki kahraman stack'iyle uyumlu olmalı
+// (QA önerisi, docs/ekip/2026-11-11/01-spot-denetimi.md, D-2).
+describe("seçeneklerdeki all-in tutarları", () => {
+  it("'All-in (N BB)' yazan her seçenekte N, kalan stack'ten en fazla 1 BB farklı", () => {
+    let checked = 0;
+    for (const h of HANDS) {
+      const r = replay(h);
+      const seat = r.seats[h.heroPos];
+      for (const o of h.options) {
+        const m = o.match(/^All-in \(≈?(\d+(?:[.,]\d+)?) BB\)$/);
+        if (!m) continue;
+        const n = Number(m[1].replace(",", "."));
+        const ok = Math.abs(n - seat.stack) <= 1 || Math.abs(n - (seat.stack + seat.bet)) <= 1;
+        expect(ok, `${h.id}: seçenek ${n} BB, kalan stack ${seat.stack} BB (+ bu sokaktaki bahis ${seat.bet})`).toBe(true);
+        checked++;
+      }
+    }
+    expect(checked).toBeGreaterThan(3);
+  });
+});

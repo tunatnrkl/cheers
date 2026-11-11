@@ -181,17 +181,17 @@ const CURATED: Hand[] = [
     id: "c19", title: "Çift uçlu kent çekişine küçük bahis", game: "cash", street: "turn", heroPos: "BTN", stackBB: 80,
     hero: "9c8c", board: "Kd7s6h2c", potBB: 20, seq: ["BTN r2.5", "SB f", "BB r7.75", "BTN c", "F Kd7s6h", "BB x", "BTN x", "T 2c", "BB b4"],
     options: ["Fold", "Call (4 BB)", "Raise 14 BB"], correct: 1, topic: "odds", level: 2,
-    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %17. Çift uçlu kent çekişi 8 out'la river'da yaklaşık %17 tutar; yani fiyat tam sınırda. Pozisyondasın ve tutarsan ek chip kazanma şansın (implied odds) var, bu da call'u artıya geçirir.",
+    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %17. Çift uçlu kent çekişi 8 out'la river'da yaklaşık %18 tutar (8 / 44); yani fiyat tek başına zaten yeterli. Pozisyondasın ve tutarsan ek chip kazanma şansın (implied odds) da var; bu, call'u daha da rahat yapar.",
   },
   {
     id: "c20", title: "River'da top pair: value bet", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
     hero: "AcKh", board: "Kd8s4c2h6d", potBB: 22, seq: ["BTN r2.5", "SB f", "BB c", "F Kd8s4c", "BB x", "BTN b2.75", "BB c", "T 2h", "BB x", "BTN b5.5", "BB c", "R 6d", "BB x"],
     note: "BB her bahsi gören, pasif bir oyuncu.",
-    options: ["Check", "2/3 pot bahis (≈15 BB)", "All-in (≈85 BB)"], correct: 1, topic: "value", level: 1,
+    options: ["Check", "2/3 pot bahis (≈15 BB)", "All-in (≈89 BB)"], correct: 1, topic: "value", level: 1,
     reasoning: "Floş çekişi olmayan, kent çekişi de az olan bu board'da rakibin iki bahsi gören aralığı çoğunlukla KQ, KJ, KT gibi daha kötü per'lerden oluşur. Calling station'a karşı blöf yapılmaz ama value bet kaçırılmaz: orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
   },
   {
-    id: "c21", title: "River'da ikinci per: bluff catch?", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
+    id: "c21", title: "River'da üçüncü per: bluff catch?", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
     hero: "Td9d", board: "AsTh6c3dKc", potBB: 27, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F AsTh6c", "BB x", "CO b4", "BB c", "T 3d", "BB x", "CO x", "R Kc", "BB x", "CO b13.5"],
     note: "CO çok sıkı, nadiren blöf yapan bir oyuncu.",
     options: ["Fold", "Call (13.5 BB)", "Raise"], correct: 0, topic: "blof", level: 2,
@@ -220,7 +220,7 @@ const CURATED: Hand[] = [
     hero: "AdKs", board: "Kh9c5h2s", potBB: 67.5, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Kh9c5h", "BB x", "CO b4", "BB c", "T 2s", "BB x", "CO b12", "BB r42"],
     note: "BB sıkı ve pasif bir oyuncu.",
     options: ["Fold", "Call (30 BB daha)", "All-in"], correct: 0, topic: "spr", level: 3,
-    reasoning: "Sıkı ve pasif bir oyuncunun turn'de büyük raise'i çoğunlukla set ya da iki per demektir; bu tarz oyuncular burada nadiren blöf yapar. Stack'ler derin olduğundan call edersen river'da daha da büyük bir bahisle karşılaşırsın. Yüksek SPR'de tek per büyük potları kazanmaz. Bu varsayımlarla fold; agresif bir rakibe karşı call düşünülürdü.",
+    reasoning: "Sıkı ve pasif bir oyuncunun turn'de büyük raise'i çoğunlukla set ya da iki per demektir; bu tarz oyuncular burada nadiren blöf yapar. Stack'ler derin olduğundan call edersen river'da daha da büyük bir bahisle karşılaşırsın. Yüksek SPR'de tek per büyük potları kazanmaz. Fiyat: 30 BB ödeyip 97.5 BB'lik pot için oynuyorsun, yani yaklaşık %31 equity gerekir; ama river'da da ödeme yapacağın için gerçek eşik daha yüksektir. Board'daki kupa floş çekişi semi-blöf raise'lerini mümkün kılar; karar tamamen rakip okumasına dayanıyor. Bu oyuncu tipinin aralığı neredeyse yalnızca set ve iki per ise fold; agresif bir rakibe karşı call düşünülürdü.",
   },
   {
     id: "c26", title: "Combo draw ile semi-blöf", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
@@ -349,7 +349,7 @@ const CURATED: Hand[] = [
     hero: "Ac4c", potBB: 2.5, seq: [],
     note: "Final masası, 6 kişi kaldı. En kısa stack sensin; gelecek el BB sana geliyor.", ante: 1,
     options: ["Fold", "All-in (7 BB)"], correct: 1, topic: "pushfold", level: 2,
-    reasoning: "Fold edersen blind ve ante'ler iki elde stack'inin dörtte birine yakınını götürür ve fold equity'n iyice azalır. A4s, 7 BB ile UTG'den bile itilecek kadar güçlüdür: as blocker'ı güçlü call ellerini azaltır, görülürse de canlı kartların vardır. Kısa stack'te beklemek de bir karardır ve çoğu zaman pahalıdır.",
+    reasoning: "Fold edersen blind ve ante'ler iki elde stack'inin üçte birinden fazlasını götürür (2.5 / 7 BB) ve fold equity'n iyice azalır. A4s, 7 BB ile UTG'den bile itilecek kadar güçlüdür: as blocker'ı güçlü call ellerini azaltır, görülürse de canlı kartların vardır. Kısa stack'te beklemek de bir karardır ve çoğu zaman pahalıdır.",
   },
 
   // ───────────── TURNUVA · ICM / BUBBLE ─────────────
@@ -377,9 +377,9 @@ const CURATED: Hand[] = [
   {
     id: "t10", title: "Final masasında 3 kişi: KJ offsuit", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 30,
     hero: "KhJc", potBB: 52, seq: ["BTN f", "SB a"],
-    note: "Final masası, 3 kişi kaldı: SB 50 BB ile lider, sen 30 BB, BTN 6 BB.", ante: 1, stacks: {SB: 50, BTN: 6}, players: ["BTN", "SB", "BB"],
+    note: "Final masası, 3 kişi kaldı: SB 50 BB ile lider, sen 30 BB, BTN 6 BB. Ödüller: %50 / %30 / %20.", ante: 1, stacks: {SB: 50, BTN: 6}, players: ["BTN", "SB", "BB"],
     options: ["Fold", "Call (29 BB daha)"], correct: 0, topic: "icm", level: 3,
-    reasoning: "Kaybedersen 6 BB'lik oyuncunun arkasında üçüncü olursun; fold edersen ikinciliğe çok yakınsın. Bu ödül sıçraması yüzünden call için chip hesabının gerektirdiğinden belirgin biçimde fazla equity gerekir (risk primi). KJo geniş bir aralığa karşı yarı yarıya civarındadır; bu yetmez. Lider de bunu bildiği için geniş itiyor.",
+    reasoning: "Kaybedersen 6 BB'lik oyuncunun arkasında üçüncü olursun; fold edersen ikinciliğe çok yakınsın. Bu ödül sıçraması yüzünden call için chip hesabının gerektirdiğinden belirgin biçimde fazla equity gerekir (risk primi). Chip hesabı yaklaşık %47.5 equity ister: 29 BB ödüyorsun ve SB'nin fazladan ittiği 20 BB geri döndüğü için 61 BB'lik pot için oynuyorsun (29 / 61). KJo, liderin geniş itme aralığına (referans SB 10 BB aralığı) karşı yaklaşık %55 equity'ye sahiptir; chip hesabına göre call olurdu. Ama bu ödül yapısında ICM, call için %60'ın üzerinde equity ister (kendi hesabımızla yaklaşık %64); %55 bunu karşılamaz. Lider de bunu bildiği için geniş itiyor.",
   },
   {
     id: "t17", title: "Satellite bubble'ında QQ", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 40,

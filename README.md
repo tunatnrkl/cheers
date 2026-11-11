@@ -85,7 +85,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | Adres | Ne yapar |
 |---|---|
 | `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
-| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
+| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). Belirli sayıda elden (varsayılan 20) ya da 25 dakikadan sonra engellemeyen bir ara kartı çıkar; sıklığı ayarlanabilir ya da kapatılabilir. `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
 | `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran, kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
 | `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
