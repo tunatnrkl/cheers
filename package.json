@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "db:migrate": "node scripts/migrate.mjs",
-    "ranges": "node scripts/generate-ranges.mts"
+    "ranges": "node scripts/generate-ranges.mts",
+    "drills:flop": "node scripts/add-flop-odds.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.7.0",
