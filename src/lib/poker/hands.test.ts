@@ -68,6 +68,29 @@ describe("üretilen ellerin cevapları", () => {
     }
   });
 
+  it("flop pot odds elleri: tüm turn+river ikilileri sayıldığında karar doğru", () => {
+    for (const h of HANDS.filter((h) => h.id.startsWith("f-"))) {
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const vil = h.villain!.cards.match(/.{2}/g)!.map(cardFromString);
+      const board = h.board!.match(/.{2}/g)!.map(cardFromString);
+      const used = new Set([...hero, ...vil, ...board]);
+      const rest = Array.from({ length: 52 }, (_, i) => i).filter((c) => !used.has(c));
+      let wins = 0;
+      let total = 0;
+      for (let i = 0; i < rest.length; i++)
+        for (let j = i + 1; j < rest.length; j++) {
+          const a = evaluate7([...hero, ...board, rest[i], rest[j]]);
+          const b = evaluate7([...vil, ...board, rest[i], rest[j]]);
+          wins += a > b ? 1 : a === b ? 0.5 : 0;
+          total++;
+        }
+      const r = replay(h);
+      const req = r.toCall / (r.pot + r.toCall);
+      expect(h.correct === 1, h.id).toBe(wins / total > req);
+      expect(Math.abs(wins / total - req), h.id).toBeGreaterThan(0.035);
+    }
+  });
+
   it("açılış ve push elleri referans aralıkla tutarlı", () => {
     const label = (cards: string) => {
       const order = "AKQJT98765432";
