@@ -431,6 +431,110 @@ const CURATED: Hand[] = [
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
   },
+  // ───────────── CASH · EK ELLER ─────────────
+  {
+    id: "c34", title: "HJ'de KJ offsuit", game: "cash", street: "preflop", heroPos: "HJ", stackBB: 100,
+    hero: "KdJc", potBB: 1.5, seq: [],
+    options: ["Fold", "Limp (1 BB)", "2.5 BB aç"], correct: 2, topic: "acilis", level: 1,
+    reasoning: "HJ'de arkanda dört oyuncu kaldı; KJo bu pozisyondan açılış aralığına giren en zayıf offsuit broadway'lerden biridir ama hâlâ içindedir. Raise ile blind'ları çalma şansı ve inisiyatif kazanırsın. Limp ise arkadakilere ucuza girme ve izolasyon raise'i yapma fırsatı verir. 3-bet yersen bu eli çoğunlukla bırakırsın.",
+  },
+  {
+    id: "c35", title: "Cutoff'ta Q9 offsuit", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "Qh9c", potBB: 1.5, seq: [],
+    options: ["Fold", "Limp (1 BB)", "2.5 BB aç"], correct: 0, topic: "acilis", level: 2,
+    reasoning: "Q9o kâğıt üzerinde fena görünmez ama suited değildir ve gördüğü ellere (QT, QJ, KQ, A9) karşı sık sık domine olur. Cutoff'tan aralık genişler, yine de offsuit elde sınır QT civarındadır. Arkanda buton ve iki blind varken bu el kârlı bir açılış olmaktan çok zor kararlar üretir. Butonda olsaydın açılabilirdi.",
+  },
+  {
+    id: "c36", title: "BB'de K8 offsuit: SB 3 BB açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Kd8c", potBB: 4, seq: ["SB r3"],
+    options: ["Fold", "Call (2 BB daha)", "3-bet 9 BB"], correct: 1, topic: "savunma", level: 2,
+    reasoning: "Pota 2 BB ödeyip 6 BB'lik pot için oynuyorsun: gereken equity %33. SB, herkes fold ettiğinde çok geniş açar; K8o bu geniş aralığa karşı yaklaşık %43 equity taşır. Üstelik flop sonrası pozisyon sende. Fold fazla sıkı; bu elle 3-bet ise çoğu zaman yalnızca daha iyi ellerin devam ettiği bir pot yaratır.",
+  },
+  {
+    id: "c37", title: "BB'de Q6 offsuit: UTG açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Qs6d", potBB: 4, seq: ["UTG r2.5"],
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 2,
+    reasoning: "Fiyat iyi görünüyor (%27 equity yetiyor) ama UTG'nin aralığı masadaki en güçlü aralıktır: büyük çiftler, AQ, KQ, QJ gibi seni domine eden eller. Q6o dam yaptığında bile kicker'ı yüzünden sık sık geride kalır ve pozisyon dışında equity'sinin tamamını gerçekleştiremez. Geç pozisyon açılışlarına karşı savunulabilecek bir el, UTG'ye karşı fold.",
+  },
+  {
+    id: "c38", title: "4-bet'ine 5-bet all-in: AK suited", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "AsKs", potBB: 121.5, seq: ["CO r2.5", "BTN r8", "SB f", "BB f", "CO r20", "BTN a"],
+    options: ["Fold", "Call (80 BB daha)"], correct: 1, topic: "3bet", level: 3,
+    reasoning: "201.5 BB'lik toplam pota 80 BB ödüyorsun: gereken equity yaklaşık %40. 100 BB'de 5-bet all-in aralığı genelde QQ+, AK ve az sayıda as'lı blöften oluşur. AKs bu aralığa karşı %42–45 civarındadır; as ve papaz blocker'ları AA ve KK kombinasyonlarını yarıya indirir. Yalnızca AA/KK ile 5-bet atan çok sıkı bir oyuncuya karşı fold düşünülür.",
+  },
+  {
+    id: "c39", title: "SB'de KK: buton açtı", game: "cash", street: "preflop", heroPos: "SB", stackBB: 100,
+    hero: "KhKc", potBB: 4, seq: ["BTN r2.5"],
+    options: ["Fold", "Call", "3-bet 11 BB"], correct: 2, topic: "3bet", level: 1,
+    reasoning: "KK, butonun geniş açılış aralığının neredeyse tamamına karşı büyük favoridir. 3-bet ile potu büyütür, daha kötü ellerden value alırsın. Call etmek BB'ye ucuz giriş fırsatı verir ve sen pozisyon dışında çok yönlü bir pot oynarsın. Pozisyon dışında olduğun için boyut açılışın yaklaşık dört katı.",
+  },
+  {
+    id: "c40", title: "Eşli kuru board'da overpair", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "QsQd", board: "7c7d2s", potBB: 5.5, seq: ["BTN r2.5", "SB f", "BB c", "F 7c7d2s", "BB x"],
+    options: ["Check", "1/3 pot bahis (≈1.8 BB)", "Pot kadar bahis (5.5 BB)"], correct: 1, topic: "cbet", level: 1,
+    reasoning: "Bu board'da rakibe neredeyse hiç çekiş yok ve 7'li bir eli olma ihtimali düşük; elin çoğu zaman en iyisi. Küçük bahis; as yüksek, küçük çiftler ve 2'li eller gibi zayıf ellerin devam etmesine izin vererek value alır. Pot kadar bahis yalnızca seni yenen elleri tutar. Check de mümkün ama küçük bahis aralığının tamamıyla rahatça yapılır.",
+  },
+  {
+    id: "c41", title: "Düşük floş çekişine turn bahsi", game: "cash", street: "turn", heroPos: "BB", stackBB: 100,
+    hero: "6c5c", board: "Ac9c2dKh", potBB: 16.5, seq: ["BTN r2.5", "SB f", "BB c", "F Ac9c2d", "BB x", "BTN b2", "BB c", "T Kh", "BB x", "BTN b7"],
+    options: ["Fold", "Call (7 BB)", "Check-raise 24 BB"], correct: 0, topic: "odds", level: 1,
+    reasoning: "Call için yaklaşık %30 equity gerekiyor (7 / 23.5). Floş çekişin 9 out'la river'da yalnızca %20 civarında tutar ve floş küçük olduğu için tuttuğunda bile daha büyük floşa kaybedebilirsin. Bu kadar açığı implied odds kapatmaz. Check-raise ise as ve papazlı ellerin bolca bulunduğu bir aralığa karşı chip yakmak olur.",
+  },
+  {
+    id: "c42", title: "River'da nut floş: boyut seçimi", game: "cash", street: "river", heroPos: "CO", stackBB: 100,
+    hero: "AhTh", board: "Kh7h3c9s2h", potBB: 11.5, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Kh7h3c", "BB x", "CO b3", "BB c", "T 9s", "BB x", "CO x", "R 2h", "BB x"],
+    options: ["Check", "1/3 pot bahis (≈4 BB)", "Pot kadar bahis (11.5 BB)"], correct: 2, topic: "value", level: 2,
+    reasoning: "Elin en güçlü olabilecek el (nut floş) ve rakibin aralığında papazlı eller, iki per ve daha küçük floşlar var. Bu eller büyük bir bahsi de görecek kadar güçlüdür. Küçük bahis value'nun önemli kısmını masada bırakır, check ise hiç value almaz. Elin yenilmezken pot büyüklüğünde bahisle en çok chip'i kazanırsın.",
+  },
+  {
+    id: "c43", title: "3-bet potta top pair top kicker", game: "cash", street: "flop", heroPos: "BTN", stackBB: 100,
+    hero: "AsKs", board: "Ah9c4d", potBB: 17.5, seq: ["CO r2.5", "BTN r8", "SB f", "BB f", "CO c", "F Ah9c4d", "CO x"],
+    options: ["Check", "1/3 pot bahis (≈6 BB)", "All-in (92 BB)"], correct: 1, topic: "cbet", level: 2,
+    reasoning: "Board kuru ve as senin 3-bet aralığına çok iyi uyar; rakibin call aralığında ise AQ, AJ, AT ve cep çiftleri var. Küçük bahis bu ellerden üç sokak boyunca value almaya başlar ve SPR yaklaşık 5 olduğundan stack'ler turn ve river'da rahatça ortaya gelir. All-in yalnızca seni yenen setleri tutar; check ise bedava kart verir.",
+  },
+  {
+    id: "c44", title: "BB'de A3 offsuit: cutoff açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Ac3d", potBB: 4, seq: ["CO r2.5"],
+    options: ["Fold", "Call (1.5 BB daha)"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "1.5 BB ödeyip 5.5 BB'lik pot için oynuyorsun: gereken equity yaklaşık %27. Cutoff'un açılış aralığına karşı A3o %40'ın üzerinde equity taşır; pozisyon dışında oynamanın bedelini düşsen bile fiyat yeterli. As tuttuğunda kicker'ın zayıf olduğunu unutma: büyük potlardan kaçınıp elini pot kontrolüyle oyna.",
+  },
+
+  // ───────────── TURNUVA · EK ELLER ─────────────
+  {
+    id: "t25", title: "10 BB ile butonda Q9 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 10,
+    hero: "Qd9s", potBB: 2.5, seq: [],
+    ante: 1,
+    options: ["Fold", "Min-raise (2 BB)", "All-in (10 BB)"], correct: 2, topic: "pushfold", level: 2,
+    reasoning: "Butonda yalnızca iki blind'ı geçmen gerekiyor ve onların 10 BB'lik all-in'i görecek elleri sınırlı. Q9o, 10 BB'lik buton push aralığının içindedir: fold equity yüksektir, görüldüğünde de çoğu zaman tamamen ölü değilsin. Min-raise edip all-in'e fold etmek ise stack'inin beşte birini yakar.",
+  },
+  {
+    id: "t26", title: "10 BB ile UTG'de KJ offsuit", game: "turnuva", street: "preflop", heroPos: "UTG", stackBB: 10,
+    hero: "KsJd", potBB: 2.5, seq: [],
+    ante: 1,
+    options: ["Fold", "Min-raise (2 BB)", "All-in (10 BB)"], correct: 0, topic: "pushfold", level: 2,
+    reasoning: "Arkanda beş oyuncu var; birinin AK, AQ, KQ ya da bir çift bulma ihtimali yüksek ve KJo görüldüğünde bu ellerin çoğuna karşı domine durumda kalır. 10 BB'de UTG push aralığı dardır ve KJo sınırın hemen dışındadır. Aynı el cutoff ya da butondan rahat bir all-in olurdu; pozisyon her şeyi değiştirir.",
+  },
+  {
+    id: "t27", title: "BB'de KT offsuit: butonun 10 BB all-in'i", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 10,
+    hero: "KhTd", potBB: 12.5, seq: ["BTN a", "SB f"],
+    ante: 1, stacks: {BB: 30},
+    options: ["Fold", "Call (9 BB daha)"], correct: 1, topic: "callshove", level: 2,
+    reasoning: "21.5 BB'lik toplam pota 9 BB ödüyorsun: gereken equity yaklaşık %42. Butonun 10 BB push aralığı çok geniştir (zayıf as'lar, papazlı eller, orta çiftler, suited connector'lar) ve KTo bu aralığa karşı %47 civarında equity taşır. Kaybetsen de 20 BB ile oyunda kalırsın. Özel bir ICM baskısı yoksa call.",
+  },
+  {
+    id: "t28", title: "20 BB'de top pair'e check-raise all-in", game: "turnuva", street: "flop", heroPos: "BTN", stackBB: 20,
+    hero: "Ad9s", board: "Ac7h3d", potBB: 25.7, seq: ["BTN r2.2", "SB f", "BB c", "F Ac7h3d", "BB x", "BTN b2", "BB a"],
+    ante: 1,
+    options: ["Fold", "Call (15.8 BB daha)"], correct: 1, topic: "spr", level: 2,
+    reasoning: "41.5 BB'lik toplam pota 15.8 BB ödüyorsun: gereken equity yaklaşık %38. Flop'ta SPR 3'ün altındaydı; bu derinlikte top pair ile fold etmek çok nadiren doğrudur. Rakibin aralığında daha iyi as'lar ve setler olsa da daha kötü as'lar, 7'li eller, çekişler ve blöfler de var. A9 bu karışık aralığa karşı rahatça yeterli equity taşır.",
+  },
+  {
+    id: "t29", title: "6 BB ile SB'de T6 offsuit", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 6,
+    hero: "Tc6h", potBB: 2.5, seq: [],
+    ante: 1,
+    options: ["Fold", "Limp", "All-in (6 BB)"], correct: 2, topic: "pushfold", level: 2,
+    reasoning: "6 BB ile yalnızca BB'ye karşı oynuyorsun ve pota zaten 2.5 BB girmiş durumda; kazanırsan stack'in üçte bir oranında büyür. BB her elle göremez, gördüğünde de T6o çoğu zaman %30–40 equity taşır. Bu kadar kısa stack'te SB'den push aralığı çok geniştir. Limp ise BB'ye bedava flop ya da ucuz bir all-in fırsatı verir.",
+  },
 ];
 
 export const HANDS: Hand[] = [...CURATED, ...(drills as Hand[])];
