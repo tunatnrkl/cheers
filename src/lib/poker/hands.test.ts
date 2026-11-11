@@ -174,6 +174,99 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
       }
     expect(score / n).toBeGreaterThan(0.5);
   });
+
+  // 5. çalışmada eklenen blind savunması ve SPR spotları (docs/ekip/2026-11-11/08-calisma-5-kapanis.md).
+  // Rakip aralıkları ranges.json'daki yaklaşık açılış aralıklarıdır.
+  const cash = ranges.cash as Record<string, string[]>;
+
+  it("c34: 72o, butonun aralığına karşı gereken equity'nin ham haliyle bile altında", () => {
+    expect(required("c34")).toBeCloseTo(2 / 6.5, 3);
+    expect(equityVsRange("7d2c", cash.BTN)).toBeLessThan(required("c34"));
+  });
+
+  it("c35: J4o, UTG'ye karşı eşiğin hemen üstünde; equity'nin %85'inden fazlasını kullanması gerekir", () => {
+    const eq = equityVsRange("Jd4c", cash.UTG);
+    expect(eq - required("c35")).toBeLessThan(0.035);
+    expect(required("c35") / eq).toBeGreaterThan(0.85);
+    // Aynı el butonun aralığına karşı belirgin daha iyi (blog: blind-savunmasi-fiyat-aralik-pozisyon)
+    expect(equityVsRange("Jd4c", cash.BTN) - eq).toBeGreaterThan(0.03);
+  });
+
+  it("c36: 65s, açılış + call'a karşı üç yollu potta gereken equity'nin belirgin üzerinde", () => {
+    // Varsayım: butonun call aralığı = CO aralığı, en güçlü 3-bet elleri çıkarılmış.
+    const flat = cash.CO.filter((l) => !["AA", "KK", "QQ", "JJ", "AKs", "AKo", "AQs"].includes(l));
+    const h = cards("6s5s");
+    const A = cash.CO.flatMap(combos).map(cards);
+    const B = flat.flatMap(combos).map(cards);
+    let score = 0;
+    let n = 0;
+    while (n < 40000) {
+      const v = A[Math.floor(rnd() * A.length)];
+      const w = B[Math.floor(rnd() * B.length)];
+      const used = new Set([...h, ...v, ...w]);
+      if (used.size !== 6) continue;
+      const board: number[] = [];
+      while (board.length < 5) {
+        const c = Math.floor(rnd() * 52);
+        if (!used.has(c)) {
+          used.add(c);
+          board.push(c);
+        }
+      }
+      const s = [h, v, w].map((x) => evaluate7([...x, ...board]));
+      const best = Math.max(...s);
+      if (s[0] === best) score += 1 / s.filter((x) => x === best).length;
+      n++;
+    }
+    expect(score / n - required("c36")).toBeGreaterThan(0.05);
+  });
+
+  it("t25: K4o, butonun aralığına karşı gereken equity'nin çok üzerinde", () => {
+    expect(equityVsRange("Kd4c", cash.BTN) - required("t25")).toBeGreaterThan(0.15);
+  });
+
+  it("blog: T8s butonun aralığına karşı yaklaşık %41", () => {
+    const eq = equityVsRange("Th8h", cash.BTN);
+    expect(eq).toBeGreaterThan(0.39);
+    expect(eq).toBeLessThan(0.44);
+  });
+
+  it("c38: en iyi durumda bile set mining oranı yetmiyor", () => {
+    const r = replay(HANDS.find((h) => h.id === "c38")!);
+    const pSet = 1 - (48 * 47 * 46) / (50 * 49 * 48); // flop'ta set ya da daha iyisi
+    expect(pSet).toBeCloseTo(0.1176, 3);
+    const maxWin = r.seats.UTG.stack + r.pot; // UTG'nin kalan stack'i + ortadaki pot
+    expect(maxWin / r.toCall).toBeLessThan((1 - pSet) / pSet);
+  });
+
+  it("t26: KJ, nottaki aralığa karşı call; yalnızca güçlü ellere karşı fold (kesin sayım)", () => {
+    const exact = (hero: string, flop: string, range: string[]) => {
+      const h = cards(hero);
+      const f = cards(flop);
+      let score = 0;
+      let n = 0;
+      for (const v of range.flatMap(combos).map(cards)) {
+        const used = new Set([...h, ...f, ...v]);
+        if (used.size !== 7) continue;
+        const rest = [...Array(52).keys()].filter((c) => !used.has(c));
+        for (let i = 0; i < rest.length; i++)
+          for (let j = i + 1; j < rest.length; j++) {
+            const board = [...f, rest[i], rest[j]];
+            const a = evaluate7([...h, ...board]);
+            const b = evaluate7([...v, ...board]);
+            score += a > b ? 1 : a === b ? 0.5 : 0;
+            n++;
+          }
+      }
+      return score / n;
+    };
+    const strong = ["AA", "KK", "QQ", "JJ", "88", "33", "AJs", "AJo", "KJs", "KJo", "QJs", "QJo", "JTs", "J9s"];
+    const wide = [...strong, "TT", "99", "77", "66", "A8s", "98s", "87s", "AKs", "AKo", "AQs", "AQo", "ATs", "KQs", "T9s", "QTs", "97s"];
+    const need = required("t26");
+    expect(need).toBeCloseTo(10 / 25.5, 3);
+    expect(exact("KcJd", "Jh8s3c", wide) - need).toBeGreaterThan(0.2);
+    expect(need - exact("KcJd", "Jh8s3c", strong)).toBeGreaterThan(0.035);
+  });
 });
 
 // Seçenek metnindeki all-in tutarı, replay'deki kahraman stack'iyle uyumlu olmalı

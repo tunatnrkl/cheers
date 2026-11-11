@@ -266,6 +266,38 @@ const CURATED: Hand[] = [
     reasoning: "16 BB'lik pota 4 BB ödüyorsun; elinin yalnızca %20 oranında iyi olması yetiyor. Rakip turn'de check dediği için aralığında güçlü dam'lar azaldı; küçük bahis blöfler ve daha zayıf per'lerle de yapılır. Bu fiyata ikinci per'i fold etmek fazla sıkı olur. Raise ise elini gereksiz yere blöfe çevirir.",
   },
 
+  // ───────────── CASH · BLIND SAVUNMASI VE SPR (5. çalışma) ─────────────
+  // Taslaklar: docs/ekip/2026-11-11/02 ve 05. Sayılar replay ve hands.test.ts ile kontrol edildi.
+  // Rakip aralıkları ranges.json'daki yaklaşık açılış aralıklarıdır, solver çıktısı değildir.
+  {
+    id: "c34", title: "BB'de 72 offsuit: buton 3 BB açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "7d2c", potBB: 4.5, seq: ["BTN r3", "SB f"],
+    note: "Buton geniş açıyor (ellerin yaklaşık %43'ü).",
+    options: ["Fold", "Call (2 BB daha)", "3-bet 12 BB"], correct: 0, topic: "savunma", level: 2,
+    reasoning: "Pota 2 BB ekleyip 6.5 BB'lik pot için oynuyorsun: gereken equity yaklaşık %31 (2 / 6.5). 72o butonun geniş açılış aralığına karşı ham olarak %30 civarı equity taşır, yani kâğıt üstünde bile eşiğin altında. Üstelik pozisyon dışında, bağlantısız ve offsuit bir el bu equity'nin tamamını kullanamaz (equity realization): çoğu flop'u ıskalar ve ilk bahiste bırakır. Fold. Açılış 2.5 BB olsaydı fiyat %27'ye iner ve karar sınıra yaklaşırdı.",
+  },
+  {
+    id: "c35", title: "BB'de J4 offsuit: UTG açtı", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "Jd4c", potBB: 4, seq: ["UTG r2.5"],
+    note: "UTG sıkı açıyor (ellerin yaklaşık %15'i).",
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 2,
+    reasoning: "Gereken equity yaklaşık %27 (1.5 / 5.5), butona karşı savunmadakiyle aynı. Ama UTG'nin aralığı çok daha güçlü: J4o bu aralığa karşı ham olarak yalnızca %29 civarındadır. Call'un kârlı olması için bu equity'nin yaklaşık %93'ünü kullanman gerekir; pozisyon dışında bu gerçekçi değil. Üstelik sık sık domine durumdasın: J'li per yaptığında rakipte çoğu zaman daha iyi kicker olur. Savunma aralığını fiyat kadar açanın pozisyonu da belirler.",
+  },
+  {
+    id: "c36", title: "BB'de 65 suited: açılış ve call var", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+    hero: "6s5s", potBB: 6.5, seq: ["CO r2.5", "BTN c", "SB f"],
+    note: "CO standart açıyor (ellerin yaklaşık %27'si), buton yalnızca call etti.",
+    options: ["Fold", "Call (1.5 BB daha)", "3-bet 13 BB"], correct: 1, topic: "savunma", level: 2,
+    reasoning: "Pota 1.5 BB ekleyip 8 BB'lik pot için oynuyorsun: gereken equity yaklaşık %19. İki rakibe karşı 65s'in ham equity'si %28 civarıdır; eşik rahatça geçiliyor. Suited connector'lar kent ve floş yaptığında büyük pot kazanabilir, tek per'e bel bağlamaz; bu da çok kişili potta equity'yi kullanmayı kolaylaştırır. 3-bet ise iki rakibe karşı bu eli gereksiz yere blöfe çevirir.",
+  },
+  {
+    id: "c38", title: "Kısa stack'li UTG'ye karşı set mining", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
+    hero: "3s3h", potBB: 4.5, stacks: { UTG: 20 }, seq: ["UTG r3", "HJ f"],
+    note: "UTG'nin masada yalnızca 20 BB'si var.",
+    options: ["Fold", "Call (3 BB)", "3-bet 9 BB"], correct: 0, topic: "spr", level: 2,
+    reasoning: "Küçük bir çiftle call etmenin asıl sebebi flop'ta set yapmaktır ve bu ihtimal yaklaşık %12, yani 7.5'e 1 aleyhine. UTG'nin yalnızca 17 BB'si kaldığı için set yaptığında bile en fazla yaklaşık 21.5 BB kazanabilirsin: 3 BB'lik call'un ancak 7 katı. Bu oran, set her seferinde kazansa ve rakip her seferinde bütün stack'ini verse bile yetmiyor. Arkanda oynayacak üç oyuncu da var. Bu varsayımlarla fold. Rakip 100 BB'lik olsaydı call çok daha cazip olurdu.",
+  },
+
   // ───────────── TURNUVA · PUSH/FOLD ─────────────
   {
     id: "t01", title: "10 BB ile butonda A7 offsuit", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 10,
@@ -430,6 +462,21 @@ const CURATED: Hand[] = [
     note: "Blind'lardaki oyuncular sıkı oynuyor.", ante: 1,
     options: ["Fold", "2.1 BB'ye aç", "All-in"], correct: 1, topic: "acilis", level: 1,
     reasoning: "Ante'ler potu 1.5 BB yerine 2.5 BB yapar; küçük bir açılışın kâra geçmesi için blind'ların her zamankinden daha az fold etmesi yeter. Sıkı blind'lara karşı J8s gibi oynanabilir eller butondan rahatça açılır. Bu, turnuvada stack'i ayakta tutan en temel hamledir.",
+  },
+  {
+    id: "t25", title: "BB'de K4 offsuit: ante'li potta buton açtı", game: "turnuva", street: "preflop", heroPos: "BB", stackBB: 30,
+    hero: "Kd4c", potBB: 4.7, seq: ["BTN r2.2", "SB f"],
+    note: "Buton geniş açıyor (ellerin yaklaşık %43'ü). ICM baskısı yok.", ante: 1,
+    options: ["Fold", "Call (1.2 BB daha)", "All-in (30 BB)"], correct: 1, topic: "savunma", level: 1,
+    reasoning: "Ante ve küçük açılış sayesinde 5.9 BB'lik pot için 1.2 BB ödüyorsun: gereken equity yaklaşık %20. K4o butonun geniş aralığına karşı ham olarak %41 civarındadır; pozisyon dışında equity'nin bir kısmını kaybetsen de eşik rahatça geçilir. 30 BB ile all-in ise 4.7 BB'lik pot için bütün stack'i riske atar ve çoğunlukla yalnızca daha iyi eller tarafından görülür.",
+  },
+  {
+    id: "t26", title: "Düşük SPR'de top pair: all-in'e karşı", game: "turnuva", street: "flop", heroPos: "BB", stackBB: 12,
+    hero: "KcJd", board: "Jh8s3c", potBB: 15.5, ante: 1,
+    seq: ["CO r2", "BTN f", "SB f", "BB c", "F Jh8s3c", "BB x", "CO a"],
+    note: "ICM baskısı yok. CO, bu stack'te flop'u yakaladığı ya da çekişi olduğu her eli all-in yapan agresif bir oyuncu: setler, overpair'ler, J'li eller, TT–66, 88'li per'ler (A8s, 98s, 87s), AK, AQ, ATs, KQs ve T9s, QTs, 97s gibi kent çekişleri.",
+    options: ["Fold", "Call (10 BB)"], correct: 1, topic: "spr", level: 2,
+    reasoning: "Flop'ta SPR yaklaşık 1.8: pot 5.5 BB, kalan stack 10 BB. Bu kadar düşük SPR'de rakip bahis yaptığı ellerin çoğunu doğrudan all-in yapar. 15.5 BB'lik pota 10 BB ödüyorsun: gereken equity yaklaşık %39. Notta yazan aralığa karşı KJ yaklaşık %63 equity taşır, yani call. Rakip yalnızca set, overpair ve J'li güçlü ellerle all-in yapsaydı equity'n %34'e düşer ve fold doğru olurdu. Düşük SPR'de karar neredeyse tamamen bir pot odds hesabıdır.",
   },
 ];
 

@@ -2,11 +2,11 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-11, 4. çalışma**
+Son güncelleme: **2026-11-11, 5. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dallar birleştirilmeli.** Her çalışma ana dalın temiz kopyasından başlıyor. 1–3. çalışmalar ayrı dallarda kaldığı için 3. çalışma ilk ikisini görmedi ve ikinci bir hafıza dosyası açtı. 4. çalışma hepsini `claude/wizardly-meitner-wcrqqc` dalında birleştirdi. Bu dal ana dala alınmazsa bir sonraki çalışma yine sıfırdan başlar.
+1. **Dallar birleştirilmeli (hâlâ açık, 5. çalışmada da hatırlatıldı).** Varsayılan dal `claude/charming-davinci-emhvz1` hâlâ `2b7d6b5`'te. Her çalışma oradan başlıyor. 4. çalışma 1–3'ü `wcrqqc`'de birleştirdi; 5. çalışma `wcrqqc`'yi `claude/wizardly-meitner-vrsaxz`'ye hızlı ileri aldı ve üzerine ekledi. **En güncel dal: `claude/wizardly-meitner-vrsaxz`.** Bir sonraki çalışma, dalı yoksa önce `git branch -r` ile en yeni `HAFIZA.md`'yi taşıyan dalı bulmalı (`git log -1 <dal>`).
 2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı.** Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
@@ -14,11 +14,21 @@ Son güncelleme: **2026-11-11, 4. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- 575 spot (53 elle yazılmış + 522 üretilmiş), 138 sözlük terimi, 7 blog yazısı.
-- Sağlık (4. çalışma): `npm test` **601/601**, `npm run typecheck` temiz. `next build` bu çalışmada çalıştırılmadı (3. çalışmada temizdi).
+- 581 spot (59 elle yazılmış + 522 üretilmiş), 138 sözlük terimi, 8 blog yazısı.
+- Sağlık (5. çalışma): `npm test` **614/614**, `npm run typecheck` temiz, `npm run build` temiz.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir).
 
 ## Tamamlananlar
+
+### 5. çalışma — rapor: [`docs/ekip/2026-11-11/08-calisma-5-kapanis.md`](docs/ekip/2026-11-11/08-calisma-5-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| 6 spot eklendi: c34 (3 BB'ye revize), c35, c36, c38, t25, t26; sayılar yeniden ölçüldü | Poker Uzmanı, Poker Eğitim | ✅ |
+| 7 equity/oran regresyon testi (c34, c35, c36 üç yollu, t25, c38, t26 tam sayım, blog T8s) | QA | ✅ |
+| Blog: `blind-savunmasi-fiyat-aralik-pozisyon` (8. yazı) | Content | ✅ |
+| `/cash` sayfasına "Blind savunması" bölümü (spot + yazı bağlantısı), README sayıları | Frontend | ✅ |
+| c39 | — | ⏸ B-1 (`acceptable`) kararı bekliyor |
 
 ### 4. çalışma — rapor: [`docs/ekip/2026-11-11/07-calisma-4-kapanis.md`](docs/ekip/2026-11-11/07-calisma-4-kapanis.md)
 
@@ -40,20 +50,20 @@ Son güncelleme: **2026-11-11, 4. çalışma**
 | Çıktı | Durum |
 |---|---|
 | 01 spot denetimi | ✅ Bulguların çoğu kapandı (bkz. hata tablosu). **Dikkat:** O-2 ve O-3'teki sayılar yanlıştı (Q-1, Q-2) |
-| 02 blind savunması paketi (quiz, 4 spot taslağı) | ⚠️ Quiz tamam; c35, c36, t25 eklenmedi; c34 revizyon bekliyor |
+| 02 blind savunması paketi (quiz, 4 spot taslağı) | ✅ 5. çalışmada eklendi (c34 3 BB'ye revize) |
 | 03 oturum ritmi spesifikasyonu | ✅ 4. çalışmada büyük ölçüde uygulandı |
 | 04 callshove duyarlılık denetimi + betik | ✅ Rapor; CS-1, CS-2, CS-4 düzeltmeleri açık |
-| 05 SPR/value paketi (quiz, c38, c39, t26 taslakları) | ⚠️ Spotlar eklenmedi |
-| 06 blind savunması rehberi (blog taslağı) | ⚠️ `blog.ts`'e eklenmedi |
+| 05 SPR/value paketi (quiz, c38, c39, t26 taslakları) | ⚠️ c38, t26 eklendi; c39 B-1'i bekliyor |
+| 06 blind savunması rehberi (blog taslağı) | ✅ 5. çalışmada yayına alındı |
 
 ## Devam eden / açık işler
 
 1. **Ara kartı tamamlama:** masaüstünde masa arkada soluk kalsın ve koç paneli açık kalsın; "Bu bölümü yorumla" kısayolu (`AiPanel`, `practice` bağlamı, `STATIC_SITE`'ta gizli); 60 dk notunun arayüzde doğrulanması.
-2. **Yeni spotlar:** c35, c36, t25 (02), c38, c39, t26 (05). c34 revizyon bekliyor. Eklemeden önce her birinin sayıları `replay` ile yeniden kontrol edilmeli (Q-1 dersi).
-3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24 (+ c34, c39 taslakları). Ürün kararı da gerekiyor.
+2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
+3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
 4. **Üretici iyileştirmeleri** (04): deneme sayısı 20.000 (CS-2), 19 callshove spotuna "rakibin aralığı" cümlesi (CS-1), "SB'nin / CO'nun" (CS-4). Sonra `npm run ranges` ve `npm test`.
 5. **Ondalık ayırıcı (CS-5):** görünen metinde virgül. Elle yazılan spotlarda nokta duruyor (4. çalışmada eklenen metinler de mevcut biçime uyması için nokta kullandı). Test: görünen metinde `/\d\.\d/` yasak.
-6. **Blog:** `06-blind-savunmasi-rehberi.md` → `blog.ts`.
+6. Alıştırma masasında "Blind savunması" filtresinin 6 el gösterdiği tarayıcıda denenmedi.
 7. t23 turnuva spotunda ante yok; t13 "88 yarı yarıya" iddiası için resteal aralığı yok.
 8. ICM hesap makinesinde elenmiş (stack 0) oyuncunun gösterimi kontrol edilmedi.
 
@@ -69,7 +79,9 @@ Son güncelleme: **2026-11-11, 4. çalışma**
 - **Ödül döngüsü mekanikleri yok:** seri, rozet, liderlik tablosu, günlük hedef zinciri. Ara kartındaki iki seçenek eşit görsel ağırlıkta.
 - Oturum ritmi verisi yalnızca tarayıcıda (`localStorage["pd:rhythm"]`); sunucuya kişisel veri gitmez.
 - Ondalık ayırıcı: görünen metinde virgül (karar verildi, uygulanmadı). Veri alanlarında nokta.
-- Blog yazıları `POSTS` dizisine kronolojik sırayla eklenir.
+- Blog yazıları `POSTS` dizisine kronolojik sırayla eklenir. Gövde yalnızca `{h, p}` blokları; tablo yerine `RichText` madde listesi (`\n- `) kullanılır.
+- 5. çalışmada eklenen elle yazılmış spotlarda ondalık nokta kullanıldı (CS-5 toplu dönüşümüne kadar mevcut biçimle tutarlılık). Blog metinlerinde virgül.
+- Sınırda spot (fark < 3.5 puan) yalnızca kararı **aynı yöne** iten ek bir etken (ör. realization) varsa ve gerekçede açıkça yazılıysa eklenir (c34, c35). Testte fark ve oran ayrıca korunur.
 
 ## Tespit edilen hatalar
 
@@ -88,10 +100,12 @@ Son güncelleme: **2026-11-11, 4. çalışma**
 | T-1 | t23 turnuva spotunda ante yok | Düşük | Açık |
 | UX-1 | Ara kartı masaüstünde masanın yerini alıyor, koç kısayolu yok | Düşük | Açık |
 | B-1 | Karışık stratejili spotlarda tek doğru cevap | Bilgi | Ürün kararı bekliyor |
+| P-1 | Çalışma dalları varsayılan dala alınmıyor (5 çalışma, 5 dal) | Orta | Açık — kullanıcı aksiyonu gerekiyor |
 
 ## Doğrulanamayan konular
 
-- Solver karşılaştırması yapılamadı (c09, c23, c24, c25, c34, c39'daki karışık strateji yorumları; postflop range avantajı iddiaları).
+- c36'daki butonun call aralığı (CO aralığı − AA–JJ, AK, AQs) bir varsayım.
+- Solver karşılaştırması yapılamadı (c09, c23, c24, c25, c34, c35, c39'daki karışık strateji yorumları; postflop range avantajı iddiaları).
 - t07, t09 ödül yapısı yok. t13 resteal aralığı yok.
 - Push aralıklarının Nash tablolarına yakınlığı bilinmiyor.
 - Set mining "15–20 kat" kuralının kaynağı.
@@ -99,16 +113,16 @@ Son güncelleme: **2026-11-11, 4. çalışma**
 
 ## Atlanan roller
 
-- **Data Analyst** (1–4): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
-- **Davranış Bilimleri** (2–4): yeni mekanik önerilmedi; 1. çalışmadaki spesifikasyon geçerli.
-- **Backend** (2–4): sunucu değişikliği gerekmedi.
+- **Data Analyst** (1–5): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
+- **Davranış Bilimleri** (2–5): yeni mekanik önerilmedi; 1. çalışmadaki spesifikasyon geçerli.
+- **Backend** (2–5): sunucu değişikliği gerekmedi.
 
 ## Sonraki öncelikler
 
-1. **Dal durumu kontrolü.** Bu dal ana dala alınmadıysa yeni iş üretme; önce kullanıcıya hatırlat, sonra bu daldan devam et.
-2. **Bekleyen içeriği siteye almak:** 6 spot taslağı (sayılar `replay` ile yeniden kontrol edilerek) ve blind savunması blog yazısı. Yeni içerik üretmeden önce bunlar.
-3. **Ara kartının masaüstü yerleşimi ve koç kısayolu** (UX-1) ya da üretici iyileştirmeleri (CS-1, CS-2, CS-4). Biri seçilmeli.
-4. Gelişmiş istatistikler (Aşama 3) için UI/UX + Backend spesifikasyonu, 2 ve 3'ten sonra.
+1. **Dal durumu kontrolü (P-1).** `claude/wizardly-meitner-vrsaxz` ana dala alınmadıysa bu daldan devam et ve kullanıcıya yeniden hatırlat.
+2. **Ara kartının masaüstü yerleşimi ve koç kısayolu** (UX-1) — 4. çalışmadan kalan yarım iş. Tarayıcıda (Playwright) ekran görüntüsüyle doğrulanmalı.
+3. **Üretici iyileştirmeleri** (CS-1, CS-2, CS-4) ve ardından CS-5 ondalık dönüşümü; tek çalışmada `npm run ranges` + test.
+4. B-1 ürün kararı gelirse `acceptable` alanı + c39. Gelişmiş istatistikler (Aşama 3) spesifikasyonu bunlardan sonra.
 
 ## Agent sorumlulukları
 
