@@ -33,6 +33,11 @@ export default function Page() {
           links: [["/range", "Range matrisi"], ["/alistirma?oyun=cash&konu=acilis", "Açılış alıştırması"]],
         },
         {
+          title: "Blind savunması",
+          text: "BB'de karar üç soruya iner: fiyat (ne kadar equity gerekiyor), açanın aralığı (UTG dar, buton geniş açar) ve pozisyon dışında equity'nin ne kadarını kullanabileceğin. Suited ve bağlantılı eller ucuz fiyatlarda rahat savunulur; offsuit, kopuk ve domine olmaya yatkın eller fiyat yetse bile çoğu zaman bırakılır.",
+          links: [["/alistirma?oyun=cash&konu=savunma", "Savunma spotları"], ["/blog/blind-savunmasi-fiyat-aralik-pozisyon", "Yazıyı oku"]],
+        },
+        {
           title: "Flop sonrası",
           text: "Board'un kime uyduğunu sor: kuru ve yüksek kartlı board'lar açılış yapana, bağlantılı orta kartlı board'lar call edene yarar. Güçlü elle value bet yap, orta güçte elle pot kontrolü düşün, blöfü fold edebilecek rakibe sakla.",
           links: [["/alistirma?oyun=cash&konu=cbet", "C-bet spotları"], ["/blog/c-bet-ne-zaman", "C-bet yazısı"]],

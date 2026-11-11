@@ -1,6 +1,6 @@
 # Poker Defteri
 
-Türkçe bir Texas Hold'em alıştırma masası: 575 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 577 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -50,7 +50,7 @@ src/
       ai/chat/                POST  — asistan (akışlı düz metin)
       auth/{register,login,logout,me}/   e-posta ile hesap
       auth/google/ (+callback)           Google ile giriş
-      attempts/               GET/POST — alıştırma cevapları
+      attempts/               GET/POST — alıştırma cevapları (GET: son 5000 + toplam)
       saved/                  GET/PUT/DELETE — kayıtlı eller ve notlar
       hands/ (+[id])          GET — el kütüphanesi
   components/                 PokerTable, ActionStrip, CoachChat, AiPanel, Cards, Nav, ...
@@ -85,15 +85,15 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | Adres | Ne yapar |
 |---|---|
 | `/` | Tanıtım, gerçek masa bileşeniyle önizleme, spot türlerine kısayollar |
-| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
+| `/alistirma` | Alıştırma masası: üstte aksiyon geçmişi, ortada 6 kişilik masa, altta renkli hamle butonları, yanda koç sohbeti. Soru sayısı yok; eller arka arkaya gelir, yanlışlar ara ara geri döner. Oyun tipi ve spot filtresi, oturum özeti, el kaydetme, klavye kısayolları (1–3, Enter). Belirli sayıda elden (varsayılan 20) ya da 25 dakikadan sonra engellemeyen bir ara kartı çıkar; sıklığı ayarlanabilir ya da kapatılabilir. Masaüstünde kart soluk masanın üstünde durur ve koç panelinde "Bu bölümü yorumla" kısayolu çıkar (statik sürümde yok). `?el=`, `?oyun=`, `?konu=` ile doğrudan açılır |
 | `/yapay-zeka` | Serbest soru, el formu ya da geçmiş alıştırma sonuçlarının analizi |
-| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran, kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
+| `/profil` | E-posta / Google ile giriş; çözülen soru, doğruluk, spot bazında oran; gelişim kartı (son 8 haftanın kayan 7 günlük pencereleri, pozisyona göre doğruluk, ilk görüş / tekrar ayrımı; 10 cevaptan azında oran gösterilmez); kayıtlı eller (masada yeniden açılır); CSV/JSON indirme; hesap silme |
 | `/ogren` | Cash ve turnuva rehberleri, araçlar, sözlük ve blog için tek giriş |
 | `/range` | Pozisyona göre açılış (cash) ve push/fold (turnuva) aralıkları; kendi range'ini işaretle, karşılaştır, asistana değerlendir |
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
-| `/blog`, `/blog/[slug]` | 6 özgün yazı |
+| `/blog`, `/blog/[slug]` | 8 özgün yazı |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu
@@ -158,17 +158,17 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**575 spot:**
+**577 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
-| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 53 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
+| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 59 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
 | Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
-| All-in'e karşı call (BB) | 126 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
+| All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
 | Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla yeniden kontrol edilir.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda ve blog yazılarında testle denetlenir.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
@@ -196,7 +196,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (575 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (577 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |
@@ -215,10 +215,11 @@ Alıştırma modu, yapay zeka ile alıştırma analizi, kullanıcı hesabı (e-p
 |---|---|
 | Turnuva modülü ve ICM hesabı | ✅ temel hali |
 | Hand history içe aktarma | ⬜ |
-| Gelişmiş istatistikler (zaman içinde eğilim, pozisyon bazında döküm) | ⬜ |
+| Gelişmiş istatistikler (zaman içinde eğilim, pozisyon bazında döküm) | ✅ temel hali (`src/lib/client/stats.ts`, yeni veri toplanmaz) |
 
 ### Bilinen sınırlar
 
+- Üyenin cevap listesi son 5000 kayıtla sınırlıdır; "Çözülen soru" ve "Doğruluk" sunucu toplamından gelir, Gelişim kartı kesintiyi belirtir. Konu tablosu ve CSV/JSON dışa aktarma henüz son 5000 kayıtla sınırlıdır.
 - Asistan gerçek Claude API'ye karşı denenmedi (geliştirme ortamında anahtar yoktu); akış, önbellek ve hata yolları API'nin akış biçimini taklit eden yerel bir sunucuyla test edildi. Yanıt kalitesi ve sistem talimatı gerçek anahtarla gözden geçirilmeli.
 - Google ile giriş kodu yazıldı ancak gerçek Google kimlik bilgileriyle denenmedi.
 - Sayfa yükleme süresi gerçek mobil ağda ölçülmedi. İçerik sayfaları statik üretilir, harici font ya da görsel yoktur.

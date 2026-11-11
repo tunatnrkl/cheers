@@ -5,16 +5,30 @@ import { currentUser } from "@/lib/server/auth";
 import { db } from "@/lib/server/db";
 import { fail, readJson, sameOrigin } from "@/lib/server/http";
 
-// GET /api/attempts → kullanıcının alıştırma cevapları (yeniden eskiye)
+const ATTEMPTS_LIMIT = 5000;
+
+// GET /api/attempts → kullanıcının alıştırma cevapları (yeniden eskiye, en fazla ATTEMPTS_LIMIT)
+// ve tüm cevapların toplamı. Liste kesildiğinde istemci toplamı ayrıca gösterebilir (G-1).
 export async function GET() {
   const user = await currentUser();
   if (!user) return fail(401, "Giriş yapman gerekiyor.");
-  const { rows } = await db()!.query(
-    `SELECT hand_id AS "handId", chosen, correct, topic, created_at AS at
-       FROM attempts WHERE user_id = $1 ORDER BY created_at DESC LIMIT 5000`,
-    [user.id],
+  const pool = db()!;
+  const [list, sum] = await Promise.all([
+    pool.query(
+      `SELECT hand_id AS "handId", chosen, correct, topic, created_at AS at
+         FROM attempts WHERE user_id = $1 ORDER BY created_at DESC LIMIT ${ATTEMPTS_LIMIT}`,
+      [user.id],
+    ),
+    pool.query(
+      `SELECT count(*)::int AS total, count(*) FILTER (WHERE correct)::int AS ok
+         FROM attempts WHERE user_id = $1`,
+      [user.id],
+    ),
+  ]);
+  return NextResponse.json(
+    { attempts: list.rows, totals: sum.rows[0] },
+    { headers: { "Cache-Control": "no-store" } },
   );
-  return NextResponse.json({ attempts: rows }, { headers: { "Cache-Control": "no-store" } });
 }
 
 const schema = z.object({

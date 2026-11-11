@@ -60,7 +60,7 @@ export function Assistant() {
             suggestions={[
               "Pot odds nedir, nasıl hesaplarım?",
               "Butonda neden daha çok elle oynanır?",
-              "BTN'deyim, 40 BB stack, elimde A♠J♦. CO 2.5 BB açtı. Ne yapmalıyım?",
+              "BTN'deyim, 40 BB stack, elimde A♠J♦. CO 2,5 BB açtı. Ne yapmalıyım?",
               "Bubble'da orta stack ile nasıl oynamalıyım?",
             ]}
             placeholder="Örn: SB'de KQo ile 3-bet'e ne yapmalıyım?"
@@ -124,7 +124,7 @@ export function Assistant() {
             </div>
             <div>
               <label htmlFor="a" className="label">Ne oldu?</label>
-              <textarea id="a" className="field min-h-24" value={form.actions} onChange={set("actions")} maxLength={800} placeholder="CO 2.5 BB açtı, ben butondan call ettim. Flop'ta check etti, ben…" />
+              <textarea id="a" className="field min-h-24" value={form.actions} onChange={set("actions")} maxLength={800} placeholder="CO 2,5 BB açtı, ben butondan call ettim. Flop'ta check etti, ben…" />
             </div>
           </section>
 
