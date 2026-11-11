@@ -1,6 +1,6 @@
 # Poker Defteri
 
-Türkçe bir Texas Hold'em alıştırma masası: 575 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 797 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -158,19 +158,19 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**575 spot:**
+**797 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
 | Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 53 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı |
-| Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
-| Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
-| All-in'e karşı call (BB) | 126 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
-| Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
+| Cash açılış (herkes fold etti) | 145 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
+| Turnuva push/fold (6, 10, 15 BB) | 295 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
+| All-in'e karşı call (BB) | 204 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Gerekli equity'ye 3,5 puandan yakın olanlar dışarıda |
+| Turn all-in, rakip kartları açık | 100 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
 
 `npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla yeniden kontrol edilir.
 
-Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
+Üretilen spotlar `npm run ranges` ile sıfırdan yeniden oluşturulur (sabit tohum, tekrarlanabilir). `npm run drills:add` ise aynı kurallarla mevcut spotlara dokunmadan yenilerini ekler (all-in'e call için ek spotlar: CO/BTN 6 BB, HJ/UTG 10–15 BB); `npm run ranges` çalıştırılırsa bu eklenenler silinir.
 
 ## 5. Güvenlik ve KVKK
 
@@ -196,7 +196,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (575 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (797 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |
