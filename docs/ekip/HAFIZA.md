@@ -41,10 +41,10 @@ Bu çalışmada kod yazılmadı. Yukarıdaki 4 iş Claude Code görevine devredi
 
 | # | Yer | Önem | Durum |
 |---|---|---|---|
-| O-1 | c17: tek bahsin fiyatı, iki kartlık equity ile karşılaştırılmış | Orta | Açık |
-| O-2 | t10: "KJo yarı yarıya" (ölçülen %55); ödül yapısı yazılmamış | Orta | Açık |
-| O-3 | c25: exploit fold, fiyat (%23.5) belirtilmemiş | Orta | Açık |
-| D-1…D-7 | c19, c20, c21, c27, t21, t22, t23: sayı ve ifade hataları | Düşük | Açık |
+| O-1 | c17: tek bahsin fiyatı, iki kartlık equity ile karşılaştırılmış | Orta | Kapandı |
+| O-2 | t10: "KJo yarı yarıya" (ölçülen %55); ödül yapısı yazılmamış | Orta | Kapandı |
+| O-3 | c25: exploit fold, fiyat (%23.5) belirtilmemiş | Orta | Kapandı |
+| D-1…D-7 | c19, c20, c21, c27, t21, t22, t23: sayı ve ifade hataları | Düşük | Kapandı (all-in miktarı ve ondalık virgül için test eklendi; `drills.json`'daki 70 ondalık virgül de düzeltildi) |
 | B-1 | Karışık stratejili spotlarda tek doğru cevap var | Bilgi | Ürün kararı bekliyor |
 
 ## Doğrulanamayan konular

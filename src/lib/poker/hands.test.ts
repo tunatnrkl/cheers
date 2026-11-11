@@ -38,6 +38,23 @@ describe("el verisi", () => {
       expect(h.reasoning.length).toBeGreaterThan(40);
     });
   }
+
+  it("all-in seçeneğindeki BB miktarı kahramanın kalan stack'iyle tutarlı", () => {
+    const bad: string[] = [];
+    for (const h of HANDS) {
+      const left = replay(h).seats[h.heroPos].stack;
+      for (const o of h.options) {
+        const m = o.match(/^All-in \((?:≈\s*)?(\d+(?:\.\d+)?) BB\)/);
+        if (m && Math.abs(Number(m[1]) - left) > 1) bad.push(`${h.id}: "${o}", kalan stack ${left}`);
+      }
+    }
+    expect(bad, bad.join("; ")).toEqual([]);
+  });
+
+  it("seçenek metinlerinde ondalık virgül yok", () => {
+    const bad = HANDS.flatMap((h) => h.options.filter((o) => /\d,\d/.test(o)).map((o) => `${h.id}: "${o}"`));
+    expect(bad, bad.join("; ")).toEqual([]);
+  });
 });
 
 // Üretilen ellerin cevaplarını bağımsız olarak yeniden doğrular.
