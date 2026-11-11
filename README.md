@@ -93,7 +93,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
-| `/blog`, `/blog/[slug]` | 6 özgün yazı |
+| `/blog`, `/blog/[slug]` | 7 özgün yazı |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu

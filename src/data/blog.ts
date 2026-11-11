@@ -104,6 +104,22 @@ export const POSTS: Post[] = [
       { h: "Bu site hakkında", p: "Poker Defteri 18 yaş ve üzeri kullanıcılar içindir. Gerçek parayla oyun oynatmaz, bahis önermez ve kazanç vaat etmez. Buradaki her şey bir zihin oyununu daha iyi anlamak içindir." },
     ],
   },
+  {
+    slug: "risk-primi-hesabi",
+    title: "Risk primi nasıl hesaplanır? Üç bubble kararı",
+    summary: "Chip hesabıyla call görünen iki el, ICM ile neden fold oluyor? Varsayımları açık, adım adım bir hesap.",
+    date: "2026-11-11",
+    minutes: 6,
+    tag: "Turnuva",
+    body: [
+      { p: "“ICM nedir?” yazısında risk primini tanımlamıştık: chip hesabının istediği equity ile ödül hesabının istediği equity arasındaki fark. Bu yazıda o farkı alıştırma masasındaki iki spot üzerinden sayıyla gösteriyoruz. Önce şunu netleştirelim: aşağıdaki sayılar bir solver çıktısı değildir. Malmuth-Harville ICM modeliyle (hesap makineleri sayfasındaki araçla aynı formül) ve kendi el değerlendiricimizle yapılmış, varsayımları belirtilmiş yaklaşık hesaplardır." },
+      { h: "Yöntem: üç sayı yeter", p: "Bir all-in kararında üç durumun ödül payını (beklenen ödülünü) hesapla: fold edersen (F), call edip kazanırsan (K), call edip kaybedersen (L). Call'un başabaş equity'si (F − L) / (K − L) olur. Chip hesabındaki karşılığı ise bildiğin pot odds formülüdür: ödeyeceğin miktar / (pot + ödeyeceğin miktar). İkisi arasındaki fark risk primidir. ICM modeli gelecekteki elleri, blind baskısını ve oyuncuların becerisini hesaba katmaz; bu yüzden sonuçlar yön gösterir, kesin sınır çizmez." },
+      { h: "1. Bubble'da AJo, chip liderinin all-in'i", p: "Spot: 5 oyuncu kaldı, 4 kişi ödül alıyor. Buton 60 BB ile chip lideri ve all-in yaptı; sen BB'de 22 BB'lik AJo'sun; iki oyuncunun 3'er BB'si var. Ödül dağılımını %40 / %30 / %20 / %10 varsaydık (gerçek turnuvalarda farklı olabilir). Chip hesabıyla call için yaklaşık %46 equity yeter. ICM ile: fold ederken ödül payın yaklaşık 24,6; kazanınca 30,9; kaybedince 0 (ödülsüz elenirsin). Başabaş equity (24,6 − 0) / (30,9 − 0) ≈ %80 çıkar. AJo, kendi referans 10 BB buton push aralığımıza karşı yaklaşık %60 equity taşır. Chip'e göre rahat call, ICM'e göre açık fold. Ödül dağılımını %35 / %25 / %22 / %18 gibi daha düz alınca başabaş %86'ya yükselir: ödüller birbirine ne kadar yakınsa elenmek o kadar pahalıdır." },
+      { h: "2. Final masasında 3 kişi: KJo", p: "Spot: SB 50 BB ile lider ve all-in yaptı, sen BB'de 30 BB'lik KJo'sun, butonda 6 BB'lik bir oyuncu var. Ödülleri %50 / %30 / %20 varsaydık. Chip hesabı yaklaşık %47,5 equity istiyor. ICM ile: fold ≈ 35,0; kazanırsan ≈ 43,6; kaybedersen üçüncü olursun ve 20 alırsın. Başabaş (35,0 − 20) / (43,6 − 20) ≈ %64. KJo'nun SB'nin referans 10 BB push aralığına karşı equity'si yaklaşık %55. Risk primi burada yaklaşık 16 puan ve elin bunu karşılamıyor. Dikkat: kaybedince sıfır değil üçüncülük ödülü aldığın için prim, bubble örneğinden daha küçüktür." },
+      { h: "3. Satellite: QQ bile fold", p: "6 oyuncu, 5 bilet. İki oyuncunun 2'şer BB'si var ve sen 40 BB ile bileti neredeyse almışsın. Fold edersen beklenen değerin bir bilete çok yakın; kazanırsan yine bir bilet alırsın, kaybedersen hiçbir şey. Bu durumda başabaş equity %99'un üzerine çıkar; QQ'nun geniş bir aralığa karşı yaklaşık %74'lük equity'si bile yetmez. Kazanmanın neredeyse hiçbir şey eklemediği, kaybetmenin her şeyi götürdüğü bu yapı, risk priminin en uç halidir." },
+      { h: "Ne öğrendik?", p: "Risk primi sabit bir sayı değildir: ödül dağılımına, kaç oyuncunun elenmek üzere olduğuna ve seni kimin eleyebildiğine göre değişir. Kısa stack'e karşı küçüktür; seni kapatan büyük stack'e karşı büyüktür. Kendi kararlarını çalışırken aynı üç sayıyı hesap makineleri sayfasındaki ICM aracıyla bulabilirsin. Bu hesaplar karar kalitesini çalışmak içindir; hiçbir hesap tek bir elin ya da turnuvanın sonucunu garanti etmez." },
+    ],
+  },
 ];
 
 export const POST_BY_SLUG = new Map(POSTS.map((p) => [p.slug, p]));
