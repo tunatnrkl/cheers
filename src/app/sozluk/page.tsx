@@ -12,7 +12,7 @@ export default function Page() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    name: "Poker Defteri Sözlüğü",
+    name: "Cheers Sözlüğü",
     inLanguage: "tr",
     hasDefinedTerm: GLOSSARY.map((g) => ({ "@type": "DefinedTerm", name: g.term, description: g.def })),
   };

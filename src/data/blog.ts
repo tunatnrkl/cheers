@@ -101,7 +101,7 @@ export const POSTS: Post[] = [
       { h: "Tilt'i tanı", p: "Kayıptan sonra hızlanan kararlar, “bunu geri almalıyım” düşüncesi, normalde oynamayacağın elleri oynamak tilt belirtileridir. Tilt bir karakter kusuru değil, herkesin yaşadığı bir durumdur. Çözümü basittir: fark ettiğin an bırak." },
       { h: "Sınırlarını önceden koy", p: "Oturmadan önce süre ve bütçe sınırı belirle; sınır dolunca kalk. Kaybı kovalamak, yani kaybettiğini geri almak için limiti ya da süreyi artırmak, en pahalı alışkanlıktır. Poker bütçesi her zaman günlük hayatı etkilemeyecek bir miktar olmalı; borçla oynanmaz." },
       { h: "Uyarı işaretleri", p: "Planladığından uzun oynamak, oyunu yakınlarından gizlemek, iş, okul ya da ilişkileri aksatmak, oynayamayınca huzursuz olmak. Bunlardan biri sana tanıdık geliyorsa ara vermek ve bir uzmanla konuşmak güç göstergesidir. Türkiye'de Yeşilay Danışmanlık Merkezi (YEDAM) 115 numaralı hattan ücretsiz destek verir." },
-      { h: "Bu site hakkında", p: "Poker Defteri 18 yaş ve üzeri kullanıcılar içindir. Gerçek parayla oyun oynatmaz, bahis önermez ve kazanç vaat etmez. Buradaki her şey bir zihin oyununu daha iyi anlamak içindir." },
+      { h: "Bu site hakkında", p: "Cheers 18 yaş ve üzeri kullanıcılar içindir. Gerçek parayla oyun oynatmaz, bahis önermez ve kazanç vaat etmez. Buradaki her şey bir zihin oyununu daha iyi anlamak içindir." },
     ],
   },
 ];

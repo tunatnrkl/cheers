@@ -1,4 +1,4 @@
-# Poker Defteri
+# Cheers
 
 Türkçe bir Texas Hold'em alıştırma masası: 578 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 

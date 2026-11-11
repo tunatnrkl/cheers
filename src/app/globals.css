@@ -1,53 +1,79 @@
 @import "tailwindcss";
 
-/* ───────── Tasarım değişkenleri ─────────
-   Site genelinde açık/koyu tema; alıştırma masası (--t-*) her zaman koyu. */
-:root {
-  --bg: #f4f5f2;
-  --surface: #ffffff;
-  --surface-2: #f8f9f7;
-  --ink: #111614;
-  --muted: #5a6661;
-  --line: #e2e6e1;
-  --accent: #0d7a50;
-  --accent-ink: #ffffff;
-  --soft: #e4f2ea;
-  --danger: #b42318;
-  --danger-soft: #fdecea;
-  --shadow: 0 1px 2px rgb(16 24 20 / 0.04), 0 4px 16px rgb(16 24 20 / 0.06);
-  color-scheme: light;
-}
-
+/* ───────── Cheers tasarım değişkenleri ─────────
+   Varsayılan tema koyu (masa yeşili-siyah). Açık tema isteğe bağlı: bira altlığı kâğıdı.
+   --accent dolgu (buton, odak), --accent-text metin içindir; ikisi temaya göre ayrılır.
+   Alıştırma masası (--t-*) her iki temada da koyu kalır. Kontrast: hepsi WCAG AA (≥ 4.5:1). */
+:root,
 :root[data-theme="dark"] {
   --bg: #0b0e0d;
-  --surface: #141917;
-  --surface-2: #181e1c;
-  --ink: #e8eeea;
-  --muted: #95a29c;
-  --line: #242c29;
-  --accent: #3ccf8e;
-  --accent-ink: #03130b;
-  --soft: #15291f;
-  --danger: #ff8a7a;
+  --surface: #141a17;
+  --surface-2: #1b221e;
+  --line: #2a332e;
+  --ink: #f3ede0;
+  --muted: #a8a291;
+  --accent: #e0a526; /* bira amberi */
+  --accent-ink: #1c1404;
+  --accent-text: #f0bc4c;
+  --accent-deep: #b97f0c;
+  --foam: #f6ebd0; /* köpük */
+  --soft: #2a2212;
+  --danger: #f0715a; /* sıcak kırmızı: fold, hata */
+  --danger-strong: #b83a26;
   --danger-soft: #35191a;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+  --felt: #0f3b2b;
+  --felt-deep: #08241a;
+  --focus: #e0a526;
+  --glow: rgb(224 165 38 / 0.1);
+  --shadow: 0 1px 0 rgb(246 235 208 / 0.04) inset, 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  /* Logo */
+  --mark-beer: #e0a526;
+  --mark-foam: #f6ebd0;
+  --mark-spark: #ffd36b;
+  --mark-badge: transparent;
   color-scheme: dark;
 }
 
-/* Alıştırma masası paleti (temadan bağımsız) */
+:root[data-theme="light"] {
+  --bg: #f7f1e3;
+  --surface: #fffcf5;
+  --surface-2: #f1e9d6;
+  --line: #e3d7bc;
+  --ink: #1e1a12;
+  --muted: #6a604c;
+  --accent: #e0a526;
+  --accent-ink: #1c1404;
+  --accent-text: #8a5a00;
+  --accent-deep: #8a5a00;
+  --foam: #f6ebd0;
+  --soft: #f6e6be;
+  --danger: #b3321f;
+  --danger-strong: #b3321f;
+  --danger-soft: #fbe5df;
+  --felt: #0f3b2b;
+  --felt-deep: #08241a;
+  --focus: #8a5a00;
+  --glow: rgb(224 165 38 / 0.16);
+  --shadow: 0 1px 2px rgb(60 40 10 / 0.06), 0 10px 28px -12px rgb(60 40 10 / 0.25);
+  --mark-badge: #0b0e0d;
+  color-scheme: light;
+}
+
+/* Alıştırma masası paleti (temadan bağımsız, her zaman koyu) */
 .trainer {
-  --t-bg: #0d1110;
-  --t-panel: #141a18;
-  --t-panel-2: #1b2220;
-  --t-line: #27302d;
-  --t-ink: #e9efeb;
-  --t-muted: #8f9c96;
-  --t-accent: #3ccf8e;
+  --t-bg: #0b0e0d;
+  --t-panel: #141a17;
+  --t-panel-2: #1b221e;
+  --t-line: #2a332e;
+  --t-ink: #f3ede0;
+  --t-muted: #a8a291;
+  --t-accent: #e0a526;
+  --t-felt: #0f3b2b;
   --t-fold: #4b5b70;
   --t-call: #1f9a5e;
   --t-raise: #d8632a;
   --t-allin: #b8262e;
-  --t-act: #f2a33a;
+  --t-act: #ffd36b;
   color-scheme: dark;
 }
 
@@ -60,6 +86,13 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-accent-deep: var(--accent-deep);
+  --color-foam: var(--foam);
+  --color-danger-strong: var(--danger-strong);
+  --color-felt: var(--felt);
+  --color-felt-deep: var(--felt-deep);
+  --color-t-felt: var(--t-felt);
   --color-soft: var(--soft);
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
@@ -75,7 +108,8 @@
   --color-t-raise: var(--t-raise);
   --color-t-allin: var(--t-allin);
   --color-t-act: var(--t-act);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --shadow-card: var(--shadow);
 }
 
@@ -85,15 +119,28 @@ html {
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(1200px 520px at 50% -180px, var(--glow), transparent 70%),
+    var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Başlıklar: Fraunces, yumuşak ve hafif "wonky" kesim; bar tabelası sıcaklığı */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  letter-spacing: -0.01em;
+}
+
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--focus);
   outline-offset: 2px;
   border-radius: 8px;
 }
@@ -105,10 +152,10 @@ body {
 @layer components {
   /* Tüm dokunma hedefleri en az 44px */
   .btn {
-    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border border-line bg-surface px-4 py-2 text-[15px] font-semibold text-ink transition hover:border-muted/50 hover:bg-surface-2 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-line bg-surface px-4 py-2 text-[15px] font-bold text-ink transition hover:border-muted/60 hover:bg-surface-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply border-transparent bg-accent text-accent-ink hover:bg-accent hover:brightness-110;
+    @apply border-transparent bg-accent text-accent-ink shadow-[inset_0_1px_0_rgb(255_240_200/0.55),inset_0_-2px_0_rgb(120_70_0/0.35)] hover:bg-accent hover:brightness-110;
   }
   .btn-ghost {
     @apply border-transparent bg-transparent hover:bg-surface-2;
@@ -117,7 +164,7 @@ body {
     @apply min-h-13 px-6 text-base;
   }
   .card {
-    @apply rounded-2xl border border-line bg-surface p-5 shadow-card sm:p-6;
+    @apply rounded-[22px] border border-line bg-surface p-5 shadow-card sm:p-6;
   }
   .chip {
     @apply inline-flex min-h-11 cursor-pointer items-center rounded-full border border-line bg-surface px-4 text-sm font-semibold text-ink transition hover:border-muted/50;
@@ -126,28 +173,29 @@ body {
     @apply border-ink bg-ink text-bg hover:border-ink;
   }
   .tag {
-    @apply inline-flex items-center rounded-full bg-soft px-2.5 py-0.5 text-xs font-semibold text-accent;
+    @apply inline-flex items-center rounded-full bg-soft px-2.5 py-0.5 text-xs font-bold text-accent-text;
   }
   .field {
-    @apply min-h-11 w-full rounded-xl border border-line bg-surface px-3.5 py-2 text-base text-ink placeholder:text-muted/80 focus:border-accent;
+    @apply min-h-11 w-full rounded-xl border border-line bg-surface px-3.5 py-2 text-base text-ink placeholder:text-muted/80 focus:border-accent-deep;
   }
   .label {
     @apply mb-1.5 block text-sm font-semibold text-ink;
   }
   .eyebrow {
-    @apply text-xs font-bold tracking-[0.12em] text-accent uppercase;
+    /* Etiket: büyük harf yerine Fraunces italik, amber */
+    @apply font-display text-[15px] font-medium text-accent-text italic;
   }
   .h1 {
-    @apply text-[28px] leading-tight font-bold tracking-tight text-balance sm:text-4xl;
+    @apply font-display text-[30px] leading-[1.1] font-bold text-balance sm:text-[40px];
   }
   .h2 {
-    @apply text-lg leading-snug font-bold tracking-tight sm:text-xl;
+    @apply font-display text-xl leading-snug font-semibold sm:text-[22px];
   }
   .lead {
     @apply text-base text-muted sm:text-lg;
   }
   .link {
-    @apply font-semibold text-accent underline-offset-4 hover:underline;
+    @apply font-bold text-accent-text underline-offset-4 hover:underline;
   }
   .term {
     @apply cursor-help text-inherit underline decoration-current/40 decoration-dotted underline-offset-4;
@@ -172,4 +220,14 @@ body {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Logo: açık temada koyu rozet içinde durur (köpük açık zeminde kaybolmasın) */
+.cheers-badge {
+  background: var(--mark-badge);
+}
+.cheers-mark-mono {
+  --mark-beer: currentColor;
+  --mark-foam: currentColor;
+  --mark-spark: currentColor;
 }

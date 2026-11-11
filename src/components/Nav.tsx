@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE_NAME } from "@/lib/site";
 import { ThemeToggle } from "./ThemeToggle";
+import { CheersMark } from "./brand/CheersMark";
 
 const ITEMS = [
   { href: "/", label: "Ana Sayfa", icon: "M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10" },
@@ -25,11 +26,11 @@ function Icon({ d }: { d: string }) {
 
 export function Logo() {
   return (
-    <Link href="/" className="flex min-h-11 items-center gap-2.5 font-bold tracking-tight">
-      <span aria-hidden="true" className="grid size-8 place-items-center rounded-[10px] bg-accent text-[17px] text-accent-ink">
-        ♠
+    <Link href="/" className="group flex min-h-11 items-center gap-2 text-ink" aria-label={`${SITE_NAME}, ana sayfa`}>
+      <span className="cheers-badge grid size-10 place-items-center rounded-xl">
+        <CheersMark className="size-9 transition-transform duration-300 group-hover:-rotate-3" />
       </span>
-      <span className="text-[17px]">{SITE_NAME}</span>
+      <span className="font-display text-[24px] leading-none font-bold italic">{SITE_NAME}</span>
     </Link>
   );
 }
@@ -78,7 +79,7 @@ export function Nav() {
                 href={it.href}
                 aria-current={active(it.href) ? "page" : undefined}
                 className={`flex min-h-15 flex-col items-center justify-center gap-0.5 text-[11px] font-semibold ${
-                  active(it.href) ? "text-accent" : "text-muted"
+                  active(it.href) ? "text-accent-text" : "text-muted"
                 }`}
               >
                 <Icon d={it.icon} />

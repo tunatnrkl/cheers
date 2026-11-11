@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Cheers Open Graph görseli (kaynak). Yayında src/app/opengraph-image.png kullanılır;
+       PNG, bu dosyadan Fraunces ve Manrope yüklenerek üretildi (sosyal ağlar SVG kabul etmez). -->
+  <defs>
+    <radialGradient id="felt" cx="78%" cy="62%" r="62%">
+      <stop offset="0" stop-color="#14503a"/>
+      <stop offset="0.55" stop-color="#0f3b2b" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0b0e0d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="78%" cy="30%" r="35%">
+      <stop offset="0" stop-color="#e0a526" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#e0a526" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0e0d"/>
+  <rect width="1200" height="630" fill="url(#felt)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(806 118) scale(5.8)"><g><g transform="translate(17 60) rotate(9)"><path fill-rule="evenodd" fill="#E0A526" d="M-8 -28 H8 V-4 a4 4 0 0 1 -4 4 H-4 a4 4 0 0 1 -4 -4 Z M0.00 -18.46 C1.15 -16.59 3.89 -15.15 3.89 -12.85 C3.89 -11.12 2.16 -10.40 0.86 -11.41 L1.44 -9.39 H-1.44 L-0.86 -11.41 C-2.16 -10.40 -3.89 -11.12 -3.89 -12.85 C-3.89 -15.15 -1.15 -16.59 0.00 -18.46 Z"/><path fill="none" stroke="#E0A526" stroke-width="3.2" stroke-linecap="round" d="M-8 -23 h-2.6 a4.6 4.6 0 0 0 -4.6 4.6 v4.4 a4.6 4.6 0 0 0 4.6 4.6 h2.6"/><g fill="#F6EBD0"><circle cx="-5" cy="-33.4" r="4.4"/><circle cx="1" cy="-35.6" r="5"/><circle cx="6.2" cy="-32.8" r="3.6"/><rect x="-9.8" y="-34" width="19.6" height="4.4" rx="2.2"/></g></g></g><g><g transform="translate(47 60) scale(-1 1) rotate(9)"><path fill-rule="evenodd" fill="#E0A526" d="M-8 -28 H8 V-4 a4 4 0 0 1 -4 4 H-4 a4 4 0 0 1 -4 -4 Z M2.4 -24 h2.4 v17 h-2.4 Z"/><path fill="none" stroke="#E0A526" stroke-width="3.2" stroke-linecap="round" d="M-8 -23 h-2.6 a4.6 4.6 0 0 0 -4.6 4.6 v4.4 a4.6 4.6 0 0 0 4.6 4.6 h2.6"/><g fill="#F6EBD0"><circle cx="-5" cy="-33.4" r="4.4"/><circle cx="1" cy="-35.6" r="5"/><circle cx="6.2" cy="-32.8" r="3.6"/><rect x="-9.8" y="-34" width="19.6" height="4.4" rx="2.2"/></g></g></g><g fill="#FFD36B"><path d="M32 4 l1.6 4.3 4.3 1.6 -4.3 1.6 -1.6 4.3 -1.6 -4.3 -4.3 -1.6 4.3 -1.6 Z"/><rect x="22.6" y="8" width="2.2" height="4.6" rx="1.1" transform="rotate(-45 23.7 10.3)"/><rect x="39.2" y="8" width="2.2" height="4.6" rx="1.1" transform="rotate(45 40.3 10.3)"/></g></g>
+  <text x="80" y="300" fill="#f6ebd0" font-family="'Fraunces Variable', Fraunces, Georgia, serif" font-size="168" font-weight="700" font-style="italic" style="font-variation-settings:'SOFT' 100, 'WONK' 1">Cheers</text>
+  <text x="84" y="384" fill="#f3ede0" font-family="'Manrope Variable', Manrope, Arial, sans-serif" font-size="40" font-weight="700">Poker kararlarını masada çalış.</text>
+  <text x="84" y="440" fill="#a8a291" font-family="'Manrope Variable', Manrope, Arial, sans-serif" font-size="25" font-weight="500">Türkçe Texas Hold'em alıştırma masası ve yapay zeka koçu</text>
+  <rect x="84" y="508" width="66" height="40" rx="20" fill="none" stroke="#e0a526" stroke-width="2"/>
+  <text x="117" y="535" fill="#f0bc4c" text-anchor="middle" font-family="'Manrope Variable', Manrope, Arial, sans-serif" font-size="20" font-weight="800">18+</text>
+  <text x="166" y="535" fill="#a8a291" font-family="'Manrope Variable', Manrope, Arial, sans-serif" font-size="22" font-weight="500">Strateji çalışma aracı. Gerçek parayla oyun oynatmaz.</text>
+</svg>

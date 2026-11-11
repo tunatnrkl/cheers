@@ -56,7 +56,7 @@ export default function Home() {
         <div>
           <p className="eyebrow">Texas Hold'em alıştırma masası</p>
           <h1 className="mt-3 text-4xl leading-[1.08] font-extrabold tracking-tight text-balance sm:text-[56px]">
-            Poker kararlarını <span className="text-accent">masada</span> çalış.
+            Poker kararlarını <span className="text-accent-text">masada</span> çalış.
           </h1>
           <p className="lead mt-5 max-w-xl">
             {TOTAL} gerçekçi spot. Aksiyonu gör, hamleni seç, anında sonucu öğren. Takıldığın yeri yanındaki
@@ -119,7 +119,7 @@ export default function Home() {
         <ol className="mt-8 grid gap-4 md:grid-cols-3">
           {STEPS.map(([t, d], i) => (
             <li key={t} className="card">
-              <span className="grid size-10 place-items-center rounded-xl bg-soft text-lg font-extrabold text-accent">{i + 1}</span>
+              <span className="grid size-10 place-items-center rounded-xl bg-soft text-lg font-extrabold text-accent-text">{i + 1}</span>
               <h3 className="mt-4 text-lg font-bold">{t}</h3>
               <p className="mt-1 text-muted">{d}</p>
             </li>
@@ -147,7 +147,7 @@ export default function Home() {
                 <span className="mt-1 flex-1 text-sm text-muted">{m.desc}</span>
                 <span className="mt-5 flex items-center justify-between text-sm font-bold">
                   <span className="tag">{m.n} spot</span>
-                  <span className="text-accent transition group-hover:translate-x-0.5" aria-hidden="true">
+                  <span className="text-accent-text transition group-hover:translate-x-0.5" aria-hidden="true">
                     →
                   </span>
                 </span>
