@@ -50,7 +50,7 @@ Kritik hata (yanlış "doğru cevap") bulunmadı. Bulgular gerekçe metnindeki h
 
 **D-6 · t22.** Doğru cevap korunuyor ama pay çok dar: ölçülen %32.6, gereken %31.6. UTG'nin 4 BB'deki push aralığı 6 BB aralığından geniş olacağı için gerçek pay muhtemelen daha büyük. Ancak aralık verisinde 4 BB yok (**doğrulanamadı**). "Çoğu push aralığına karşı bunu sağlar" ifadesi "sağlar, ama pay dar" diye yumuşatılmalı.
 
-**D-7 · t23.** Seçenek metninde ondalık virgül var ("25,8 BB"); diğer tüm spotlar nokta kullanıyor.
+**D-7 · t23.** Seçenek metninde ondalık virgül var ("25,8 BB"); diğer tüm spotlar nokta kullanıyor. *(2. çalışmada geçersiz sayıldı: üretilen 70 spot ve arayüz virgül kullanıyor. Yerine bkz. `04-callshove-duyarlilik.md`, CS-5. QA önerisi 3 de buna göre değişti.)*
 
 ### Bilgi (ürün kararı gerektirir)
 

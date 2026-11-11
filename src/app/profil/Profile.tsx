@@ -16,6 +16,7 @@ import {
   type Attempt,
   type Saved,
 } from "@/lib/client/store";
+import { Growth } from "./Growth";
 
 function download(name: string, mime: string, content: string) {
   const url = URL.createObjectURL(new Blob([content], { type: mime }));
@@ -158,8 +159,9 @@ export function Profile() {
 
   if (!p.ready) return <p className="card text-muted">Yükleniyor…</p>;
 
-  const total = p.attempts.length;
-  const ok = p.attempts.filter((a) => a.correct).length;
+  // Üyede toplamlar sunucudan gelir; liste 5000 cevapta kesildiği için listeden sayılmaz (G-1).
+  const total = p.totals?.total ?? p.attempts.length;
+  const ok = p.totals?.ok ?? p.attempts.filter((a) => a.correct).length;
   const stats = topicStats(p.attempts);
   const weak = weakTopics(stats);
 
@@ -235,6 +237,8 @@ export function Profile() {
               </>
             )}
           </section>
+
+          {total > 0 && <Growth attempts={p.attempts} total={total} />}
 
           <section className="card" aria-label="Veri">
             <h2 className="h2">Verilerin</h2>

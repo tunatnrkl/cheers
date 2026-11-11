@@ -5,18 +5,24 @@
 // Çalıştırma: npm run ranges   (çıktı: src/data/ranges.json)
 import { writeFileSync } from "node:fs";
 import { evaluate7 } from "../src/lib/poker/evaluator.ts";
+import { pctWithSuffix as numSuffix } from "../src/lib/trSuffix.ts";
 
 const R = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
 const rankIdx = (ch: string) => 12 - R.indexOf(ch);
 
 // Tekrarlanabilir sonuç için sabit tohumlu üreteç (mulberry32)
-let seed = 20260101;
-function rnd() {
-  seed = (seed + 0x6d2b79f5) | 0;
-  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+function mulberry32(start: number) {
+  let seed = start;
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
+const rnd = mulberry32(20260101);
+// Doğrulama ölçümleri ayrı bir üreteçle yapılır; böylece spot seçimi (ana üreteç) değişmez.
+const rndCheck = mulberry32(777);
 
 function equityVsRandom(label: string, trials: number): number {
   const a = rankIdx(label[0]) * 4;
@@ -117,6 +123,8 @@ const SUITS = "shdc";
 const SUIT_TR: Record<string, string> = { s: "♠", h: "♥", d: "♦", c: "♣" };
 const LOC: Record<string, string> = { UTG: "UTG'de", HJ: "HJ'de", CO: "CO'da", BTN: "BTN'de", SB: "SB'de", BB: "BB'de" };
 const ABL: Record<string, string> = { UTG: "UTG'den", HJ: "HJ'den", CO: "CO'dan", BTN: "BTN'den", SB: "SB'den", BB: "BB'den" };
+// İlgi hâli, kısaltmanın harf harf okunuşuna göre: "es-be'nin", "si-o'nun", "bi-ti-en'in".
+const GEN: Record<string, string> = { UTG: "UTG'nin", HJ: "HJ'nin", CO: "CO'nun", BTN: "BTN'nin", SB: "SB'nin", BB: "BB'nin" };
 const BEHIND: Record<string, number> = { UTG: 5, HJ: 4, CO: 3, BTN: 2, SB: 1 };
 
 function concrete(l: string): string {
@@ -174,10 +182,10 @@ for (const [pos, target] of Object.entries(cashTargets)) {
   const range = new Set(out.cash[pos as keyof typeof out.cash]);
   const raise = labels.filter((l) => range.has(l) && openPct.get(l)![1] <= target - 4);
   const fold = labels.filter((l) => !range.has(l) && !mixedOpen(l, pos) && openPct.get(l)![0] >= rfiFoldFrom[pos] && openPct.get(l)![0] <= rfiFoldFrom[pos] + 30);
-  const raiseOpt = pos === "SB" ? "3 BB aç" : "2.5 BB aç";
+  const raiseOpt = pos === "SB" ? "3 BB aç" : "2,5 BB aç";
   const options = pos === "SB" ? ["Fold", raiseOpt] : ["Fold", "Limp (1 BB)", raiseOpt];
   for (const [l, ok] of [...pick(raise, 12).map((l) => [l, true] as const), ...pick(fold, 11).map((l) => [l, false] as const)]) {
-    const p = pct(openPct.get(l)![1] / 100);
+    const p = Math.max(1, pct(openPct.get(l)![1] / 100));
     drills.push({
       id: `r-${pos}-${l}`,
       title: `${LOC[pos]} ${l}`,
@@ -186,8 +194,8 @@ for (const [pos, target] of Object.entries(cashTargets)) {
       note: "6-max cash game, 100 BB. Herkes sana kadar fold etti.",
       options, correct: ok ? options.length - 1 : 0, topic: "acilis", level: 1,
       reasoning: ok
-        ? `${l} ${ABL[pos]} açılacak kadar güçlü: ellerin en iyi ~%${p}'inde, ${pos} ise yaklaşık en iyi %${target} ile açar. Önünde herkes fold etti; raise ile ya blind'ları hemen alırsın ya da inisiyatifle oynarsın. Limp ise inisiyatifi verir.`
-        : `${l}, ${pos} için fazla zayıf: ellerin en iyi ~%${p}'inde, ${pos} ise yaklaşık en iyi %${target} ile açar. Arkanda ${BEHIND[pos]} oyuncu varken bu el görüldüğünde çoğu zaman geride kalır; limp de kârlı değildir.`,
+        ? `${l} ${ABL[pos]} açılacak kadar güçlü: ellerin en iyi ~${numSuffix(p, "inde")}, ${pos} ise yaklaşık en iyi %${target} ile açar. Önünde herkes fold etti; raise ile ya blind'ları hemen alırsın ya da inisiyatifle oynarsın. Limp ise inisiyatifi verir.`
+        : `${l}, ${pos} için fazla zayıf: ellerin en iyi ~${numSuffix(p, "inde")}, ${pos} ise yaklaşık en iyi %${target} ile açar. Arkanda ${BEHIND[pos]} oyuncu varken bu el görüldüğünde çoğu zaman geride kalır; limp de kârlı değildir.`,
     });
   }
 }
@@ -207,7 +215,7 @@ for (const [bb, targets] of Object.entries(pushTargets)) {
     const fold = labels.filter((l) => !range.has(l) && pushPct.get(l)![0] >= pushFoldFrom[bb][pos]);
     const options = ["Fold", `All-in (${bb} BB)`];
     for (const [l, ok] of [...pick(push, 8).map((l) => [l, true] as const), ...pick(fold, 7).map((l) => [l, false] as const)]) {
-      const p = pct(pushPct.get(l)![1] / 100);
+      const p = Math.max(1, pct(pushPct.get(l)![1] / 100));
       drills.push({
         id: `p${bb}-${pos}-${l}`,
         title: `${bb} BB ile ${LOC[pos]} ${l}`,
@@ -216,8 +224,8 @@ for (const [bb, targets] of Object.entries(pushTargets)) {
         note: `Turnuvanın orta aşaması, ICM baskısı yok. Herkesin ${bb} BB'si var; toplam ante 1 BB. Herkes sana kadar fold etti.`,
         options, correct: ok ? 1 : 0, topic: "pushfold", level: 1,
         reasoning: ok
-          ? `${bb} BB ile ${ABL[pos]} ${l} rahat bir all-in: ellerin en iyi ~%${p}'inde, bu spotta en az en iyi %${target} itilir. Herkes fold ederse 2,5 BB'lik pot senin; görülürsen de yeterli equity taşırsın. Bu stack'te açıp fold etmek pahalıdır.`
-          : `${l}, ${bb} BB ile ${ABL[pos]} itmek için fazla zayıf: ellerin ancak en iyi ~%${p}'inde. Arkanda ${BEHIND[pos]} oyuncu varken görülme ihtimali yüksek ve görüldüğünde çoğunlukla geride kalırsın. Daha iyi bir spot beklemek daha az chip kaybettirir.`,
+          ? `${bb} BB ile ${ABL[pos]} ${l} rahat bir all-in: ellerin en iyi ~${numSuffix(p, "inde")}, bu spotta en az en iyi %${target} itilir. Herkes fold ederse 2,5 BB'lik pot senin; görülürsen de yeterli equity taşırsın. Bu stack'te açıp fold etmek pahalıdır.`
+          : `${l}, ${bb} BB ile ${ABL[pos]} itmek için fazla zayıf: ellerin ancak en iyi ~${numSuffix(p, "inde")}. Arkanda ${BEHIND[pos]} oyuncu varken görülme ihtimali yüksek ve görüldüğünde çoğunlukla geride kalırsın. Daha iyi bir spot beklemek daha az chip kaybettirir.`,
       });
     }
   }
@@ -240,16 +248,16 @@ function rangeCombos(list: string[]): [number, number][] {
   return out;
 }
 
-function equityVsRange(hero: [number, number], range: [number, number][], trials: number): number {
+function equityVsRange(hero: [number, number], range: [number, number][], trials: number, rng = rnd): number {
   const live = range.filter(([x, y]) => x !== hero[0] && x !== hero[1] && y !== hero[0] && y !== hero[1]);
   let score = 0;
   const deck: number[] = [];
   for (let t = 0; t < trials; t++) {
-    const [v1, v2] = live[Math.floor(rnd() * live.length)];
+    const [v1, v2] = live[Math.floor(rng() * live.length)];
     deck.length = 0;
     for (let c = 0; c < 52; c++) if (c !== hero[0] && c !== hero[1] && c !== v1 && c !== v2) deck.push(c);
     for (let i = 0; i < 5; i++) {
-      const j = i + Math.floor(rnd() * (deck.length - i));
+      const j = i + Math.floor(rng() * (deck.length - i));
       [deck[i], deck[j]] = [deck[j], deck[i]];
     }
     const board = deck.slice(0, 5);
@@ -260,6 +268,8 @@ function equityVsRange(hero: [number, number], range: [number, number][], trials
   return score / trials;
 }
 
+const dropped: string[] = [];
+const sensitive: string[] = [];
 const SHOVES: [string, "6" | "10" | "15"][] = [["SB", "6"], ["SB", "10"], ["SB", "15"], ["BTN", "10"], ["BTN", "15"], ["CO", "10"], ["CO", "15"]];
 for (const [pos, bb] of SHOVES) {
   const S = Number(bb);
@@ -286,12 +296,44 @@ for (const [pos, bb] of SHOVES) {
       title: `${pos} ${bb} BB all-in, BB'de ${l}`,
       game: "turnuva", street: "preflop", heroPos: "BB", stackBB: S,
       hero: cards, potBB: S + 1 + 1 + dead, seq, ante: 1,
-      note: `ICM baskısı yok. ${pos}, ${bb} BB ile ellerin yaklaşık %${rangePct}'iyle all-in yapan bir oyuncu. Toplam ante 1 BB.`,
+      note: `ICM baskısı yok. ${pos}, ${bb} BB ile ellerin yaklaşık ${numSuffix(rangePct, "iyle")} all-in yapan bir oyuncu. Toplam ante 1 BB.`,
       options: ["Fold", `Call (${num(call)} BB)`], correct: ok ? 1 : 0, topic: "callshove", level: 2,
-      reasoning: `Call için ${num(call)} BB ödeyip ${num(finalPot)} BB'lik pota giriyorsun; gereken equity %${pct(req)}. ${pretty(cards)}, ${pos}'un bu all-in aralığına karşı yaklaşık %${pct(eq)} equity taşır, ${ok ? "yani call kârlı." : "bu yetmez; fold."}`,
+      reasoning: "",
     });
   }
-  drills.push(...callers, ...folders);
+  // Doğrulama (ayrı üreteç, 20.000 deneme, standart hata ≈ ±0,35 puan):
+  // 1) Eşiğe 3,5 puandan yakın çıkan spot alınmaz (6.000 denemelik seçimin örnekleme hatası).
+  // 2) Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu söyler.
+  const pushPctOf = pushTargets[bb][pos];
+  const narrowPct = Math.round(pushPctOf * 0.6);
+  const widePct = Math.min(100, Math.round(pushPctOf * 1.5));
+  const narrow = rangeCombos(top(pushScore, narrowPct));
+  const wide = rangeCombos(top(pushScore, widePct));
+  for (const d of [...callers, ...folders]) {
+    const cards = d.hero as string;
+    const h: [number, number] = [toCard(cards.slice(0, 2)), toCard(cards.slice(2))];
+    const eq = equityVsRange(h, combosList, 20000, rndCheck);
+    const ok = d.correct === 1;
+    if (Math.abs(eq - req) < 0.035 || eq > req !== ok) {
+      dropped.push(`${d.id} (${pct(req)} / ${(eq * 100).toFixed(1)})`);
+      continue;
+    }
+    const eqN = equityVsRange(h, narrow, 20000, rndCheck);
+    const eqW = equityVsRange(h, wide, 20000, rndCheck);
+    const flips: string[] = [];
+    // Senaryodaki fark 1 puandan küçükse "şu doğru olurdu" demek Monte Carlo hatası içinde kalır.
+    const outcome = (e: number) =>
+      Math.abs(e - req) < 0.01
+        ? `equity'n gereken düzeye (yaklaşık %${pct(req)}) yaklaşırdı ve call ile fold neredeyse eşit olurdu`
+        : `equity'n yaklaşık %${pct(e)} olurdu ve ${ok ? "fold" : "call"} doğru olurdu`;
+    if (eqN > req !== ok) flips.push(`daha sıkı oynasaydı (ellerin yaklaşık ${numSuffix(narrowPct, "i")}) ${outcome(eqN)}`);
+    if (eqW > req !== ok)
+      flips.push(`${widePct === 100 ? "her eliyle all-in yapsaydı" : `daha geniş oynasaydı (ellerin yaklaşık ${numSuffix(widePct, "i")})`} ${outcome(eqW)}`);
+    const sensitivity = flips.length ? ` Bu kararı rakibin aralığı belirliyor: rakip ${flips.join("; ")}.` : "";
+    if (flips.length) sensitive.push(d.id as string);
+    d.reasoning = `Call için ${num(call)} BB ödeyip ${num(finalPot)} BB'lik pota giriyorsun; gereken equity %${pct(req)}. ${pretty(cards)}, ${GEN[pos]} bu all-in aralığına karşı yaklaşık %${pct(eq)} equity taşır, ${ok ? "yani call kârlı." : "bu yetmez; fold."}${sensitivity}`;
+    drills.push(d);
+  }
 }
 
 // ── 4) Cash: turn'de all-in, rakibin kartları açık (pot odds) ─────────
@@ -354,6 +396,8 @@ for (let guard = 0; guard < 200000 && potOdds.length < 70; guard++) {
   });
 }
 drills.push(...potOdds);
+console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
+console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);
 
 writeFileSync(new URL("../src/data/drills.json", import.meta.url), JSON.stringify(drills));

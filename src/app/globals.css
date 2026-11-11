@@ -210,24 +210,8 @@ h3,
   }
 }
 
-/* Alıştırma masası: ara kartının açılışı (prefers-reduced-motion'da kapalı) */
-@keyframes break-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Logo: açık temada koyu rozet içinde durur (köpük açık zeminde kaybolmasın) */
-.cheers-badge {
-  background: var(--mark-badge);
-}
-.cheers-mark-mono {
-  --mark-beer: currentColor;
-  --mark-foam: currentColor;
-  --mark-spark: currentColor;
+/* Ara kartı açılışı; prefers-reduced-motion açıkken motion-safe ile devre dışı */
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
 }

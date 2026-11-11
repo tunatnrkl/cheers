@@ -8,11 +8,21 @@ import { AiPanel } from "@/components/AiPanel";
 import { CoachChat } from "@/components/CoachChat";
 import { KIND_BG, PokerTable, optionKind } from "@/components/PokerTable";
 import { HAND_BY_ID, HANDS, TOPICS, type Game, type Hand, type Topic } from "@/data/hands";
+import { TOPIC_NOTES } from "@/data/topicNotes";
 import { STATIC_SITE } from "@/lib/client/env";
+import {
+  RHYTHM_CHOICES,
+  everyLabel,
+  isLongSession,
+  readEvery,
+  shouldBreak,
+  staleEmptyBlock,
+  writeEvery,
+  type Block,
+  type RhythmEvery,
+} from "@/lib/client/rhythm";
 import { addAttempt, saveHand, topicStats, unsaveHand, useProgress, weakTopics } from "@/lib/client/store";
 import { fmt, replay } from "@/lib/poker/replay";
-import { RHYTHM_DEFAULT, readRhythm, rhythmStep, writeRhythm, type RhythmEvery } from "@/lib/client/rhythm";
-import { BreakCard } from "./BreakCard";
 
 type Answer = { hand: Hand; chosen: number };
 type GameFilter = "" | Game;
@@ -34,15 +44,19 @@ export function Trainer() {
   const [summary, setSummary] = useState(false);
   const [why, setWhy] = useState<{ id: number; text: string } | undefined>();
   const [analyze, setAnalyze] = useState(0);
-  // Oturum ritmi: bölüm (block) başına el sayısı ya da 25 dk sonra ara kartı
-  const [every, setEvery] = useState<RhythmEvery>(RHYTHM_DEFAULT);
-  const [block, setBlock] = useState({ start: 0, from: 0 });
-  const [sessionStart, setSessionStart] = useState(0);
-  const [breakAt, setBreakAt] = useState(0); // 0 = ara kartı kapalı
-  const [breakAsk, setBreakAsk] = useState(0);
-  const showBreak = breakAt > 0;
   const recent = useRef<string[]>([]);
   const chatRef = useRef<HTMLDivElement>(null);
+  // Oturum ritmi: belirli sayıda elden ya da 25 dakikadan sonra engellemeyen bir ara kartı
+  const [every, setEvery] = useState<RhythmEvery>(20);
+  const [showBreak, setShowBreak] = useState(false);
+  // Ara kartındaki "Bu bölümü yorumla" kısayolu: 0 = sorulmadı
+  const [breakAsk, setBreakAsk] = useState(0);
+  const block = useRef<Block>({ start: 0, answers: 0 });
+  const sessionStart = useRef(0);
+  useEffect(() => {
+    setEvery(readEvery());
+    block.current.start = sessionStart.current = Date.now();
+  }, []);
 
   const pool = useMemo(() => HANDS.filter((h) => inPool(h, game, topic)), [game, topic]);
   const topicsForGame = useMemo(() => {
@@ -78,10 +92,6 @@ export function Trainer() {
   useEffect(() => {
     const start = params.get("el");
     show((start && HAND_BY_ID.get(start)) || pickNext(pool));
-    const now = Date.now();
-    setSessionStart(now);
-    setBlock({ start: now, from: 0 });
-    setEvery(readRhythm());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -104,39 +114,38 @@ export function Trainer() {
     if (!hand || answered) return;
     setPicked(i);
     setAnswers((a) => [...a, { hand, chosen: i }]);
+    block.current.answers++;
     void addAttempt(hand.id, i);
   }
 
   function next() {
     const now = Date.now();
-    const step = rhythmStep(every, answers.length - block.from, block.start, now);
-    if (step === "break") {
-      setBreakAt(now);
+    if (staleEmptyBlock(block.current, now)) block.current = { start: now, answers: 0 };
+    if (shouldBreak(every, block.current, now)) {
       setBreakAsk(0);
+      setShowBreak(true);
       return;
     }
-    if (step === "reset") setBlock({ start: now, from: answers.length });
     show(pickNext(pool));
-  }
-
-  function newBlock() {
-    setBlock({ start: Date.now(), from: answers.length });
-    setBreakAt(0);
   }
 
   function continueAfterBreak() {
-    newBlock();
+    block.current = { start: Date.now(), answers: 0 };
+    setShowBreak(false);
+    setBreakAsk(0);
     show(pickNext(pool));
   }
 
-  function stopAtBreak() {
-    newBlock();
+  function stopAfterBreak() {
+    block.current = { start: Date.now(), answers: 0 };
+    setShowBreak(false);
+    setBreakAsk(0);
     setSummary(true);
   }
 
   function changeEvery(e: RhythmEvery) {
     setEvery(e);
-    writeRhythm(e);
+    writeEvery(e);
   }
 
   function askWhy() {
@@ -151,12 +160,10 @@ export function Trainer() {
     function onKey(e: KeyboardEvent) {
       const t = e.target as HTMLElement;
       if (t.closest("input, textarea, select") || summary || !hand) return;
-      // Ara kartı açıkken: Enter devam eder, Esc bırakır; 1–3 yok sayılır
       if (showBreak) {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          stopAtBreak();
-        } else if (e.key === "Enter" && !t.closest("button, a")) {
+        // Ara kartı açıkken 1-3 hiçbir cevap kaydetmez
+        if (e.key === "Escape") stopAfterBreak();
+        else if (e.key === "Enter" && !t.closest("button, a")) {
           e.preventDefault();
           continueAfterBreak();
         }
@@ -175,6 +182,7 @@ export function Trainer() {
   });
 
   const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
+  const blockAnswers = showBreak ? answers.slice(Math.max(0, answers.length - block.current.answers)) : [];
   const saved = !!hand && progress.saved.some((s) => s.handId === hand.id);
 
   return (
@@ -260,9 +268,7 @@ export function Trainer() {
           onReset={() => {
             setAnswers([]);
             setSummary(false);
-            setBlock({ start: Date.now(), from: 0 });
-            setBreakAt(0);
-            show(pickNext(pool));
+            next();
           }}
           onTopic={(t) => changeFilter("", t)}
           analyze={analyze}
@@ -272,152 +278,160 @@ export function Trainer() {
         <p className="p-10 text-center text-t-muted">{pool.length ? "Yükleniyor…" : "Bu seçimde el yok."}</p>
       ) : (
         <>
-          <div className="border-b border-t-line">
+          <div className={`border-b border-t-line ${showBreak ? "hidden opacity-25 lg:block" : ""}`} inert={showBreak}>
             <ActionStrip r={r} heroPos={hand.heroPos} />
           </div>
 
           <div className="grid lg:grid-cols-[minmax(0,1fr)_380px]">
-            {/* ── Masa ve kararlar ── */}
-            <section aria-label="Masa" className="relative flex min-w-0 flex-col gap-2.5 p-2.5 sm:gap-3 sm:p-5">
-              {showBreak && (
+            <div className="relative min-w-0">
+            {/* Ara kartı: mobilde masanın yerini alır, masaüstünde soluk masanın üstünde durur */}
+            {showBreak && (
+              <div className="lg:absolute lg:inset-0 lg:z-10 lg:flex lg:items-start lg:justify-center lg:pt-6">
                 <BreakCard
-                  answers={answers.slice(block.from)}
-                  blockStart={block.start}
-                  sessionStart={sessionStart}
-                  openedAt={breakAt}
+                  answers={blockAnswers}
+                  minutes={Math.max(1, Math.round((Date.now() - block.current.start) / 60000))}
+                  longSession={isLongSession(sessionStart.current, Date.now())}
                   every={every}
                   onEvery={changeEvery}
                   onContinue={continueAfterBreak}
-                  onStop={stopAtBreak}
+                  onStop={stopAfterBreak}
                 />
-              )}
-              {/* Ara kartı açıkken masa mobilde gizlenir, masaüstünde arkada soluk kalır */}
-              <div
-                inert={showBreak}
-                className={showBreak ? "pointer-events-none hidden flex-col gap-3 opacity-25 lg:flex" : "contents"}
-              >
-                <div className="flex items-center gap-x-3 text-[13px] text-t-muted">
-                  <span className="truncate font-bold text-t-ink">{hand.title}</span>
-                  <span className="shrink-0">
-                    {hand.game === "cash" ? "Cash" : "Turnuva"} · {hand.stackBB} BB{hand.ante ? ` · Ante ${fmt(hand.ante)}` : ""}
-                  </span>
-                  <span className="ml-auto hidden shrink-0 rounded-full bg-t-panel-2 px-2 py-0.5 text-xs font-semibold sm:inline">{TOPICS[hand.topic]}</span>
-                </div>
-                {hand.note && (
-                  <p className="flex gap-2 rounded-xl border border-t-line bg-t-panel px-3 py-1.5 text-[13px] leading-snug text-t-ink/90">
-                    <span aria-hidden="true" className="text-t-act">
-                      ●
-                    </span>
-                    {hand.note}
-                  </p>
-                )}
-
-                <PokerTable hand={hand} r={r} />
-
-                <div
-                  role="group"
-                  aria-label="Hamleni seç"
-                  className={`grid gap-2 ${hand.options.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}
-                >
-                  {hand.options.map((o, i) => {
-                    const isCorrect = answered && i === hand.correct;
-                    const isWrong = answered && i === picked && i !== hand.correct;
-                    return (
-                      <button
-                        key={o}
-                        type="button"
-                        onClick={() => choose(i)}
-                        aria-disabled={answered}
-                        className={`relative flex min-h-16 flex-col items-center justify-center rounded-xl px-2 py-2 text-center text-[15px] leading-tight font-extrabold text-white uppercase transition sm:min-h-[68px] sm:text-base ${KIND_BG[optionKind(o)]} ${
-                          answered
-                            ? isCorrect
-                              ? "ring-4 ring-t-accent"
-                              : isWrong
-                                ? "ring-4 ring-[#ff6b6b]"
-                                : "opacity-30"
-                            : "hover:brightness-110 active:scale-[0.98]"
-                        }`}
-                      >
-                        <span className="normal-case">{o}</span>
-                        {isCorrect && <span className="mt-1 text-[11px] font-bold normal-case">✓ Doğru hamle</span>}
-                        {isWrong && <span className="mt-1 text-[11px] font-bold normal-case">✕ Senin seçimin</span>}
-                        {!answered && (
-                          <span aria-hidden="true" className="absolute top-1.5 right-2 hidden text-[10px] font-bold opacity-60 sm:block">
-                            {i + 1}
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {answered && (
-                  <div
-                    className={`flex flex-col gap-3 rounded-xl border px-4 py-3 sm:flex-row sm:items-center ${
-                      picked === hand.correct ? "border-t-accent/40 bg-t-accent/10" : "border-[#ff6b6b]/40 bg-[#ff6b6b]/10"
-                    }`}
-                    aria-live="polite"
-                  >
-                    <p className="flex-1 text-[15px] font-bold">
-                      {picked === hand.correct ? (
-                        <span className="text-t-accent">✓ Doğru!</span>
-                      ) : (
-                        <>
-                          <span className="text-[#ff8a8a]">✕ Yanlış.</span> Doğru hamle:{" "}
-                          <span className="text-t-ink">{hand.options[hand.correct]}</span>
-                        </>
-                      )}
-                    </p>
-                    <div className="grid grid-cols-2 gap-2 sm:flex">
-                      <button
-                        type="button"
-                        onClick={askWhy}
-                        className="min-h-11 rounded-xl border border-t-line bg-t-panel-2 px-4 text-sm font-bold text-t-ink transition hover:border-t-accent"
-                      >
-                        Neden?
-                      </button>
-                      <button
-                        type="button"
-                        onClick={next}
-                        autoFocus
-                        className="min-h-11 rounded-xl bg-t-accent px-5 text-sm font-extrabold text-[#03130b] transition hover:brightness-110"
-                      >
-                        Sonraki el →
-                      </button>
-                    </div>
-                  </div>
-                )}
-                <p className="hidden text-center text-xs text-t-muted lg:block">
-                  Kısayollar: 1–{hand.options.length} hamle seçer, Enter sonraki ele geçer.
-                </p>
               </div>
+            )}
+            {/* ── Masa ve kararlar ── */}
+            <section
+              aria-label="Masa"
+              inert={showBreak}
+              className={`flex min-w-0 flex-col gap-2.5 p-2.5 sm:gap-3 sm:p-5 ${showBreak ? "hidden opacity-25 select-none lg:flex" : ""}`}
+            >
+              <div className="flex items-center gap-x-3 text-[13px] text-t-muted">
+                <span className="truncate font-bold text-t-ink">{hand.title}</span>
+                <span className="shrink-0">
+                  {hand.game === "cash" ? "Cash" : "Turnuva"} · {hand.stackBB} BB{hand.ante ? ` · Ante ${fmt(hand.ante)}` : ""}
+                </span>
+                <span className="ml-auto hidden shrink-0 rounded-full bg-t-panel-2 px-2 py-0.5 text-xs font-semibold sm:inline">{TOPICS[hand.topic]}</span>
+              </div>
+              {hand.note && (
+                <p className="flex gap-2 rounded-xl border border-t-line bg-t-panel px-3 py-1.5 text-[13px] leading-snug text-t-ink/90">
+                  <span aria-hidden="true" className="text-t-act">
+                    ●
+                  </span>
+                  {hand.note}
+                </p>
+              )}
+
+              <PokerTable hand={hand} r={r} />
+
+              <div
+                role="group"
+                aria-label="Hamleni seç"
+                className={`grid gap-2 ${hand.options.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}
+              >
+                {hand.options.map((o, i) => {
+                  const isCorrect = answered && i === hand.correct;
+                  const isWrong = answered && i === picked && i !== hand.correct;
+                  return (
+                    <button
+                      key={o}
+                      type="button"
+                      onClick={() => choose(i)}
+                      aria-disabled={answered}
+                      className={`relative flex min-h-16 flex-col items-center justify-center rounded-xl px-2 py-2 text-center text-[15px] leading-tight font-extrabold text-white uppercase transition sm:min-h-[68px] sm:text-base ${KIND_BG[optionKind(o)]} ${
+                        answered
+                          ? isCorrect
+                            ? "ring-4 ring-t-accent"
+                            : isWrong
+                              ? "ring-4 ring-[#ff6b6b]"
+                              : "opacity-30"
+                          : "hover:brightness-110 active:scale-[0.98]"
+                      }`}
+                    >
+                      <span className="normal-case">{o}</span>
+                      {isCorrect && <span className="mt-1 text-[11px] font-bold normal-case">✓ Doğru hamle</span>}
+                      {isWrong && <span className="mt-1 text-[11px] font-bold normal-case">✕ Senin seçimin</span>}
+                      {!answered && (
+                        <span aria-hidden="true" className="absolute top-1.5 right-2 hidden text-[10px] font-bold opacity-60 sm:block">
+                          {i + 1}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {answered && (
+                <div
+                  className={`flex flex-col gap-3 rounded-xl border px-4 py-3 sm:flex-row sm:items-center ${
+                    picked === hand.correct ? "border-t-accent/40 bg-t-accent/10" : "border-[#ff6b6b]/40 bg-[#ff6b6b]/10"
+                  }`}
+                  aria-live="polite"
+                >
+                  <p className="flex-1 text-[15px] font-bold">
+                    {picked === hand.correct ? (
+                      <span className="text-t-accent">✓ Doğru!</span>
+                    ) : (
+                      <>
+                        <span className="text-[#ff8a8a]">✕ Yanlış.</span> Doğru hamle:{" "}
+                        <span className="text-t-ink">{hand.options[hand.correct]}</span>
+                      </>
+                    )}
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 sm:flex">
+                    <button
+                      type="button"
+                      onClick={askWhy}
+                      className="min-h-11 rounded-xl border border-t-line bg-t-panel-2 px-4 text-sm font-bold text-t-ink transition hover:border-t-accent"
+                    >
+                      Neden?
+                    </button>
+                    <button
+                      type="button"
+                      onClick={next}
+                      autoFocus
+                      className="min-h-11 rounded-xl bg-t-accent px-5 text-sm font-extrabold text-[#03130b] transition hover:brightness-110"
+                    >
+                      Sonraki el →
+                    </button>
+                  </div>
+                </div>
+              )}
+              <p className="hidden text-center text-xs text-t-muted lg:block">
+                Kısayollar: 1–{hand.options.length} hamle seçer, Enter sonraki ele geçer.
+              </p>
             </section>
+            </div>
 
             {/* ── Koç sohbeti ── */}
             <aside
               ref={chatRef}
-              className={`${showBreak ? "hidden lg:block" : ""} h-[440px] scroll-mt-20 border-t border-t-line bg-t-panel/60 lg:h-[calc(100dvh-190px)] lg:max-h-[860px] lg:min-h-[560px] lg:border-t-0 lg:border-l`}
+              className="h-[440px] scroll-mt-20 border-t border-t-line bg-t-panel/60 lg:h-[calc(100dvh-190px)] lg:max-h-[860px] lg:min-h-[560px] lg:border-t-0 lg:border-l"
             >
-              {showBreak && !STATIC_SITE ? (
-                <div className="flex h-full flex-col gap-3 overflow-y-auto p-3 text-ink">
-                  {breakAsk === 0 && (
-                    <button
-                      type="button"
-                      onClick={() => setBreakAsk(Date.now())}
-                      className="min-h-12 rounded-xl bg-t-panel-2 text-sm font-extrabold text-t-ink transition hover:brightness-110"
-                    >
-                      Bu bölümü yorumla
-                    </button>
-                  )}
+              {showBreak && breakAsk ? (
+                <div className="h-full overflow-y-auto p-3 text-ink">
                   <AiPanel
-                    title="Bölüm yorumu"
-                    context={{ type: "practice", attempts: answers.slice(block.from).map((a) => ({ handId: a.hand.id, chosen: a.chosen })) }}
-                    autoAsk={breakAsk ? { id: breakAsk, question: "Bu bölümdeki sonuçlarımı kısaca yorumlar mısın?" } : undefined}
+                    title="Bu bölümün yorumu"
+                    context={{ type: "practice", attempts: blockAnswers.map((a) => ({ handId: a.hand.id, chosen: a.chosen })) }}
+                    autoAsk={{ id: breakAsk, question: "Bu bölümdeki sonuçlarımı kısaca yorumlar mısın?" }}
                     placeholder="Bu bölüm hakkında sor…"
                   />
                 </div>
               ) : (
-                <CoachChat hand={hand} chosen={picked} trigger={why} />
+                <div className="flex h-full min-h-0 flex-col">
+                  {showBreak && !STATIC_SITE && blockAnswers.length > 0 && (
+                    <div className="border-b border-t-line p-3">
+                      <button
+                        type="button"
+                        onClick={() => setBreakAsk(Date.now())}
+                        className="min-h-11 w-full rounded-xl border border-t-line bg-t-panel-2 px-4 text-sm font-bold text-t-ink transition hover:border-t-accent"
+                      >
+                        Bu bölümü yorumla
+                      </button>
+                    </div>
+                  )}
+                  <div className="min-h-0 flex-1">
+                    <CoachChat hand={hand} chosen={picked} trigger={why} />
+                  </div>
+                </div>
               )}
             </aside>
           </div>
@@ -541,6 +555,108 @@ function Summary({
           placeholder="Sonuçların hakkında sor…"
         />
       </div>
+    </div>
+  );
+}
+
+function BreakCard({
+  answers,
+  minutes,
+  longSession,
+  every,
+  onEvery,
+  onContinue,
+  onStop,
+}: {
+  answers: Answer[];
+  minutes: number;
+  longSession: boolean;
+  every: RhythmEvery;
+  onEvery: (e: RhythmEvery) => void;
+  onContinue: () => void;
+  onStop: () => void;
+}) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [settings, setSettings] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+  // Odak başlığa taşınır; kaydırma, kart sabit üst menünün altında kalmayacak biçimde ayrıca yapılır.
+  useEffect(() => {
+    headingRef.current?.focus({ preventScroll: true });
+    cardRef.current?.scrollIntoView({ block: "nearest" });
+  }, []);
+  const ok = answers.filter((a) => a.chosen === a.hand.correct).length;
+  const weak = weakTopics(topicStats(answers.map((a) => ({ topic: a.hand.topic, correct: a.chosen === a.hand.correct }))));
+
+  return (
+    <div className="flex justify-center p-3 sm:p-8">
+      <section
+        ref={cardRef}
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="break-title"
+        className="flex w-full max-w-[480px] scroll-mt-28 flex-col gap-4 rounded-2xl border border-t-line bg-t-panel p-5 lg:shadow-[0_20px_60px_rgb(0_0_0/0.45)] motion-safe:animate-[fadein_160ms_ease-out]"
+      >
+        <h2 id="break-title" ref={headingRef} tabIndex={-1} className="text-xl font-extrabold outline-none">
+          Kısa bir durak
+        </h2>
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            ["Bu bölümde el", String(answers.length)],
+            ["Doğru", String(ok)],
+            ["Süre", `${minutes} dk`],
+          ].map(([k, v]) => (
+            <div key={k} className="rounded-xl bg-t-panel-2 px-2 py-3 text-center">
+              <p className="text-2xl font-extrabold tabular-nums">{v}</p>
+              <p className="text-xs font-semibold text-t-muted">{k}</p>
+            </div>
+          ))}
+        </div>
+        {weak.length ? (
+          <p className="text-[15px] leading-relaxed">
+            Bu bölümde en çok zorlandığın konu: <strong>{TOPICS[weak[0].topic]}</strong>. {TOPIC_NOTES[weak[0].topic]}
+          </p>
+        ) : (
+          <p className="text-[15px] leading-relaxed">Bu bölümde belirgin bir zayıf konu yok.</p>
+        )}
+        {longSession && (
+          <p className="rounded-xl border border-t-line px-3 py-2 text-sm text-t-ink/90">
+            Bir saattir çalışıyorsun; kısa bir mola, öğrendiklerini pekiştirmeye yardımcı olabilir.{" "}
+            <Link href="/sorumlu-oyun" className="text-t-muted underline hover:text-t-ink">
+              Sorumlu oyun
+            </Link>
+          </p>
+        )}
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" onClick={onContinue} className="min-h-12 rounded-xl border border-t-line bg-t-panel-2 text-sm font-extrabold text-t-ink transition hover:border-t-accent">
+            Devam et
+          </button>
+          <button type="button" onClick={onStop} className="min-h-12 rounded-xl border border-t-line bg-t-panel-2 text-sm font-extrabold text-t-ink transition hover:border-t-accent">
+            Burada bırak
+          </button>
+        </div>
+        <div className="text-center text-sm">
+          <button type="button" aria-expanded={settings} onClick={() => setSettings((v) => !v)} className="min-h-11 px-2 text-t-muted underline hover:text-t-ink">
+            Sıklığı ayarla ({everyLabel(every)})
+          </button>
+          {settings && (
+            <div role="radiogroup" aria-label="Ara kartı sıklığı" className="mt-2 grid grid-cols-4 gap-1 rounded-xl bg-t-panel-2 p-1">
+              {RHYTHM_CHOICES.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  role="radio"
+                  aria-checked={every === c}
+                  onClick={() => onEvery(c)}
+                  className={`min-h-11 rounded-lg text-xs font-bold ${every === c ? "bg-t-bg text-t-ink" : "text-t-muted hover:text-t-ink"}`}
+                >
+                  {c === 0 ? "Kapalı" : `${c} el`}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <p className="text-center text-xs text-t-muted">Enter devam eder, Esc oturum özetine geçer.</p>
+      </section>
     </div>
   );
 }
