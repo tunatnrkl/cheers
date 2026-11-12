@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 15 ders, 169 alıştırma.
+**Dolu:** 30 ders, 339 alıştırma.
 
 ## Cash pisti
 
@@ -88,13 +88,13 @@ Koltuk adları ve son konuşmanın neden avantaj olduğu.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o3-d1` Koltuk adları | ders | 6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir. | o2-k |
-| `o3-d2` Pozisyonda ve pozisyonsuz | ders | Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır. | o3-d1, o2-d3 |
-| `o3-d3` Son konuşmanın değeri | ders | Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar. | o3-d2 |
-| `o3-d4` Erken, geç pozisyon ve blind'ler | ders | Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar. | o3-d3 |
-| `o3-d5` BB cinsinden düşünmek | ders | Stack ve bahisleri BB'ye çevirir; iki oyuncu arasındaki efektif stack'i bulur. | o3-d4, o2-d5 |
-| `o3-k` Kontrol: Pozisyon | kontrol | "Pozisyon" ünitesinin kazanımlarını karışık sorularda uygular. | o3-d5 |
-| `o3-r` Tekrar: Pozisyon | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o3-k |
+| `o3-d1` Koltuk adları (11 alıştırma) | ders | 6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir. | o2-k |
+| `o3-d2` Pozisyonda ve pozisyonsuz (11 alıştırma) | ders | Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır. | o3-d1, o2-d3 |
+| `o3-d3` Son konuşmanın değeri (11 alıştırma) | ders | Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar. | o3-d2 |
+| `o3-d4` Erken, geç pozisyon ve blind'ler (11 alıştırma) | ders | Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar. | o3-d3 |
+| `o3-d5` BB cinsinden düşünmek (11 alıştırma) | ders | Stack ve bahisleri BB'ye çevirir; iki oyuncu arasındaki efektif stack'i bulur. | o3-d4, o2-d5 |
+| `o3-k` Kontrol: Pozisyon (12 alıştırma) | kontrol | "Pozisyon" ünitesinin kazanımlarını karışık sorularda uygular. | o3-d5 |
+| `o3-r` Tekrar: Pozisyon (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o3-k |
 
 ### o4 · Başlangıç elleri (seviye 3)
 
@@ -102,14 +102,14 @@ Koltuk adları ve son konuşmanın neden avantaj olduğu.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o4-d1` El kategorileri | ders | Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326). | o3-k |
-| `o4-d2` Range matrisini okumak | ders | 13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar. | o4-d1 |
-| `o4-d3` Domine edilme ve kicker sorunu | ders | AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır. | o4-d2, o1-d4 |
-| `o4-d4` Sıkı ve agresif oyunun mantığı | ders | Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar. | o4-d3, o3-d4 |
-| `o4-d5` Limp neden çoğunlukla zayıf | ders | İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir. | o4-d4 |
-| `o4-k` Kontrol: Başlangıç elleri | kontrol | "Başlangıç elleri" ünitesinin kazanımlarını karışık sorularda uygular. | o4-d5 |
-| `o4-r` Tekrar: Başlangıç elleri | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o4-k |
-| `o4-t` Temel testi: pozisyon ve başlangıç elleri | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o4-k |
+| `o4-d1` El kategorileri (11 alıştırma) | ders | Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326). | o3-k |
+| `o4-d2` Range matrisini okumak (11 alıştırma) | ders | 13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar. | o4-d1 |
+| `o4-d3` Domine edilme ve kicker sorunu (11 alıştırma) | ders | AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır. | o4-d2, o1-d4 |
+| `o4-d4` Sıkı ve agresif oyunun mantığı (11 alıştırma) | ders | Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar. | o4-d3, o3-d4 |
+| `o4-d5` Limp neden çoğunlukla zayıf (11 alıştırma) | ders | İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir. | o4-d4 |
+| `o4-k` Kontrol: Başlangıç elleri (12 alıştırma) | kontrol | "Başlangıç elleri" ünitesinin kazanımlarını karışık sorularda uygular. | o4-d5 |
+| `o4-r` Tekrar: Başlangıç elleri (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o4-k |
+| `o4-t` Temel testi: pozisyon ve başlangıç elleri (20 alıştırma) | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o4-k |
 
 ### c5 · Açılış aralıkları (seviye 3)
 
