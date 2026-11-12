@@ -2,7 +2,7 @@
 
 Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile birlikte üretilir; elle düzenlenmez.
 
-**Toplam:** 23 ünite (4 ortak), 186 ders, hedef 1970 alıştırma.
+**Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
 ## Cash pisti
 
@@ -30,7 +30,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 Temelden başlar; stack derinliği, push/fold, ICM ve özel formatlara uzanır.
 
-14 ünite, 110 ders, yaklaşık 585 dakika.
+14 ünite, 111 ders, yaklaşık 590 dakika.
 
 | # | Ünite | Seviye | Dersler |
 |---|---|---|---|
@@ -40,7 +40,7 @@ Temelden başlar; stack derinliği, push/fold, ICM ve özel formatlara uzanır.
 | 4 | Pozisyon (ortak) | 2 | Koltuk adları; Pozisyonda ve pozisyonsuz; Son konuşmanın değeri; Erken, geç pozisyon ve blind'ler; BB cinsinden düşünmek + kontrol + tekrar |
 | 5 | Stack'i ölçmek | 2 | Stack kaç BB; M oranı; Efektif stack turnuvada; Ortalama stack ve aşamalar; Chip'in değeri sabit değil + kontrol + tekrar + **seviye testi** |
 | 6 | Başlangıç elleri (ortak) | 3 | El kategorileri; Range matrisini okumak; Domine edilme ve kicker sorunu; Sıkı ve agresif oyunun mantığı; Limp neden çoğunlukla zayıf + kontrol + tekrar + **seviye testi** |
-| 7 | Derin stack oyunu | 3 | Erken aşama planı; Turnuvada açılış boyutu; Ante'li potta çalma; Ante ile BB savunması; 3-bet'e kısa giriş + kontrol + tekrar |
+| 7 | Derin stack oyunu | 3 | Erken aşama planı; Turnuvada açılış aralıkları; Turnuvada açılış boyutu; Ante'li potta çalma; Ante ile BB savunması; 3-bet'e kısa giriş + kontrol + tekrar |
 | 8 | Orta stack oyunu | 4 | Stack kısaldıkça ne değişir; 3-bet ya da fold; Resteal: 3-bet all-in; Açılışa call mı, all-in mi; Düşük SPR'de postflop + kontrol + tekrar + **seviye testi** |
 | 9 | Push/fold | 5 | Neden all-in ya da fold; Fold equity; 10 BB: pozisyona göre push; 6 BB ve altı; 15 BB: push mu, açılış mı; SB'den BB'ye karşı; Nash mantığı + kontrol + tekrar |
 | 10 | All-in'e call | 6 | Fiyat: gereken equity; Rakibin itme aralığı; Aralığa karşı equity; BB'den call; Arkanda oyuncu varken; Açılışına all-in gelirse + kontrol + tekrar + **seviye testi** |
@@ -78,7 +78,7 @@ Blind'ler, aksiyonlar, sokaklar, showdown ve pot hesabı.
 | `o2-d5` Pot nasıl büyür | ders | Blind'ler ve bahislerden potu toplar; bir bahsi görmek için ödenecek miktarı hesaplar. | o2-d4 |
 | `o2-k` Kontrol: Masa ve el akışı | kontrol | "Masa ve el akışı" ünitesinin kazanımlarını karışık sorularda uygular. | o2-d5 |
 | `o2-r` Tekrar: Masa ve el akışı | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o2-k |
-| `o2-t` Seviye 1 testi | test | Seviye 1 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | o2-k |
+| `o2-t` Temel testi: kartlar ve masa | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o2-k |
 
 ### o3 · Pozisyon (seviye 2)
 
@@ -86,7 +86,7 @@ Koltuk adları ve son konuşmanın neden avantaj olduğu.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o3-d1` Koltuk adları | ders | 6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir. | — |
+| `o3-d1` Koltuk adları | ders | 6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir. | o2-k |
 | `o3-d2` Pozisyonda ve pozisyonsuz | ders | Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır. | o3-d1, o2-d3 |
 | `o3-d3` Son konuşmanın değeri | ders | Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar. | o3-d2 |
 | `o3-d4` Erken, geç pozisyon ve blind'ler | ders | Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar. | o3-d3 |
@@ -100,14 +100,14 @@ Koltuk adları ve son konuşmanın neden avantaj olduğu.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o4-d1` El kategorileri | ders | Cepte çift, suited, offsuit, connector ve broadway ellerini tanır ve yazımını (AKs, 76o) okur. | — |
+| `o4-d1` El kategorileri | ders | Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326). | o3-k |
 | `o4-d2` Range matrisini okumak | ders | 13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar. | o4-d1 |
 | `o4-d3` Domine edilme ve kicker sorunu | ders | AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır. | o4-d2, o1-d4 |
 | `o4-d4` Sıkı ve agresif oyunun mantığı | ders | Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar. | o4-d3, o3-d4 |
 | `o4-d5` Limp neden çoğunlukla zayıf | ders | İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir. | o4-d4 |
 | `o4-k` Kontrol: Başlangıç elleri | kontrol | "Başlangıç elleri" ünitesinin kazanımlarını karışık sorularda uygular. | o4-d5 |
 | `o4-r` Tekrar: Başlangıç elleri | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o4-k |
-| `o4-t` Seviye 2-3 testi | test | Seviye 3 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | o4-k |
+| `o4-t` Temel testi: pozisyon ve başlangıç elleri | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o4-k |
 
 ### c5 · Açılış aralıkları (seviye 3)
 
@@ -130,14 +130,14 @@ Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c6-d1` Fiyat: gereken equity | ders | Açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot). | c5-k, o2-d5 |
+| `c6-d1` Fiyat: gereken equity | ders | Equity'yi potun uzun vadedeki payı olarak tanır; açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot). | c5-k, o2-d5 |
 | `c6-d2` BB savunması ve açanın pozisyonu | ders | Aynı fiyatta UTG'ye karşı dar, BTN'ye karşı geniş savunmanın nedenini açıklar. | c6-d1, c5-d3 |
 | `c6-d3` Equity realization | ders | Ham equity'nin tamamının neden kullanılamadığını; suited ve bağlantılı ellerin avantajını açıklar. | c6-d2 |
-| `c6-d4` SB stratejisi | ders | SB'de açılışa karşı çoğunlukla 3-bet ya da fold oynamanın gerekçesini açıklar. | c6-d3 |
+| `c6-d4` SB stratejisi | ders | SB'de açılışa karşı call yerine çoğunlukla yeniden raise (3-bet) ya da fold oynamanın gerekçesini pozisyonsuzluk ve arkadaki BB ile açıklar. | c6-d3 |
 | `c6-d5` Çok oyunculu potta BB | ders | Açılış ve call sonrası iyi fiyatla hangi el tiplerinin savunulduğunu seçer. | c6-d4 |
 | `c6-k` Kontrol: Blind savunması | kontrol | "Blind savunması" ünitesinin kazanımlarını karışık sorularda uygular. | c6-d5 |
 | `c6-r` Tekrar: Blind savunması | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c6-k |
-| `c6-t` Seviye 4 testi | test | Seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | c6-k |
+| `c6-t` Seviye 4 testi | test | bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c6-k |
 
 ### c7 · 3-bet ve ötesi (seviye 5)
 
@@ -145,8 +145,8 @@ Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c7-d1` 3-bet nedir, neden yapılır | ders | 3-bet'i tanımlar; value ve fold equity olmak üzere iki amacını ayırır. | c6-k, c5-d3 |
-| `c7-d2` Value 3-bet ve blöf 3-bet | ders | Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır. | c7-d1 |
+| `c7-d1` 3-bet nedir, neden yapılır | ders | 3-bet'in iki amacını ayırır: value ve fold equity. | c6-k, c5-d3, c6-d4 |
+| `c7-d2` Value 3-bet ve blöf 3-bet | ders | Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır; value ve blöf 3-bet'in birbirine oranının neden önemli olduğunu açıklar. | c7-d1 |
 | `c7-d3` Blokerler | ders | Elindeki bir asın rakibin AA ve AK kombinasyonlarını nasıl azalttığını sayar. | c7-d2, o4-d1 |
 | `c7-d4` 3-bet boyutları | ders | Pozisyonda ve pozisyonsuz 3-bet boyutunun neden farklı olduğunu açıklar. | c7-d3, o3-d2 |
 | `c7-d5` 3-bet'e karşı oynamak | ders | Açtığı ele 3-bet gelince call, 4-bet ve fold arasında seçim yapar. | c7-d4 |
@@ -162,7 +162,7 @@ Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c8-d1` Equity nedir | ders | Equity'yi potun uzun vadedeki payı olarak tanımlar; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k |
+| `c8-d1` Equity nedir | ders | Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k, c6-d1 |
 | `c8-d2` Outs saymak | ders | Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar. | c8-d1, o1-d5 |
 | `c8-d3` 2 ve 4 kuralı | ders | Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir. | c8-d2 |
 | `c8-d4` Pot odds | ders | Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır. | c8-d3, c6-d1 |
@@ -170,7 +170,7 @@ Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.
 | `c8-d6` SPR | ders | SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar. | c8-d5, o3-d5 |
 | `c8-k` Kontrol: Postflop matematiği | kontrol | "Postflop matematiği" ünitesinin kazanımlarını karışık sorularda uygular. | c8-d6 |
 | `c8-r` Tekrar: Postflop matematiği | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c8-k |
-| `c8-t` Seviye 5 testi | test | Seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | c8-k |
+| `c8-t` Seviye 5 testi | test | bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c8-k |
 
 ### c9 · Flop: board ve c-bet (seviye 6)
 
@@ -215,7 +215,7 @@ Turn kararları, ikinci barrel ve düşük SPR'li 3-bet potları.
 | `c11-d5` IP ve OOP planı | ders | Aynı spotta pozisyona göre bahis ve check sıklığının yönünü belirler. | c11-d4, c9-d6 |
 | `c11-k` Kontrol: Turn ve 3-bet potları | kontrol | "Turn ve 3-bet potları" ünitesinin kazanımlarını karışık sorularda uygular. | c11-d5 |
 | `c11-r` Tekrar: Turn ve 3-bet potları | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c11-k |
-| `c11-t` Seviye 6-8 testi | test | Seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | c11-k |
+| `c11-t` Seviye 6-8 testi | test | bu pistte seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c11-k |
 
 ### c12 · River (seviye 9)
 
@@ -246,7 +246,7 @@ Turn kararları, ikinci barrel ve düşük SPR'li 3-bet potları.
 | `c13-d6` Oyununu gözden geçirme | ders | Bir eli sonuçtan bağımsız, karar kalitesiyle değerlendirir. | c13-d5 |
 | `c13-k` Kontrol: İleri konular | kontrol | "İleri konular" ünitesinin kazanımlarını karışık sorularda uygular. | c13-d6 |
 | `c13-r` Tekrar: İleri konular | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c13-k |
-| `c13-t` Cash bitirme testi | test | Seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | c13-k |
+| `c13-t` Cash bitirme testi | test | bu pistte seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c13-k |
 
 ### t1 · Turnuva nedir (seviye 1)
 
@@ -275,7 +275,7 @@ BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.
 | `t2-d5` Chip'in değeri sabit değil | ders | Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar. | t2-d4, t1-d5 |
 | `t2-k` Kontrol: Stack'i ölçmek | kontrol | "Stack'i ölçmek" ünitesinin kazanımlarını karışık sorularda uygular. | t2-d5 |
 | `t2-r` Tekrar: Stack'i ölçmek | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t2-k |
-| `t2-t` Turnuva seviye 1-2 testi | test | Seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | t2-k |
+| `t2-t` Turnuva seviye 1-2 testi | test | bu pistte seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t2-k |
 
 ### t3 · Derin stack oyunu (seviye 3)
 
@@ -283,12 +283,13 @@ BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t3-d1` Erken aşama planı | ders | Derin stack'te pozisyon ve el seçiminin önceliğini açıklar. | o4-k, o4-d4 |
-| `t3-d2` Turnuvada açılış boyutu | ders | 2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar. | t3-d1 |
-| `t3-d3` Ante'li potta çalma | ders | Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar. | t3-d2, t1-d4 |
-| `t3-d4` Ante ile BB savunması | ders | Küçük açılış ve ante karşısında gereken equity'yi hesaplar; geniş savunmayı gerekçelendirir. | t3-d3 |
-| `t3-d5` 3-bet'e kısa giriş | ders | 3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır. | t3-d4 |
-| `t3-k` Kontrol: Derin stack oyunu | kontrol | "Derin stack oyunu" ünitesinin kazanımlarını karışık sorularda uygular. | t3-d5 |
+| `t3-d1` Erken aşama planı | ders | Derin stack'te pozisyon ve el seçiminin önceliğini açıklar. | o4-k, t2-k, t1-k, o4-d4 |
+| `t3-d2` Turnuvada açılış aralıkları | ders | Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar. | t3-d1, o4-d2, o3-d4 |
+| `t3-d3` Turnuvada açılış boyutu | ders | 2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar. | t3-d2 |
+| `t3-d4` Ante'li potta çalma | ders | Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar. | t3-d3, t1-d4 |
+| `t3-d5` Ante ile BB savunması | ders | Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir. | t3-d4 |
+| `t3-d6` 3-bet'e kısa giriş | ders | 3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır. | t3-d5 |
+| `t3-k` Kontrol: Derin stack oyunu | kontrol | "Derin stack oyunu" ünitesinin kazanımlarını karışık sorularda uygular. | t3-d6 |
 | `t3-r` Tekrar: Derin stack oyunu | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t3-k |
 
 ### t4 · Orta stack oyunu (seviye 4)
@@ -297,14 +298,14 @@ BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t4-d1` Stack kısaldıkça ne değişir | ders | Spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar. | t3-k, t2-d1 |
-| `t4-d2` 3-bet ya da fold | ders | Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar. | t4-d1, t3-d5 |
+| `t4-d1` Stack kısaldıkça ne değişir | ders | Açılış aralığının stack kısaldıkça nasıl değiştiğini; spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar. | t3-k, t2-d1, t3-d2 |
+| `t4-d2` 3-bet ya da fold | ders | Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar. | t4-d1, t3-d6 |
 | `t4-d3` Resteal: 3-bet all-in | ders | 15 ile 25 BB arasında geç pozisyon açılışına all-in adaylarını seçer. | t4-d2 |
 | `t4-d4` Açılışa call mı, all-in mi | ders | Stack derinliği ve pozisyona göre iki seçeneği karşılaştırır. | t4-d3 |
 | `t4-d5` Düşük SPR'de postflop | ders | SPR'yi hesaplar; top pair ile stack'i koymanın ne zaman doğal olduğunu açıklar. | t4-d4 |
 | `t4-k` Kontrol: Orta stack oyunu | kontrol | "Orta stack oyunu" ünitesinin kazanımlarını karışık sorularda uygular. | t4-d5 |
 | `t4-r` Tekrar: Orta stack oyunu | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t4-k |
-| `t4-t` Turnuva seviye 3-4 testi | test | Seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | t4-k |
+| `t4-t` Turnuva seviye 3-4 testi | test | bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t4-k |
 
 ### t5 · Push/fold (seviye 5)
 
@@ -318,7 +319,7 @@ Kısa stack: all-in ya da fold, pozisyona göre push aralıkları.
 | `t5-d4` 6 BB ve altı | ders | Çok kısa stack'te aralığın neden iyice genişlediğini açıklar. | t5-d3 |
 | `t5-d5` 15 BB: push mu, açılış mı | ders | 15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır. | t5-d4 |
 | `t5-d6` SB'den BB'ye karşı | ders | Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar. | t5-d5 |
-| `t5-d7` Nash mantığı | ders | Denge push/fold tablolarının varsayımlarını ve sınırlarını (ICM yok, rakip dengede) sayar. | t5-d6 |
+| `t5-d7` Nash mantığı | ders | Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar. | t5-d6 |
 | `t5-k` Kontrol: Push/fold | kontrol | "Push/fold" ünitesinin kazanımlarını karışık sorularda uygular. | t5-d7 |
 | `t5-r` Tekrar: Push/fold | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t5-k |
 
@@ -328,7 +329,7 @@ Fiyat, rakibin itme aralığı ve aralığa karşı equity.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t6-d1` Fiyat: gereken equity | ders | All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar. | t5-k, t3-d4 |
+| `t6-d1` Fiyat: gereken equity | ders | All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar. | t5-k, t3-d5 |
 | `t6-d2` Rakibin itme aralığı | ders | Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder. | t6-d1, t5-d3 |
 | `t6-d3` Aralığa karşı equity | ders | Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar. | t6-d2 |
 | `t6-d4` BB'den call | ders | Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir. | t6-d3 |
@@ -336,7 +337,7 @@ Fiyat, rakibin itme aralığı ve aralığa karşı equity.
 | `t6-d6` Açılışına all-in gelirse | ders | Açtıktan sonra gelen all-in'e fiyat ve aralıkla karar verir. | t6-d5, t4-d3 |
 | `t6-k` Kontrol: All-in'e call | kontrol | "All-in'e call" ünitesinin kazanımlarını karışık sorularda uygular. | t6-d6 |
 | `t6-r` Tekrar: All-in'e call | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t6-k |
-| `t6-t` Turnuva seviye 5-6 testi | test | Seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | t6-k |
+| `t6-t` Turnuva seviye 5-6 testi | test | bu pistte seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t6-k |
 
 ### t7 · ICM temeli (seviye 7)
 
@@ -366,7 +367,7 @@ Balon oyunu, para atlamaları ve final masa dinamikleri.
 | `t8-d6` Final masada plan | ders | Kendi stack'ine göre agresiflik düzeyini seçer. | t8-d5 |
 | `t8-k` Kontrol: Balon ve final masası | kontrol | "Balon ve final masası" ünitesinin kazanımlarını karışık sorularda uygular. | t8-d6 |
 | `t8-r` Tekrar: Balon ve final masası | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t8-k |
-| `t8-t` Turnuva seviye 7-8 testi | test | Seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | t8-k |
+| `t8-t` Turnuva seviye 7-8 testi | test | bu pistte seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t8-k |
 
 ### t9 · Özel formatlar (seviye 9)
 
@@ -396,5 +397,5 @@ Heads-up, aşama planı, ICM'de sömürücü oyun ve zihinsel dayanıklılık.
 | `t10-d6` Turnuvanı gözden geçirme | ders | Kritik elleri sonuçtan bağımsız, kararın gerekçesiyle değerlendirir. | t10-d5 |
 | `t10-k` Kontrol: Heads-up ve ileri oyun | kontrol | "Heads-up ve ileri oyun" ünitesinin kazanımlarını karışık sorularda uygular. | t10-d6 |
 | `t10-r` Tekrar: Heads-up ve ileri oyun | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t10-k |
-| `t10-t` Turnuva bitirme testi | test | Seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır. | t10-k |
+| `t10-t` Turnuva bitirme testi | test | bu pistte seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t10-k |
 

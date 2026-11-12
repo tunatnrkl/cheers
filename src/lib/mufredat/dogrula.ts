@@ -5,8 +5,15 @@ import type { Alistirma, Ders, Mufredat } from "./tipler";
 const TURLER = ["ders", "kontrol", "test", "tekrar"];
 const TIPLER = ["secmeli", "dogruYanlis", "eslestirme", "siralama", "sayi", "range", "spot"];
 const KART = /^([2-9TJQKA][shdc])+$/;
-// Rakibin somut eli: "A♠ K♦", "AhKd" gibi iki kartlık yazım. Aralık anlatımında bulunmamalı.
-const SOMUT_EL = /\b[2-9TJQKA][shdc♠♥♦♣]\s?[2-9TJQKA][shdc♠♥♦♣]\b/;
+// Somut bir el: "A♠ K♦", "A♠K♦", "AhKd" gibi iki kartlık yazım. Aralık anlatımında bulunmamalı.
+const SOMUT_EL = /(?<![A-Za-z0-9])[2-9TJQKA][shdc♠♥♦♣]\s?[2-9TJQKA][shdc♠♥♦♣](?![A-Za-z0-9])/g;
+const SIMGE: Record<string, string> = { "♠": "s", "♥": "h", "♦": "d", "♣": "c" };
+const yalin = (el: string) => el.replace(/\s/g, "").replace(/[♠♥♦♣]/g, (c) => SIMGE[c]);
+/** Metindeki somut ellerden, hero eli (iki sırayla) dışında kalanlar. */
+function yabanciEller(metin: string, heroEl?: string): string[] {
+  const hero = heroEl ? [heroEl, heroEl.slice(2) + heroEl.slice(0, 2)] : [];
+  return (metin.match(SOMUT_EL) ?? []).filter((e) => !hero.includes(yalin(e)));
+}
 
 export type Baglam = { terimler?: Set<string>; spotKimlikleri?: Set<string> };
 
@@ -58,15 +65,14 @@ function alistirmaHatalari(a: Alistirma, yer: string, b: Baglam): string[] {
       if (!(s.oyuncuSayisi >= 2 && s.oyuncuSayisi <= 9)) e("oyuncu sayısı 2 ile 9 arasında olmalı");
       if (!(s.stackBB > 0)) e("stack derinliği pozitif olmalı");
       if (!s.rakipAraligi?.trim()) e("rakip aralığı yazılmalı");
-      else if (SOMUT_EL.test(s.rakipAraligi)) e("rakip aralığında somut bir el yazılmış; rakip yalnızca aralıkla anlatılır");
+      else if (yabanciEller(s.rakipAraligi).length) e("rakip aralığında somut bir el yazılmış; rakip yalnızca aralıkla anlatılır");
       const kartlar = (s.heroEl + (s.board ?? "")).match(/../g) ?? [];
       if (new Set(kartlar).size !== kartlar.length) e("aynı kart iki kez kullanılmış");
     }
-    if (SOMUT_EL.test(a.soru.replace(a.spot?.heroEl ?? "", ""))) {
-      // Soruda hero eli geçebilir; başka somut el geçiyorsa rakip eli sızıyor olabilir.
-      const heroYazimlari = a.spot ? [a.spot.heroEl] : [];
-      if (!heroYazimlari.some((y) => a.soru.includes(y))) e("soru metninde somut bir el var; rakibin eli verilmemeli");
-    }
+    // Soru ve seçeneklerde hero eli dışında somut el geçmemeli: rakibin eli verilmez.
+    const metinler = [a.soru, ...((a.secenekler ?? []) as unknown[]).filter((x): x is string => typeof x === "string")];
+    const sizan = metinler.flatMap((t) => yabanciEller(t, a.spot?.heroEl));
+    if (sizan.length) e(`soru ya da seçeneklerde hero eli dışında somut bir el var (${sizan.join(", ")}); rakibin eli verilmemeli`);
   }
   return h;
 }

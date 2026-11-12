@@ -59,6 +59,8 @@ export type Ders = {
   durum: "iskelet" | "dolu";
   zorunlu?: boolean;
   seviyeAtlar?: number;
+  /** test: "ortak" yalnızca ortak temel üniteleri, "pist" kendi pistindeki üniteleri açar */
+  kapsam?: "ortak" | "pist";
   alistirmalar: Alistirma[];
 };
 

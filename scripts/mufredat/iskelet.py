@@ -26,21 +26,21 @@ unite("o2", "Masa ve el akışı", 1, "temel", "Blind'ler, aksiyonlar, sokaklar,
  ("Sokaklar: preflop'tan river'a", "Preflop, flop, turn ve river'da kaç kart açıldığını ve kimin önce konuştuğunu sıralar.", []),
  ("Showdown ve kazanan", "Showdown'da kazananı, beraberliği ve potun bölünmesini belirler.", ["o1-d4"]),
  ("Pot nasıl büyür", "Blind'ler ve bahislerden potu toplar; bir bahsi görmek için ödenecek miktarı hesaplar.", []),
-], test="Seviye 1 testi")
+], test="Temel testi: kartlar ve masa")
 unite("o3", "Pozisyon", 2, "temel", "Koltuk adları ve son konuşmanın neden avantaj olduğu.", [
- ("Koltuk adları", "6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir.", []),
+ ("Koltuk adları", "6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir.", ["o2-k"]),
  ("Pozisyonda ve pozisyonsuz", "Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır.", ["o2-d3"]),
  ("Son konuşmanın değeri", "Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar.", []),
  ("Erken, geç pozisyon ve blind'ler", "Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar.", []),
  ("BB cinsinden düşünmek", "Stack ve bahisleri BB'ye çevirir; iki oyuncu arasındaki efektif stack'i bulur.", ["o2-d5"]),
 ])
 unite("o4", "Başlangıç elleri", 3, "preflop", "169 başlangıç eli, kategoriler ve domine edilme.", [
- ("El kategorileri", "Cepte çift, suited, offsuit, connector ve broadway ellerini tanır ve yazımını (AKs, 76o) okur.", []),
+ ("El kategorileri", "Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326).", ["o3-k"]),
  ("Range matrisini okumak", "13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar.", []),
  ("Domine edilme ve kicker sorunu", "AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır.", ["o1-d4"]),
  ("Sıkı ve agresif oyunun mantığı", "Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar.", ["o3-d4"]),
  ("Limp neden çoğunlukla zayıf", "İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir.", []),
-], test="Seviye 2-3 testi")
+], test="Temel testi: pozisyon ve başlangıç elleri")
 
 # ───────────── CASH ─────────────
 unite("c5", "Açılış aralıkları", 3, "preflop", "Herkes fold ettiğinde hangi pozisyondan hangi ellerle açılır.", [
@@ -52,15 +52,15 @@ unite("c5", "Açılış aralıkları", 3, "preflop", "Herkes fold ettiğinde han
  ("Rakibe göre küçük ayar", "Blind'lerdeki oyuncular sıkı ya da gevşekse açılışı hangi yönde ayarlayacağını söyler.", []),
 ])
 unite("c6", "Blind savunması", 4, "preflop", "Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.", [
- ("Fiyat: gereken equity", "Açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot).", ["o2-d5"]),
+ ("Fiyat: gereken equity", "Equity'yi potun uzun vadedeki payı olarak tanır; açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot).", ["o2-d5"]),
  ("BB savunması ve açanın pozisyonu", "Aynı fiyatta UTG'ye karşı dar, BTN'ye karşı geniş savunmanın nedenini açıklar.", ["c5-d3"]),
  ("Equity realization", "Ham equity'nin tamamının neden kullanılamadığını; suited ve bağlantılı ellerin avantajını açıklar.", []),
- ("SB stratejisi", "SB'de açılışa karşı çoğunlukla 3-bet ya da fold oynamanın gerekçesini açıklar.", []),
+ ("SB stratejisi", "SB'de açılışa karşı call yerine çoğunlukla yeniden raise (3-bet) ya da fold oynamanın gerekçesini pozisyonsuzluk ve arkadaki BB ile açıklar.", []),
  ("Çok oyunculu potta BB", "Açılış ve call sonrası iyi fiyatla hangi el tiplerinin savunulduğunu seçer.", []),
 ], test="Seviye 4 testi")
 unite("c7", "3-bet ve ötesi", 5, "preflop", "3-bet, 4-bet, 5-bet, squeeze, iso-raise ve blokerler.", [
- ("3-bet nedir, neden yapılır", "3-bet'i tanımlar; value ve fold equity olmak üzere iki amacını ayırır.", ["c5-d3"]),
- ("Value 3-bet ve blöf 3-bet", "Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır.", []),
+ ("3-bet nedir, neden yapılır", "3-bet'in iki amacını ayırır: value ve fold equity.", ["c5-d3", "c6-d4"]),
+ ("Value 3-bet ve blöf 3-bet", "Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır; value ve blöf 3-bet'in birbirine oranının neden önemli olduğunu açıklar.", []),
  ("Blokerler", "Elindeki bir asın rakibin AA ve AK kombinasyonlarını nasıl azalttığını sayar.", ["o4-d1"]),
  ("3-bet boyutları", "Pozisyonda ve pozisyonsuz 3-bet boyutunun neden farklı olduğunu açıklar.", ["o3-d2"]),
  ("3-bet'e karşı oynamak", "Açtığı ele 3-bet gelince call, 4-bet ve fold arasında seçim yapar.", []),
@@ -69,7 +69,7 @@ unite("c7", "3-bet ve ötesi", 5, "preflop", "3-bet, 4-bet, 5-bet, squeeze, iso-
  ("Iso-raise", "Limp eden oyuncuyu izole etmenin amacını ve boyutunu belirler.", ["o4-d5"]),
 ])
 unite("c8", "Postflop matematiği", 5, "matematik", "Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.", [
- ("Equity nedir", "Equity'yi potun uzun vadedeki payı olarak tanımlar; tipik karşılaşmaların yaklaşık equity'sini bilir.", []),
+ ("Equity nedir", "Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir.", ["c6-d1"]),
  ("Outs saymak", "Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar.", ["o1-d5"]),
  ("2 ve 4 kuralı", "Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir.", []),
  ("Pot odds", "Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır.", ["c6-d1"]),
@@ -132,15 +132,16 @@ unite("t2", "Stack'i ölçmek", 2, "turnuva", "BB cinsinden stack, M oranı, efe
  ("Chip'in değeri sabit değil", "Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar.", ["t1-d5"]),
 ], test="Turnuva seviye 1-2 testi")
 unite("t3", "Derin stack oyunu", 3, "turnuva", "40 BB ve üstü: açılış boyutu, ante'li potta çalma, BB savunması.", [
- ("Erken aşama planı", "Derin stack'te pozisyon ve el seçiminin önceliğini açıklar.", ["o4-d4"]),
+ ("Erken aşama planı", "Derin stack'te pozisyon ve el seçiminin önceliğini açıklar.", ["t2-k", "t1-k", "o4-d4"]),
+ ("Turnuvada açılış aralıkları", "Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar.", ["o4-d2", "o3-d4"]),
  ("Turnuvada açılış boyutu", "2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar.", []),
  ("Ante'li potta çalma", "Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar.", ["t1-d4"]),
- ("Ante ile BB savunması", "Küçük açılış ve ante karşısında gereken equity'yi hesaplar; geniş savunmayı gerekçelendirir.", []),
+ ("Ante ile BB savunması", "Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir.", []),
  ("3-bet'e kısa giriş", "3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır.", []),
 ])
 unite("t4", "Orta stack oyunu", 4, "turnuva", "20 ile 40 BB: aralıkların değişmesi, 3-bet/fold ve resteal.", [
- ("Stack kısaldıkça ne değişir", "Spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar.", ["t2-d1"]),
- ("3-bet ya da fold", "Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar.", ["t3-d5"]),
+ ("Stack kısaldıkça ne değişir", "Açılış aralığının stack kısaldıkça nasıl değiştiğini; spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar.", ["t2-d1", "t3-d2"]),
+ ("3-bet ya da fold", "Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar.", ["t3-d6"]),
  ("Resteal: 3-bet all-in", "15 ile 25 BB arasında geç pozisyon açılışına all-in adaylarını seçer.", []),
  ("Açılışa call mı, all-in mi", "Stack derinliği ve pozisyona göre iki seçeneği karşılaştırır.", []),
  ("Düşük SPR'de postflop", "SPR'yi hesaplar; top pair ile stack'i koymanın ne zaman doğal olduğunu açıklar.", []),
@@ -152,10 +153,10 @@ unite("t5", "Push/fold", 5, "turnuva", "Kısa stack: all-in ya da fold, pozisyon
  ("6 BB ve altı", "Çok kısa stack'te aralığın neden iyice genişlediğini açıklar.", []),
  ("15 BB: push mu, açılış mı", "15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır.", []),
  ("SB'den BB'ye karşı", "Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar.", []),
- ("Nash mantığı", "Denge push/fold tablolarının varsayımlarını ve sınırlarını (ICM yok, rakip dengede) sayar.", []),
+ ("Nash mantığı", "Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar.", []),
 ])
 unite("t6", "All-in'e call", 6, "turnuva", "Fiyat, rakibin itme aralığı ve aralığa karşı equity.", [
- ("Fiyat: gereken equity", "All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar.", ["t3-d4"]),
+ ("Fiyat: gereken equity", "All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar.", ["t3-d5"]),
  ("Rakibin itme aralığı", "Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder.", ["t5-d3"]),
  ("Aralığa karşı equity", "Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar.", []),
  ("BB'den call", "Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir.", []),
@@ -225,8 +226,11 @@ def build(eski):
                   kazanimlar=["Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."], sureDk=SURE["tekrar"],
                   anlatim=[], terimler=[], ustalik=USTALIK["tekrar"], hedefAlistirma=HEDEF["tekrar"], durum="iskelet", alistirmalar=[]))
         if u["test"]:
-            ekle(dict(kimlik=f"{k}-t", baslik=u["test"], tur="test", onkosul=[f"{k}-k"], seviyeAtlar=u["seviye"],
-                      kazanimlar=[f"Seviye {u['seviye']} ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu üniteye kadar olan dersler açılır."],
+            ortak = k.startswith("o")
+            kapsam = ("ortak temel ünitelerin (o1'den bu üniteye kadar)" if ortak else f"bu pistte seviye {u['seviye']} ve altındaki ünitelerin")
+            acar = ("yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır" if ortak else "bu pistte bu üniteye kadar olan dersler açılır")
+            ekle(dict(kimlik=f"{k}-t", baslik=u["test"], tur="test", onkosul=[f"{k}-k"], seviyeAtlar=u["seviye"], kapsam=("ortak" if ortak else "pist"),
+                      kazanimlar=[f"{kapsam} kazanımlarını karışık sorularda gösterir; geçilirse {acar}."],
                       sureDk=SURE["test"], anlatim=[], terimler=[], ustalik=USTALIK["test"], hedefAlistirma=HEDEF["test"], durum="iskelet", alistirmalar=[]))
         uniteler.append(dict(kimlik=k, baslik=u["baslik"], seviye=u["seviye"], renk=RENK[u["renk"]], ozet=u["ozet"], dersler=dersler))
     # Ünite arası önkoşul: bir ünitenin ilk dersi, onu içeren HER pistte kendinden önceki ünitenin kontrolünü ister.

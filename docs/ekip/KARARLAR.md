@@ -27,3 +27,23 @@
 5. Sızıntı testi ve "harici istek yok" testi her yayında zorunlu kapı.
 
 Ajanın denetim notu: depo salt okunur incelendi; test ve derleme ajan tarafından çalıştırılmadı, spot ve test sayıları uygulayan ajanın beyanıdır.
+
+## 2026-11-12 · Kapı 2a: müfredat iskeleti · DÜZELT → düzeltildi
+
+Ajan `npm test` ve typecheck'i kendisi çalıştırdı; 13 düzeltme istedi, hepsi uygulandı:
+
+- **Önkoşul delikleri:** `o3-d1`, `o4-d1`, `t3-d1` artık önceki ünitenin kontrolünü istiyor. İki yeni test: pistin ilk dersi dışında önkoşulsuz ders olamaz; bitirme testine ulaşmak pistteki bütün kontrol derslerini gerektirir.
+- **Erken kullanılan kavramlar:** equity `c6-d1` ve `t3-d5` içinde, 3-bet `c6-d4` içinde, kombinasyon sayımı `o4-d1` içinde tanımlanıyor; `t5-d7` ICM'e ileri atıfla yazıldı. `c7-d2` kazanımına value/blöf dengesi eklendi.
+- **Eksik ders:** turnuva pistine "Turnuvada açılış aralıkları" (`t3-d2`) eklendi.
+- **Ortak testler:** `o2-t` ve `o4-t` yalnızca ortak üniteleri açar; piste özgü üniteler kendi testleriyle açılır.
+- **Sızıntı denetimi:** simgeli ve bitişik yazım ("A♠ K♦", "Q♥Q♦"), hero eliyle aynı soruda geçen rakip eli ve seçenek metinleri de yakalanıyor; testleri eklendi.
+
+Onaylanan tercihler: ortak temel üniteler (o1–o4), bankroll yönetiminin dışarıda kalması, tekrar derslerinin zorunlu olmaması.
+
+### Brif sapması
+
+- **Seviye testleri 20 alıştırma hedefliyor** (brif: ders başına 8–12). Test birkaç üniteyi örneklediği için.
+
+Yayın: düzeltmeler yeşil olduğunda yeniden kapı gerekmeden birleştirilebilir (iskelet bağlantısız, kullanıcıya görünmez).
+
+İçerik aşamasına notlar: `c9-d4` ve `t8-d3` "çoğunlukla" ile yumuşatılacak; `c8-d1`'deki equity sayıları üreticiden gelip testle sabitlenecek; dolu derslerde sözlük bağlantısı beklenir.
