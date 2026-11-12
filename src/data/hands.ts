@@ -231,7 +231,7 @@ const CURATED: Hand[] = [
   {
     id: "c27", title: "Turn'de korkutucu kart: ikinci barrel", game: "cash", street: "turn", heroPos: "CO", stackBB: 100,
     hero: "AhJh", board: "Ts6d2cKs", potBB: 9.5, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Ts6d2c", "BB x", "CO b2", "BB c", "T Ks", "BB x"],
-    options: ["Check", "2/3 pot bahis (≈6,5 BB)", "All-in"], correct: 1, topic: "cbet", level: 3,
+    options: ["Check", "2/3 pot bahis (≈6,3 BB)", "All-in"], correct: 1, topic: "cbet", level: 3,
     reasoning: "Papaz senin açılış aralığına (AK, KQ, KJ) rakibin flop'ta call eden aralığından (T'li per, orta çiftler) çok daha iyi uyar. İkinci barrel, bu orta güçteki ellere zor bir karar verdirir. Görülürse de river'da as (per) ya da dam (kent) gelirse tamamen boş değilsin.",
   },
   {

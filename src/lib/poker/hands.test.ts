@@ -515,3 +515,25 @@ describe("gerekçelerdeki out oranlarının paydası", () => {
     expect(bad).toEqual([]);
   });
 });
+
+// Q-8 (14. çalışma): c27'de 2/3 pot seçeneği "≈6,5 BB" yazıyordu; 9,5 × 2/3 ≈ 6,33.
+// "N/M pot bahis (≈X BB)" yazan her seçenekte X, replay potunun N/M'sine yazıldığı basamakta yuvarlanmış olmalı
+// (tam sayıysa ±0,5, bir ondalıksa ±0,05).
+describe("seçeneklerdeki pot kesri tutarları", () => {
+  it("'1/3 pot bahis (≈1,8 BB)' gibi tutarlar replay potuyla tutarlı", () => {
+    const bad: string[] = [];
+    let checked = 0;
+    for (const h of HANDS)
+      for (const o of h.options) {
+        const m = o.match(/^(\d)\/(\d) pot bahis \(≈(\d+(?:,\d+)?) BB\)$/);
+        if (!m) continue;
+        checked++;
+        const exact = (replay(h).pot * +m[1]) / +m[2];
+        const shown = parseFloat(m[3].replace(",", "."));
+        const tol = m[3].includes(",") ? 0.05 : 0.5;
+        if (Math.abs(shown - exact) > tol + 1e-9) bad.push(`${h.id}: ${o} (doğrusu ≈ ${exact.toFixed(2)})`);
+      }
+    expect(checked).toBeGreaterThanOrEqual(5);
+    expect(bad).toEqual([]);
+  });
+});

@@ -1,4 +1,4 @@
-// Kısa tekrar quiz'leri. Sorular ekip raporlarından (docs/ekip/2026-11-11/02, 05, 14; 2026-11-12/15)
+// Kısa tekrar quiz'leri. Sorular ekip raporlarından (docs/ekip/2026-11-11/02, 05, 14; 2026-11-12/15, 18)
 // alındı, çoktan seçmeli biçime getirildi ve sayıları quizzes.test.ts ile yeniden ölçüldü.
 // Equity değerleri ranges.json'daki yaklaşık aralıklara karşıdır; solver çıktısı değildir.
 // Puan, seri ya da kayıt yok (HAFIZA.md, "ödül döngüsü mekanikleri yok").
@@ -103,6 +103,80 @@ export const QUIZZES: Quiz[] = [
         options: ["%20", "%25", "%33", "%50"],
         correct: 1,
         why: "Ortada 15 BB var, 5 BB ödüyorsun: 5 / 20 = %25. Pot ne kadar olursa olsun yarım pot bahis her zaman %25 ister; pot kadar bahis %33, üçte bir pot bahis %20 ister.",
+      },
+    ],
+  },
+  {
+    slug: "c-bet-ve-barrel",
+    title: "C-bet ve barrel: boyut, board ve rakip sayısı",
+    summary: "Blöf c-bet'inin ne sıklıkla fold görmesi gerektiğini hesapla, rakibe verdiğin fiyatı gör ve board'a, rakip sayısına, rakip tipine göre bahis mi check mi karar ver.",
+    level: "Orta",
+    game: "cash",
+    topic: "cbet",
+    assumptions:
+      "Cash, 100 BB, rake yok (7. soru hariç: turnuva, 20 BB, ante 1). Fiyat, başabaş fold sıklığı, out ve SPR kesin hesaptır. \"Board kime uyuyor\" ve rakip aralığıyla ilgili yargılar yaygın kabul gören ilkelerdir; bu sitede solver ile karşılaştırılmadı. Rakibin gerçekte ne sıklıkla fold ettiği rakibe bağlıdır ve burada tahmin edilmez.",
+    posts: ["c-bet-ne-zaman", "pot-odds-adim-adim"],
+    questions: [
+      {
+        q: "Flop'ta pot 5,5 BB. Iska geçtin ve 1/3 pot (≈1,8 BB) blöf c-bet'i düşünüyorsun. Bahsin hemen kâra geçmesi için rakip en az ne sıklıkla fold etmeli?",
+        options: ["%20", "%25", "%33", "%50"],
+        correct: 1,
+        why: "Blöfte riske ettiğin bahis, kazanacağın ise ortadaki pot: 1,83 / (5,5 + 1,83) = %25. Elin hiç gelişmeyecek gibi sayılır; gelişme şansın varsa eşik biraz daha düşer. %20, rakibin call için ihtiyaç duyduğu equity'dir (sonraki soru); %50 ise pot kadar bahsin eşiğidir. Aynı işi büyük bahisle yapmak, iki kat sık fold görmeyi gerektirir.",
+        spot: "c15",
+      },
+      {
+        q: "Aynı spotta BB, 1,8 BB'lik c-bet'ine call etmeyi düşünüyor. Call için en az ne kadar equity gerekir?",
+        options: ["%20", "%25", "%33", "%40"],
+        correct: 0,
+        why: "Ortada 5,5 + 1,83 = 7,33 BB var; BB 1,83 ödeyip 9,17 BB'lik pot için oynar: 1,83 / 9,17 = %20. Küçük bahis rakibe iyi fiyat verir; bu yüzden en iyi, rakibin aralığındaki ellerin çoğunun hiçbir şey yakalamadığı kuru board'larda çalışır. Pot kadar bahis %33, 2/3 pot %28,6 equity ister.",
+        spot: "c15",
+      },
+      {
+        q: "Buton 2,5 BB açtı, yalnızca BB call etti. Aşağıdaki flop'lardan hangisi genel olarak açılış yapanın aralığına en iyi uyar ve küçük c-bet için en uygun adaydır?",
+        options: ["9-8-7, iki kupa", "6-5-4, iki kupa", "K-7-2, üç farklı renk", "8-7-6, iki maça"],
+        correct: 2,
+        why: "Papaz yüksek, kartlar bağlantısız ve üç farklı renkte. Açılış yapanın aralığında AK, KQ, KK daha çoktur; BB bu güçlü ellerin bir kısmını preflop'ta 3-bet ile oynadığı için call aralığında daha az taşır (range avantajı). Diğer üç board orta-düşük ve bağlantılı: BB'nin suited connector'larına ve orta çiftlerine çok uyar. Bu genel kabul gören bir ilkedir; sitedeki aralıklarla oranı ölçülmedi.",
+        spot: "c15",
+      },
+      {
+        q: "Üç kişilik bir potta flop 8-7-6 (iki maça) geldi, sende AK var (per yok, çekiş yok). Örnek bir varsayım: her rakip bu flop'u bağımsız olarak %35 olasılıkla yakalıyor (per ya da çekiş). En az bir rakibin yakalamış olma olasılığı yaklaşık kaçtır?",
+        options: ["%35", "%58", "%70", "%12"],
+        correct: 1,
+        why: "İkisinin de ıskalama olasılığı 0,65 × 0,65 ≈ 0,42; en az birinin yakalama olasılığı 1 − 0,42 ≈ %57,8. %70, iki olasılığı toplamaktan çıkar (yanlış); %12 ikisinin birden yakalamasıdır. %35 yalnızca örnek bir sayı ve iki rakibin kartları tam bağımsız değildir; fikir şu: her ek rakip, blöfünün çalışma ihtimalini hızla düşürür. c29'da check bu yüzden.",
+        spot: "c29",
+      },
+      {
+        q: "Turn'de elinde AJ var (floş çekişin yok), board T-6-2-K. Rakibin kartlarını bilmiyorsun. River'da kaç kart sana kent yaptırır ve olasılığı nedir?",
+        options: ["4 / 46 ≈ %8,7", "8 / 46 ≈ %17,4", "4 / 44 ≈ %9,1", "7 / 46 ≈ %15,2"],
+        correct: 0,
+        why: "Yalnızca dört dam A-K-Q-J-T kentini tamamlar (gutshot). As gelirse per yaparsın ama kent değil; 7 out'u saymak bu yüzden yanlış. Payda 52 − 2 − 4 = 46, çünkü rakibin kartları görülmeyen kartların içinde. Kent şansı tek başına bahsi taşımaz; ikinci barrel'in asıl gerekçesi papazın açılış aralığına daha iyi uyması ve rakibin orta güçteki ellerine fold ettirmesi.",
+        spot: "c27",
+      },
+      {
+        q: "Aynı spotta pot 9,5 BB ve 2/3 pot (≈6,3 BB) ikinci barrel yapıyorsun. Elinin gelişme şansını yok sayarsan rakip en az ne sıklıkla fold etmeli?",
+        options: ["%29", "%67", "%40", "%25"],
+        correct: 2,
+        why: "6,33 / (9,5 + 6,33) = %40. %28,6, rakibin bu bahse call için ihtiyaç duyduğu equity'dir; %67 bahsi yalnızca pota bölmekten çıkar. Gutshot ve as ile per şansın gerçek eşiği biraz düşürür; ne kadar düşürdüğü rakibin aralığına bağlı olduğu için burada kesin sayı verilmez.",
+        spot: "c27",
+      },
+      {
+        q: "Turnuva, 20 BB, ante 1: butonda AQ ile Q-8-4 flop'unda top pair'in var. Pot 5,5 BB, geride 18 BB. 1/3 pot c-bet görülür, turn'de 2/3 pot bahis de görülürse river'da geride potun ne kadarı kalır?",
+        options: ["Hiç chip kalmaz", "Potun iki katı", "Potun onda biri", "Yaklaşık yarısı (≈10 BB, pot ≈21 BB)"],
+        correct: 3,
+        why: "Flop: 1,83 BB bahis, pot 9,17, geride 16,17. Turn: 6,11 BB bahis, pot 21,39, geride 10,06. River'da kalan 10,06 BB potun ≈ %47'si; doğal bir bahis boyutuyla hepsi girer. SPR ≈ 3,3 (18 / 5,5) olduğu için küçük c-bet value kaçırmaz; flop'ta all-in ise yalnızca seni yenen ellerin ve güçlü çekişlerin göreceği bir boyut olur.",
+        spot: "t15",
+      },
+      {
+        q: "Turn'de pot 9 BB, elinde as yüksek ve gutshot var. Rakip neredeyse hiç fold etmeyen biri. 2/3 pot (6 BB) blöf için en az ne sıklıkla fold görmen gerekir ve ne yapmalısın?",
+        options: [
+          "%29 fold yeter; blöf kârlı",
+          "Fold sıklığı önemli değil; turn'de her zaman ikinci barrel",
+          "%40 fold gerekir; bu rakip buna yaklaşmaz, check",
+          "%60 fold gerekir; pot kadar bahis daha iyi",
+        ],
+        correct: 2,
+        why: "6 / (9 + 6) = %40. Neredeyse hiç fold etmeyen birine karşı bu sıklık gelmez; blöf chip kaybettirir. Check ile river'ı bedava görürsün: on gelirse kent yaparsın, as ya da dam gelirse per'in kazanabilir. Pot kadar bahis eşiği %50'ye çıkarır, durumu kötüleştirir. Bu rakibe karşı tersini yap: blöfü azalt, value bet'i artır.",
+        spot: "c28",
       },
     ],
   },

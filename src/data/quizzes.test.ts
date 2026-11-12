@@ -346,3 +346,119 @@ describe("pot odds quiz'i: hesaplar", () => {
     expect(answer(Z, 8)).toBe("%25");
   });
 });
+
+// 14. çalışma: c-bet quiz'i. Fiyatlar ve potlar replay'den; out'lar evaluator ile kart kart sayılır.
+describe("quiz: c-bet-ve-barrel", () => {
+  const Z = "c-bet-ve-barrel";
+  const spot = (id: string) => replay(HANDS.find((h) => h.id === id)!);
+  const cards = (s: string) => (s.match(/.{2}/g) ?? []).map(cardFromString);
+  const category = (v: number) => Math.floor(v / 16 ** 5);
+
+  it("blog yazısının 'Quiz ile tekrarla' düğmesi bu quiz'i açar; bağlı spotlar cbet ya da blof konulu", () => {
+    expect(QUIZZES.find((z) => z.posts[0] === "c-bet-ne-zaman")?.slug).toBe(Z);
+    for (const q of QUIZ_BY_SLUG.get(Z)!.questions)
+      if (q.spot) expect(["cbet", "blof"]).toContain(HANDS.find((h) => h.id === q.spot)!.topic);
+  });
+
+  it("1–2: c15 pot 5,5; 1/3 pot blöf başabaşı %25, call edenin gereken equity'si %20; pot kadar %50", () => {
+    const r = spot("c15");
+    expect(r.pot).toBeCloseTo(5.5, 5);
+    expect(r.next).toBe("BTN");
+    const bet = r.pot / 3;
+    expect(bet).toBeCloseTo(1.83, 2);
+    expect(bluffBreakEven(r.pot, bet)).toBeCloseTo(0.25, 6);
+    expect(requiredEquity(r.pot + bet, bet)).toBeCloseTo(0.2, 6);
+    expect(bluffBreakEven(r.pot, r.pot)).toBeCloseTo(0.5, 6);
+    expect(requiredEquity(r.pot + r.pot, r.pot)).toBeCloseTo(1 / 3, 6);
+    expect(requiredEquity(r.pot + (2 * r.pot) / 3, (2 * r.pot) / 3)).toBeCloseTo(0.286, 3);
+    expect(answer(Z, 1)).toBe("%25");
+    expect(answer(Z, 2)).toBe("%20");
+    // c15'in doğru cevabı küçük c-bet, board quiz'deki kuru board
+    const h = HANDS.find((x) => x.id === "c15")!;
+    expect(h.options[h.correct]).toMatch(/^1\/3 pot/);
+    expect(h.board).toBe("Ks7d2c");
+    expect(answer(Z, 3)).toBe("K-7-2, üç farklı renk");
+  });
+
+  it("4: iki rakip, her biri %35: en az biri ≈ %57,8; c29'da check doğru", () => {
+    expect(1 - 0.65 ** 2).toBeCloseTo(0.5775, 4);
+    expect(answer(Z, 4)).toBe("%58");
+    const h = HANDS.find((x) => x.id === "c29")!;
+    expect(h.board).toBe("8s7s6d");
+    expect(h.options[h.correct]).toBe("Check");
+    expect(spot("c29").entries.filter((e) => e.kind === "act" && e.act === "call")).toHaveLength(2);
+  });
+
+  it("5: c27 AhJh, Ts6d2cKs: river'da yalnızca 4 dam kent yaptırır, 4/46 ≈ %8,7", () => {
+    const h = HANDS.find((x) => x.id === "c27")!;
+    expect(h.hero).toBe("AhJh");
+    expect(h.board).toBe("Ts6d2cKs");
+    const hero = cards(h.hero), board = cards(h.board!);
+    const used = new Set([...hero, ...board]);
+    let straightOrBetter = 0, unseen = 0;
+    const improvers: string[] = [];
+    for (let c = 0; c < 52; c++) {
+      if (used.has(c)) continue;
+      unseen++;
+      if (category(evaluate7([...hero, ...board, c])) >= 4) {
+        straightOrBetter++;
+        improvers.push("23456789TJQKA"[c >> 2]);
+      }
+    }
+    expect(unseen).toBe(46);
+    expect(straightOrBetter).toBe(4);
+    expect(new Set(improvers)).toEqual(new Set(["Q"]));
+    expect(straightOrBetter / unseen).toBeCloseTo(0.087, 3);
+    expect(answer(Z, 5)).toBe("4 / 46 ≈ %8,7");
+  });
+
+  it("6: c27 pot 9,5; 2/3 pot ≈ 6,33 → blöf başabaşı %40, call eden %28,6; seçenek metni ≈6,3", () => {
+    const r = spot("c27");
+    expect(r.pot).toBeCloseTo(9.5, 5);
+    const bet = (2 * r.pot) / 3;
+    expect(bet).toBeCloseTo(6.33, 2);
+    expect(bluffBreakEven(r.pot, bet)).toBeCloseTo(0.4, 6);
+    expect(requiredEquity(r.pot + bet, bet)).toBeCloseTo(0.286, 3);
+    expect(answer(Z, 6)).toBe("%40");
+    expect(HANDS.find((x) => x.id === "c27")!.options[1]).toBe("2/3 pot bahis (≈6,3 BB)");
+  });
+
+  it("7: t15 SPR ≈ 3,3; 1/3 flop + 2/3 turn sonrası river'da geride ≈ 10,06 BB, pot ≈ 21,39 (≈ %47)", () => {
+    const r = spot("t15");
+    expect(r.pot).toBeCloseTo(5.5, 5);
+    let behind = r.seats.BTN.stack;
+    expect(behind).toBeCloseTo(18, 5);
+    expect(r.seats.BB.stack).toBeCloseTo(18, 5);
+    expect(behind / r.pot).toBeCloseTo(3.27, 2);
+    let pot = r.pot;
+    const f = pot / 3;
+    pot += 2 * f;
+    behind -= f;
+    expect(pot).toBeCloseTo(9.17, 2);
+    expect(behind).toBeCloseTo(16.17, 2);
+    const t = (2 * pot) / 3;
+    pot += 2 * t;
+    behind -= t;
+    expect(t).toBeCloseTo(6.11, 2);
+    expect(pot).toBeCloseTo(21.39, 2);
+    expect(behind).toBeCloseTo(10.06, 2);
+    expect(behind / pot).toBeCloseTo(0.47, 2);
+    expect(answer(Z, 7)).toContain("≈10 BB");
+  });
+
+  it("8: c28 pot 9, 2/3 pot = 6 BB → %40; doğru cevap check; gutshot (T) gerçekten 4 kart", () => {
+    const r = spot("c28");
+    expect(r.pot).toBeCloseTo(9, 5);
+    expect(bluffBreakEven(r.pot, 6)).toBeCloseTo(0.4, 6);
+    expect(bluffBreakEven(r.pot, 9)).toBeCloseTo(0.5, 6);
+    const h = HANDS.find((x) => x.id === "c28")!;
+    expect(h.options[h.correct]).toBe("Check");
+    expect(h.note).toMatch(/fold etmeyen/);
+    const hero = cards(h.hero), board = cards(h.board!);
+    const used = new Set([...hero, ...board]);
+    let st = 0;
+    for (let c = 0; c < 52; c++) if (!used.has(c) && category(evaluate7([...hero, ...board, c])) >= 4) st++;
+    expect(st).toBe(4);
+    expect(answer(Z, 8)).toMatch(/^%40 fold gerekir/);
+  });
+});
