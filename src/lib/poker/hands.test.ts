@@ -475,6 +475,102 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
     expect(wide.pc).toBeLessThan(0.27);
     expect(wide.eq).toBeGreaterThan(wide.need);
   });
+
+  // 15. çalışma: 3-bet spotları. Aralıklar spotların note alanındaki varsayımlar (ekip tahmini, solver değil).
+  describe("3-bet spotları (c07–c10, c12)", () => {
+    const cash = ranges.cash as Record<string, string[]>;
+    const P = "AKQJT98765432";
+    const pairsFrom = (lo: string, hi = "A") => P.slice(P.indexOf(hi), P.indexOf(lo) + 1).split("").map((r) => r + r);
+    const both = (...l: string[]) => l.flatMap((x) => [x + "s", x + "o"]);
+    const btn3vsCO = [...pairsFrom("T"), ...both("AK", "AQ"), "AJs", "KQs", "A5s", "A4s", "KJs", "QJs", "JTs", "76s", "65s"];
+    const btn3vsHJValue = [...pairsFrom("J"), ...both("AK", "AQ")];
+    const btn3vsHJ = [...btn3vsHJValue, "A5s", "A4s", "KQs", "76s"];
+    const btnFlat = [...pairsFrom("2", "J"), "ATs", "AJs", "KTs", "QTs", "J9s", "T9s", "98s", "87s", "AQo", "AJo", "KQo"];
+    const hasNote = (id: string, ...parts: string[]) => {
+      const n = HANDS.find((h) => h.id === id)!.note ?? "";
+      for (const x of parts) expect(n, id).toContain(x);
+    };
+
+    it("aralık sayıları notlarla aynı (CO ≈ %27, 3-bet ≈ %7 ve ≈ %5)", () => {
+      const n = (r: string[]) => r.flatMap(combos).length / 1326;
+      expect(n(cash.CO)).toBeCloseTo(0.273, 2);
+      expect(n(btn3vsCO)).toBeCloseTo(0.074, 2);
+      expect(n(btn3vsHJ)).toBeCloseTo(0.054, 2);
+      hasNote("c09", "TT+, AQ+, AJs, KQs", "A5s, A4s, KJs, QJs, JTs, 76s, 65s");
+      hasNote("c10", "JJ+, AQ+", "A5s, A4s, KQs, 76s");
+      hasNote("c12", "22–JJ, ATs, AJs, KTs, QTs, J9s, T9s, 98s, 87s, AQo, AJo ve KQo");
+    });
+
+    it("c07: AQs cutoff'un açılış aralığına karşı ≈ %61", () => {
+      const eq = equityVsRange("AhQh", cash.CO);
+      expect(eq).toBeGreaterThan(0.59);
+      expect(eq).toBeLessThan(0.63);
+    });
+
+    it("c08: As blocker'ı AA'yı 6'dan 3'e, AK'yi 16'dan 12'ye indirir", () => {
+      const live = (l: string) => combos(l).filter((c) => !c.includes("As") && !c.includes("5s")).length;
+      expect(live("AA")).toBe(3);
+      expect(live("AKs") + live("AKo")).toBe(12);
+    });
+
+    it("c09: QQ nottaki aralığa karşı ≈ %62; yalnızca KK+'ya karşı ≈ %18, gereken ≈ %31,4", () => {
+      const eq = equityVsRange("QsQd", btn3vsCO);
+      expect(eq).toBeGreaterThan(0.6);
+      expect(eq).toBeLessThan(0.64);
+      const vsKK = equityVsRange("QsQd", ["KK", "AA"]);
+      expect(vsKK).toBeGreaterThan(0.16);
+      expect(vsKK).toBeLessThan(0.2);
+      expect(required("c09")).toBeCloseTo(5.5 / 17.5, 3);
+      expect(vsKK).toBeLessThan(required("c09") - 0.1);
+    });
+
+    it("c10 (sınırda): AJo ≈ %34,5, gereken %31,4, gereken realization ≈ %91; value kısmına ≈ %26; geniş aralıkta ≈ %41", () => {
+      const need = required("c10");
+      expect(need).toBeCloseTo(5.5 / 17.5, 3);
+      const eq = equityVsRange("AdJc", btn3vsHJ, 80000);
+      expect(eq).toBeGreaterThan(0.33);
+      expect(eq).toBeLessThan(0.36);
+      expect(eq - need).toBeLessThan(0.035);
+      expect(need / eq).toBeGreaterThan(0.89);
+      expect(need / eq).toBeLessThan(0.93);
+      const v = equityVsRange("AdJc", btn3vsHJValue);
+      expect(v).toBeGreaterThan(0.24);
+      expect(v).toBeLessThan(0.28);
+      const wide = equityVsRange("AdJc", btn3vsCO);
+      expect(wide).toBeGreaterThan(0.39);
+      expect(wide).toBeLessThan(0.43);
+    });
+
+    it("c12: JJ cutoff'a ≈ %68, butonun call aralığına ≈ %74, üç yollu payı ≈ %52", () => {
+      const a = equityVsRange("JhJs", cash.CO);
+      expect(a).toBeGreaterThan(0.66);
+      expect(a).toBeLessThan(0.7);
+      const b = equityVsRange("JhJs", btnFlat);
+      expect(b).toBeGreaterThan(0.72);
+      expect(b).toBeLessThan(0.76);
+      // Üç yollu: her iki rakipten birer kombinasyon, kart çakışması olursa yeniden çek.
+      const h = cards("JhJs");
+      const pool = (r: string[]) => r.flatMap(combos).map(cards).filter((v) => !v.some((c) => h.includes(c)));
+      const [p1, p2] = [pool(cash.CO), pool(btnFlat)];
+      let score = 0, n = 0;
+      while (n < 40000) {
+        const v1 = p1[Math.floor(rnd() * p1.length)], v2 = p2[Math.floor(rnd() * p2.length)];
+        if (v2.some((c) => v1.includes(c))) continue;
+        const used = new Set([...h, ...v1, ...v2]);
+        const board: number[] = [];
+        while (board.length < 5) {
+          const c = Math.floor(rnd() * 52);
+          if (!used.has(c)) { used.add(c); board.push(c); }
+        }
+        const s = [h, v1, v2].map((x) => evaluate7([...x, ...board]));
+        const best = Math.max(...s);
+        if (s[0] === best) score += 1 / s.filter((x) => x === best).length;
+        n++;
+      }
+      expect(score / n).toBeGreaterThan(0.5);
+      expect(score / n).toBeLessThan(0.54);
+    });
+  });
 });
 
 // Seçenek metnindeki all-in tutarı, replay'deki kahraman stack'iyle uyumlu olmalı

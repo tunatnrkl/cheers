@@ -1,4 +1,4 @@
-// Kısa tekrar quiz'leri. Sorular ekip raporlarından (docs/ekip/2026-11-11/02, 05, 14; 2026-11-12/15, 18)
+// Kısa tekrar quiz'leri. Sorular ekip raporlarından (docs/ekip/2026-11-11/02, 05, 14; 2026-11-12/15, 18, 19)
 // alındı, çoktan seçmeli biçime getirildi ve sayıları quizzes.test.ts ile yeniden ölçüldü.
 // Equity değerleri ranges.json'daki yaklaşık aralıklara karşıdır; solver çıktısı değildir.
 // Puan, seri ya da kayıt yok (HAFIZA.md, "ödül döngüsü mekanikleri yok").
@@ -177,6 +177,78 @@ export const QUIZZES: Quiz[] = [
         correct: 2,
         why: "6 / (9 + 6) = %40. Neredeyse hiç fold etmeyen birine karşı bu sıklık gelmez; blöf chip kaybettirir. Check ile river'ı bedava görürsün: on gelirse kent yaparsın, as ya da dam gelirse per'in kazanabilir. Pot kadar bahis eşiği %50'ye çıkarır, durumu kötüleştirir. Bu rakibe karşı tersini yap: blöfü azalt, value bet'i artır.",
         spot: "c28",
+      },
+    ],
+  },
+  {
+    slug: "3-bet-ve-squeeze",
+    title: "3-bet ve squeeze: fiyat, blocker, aralık",
+    summary: "3-bet'e verdiğin fiyatı hesapla, blocker'ın rakibin kombinasyonlarını nasıl azalttığını say ve aynı elin rakibin aralığına göre neden 4-bet, call ya da fold olabileceğini gör.",
+    level: "Orta–ileri",
+    game: "cash",
+    topic: "3bet",
+    assumptions:
+      "Cash, 100 BB, rake yok. Fiyat, blocker sayımı ve başabaş fold sıklığı kesin hesaptır. Equity değerleri sitenin referans açılış aralıklarına ve spotların notunda yazılı 3-bet ve call aralıklarına karşı Monte Carlo ile ölçüldü; bu aralıklar ekip tahminidir, solver çıktısı değildir. Hangi ellerin 3-bet blöfüne uygun olduğu yaygın kabul gören bir ilkedir; burada solver ile karşılaştırılmadı.",
+    posts: ["pozisyon-neden-onemli", "blind-savunmasi-fiyat-aralik-pozisyon"],
+    questions: [
+      {
+        q: "Cutoff 2,5 BB açtı, buton 7,5 BB'ye 3-bet attı, blind'lar fold etti. Cutoff call için en az ne kadar equity'ye ihtiyaç duyar?",
+        options: ["%43", "%30", "%20", "%67"],
+        correct: 1,
+        why: "Cutoff'un önünde 2,5 + 7,5 + 0,5 + 1 = 11,5 BB var. 5 BB daha ödeyip 16,5 BB'lik pot için oynar: 5 / 16,5 ≈ %30,3. %43, call'u paydaya eklemeyi unutmaktan (5 / 11,5); %67 ise call'u yalnızca 3-bet'e bölmekten çıkar. Fiyat iyi görünse de cutoff bu potu pozisyon dışında oynar; ham equity'nin tamamını kullanamaz.",
+        spot: "c07",
+      },
+      {
+        q: "SB'desin, elinde maça as ve maça beşli (A5 suited) var. Butonun aralığında AA ve AK'nin hepsi olsaydı, senin kartların yüzünden kaç AA ve kaç AK kombinasyonu kalır?",
+        options: ["6 AA, 16 AK", "5 AA, 15 AK", "3 AA, 12 AK", "3 AA, 8 AK"],
+        correct: 2,
+        why: "AA'nın 6 kombinasyonundan maça aslı olan 3'ü düşer: 3 kalır. AK'nin 16 kombinasyonundan maça aslı olan 4'ü düşer: 12 kalır. Bir as tutmak, rakibin en güçlü ellerinin kabaca dörtte birini (AK) ile yarısını (AA) ortadan kaldırır; A5s'yi iyi bir 3-bet blöf adayı yapan şey budur.",
+        spot: "c08",
+      },
+      {
+        q: "Aşağıdaki ellerden hangisi pozisyon dışından 3-bet blöfü için genelde en uygun adaydır?",
+        options: [
+          "A5s: as blocker'ı var, görülürse floş ve küçük kent yapabilir",
+          "KJo: çoğu zaman call ile oynamak daha iyidir",
+          "72o: blöf için en ucuz el",
+          "TT: blöf olarak 3-bet atılır",
+        ],
+        correct: 0,
+        why: "İyi bir 3-bet blöfü rakibin güçlü ellerini bloke eder ve call görülürse oynanabilir kalır. A5s ikisini de yapar. KJo gibi orta güçteki eller rakibin fold edeceği ellere karşı önde, devam edeceği ellere karşı geride kaldığı için 3-bet'e uygun düşmez. 72o'nun ne blocker'ı ne oynanabilirliği var; TT ise blöf değil, value için 3-bet atılan ya da call edilen bir el. Bu yaygın kabul gören bir ilkedir; solver ile karşılaştırılmadı.",
+        spot: "c08",
+      },
+      {
+        q: "Cutoff'tan QQ ile açtın, buton 8 BB 3-bet attı. Bu buton yalnızca KK ve AA ile 3-bet atan biriyse QQ'nun equity'si yaklaşık kaçtır ve 4-bet ne olur?",
+        options: ["≈ %62; 4-bet value için", "≈ %50; fark etmez", "≈ %40; 4-bet blöf olur", "≈ %18; 4-bet büyük hata olur"],
+        correct: 3,
+        why: "QQ, KK ve AA'ya karşı %18 civarındadır; call için gereken %31,4'ü (5,5 / 17,5) bile karşılamaz. 4-bet'e yalnızca seni yenen eller devam eder. %62, butonun TT+, AQ+ ve bazı blöflerle 3-bet attığı (spotun notundaki) aralığa karşı equity'dir: o zaman 4-bet doğru. Aynı el, rakibin aralığına göre value 4-bet'ten fold'a kadar değişebilir.",
+        spot: "c09",
+      },
+      {
+        q: "HJ'den AJo ile açtın, buton 8 BB 3-bet attı, blind'lar fold. Call 5,5 BB; gereken equity ≈ %31,4. AJo nottaki aralığa karşı ham olarak ≈ %34,5 alıyor. Call'un kârlı olması için bu equity'nin en az ne kadarını gerçekleştirmen (realization) gerekir?",
+        options: ["≈ %50", "≈ %91", "%100'ünü, ham equity zaten yeter", "≈ %69"],
+        correct: 1,
+        why: "31,4 / 34,5 ≈ %91. Ham equity eşiği yalnızca 3 puan geçiyor; pozisyon dışında, domine edilebilen offsuit bir elle equity'nin bu kadarını kullanmak gerçekçi değil (AJo, JJ+, AQ ve AK'ye karşı yalnızca %26 civarında). Bu yüzden spotta fold doğru kabul edildi, ama karar sınırda: buton daha geniş 3-bet atıyorsa equity %41 civarına çıkar ve call makul olur. Realization oranının kesin değeri rakibe ve oyun biçimine bağlıdır; burada ölçülmedi.",
+        spot: "c10",
+      },
+      {
+        q: "BB'desin. Cutoff 2,5 BB açtı, buton call etti, SB fold; pot 6,5 BB. 13 BB'ye squeeze yapıyorsun. Elin hiç kazanmayacak bir blöf olsaydı, iki rakibin birlikte en az ne sıklıkta fold etmesi gerekirdi?",
+        options: ["%35", "%50", "%65", "%80"],
+        correct: 2,
+        why: "Zaten koyduğun 1 BB'nin üstüne 12 BB riske edip ortadaki 6,5 BB'yi almaya çalışıyorsun: 12 / (12 + 6,5) ≈ %64,9. İki rakibin ikisinin de fold etmesi gerektiği için saf blöf squeeze'i pahalıdır. c12'de JJ ile squeeze value içindir: JJ cutoff'un aralığına karşı ≈ %68, butonun call aralığına karşı ≈ %74 equity'ye sahip; üç kişilik potta payı ≈ %52 (adil pay %33).",
+        spot: "c12",
+      },
+      {
+        q: "Aynı spotta squeeze'i 9 BB ya da 13 BB yapabilirsin. Cutoff call etmek isterse hangi boyutta ne kadar equity'ye ihtiyaç duyar?",
+        options: [
+          "9 BB'de ≈ %31, 13 BB'de ≈ %36",
+          "İkisinde de %33",
+          "9 BB'de ≈ %45, 13 BB'de ≈ %57",
+          "9 BB'de ≈ %69, 13 BB'de ≈ %64",
+        ],
+        correct: 0,
+        why: "9 BB: cutoff'un önünde 2,5 + 2,5 + 0,5 + 9 = 14,5 BB; 6,5 BB ödeyip 21 BB'lik pot için oynar: ≈ %31. 13 BB: önünde 18,5 BB; 10,5 ödeyip 29 BB için oynar: ≈ %36,2. Cutoff call ettikten sonra buton daha da iyi fiyat alır. Küçük squeeze iki rakibe birden ucuz fiyat verir ve pozisyon dışında çok yollu bir pot yaratır; bu yüzden pozisyon dışında ve iki rakibe karşı boyut büyür. %45 ve %57, call'u paydaya eklemeyi unutmaktan çıkar.",
+        spot: "c12",
       },
     ],
   },

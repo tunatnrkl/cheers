@@ -462,3 +462,79 @@ describe("quiz: c-bet-ve-barrel", () => {
     expect(answer(Z, 8)).toMatch(/^%40 fold gerekir/);
   });
 });
+
+describe("quiz: 3-bet-ve-squeeze", () => {
+  const Z = "3-bet-ve-squeeze";
+  const at = (heroPos: "CO" | "BB" | "HJ", seq: string[]) => {
+    const r = replay({ heroPos, stackBB: 100, seq });
+    expect(r.errors).toEqual([]);
+    expect(r.next).toBe(heroPos);
+    return r;
+  };
+  const S = "shdc";
+  const combos = (l: string) => {
+    const out: string[] = [];
+    if (l.length === 2) { for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) out.push(l[0] + S[i] + l[1] + S[j]); }
+    else if (l[2] === "s") { for (let i = 0; i < 4; i++) out.push(l[0] + S[i] + l[1] + S[i]); }
+    else { for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if (i !== j) out.push(l[0] + S[i] + l[1] + S[j]); }
+    return out;
+  };
+
+  it("bağlı spotlar 3bet konulu; quiz pozisyon yazısının düğmesinden açılır", () => {
+    for (const q of QUIZ_BY_SLUG.get(Z)!.questions) if (q.spot) expect(HANDS.find((h) => h.id === q.spot)!.topic).toBe("3bet");
+    expect(QUIZZES.find((z) => z.posts[0] === "pozisyon-neden-onemli")?.slug).toBe(Z);
+  });
+
+  it("1: 2,5 açılışa 7,5 3-bet → cutoff 5 / 16,5 ≈ %30,3; yaygın hatalar %43 ve %67", () => {
+    const r = at("CO", ["CO r2.5", "BTN r7.5", "SB f", "BB f"]);
+    expect(r.pot).toBeCloseTo(11.5, 5);
+    expect(r.toCall).toBeCloseTo(5, 5);
+    expect(requiredEquity(r.pot, r.toCall)).toBeCloseTo(0.303, 3);
+    expect(r.toCall / r.pot).toBeCloseTo(0.435, 3);
+    expect(r.toCall / 7.5).toBeCloseTo(0.667, 3);
+    expect(answer(Z, 1)).toBe("%30");
+  });
+
+  it("2: maça as + maça beşli → 3 AA, 12 AK (c08 gerekçesiyle aynı)", () => {
+    const live = (l: string) => combos(l).filter((c) => !c.includes("As") && !c.includes("5s")).length;
+    expect(live("AA")).toBe(3);
+    expect(live("AKs") + live("AKo")).toBe(12);
+    expect(answer(Z, 2)).toBe("3 AA, 12 AK");
+    expect(HANDS.find((h) => h.id === "c08")!.reasoning).toContain("6'dan 3'e, AK'yi 16'dan 12'ye");
+  });
+
+  it("4–5: c09 ve c10 fiyatı 5,5 / 17,5 ≈ %31,4; c10 gereken realization ≈ %91; sayılar spot gerekçeleriyle aynı", () => {
+    for (const id of ["c09", "c10"]) {
+      const r = replay(HANDS.find((h) => h.id === id)!);
+      expect(requiredEquity(r.pot, r.toCall)).toBeCloseTo(5.5 / 17.5, 6);
+    }
+    expect(5.5 / 17.5 / 0.345).toBeCloseTo(0.91, 2);
+    expect(answer(Z, 5)).toBe("≈ %91");
+    const c09 = HANDS.find((h) => h.id === "c09")!, c10 = HANDS.find((h) => h.id === "c10")!;
+    expect(c09.reasoning).toContain("%62");
+    expect(c09.reasoning).toContain("%18");
+    expect(c09.options[c09.correct]).toMatch(/^4-bet/);
+    expect(c10.reasoning).toContain("%34,5");
+    expect(c10.reasoning).toContain("%91");
+    expect(c10.options[c10.correct]).toBe("Fold");
+  });
+
+  it("6: c12 pot 6,5; 13 BB saf blöf squeeze'i 12 / 18,5 ≈ %64,9 fold ister", () => {
+    const r = replay(HANDS.find((h) => h.id === "c12")!);
+    expect(r.pot).toBeCloseTo(6.5, 5);
+    expect(bluffBreakEven(r.pot, 13 - 1)).toBeCloseTo(0.649, 3);
+    expect(answer(Z, 6)).toBe("%65");
+  });
+
+  it("7: squeeze 9 BB → cutoff 6,5 / 21 ≈ %31; 13 BB → 10,5 / 29 ≈ %36,2", () => {
+    const a = at("CO", ["CO r2.5", "BTN c", "SB f", "BB r9"]);
+    expect(a.pot).toBeCloseTo(14.5, 5);
+    expect(requiredEquity(a.pot, a.toCall)).toBeCloseTo(0.31, 2);
+    const b = at("CO", ["CO r2.5", "BTN c", "SB f", "BB r13"]);
+    expect(b.pot).toBeCloseTo(18.5, 5);
+    expect(requiredEquity(b.pot, b.toCall)).toBeCloseTo(0.362, 3);
+    expect(a.toCall / a.pot).toBeCloseTo(0.45, 2);
+    expect(b.toCall / b.pot).toBeCloseTo(0.57, 2);
+    expect(answer(Z, 7)).toBe("9 BB'de ≈ %31, 13 BB'de ≈ %36");
+  });
+});

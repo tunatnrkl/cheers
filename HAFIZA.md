@@ -2,12 +2,12 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-12, 14. çalışma**
+Son güncelleme: **2026-11-12, 15. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dal akışı (14'te de açık):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9 (`g2abma`) … 13 (`56jps3`) birleştirilmedi; 14. çalışma onların üzerine kuruldu: **`claude/wizardly-meitner-ct3uj1` (en güncel dal, 9–14'ü içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
-2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (14'te hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
+1. **Dal akışı (15'te de açık):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9 (`g2abma`) … 14 (`ct3uj1`) birleştirilmedi; 15. çalışma onların üzerine kuruldu: **`claude/wizardly-meitner-stm5g6` (en güncel dal, 9–15'i içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
+2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (15'te hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
 5. **B-1 ürün kararı** (`acceptable` alanı): poker içerik işlerinin (c39, sınırda spotlar) tek engeli.
@@ -16,18 +16,28 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- 583 spot (65 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 12), 138 sözlük terimi, 9 blog yazısı, **5 quiz / 34 soru** (`/quiz`; 12'de 4, 13'te pot odds quiz'i eklendi).
+- 583 spot (65 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 12), 138 sözlük terimi, 9 blog yazısı, **7 quiz / 49 soru** (`/quiz`).
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
 - Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (14. çalışma): `npm test` **696/696**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- Sağlık (15. çalışma): `npm test` **708/708**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
 - Profil (9): konu tablosu ve çalışma önerisi üyede sunucunun konu toplamlarından; CSV/JSON dökümü `GET /api/attempts/export` ile bütün kayıtlar (12.345 kayıtla PostgreSQL'de doğrulandı). Yalnızca Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
-- 6 quiz, 42 soru (`/quiz`): pot odds, c-bet ve barrel (14), blind savunması, SPR ve value, bubble call/fold, bubble push/fold.
+- 7 quiz, 49 soru (`/quiz`): pot odds, c-bet ve barrel (14), 3-bet ve squeeze (15), blind savunması, SPR ve value, bubble call/fold, bubble push/fold.
 - Quiz'ler GitHub Pages ayarlarıyla (`basePath=/cheers`, statik) ve açık/koyu temada denendi (13): öneksiz bağlantı ve 4xx yok, metin kontrastı ≥ 4,79 (açık tema en düşük, eşiğe yakın).
 - ICM hesap makinesi (10): `5.000` binlik, `%50` yüzde okunuyor; atılan ve 9'u aşan girişler arayüzde söyleniyor (`icmInput.ts`, testli).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 15. çalışma — rapor: [`docs/ekip/2026-11-12/19-calisma-15-kapanis.md`](docs/ekip/2026-11-12/19-calisma-15-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| 3-bet spot denetimi (c07, c08, c09, c10, c12): rakip aralıkları `note`'ta, equity ve blocker iddiaları betikle ölçüldü (`docs/ekip/arac/3bet-denetim.mts`), sayılar gerekçelere eklendi | Poker Uzmanı | ✅ |
+| Q-9 (c09 "KK+'ya karşı call daha güvenli") ve Q-10 (c10 sınırda, gerekçe sayısız) düzeltildi; cevaplar değişmedi | Poker Uzmanı, QA | ✅ |
+| 6 regresyon testi (`hands.test.ts` "3-bet spotları") | QA | ✅ |
+| `3-bet-ve-squeeze` quiz'i (7 soru): fiyat, blocker sayımı, blöf adayı (ilke), QQ vs KK+, AJo realization, squeeze başabaşı, squeeze boyutu fiyatı; 6 quiz testi; `pozisyon-neden-onemli` yazısına quiz düğmesi | Poker Eğitim, Poker Uzmanı, QA | ✅ |
+| Playwright 390/1366 px: 7/7 geri bildirim, taşma 0, konsol 0; c09/c10/c12 notları masada görünüyor | QA | ✅ (ekran okuyucu, Pages, açık tema denenmedi) |
 
 ### 14. çalışma — rapor: [`docs/ekip/2026-11-12/18-calisma-14-kapanis.md`](docs/ekip/2026-11-12/18-calisma-14-kapanis.md)
 
@@ -151,9 +161,9 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 
 ## Devam eden / açık işler
 
-1. **Quiz kapsamı:** `3bet` konusunda quiz yok (`odds` 13'te, `cbet` 14'te eklendi). 3-bet spotları (c07–c10, c12) gerekçeleri aralık varsayımına dayanıyor; quiz'den önce equity iddiaları `ranges.json` ile ölçülmeli ve rakip aralığı yazılmalı.
+1. **3-bet içerik boşluğu (15):** 3-bet'e karşı pozisyonda devam (IP call/4-bet), 4-bet'e karşı karar ve blind-vs-blind 3-bet spotu yok; 3-bet konulu blog yazısı yok. Bütün konularda quiz var (`odds`, `cbet`, `3bet`, `savunma`, `spr/value`, ICM).
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
-3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
+3. **`acceptable?: number[]` alanı** (B-1): c09, c10 (sınırda, 15), c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
 4. **CS-3 devamı:** call (10) ve SB push (11) tarafı 3'er spotla yapıldı. Final masası ödül sıçramaları için ICM'li spot yok; push tarafında yalnızca SB → BB (iki oyunculu karar) modellendi, arkasında birden fazla oyuncu olan push (ör. CO/BTN'den) yok. Quiz'ler 12. çalışmada `/quiz`'de yayına alındı.
 5. "Bu bölümü yorumla" yanıtının içeriği gerçek API anahtarıyla denenmedi.
 6. **G-4 (9):** Gelişim kartı son 5000 cevapla hesaplanıyor (G-1 kararı gereği, not gösteriliyor). Gerçek kullanım verisi gelmeden değiştirilmeyecek.
@@ -179,6 +189,7 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 - **Görülmeyen kart paydası (13):** rakibin kartları kapalıysa turn'de 46 (flop'ta 47); yalnızca kartlar açıksa (üretilmiş "Turn all-in" spotları) 44. Out sayısı iddiası olan yeni spotta out'lar testte evaluator ile kart kart sayılır.
 - **Statik sürüm denemesi (13):** `mv src/app/api <scratchpad>` → `STATIC_EXPORT=1 NEXT_PUBLIC_STATIC=1 npx next build` → `api`'yi geri taşı → `out`'u `<dizin>/cheers` olarak kopyala, `python3 -m http.server` ile `/cheers/` altında aç. Sembolik bağlantılı `node_modules` ile kopyada derleme Turbopack'te çalışmıyor. İş bitince `out` silinmeli.
 - **Pot kesirli seçenekler (14):** "N/M pot bahis (≈X BB)" tutarı replay potundan hesaplanır ve yazıldığı basamakta yuvarlanır (tam sayıda ±0,5, bir ondalıkta ±0,05); `hands.test.ts` denetliyor.
+- **3-bet spotları (15):** rakip 3-bet/flat aralığı `note`'ta, "Varsayım:" ile başlar ve yaklaşık yüzdesini söyler; test, notlardaki listeyi ve yüzdeyi denetler. Rakibin aralığına göre cevabı değişen spotta (c09, c10) gerekçe her iki yönü de söyler.
 - **Quiz metinlerinde kart renk sembolü (♠♥♦♣) kullanılmaz (14):** sistem fontunda kupa emoji olarak çiziliyor. Board "K-7-2, üç farklı renk" biçiminde yazılır.
 - **Quiz kararı (12):** puan, toplam doğru sayısı, süre, seri ve kayıt yok; cevaplar yalnızca sayfa belleğinde (ne `localStorage` ne sunucu). Seçimden sonra doğru cevap metinle de işaretlenir, düğmeler `aria-disabled` (odak kaybolmasın). Her quiz 5–10 soru; her sayı `quizzes.test.ts`'te yeniden hesaplanır; spot bağlantısı (`spot`) varsa soruyla aynı sayıları kullanmalı. Yeni quiz `QUIZZES` dizisine eklenir; ilk `posts` girdisi blog yazısındaki "Quiz ile tekrarla" düğmesini belirler.
 - **G-1 kararı (8):** istatistikler istemcide kalır; sunucu yalnızca toplamı (`count`) verir, liste kesildiğinde arayüz bunu söyler. Kullanıcıların kayda değer kısmı 5000'i aşarsa sunucu özeti yeniden değerlendirilir.
@@ -230,10 +241,13 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 | Q-7 | `pot-odds-adim-adim` yazısının quiz düğmesi SPR quiz'ini açıyordu | Bilgi | Düzeltildi (13) |
 | Q-8 | c27 doğru seçeneği "2/3 pot bahis (≈6,5 BB)"; 9,5 × 2/3 ≈ 6,33 | Düşük | Düzeltildi (14), bütün pot kesirli seçenekler testli |
 | A-2 | C-bet quiz taslağında kart renk sembolleri tutarsız çiziliyordu (kupa emoji) | Düşük | Yayından önce düzeltildi (14) |
+| Q-9 | c09: "yalnızca KK+ ile 3-bet atan rakibe karşı call daha güvenli"; QQ KK+'ya karşı ≈ %18, gereken %31,4 | Düşük | Düzeltildi (15), testli |
+| Q-10 | c10: fold cevabı ham equity'ye göre eşiğin 3,1 puan üstünde (sınırda) ve gerekçe bunu söylemiyordu | Düşük–orta | Düzeltildi (15): fiyat, realization %91, aralık duyarlılığı yazıldı, testli; B-1 adayı |
 | P-3 | "Cheers" yeniden markalaması (`ch8abk`/`ab8a72b`) ana zincirde yok | Bilgi | Kapandı (9): kullanıcı birleştirdi |
 
 ## Doğrulanamayan konular
 
+- 3-bet aralıkları (15): c09, c10'daki buton 3-bet aralıkları ve c12'deki buton flat aralığı ekip tahmini; solver ya da oyuncu havuzu verisiyle karşılaştırılmadı. c10'daki "pozisyon dışında %91 realization gerçekçi değil" yargısı ölçülmedi. Monte Carlo sapması ±0,3 puan civarı.
 - c36'daki butonun call aralığı (CO aralığı − AA–JJ, AK, AQs) bir varsayım.
 - Solver karşılaştırması yapılamadı (c09, c23, c24, c25, c34, c35, c39'daki karışık strateji yorumları; postflop range avantajı iddiaları).
 - t07, t09 ödül yapısı yok.
@@ -251,6 +265,7 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 
 ## Atlanan roller
 
+- **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend, Content** (15): veri yok; yeni mekanik, ekran, uç nokta yok; 3-bet yazısı bir sonraki çalışmaya önerildi.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend, Content** (14): veri yok; yeni mekanik, ekran, uç nokta yok (var olan quiz bileşeni); `c-bet-ne-zaman` yazısı zaten var.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Backend, Content** (13): veri yok; yeni mekanik, ekran ya da uç nokta yok; pot odds yazısı zaten vardı.
 - **Backend, Content, Data Analyst** (12): quiz verisi sunucuya gitmiyor; yeni yazı gerekmedi; veri yok.
@@ -266,9 +281,9 @@ Son güncelleme: **2026-11-12, 14. çalışma**
 
 ## Sonraki öncelikler
 
-1. **Dal kontrolü:** `ct3uj1` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
-2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar. Gelmediyse: **3-bet spot denetimi + quiz** (c07–c10, c12: önce rakip aralıkları `note`'a, equity'ler `ranges.json` ile ölçülmeli; tek cümleyle tarif edilemeyen spot quiz'e alınmaz) ya da **CS-3 son adımı** (final masası ödül sıçraması için 2 ICM spotu; `icm-callfold.mts` / `icm-push.mts`).
-3. C-bet boşluğu (açık iş 7): delayed c-bet ya da check-raise'e karşı c-bet spotu, yalnızca aralığı tek cümleyle yazılabiliyorsa.
+1. **Dal kontrolü:** `stm5g6` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
+2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar (c09, c10, c35). Gelmediyse: **3-bet yazısı** (Content: c07–c10, c12'nin ölçülmüş sayılarıyla; quiz'in `posts[0]`'ı ona çevrilir) ve/veya **3-bet boşluğu** (IP'de 3-bet'e karşı ya da 4-bet'e karşı 1–2 spot; aralık notta, `3bet-denetim.mts` ile ölçülmüş).
+3. **CS-3 son adımı** (final masası ödül sıçraması için 2 ICM spotu) ya da c-bet boşluğu (delayed c-bet / check-raise'e karşı c-bet).
 4. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
 
 **Yerel PostgreSQL ile deneme (8 ve 9'da çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb -h /tmp cheers`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. Sunucuyu yeniden başlatırken `pkill -f next-server` gerekir (`next start` alt süreci kalıyor; 9'da eski sürüm yanıt verdi). Toplu veri için `psql \copy`. İş bitince sunucu ve Postgres durdurulmalı, `.env.local` silinmeli.

@@ -110,26 +110,29 @@ const CURATED: Hand[] = [
   {
     id: "c07", title: "Butonda AQ suited, cutoff açtı", game: "cash", street: "preflop", heroPos: "BTN", stackBB: 100,
     hero: "AhQh", potBB: 4, seq: ["CO r2.5"],
+    note: "Varsayım: cutoff sitedeki referans açılış aralığıyla açıyor (ellerin yaklaşık %27'si).",
     options: ["Fold", "Call", "3-bet 7,5 BB"], correct: 2, topic: "3bet", level: 2,
-    reasoning: "AQs, cutoff'un geniş açılış aralığının çoğundan öndedir; 3-bet ile hem value alır hem blind'ları elden çıkarırsın. Pozisyonda olduğun için açılışın yaklaşık üç katı yeterli. Call da kötü değil ama blind'lara squeeze fırsatı verir.",
+    reasoning: "AQs, cutoff'un geniş açılış aralığının çoğundan öndedir: nottaki aralığa karşı equity'si yaklaşık %61 ve kombinasyonların yaklaşık dörtte üçüne karşı favori. 3-bet ile hem value alır hem blind'ları elden çıkarırsın. Pozisyonda olduğun için açılışın yaklaşık üç katı yeterli. Call da kötü değil ama blind'lara squeeze fırsatı verir.",
   },
   {
     id: "c08", title: "SB'de A5 suited, buton açtı", game: "cash", street: "preflop", heroPos: "SB", stackBB: 100,
     hero: "As5s", potBB: 4, seq: ["BTN r2.5"],
     options: ["Fold", "Call", "3-bet 11 BB"], correct: 2, topic: "3bet", level: 3,
-    reasoning: "SB'den call etmek seni pozisyon dışında, BB arkandayken zor durumda bırakır; bu yüzden çoğu el ya 3-bet ya fold olur. A5s iyi bir 3-bet blöf adayıdır: as blocker'ı rakibin AA/AK kombinasyonlarını azaltır, görülürse de floş ve wheel potansiyeli vardır. Pozisyon dışı olduğun için boyut biraz daha büyük.",
+    reasoning: "SB'den call etmek seni pozisyon dışında, BB arkandayken zor durumda bırakır; bu yüzden çoğu el ya 3-bet ya fold olur. A5s iyi bir 3-bet blöf adayıdır: as blocker'ı rakibin AA kombinasyonlarını 6'dan 3'e, AK'yi 16'dan 12'ye indirir; görülürse de floş ve wheel potansiyeli vardır. Pozisyon dışı olduğun için boyut biraz daha büyük.",
   },
   {
     id: "c09", title: "QQ ile açtın, buton 3-bet attı", game: "cash", street: "preflop", heroPos: "CO", stackBB: 100,
     hero: "QsQd", potBB: 12, seq: ["CO r2.5", "BTN r8", "SB f", "BB f"],
+    note: "Varsayım: butonun cutoff'a 3-bet aralığı TT+, AQ+, AJs, KQs; blöf olarak A5s, A4s, KJs, QJs, JTs, 76s, 65s (ellerin yaklaşık %7'si).",
     options: ["Fold", "Call", "4-bet 20 BB"], correct: 2, topic: "3bet", level: 2,
-    reasoning: "Butonun cutoff'a karşı 3-bet aralığı JJ, TT, AQ ve blöfleri de içerir; QQ bu aralığa karşı net biçimde öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Çok sıkı, yalnızca KK+ ile 3-bet atan bir rakibe karşı call daha güvenli olurdu.",
+    reasoning: "Butonun cutoff'a karşı 3-bet aralığı JJ, TT, AQ ve blöfleri de içerir; QQ nottaki aralığa karşı yaklaşık %62 equity'yle net biçimde öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Rakip yalnızca KK+ ile 3-bet atıyorsa tablo tersine döner: QQ'nun equity'si %18 civarına iner, 4-bet büyük hata olur ve call için gereken %31'i de karşılamaz. Böyle bir rakibe karşı seçim call ile fold arasındadır.",
   },
   {
     id: "c10", title: "AJ offsuit ile açtın, 3-bet yedin", game: "cash", street: "preflop", heroPos: "HJ", stackBB: 100,
     hero: "AdJc", potBB: 12, seq: ["HJ r2.5", "BTN r8", "SB f", "BB f"],
+    note: "Varsayım: buton HJ açılışına sıkı 3-bet atıyor: JJ+, AQ+; blöf olarak A5s, A4s, KQs, 76s (ellerin yaklaşık %5'i).",
     options: ["Fold", "Call (5,5 BB daha)", "4-bet 20 BB"], correct: 0, topic: "3bet", level: 2,
-    reasoning: "HJ açılışına 3-bet atan aralık genelde güçlüdür ve AJo onun value kısmına (AQ, AK, JJ+) karşı domine durumdadır. Pozisyon dışında, offsuit ve domine edilebilir bir elle devam etmek uzun vadede chip kaybettirir. Açılış aralığının bir kısmını 3-bet'e bırakmak normaldir; bu el o kısımdadır.",
+    reasoning: "5,5 BB ödeyip 17,5 BB'lik pot için oynuyorsun: gereken equity yaklaşık %31,4. AJo nottaki aralığa karşı ham olarak yaklaşık %34,5 alır; fark 3 puan, yani karar sınırda. Fold'a iten pozisyon ve dominasyon: call'un kârlı olması için bu equity'nin yaklaşık %91'ini kullanman gerekir. Pozisyon dışında, value kısmına (JJ+, AQ, AK) karşı yalnızca %26 civarında equity'si olan offsuit bir elle bu gerçekçi değil; as ya da vale ile per yaptığında rakipte çoğu zaman daha iyi kicker olur. Buton daha geniş 3-bet atıyorsa (TT, AJs, KJs, QJs gibi eller de varsa) equity %41 civarına çıkar ve call makul hale gelir; karar rakibin 3-bet sıklığına bağlıdır.",
   },
   {
     id: "c11", title: "Limp edene karşı AT suited", game: "cash", street: "preflop", heroPos: "BTN", stackBB: 100,
@@ -141,8 +144,9 @@ const CURATED: Hand[] = [
   {
     id: "c12", title: "BB'de JJ: açılış ve call var", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
     hero: "JhJs", potBB: 6.5, seq: ["CO r2.5", "BTN c", "SB f"],
+    note: "Varsayım: cutoff referans açılış aralığıyla açıyor; buton 22–JJ, ATs, AJs, KTs, QTs, J9s, T9s, 98s, 87s, AQo, AJo ve KQo ile call ediyor (QQ+ ve AK'yi 3-bet'le oynuyor).",
     options: ["Call", "3-bet 9 BB", "3-bet 13 BB (squeeze)"], correct: 2, topic: "3bet", level: 3,
-    reasoning: "JJ, iki rakibin aralığına karşı da öndedir ama üç kişilik potta pozisyon dışı oynamak zordur. Büyük bir squeeze, yalnızca call eden butonun genelde sınırlı (çok güçlü elleri içermeyen) aralığını cezalandırır ve potu çoğu zaman hemen kazandırır. Pozisyon dışında ve iki rakibe karşı boyut büyük olmalı; 9 BB herkese iyi fiyat verir.",
+    reasoning: "JJ, iki rakibin aralığına karşı da öndedir (cutoff'a karşı yaklaşık %68, butonun call aralığına karşı %74; üç kişilik potta payı %52 civarında, adil pay %33) ama üç kişilik potta pozisyon dışı oynamak zordur. Büyük bir squeeze, yalnızca call eden butonun genelde sınırlı (çok güçlü elleri içermeyen) aralığını cezalandırır ve potu çoğu zaman hemen kazandırır. Pozisyon dışında ve iki rakibe karşı boyut büyük olmalı; 9 BB herkese iyi fiyat verir.",
   },
   {
     id: "c13", title: "Derin stack'te 44 ile set avı", game: "cash", street: "preflop", heroPos: "BTN", stackBB: 200,

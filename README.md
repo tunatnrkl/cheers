@@ -96,7 +96,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
 | `/blog`, `/blog/[slug]` | 9 özgün yazı |
-| `/quiz`, `/quiz/[slug]` | 6 quiz, 42 çoktan seçmeli soru (pot odds ve çekişler, c-bet ve barrel, blind savunması, SPR ve value, bubble'da call ve push). Seçimden sonra doğru cevap ve gerekçe; ilgili spot masada açılır. Puan, süre, seri ya da kayıt yok |
+| `/quiz`, `/quiz/[slug]` | 7 quiz, 49 çoktan seçmeli soru (pot odds ve çekişler, c-bet ve barrel, 3-bet ve squeeze, blind savunması, SPR ve value, bubble'da call ve push). Seçimden sonra doğru cevap ve gerekçe; ilgili spot masada açılır. Puan, süre, seri ya da kayıt yok |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu
