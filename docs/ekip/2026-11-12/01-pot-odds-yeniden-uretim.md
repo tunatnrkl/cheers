@@ -239,4 +239,4 @@ Cevabı değişen: **25** / 70. Aralığa duyarlı (rakip çekişle hiç itmesey
 
 - `src/lib/poker/hands.test.ts`: pot odds denetimi yeni mantıkla (yukarıda). 70 spot, call ≥ 25 ve fold ≥ 25.
 - `src/lib/poker/sizinti.test.ts` (yeni, 12 test): bütün spotlarda başlık, not, seçenekler ve diğer veri alanlarında hero eli ve board dışında somut iki kartlık el yazımı yok (`AhKd`, `A♠ K♦`, `A♠K♦`, `10♥ 9♣`); `seq` yalnızca board kartı içeriyor; hiçbir spotta `villain` yok; `describeHand(h, false)` rakip kartı, önerilen hamle ya da gerekçe içermiyor; masa ve koç kodu rakip kartı alanı okumuyor; gerekçelerde de somut rakip eli yok (istisna listesi boş). Tek kart ("A♠ blocker'ı") ve harfle yazılan aralıklar ("AK, KQ, 99", "A5s") somut el sayılmıyor; denetleyicinin kendi örnek vakaları da test ediliyor.
-- `npx tsc --noEmit` temiz, `npx vitest run` 654/654. `npm run ranges` iki kez çalıştırıldı: `drills.json` bayt bayt aynı, `ranges.json` değişmedi. `next build` çalıştırılmadı.
+- `npx tsc --noEmit` temiz, `npx vitest run` 662/662 (birleştirilmiş dal). `npm run ranges` iki kez çalıştırıldı: `drills.json` bayt bayt aynı, `ranges.json` değişmedi. `next build` çalıştırılmadı.

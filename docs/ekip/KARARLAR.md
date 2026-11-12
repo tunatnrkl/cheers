@@ -55,3 +55,13 @@ Yayın: düzeltmeler yeşil olduğunda yeniden kapı gerekmeden birleştirilebil
 - İşler birbirine dokunmayan iş kollarına bölünür ve her biri ayrı bir uygulayıcı ajana verilir (ayrı çalışma kopyasında). Koordinatör (Claude Code) sonuçları birleştirir, testleri ve derlemeyi çalıştırır.
 - Her iş kolunun çıktısı Onay Ajanı kapısından geçer; ONAY alan ve testleri yeşil olan iş yayınlanır.
 - Sıra sorusu (önce görünen işler mi, müfredat mı) paralel çalışmayla ortadan kalktı. İlk tur: (A) el motoru, (B) rakip eli sızıntısı ve 70 pot odds spotunun yeniden üretimi, (D) müfredat o1–o2 içeriği, (E) Öğren yol haritası ve ders ekranı. İkinci tur: (C) alıştırma ekranı ve koç penceresi (A ve B'ye dayanır), animasyonlar, kalan üniteler, ana sayfa, kutlama.
+
+## 2026-11-12 · Kapı B: rakip eli sızıntısı ve 70 pot odds spotu · ONAY
+
+Ajan 5 spotu projenin değerlendiricisini kullanmadan kendi yazdığı hesaplayıcıyla yeniden hesapladı (5/5 tuttu); `npm test` 662/662 ve typecheck'i kendisi çalıştırdı. Koordinatör statik derlemeyi yeşil gördü ve masanın ekran görüntüsünü aldı (`2026-11-12/kapi-b-masa.png`): rakip koltuğunda yalnızca kart sırtı, not aralıkla anlatıyor.
+
+- **Görevden sapma:** 22 spotta hero eli değişti (4'ü sınırdaydı; 18'i aralığa karşı %10'un altında equity'li "ölü el"di, `DEAD_BELOW = 0.1`). Kimlikler, board, aksiyon dizisi ve pot değişmedi. Kabul edildi.
+- Kimliğinde kart yazan 22 spotta kimlik eski hero elini taşıyor; kimlik arayüzde görünmüyor, rakip elini taşımıyor. Kabul edildi.
+- 25 call cevabı, rakibin çekişle all-in yaptığı varsayımına bağlı; gerekçeler bunu söylüyor. Dar/geniş aralık sınırı "doğrulama gerekli" olarak raporda.
+- **Ayrı iş olarak kayda alındı:** 17 spotta hero BTN'den açılış aralığı dışındaki bir elle açmış görünüyor (eski üretimden); pot odds hesabını etkilemiyor.
+- **El motoru (A) kabul ölçütüne eklendi:** showdown'da rakip eli aralıktan sabit tohumla türetilir; el bitmeden hiçbir yerde bulunmaz.
