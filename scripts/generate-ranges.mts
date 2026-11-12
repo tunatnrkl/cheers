@@ -581,6 +581,144 @@ for (let guard = 0; guard < 400000 && bluffDrills.length < 60; guard++) {
 }
 drills.push(...bluffDrills);
 console.log("blöf:", bluffDrills.length, bluffCounts);
+
+// ── 7) Turnuva: BB'desin, açılışa 3-bet all-in ya da fold (17. çalışma) ─────
+// BTN ya da CO 2 BB açar, aradakiler fold eder; kahraman BB'de, efektif stack 20 ya da 25 BB,
+// toplam ante 1 BB (ölü para). Seçenekler yalnızca Fold ve All-in (flat call, küçük 3-bet modellenmez).
+// Fold'a göre fark (BB, chip EV):  Δ = f × P0 + (1 − f) × [eq × (2S + 1,5) − (S − 1)]
+//   P0 = 4,5 (açılış 2 + SB 0,5 + BB 1 + ante 1), f = açanın all-in'e fold etme oranı (açılış aralığındaki
+//   kombinasyonlar, kahramanın kartları çıkarılarak kesin sayılır), eq = kahramanın call aralığına karşı equity'si.
+// Açanın call aralığı türetilir: açan, BB'nin all-in aralığını push sıralamasının en iyi %X'i sayar ve
+// açılış aralığındaki ellerden yalnızca bu aralığa karşı call fiyatını (S − 2) / (2S + 1,5) karşılayan
+// equity'si olanlarla call eder. Üç senaryo: varsayılan all-in aralığı %X, %0,75X (açan daha sıkı call eder)
+// ve %1,35X (daha geniş call eder). Not: açan çok sıkı call ederse (ör. %0,6X) hemen her el all-in'de kârlı
+// çıkar; fold cevapları bu uç senaryoya dayanıklı değildir, bu yüzden aralık bilerek bu kadar tutuldu. Cevap üçünde aynı ve |Δ| ≥ 0,5 BB olmalı. Aralıklar `note`/gerekçede yazılır;
+// test bu yazılı aralıklardan yeniden hesaplar (aralığın türetilmesi değil, cevabın doğruluğu denetlenir).
+const rnd3 = mulberry32(20261117);
+const rnd3Check = mulberry32(20261118);
+const RESTEAL_P0 = 4.5;
+const RESTEAL_MARGIN = 0.5;
+const sgn = (x: number) => num(Math.round(x * 10) / 10).replace("-", "−");
+/** Aralığı kısa yazar ("77+, A9s+, KQo"); testteki `expand` ile geri açılabilir. */
+function compactRange(list: string[]): string {
+  const set = new Set(list);
+  const parts: string[] = [];
+  const pairs = R.filter((r) => set.has(r + r)); // A'dan aşağı
+  let k = 0;
+  while (k < pairs.length && pairs[k] === R[k]) k++;
+  if (k > 1) parts.push(`${pairs[k - 1]}${pairs[k - 1]}+`);
+  else if (k === 1) parts.push("AA");
+  for (const p of pairs.slice(k)) parts.push(p + p);
+  for (let i = 0; i < R.length; i++) {
+    for (const kind of ["s", "o"]) {
+      const kick = R.slice(i + 1).filter((r) => set.has(R[i] + r + kind));
+      if (!kick.length) continue;
+      let c = 0;
+      while (c < kick.length && kick[c] === R[i + 1 + c]) c++;
+      if (c > 1) parts.push(`${R[i]}${kick[c - 1]}${kind}+`);
+      else if (c === 1) parts.push(R[i] + kick[0] + kind);
+      for (const r of kick.slice(c)) parts.push(R[i] + r + kind);
+    }
+  }
+  return parts.join(", ");
+}
+const pctOfCombos = (list: string[]) => list.reduce((n, l) => n + combos(l), 0) / 13.26;
+function restealDelta(hero: [number, number], openList: string[], callList: string[], S: number, trials: number, rng: () => number) {
+  const live = (l: [number, number][]) => l.filter(([x, y]) => x !== hero[0] && x !== hero[1] && y !== hero[0] && y !== hero[1]);
+  const nOpen = live(rangeCombos(openList)).length;
+  const callC = live(rangeCombos(callList));
+  const f = 1 - callC.length / nOpen;
+  const eq = equityVsRange(hero, callC, trials, rng);
+  const called = eq * (2 * S + 1.5) - (S - 1);
+  return { f, eq, called, delta: f * RESTEAL_P0 + (1 - f) * called };
+}
+// Varsayılan all-in aralığı (X): açan ne kadar geç pozisyonda ve stack ne kadar kısaysa o kadar geniş.
+const RESTEAL_CONFIGS: { pos: "BTN" | "CO" | "HJ" | "UTG"; S: 20 | 25; shovePct: number }[] = [
+  { pos: "BTN", S: 20, shovePct: 25 },
+  { pos: "BTN", S: 25, shovePct: 20 },
+  { pos: "CO", S: 20, shovePct: 20 },
+  { pos: "CO", S: 25, shovePct: 15 },
+  { pos: "HJ", S: 20, shovePct: 15 },
+  { pos: "HJ", S: 25, shovePct: 15 },
+  { pos: "UTG", S: 20, shovePct: 15 },
+  { pos: "UTG", S: 25, shovePct: 12 },
+];
+const RESTEAL_CAP = { allin: 4, fold: 8 }; // bölüm başına; toplamda en fazla 30 + 30
+/** Açanın call aralığı: açılış aralığında, BB'nin varsayılan all-in aralığına karşı call fiyatını karşılayan eller. */
+function deriveCalls(openList: string[], shovePct: number, S: number): string[] {
+  const shove = rangeCombos(top(pushScore, shovePct));
+  const need = (S - 2) / (2 * S + 1.5);
+  return openList.filter((l) => {
+    const c = l.length === 3 && l[2] === "s" ? l[0] + "s" + l[1] + "s" : l[0] + "s" + l[1] + "h";
+    return equityVsRange([toCard(c.slice(0, 2)), toCard(c.slice(2))], shove, 20000, rnd3Check) >= need;
+  });
+}
+const restealDrills: Drill[] = [];
+const restealCounts = { allin: 0, fold: 0 };
+for (const cfg of RESTEAL_CONFIGS) {
+  const openList = out.cash[cfg.pos] as string[];
+  const callBase = deriveCalls(openList, cfg.shovePct, cfg.S);
+  const callNarrow = deriveCalls(openList, Math.round(cfg.shovePct * 0.75), cfg.S);
+  const callWide = deriveCalls(openList, Math.round(cfg.shovePct * 1.35), cfg.S);
+  const local = { allin: 0, fold: 0 };
+  const order = [...labels];
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd3() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  for (const l of order) {
+    const full = (k: "allin" | "fold") => local[k] >= RESTEAL_CAP[k] || restealCounts[k] >= 30;
+    if (full("allin") && full("fold")) break;
+    const s1 = Math.floor(rnd3() * 4);
+    const s2 = l.length === 3 && l[2] === "s" ? s1 : (s1 + 1 + Math.floor(rnd3() * 3)) % 4;
+    const cards = l[0] + SUITS[s1] + l[1] + SUITS[s2];
+    const hero: [number, number] = [toCard(cards.slice(0, 2)), toCard(cards.slice(2))];
+    // Hızlı ön eleme (6.000 deneme); kalanlar 20.000 denemeyle üç senaryoda ölçülür.
+    const quick = restealDelta(hero, openList, callBase, cfg.S, 6000, rnd3Check);
+    if (Math.abs(quick.delta) < RESTEAL_MARGIN * 0.6 || full(quick.delta > 0 ? "allin" : "fold")) continue;
+    const base = restealDelta(hero, openList, callBase, cfg.S, 20000, rnd3Check);
+    const narrow = restealDelta(hero, openList, callNarrow, cfg.S, 20000, rnd3Check);
+    const wide = restealDelta(hero, openList, callWide, cfg.S, 20000, rnd3Check);
+    const ds = [base, narrow, wide].map((x) => x.delta);
+    if (ds.some((d) => Math.sign(d) !== Math.sign(ds[0]))) continue;
+    if (Math.min(...ds.map(Math.abs)) < RESTEAL_MARGIN) continue;
+    const allin = base.delta > 0;
+    const key = allin ? "allin" : "fold";
+    if (full(key)) continue;
+    // Gerekçede gösterilen sayılar daha uzun ölçümden (80.000 deneme, standart hata ≈ ±0,18 puan).
+    const shown = restealDelta(hero, openList, callBase, cfg.S, 80000, rnd3Check);
+    if (Math.sign(shown.delta) !== Math.sign(base.delta) || Math.abs(shown.delta) < RESTEAL_MARGIN) continue;
+    local[key]++;
+    restealCounts[key]++;
+    const S = cfg.S;
+    const fP = pct(shown.f);
+    const eP = pct(shown.eq);
+    const order6 = ["UTG", "HJ", "CO", "BTN", "SB"];
+    const seq = [`${cfg.pos} r2`, ...order6.slice(order6.indexOf(cfg.pos) + 1).map((p) => `${p} f`)];
+    const pot2 = num(2 * S + 1.5);
+    const tail = allin
+      ? shown.called < 0
+        ? `Call gördüğünde kaybediyorsun ama ${GEN[cfg.pos]} sık fold etmesi bunu fazlasıyla karşılıyor.`
+        : `Call gördüğünde bile önde ya da kâra yakınsın; fold ettiğinde potu bedavaya alıyorsun.`
+      : `Fold ettirdiğin pot (4,5 BB), call gördüğün kolun kaybını karşılamıyor.`;
+    restealDrills.push({
+      id: `r3-${cfg.pos}${S}-${cards}`,
+      title: `${cfg.pos} 2 BB açtı, BB'de ${l}, ${S} BB: all-in mi?`,
+      game: "turnuva", street: "preflop", heroPos: "BB", stackBB: S,
+      hero: cards, potBB: RESTEAL_P0, seq, ante: 1,
+      note: `Varsayım: ICM yok (chip EV), efektif stack ${S} BB, toplam ante 1 BB. ${cfg.pos} sitedeki ${cfg.pos} açılış aralığıyla (ellerin yaklaşık ${numSuffix(Math.round(pctOfCombos(openList)), "i")}) 2 BB açar; senin all-in aralığını ellerin en iyi ${numSuffix(cfg.shovePct, "i")} sayar ve yalnızca buna karşı yeterli equity'si olan ${compactRange(callBase)} ile call eder (ellerin yaklaşık ${numSuffix(Math.round(pctOfCombos(callBase)), "i")}). Flat call ve küçük 3-bet modellenmedi; soru all-in ile fold'u karşılaştırır.`,
+      options: ["Fold", `All-in (${S} BB)`], correct: allin ? 1 : 0, topic: "3bet", level: 2,
+      reasoning:
+        `All-in'in iki sonucu var. ${cfg.pos} açılış aralığının yaklaşık ${numSuffix(fP, "inde")} fold eder ve 4,5 BB'lik potu alırsın. ` +
+        `Kalan ${numSuffix(100 - fP, "inde")} call eder; ${pretty(cards)} bu call aralığına karşı yaklaşık %${eP} equity taşır, ${pot2} BB'lik potta bu kol fold'a göre ≈ ${sgn(shown.called)} BB getirir. ` +
+        `Toplam: ${num(Math.round(shown.f * 100) / 100)} × 4,5 + ${num(Math.round((1 - shown.f) * 100) / 100)} × (${sgn(shown.called)}) ≈ ${sgn(shown.delta)} BB, yani ${allin ? "all-in fold'dan kârlı" : "all-in fold'dan kötü; fold"}. ${tail} ` +
+        `${cfg.pos} yalnızca ${compactRange(callNarrow)} ile call etse (daha sıkı) ya da ${compactRange(callWide)} ile call etse (daha geniş) de cevap aynı kalıyor.`,
+    });
+  }
+  console.log(`3-bet all-in ${cfg.pos} ${cfg.S}:`, local);
+}
+drills.push(...restealDrills);
+console.log("3-bet all-in:", restealDrills.length, restealCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);

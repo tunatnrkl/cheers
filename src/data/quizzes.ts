@@ -189,7 +189,7 @@ export const QUIZZES: Quiz[] = [
     topic: "3bet",
     assumptions:
       "Cash, 100 BB, rake yok. Fiyat, blocker sayımı ve başabaş fold sıklığı kesin hesaptır. Equity değerleri sitenin referans açılış aralıklarına ve spotların notunda yazılı 3-bet ve call aralıklarına karşı Monte Carlo ile ölçüldü; bu aralıklar ekip tahminidir, solver çıktısı değildir. Hangi ellerin 3-bet blöfüne uygun olduğu yaygın kabul gören bir ilkedir; burada solver ile karşılaştırılmadı.",
-    posts: ["pozisyon-neden-onemli", "blind-savunmasi-fiyat-aralik-pozisyon"],
+    posts: ["3-bet-4-bet-ve-kisa-stack-all-in", "pozisyon-neden-onemli", "blind-savunmasi-fiyat-aralik-pozisyon"],
     questions: [
       {
         q: "Cutoff 2,5 BB açtı, buton 7,5 BB'ye 3-bet attı, blind'lar fold etti. Cutoff call için en az ne kadar equity'ye ihtiyaç duyar?",

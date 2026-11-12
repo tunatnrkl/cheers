@@ -480,9 +480,12 @@ describe("quiz: 3-bet-ve-squeeze", () => {
     return out;
   };
 
-  it("bağlı spotlar 3bet konulu; quiz pozisyon yazısının düğmesinden açılır", () => {
+  it("bağlı spotlar 3bet konulu; quiz 3-bet yazısının düğmesinden (pozisyon yazısından da) açılır", () => {
     for (const q of QUIZ_BY_SLUG.get(Z)!.questions) if (q.spot) expect(HANDS.find((h) => h.id === q.spot)!.topic).toBe("3bet");
-    expect(QUIZZES.find((z) => z.posts[0] === "pozisyon-neden-onemli")?.slug).toBe(Z);
+    expect(QUIZZES.find((z) => z.posts[0] === "3-bet-4-bet-ve-kisa-stack-all-in")?.slug).toBe(Z);
+    // Blog sayfası önce posts[0], sonra posts içinde arar; pozisyon yazısını başka quiz posts[0] olarak almıyor.
+    expect(QUIZZES.find((z) => z.posts[0] === "pozisyon-neden-onemli")).toBeUndefined();
+    expect(QUIZZES.find((z) => z.posts.includes("pozisyon-neden-onemli"))?.slug).toBe(Z);
   });
 
   it("1: 2,5 açılışa 7,5 3-bet → cutoff 5 / 16,5 ≈ %30,3; yaygın hatalar %43 ve %67", () => {

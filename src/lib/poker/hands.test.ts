@@ -809,3 +809,154 @@ describe("river blöf spotları", () => {
     expect((1.8 / 7.3) * 100).toBeCloseTo(24.7, 1);
   });
 });
+
+// 17. çalışma: BB'den açılışa 3-bet all-in ya da fold (r3-). Üreteçten bağımsız yeniden hesap.
+// Açanın açılış aralığı ranges.json'dan; call aralıkları spotun kendi metninden (note: temel,
+// gerekçe: sıkı ve geniş) geri açılır. Fold'a göre fark (chip EV, BB):
+//   Δ = f × 4,5 + (1 − f) × [eq × (2S + 1,5) − (S − 1)]
+// f kesin kombinasyon sayımı (kahramanın kartları çıkarılır), eq Monte Carlo (ayrı tohum).
+// Üç senaryoda işaret cevapla aynı ve |Δ| ≥ 0,3 BB; gerekçedeki sayılar yeniden hesaba yakın olmalı.
+describe("3-bet all-in spotları (r3-)", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("r3-"));
+  const RK = "23456789TJQKA";
+  const expand = (spec: string): string[] => {
+    const out: string[] = [];
+    for (const raw of spec.split(",").map((x) => x.trim())) {
+      const plus = raw.endsWith("+");
+      const t = plus ? raw.slice(0, -1) : raw;
+      if (t[0] === t[1]) {
+        for (let k = RK.indexOf(t[0]); k <= (plus ? 12 : RK.indexOf(t[0])); k++) out.push(RK[k] + RK[k]);
+        continue;
+      }
+      const kinds = t.length === 3 ? [t[2]] : ["s", "o"];
+      for (let k = RK.indexOf(t[1]); k <= (plus ? RK.indexOf(t[0]) - 1 : RK.indexOf(t[1])); k++)
+        for (const s of kinds) out.push(t[0] + RK[k] + s);
+    }
+    return out;
+  };
+  const combosOf = (labels: string[]): [number, number][] => {
+    const out: [number, number][] = [];
+    for (const l of labels) {
+      const a = RK.indexOf(l[0]);
+      const b = RK.indexOf(l[1]);
+      for (let s1 = 0; s1 < 4; s1++)
+        for (let s2 = 0; s2 < 4; s2++) {
+          if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+          out.push([a * 4 + s1, b * 4 + s2]);
+        }
+    }
+    return out;
+  };
+  let seed = 31337;
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const measure = (hero: number[], open: string[], call: string[], S: number, trials: number) => {
+    const live = (c: [number, number][]) => c.filter(([x, y]) => !hero.includes(x) && !hero.includes(y));
+    const callC = live(combosOf(call));
+    const f = 1 - callC.length / live(combosOf(open)).length;
+    let score = 0;
+    for (let t = 0; t < trials; t++) {
+      const v = callC[Math.floor(rnd() * callC.length)];
+      const used = new Set([...hero, ...v]);
+      const board: number[] = [];
+      while (board.length < 5) {
+        const c = Math.floor(rnd() * 52);
+        if (!used.has(c)) {
+          used.add(c);
+          board.push(c);
+        }
+      }
+      const a = evaluate7([...hero, ...board]);
+      const b = evaluate7([...v, ...board]);
+      score += a > b ? 1 : a === b ? 0.5 : 0;
+    }
+    const eq = score / trials;
+    const called = eq * (2 * S + 1.5) - (S - 1);
+    return { f, eq, called, delta: f * 4.5 + (1 - f) * called };
+  };
+  const dec = (s: string) => Number(s.replace("−", "-").replace(",", "."));
+
+  it("en az 50 spot, cevaplar iki tarafa dağılmış, konu 3bet, durum doğru", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+    for (const h of list) {
+      expect(h.topic, h.id).toBe("3bet");
+      expect(h.heroPos).toBe("BB");
+      const r = replay(h);
+      expect(r.pot, h.id).toBeCloseTo(4.5, 5);
+      expect(r.toCall, h.id).toBeCloseTo(1, 5);
+      expect(r.next, h.id).toBe("BB");
+      expect(h.options, h.id).toEqual(["Fold", `All-in (${h.stackBB} BB)`]);
+    }
+  });
+
+  it("cevap üç call senaryosunda da yeniden hesapla aynı; gerekçedeki sayılar doğru", () => {
+    const cash = ranges.cash as Record<string, string[]>;
+    for (const h of list) {
+      const opener = h.seq[0].split(" ")[0];
+      const open = cash[opener];
+      const S = h.stackBB;
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const base = expand(h.note!.match(/yeterli equity'si olan (.+?) ile call eder/)![1]);
+      const [, narrowSpec, wideSpec] = h.reasoning.match(/yalnızca (.+?) ile call etse \(daha sıkı\) ya da (.+?) ile call etse \(daha geniş\)/)!;
+      for (const spec of [base, expand(narrowSpec), expand(wideSpec)]) {
+        for (const l of spec) expect(open, `${h.id}: ${l} açılış aralığında yok`).toContain(l);
+        const m = measure(hero, open, spec, S, spec === base ? 60000 : 15000);
+        expect(m.delta > 0, `${h.id} Δ=${m.delta.toFixed(2)}`).toBe(h.correct === 1);
+        expect(Math.abs(m.delta), h.id).toBeGreaterThanOrEqual(0.3);
+        if (spec === base) {
+          const [, fP, eP] = h.reasoning.match(/yaklaşık %(\d+)'\S+ fold eder.*?yaklaşık %(\d+) equity/)!;
+          expect(Math.abs(Number(fP) - 100 * m.f), h.id).toBeLessThanOrEqual(0.51);
+          expect(Math.abs(Number(eP) - 100 * m.eq), h.id).toBeLessThanOrEqual(1.5); // yuvarlama 0,5 + iki Monte Carlo (≈ ±0,2 puan SE)
+          const shownDelta = dec(h.reasoning.match(/\) ≈ (−?\d+(?:,\d)?) BB, yani/)![1]);
+          expect(Math.abs(shownDelta - m.delta), h.id).toBeLessThanOrEqual(0.4);
+        }
+      }
+    }
+  }, 120000);
+
+  // Blog: 3-bet-4-bet-ve-kisa-stack-all-in. Kısa stack örneklerindeki sayılar spotların (yukarıda yeniden
+  // hesaplanan) gerekçeleriyle aynı olmalı; cash örnekleri c07–c12'nin testli gerekçeleriyle aynı olmalı.
+  it("blog: 3-bet yazısındaki sayılar spotlarla aynı; T6s'de sıkı call senaryosu yeniden ölçülür", () => {
+    const post = POSTS.find((p) => p.slug === "3-bet-4-bet-ve-kisa-stack-all-in")!;
+    const text = post.body.map((b) => b.p).join(" ");
+    const nums = (id: string) => {
+      const h = HANDS.find((x) => x.id === id)!;
+      const m = h.reasoning.match(/yaklaşık %(\d+)'\S+ fold eder.*?yaklaşık %(\d+) equity.*?≈ (−?\d+(?:,\d)?) BB getirir.*?\) ≈ (−?\d+(?:,\d)?) BB/)!;
+      return { h, f: m[1], eq: m[2], called: m[3], delta: m[4] };
+    };
+    const k9 = nums("r3-BTN25-Kh9h");
+    expect(k9.h.correct).toBe(1);
+    expect([k9.f, k9.eq, k9.called, k9.delta]).toEqual(["71", "35", "−5,8", "1,5"]);
+    const s77 = nums("r3-UTG20-7s7h");
+    expect(s77.h.correct).toBe(1);
+    expect([s77.f, s77.eq, s77.called, s77.delta]).toEqual(["39", "44", "−0,7", "1,3"]);
+    const t6 = nums("r3-UTG20-Ts6s");
+    expect(t6.h.correct).toBe(0);
+    expect([t6.f, t6.eq, t6.called, t6.delta]).toEqual(["38", "32", "−5,6", "−1,7"]);
+    for (const t of ["%71'inde", "%35 equity", "−5,8 BB", "0,71 × 4,5 + 0,29 × (−5,8) ≈ +1,5 BB", "%39'unda", "%44 alır", "−0,7 BB", "≈ +1,3 BB", "%38 fold", "%32 equity", "−5,6 BB", "≈ −1,7 BB", "+2,3 BB", "60 turnuva spotu"])
+      expect(text, t).toContain(t);
+    expect(list.length).toBe(60);
+    // T6s: UTG yalnızca QQ+ ve AK ile call etseydi
+    const m = measure(["Ts", "6s"].map(cardFromString), (ranges.cash as Record<string, string[]>).UTG, expand("QQ+, AKs, AKo"), 20, 60000);
+    expect(Math.abs(m.delta - 2.3)).toBeLessThanOrEqual(0.15);
+    // Cash örnekleri: yazıdaki sayılar spot gerekçelerinde de var (o sayılar "3-bet spotları" testinde ölçülüyor)
+    const cashNums: [string, string[]][] = [
+      ["c07", ["%61"]],
+      ["c08", ["6'dan 3'e", "16'dan 12'ye"]],
+      ["c09", ["%62", "%18"]],
+      ["c10", ["%31,4", "%34,5", "%91"]],
+      ["c12", ["%68", "%74", "%52", "%33"]],
+    ];
+    for (const [id, ts] of cashNums)
+      for (const t of ts) {
+        expect(HANDS.find((h) => h.id === id)!.reasoning, `${id} ${t}`).toContain(t);
+        expect(text, `${id} ${t}`).toContain(t);
+      }
+  }, 60000);
+});
