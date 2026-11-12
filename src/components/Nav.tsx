@@ -14,7 +14,7 @@ const ITEMS = [
   { href: "/profil", label: "Profil", icon: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7.5 8.5a7.5 7.5 0 0 1 15 0" },
 ];
 
-const LEARN = ["/ogren", "/cash", "/turnuva", "/araclar", "/sozluk", "/blog", "/yapay-zeka"];
+const LEARN = ["/ogren", "/cash", "/turnuva", "/araclar", "/sozluk", "/blog", "/quiz", "/yapay-zeka"];
 
 function Icon({ d }: { d: string }) {
   return (

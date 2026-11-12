@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RichText } from "@/components/RichText";
 import { POST_BY_SLUG, POSTS } from "@/data/blog";
+import { QUIZZES } from "@/data/quizzes";
 import { SITE_NAME, siteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const post = POST_BY_SLUG.get((await params).slug);
   if (!post) notFound();
+  const quiz = QUIZZES.find((z) => z.posts[0] === post.slug) ?? QUIZZES.find((z) => z.posts.includes(post.slug));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -64,6 +66,11 @@ export default async function Page({ params }: Props) {
         <p className="font-medium">Okuduğunu dene</p>
         <div className="flex flex-wrap gap-2">
           <Link href="/alistirma" className="btn btn-primary">Alıştırma yap</Link>
+          {quiz && (
+            <Link href={`/quiz/${quiz.slug}`} className="btn">
+              Quiz ile tekrarla
+            </Link>
+          )}
           <Link href="/yapay-zeka" className="btn">Yapay zekaya sor</Link>
         </div>
       </div>

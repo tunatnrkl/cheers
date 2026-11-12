@@ -281,7 +281,7 @@ const CURATED: Hand[] = [
     hero: "Jd4c", potBB: 4, seq: ["UTG r2.5"],
     note: "UTG sıkı açıyor (ellerin yaklaşık %15'i).",
     options: ["Fold", "Call (1,5 BB daha)", "3-bet 11 BB"], correct: 0, topic: "savunma", level: 2,
-    reasoning: "Gereken equity yaklaşık %27 (1,5 / 5,5), butona karşı savunmadakiyle aynı. Ama UTG'nin aralığı çok daha güçlü: J4o bu aralığa karşı ham olarak yalnızca %29 civarındadır. Call'un kârlı olması için bu equity'nin yaklaşık %93'ünü kullanman gerekir; pozisyon dışında bu gerçekçi değil. Üstelik sık sık domine durumdasın: J'li per yaptığında rakipte çoğu zaman daha iyi kicker olur. Savunma aralığını fiyat kadar açanın pozisyonu da belirler.",
+    reasoning: "Gereken equity yaklaşık %27 (1,5 / 5,5), butona karşı savunmadakiyle aynı. Ama UTG'nin aralığı çok daha güçlü: J4o bu aralığa karşı ham olarak yalnızca %29 civarındadır. Call'un kârlı olması için bu equity'nin yaklaşık %94'ünü kullanman gerekir; pozisyon dışında bu gerçekçi değil. Üstelik sık sık domine durumdasın: J'li per yaptığında rakipte çoğu zaman daha iyi kicker olur. Savunma aralığını fiyat kadar açanın pozisyonu da belirler.",
   },
   {
     id: "c36", title: "BB'de 65 suited: açılış ve call var", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,

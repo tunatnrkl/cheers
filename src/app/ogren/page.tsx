@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { POSTS } from "@/data/blog";
 import { GLOSSARY } from "@/data/glossary";
+import { QUIZZES } from "@/data/quizzes";
 
 export const metadata: Metadata = {
   title: "Öğren",
@@ -30,6 +31,10 @@ const GROUPS = [
       ["/sozluk", "Sözlük", `${GLOSSARY.length} terim, sade Türkçe`],
       ["/blog", "Blog", `${POSTS.length} kısa yazı: pozisyon, pot odds, ICM…`],
     ],
+  },
+  {
+    title: "Tekrar",
+    items: [["/quiz", "Quiz", `${QUIZZES.length} kısa quiz, her cevabın gerekçesiyle`]],
   },
 ];
 

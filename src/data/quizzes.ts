@@ -1,0 +1,294 @@
+// Kısa tekrar quiz'leri. Sorular ekip raporlarından (docs/ekip/2026-11-11/02, 05, 14; 2026-11-12/15)
+// alındı, çoktan seçmeli biçime getirildi ve sayıları quizzes.test.ts ile yeniden ölçüldü.
+// Equity değerleri ranges.json'daki yaklaşık aralıklara karşıdır; solver çıktısı değildir.
+// Puan, seri ya da kayıt yok (HAFIZA.md, "ödül döngüsü mekanikleri yok").
+
+import type { Topic } from "./hands";
+
+export type QuizQuestion = {
+  q: string;
+  options: string[];
+  correct: number;
+  why: string;
+  /** Aynı fikri masada gösteren spot (alıştırma masasında `?el=` ile açılır). */
+  spot?: string;
+};
+
+export type Quiz = {
+  slug: string;
+  title: string;
+  summary: string;
+  level: "Başlangıç–orta" | "Orta" | "Orta–ileri";
+  game: "cash" | "turnuva";
+  topic: Topic;
+  /** Bütün sorularda geçerli varsayımlar. Soruların başında gösterilir. */
+  assumptions: string;
+  /** İlgili blog yazıları. */
+  posts: string[];
+  questions: QuizQuestion[];
+};
+
+export const QUIZZES: Quiz[] = [
+  {
+    slug: "blind-savunmasi",
+    title: "Blind savunması: fiyat, aralık, pozisyon",
+    summary: "BB'de ne kadar equity gerekir, ham equity neden yetmez ve açanın pozisyonu kararı nasıl değiştirir?",
+    level: "Başlangıç–orta",
+    game: "cash",
+    topic: "savunma",
+    assumptions:
+      "Cash: 6 kişilik masa, 100 BB, rake yok. Turnuva sorularında BB ante 1 BB. Rakip aralıkları sitedeki yaklaşık açılış aralıkları: UTG ellerin yaklaşık %15'i, CO %27'si, buton %43'ü. Bunlar solver çıktısı değildir. Equity realization (ham equity'nin ne kadarının kullanılabildiği) için kesin bir sayı verilmez; oranlar kaynağa göre değişir.",
+    posts: ["blind-savunmasi-fiyat-aralik-pozisyon", "pot-odds-adim-adim"],
+    questions: [
+      {
+        q: "Buton 2,5 BB açtı, SB fold etti. BB'desin. Call için en az ne kadar equity gerekir?",
+        options: ["%20", "%27", "%38", "%50"],
+        correct: 1,
+        why: "Ortada 4 BB var (2,5 + 0,5 + 1). 1,5 BB ödeyip 5,5 BB'lik pot için oynuyorsun: 1,5 / 5,5 ≈ %27,3.",
+      },
+      {
+        q: "Aynı durum, ama buton 2 BB'ye açtı (min-raise). Gereken equity nedir?",
+        options: ["%18", "%22", "%27", "%33"],
+        correct: 1,
+        why: "Ortada 3,5 BB var, 1 BB ödüyorsun: 1 / 4,5 ≈ %22,2. Açılış küçüldükçe BB daha geniş savunabilir.",
+      },
+      {
+        q: "CO 2,5 BB açtı, buton call etti, SB fold etti. BB'desin. Gereken equity nedir?",
+        options: ["%19", "%27", "%33", "%40"],
+        correct: 0,
+        why: "Ortada 6,5 BB var, 1,5 BB ödüyorsun: 1,5 / 8 ≈ %18,8. Fiyat çok iyi ama iki rakibe karşı oynayacaksın. En çok suited ve bağlantılı eller kazanır, çünkü güçlü el yaptıklarında büyük pot alırlar.",
+        spot: "c36",
+      },
+      {
+        q: "Turnuva, 30 BB, BB ante 1. Buton 2,2 BB açtı, SB fold etti. BB'desin. Gereken equity nedir?",
+        options: ["%15", "%20", "%27", "%31"],
+        correct: 1,
+        why: "Ortada 4,7 BB var (2,2 + 0,5 + 1 + 1 ante). 1,2 BB ödüyorsun: 1,2 / 5,9 ≈ %20,3. Ante, BB'nin fiyatını belirgin biçimde iyileştirir.",
+      },
+      {
+        q: "Butonun 2,5 BB açılışına karşı BB'de 72o var. 72o bu aralığa karşı ham olarak yaklaşık %29,5 equity taşıyor, gereken ise %27,3. Bu varsayımlarla neden yine de fold daha iyi?",
+        options: [
+          "Pot odds yanlış hesaplanmıştır",
+          "Pozisyon dışında bu el ham equity'sinin neredeyse tamamını kullanamaz (equity realization)",
+          "72o her zaman %20'den az equity taşır",
+          "BB hiçbir zaman offsuit elle savunma yapmaz",
+        ],
+        correct: 1,
+        why: "Eşik kıl payı geçiliyor: call'un kârlı olması için 72o'nun ham equity'sinin yaklaşık %92'sini kullanması gerekir. Pozisyon dışında, çoğu flop'u ıskalayan bir el için bu gerçekçi değil. Son seçenek de yanlış: K4o gibi offsuit eller ucuz fiyatlarda savunulur. Açılış 3 BB olunca fiyat %31'e çıkar ve 72o eşiğin altında kalır.",
+        spot: "c34",
+      },
+      {
+        q: "Aynı spotta T8s'in ham equity'si yaklaşık %41. Call'un kârlı olması için bu equity'nin en az ne kadarını kullanması gerekir?",
+        options: ["%27", "%50", "%66", "%90"],
+        correct: 2,
+        why: "27,3 / 41 ≈ %66. Suited ve bağlantılı bir el için ulaşılabilir bir oran; 72o'nun ihtiyacı ise yaklaşık %92'ydi. Aynı fiyat, iki çok farklı karar.",
+      },
+      {
+        q: "Turnuva, 30 BB, ante 1. Buton 2,2 BB açtı ve BB'de K4o var. Ham equity yaklaşık %41, gereken %20,3. En iyi hamle hangisi?",
+        options: ["Fold", "Call", "All-in"],
+        correct: 1,
+        why: "Ham equity'nin yalnızca yaklaşık yarısını kullanmak yetiyor. 30 BB ile all-in ise 4,7 BB'lik potu almak için bütün stack'i riske atar ve çoğunlukla daha iyi eller tarafından görülür.",
+        spot: "t25",
+      },
+      {
+        q: "UTG 2,5 BB açtı, herkes fold etti, BB'de J4o var. Fiyat buton açılışındakiyle aynı (%27,3). J4o'nun UTG aralığına karşı ham equity'si yaklaşık %29. Kararı en çok değiştiren etken nedir?",
+        options: ["Açanın pozisyonu ve buna bağlı aralığın gücü", "Kartların rengi", "Masadaki oyuncu sayısı"],
+        correct: 0,
+        why: "UTG'nin aralığı (yaklaşık %15) butonunkinden (yaklaşık %43) çok daha güçlü. J4o eşiğin hemen üstünde kalıyor ve J'li per yaptığında sık sık daha iyi kicker'a kaybediyor (domine). Fiyat aynı olsa da savunma aralığı açana göre daralır.",
+        spot: "c35",
+      },
+    ],
+  },
+  {
+    slug: "spr-ve-value",
+    title: "SPR ve value bet",
+    summary: "Flop'taki stack/pot oranını hesapla, set mining'in sınırını gör, bir bahsin value bet olup olmadığını ayırt et.",
+    level: "Orta",
+    game: "cash",
+    topic: "spr",
+    assumptions:
+      "Cash, 100 BB, rake yok. SPR (stack-to-pot ratio): efektif stack'in flop'taki pota oranı. SPR'nin yaklaşık 3'ün altı ya da 10'un üstü olması pratik kurallardır, kesin sınırlar değildir.",
+    posts: ["pot-odds-adim-adim", "c-bet-ne-zaman"],
+    questions: [
+      {
+        q: "Buton 2,5 BB açtı, SB fold etti, BB call etti. Flop'ta SPR yaklaşık kaçtır?",
+        options: ["5", "10", "18", "40"],
+        correct: 2,
+        why: "Pot 2,5 + 2,5 + 0,5 = 5,5 BB. Kalan stack 97,5 BB. 97,5 / 5,5 ≈ 17,7.",
+      },
+      {
+        q: "CO 2,5 BB açtı, sen butonda 9 BB'ye 3-bet yaptın, blind'lar fold etti, CO call etti. Flop'ta SPR kaçtır?",
+        options: ["1,7", "4,7", "9", "18"],
+        correct: 1,
+        why: "Pot 9 + 9 + 0,5 + 1 = 19,5 BB. Kalan stack 91 BB. 91 / 19,5 ≈ 4,7. 3-bet potlarında SPR, tek raise'li potlara göre çok daha düşüktür.",
+      },
+      {
+        q: "Aynı masada 22 BB'ye 4-bet yaptın ve call geldi (blind'lar fold). Flop'ta SPR yaklaşık 1,7. Top pair top kicker ile rakip all-in yaptı. Bu SPR'de en doğru yaklaşım hangisi?",
+        options: [
+          "Rakibin aralığına bakmadan fold",
+          "Top pair çoğu rakip aralığına karşı stack koymaya yeter; fold nadiren doğrudur",
+          "Yalnızca set ile devam edilir",
+        ],
+        correct: 1,
+        why: "Pot 22 + 22 + 1,5 = 45,5 BB, kalan 78 BB. Pot stack'lere göre çok büyük olduğu için fiyat iyidir ve rakibin 4-bet potunu call eden aralığında top pair'in yendiği çok el vardır. \"Nadiren\" bilinçli: aşırı sıkı bir rakibe karşı istisna olabilir.",
+        spot: "t26",
+      },
+      {
+        q: "Elinde küçük bir cep çifti var. Flop'ta set ya da daha iyisini yapma ihtimali yaklaşık nedir?",
+        options: ["%6", "%12", "%20", "%25"],
+        correct: 1,
+        why: "1 − C(48,3) / C(50,3) = 1 − 17.296 / 19.600 ≈ %11,8. Yani yaklaşık 7,5'e 1 aleyhine.",
+      },
+      {
+        q: "UTG 3 BB açtı ve masada yalnızca 20 BB'si var. CO'dasın, elinde 33 var. Yalnızca set mining için call etmenin neden zor olduğunu en iyi hangisi açıklar?",
+        options: [
+          "33 hiçbir zaman eşleşmeden kazanmaz",
+          "Set yaptığında bile kazanabileceğin en fazla miktar call'un yaklaşık 7 katı; 7,5'e 1'lik ihtimali bu bile karşılamaz",
+          "UTG hiçbir zaman çift oynamaz",
+        ],
+        correct: 1,
+        why: "En fazla 17 BB (UTG'nin kalan stack'i) + 4,5 BB (ortadaki pot) = 21,5 BB kazanabilirsin. 3 BB'lik call'a oranı 21,5 / 3 ≈ 7,2. Set her zaman kazanmaz ve rakip her zaman bütün stack'ini vermez; gerçek oran daha da kötüdür. İlk seçenek yanlış: 33 bazen eşleşmeden de kazanır, ama bunu UTG'nin güçlü aralığına karşı kullanmak zordur.",
+        spot: "c38",
+      },
+      {
+        q: "River'da bahis yapıyorsun. Rakip yalnızca daha iyi ellerle call ediyor, daha kötü elleriyle fold ediyor. Bu bahis ne tür bir bahistir?",
+        options: [
+          "Value bet",
+          "Value bet değil: bahis yalnızca daha iyi elleri ödetir ya da hiçbir şey kazanmaz",
+          "Koruma bahsi",
+        ],
+        correct: 1,
+        why: "Bir bahsin value bet sayılması için call edildiğinde daha kötü bir elin call ediyor olması gerekir. Daha kötü eller fold, daha iyiler call ediyorsa bahis yalnızca kaybını büyütür. River'da koruma diye bir şey yoktur, çünkü gelecek kart yok.",
+      },
+      {
+        q: "River'da pot büyüklüğünde bahis yapıyorsun ve aralığın polarize (ya çok güçlü ya hiçbir şey). Basitleştirilmiş oyun teorisi modeline göre bahis aralığının yaklaşık ne kadarı blöf olmalı?",
+        options: ["%10", "%33", "%50", "%66"],
+        correct: 1,
+        why: "Pot büyüklüğünde bahiste rakibin call için ihtiyaç duyduğu equity 1 / 3. Rakibi call ile fold arasında kararsız bırakmak için blöf oranı da 1 / 3 olur (genel formül: bahis / (pot + 2 × bahis)). Varsayımlar: river, polarize aralık, raise yok, rakip yalnızca blöfleri yenen bir elle karar veriyor. Bu oran gerçek bir solver çıktısıyla karşılaştırılmadı; hedef değil, başlangıç noktasıdır.",
+      },
+    ],
+  },
+  {
+    slug: "bubble-call-fold",
+    title: "Bubble'da all-in'e karşı call",
+    summary: "ICM eşiğini hesapla ve aynı elin chip hesabıyla call, bubble'da fold olduğu durumları ayırt et.",
+    level: "Orta–ileri",
+    game: "turnuva",
+    topic: "icm",
+    assumptions:
+      "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alır; ödüller havuzun %50 / %30 / %20'si (varsayım). ICM: Malmuth-Harville, tek el; gelecek eller hesaba katılmıyor. Rakibin all-in aralığı sitedeki referans push aralığı; solver çıktısı değildir.",
+    posts: ["icm-nedir", "risk-primi-hesabi", "bubble-push-fold-icm"],
+    questions: [
+      {
+        q: "Bubble'da eşit stack'li bir rakibin all-in'ine call etmek için neden chip hesabından daha fazla equity gerekir?",
+        options: [
+          "Rakipler bubble'da yalnızca çok güçlü ellerle all-in yapar",
+          "Kaybedersen ödülsüz elenirsin; kazanırsan stack'in ikiye katlanır ama ödül payın katlanmaz",
+          "Bubble'da ante pota girmez",
+        ],
+        correct: 1,
+        why: "Kayıp, kazançtan daha pahalıdır. Ödül payı stack'le doğru orantılı artmaz; elenmenin maliyeti, stack'i ikiye katlamanın getirisinden büyüktür. İlk seçenek bir rakip varsayımıdır, ICM'in sebebi değil.",
+      },
+      {
+        q: "Call ettiğinde pot 21,5 BB olacak ve sen 9 BB ödüyorsun. Chip hesabıyla gereken equity kaçtır?",
+        options: ["%30", "%42", "%50", "%58"],
+        correct: 1,
+        why: "9 / 21,5 ≈ %41,9. Bu, ödülleri hesaba katmayan eşik; bir sonraki soruda aynı spotun ICM eşiğini hesaplayacaksın.",
+        spot: "ib01",
+      },
+      {
+        q: "Fold edersen ödül havuzunun %16,4'ünü, call edip kazanırsan %31,9'unu, kaybedersen hiçbir şey beklemiyorsun. Call için gereken equity kaçtır?",
+        options: ["%32", "%42", "%51,5", "%66"],
+        correct: 2,
+        why: "(16,4 − 0) / (31,9 − 0) ≈ %51,5. Chip eşiğinden (%41,9) yaklaşık 10 puan yüksek. Bu, A3o'nun chip hesabıyla call, bubble'da fold olduğu spot.",
+        spot: "ib01",
+      },
+      {
+        q: "Aynı bubble'da hangi durumda risk primi (ICM'in eşiğe eklediği fark) en küçüktür?",
+        options: [
+          "10 BB ile 10 BB'lik all-in'e karşı",
+          "40 BB'lik chip lideri olarak 10 BB'lik all-in'e karşı",
+          "15 BB ile 15 BB'lik all-in'e karşı",
+        ],
+        correct: 1,
+        why: "Kaybetsen de en büyük stack olarak kalırsın; eşik %42'den yalnızca %45'e çıkar. 10 BB'ye karşı 10 BB'de eşik %42'den %51,5'e, 15 BB'ye karşı 15 BB'de %44'ten %56'ya çıkar.",
+        spot: "ib03",
+      },
+      {
+        q: "Doğru mu, yanlış mı: \"Bubble'da all-in'e karşı doğru cevap her zaman fold'dur.\"",
+        options: ["Doğru", "Yanlış"],
+        correct: 1,
+        why: "Chip lideri, kısa stack'in geniş all-in'ine karşı A7s ile call eder: equity eşiğin belirgin üstünde ve kazanırsa bubble biter. Rakip çok daha dar itseydi aynı el fold olurdu.",
+        spot: "ib03",
+      },
+      {
+        q: "A3o spotunda buton ellerin %36'sı yerine %48'iyle itiyor olsun. A3o'nun equity'si yaklaşık %48,5 olur. Cevap değişir mi?",
+        options: ["Evet, call olur", "Hayır, fold kalır"],
+        correct: 1,
+        why: "ICM eşiği %51,5; %48,5 hâlâ altında kalır. Rakip daha geniş itse de bu stack dağılımında fold.",
+        spot: "ib01",
+      },
+    ],
+  },
+  {
+    slug: "bubble-push-fold",
+    title: "Bubble'da SB'den all-in ya da fold",
+    summary: "Fold equity'yi hesaba kat, kimin ICM baskısı altında olduğunu gör ve kısa stack'in neden her eli fold etmemesi gerektiğini anla.",
+    level: "Orta–ileri",
+    game: "turnuva",
+    topic: "icm",
+    assumptions:
+      "4 oyuncu, ilk 3 ödül; ödüller havuzun %50 / %30 / %20'si (varsayım). SB 0,5, BB 1, toplam ante 1 BB. Herkes SB'ye kadar fold etti; SB yalnızca fold ya da all-in, BB yalnızca call ya da fold. BB'nin call aralığı, kendi ICM eşiğine göre hesaplanan bir varsayımdır. Tek el ICM, solver çıktısı değildir.",
+    posts: ["bubble-push-fold-icm", "push-fold-temelleri", "icm-nedir"],
+    questions: [
+      {
+        q: "SB'den all-in yaptığında potu kazanmanın iki yolu nedir?",
+        options: [
+          "BB fold eder ve pot çekişmeden senindir, ya da BB call eder ve elin kazanır",
+          "Yalnızca elin kazanırsa",
+          "Yalnızca BB fold ederse",
+        ],
+        correct: 0,
+        why: "Fold equity (rakibin fold etmesiyle gelen kazanç) push'un en büyük parçasıdır. Görüldüğünde gereken equity bu yüzden call tarafındakinden düşüktür.",
+      },
+      {
+        q: "8 BB ile SB'desin, ortada 2,5 BB var, BB ellerin yaklaşık %35'iyle call ediyor. K6o görüldüğünde yaklaşık %38 equity taşıyor. All-in kârlı mı?",
+        options: ["Evet", "Hayır"],
+        correct: 0,
+        why: "Görüldüğünde gereken equity ICM ile yaklaşık %24. Üç elden ikisinde pot çekişmeden geldiği için eşik düşer.",
+        spot: "ip01",
+      },
+      {
+        q: "Doğru mu, yanlış mı: \"Bubble'da kısa stack, ödüle girmek için her eli fold etmelidir.\"",
+        options: ["Doğru", "Yanlış"],
+        correct: 1,
+        why: "K6o spotunda all-in, fold'dan ödül havuzunun yaklaşık 1 puanı kadar fazla getirir. Blind'lar ve ante stack'i eritirken beklemenin de bir maliyeti vardır.",
+        spot: "ip01",
+      },
+      {
+        q: "12 BB ile SB'desin, CO'da 4 BB'lik bir oyuncu var, BB 50 BB ile seni kapsıyor. KJo chip hesabıyla rahat all-in. ICM ile neden fold?",
+        options: [
+          "KJo BB'nin call aralığına karşı her zaman %30'un altındadır",
+          "CO elenirse ödüle girersin; BB'ye kaybedersen ödülsüz elenirsin. Görüldüğünde yaklaşık %59 gerekir, KJo %47 taşır",
+          "BB 50 BB ile her eli call eder",
+        ],
+        correct: 1,
+        why: "Kararı değiştiren 4 BB'lik CO: o masadayken elenmenin maliyeti çok yüksek. Chip hesabıyla görüldüğünde gereken yalnızca %24 civarındaydı.",
+        spot: "ip02",
+      },
+      {
+        q: "45 BB'lik chip lideri olarak SB'desin; diğerleri 17–20 BB. BB neden neredeyse hiç call edemez ve bu senin için ne demek?",
+        options: [
+          "BB kaybederse ödülsüz 4. olur; kendi ICM hesabıyla call için yaklaşık %67 equity gerekir. Fold equity çok yüksek olduğu için T9s bile all-in yapabilir",
+          "BB'nin kartları zayıftır; yalnızca AA ile all-in yapmalısın",
+          "Chip lideri bubble'da hiç el oynamamalıdır",
+        ],
+        correct: 0,
+        why: "BB kendi ICM eşiğiyle yalnızca JJ ve üstüyle call edebilir. ICM baskısı burada push edenin lehine. BB ICM'i yok sayıp daha geniş call etse bile, bu varsayımlarla all-in az farkla önde kalır.",
+        spot: "ip03",
+      },
+    ],
+  },
+];
+
+export const QUIZ_BY_SLUG = new Map(QUIZZES.map((q) => [q.slug, q]));

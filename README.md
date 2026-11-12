@@ -1,6 +1,6 @@
 # Cheers
 
-Türkçe bir Texas Hold'em alıştırma masası: 583 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 583 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük, blog ve kısa tekrar quiz'leri. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -44,6 +44,7 @@ src/
     araclar/                  Hesap makineleri
     cash/  turnuva/           Modül sayfaları
     sozluk/  blog/            İçerik
+    quiz/                     Tekrar quiz'leri (Quiz.tsx istemci bileşeni; puan ve kayıt yok)
     gizlilik/  sorumlu-oyun/  KVKK ve sorumlu oyun
     sitemap.ts  robots.ts     SEO
     api/
@@ -56,7 +57,7 @@ src/
       hands/ (+[id])          GET — el kütüphanesi
   components/                 PokerTable, ActionStrip, CoachChat, AiPanel, Cards, Nav, ...
   data/                       hands.ts (elle yazılan spotlar), drills.json (üretilen spotlar),
-                              ranges.json, glossary.ts, blog.ts
+                              ranges.json, glossary.ts, blog.ts, quizzes.ts (+ quizzes.test.ts: sayılar yeniden ölçülür)
   lib/
     poker/                    evaluator.ts, replay.ts (aksiyon motoru), math.ts, cards.ts
                               hands.test.ts: tüm spotların doğrulaması
@@ -95,6 +96,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
 | `/blog`, `/blog/[slug]` | 9 özgün yazı |
+| `/quiz`, `/quiz/[slug]` | 4 quiz, 26 çoktan seçmeli soru (blind savunması, SPR ve value, bubble'da call ve push). Seçimden sonra doğru cevap ve gerekçe; ilgili spot masada açılır. Puan, süre, seri ya da kayıt yok |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu
@@ -169,7 +171,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
 | Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda ve blog yazılarında testle denetlenir.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda, blog yazılarında ve quiz'lerde testle denetlenir. Quiz'lerdeki fiyat, SPR, ICM ve equity sayıları `src/data/quizzes.test.ts` ile yeniden hesaplanır.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
