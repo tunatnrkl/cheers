@@ -372,7 +372,7 @@ export const QUIZZES: Quiz[] = [
     game: "cash",
     topic: "spr",
     assumptions:
-      "Cash, 100 BB, rake yok. SPR (stack-to-pot ratio): efektif stack'in flop'taki pota oranı. SPR'nin yaklaşık 3'ün altı ya da 10'un üstü olması pratik kurallardır, kesin sınırlar değildir.",
+      "Cash, 100 BB, rake yok (8–9. sorular hariç: turnuva, ante 1 BB, chip EV, ICM yok). SPR (stack-to-pot ratio): efektif stack'in flop'taki pota oranı. SPR'nin yaklaşık 3'ün altı ya da 10'un üstü olması pratik kurallardır, kesin sınırlar değildir.",
     posts: ["pot-odds-adim-adim", "c-bet-ne-zaman"],
     questions: [
       {
@@ -430,6 +430,24 @@ export const QUIZZES: Quiz[] = [
         options: ["%10", "%33", "%50", "%66"],
         correct: 1,
         why: "Pot büyüklüğünde bahiste rakibin call için ihtiyaç duyduğu equity 1 / 3. Rakibi call ile fold arasında kararsız bırakmak için blöf oranı da 1 / 3 olur (genel formül: bahis / (pot + 2 × bahis)). Varsayımlar: river, polarize aralık, raise yok, rakip yalnızca blöfleri yenen bir elle karar veriyor. Bu oran gerçek bir solver çıktısıyla karşılaştırılmadı; hedef değil, başlangıç noktasıdır.",
+      },
+      {
+        q: "Turnuva, 12 BB stack: buton 2 BB açtı, SB fold, BB call etti (toplam ante 1 BB). Flop'ta pot 5,5 BB ve BB kalan 10 BB'yi all-in yaptı. Call için gereken equity yaklaşık kaçtır?",
+        options: ["%28", "%39", "%45", "%50"],
+        correct: 1,
+        why: "Call 10 BB, call sonrası pot 5,5 + 10 + 10 = 25,5 BB. 10 / 25,5 ≈ %39,2. SPR ≈ 1,8: pot stack'e göre büyük olduğu için fiyat iyi. Bağlı spotta üst çift (Q5), her çift ve çekişle all-in yapan bir aralığa karşı ≈ %70 equity taşır: call.",
+        spot: "sp-12-Qc5c-Qh2d7s",
+      },
+      {
+        q: "Aynı el, ama stack 40 BB: flop'ta BB kalan 38 BB'yi all-in yaptı. Gereken equity ne olur ve karar neden zorlaşır?",
+        options: [
+          "%39; fiyat stack'ten bağımsızdır",
+          "≈ %46,6; SPR büyüdükçe eşik %50'ye yaklaşır ve bu kadar derin all-in yapan aralık genelde daha güçlüdür",
+          "%25; stack büyüdükçe call ucuzlar",
+        ],
+        correct: 1,
+        why: "38 / (5,5 + 38 + 38) = 38 / 81,5 ≈ %46,6. Gereken equity R / (5,5 + 2R) stack büyüdükçe %50'ye yaklaşır. İkinci kısım bir varsayım: bağlı spotta BB 40 BB'yle yalnızca overpair, iki çift ve üstüyle all-in yapıyor; o aralığa karşı A-K-J board'unda A8 ≈ %10 equity taşır: fold. Rakip daha geniş all-in yaparsa (üst çift ve floş çekişi dahil) bile ≈ %39,8, yine fold.",
+        spot: "sp-40-Ah8c-JdKhAd",
       },
     ],
   },

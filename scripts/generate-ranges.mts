@@ -958,6 +958,141 @@ for (const { pos, open } of DEF_CONFIGS) {
 }
 drills.push(...defendDrills);
 console.log("BB savunması:", defendDrills.length, defendCounts);
+// ── 10) Turnuva: flop'ta BB all-in yaptı, SPR'ye göre call ya da fold (20. çalışma) ─────────
+// BTN 2 BB açar, SB fold, BB call (toplam ante 1 BB, ölü para); flop pot 5,5 BB. Flop'ta BB kalan
+// R = S − 2 BB'yi all-in yapar. Kahraman BTN'de, flop'ta tek çifti var. Gereken equity R / (5,5 + 2R).
+// BB'nin preflop aralığı 5. bölümdeki aralık (buton açılış aralığı, AA, KK, QQ, AK hariç). Flop all-in
+// aralığı dört iç içe kuraldan biri (geniş ⊃ orta ⊃ sıkı ⊃ çok sıkı); varsayım: stack derinleştikçe
+// (SPR büyüdükçe) all-in aralığı daralır. Equity tam sayımla: BB'nin her kombinasyonu × turn ve river'ın
+// bütün kombinasyonları (Monte Carlo yok). Cevap, varsayılan aralıkta ve onun bir sıkı ve bir geniş
+// komşusunda (varsa) aynı olmalı ve üçünde de gereken equity'den en az 3,5 puan uzak kalmalı.
+type JamLevel = 0 | 1 | 2 | 3; // 0 çok sıkı, 1 sıkı, 2 orta, 3 geniş
+const rndSpr = mulberry32(20261200);
+const SPR_POT = 5.5;
+const SPR_MARGIN = 0.035;
+const SPR_CONFIGS: { S: number; level: JamLevel }[] = [
+  { S: 12, level: 3 },
+  { S: 16, level: 2 },
+  { S: 22, level: 2 },
+  { S: 30, level: 1 },
+  { S: 40, level: 0 },
+];
+const JAM_NOTE = [
+  "overpair, iki çift ve üstü",
+  "üst çift ya da daha iyisi (overpair, iki çift, set, hazır kent/floş) ve floş çekişi",
+  "board'un ikinci büyük kartı ya da daha yüksek bir çift, iki çift ve üstü, floş çekişi ve açık uçlu (ya da çift gutshot) kent çekişi",
+  "her çift, her floş ya da kent çekişi (gutshot dahil), elinde as olan ya da board'un üstünde iki kartı olan eller",
+];
+const JAM_SHORT = ["overpair ve iki çift+", "üst çift+ ve floş çekişi", "ikinci çift+, floş ve açık uçlu çekiş", "her çift ve her çekiş"];
+/** BB'nin bu flop'ta all-in yapacağı en sıkı seviye (−1: hiçbirinde all-in yapmaz). Seviyeler iç içe. */
+function jamLevel(h: number[], flop: number[]): number {
+  const v = evaluate7([...h, ...flop]);
+  const cat = category(v);
+  const br = flop.map((c) => c >> 2).sort((x, y) => y - x);
+  const pairRank = Math.floor(v / 16 ** 4) % 16;
+  const pocket = h[0] >> 2 === h[1] >> 2;
+  if (cat >= 2 || (cat === 1 && pocket && pairRank > br[0])) return 0;
+  if (hasFlushDraw(h, flop) || (cat === 1 && pairRank >= br[0])) return 1;
+  if (straightDrawRanks(h, flop) >= 2 || (cat === 1 && pairRank >= br[1])) return 2;
+  return flopCall(h, flop) ? 3 : -1;
+}
+function sprEquity(hero: number[], flop: number[]) {
+  const used = new Set([...hero, ...flop]);
+  const acc = [0, 1, 2, 3].map(() => ({ s: 0, n: 0 }));
+  for (const [a, b] of bbCombos) {
+    if (used.has(a) || used.has(b)) continue;
+    const lv = jamLevel([a, b], flop);
+    if (lv < 0) continue;
+    let s = 0;
+    let k = 0;
+    for (let t = 0; t < 52; t++) {
+      if (used.has(t) || t === a || t === b) continue;
+      for (let r = t + 1; r < 52; r++) {
+        if (used.has(r) || r === a || r === b) continue;
+        const hv = evaluate7([...hero, ...flop, t, r]);
+        const vv = evaluate7([a, b, ...flop, t, r]);
+        s += hv > vv ? 1 : hv === vv ? 0.5 : 0;
+        k++;
+      }
+    }
+    // Kombinasyon kendi seviyesinde ve daha geniş bütün seviyelerde all-in yapar.
+    for (let L = lv; L <= 3; L++) {
+      acc[L].s += s / k;
+      acc[L].n++;
+    }
+  }
+  return acc.map((x) => (x.n ? x.s / x.n : NaN));
+}
+function heroPairDesc(hero: number[], flop: number[]): string {
+  const v = evaluate7([...hero, ...flop]);
+  const pr = Math.floor(v / 16 ** 4) % 16;
+  const br = flop.map((c) => c >> 2).sort((x, y) => y - x);
+  if (hero[0] >> 2 === hero[1] >> 2) return pr > br[0] ? "overpair" : pr > br[2] ? "board'un iki kartı arasında bir cep çifti" : "board'un altında bir cep çifti (underpair)";
+  return pr === br[0] ? "üst çift (top pair)" : pr === br[1] ? "orta çift" : "alt çift";
+}
+const sprDrills: Drill[] = [];
+const sprCounts = { call: 0, fold: 0 };
+for (const { S, level } of SPR_CONFIGS) {
+  const R = S - 2;
+  const need = R / (SPR_POT + 2 * R);
+  const spr = R / SPR_POT;
+  const levels = [level - 1, level, level + 1].filter((L) => L >= 0 && L <= 3);
+  const local = { call: 0, fold: 0 };
+  for (let guard = 0; guard < 6000 && local.call + local.fold < 12; guard++) {
+    const [h1, h2] = btnCombos[Math.floor(rndSpr() * btnCombos.length)];
+    const deck = Array.from({ length: 52 }, (_, i) => i).filter((c) => c !== h1 && c !== h2);
+    for (let i = 0; i < 3; i++) {
+      const j = i + Math.floor(rndSpr() * (deck.length - i));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    const flop = deck.slice(0, 3);
+    const hero = [h1, h2];
+    // Board çiftsiz; kahramanın flop'ta tam olarak tek çifti var
+    if (new Set(flop.map((c) => c >> 2)).size !== 3) continue;
+    if (category(evaluate7([...hero, ...flop])) !== 1) continue;
+    const heroCards = hero.map(cardStr).join("");
+    const flopS = flop.map(cardStr).join("");
+    const id = `sp-${S}-${heroCards}-${flopS}`;
+    if (sprDrills.some((d) => d.id === id)) continue;
+    const eqs = sprEquity(hero, flop);
+    const base = eqs[level];
+    const call = base > need;
+    const key = call ? "call" : "fold";
+    if (local[key] >= 8 || sprCounts[key] >= 30) continue;
+    if (levels.some((L) => (eqs[L] > need) !== call || Math.abs(eqs[L] - need) < SPR_MARGIN)) continue;
+    local[key]++;
+    sprCounts[key]++;
+    const p1 = (x: number) => num(Math.round(x * 1000) / 10);
+    const gap = num(Math.round(Math.abs(base - need) * 1000) / 10);
+    const neighbours = [
+      ...(level > 0 ? [`daha sıkı (yalnızca ${JAM_SHORT[level - 1]}) all-in yapsa ≈ %${p1(eqs[level - 1])}`] : []),
+      ...(level < 3 ? [`daha geniş (${JAM_SHORT[level + 1]}) all-in yapsa ≈ %${p1(eqs[level + 1])}`] : []),
+    ];
+    const lesson = call
+      ? spr < 3
+        ? `SPR düşük: pot kalan stack'e göre büyük, bu yüzden gereken equity yalnızca %${p1(need)}.`
+        : `SPR ${num(Math.round(spr * 10) / 10)} olsa da el bu aralığa karşı eşiği geçiyor.`
+      : spr < 3
+        ? `Fiyat iyi (%${p1(need)}) olsa da el bu aralığa karşı yeterli equity taşımıyor.`
+        : `SPR büyüdükçe gereken equity %50'ye yaklaşır (SPR ${num(Math.round(((SPR_CONFIGS[0].S - 2) / SPR_POT) * 10) / 10)}'de %${p1((SPR_CONFIGS[0].S - 2) / (SPR_POT + 2 * (SPR_CONFIGS[0].S - 2)))}, burada %${p1(need)}) ve bu varsayımda bu kadar derin all-in yapan aralık daha güçlüdür.`;
+    sprDrills.push({
+      id,
+      title: `Flop'ta SPR ${num(Math.round(spr * 10) / 10)}: ${pretty(heroCards)} all-in'e karşı`,
+      game: "turnuva", street: "flop", heroPos: "BTN", stackBB: S,
+      hero: heroCards, board: flopS, potBB: SPR_POT + R, ante: 1,
+      seq: ["BTN r2", "SB f", "BB c", `F ${flopS}`, "BB a"],
+      note: `Varsayım: ICM yok (chip EV), efektif stack ${S} BB, toplam ante 1 BB. BB'nin aralığı sitedeki buton açılış aralığı, AA, KK, QQ ve AK hariç (bunlarla preflop 3-bet ederdi); flop'ta ${JAM_NOTE[level]} ile all-in yapar. Equity, turn ve river'ın bütün kombinasyonları sayılarak bulundu.`,
+      options: ["Fold", `Call (${R} BB)`], correct: call ? 1 : 0, topic: "spr", level: 2,
+      reasoning:
+        `Flop'ta pot 5,5 BB, kalan stack ${R} BB: SPR ≈ ${num(Math.round(spr * 10) / 10)}. Call için ${R} BB ödeyip ${num(SPR_POT + 2 * R)} BB'lik pot için oynuyorsun: gereken equity ${R} / ${num(SPR_POT + 2 * R)} ≈ %${p1(need)}. ` +
+        `Elinde ${heroPairDesc(hero, flop)} var. Nottaki all-in aralığına karşı ${pretty(heroCards)} yaklaşık %${p1(base)} equity taşır, eşiğin ${gap} puan ${call ? "üstünde: call" : "altında: fold"}. ${lesson} ` +
+        `BB ${neighbours.join(", ")}; cevap değişmiyor.`,
+    });
+  }
+  console.log(`SPR ${S} BB:`, local);
+}
+drills.push(...sprDrills);
+console.log("SPR all-in:", sprDrills.length, sprCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);

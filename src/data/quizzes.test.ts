@@ -251,6 +251,29 @@ describe("SPR ve value quiz'i: hesaplar", () => {
   });
 });
 
+// 20. çalışma: sp- spotlarına bağlı SPR soruları
+describe("SPR ve value quiz'i: sp- spotları (8–9)", () => {
+  it("8: 12 BB, 10 BB all-in → 10 / 25,5 ≈ %39,2; spot call ve aynı sayıları kullanıyor", () => {
+    expect(10 / 25.5).toBeCloseTo(0.392, 3);
+    expect(answer("spr-ve-value", 8)).toBe("%39");
+    const h = HANDS.find((x) => x.id === question("spr-ve-value", 8).spot)!;
+    expect(h.stackBB).toBe(12);
+    expect(h.correct).toBe(1);
+    expect(replay(h).pot).toBeCloseTo(15.5, 5);
+    for (const t of ["%39,2", "%70,1", "üst çift"]) expect(h.reasoning, t).toContain(t);
+  });
+
+  it("9: 40 BB, 38 BB all-in → 38 / 81,5 ≈ %46,6; spot fold, geniş komşuda ≈ %39,8", () => {
+    expect(38 / 81.5).toBeCloseTo(0.466, 3);
+    expect(answer("spr-ve-value", 9)).toMatch(/^≈ %46,6/);
+    const h = HANDS.find((x) => x.id === question("spr-ve-value", 9).spot)!;
+    expect(h.stackBB).toBe(40);
+    expect(h.correct).toBe(0);
+    for (const t of ["%46,6", "%10 equity", "≈ %39,8"]) expect(h.reasoning, t).toContain(t);
+    expect(h.note).toContain("overpair, iki çift ve üstü ile all-in");
+  });
+});
+
 describe("bubble call/fold quiz'i: ib01 sayıları", () => {
   const h = HANDS.find((x) => x.id === "ib01")!;
   const r = replay(h);

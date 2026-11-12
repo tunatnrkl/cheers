@@ -597,13 +597,13 @@ describe("seçeneklerdeki all-in tutarları", () => {
 
 // Q-6 (13. çalışma): c19 gerekçesi rakip kartları kapalıyken 8 / 44 yazıyordu.
 // Gerekçedeki "N / 4x" oranının paydası görülmeyen kart sayısıyla aynı olmalı:
-// rakip kartları kapalıysa flop'ta 47, turn'de 46; açıksa 45 ve 44.
+// rakip kartları kapalıysa flop'ta 47, turn'de 46; açıksa 45 ve 44. Ondalıklı pot ("20 / 45,5") oran sayılmaz (20).
 describe("gerekçelerdeki out oranlarının paydası", () => {
   it("görülmeyen kart sayısıyla tutarlı", () => {
     const bad: string[] = [];
     let checked = 0;
     for (const h of HANDS)
-      for (const m of h.reasoning.matchAll(/(\d+)\s*\/\s*(4[4-7])\b/g)) {
+      for (const m of h.reasoning.matchAll(/(\d+)\s*\/\s*(4[4-7])(?![,.]?\d)/g)) {
         checked++;
         const unseen = 52 - 2 - (h.villain ? 2 : 0) - (h.street === "turn" ? 4 : 3);
         if (+m[2] !== unseen) bad.push(`${h.id}: ${m[0]} (beklenen /${unseen})`);
@@ -1211,4 +1211,128 @@ describe("BB savunması spotları (bd-)", () => {
       }
     }
   }, 120000);
+});
+
+// 20. çalışma: flop'ta BB all-in, SPR'ye göre call ya da fold (sp-). Üreteçten bağımsız yeniden hesap.
+// BB'nin aralığı (buton açılışı − AA, KK, QQ, AK), notta yazılı all-in kuralıyla daraltılır. Kahramanın
+// equity'si BB'nin her kombinasyonu × turn ve river'ın bütün kombinasyonları (990) sayılarak bulunur.
+// Gereken equity R / (5,5 + 2R), R = stack − 2. Cevap notta yazılı aralıkta ve bir sıkı / bir geniş komşu
+// kuralda aynı, üçünde de eşikten ≥ 3,5 puan uzak olmalı; gerekçedeki yüzdeler yeniden hesaplanır.
+describe("SPR all-in spotları (sp-)", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("sp-"));
+  const RK = "23456789TJQKA";
+  const bbLabels = (ranges.cash as Record<string, string[]>).BTN.filter((l) => !["AA", "KK", "QQ", "AKs", "AKo"].includes(l));
+  const combos: [number, number][] = [];
+  for (const l of bbLabels) {
+    const a = RK.indexOf(l[0]);
+    const b = RK.indexOf(l[1]);
+    for (let s1 = 0; s1 < 4; s1++)
+      for (let s2 = 0; s2 < 4; s2++) {
+        if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+        combos.push([a * 4 + s1, b * 4 + s2]);
+      }
+  }
+  const cat = (v: number) => Math.floor(v / 16 ** 5);
+  const windows = [[12, 0, 1, 2, 3], ...Array.from({ length: 9 }, (_, i) => [i, i + 1, i + 2, i + 3, i + 4])];
+  const hasStraight = (ranks: Set<number>) => windows.some((w) => w.every((r) => ranks.has(r)));
+  const strOuts = (hole: number[], board: number[]) => {
+    const all = new Set([...hole, ...board].map((c) => c >> 2));
+    const bd = new Set(board.map((c) => c >> 2));
+    if (hasStraight(all)) return 0;
+    let k = 0;
+    for (let r = 0; r < 13; r++) {
+      if (all.has(r)) continue;
+      if (hasStraight(new Set([...all, r])) && !hasStraight(new Set([...bd, r]))) k++;
+    }
+    return k;
+  };
+  const fd = (hole: number[], board: number[]) =>
+    [0, 1, 2, 3].some((s) => hole.some((c) => (c & 3) === s) && [...hole, ...board].filter((c) => (c & 3) === s).length === 4);
+  // Nottaki dört kural, en sıkıdan en genişe. Her biri bir öncekini kapsar.
+  const RULES = [
+    "overpair, iki çift ve üstü",
+    "üst çift ya da daha iyisi (overpair, iki çift, set, hazır kent/floş) ve floş çekişi",
+    "board'un ikinci büyük kartı ya da daha yüksek bir çift, iki çift ve üstü, floş çekişi ve açık uçlu (ya da çift gutshot) kent çekişi",
+    "her çift, her floş ya da kent çekişi (gutshot dahil), elinde as olan ya da board'un üstünde iki kartı olan eller",
+  ];
+  const jams = (hole: number[], flop: number[], level: number) => {
+    const v = evaluate7([...hole, ...flop]);
+    const c = cat(v);
+    const pr = Math.floor(v / 16 ** 4) % 16;
+    const rk = flop.map((x) => x >> 2).sort((x, y) => y - x);
+    const pocket = hole[0] >> 2 === hole[1] >> 2;
+    const r0 = c >= 2 || (c === 1 && pocket && pr > rk[0]);
+    const r1 = r0 || fd(hole, flop) || (c === 1 && pr >= rk[0]);
+    const r2 = r1 || strOuts(hole, flop) >= 2 || (c === 1 && pr >= rk[1]);
+    const r3 = c >= 1 || fd(hole, flop) || strOuts(hole, flop) >= 1 || hole.some((x) => x >> 2 === 12) || hole.every((x) => x >> 2 > rk[0]);
+    return [r0, r1, r2, r3][level];
+  };
+  const pctIn = (s: string) => [...s.matchAll(/%(\d+(?:,\d)?)/g)].map((m) => Number(m[1].replace(",", ".")));
+
+  it("en az 50 spot, iki cevap da yeterince var, konu spr, not kuralı ve varsayımları içeriyor", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+    for (const h of list) {
+      expect(h.topic, h.id).toBe("spr");
+      expect(h.game).toBe("turnuva");
+      for (const t of ["ICM yok", "AA, KK, QQ ve AK hariç", "toplam ante 1 BB", "bütün kombinasyonları"]) expect(h.note, `${h.id} ${t}`).toContain(t);
+      expect(RULES.filter((r) => h.note!.includes(`flop'ta ${r} ile all-in`)).length, h.id).toBe(1);
+    }
+  });
+
+  it("karar nottaki aralıkta ve iki komşu kuralda tam sayımla aynı; gerekçedeki sayılar doğru", () => {
+    for (const h of list) {
+      const r = replay(h);
+      const R = h.stackBB - 2;
+      expect(r.pot, h.id).toBeCloseTo(5.5 + R, 5);
+      expect(r.toCall, h.id).toBeCloseTo(R, 5);
+      expect(h.options[1]).toBe(`Call (${R} BB)`);
+      const need = R / (5.5 + 2 * R);
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const flop = h.board!.match(/.{2}/g)!.map(cardFromString);
+      expect(new Set(flop.map((c) => c >> 2)).size, h.id).toBe(3);
+      expect(cat(evaluate7([...hero, ...flop])), h.id).toBe(1);
+      const level = RULES.findIndex((x) => h.note!.includes(`flop'ta ${x} ile all-in`));
+      const levels = [level - 1, level, level + 1].filter((L) => L >= 0 && L <= 3);
+      const acc = new Map(levels.map((L) => [L, { s: 0, n: 0 }]));
+      for (const [a, b] of combos) {
+        const used = [...hero, ...flop];
+        if (used.includes(a) || used.includes(b)) continue;
+        const hole = [a, b];
+        const inL = levels.filter((L) => jams(hole, flop, L));
+        if (!inL.length) continue;
+        let s = 0;
+        let k = 0;
+        for (let t = 0; t < 52; t++) {
+          if (used.includes(t) || t === a || t === b) continue;
+          for (let u = t + 1; u < 52; u++) {
+            if (used.includes(u) || u === a || u === b) continue;
+            const hv = evaluate7([...hero, ...flop, t, u]);
+            const vv = evaluate7([...hole, ...flop, t, u]);
+            s += hv > vv ? 1 : hv === vv ? 0.5 : 0;
+            k++;
+          }
+        }
+        expect(k).toBe(990);
+        for (const L of inL) {
+          acc.get(L)!.s += s / k;
+          acc.get(L)!.n++;
+        }
+      }
+      const eq = (L: number) => acc.get(L)!.s / acc.get(L)!.n;
+      for (const L of levels) {
+        expect(eq(L) > need, `${h.id} seviye ${L}`).toBe(h.correct === 1);
+        expect(Math.abs(eq(L) - need), `${h.id} seviye ${L}`).toBeGreaterThanOrEqual(0.035);
+      }
+      // Gerekçe: ilk yüzde gereken equity, ikincisi nottaki aralığa karşı equity; komşular sondaki "≈ %" değerleri.
+      const p = pctIn(h.reasoning);
+      expect(p[0], h.id).toBeCloseTo(need * 100, 1);
+      expect(p[1], h.id).toBeCloseTo(eq(level) * 100, 1);
+      const tail = h.reasoning.slice(h.reasoning.lastIndexOf("BB daha sıkı") >= 0 ? h.reasoning.lastIndexOf("BB daha sıkı") : h.reasoning.lastIndexOf("BB daha geniş"));
+      const pn = pctIn(tail);
+      expect(pn, h.id).toEqual(levels.filter((L) => L !== level).map((L) => Math.round(eq(L) * 1000) / 10));
+      expect(h.reasoning).toContain(h.correct === 1 ? "üstünde: call" : "altında: fold");
+    }
+  }, 300_000);
 });
