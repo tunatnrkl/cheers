@@ -110,14 +110,14 @@ export const chatSchema = z.object({
 export type ChatInput = z.infer<typeof chatSchema>;
 
 // ───────────── Bağlam metni ─────────────
-function describeHand(h: Hand, reveal: boolean): string {
+/** Koça giden el özeti. Rakibin kartları hiçbir durumda yer almaz (sizinti.test.ts). */
+export function describeHand(h: Hand, reveal: boolean): string {
   const r = replay(h);
   const lines = [
     `El: ${h.title} (${GAMES[h.game]}, ${STREETS[h.street]})`,
     h.note ? `Durum: ${h.note}` : null,
     `Kahraman: ${h.heroPos}, kartlar ${h.hero}, efektif stack ${h.stackBB} BB${h.ante ? `, toplam ante ${h.ante} BB` : ""}`,
     h.board ? `Board: ${h.board}` : null,
-    h.villain ? `Açık rakip kartları: ${h.villain.pos} ${h.villain.cards}` : null,
     `Aksiyonlar: ${describeSeq(r)}`,
     `Karar anı: pot ${fmt(r.pot)} BB${r.toCall > 0 ? `, görmek için ${fmt(r.toCall)} BB` : ""}`,
     `Seçenekler: ${h.options.join(" | ")}`,

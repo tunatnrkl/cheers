@@ -1,6 +1,6 @@
 # Müfredat: veri yapısı ve tasarım gerekçeleri
 
-Müfredat tek dosyadır: `src/data/mufredat.json`. Öğren bölümü yalnızca bu dosyayı okur. Tipler `src/lib/mufredat/tipler.ts`, yükleme denetimi `src/lib/mufredat/dogrula.ts` içindedir; `npm test` dosyayı her seferinde denetler.
+Müfredat tek dosyadır: `src/data/mufredat.json`. Elle düzenlenmez: harita `scripts/mufredat/iskelet.py` içinde, ders içerikleri ünite başına `scripts/mufredat/icerik/<unite>.json` dosyalarında durur ve betik ikisini birleştirir (içeriği olan ders `durum: "dolu"` olur). `python3 scripts/mufredat/iskelet.py --kontrol` dosya yazmadan çıktının güncel olup olmadığını söyler; `npm test` bunu da denetler. Öğren bölümü yalnızca bu dosyayı okur. Tipler `src/lib/mufredat/tipler.ts`, yükleme denetimi `src/lib/mufredat/dogrula.ts` içindedir; `npm test` dosyayı her seferinde denetler.
 
 ## Alanlar
 
@@ -8,7 +8,7 @@ Müfredat tek dosyadır: `src/data/mufredat.json`. Öğren bölümü yalnızca b
 - **Pist:** `kimlik` (cash, turnuva), `baslik`, `aciklama`, `uniteler` (sıralı ünite kimlikleri).
 - **Ünite:** `kimlik`, `baslik`, `seviye` (1–10), `renk`, `ozet`, `dersler`.
 - **Ders:** `kimlik`, `baslik`, `tur` (ders, kontrol, test, tekrar), `onkosul`, `kazanimlar`, `sureDk`, `anlatim` (2–4 paragraf), `terimler` (sözlük terimleri), `ustalik` (son kaç alıştırmada hangi oran), `hedefAlistirma`, `durum` (iskelet, dolu), `alistirmalar`.
-- **Alıştırma:** `kimlik`, `tip` (secmeli, dogruYanlis, eslestirme, siralama, sayi, range, spot), `zorluk` (1–5), `soru`, `secenekler`, `dogru`, `kabulEdilebilir`, `neden`, `yanilgi`, `dogrulamaGerekli`. Sayı sorularında `tolerans` ve `birim`. Spot sorularında ya `spotKimlik` (mevcut spot) ya da `spot` (yeni tanım: oyun, oyuncu sayısı, stack, hero pozisyonu ve eli, board, aksiyonlar, rakip aralığı).
+- **Alıştırma:** `kimlik`, `tip` (secmeli, dogruYanlis, eslestirme, siralama, sayi, range, spot), `zorluk` (1–5), `soru`, `secenekler`, `dogru`, `kabulEdilebilir`, `neden`, `yanilgi`, `dogrulamaGerekli`. Sayı sorularında `tolerans` ve `birim`. İsteğe bağlı `denetim`: cevabın betikle bağımsız yeniden hesaplanması için makinece okunur tarif (ör. `{tur: "kazanan", board: "A♣ 8♦ 5♠ 3♥ 2♦", eller: {Ali: "A♠ K♥", Berk: "A♦ J♣"}}` ya da `{tur: "toplam", terimler: [0.5, 2.5, 2.5]}`); arayüz okumaz. Spot sorularında ya `spotKimlik` (mevcut spot) ya da `spot` (yeni tanım: oyun, oyuncu sayısı, stack, hero pozisyonu ve eli, board, aksiyonlar, rakip aralığı).
 
 ## Yükleme denetimi neleri reddeder
 
@@ -21,6 +21,10 @@ Eksik ya da geçersiz alan; tekrar eden kimlik; var olmayan önkoşul; önkoşul
 3. **Tekrar dersleri zorunlu değil.** Yolu kilitlemez; soruları sabit değil, kullanıcının geçmiş hatalarından seçilir.
 4. **Bankroll yönetimi yok.** Gerçek parayla oyuna dair bir konu olduğu için müfredata alınmadı (değişmez 6).
 5. **Solver.** Elimizde solver yok. İleri seviye strateji iddiaları genel kabul görmüş ilkelere dayanır; sayısal iddialar ya kendi hesaplayıcımızdan gelir ya da "doğrulama gerekli" işaretlenir.
+
+## Olgu denetimi
+
+`scripts/mufredat/denetle.mts` (`node scripts/mufredat/denetle.mts`; testte `src/lib/mufredat/denetle.test.ts`) her `denetim` alanını okur: el çeşidi, kazanan, en iyi beşli, kullanılan kapalı kart sayısı, nuts ve sıralamaları `src/lib/poker/evaluator.ts` ile; pot ve sayıları yeniden toplayarak hesaplar ve `dogru` ile karşılaştırır. Ayrıca aynı kartın iki kez kullanılmasını, denetimdeki kartın soru metninde görünmemesini ve board ya da el karşılaştırması içerip denetimi olmayan soruyu reddeder.
 
 ## Doldurma düzeni
 

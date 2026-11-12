@@ -1,8 +1,10 @@
 # Müfredat iskeleti
 
-Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile birlikte üretilir; elle düzenlenmez.
+Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile birlikte üretilir; elle düzenlenmez. Ders içerikleri `scripts/mufredat/icerik/<unite>.json` dosyalarındadır.
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
+
+**Dolu:** 15 ders, 169 alıştırma.
 
 ## Cash pisti
 
@@ -57,13 +59,13 @@ Desteyi, on el sıralamasını ve beş kart kuralını öğren.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o1-d1` Deste ve kartlar | ders | 52 kartı, dört rengi ve sıra değerlerini (2'den A'ya) tanır; kart yazımını (A♠, Kh) okur. | — |
-| `o1-d2` El sıralaması: yüksek karttan üçlüye | ders | Yüksek kart, per, iki per ve üçlüyü ayırt eder ve sıralar. | o1-d1 |
-| `o1-d3` El sıralaması: kentten royal floşa | ders | Kent, floş, full house, kare ve sıralı floşu ayırt eder; on elin tam sırasını bilir. | o1-d2 |
-| `o1-d4` Beş kart kuralı ve kicker | ders | En iyi elin yedi karttan seçilen beş kart olduğunu ve kicker'ın eşitliği nasıl bozduğunu uygular. | o1-d3 |
-| `o1-d5` Board'u okumak | ders | Verilen el ve board'da kendi en iyi beş kartını ve board'un izin verdiği en güçlü eli (nuts) bulur. | o1-d4 |
-| `o1-k` Kontrol: Kartlar ve eller | kontrol | "Kartlar ve eller" ünitesinin kazanımlarını karışık sorularda uygular. | o1-d5 |
-| `o1-r` Tekrar: Kartlar ve eller | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o1-k |
+| `o1-d1` Deste ve kartlar (11 alıştırma) | ders | 52 kartı, dört rengi ve sıra değerlerini (2'den A'ya) tanır; kart yazımını (A♠, Kh) okur. | — |
+| `o1-d2` El sıralaması: yüksek karttan üçlüye (10 alıştırma) | ders | Yüksek kart, per, iki per ve üçlüyü ayırt eder ve sıralar. | o1-d1 |
+| `o1-d3` El sıralaması: kentten royal floşa (12 alıştırma) | ders | Kent, floş, full house, kare ve sıralı floşu ayırt eder; on elin tam sırasını bilir. | o1-d2 |
+| `o1-d4` Beş kart kuralı ve kicker (11 alıştırma) | ders | En iyi elin yedi karttan seçilen beş kart olduğunu ve kicker'ın eşitliği nasıl bozduğunu uygular. | o1-d3 |
+| `o1-d5` Board'u okumak (10 alıştırma) | ders | Verilen el ve board'da kendi en iyi beş kartını ve board'un izin verdiği en güçlü eli (nuts) bulur. | o1-d4 |
+| `o1-k` Kontrol: Kartlar ve eller (12 alıştırma) | kontrol | "Kartlar ve eller" ünitesinin kazanımlarını karışık sorularda uygular. | o1-d5 |
+| `o1-r` Tekrar: Kartlar ve eller (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o1-k |
 
 ### o2 · Masa ve el akışı (seviye 1)
 
@@ -71,14 +73,14 @@ Blind'ler, aksiyonlar, sokaklar, showdown ve pot hesabı.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `o2-d1` Buton ve blind'ler | ders | Dealer butonunu, küçük ve büyük blind'i ve blind'lerin neden zorunlu olduğunu açıklar. | o1-k |
-| `o2-d2` Aksiyonlar | ders | Fold, check, call, bet ve raise'in ne zaman yapılabildiğini bilir; check ile call'u karıştırmaz. | o2-d1 |
-| `o2-d3` Sokaklar: preflop'tan river'a | ders | Preflop, flop, turn ve river'da kaç kart açıldığını ve kimin önce konuştuğunu sıralar. | o2-d2 |
-| `o2-d4` Showdown ve kazanan | ders | Showdown'da kazananı, beraberliği ve potun bölünmesini belirler. | o2-d3, o1-d4 |
-| `o2-d5` Pot nasıl büyür | ders | Blind'ler ve bahislerden potu toplar; bir bahsi görmek için ödenecek miktarı hesaplar. | o2-d4 |
-| `o2-k` Kontrol: Masa ve el akışı | kontrol | "Masa ve el akışı" ünitesinin kazanımlarını karışık sorularda uygular. | o2-d5 |
-| `o2-r` Tekrar: Masa ve el akışı | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o2-k |
-| `o2-t` Temel testi: kartlar ve masa | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o2-k |
+| `o2-d1` Buton ve blind'ler (11 alıştırma) | ders | Dealer butonunu, küçük ve büyük blind'i ve blind'lerin neden zorunlu olduğunu açıklar. | o1-k |
+| `o2-d2` Aksiyonlar (11 alıştırma) | ders | Fold, check, call, bet ve raise'in ne zaman yapılabildiğini bilir; check ile call'u karıştırmaz. | o2-d1 |
+| `o2-d3` Sokaklar: preflop'tan river'a (11 alıştırma) | ders | Preflop, flop, turn ve river'da kaç kart açıldığını ve kimin önce konuştuğunu sıralar. | o2-d2 |
+| `o2-d4` Showdown ve kazanan (11 alıştırma) | ders | Showdown'da kazananı, beraberliği ve potun bölünmesini belirler. | o2-d3, o1-d4 |
+| `o2-d5` Pot nasıl büyür (11 alıştırma) | ders | Blind'ler ve bahislerden potu toplar; bir bahsi görmek için ödenecek miktarı hesaplar. | o2-d4 |
+| `o2-k` Kontrol: Masa ve el akışı (12 alıştırma) | kontrol | "Masa ve el akışı" ünitesinin kazanımlarını karışık sorularda uygular. | o2-d5 |
+| `o2-r` Tekrar: Masa ve el akışı (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | o2-k |
+| `o2-t` Temel testi: kartlar ve masa (20 alıştırma) | test | ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır. | o2-k |
 
 ### o3 · Pozisyon (seviye 2)
 

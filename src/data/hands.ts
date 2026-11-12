@@ -65,8 +65,6 @@ export type Hand = {
   ante?: number;
   /** Masadaki oyuncular (varsayılan: 6 koltuk dolu) */
   players?: Pos[];
-  /** Kartları açık olan rakip (pot odds alıştırmaları) */
-  villain?: { pos: Pos; cards: string };
   options: string[];
   /** options içindeki önerilen hamlenin sırası */
   correct: number;

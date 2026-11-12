@@ -336,69 +336,288 @@ for (const [pos, bb] of SHOVES) {
   }
 }
 
-// ── 4) Cash: turn'de all-in, rakibin kartları açık (pot odds) ─────────
-// Equity tahmin edilmez: kalan 44 river kartı tek tek sayılır. Sınırda olanlar alınmaz.
+// ── 4) Cash: turn'de all-in, rakibin ARALIĞINA karşı pot odds ─────────
+// Rakibin kartları görünmez (KARARLAR.md karar 3). Doğru cevap, hero elinin rakibin
+// varsayılan turn all-in aralığına karşı equity'sinin fiyatla karşılaştırmasıdır.
+// Equity tahmin edilmez: aralıktaki her kombinasyon için kalan 44 river kartı tek tek sayılır.
+//
+// Aralık varsayımı (yaklaşık; solver çıktısı değildir) üç gruptan oluşur:
+//   1) Hazır eller: board'un en yüksek kartını tutan en zayıf el ve onu yenen her el
+//      (en yüksek kart board'da tekse "üst çift ve daha iyisi").
+//   2) Floş çekişleri: kendi kartlarından en az biriyle aynı renkten dört kart.
+//   3) İki uçlu (8 out'lu) kent çekişleri: kendi kartının katkısıyla, kenti iki farklı
+//      değerle tamamlayan eller (çift içten çekiş de buraya girer).
+// Rakip BTN ise yalnızca açılış aralığındaki (ranges.json, cash.BTN) eller sayılır;
+// rakip BB ise herhangi iki kart sayılır (geniş savunma). Her kombinasyon eşit ağırlıklıdır.
+//
+// Kimlikler eski üretimden gelir ve DEĞİŞMEZ: kullanıcıların ilerleme kayıtları kimliğe bağlı.
+// Her satır: hero eli, board, efektif stack, hero pozisyonu (kimlik = o-<el>-<board>).
+const POT_ODDS_BASE = [
+  "Qc4c 3cTh7h8c 60 BB", "3s8c Jc7c5hJs 60 BTN", "5c7h Ts3hThQh 60 BTN", "7hAc QsTc9c8d 25 BB", "3hAd 8dTs8sKd 20 BTN",
+  "QhKc 6cAh7hJc 40 BTN", "3c5c Ts5dAc6d 15 BTN", "6d9h 3d4d2c3c 40 BB", "8h5s JhTc3d4c 30 BTN", "5c9s 7h2s8h4c 40 BTN",
+  "3sTh 8s8d7h9d 30 BTN", "5cTh KdJc4d8h 40 BB", "7cKc 2h7h5dAh 20 BB", "Qh2c 4dTcQs9s 60 BTN", "6c3c 8c2d7d8h 20 BTN",
+  "Ac2c JsKc9s6c 30 BB", "7s7c 2d5c2cTc 20 BTN", "6h8c 3dQh5dAs 15 BTN", "5s6s 3h9cJh7h 25 BTN", "JsTh 5c4d4cKd 30 BB",
+  "4h5s Qd8h6cKh 40 BTN", "5d8d Qs9hTsTc 30 BTN", "Jh2h 8hKs9d6h 30 BTN", "5c4d 7cKsJsKd 25 BTN", "5c8d 2hTh2sAs 15 BTN",
+  "7cQs TcAd6d3c 60 BTN", "6hTs 4dAc8c2s 25 BB", "8d7s 5hAc9hQs 60 BB", "Qh7s TdQs6cAs 25 BTN", "KdJc Td2hAs8s 25 BB",
+  "Ks3h Tc5dQc5h 25 BB", "Qh9s 2sAdTd6c 25 BTN", "5dKd 9d8s7s3h 60 BB", "6c2h QsTs7c8h 30 BTN", "8h4h Qc9sJcQh 60 BB",
+  "5h3h 4h9cKd9d 15 BTN", "4s5s 9h2c2dTd 15 BB", "3c2d Th8hKs8s 15 BB", "4h4c 8d8c6h6s 15 BB", "7h2c 2h5h6s4h 15 BB",
+  "3cQd 9s9c2s8c 20 BTN", "5h2s QsTdJh8s 15 BTN", "9c7c 8sJs8c5h 15 BB", "2h6h 4hKc4cJd 15 BB", "Qh8s 5hJh7h9d 20 BB",
+  "3c5d 6c7cTdKc 15 BB", "Tc9d Qh7dQd2d 15 BTN", "8s2s 5s9c7s9h 20 BTN", "Jc4c 7h6h8c8d 15 BTN", "AsKs ThTsJs2c 20 BTN",
+  "2hTh 8hQh9s6d 20 BTN", "6dQs KdKsAs2s 15 BTN", "5c4c Ac6cKs8d 20 BB", "2h3c Ad9dAsJh 40 BTN", "Jd7d Kc3dTcKd 15 BB",
+  "8cJc 2sTd4cQc 15 BTN", "7s6c 4c5sAc5h 15 BTN", "4dAc Ks9dQs3h 20 BTN", "Qh4d 3dTh6cAs 30 BTN", "5d3c 2c6c6dQh 15 BB",
+  "8hJh 5d7s5h6h 20 BB", "2c8c Td4dAs4c 15 BTN", "Qs7c 9s6sKsTc 25 BB", "AsQh Td3sTsKs 60 BB", "Ah8d JhKhTs8h 15 BTN",
+  "2s6c 3cKc3hAd 30 BTN", "4c2s 6c3s8cAc 15 BB", "Ad4d 6c3dJc9s 30 BTN", "Qs2s Ac8cTh3h 60 BTN", "3s9h KdQd4s6h 25 BTN",
+];
+
 const cardStr = (c: number) => R[12 - (c >> 2)] + SUITS[c & 3];
+const cardsOf = (s: string) => (s.match(/.{2}/g) ?? []).map(toCard);
+const rankTR = (r: number) => (r === 8 ? "10" : R[12 - r]);
+/** Değer maskesinde (bit 0 = 2 … bit 12 = A) beş ardışık değer var mı? As alttan da sayılır. */
+const hasStraight = (mask: number) => {
+  const m = (mask << 1) | ((mask >> 12) & 1);
+  for (let i = 0; i <= 9; i++) if (((m >> i) & 0x1f) === 0x1f) return true;
+  return false;
+};
+const maskOf = (cards: number[]) => cards.reduce((m, c) => m | (1 << (c >> 2)), 0);
+/** Kenti tamamlayan farklı değer sayısı; yalnızca hole kartın katkısıyla gelenler sayılır. */
+function straightOuts(hole: number[], board: number[]): number {
+  const all = maskOf([...hole, ...board]);
+  const b = maskOf(board);
+  if (hasStraight(all)) return 0;
+  let n = 0;
+  for (let r = 0; r < 13; r++) if (hasStraight(all | (1 << r)) && !hasStraight(b | (1 << r))) n++;
+  return n;
+}
+function flushDraw(hole: number[], board: number[]): boolean {
+  for (let s = 0; s < 4; s++) {
+    const inHole = hole.filter((c) => (c & 3) === s).length;
+    if (inHole > 0 && inHole + board.filter((c) => (c & 3) === s).length === 4) return true;
+  }
+  return false;
+}
+const labelOf = (a: number, b: number) => {
+  const [hi, lo] = a >> 2 >= b >> 2 ? [a, b] : [b, a];
+  const x = R[12 - (hi >> 2)] + R[12 - (lo >> 2)];
+  return hi >> 2 === lo >> 2 ? x : x + ((hi & 3) === (lo & 3) ? "s" : "o");
+};
+
+/** Hazır el eşiği: `rank` değerinde bir kart tutan en zayıf elin gücü. */
+type Floor = { rank: number; value: number };
+type Board = { cards: number[]; top: number; floor: number; tight: Floor; wide: Floor };
+function boardInfo(cards: number[]): Board {
+  const ranks = [...new Set(cards.map((c) => c >> 2))].sort((x, y) => y - x);
+  const onBoard = new Set(cards);
+  const weakestWith = (rank: number): Floor => {
+    let value = Infinity;
+    for (let s = 0; s < 4; s++) {
+      const c = rank * 4 + s;
+      if (onBoard.has(c)) continue;
+      for (let d = 0; d < 52; d++) if (d !== c && !onBoard.has(d)) value = Math.min(value, evaluate7([c, d, ...cards]));
+    }
+    return { rank, value };
+  };
+  const tight = weakestWith(ranks[0]);
+  // Geniş aralıkta eşik ikinci en yüksek değere iner; o değer board'da çiftse (üçlü yapar) eşik yine en yüksek karttır.
+  const second = ranks.length > 1 ? weakestWith(ranks[1]) : tight;
+  return { cards, top: ranks[0], floor: tight.value, tight, wide: second.value < tight.value ? second : tight };
+}
+
+type Combo = { hole: [number, number]; made: boolean };
+/** Rakibin turn all-in aralığı: hero ve board kartları çıkarılmış kombinasyonlar. */
+function shoveRange(b: Board, dead: number[], villainPos: string, wide: boolean): Combo[] {
+  const used = new Set([...b.cards, ...dead]);
+  const open = new Set(out.cash.BTN);
+  const floor = (wide ? b.wide : b.tight).value;
+  const list: Combo[] = [];
+  for (let x = 0; x < 52; x++)
+    for (let y = x + 1; y < 52; y++) {
+      if (used.has(x) || used.has(y)) continue;
+      if (villainPos === "BTN" && !open.has(labelOf(x, y))) continue;
+      const made = evaluate7([x, y, ...b.cards]) >= floor;
+      if (made || flushDraw([x, y], b.cards) || straightOuts([x, y], b.cards) >= (wide ? 1 : 2)) list.push({ hole: [x, y], made });
+    }
+  return list;
+}
+/** Tam sayım: aralıktaki her kombinasyon × kalan 44 river kartı. */
+function equityExact(hero: number[], board: number[], range: Combo[]): number {
+  let score = 0;
+  let n = 0;
+  for (const { hole } of range) {
+    const used = new Set([...hero, ...board, ...hole]);
+    for (let c = 0; c < 52; c++) {
+      if (used.has(c)) continue;
+      const h = evaluate7([...hero, ...board, c]);
+      const v = evaluate7([...hole, ...board, c]);
+      score += h > v ? 1 : h === v ? 0.5 : 0;
+      n++;
+    }
+  }
+  return score / n;
+}
+
+/** Hero elinin sade tarifi: [yalın, "…ile" hâli]. */
+function heroKind(hero: number[], b: Board): [string, string] {
+  const v = evaluate7([...hero, ...b.cards]);
+  const cat = Math.floor(v / 16 ** 5);
+  const fd = flushDraw(hero, b.cards);
+  const so = straightOuts(hero, b.cards);
+  const [h1, h2] = hero.map((c) => c >> 2);
+  const boardRanks = [...new Set(b.cards.map((c) => c >> 2))].sort((x, y) => y - x);
+  if (cat >= 4) return ["Güçlü hazır el", "güçlü hazır elle"];
+  if (v >= b.floor) {
+    if (cat === 1 && h1 === h2) return ["Overpair", "overpair'le"];
+    if (cat === 1) return ["Üst çift", "üst çiftle"];
+    return ["Güçlü hazır el", "güçlü hazır elle"];
+  }
+  if (fd && so >= 2) return ["Floş ve kent çekişi", "floş ve kent çekişiyle"];
+  if (fd) return ["Floş çekişi", "floş çekişiyle"];
+  if (so >= 2) return ["İki uçlu kent çekişi", "iki uçlu kent çekişiyle"];
+  const paired = h1 === h2 || boardRanks.includes(h1) || boardRanks.includes(h2);
+  if (paired && so === 1) return ["Çift ve içten kent çekişi", "çift ve içten kent çekişiyle"];
+  if (h1 === h2) return ["Cep çifti", "cep çiftiyle"];
+  if (paired) {
+    const second = boardRanks[1] === h1 || boardRanks[1] === h2;
+    return second ? ["İkinci çift", "ikinci çiftle"] : ["Alt çift", "alt çiftle"];
+  }
+  if (so === 1) return ["İçten kent çekişi", "içten kent çekişiyle"];
+  if (h1 > b.top && h2 > b.top) return ["İki üst kart", "iki üst kartla"];
+  return ["Çekişsiz el", "çekişsiz elle"];
+}
+
+const MARGIN = 0.035; // HAFIZA: eşiğe 3,5 puandan yakın spot sınırdadır
 const potOdds: Drill[] = [];
 const counts = { call: 0, fold: 0 };
-for (let guard = 0; guard < 200000 && potOdds.length < 70; guard++) {
-  const deck = Array.from({ length: 52 }, (_, i) => i);
-  for (let i = 0; i < 8; i++) {
-    const j = i + Math.floor(rnd() * (52 - i));
-    [deck[i], deck[j]] = [deck[j], deck[i]];
-  }
-  const hero = deck.slice(0, 2);
-  const vil = deck.slice(2, 4);
-  const board = deck.slice(4, 8);
-  // Rakip şu an önde olmalı ve kahramanın gerçek bir çekişi olmalı
-  if (evaluate7([...vil, ...board]) <= evaluate7([...hero, ...board])) continue;
-  let wins = 0;
-  const used = new Set(deck.slice(0, 8));
-  for (let c = 0; c < 52; c++) {
-    if (used.has(c)) continue;
-    const h = evaluate7([...hero, ...board, c]);
-    const v = evaluate7([...vil, ...board, c]);
-    wins += h > v ? 1 : h === v ? 0.5 : 0;
-  }
-  const eq = wins / 44;
-  if (eq < 0.06 || eq > 0.5 || !Number.isInteger(wins)) continue;
+const replaced: string[] = [];
+const unsolved: string[] = [];
+const detail: Record<string, unknown>[] = [];
+const flopBet = 2.75;
+const potTurn = 5.5 + 2 * flopBet;
 
-  const S = [15, 20, 25, 30, 40, 60][Math.floor(rnd() * 6)];
-  const heroBB = rnd() < 0.5;
-  const flopBet = 2.75;
-  const potTurn = 5.5 + 2 * flopBet;
+// All-in potun 1,5 katını aşmıyorsa (15 ve 20 BB) rakip geniş aralıkla iter: eşik ikinci en yüksek
+// değere iner ve içten kent çekişleri de girer. Daha büyük all-in'lerde aralık dardır. Sınır bir varsayımdır.
+const WIDE_UP_TO = 1.5;
+type Spot = { id: string; hero: number[]; b: Board; S: number; heroPos: string; vilPos: string; shove: number; finalPot: number; req: number; wide: boolean; range: Combo[]; eq: number };
+function measure(id: string, hero: number[], b: Board, S: number, heroPos: string): Spot {
+  const vilPos = heroPos === "BB" ? "BTN" : "BB";
   const shove = S - 2.5 - flopBet;
   const finalPot = potTurn + 2 * shove;
-  const req = shove / finalPot;
-  if (Math.abs(eq - req) < 0.04) continue;
-  const ok = eq > req;
-  if (counts[ok ? "call" : "fold"] >= 35) continue;
-  counts[ok ? "call" : "fold"]++;
+  const wide = shove <= WIDE_UP_TO * potTurn;
+  const range = shoveRange(b, hero, vilPos, wide);
+  return { id, hero, b, S, heroPos, vilPos, shove, finalPot, req: shove / finalPot, wide, range, eq: equityExact(hero, b.cards, range) };
+}
 
-  const heroPos = heroBB ? "BB" : "BTN";
-  const vilPos = heroBB ? "BTN" : "BB";
-  const flop = board.slice(0, 3).map(cardStr).join("");
-  const turn = cardStr(board[3]);
-  const seq = heroBB
-    ? ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", `BTN b${flopBet}`, "BB c", `T ${turn}`, "BB x", "BTN a"]
-    : ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", `BTN b${flopBet}`, "BB c", `T ${turn}`, "BB a"];
-  const heroCards = hero.map(cardStr).join("");
-  const vilCards = vil.map(cardStr).join("");
+const spots = POT_ODDS_BASE.map((row) => {
+  const [heroS, boardS, S, heroPos] = row.split(" ");
+  const first = measure(`o-${heroS}-${boardS}`, cardsOf(heroS), boardInfo(cardsOf(boardS)), Number(S), heroPos);
+  return { heroS, boardS, first, spot: first };
+});
+// Hero eli iki durumda değiştirilir (kimlik, board, stack ve aksiyonlar aynı kalır):
+//   "sınırda": equity eşiğe 3,5 puandan yakın, cevap tartışmalı;
+//   "ölü el":  equity %10'un altında, yani ortada bir fiyat sorusu yok (çekişsiz, çiftsiz el).
+// İkinci kuralı kapatmak için DEAD_BELOW = 0 yap.
+const DEAD_BELOW = 0.1;
+const whyReplace = (s: Spot) => (Math.abs(s.eq - s.req) < MARGIN ? "sınırda" : s.eq < DEAD_BELOW ? "ölü el" : null);
+for (const { spot } of spots) if (!whyReplace(spot)) counts[spot.eq > spot.req ? "call" : "fold"]++;
+
+// Yeni el sıraya bağlı sabit tohumla aranır: cevap net ama bariz değil (eşiğe 5–20 puan),
+// hero BTN ise el açılış aralığından. Call/fold dengesi için o an az olan taraf tercih edilir.
+const btnOpen = new Set(out.cash.BTN);
+const why = new Map<string, string>();
+spots.forEach((entry, i) => {
+  const s = entry.spot;
+  const reason = whyReplace(s);
+  if (!reason) return;
+  const rng = mulberry32(4100 + i);
+  const free = Array.from({ length: 52 }, (_, c) => c).filter((c) => !s.b.cards.includes(c));
+  const want = counts.call <= counts.fold ? "call" : "fold";
+  for (let t = 0; t < 3000; t++) {
+    const x = free[Math.floor(rng() * free.length)];
+    const y = free[Math.floor(rng() * free.length)];
+    if (x === y) continue;
+    if (s.heroPos === "BTN" && !btnOpen.has(labelOf(x, y))) continue;
+    const hero = x >> 2 >= y >> 2 ? [x, y] : [y, x];
+    const m = measure(s.id, hero, s.b, s.S, s.heroPos);
+    const gap = Math.abs(m.eq - m.req);
+    if (gap < 0.05 || gap > 0.2) continue;
+    if ((m.eq > m.req ? "call" : "fold") !== want && t < 2000) continue;
+    replaced.push(`${s.id}: ${pretty(entry.heroS)} → ${pretty(hero.map(cardStr).join(""))} (${reason})`);
+    why.set(s.id, reason);
+    entry.spot = m;
+    counts[m.eq > m.req ? "call" : "fold"]++;
+    return;
+  }
+  unsolved.push(s.id);
+});
+
+for (const { spot: s, heroS, boardS, first } of spots) {
+  if (unsolved.includes(s.id)) continue;
+  const ok = s.eq > s.req;
+  const flop = boardS.slice(0, 6);
+  const turn = boardS.slice(6);
+  const seq =
+    s.heroPos === "BB"
+      ? ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", `BTN b${flopBet}`, "BB c", `T ${turn}`, "BB x", "BTN a"]
+      : ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", `BTN b${flopBet}`, "BB c", `T ${turn}`, "BB a"];
+  const heroCards = s.hero.map(cardStr).join("");
+  const [kind, kindWith] = heroKind(s.hero, s.b);
+
+  const made = s.range.filter((c) => c.made);
+  const draws = s.range.filter((c) => !c.made);
+  const anyFd = s.range.some((c) => flushDraw(c.hole, s.b.cards));
+  const anySd = s.range.some((c) => straightOuts(c.hole, s.b.cards) >= (s.wide ? 1 : 2));
+  const fl = s.wide ? s.b.wide : s.b.tight;
+  const onBoard = (r: number) => s.b.cards.filter((c) => c >> 2 === r).length;
+  // "Çift" yalnızca hem eşik değeri hem en yüksek kart board'da tekse doğru kelimedir.
+  const pairWord = onBoard(fl.rank) > 1 || onBoard(s.b.top) > 1 ? null : fl.rank === s.b.top ? "üst çift" : "ikinci çift";
+  const groups = [
+    pairWord ? `${pairWord} (${rankTR(fl.rank)}) ve daha iyi her el` : `${rankTR(fl.rank)} tutan eller ve daha iyi her el`,
+    ...(anyFd ? ["floş çekişleri"] : []),
+    ...(anySd ? [s.wide ? "kent çekişleri (içten çekişler dahil)" : "iki uçlu kent çekişleri (8 out)"] : []),
+  ];
+  const who =
+    s.vilPos === "BTN"
+      ? "BTN, açılış aralığındaki ellerden yalnızca şunlarla all-in yapar"
+      : "BB bu noktaya herhangi iki kartla gelmiş olabilir ve yalnızca şunlarla all-in yapar";
+
+  // Aralığa duyarlılık: rakip hiç çekişle all-in yapmasaydı cevap değişir miydi?
+  const eqMade = draws.length ? equityExact(s.hero, s.b.cards, made) : s.eq;
+  let sensitivity = "";
+  if (draws.length && eqMade > s.req !== ok) {
+    sensitivity =
+      Math.abs(eqMade - s.req) < 0.01
+        ? ` Bu kararı rakibin aralığı belirliyor: rakip hiç çekişle all-in yapmasaydı equity'n gereken düzeye (yaklaşık %${pct(s.req)}) yaklaşırdı ve call ile fold neredeyse eşit olurdu.`
+        : ` Bu kararı rakibin aralığı belirliyor: rakip hiç çekişle all-in yapmasaydı equity'n yaklaşık %${pct(eqMade)} olurdu ve ${ok ? "fold" : "call"} doğru olurdu.`;
+  }
+  const madePct = pct(made.length / s.range.length);
+  const mix = draws.length
+    ? `Varsayılan aralıkta ${s.range.length} kombinasyon var; yaklaşık ${numSuffix(madePct, "i")} hazır el, kalanı çekiş.`
+    : `Varsayılan aralıkta ${s.range.length} kombinasyon var; hepsi hazır el.`;
+
   potOdds.push({
-    id: `o-${heroCards}-${flop}${turn}`,
-    title: `Turn all-in: ${wins} out ile call?`,
-    game: "cash", street: "turn", heroPos, stackBB: S,
-    hero: heroCards, board: flop + turn, potBB: Math.round((potTurn + shove) * 100) / 100, seq,
-    villain: { pos: vilPos, cards: vilCards },
-    note: `Pot odds alıştırması: ${vilPos} turn'de all-in yaptı ve kartlarını gösterdi (${pretty(vilCards)}). Efektif stack ${S} BB.`,
-    options: ["Fold", `Call (${num(shove)} BB)`], correct: ok ? 1 : 0, topic: "odds", level: 2,
-    reasoning: `Call için ${num(shove)} BB ödeyip ${num(finalPot)} BB'lik pota giriyorsun; gereken equity %${pct(req)}. Rakibin elini yenen ${wins} river kartı var: ${wins}/44 ≈ %${pct(eq)}. ${ok ? "Equity'n fiyattan yüksek, call kârlı." : "Equity'n fiyattan düşük, fold."} All-in olduğu için sonradan kazanılacak ek chip yok; yalnızca bu hesap önemli.`,
+    id: s.id,
+    title: `Turn all-in: ${kindWith} call?`,
+    game: "cash", street: "turn", heroPos: s.heroPos, stackBB: s.S,
+    hero: heroCards, board: boardS, potBB: Math.round((potTurn + s.shove) * 100) / 100, seq,
+    note: `Pot odds alıştırması: ${s.vilPos} turn'de all-in yaptı; kartlarını görmüyorsun. Varsayım: ${who}: ${groups.join(", ")}. Efektif stack ${s.S} BB.`,
+    options: ["Fold", `Call (${num(s.shove)} BB)`], correct: ok ? 1 : 0, topic: "odds", level: 2,
+    reasoning: `Call için ${num(s.shove)} BB ödeyip ${num(s.finalPot)} BB'lik pota giriyorsun; gereken equity %${pct(s.req)}. ${mix} ${kind} ile bu aralığa karşı equity'n yaklaşık %${pct(s.eq)} (her kombinasyon için kalan 44 river kartı tek tek sayıldı). ${ok ? "Equity'n fiyattan yüksek, call kârlı." : "Equity'n fiyattan düşük, fold."}${sensitivity} All-in olduğu için sonradan kazanılacak ek chip yok; yalnızca bu hesap önemli. Aralık yaklaşık bir varsayımdır.`,
+  });
+  detail.push({
+    id: s.id, hero: heroCards, board: boardS, heroPos: s.heroPos, stackBB: s.S, kind,
+    correct: ok ? 1 : 0, req: s.req, eq: s.eq, combos: s.range.length, made: made.length,
+    eqMadeOnly: eqMade, sensitive: sensitivity !== "",
+    wide: s.wide, note: (potOdds.at(-1) as { note: string }).note,
+    replaced: why.get(s.id) ?? null, firstHero: heroS, firstEq: first.eq,
   });
 }
 drills.push(...potOdds);
+// Önce/sonra raporu için ayrıntı (POT_ODDS_DETAIL=<dosya> npm run ranges); veri dosyasına girmez.
+if (process.env.POT_ODDS_DETAIL) writeFileSync(process.env.POT_ODDS_DETAIL, JSON.stringify(detail, null, 1));
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);
+console.log("pot odds: hero eli değiştirilen", replaced.length, replaced.join("; "));
+console.log("pot odds: çözülemeyen", unsolved.length, unsolved.join(" "));
 
 writeFileSync(new URL("../src/data/drills.json", import.meta.url), JSON.stringify(drills));
 console.log("drills:", drills.length);

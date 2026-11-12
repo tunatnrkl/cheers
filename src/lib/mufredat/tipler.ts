@@ -18,6 +18,15 @@ export type SpotTanimi = {
   rakipAraligi: string;
 };
 
+/**
+ * Makinece okunur olgu denetimi (scripts/mufredat/denetle.mts). Cevap, projedeki el değerlendiriciyle
+ * ya da yeniden toplamayla bağımsız olarak hesaplanır ve `dogru` ile karşılaştırılır. Arayüz kullanmaz.
+ * Kartlar "A♠ K♦" biçimindedir. Türler: kategori, kazanan, enIyiBes, cepKartSayisi, nuts, nutsKategori,
+ * nutsEsleme, yenen, mumkun, kategoriSirasi, kategoriEsleme, elSirasi, enGucluKategori, royalSayisi,
+ * toplam, carpim, bolum.
+ */
+export type Denetim = { tur: string; [alan: string]: unknown };
+
 export type Alistirma = {
   kimlik: string;
   tip: AlistirmaTipi;
@@ -41,6 +50,8 @@ export type Alistirma = {
   spotKimlik?: string;
   /** ... ya da yeni bir spot tanımı taşır */
   spot?: SpotTanimi;
+  /** İsteğe bağlı olgu denetimi; yalnızca betik ve testler okur */
+  denetim?: Denetim;
 };
 
 export type Ders = {

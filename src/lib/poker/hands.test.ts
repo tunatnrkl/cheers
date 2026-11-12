@@ -23,10 +23,6 @@ describe("el verisi", () => {
       expect(r.board).toBe(h.board ?? "");
 
       const cards = [...(h.hero.match(/.{2}/g) ?? []), ...((h.board ?? "").match(/.{2}/g) ?? [])];
-      const shown = h.villain?.cards.match(/.{2}/g) ?? [];
-      for (const c of shown) expect(c).toMatch(CARD);
-      expect(new Set([...cards, ...shown]).size).toBe(cards.length + shown.length);
-      if (h.villain) expect(r.seats[h.villain.pos].folded).toBe(false);
       expect(h.hero).toHaveLength(4);
       for (const c of cards) expect(c).toMatch(CARD);
       expect(new Set(cards).size).toBe(cards.length);
@@ -62,28 +58,96 @@ import { cardFromString, evaluate7 } from "./evaluator";
 import ranges from "@/data/ranges.json";
 
 describe("üretilen ellerin cevapları", () => {
-  it("pot odds elleri: kalan kartlar sayıldığında karar doğru", () => {
+  // Pot odds spotları (o-…): rakibin kartları görünmez; cevap, notta "Varsayım:" diye yazılan
+  // turn all-in aralığına karşı equity ile fiyatın karşılaştırmasıdır. Bu denetim aralığı
+  // üreticinin kodundan değil NOT METNİNDEN kurar ve equity'yi tam sayımla yeniden hesaplar.
+  // Aralıklar yaklaşık varsayımdır, solver çıktısı değildir.
+  it("pot odds elleri: nottaki aralığa karşı tam sayımla karar doğru ve eşiğe en az 3,5 puan uzak", () => {
     const list = HANDS.filter((h) => h.id.startsWith("o-"));
-    expect(list.length).toBeGreaterThan(50);
+    expect(list.length).toBe(70);
+    const ORDER = "23456789TJQKA";
+    const rankOf = (c: number) => c >> 2;
+    const isStraight = (ranks: Set<number>) => {
+      for (let hi = 4; hi <= 12; hi++) if ([0, 1, 2, 3, 4].every((k) => ranks.has(hi - k))) return true;
+      return [12, 0, 1, 2, 3].every((r) => ranks.has(r));
+    };
+    // Kenti tamamlayan farklı değer sayısı (board'un tek başına tamamladıkları sayılmaz)
+    const straightRanks = (hole: number[], board: number[]) => {
+      const all = new Set([...hole, ...board].map(rankOf));
+      if (isStraight(all)) return 0;
+      const onlyBoard = new Set(board.map(rankOf));
+      let n = 0;
+      for (let r = 0; r < 13; r++) if (isStraight(new Set([...all, r])) && !isStraight(new Set([...onlyBoard, r]))) n++;
+      return n;
+    };
+    const hasFlushDraw = (hole: number[], board: number[]) =>
+      [0, 1, 2, 3].some((s) => hole.some((c) => (c & 3) === s) && [...hole, ...board].filter((c) => (c & 3) === s).length === 4);
+    const label = (a: number, b: number) => {
+      const [hi, lo] = rankOf(a) >= rankOf(b) ? [a, b] : [b, a];
+      const x = ORDER[rankOf(hi)] + ORDER[rankOf(lo)];
+      return rankOf(hi) === rankOf(lo) ? x : x + ((hi & 3) === (lo & 3) ? "s" : "o");
+    };
+    const btnOpen = new Set((ranges.cash as Record<string, string[]>).BTN);
+    const bad: string[] = [];
+    let calls = 0;
     for (const h of list) {
+      const note = h.note ?? "";
+      expect(note, h.id).toContain("Varsayım:");
+      const pos = note.match(/^Pot odds alıştırması: (BTN|BB) turn'de all-in yaptı/)?.[1];
+      expect(pos, h.id).toBe(h.heroPos === "BB" ? "BTN" : "BB");
+      const m = note.match(/(?:üst çift|ikinci çift) \((10|[2-9JQKA])\) ve daha iyi her el|: (10|[2-9JQKA]) tutan eller ve daha iyi her el/);
+      expect(m, `${h.id}: hazır el eşiği notta yok`).not.toBeNull();
+      const floorRank = ORDER.indexOf((m![1] ?? m![2]).replace("10", "T"));
+      const minStraight = /iki uçlu kent çekişleri/.test(note) ? 2 : /kent çekişleri \(içten çekişler dahil\)/.test(note) ? 1 : 99;
+      const withFlush = /floş çekişleri/.test(note);
+      const preflop = /açılış aralığındaki ellerden/.test(note);
+      expect(preflop, h.id).toBe(pos === "BTN");
+
       const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
-      const vil = h.villain!.cards.match(/.{2}/g)!.map(cardFromString);
       const board = h.board!.match(/.{2}/g)!.map(cardFromString);
-      const used = new Set([...hero, ...vil, ...board]);
-      let wins = 0;
-      for (let c = 0; c < 52; c++) {
-        if (used.has(c)) continue;
-        const a = evaluate7([...hero, ...board, c]);
-        const b = evaluate7([...vil, ...board, c]);
-        wins += a > b ? 1 : a === b ? 0.5 : 0;
-      }
+      expect(board.some((c) => rankOf(c) === floorRank), `${h.id}: eşik değeri board'da yok`).toBe(true);
+      const free = [...Array(52).keys()].filter((c) => !board.includes(c));
+      // Eşik: nottaki değerde bir kart tutan en zayıf el
+      let floor = Infinity;
+      for (const c of free) if (rankOf(c) === floorRank) for (const d of free) if (d !== c) floor = Math.min(floor, evaluate7([c, d, ...board]));
+
+      let score = 0;
+      let n = 0;
+      let combos = 0;
+      for (let i = 0; i < free.length; i++)
+        for (let j = i + 1; j < free.length; j++) {
+          const v = [free[i], free[j]];
+          if (hero.includes(v[0]) || hero.includes(v[1])) continue;
+          if (preflop && !btnOpen.has(label(v[0], v[1]))) continue;
+          const inRange = evaluate7([...v, ...board]) >= floor || (withFlush && hasFlushDraw(v, board)) || straightRanks(v, board) >= minStraight;
+          if (!inRange) continue;
+          combos++;
+          for (const c of free) {
+            if (hero.includes(c) || v.includes(c)) continue;
+            const a = evaluate7([...hero, ...board, c]);
+            const b = evaluate7([...v, ...board, c]);
+            score += a > b ? 1 : a === b ? 0.5 : 0;
+            n++;
+          }
+        }
+      expect(n, h.id).toBe(combos * 44);
+      const eq = score / n;
       const r = replay(h);
-      const call = r.toCall;
-      const req = call / (r.pot + call);
-      expect(h.correct === 1, h.id).toBe(wins / 44 > req);
-      expect(Math.abs(wins / 44 - req), h.id).toBeGreaterThan(0.035);
+      const req = r.toCall / (r.pot + r.toCall);
+      if (h.correct === 1) calls++;
+      if ((h.correct === 1) !== eq > req || Math.abs(eq - req) < 0.035)
+        bad.push(`${h.id}: gereken ${(req * 100).toFixed(1)}, aralığa karşı ${(eq * 100).toFixed(1)}, cevap ${h.options[h.correct]}`);
+      // Gerekçedeki yuvarlanmış sayılar bu ölçümle tutmalı; başlık out sayısı vermemeli
+      expect(h.reasoning, h.id).toContain(`gereken equity %${Math.round(req * 100)}.`);
+      expect(h.reasoning, h.id).toContain(`equity'n yaklaşık %${Math.round(eq * 100)} (`);
+      expect(h.reasoning, h.id).toContain(`aralıkta ${combos} kombinasyon`);
+      expect(h.title, h.id).not.toMatch(/\d/);
     }
-  });
+    expect(bad, bad.join("; ")).toEqual([]);
+    // Tek yöne yığılmış bir set fiyat hesabını öğretmez
+    expect(calls).toBeGreaterThanOrEqual(25);
+    expect(list.length - calls).toBeGreaterThanOrEqual(25);
+  }, 30000);
 
   it("açılış ve push elleri referans aralıkla tutarlı", () => {
     const label = (cards: string) => {

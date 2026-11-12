@@ -156,7 +156,7 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 }
 ```
 
-Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
+Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`. Rakibin kartları veride hiçbir alanda durmaz; rakibe bağlı spotlarda aralık `note` içinde "Varsayım:" diye yazılır.
 
 **577 spot:**
 
@@ -166,9 +166,9 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
 | All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
-| Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
+| Turn all-in, rakip aralığına karşı pot odds | 70 | Rakibin kartları görünmez. Notta "Varsayım:" diye yazılan turn all-in aralığına (hazır eller + çekişler; yaklaşık varsayım, solver çıktısı değil) karşı equity tam sayımla bulunur: aralıktaki her kombinasyon için kalan 44 river kartı. Cevap, equity ile gereken equity'nin karşılaştırması; eşiğe 3,5 puandan yakın spot yok. Kimlikler eski üretimle aynı |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda ve blog yazılarında testle denetlenir.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı, nottaki aralığı metinden yeniden kuran bağımsız bir tam sayımla (en az 3,5 puan pay), açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda ve blog yazılarında testle denetlenir. `src/lib/poker/sizinti.test.ts` hiçbir spotta, masada ve koça giden bağlamda rakibin somut elinin bulunmadığını denetler.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 

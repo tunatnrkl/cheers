@@ -1,0 +1,1599 @@
+{
+ "o1-d1": {
+  "anlatim": [
+   "Texas Hold'em tek bir desteyle oynanır: 52 kart, joker yok. Her kartın iki özelliği vardır: değeri ve rengi. Poker masasında \"renk\" denince kırmızı ya da siyah değil, kartın takımı kastedilir.",
+   "Dört renk vardır: maça (♠), kupa (♥), karo (♦) ve sinek (♣). Her renkte 13 kart bulunur; 4 × 13 = 52. Renkler arasında üstünlük yoktur: maça ası ile kupa ası aynı güçtedir.",
+   "On üç değer küçükten büyüğe şöyle dizilir: 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A. T onluyu gösterir (İngilizce \"ten\"). J vale, Q kız, K papaz, A astır. As en yüksek karttır; tek bir istisnası var, onu kent dersinde göreceksin.",
+   "Kartları kısa yazarız: önce değer, sonra renk. A♠ maça ası, T♦ karo onlusu, 7♣ sinek yedilisi demektir. Bazı yerlerde simge yerine harf görürsün: s maça, h kupa, d karo, c sinek. Yani Kh ile K♥ aynı karttır."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Texas Hold'em'de kullanılan destede kaç kart vardır?",
+    "dogru": 52,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "Dört renk ve her renkte 13 kart vardır: 4 × 13 = 52. Joker kullanılmaz.",
+    "yanilgi": "İki jokeri de sayıp 54 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      4,
+      13
+     ]
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Destede kaç farklı renk (takım) vardır?",
+    "secenekler": [
+     "2",
+     "3",
+     "4",
+     "13"
+    ],
+    "dogru": 2,
+    "neden": "Maça, kupa, karo ve sinek olmak üzere dört renk vardır.",
+    "yanilgi": "\"Renk\" sözünü kırmızı ve siyah diye anlayıp 2 demek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "eslestirme",
+    "zorluk": 1,
+    "soru": "Simgeyi adıyla eşleştir.",
+    "secenekler": [
+     [
+      "♠",
+      "Maça"
+     ],
+     [
+      "♥",
+      "Kupa"
+     ],
+     [
+      "♦",
+      "Karo"
+     ],
+     [
+      "♣",
+      "Sinek"
+     ]
+    ],
+    "neden": "Dört rengin simgeleri bunlardır; kartları okurken hep bu simgeleri göreceksin.",
+    "yanilgi": "Maça (♠) ile sineği (♣) birbirine karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Maça ası (A♠), kupa asından (A♥) daha güçlü bir karttır.",
+    "dogru": false,
+    "neden": "Hold'em'de renkler arasında üstünlük yoktur. Bir kartın gücünü yalnızca değeri belirler.",
+    "yanilgi": "Başka kart oyunlarındaki renk sıralamasını pokere taşımak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Harfi kartın adıyla eşleştir.",
+    "secenekler": [
+     [
+      "T",
+      "Onlu"
+     ],
+     [
+      "J",
+      "Vale"
+     ],
+     [
+      "Q",
+      "Kız"
+     ],
+     [
+      "K",
+      "Papaz"
+     ],
+     [
+      "A",
+      "As"
+     ]
+    ],
+    "neden": "T onlu (ten), J vale (jack), Q kız (queen), K papaz (king), A as (ace) demektir.",
+    "yanilgi": "T harfini tanımayıp onluyu ayrı bir kart sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "siralama",
+    "zorluk": 2,
+    "soru": "Kartları en düşükten en yükseğe doğru sırala.",
+    "secenekler": [
+     "2♣",
+     "9♦",
+     "T♠",
+     "J♥",
+     "K♣",
+     "A♦"
+    ],
+    "neden": "Değer sırası 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A'dır; renk sırayı etkilemez.",
+    "yanilgi": "Ası 1 sayıp en başa koymak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "\"Qh\" yazımı hangi kartı gösterir?",
+    "secenekler": [
+     "Karo kızı",
+     "Kupa kızı",
+     "Kupa valesi",
+     "Maça kızı"
+    ],
+    "dogru": 1,
+    "neden": "Önce değer yazılır: Q kızdır. Sonra renk gelir: h kupa (hearts) demektir.",
+    "yanilgi": "h harfini başka bir renk sanmak ya da Q ile J'yi karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Bir destede kaç tane kupa (♥) kartı vardır?",
+    "dogru": 13,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "52 kart dört renge eşit dağılır: 52 / 4 = 13. Her renkte 2'den A'ya 13 kart bulunur.",
+    "yanilgi": "Resimli kartları saymayı unutup 10 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      52,
+      4
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Hangi ikili aynı kartın iki farklı yazımıdır?",
+    "secenekler": [
+     "K♠ ve Kc",
+     "J♣ ve Js",
+     "T♦ ve Td",
+     "Q♥ ve Qd"
+    ],
+    "dogru": 2,
+    "neden": "d karo (diamonds) demektir; T♦ ile Td ikisi de karo onlusudur. Diğer ikililerde harf başka bir rengi gösterir.",
+    "yanilgi": "c harfini maça, s harfini sinek sanmak; oysa s maça (spades), c sinek (clubs) demektir.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a10",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Destede vale, kız ve papazlardan toplam 12 tane vardır.",
+    "dogru": true,
+    "neden": "Üç değerin her birinden dört renkte birer tane vardır: 3 × 4 = 12.",
+    "yanilgi": "Her değerden yalnızca bir tane olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      3,
+      4
+     ],
+     "iddia": 12
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Desteden iki kart çektin: K♠ ve K♦. Destede kalan kartlar arasında kaç papaz vardır?",
+    "dogru": 2,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "Destede dört papaz vardır. İkisi sende olduğuna göre geriye 4 − 2 = 2 papaz kalır: K♥ ve K♣.",
+    "yanilgi": "Gördüğün kartları hesaptan düşmeyi unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      4,
+      -2
+     ]
+    }
+   }
+  ]
+ },
+ "o1-d2": {
+  "anlatim": [
+   "Pokerde bir \"el\" her zaman beş karttan oluşur. Eller güçlerine göre sıralanır ve bu sıralama hiç değişmez. On el çeşidi vardır; bu derste en alttaki dördünü, bir sonrakinde üstteki altısını öğreneceksin.",
+   "En zayıf el yüksek karttır: beş kart arasında hiçbir eşleşme yoktur ve elin gücünü en yüksek kart belirler. Bir üstü perdir: aynı değerden iki kart (örneğin iki sekizli). Sonra iki per gelir: iki ayrı çift (örneğin iki vale ve iki dörtlü). Bu dördünün en güçlüsü üçlüdür: aynı değerden üç kart.",
+   "Sıra şöyle: yüksek kart < per < iki per < üçlü. Aynı çeşit iki el karşılaşırsa değeri yüksek olan kazanır: as peri papaz perini yener. İki perde önce yüksek çifte bakılır: as ve ikili iki peri, papaz ve kız iki perini yener. Yüksek kartta en yüksek kartlar eşitse sıradaki karta bakılır.",
+   "Sıralamanın mantığı basittir: bir el ne kadar seyrek geliyorsa o kadar güçlüdür. Üçlü, iki perden daha seyrek geldiği için onun üstündedir."
+  ],
+  "terimler": [
+   "İki per"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "siralama",
+    "zorluk": 1,
+    "soru": "Elleri en zayıftan en güçlüye doğru sırala.",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "İki per",
+     "Üçlü"
+    ],
+    "neden": "Yüksek kartta eşleşme yoktur; per bir çift, iki per iki çift, üçlü aynı değerden üç karttır. Seyrek gelen el daha güçlüdür.",
+    "yanilgi": "İki peri üçlünün üstüne koymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriSirasi",
+     "yon": "artan"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "K♠ K♦ 9♣ 5♥ 2♠ hangi eldir?",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "İki per",
+     "Üçlü"
+    ],
+    "dogru": 1,
+    "neden": "Aynı değerden iki kart var (iki papaz), başka eşleşme yok. Bu bir perdir.",
+    "yanilgi": "Papazların yüksek olmasına bakıp eli daha üst bir çeşit sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "K♠ K♦ 9♣ 5♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Her eli çeşidiyle eşleştir.",
+    "secenekler": [
+     [
+      "A♠ J♦ 8♣ 5♥ 3♠",
+      "Yüksek kart"
+     ],
+     [
+      "9♠ 9♦ K♣ 7♥ 2♠",
+      "Per"
+     ],
+     [
+      "J♠ J♦ 4♣ 4♥ A♠",
+      "İki per"
+     ],
+     [
+      "6♠ 6♦ 6♣ Q♥ 2♠",
+      "Üçlü"
+     ]
+    ],
+    "neden": "Eşleşen kartları say: hiç yoksa yüksek kart, bir çift per, iki çift iki per, aynı değerden üç kart üçlüdür.",
+    "yanilgi": "Elde as görünce eli olduğundan güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriEsleme"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Hangi el daha güçlüdür?",
+    "secenekler": [
+     "Per: A♠ A♦ K♣ Q♥ J♠",
+     "İki per: 3♠ 3♦ 2♣ 2♥ 7♠"
+    ],
+    "dogru": 1,
+    "neden": "Önce elin çeşidine bakılır. En küçük iki per bile en büyük peri yener.",
+    "yanilgi": "Kartların büyüklüğüne bakıp el çeşidini atlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "A♠ A♦ K♣ Q♥ J♠",
+      "b": "3♠ 3♦ 2♣ 2♥ 7♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Üçlü, iki peri yener.",
+    "dogru": true,
+    "neden": "Üçlü sıralamada iki perin üstündedir. En küçük üçlü (üç tane ikili) bile as ve papaz iki perini yener.",
+    "yanilgi": "\"İki çift bir üçlüden fazladır\" diye düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "üçlü": "2♠ 2♦ 2♣ 5♥ 4♠",
+      "iki per": "A♠ A♦ K♣ K♥ Q♠"
+     },
+     "iddia": "üçlü",
+     "ornek": true
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "İkisi de per. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "Q♠ Q♦ 7♣ 4♥ 2♠",
+     "T♠ T♦ A♣ K♥ Q♣"
+    ],
+    "dogru": 0,
+    "neden": "İki perde önce çiftin değerine bakılır: kız peri onlu perini yener. Yandaki as ve papaz bunu değiştirmez.",
+    "yanilgi": "Yan kartlardaki asa bakıp düşük peri üstün sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "Q♠ Q♦ 7♣ 4♥ 2♠",
+      "b": "T♠ T♦ A♣ K♥ Q♣"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "İkisi de iki per. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "K♠ K♦ Q♣ Q♥ 9♦",
+     "A♠ A♦ 2♣ 2♥ 9♠"
+    ],
+    "dogru": 1,
+    "neden": "İki perde önce yüksek çift karşılaştırılır: aslar papazları yener. İkinci çiftin küçük olması sonucu değiştirmez.",
+    "yanilgi": "İki çiftin \"toplamına\" bakmak; papaz ve kızı as ve ikiliden güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "K♠ K♦ Q♣ Q♥ 9♦",
+      "b": "A♠ A♦ 2♣ 2♥ 9♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "İki elde de eşleşme yok. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "K♠ Q♦ J♣ T♥ 8♠",
+     "A♠ J♦ 8♣ 5♥ 3♠"
+    ],
+    "dogru": 1,
+    "neden": "İkisi de yüksek karttır; en yüksek kartlar karşılaştırılır ve as papazı yener. İlk elde 9 eksik olduğu için art arda beş kart da yoktur.",
+    "yanilgi": "Güzel görünen dört yüksek kartı güçlü bir el sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "K♠ Q♦ J♣ T♥ 8♠",
+      "b": "A♠ J♦ 8♣ 5♥ 3♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "siralama",
+    "zorluk": 4,
+    "soru": "Dört eli en zayıftan en güçlüye doğru sırala.",
+    "secenekler": [
+     "A♠ K♦ Q♣ J♥ 9♠",
+     "2♠ 2♦ 5♣ 4♥ 3♠",
+     "4♣ 4♦ 3♥ 3♦ 2♥",
+     "5♠ 5♦ 5♥ 7♣ 6♠"
+    ],
+    "neden": "Sırasıyla yüksek kart, per, iki per ve üçlü. Kartların küçük olması el çeşidinin önüne geçmez.",
+    "yanilgi": "Yüksek kartlarla dolu ama eşleşmesiz eli üste koymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "elSirasi",
+     "yon": "artan"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "İki elde de eşleşme yok ve ikisinin de en yüksek kartı as. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "A♥ Q♦ J♣ T♥ 9♠",
+     "A♠ K♦ 7♣ 5♥ 3♠"
+    ],
+    "dogru": 1,
+    "neden": "En yüksek kartlar eşitse sıradaki karta bakılır: papaz kızı yener. Karşılaştırma ilk farkta biter; kalan kartların büyüklüğü önemsizdir.",
+    "yanilgi": "Beş kartın geneline bakıp \"daha dolu\" görünen eli seçmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "A♥ Q♦ J♣ T♥ 9♠",
+      "b": "A♠ K♦ 7♣ 5♥ 3♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   }
+  ]
+ },
+ "o1-d3": {
+  "anlatim": [
+   "Üçlünün üstünde altı el daha var. Kent: değerleri art arda gelen beş kart; renkleri karışık olabilir (örneğin 5-6-7-8-9). Floş: aynı renkten beş kart; değerlerinin sıralı olması gerekmez. Floş kenti yener.",
+   "Full house bir üçlü ile bir çiftin birleşimidir (örneğin üç papaz ve iki dörtlü). Kare aynı değerden dört karttır. Sıralı floş hem kent hem floştur: aynı renkten, art arda beş kart. Bunların en yükseği olan T-J-Q-K-A aynı renktense royal floş adını alır ve oyunun en güçlü elidir.",
+   "As kentte iki uçta da durabilir: T-J-Q-K-A en yüksek kenttir; A-2-3-4-5 ise en düşük kenttir ve burada as 1 gibi sayılır. Kent astan \"dönemez\": Q-K-A-2-3 kent değildir.",
+   "Tam sıra, zayıftan güçlüye: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş. Aynı çeşit iki elde yine değerler konuşur: yüksek biten kent düşük biteni, en yüksek kartı büyük olan floş diğerini, üçlüsü büyük olan full house diğerini yener."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "siralama",
+    "zorluk": 1,
+    "soru": "Elleri en zayıftan en güçlüye doğru sırala.",
+    "secenekler": [
+     "Kent",
+     "Floş",
+     "Full house",
+     "Kare",
+     "Sıralı floş"
+    ],
+    "neden": "Kent < floş < full house < kare < sıralı floş. Her biri bir öncekinden daha seyrek gelir.",
+    "yanilgi": "Kenti floşun üstüne koymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriSirasi",
+     "yon": "artan"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "eslestirme",
+    "zorluk": 1,
+    "soru": "Her eli çeşidiyle eşleştir.",
+    "secenekler": [
+     [
+      "5♠ 6♦ 7♣ 8♥ 9♠",
+      "Kent"
+     ],
+     [
+      "A♥ J♥ 8♥ 4♥ 2♥",
+      "Floş"
+     ],
+     [
+      "K♠ K♦ K♣ 4♥ 4♠",
+      "Full house"
+     ],
+     [
+      "9♠ 9♦ 9♣ 9♥ A♠",
+      "Kare"
+     ],
+     [
+      "6♣ 7♣ 8♣ 9♣ T♣",
+      "Sıralı floş"
+     ]
+    ],
+    "neden": "Art arda beş değer kent, aynı renkten beş kart floş, üçlü ve çift full house, aynı değerden dört kart kare, aynı renkten art arda beş kart sıralı floştur.",
+    "yanilgi": "Kent ile floşu birbirine karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriEsleme"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Floş, kenti yener.",
+    "dogru": true,
+    "neden": "Floş sıralamada kentin üstündedir. En küçük floş bile en yüksek kenti (T-J-Q-K-A) yener.",
+    "yanilgi": "Art arda dizilen kartları daha etkileyici bulup kenti üstün sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "floş": "7♦ 5♦ 4♦ 3♦ 2♦",
+      "kent": "T♠ J♦ Q♣ K♥ A♠"
+     },
+     "iddia": "floş",
+     "ornek": true
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "A♠ 2♦ 3♣ 4♥ 5♠ hangi eldir?",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "Kent",
+     "Floş"
+    ],
+    "dogru": 2,
+    "neden": "As kentin alt ucunda 1 gibi kullanılabilir: A-2-3-4-5 art arda beş karttır, yani kenttir.",
+    "yanilgi": "Ası yalnızca en yüksek kart sayıp bu eli \"as yüksek\" sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "A♠ 2♦ 3♣ 4♥ 5♠"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Q♠ K♦ A♣ 2♥ 3♠ bir kenttir.",
+    "dogru": false,
+    "neden": "Kent astan dönemez. As ya en üstte (T-J-Q-K-A) ya en altta (A-2-3-4-5) durur; ortada köprü olamaz. Bu el yalnızca as yüksektir.",
+    "yanilgi": "Ası hem papazın üstünde hem ikilinin altında aynı anda saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "Q♠ K♦ A♣ 2♥ 3♠",
+     "iddia": "kent"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Hangi el daha güçlüdür?",
+    "secenekler": [
+     "Floş: A♥ K♥ Q♥ J♥ 9♥",
+     "Full house: 2♠ 2♦ 2♣ 3♥ 3♠"
+    ],
+    "dogru": 1,
+    "neden": "Full house sıralamada floşun üstündedir. En küçük full house bile en yüksek floşu yener.",
+    "yanilgi": "Yüksek ve aynı renkten kartları, küçük kartlı full house'tan güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "A♥ K♥ Q♥ J♥ 9♥",
+      "b": "2♠ 2♦ 2♣ 3♥ 3♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "İkisi de kent. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "A♠ 2♦ 3♣ 4♥ 5♠",
+     "2♣ 3♦ 4♠ 5♣ 6♥"
+    ],
+    "dogru": 1,
+    "neden": "Kentler en üstteki karta göre karşılaştırılır. A-2-3-4-5 kentinde as en alttadır ve kent 5'te biter; 6'da biten kent onu yener.",
+    "yanilgi": "İçinde as var diye A-2-3-4-5 kentini en güçlü kent sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "A♠ 2♦ 3♣ 4♥ 5♠",
+      "b": "2♣ 3♦ 4♠ 5♣ 6♥"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "İkisi de full house. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "3♠ 3♦ 3♣ A♥ A♠",
+     "4♠ 4♦ 4♣ 2♥ 2♠"
+    ],
+    "dogru": 1,
+    "neden": "Full house'ta önce üçlü karşılaştırılır: üç dörtlü, üç üçlüyü yener. Çiftin as olması bunu değiştirmez.",
+    "yanilgi": "Çiftteki aslara bakıp ilk eli üstün sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "3♠ 3♦ 3♣ A♥ A♠",
+      "b": "4♠ 4♦ 4♣ 2♥ 2♠"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "İkisi de floş. Hangisi daha güçlüdür?",
+    "secenekler": [
+     "K♠ Q♠ J♠ T♠ 8♠",
+     "A♥ 7♥ 5♥ 3♥ 2♥"
+    ],
+    "dogru": 1,
+    "neden": "Floşlar en yüksek karttan başlanarak karşılaştırılır: as papazı yener ve karşılaştırma orada biter. Renk fark etmez.",
+    "yanilgi": "Maçayı kupadan üstün saymak ya da kartların toplamına bakmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "K♠ Q♠ J♠ T♠ 8♠",
+      "b": "A♥ 7♥ 5♥ 3♥ 2♥"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "siralama",
+    "zorluk": 4,
+    "soru": "On elin tamamını en zayıftan en güçlüye doğru sırala.",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "İki per",
+     "Üçlü",
+     "Kent",
+     "Floş",
+     "Full house",
+     "Kare",
+     "Sıralı floş",
+     "Royal floş"
+    ],
+    "neden": "Tam sıra budur: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş.",
+    "yanilgi": "Full house ile floşun, kent ile üçlünün yerini karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriSirasi",
+     "yon": "artan"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "8♥ 9♥ T♥ J♥ K♥ hangi eldir?",
+    "secenekler": [
+     "Sıralı floş",
+     "Kent",
+     "Royal floş",
+     "Floş"
+    ],
+    "dogru": 3,
+    "neden": "Beş kart da kupa olduğu için floştur. Kız eksik olduğundan kartlar art arda değildir; kent de sıralı floş da olmaz.",
+    "yanilgi": "Dört ardışık kartı görüp eksik halkayı fark etmemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "8♥ 9♥ T♥ J♥ K♥"
+    }
+   },
+   {
+    "kimlik": "a12",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Bir destede kaç farklı royal floş kurulabilir?",
+    "dogru": 4,
+    "tolerans": 0,
+    "birim": "el",
+    "neden": "Royal floş aynı renkten T-J-Q-K-A'dır. Dört renk olduğuna göre dört farklı royal floş vardır ve hepsi eşit güçtedir.",
+    "yanilgi": "Yalnızca maça royal floşunu \"gerçek\" royal floş sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "royalSayisi"
+    }
+   }
+  ]
+ },
+ "o1-d4": {
+  "anlatim": [
+   "Hold'em'de sana iki kapalı kart dağıtılır; ortaya da herkesin kullanabildiği beş ortak kart açılır. Böylece yedi kartın olur, ama elin yine beş karttır: yedi kartın en güçlü beşlisi. Kalan iki kart hiçbir işe yaramaz.",
+   "En iyi beşliyi kurarken kapalı kartlarının ikisini de, yalnızca birini ya da hiçbirini kullanabilirsin. Hiçbirini kullanmadığında elin ortadaki beş karttır; buna \"board'u oynamak\" denir.",
+   "Kicker, çiftin ya da üçlünün yanındaki yan karttır ve eşitliği bozar. İki oyuncuda da as peri varsa yandaki en yüksek karta bakılır: papaz kicker'ı, kız kicker'ını yener. İlk kicker eşitse ikinciye, o da eşitse üçüncüye bakılır. Per üç, üçlü iki, iki per ve kare birer kicker taşır. Kent, floş ve full house'ta beş kartın hepsi elin parçasıdır; kicker kalmaz.",
+   "Dikkat: yalnızca beş kart sayılır. Altıncı kart hiçbir zaman eşitliği bozmaz. Beş kartın hepsi eşitse eller eşittir."
+  ],
+  "terimler": [
+   "Kapalı kartlar",
+   "Board",
+   "Kicker"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Hold'em'de en iyi elini kurarken toplam kaç kart arasından seçim yaparsın?",
+    "dogru": 7,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "İki kapalı kartın ve ortadaki beş ortak kart: 2 + 5 = 7. Bunların en iyi beşi elindir.",
+    "yanilgi": "Yalnızca ortadaki beş kartı ya da yalnızca kendi iki kartını saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2,
+      5
+     ]
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "En iyi elini kurarken iki kapalı kartını da kullanmak zorundasın.",
+    "dogru": false,
+    "neden": "Hold'em'de kapalı kartlarından ikisini, birini ya da hiçbirini kullanabilirsin. Önemli olan yedi kartın en güçlü beşlisidir.",
+    "yanilgi": "Elin mutlaka kendi iki kartını içermesi gerektiğini düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Elin: A♠ K♦. Board: A♥ 9♣ 6♦ 4♠ 2♥. Elin hangi çeşittir?",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "İki per",
+     "Kent"
+    ],
+    "dogru": 1,
+    "neden": "Elindeki as board'daki asla eşleşiyor: as peri. En iyi beş kartın A♠ A♥ K♦ 9♣ 6♦ olur.",
+    "yanilgi": "As ve papazı ayrı ayrı güçlü görüp eli iki per sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "A♠ K♦ A♥ 9♣ 6♦ 4♠ 2♥"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Elin: K♠ Q♠. Board: K♦ 9♣ 7♥ 4♠ 2♦. En iyi beş kartın hangisidir?",
+    "secenekler": [
+     "K♠ Q♠ K♦ 4♠ 2♦",
+     "K♦ 9♣ 7♥ 4♠ 2♦",
+     "K♠ K♦ Q♠ 9♣ 7♥",
+     "K♠ K♦ Q♠ 9♣ 4♠"
+    ],
+    "dogru": 2,
+    "neden": "Papaz perin var. Yanına kalan kartların en yüksek üçü gelir: kız, dokuzlu ve yedili.",
+    "yanilgi": "Kicker'ları rastgele ya da aynı renkten seçmek; oysa en yüksek yan kartlar alınır.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "enIyiBes",
+     "el": "K♠ Q♠",
+     "board": "K♦ 9♣ 7♥ 4♠ 2♦"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Elin: 7♣ 2♦. Board: A♠ A♥ K♣ K♦ Q♠. En iyi beş kartının içinde kaç kapalı kartın var?",
+    "dogru": 0,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "En iyi beşlin board'un kendisidir: aslar ve papazlar iki peri, kicker kız. Yedili ve ikili kızdan küçük olduğu için işe yaramaz.",
+    "yanilgi": "Kapalı kartların mutlaka elin içinde yer aldığını düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "cepKartSayisi",
+     "el": "7♣ 2♦",
+     "board": "A♠ A♥ K♣ K♦ Q♠"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: A♣ 8♦ 5♠ 3♥ 2♦. Ali: A♠ K♥. Berk: A♦ J♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de as peri var. Eşitliği kicker bozar: Ali'nin papazı, Berk'in valesini yener.",
+    "yanilgi": "İkisinde de as peri olduğu için beraberlik sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ K♥",
+      "Berk": "A♦ J♣"
+     },
+     "board": "A♣ 8♦ 5♠ 3♥ 2♦"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Per olan beş kartlık bir elde kaç kicker bulunur?",
+    "dogru": 3,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "El beş karttır; ikisi çifti oluşturur, geriye 5 − 2 = 3 yan kart kalır.",
+    "yanilgi": "Kicker'ın her zaman tek bir kart olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      5,
+      -2
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: K♣ K♦ Q♠ J♥ 9♦. Ali: A♠ 3♥. Berk: A♦ 2♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "İkisinin de en iyi beşlisi aynıdır: K-K-A-Q-J. Üçlü ve ikili altıncı karttır ve hiç sayılmaz.",
+    "yanilgi": "Üçlünün ikiliyi yendiğini düşünmek; oysa yalnızca beş kart karşılaştırılır.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ 3♥",
+      "Berk": "A♦ 2♣"
+     },
+     "board": "K♣ K♦ Q♠ J♥ 9♦"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Kentte kicker yoktur; beş kartın hepsi elin parçasıdır.",
+    "dogru": true,
+    "neden": "Kent beş kartın tamamını kullanır, yan kart kalmaz. İki oyuncunun kenti aynı kartta bitiyorsa eller eşittir.",
+    "yanilgi": "Aynı kentte elindeki fazladan yüksek kartın eşitliği bozacağını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: K♣ K♦ 7♠ 7♥ 3♦. Ali: A♠ 2♥. Berk: Q♦ J♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisi de board'daki iki peri oynuyor: papazlar ve yedililer. Beşinci kart kicker'dır: Ali'nin ası, Berk'in kızını yener.",
+    "yanilgi": "İki per board'dayken eldeki kartların önemsiz olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ 2♥",
+      "Berk": "Q♦ J♣"
+     },
+     "board": "K♣ K♦ 7♠ 7♥ 3♦"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: A♣ A♦ K♠ Q♥ 9♦. Ali: J♠ 8♥. Berk: T♣ 7♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisi de board'daki as perini oynuyor. İlk iki kicker ortak: papaz ve kız. Üçüncü kicker belirler: Ali'nin valesi, Berk'in onlusunu yener.",
+    "yanilgi": "İlk kicker'lar eşit çıkınca hemen beraberlik demek; üçüncü kicker'a bakmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "J♠ 8♥",
+      "Berk": "T♣ 7♣"
+     },
+     "board": "A♣ A♦ K♠ Q♥ 9♦"
+    }
+   }
+  ]
+ },
+ "o1-d5": {
+  "anlatim": [
+   "Ortadaki ortak kartlara board denir. Board herkesindir: sen de rakibin de aynı kartları kullanır. Bu yüzden iki soruyu alışkanlık edin: \"Benim en iyi beş kartım ne?\" ve \"Bu board en fazla hangi ele izin veriyor?\"",
+   "Board'un izin verdiği en güçlü ele nuts denir. Nuts'ı bulmak için yukarıdan aşağı sor. Board'da aynı renkten en az üç kart var mı? Varsa floş, bu kartlar birbirine yakınsa sıralı floş mümkündür. Board'da çift var mı? Varsa kare ve full house mümkündür. Bir kentin üç kartı board'da var mı? Varsa kent mümkündür.",
+   "Bunun tersi de işe yarar. Board'da çift yoksa kimsede full house ya da kare olamaz. Aynı renkten üç kart yoksa kimsede floş olamaz. Böylece elinin gerçekte ne kadar güçlü olduğunu görürsün: üçlün güzel görünebilir, ama board'da aynı renkten dört kart varsa o renkten tek bir kart tutan oyuncu floş yapar ve seni geçer.",
+   "Acele etme: önce kendi beşlini, sonra board'un en iyisini bul. Bu alışkanlık ileride vereceğin kararların temeli olacak."
+  ],
+  "terimler": [
+   "Board",
+   "Nuts"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Board'daki kartları yalnızca son bahsi yapan oyuncu kullanabilir.",
+    "dogru": false,
+    "neden": "Board ortaktır. Eldeki her oyuncu aynı beş kartı kendi iki kartıyla birleştirir.",
+    "yanilgi": "Ortadaki kartların tek bir oyuncuya ait olduğunu düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "\"Nuts\" ne demektir?",
+    "secenekler": [
+     "Elindeki en yüksek kart",
+     "O board'da mümkün olan en iyi el",
+     "Board'daki en yüksek çift",
+     "İki kapalı kartın aynı renkten olması"
+    ],
+    "dogru": 1,
+    "neden": "Nuts, o board ile kurulabilecek en güçlü eldir. Board değiştikçe nuts da değişir.",
+    "yanilgi": "Nuts'ı her zaman royal floş ya da as peri gibi sabit bir el sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Elin: 8♥ 7♥. Board: K♥ 9♥ 2♥ 6♠ 5♦. En iyi elin hangi çeşittir?",
+    "secenekler": [
+     "Kent",
+     "Floş",
+     "Sıralı floş",
+     "Per"
+    ],
+    "dogru": 1,
+    "neden": "Hem kentin (5-6-7-8-9) hem floşun (beş kupa) var. Floş kentten güçlü olduğu için elin floştur. Kupalar art arda olmadığından sıralı floş değildir.",
+    "yanilgi": "İlk gördüğü eli (kenti) söyleyip daha güçlüsünü aramamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "8♥ 7♥ K♥ 9♥ 2♥ 6♠ 5♦"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Board: K♠ 9♦ 7♣ 4♥ 2♠. Bu board'da bir oyuncunun floşu olabilir.",
+    "dogru": false,
+    "neden": "Floş için aynı renkten beş kart gerekir. Board'da aynı renkten en fazla iki kart (iki maça) var; iki kapalı kartla en çok dörde çıkılır.",
+    "yanilgi": "Elinde aynı renkten iki kart olunca floşun her board'da mümkün olduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "mumkun",
+     "board": "K♠ 9♦ 7♣ 4♥ 2♠",
+     "kategori": "floş"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "eslestirme",
+    "zorluk": 3,
+    "soru": "Her board'u, o board'da mümkün olan en güçlü el çeşidiyle (nuts) eşleştir.",
+    "secenekler": [
+     [
+      "Q♣ Q♦ 6♠ 3♥ 2♠",
+      "Kare"
+     ],
+     [
+      "A♥ T♥ 6♥ 3♣ 2♠",
+      "Floş"
+     ],
+     [
+      "9♠ 8♦ 7♣ 3♥ 2♠",
+      "Kent"
+     ],
+     [
+      "K♠ 8♦ 7♣ 3♥ 2♠",
+      "Üçlü"
+     ]
+    ],
+    "neden": "Çiftli board kareye izin verir. Aynı renkten üç kart floşa, birbirine yakın üç kart kente izin verir. Hiçbiri yoksa en iyi el üçlüdür.",
+    "yanilgi": "Her board'da en iyi elin floş ya da kent olabileceğini varsaymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nutsEsleme"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: Q♥ J♥ 7♥ 4♠ 2♦. Hangi kapalı kartlar nuts'tır?",
+    "secenekler": [
+     "K♥ T♥",
+     "Q♠ Q♦",
+     "A♥ K♥",
+     "A♠ K♠"
+    ],
+    "dogru": 2,
+    "neden": "Board'da üç kupa var ve çift yok; sıralı floş için de yeterince yakın kupa yok. En iyi el A♥ K♥ ile kurulan A-K-Q-J-7 floşudur.",
+    "yanilgi": "Papaz yüksek floşu ya da üç kızı en iyi el sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nuts",
+     "board": "Q♥ J♥ 7♥ 4♠ 2♦"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: A♠ K♦ 8♣ 5♥ 2♠. Bu board'da nuts hangi el çeşididir?",
+    "secenekler": [
+     "Üçlü",
+     "İki per",
+     "Kent",
+     "Floş"
+    ],
+    "dogru": 2,
+    "neden": "Board'da as, ikili ve beşli var. Elinde üçlü ve dörtlü tutan oyuncu A-2-3-4-5 kentini tamamlar. Çift ve aynı renkten üç kart olmadığı için daha güçlüsü mümkün değildir.",
+    "yanilgi": "Asın kentin alt ucunda da kullanılabildiğini unutup üç ası nuts sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nutsKategori",
+     "board": "A♠ K♦ 8♣ 5♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Elin: 9♣ 9♦. Board: 9♠ K♠ 7♠ 4♠ 2♥. Üç dokuzlun var. Aşağıdaki ellerden hangisi seni yener?",
+    "secenekler": [
+     "A♥ K♥",
+     "K♦ 7♦",
+     "8♣ 6♣",
+     "A♠ 3♦"
+    ],
+    "dogru": 3,
+    "neden": "Board'da dört maça var. Tek bir maça tutan oyuncu floş yapar ve floş üçlüyü yener. Diğer eller per, iki per ya da yüksek kartta kalır.",
+    "yanilgi": "Üçlünün gücüne güvenip board'daki dört aynı renkli kartı görmemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "yenen",
+     "el": "9♣ 9♦",
+     "board": "9♠ K♠ 7♠ 4♠ 2♥"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: J♠ J♦ 8♣ 5♥ 2♠. Bu board'da nuts hangi el çeşididir?",
+    "secenekler": [
+     "Full house",
+     "Floş",
+     "Üçlü",
+     "Kare"
+    ],
+    "dogru": 3,
+    "neden": "Board'da iki vale var. Kalan iki valeyi tutan oyuncu kare yapar. Floş ya da sıralı floş için yeterli kart olmadığından kareden güçlüsü yoktur.",
+    "yanilgi": "Çiftli board'da full house'u en iyi el sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nutsKategori",
+     "board": "J♠ J♦ 8♣ 5♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: 9♠ 8♠ 7♠ 2♦ 2♣. Hangi kapalı kartlar nuts'tır?",
+    "secenekler": [
+     "2♥ 2♠",
+     "A♠ K♠",
+     "J♠ T♠",
+     "6♠ 5♠"
+    ],
+    "dogru": 2,
+    "neden": "Board'da art arda üç maça var; sıralı floş mümkün. J♠ T♠ ile 7-8-9-T-J sıralı floşu kurulur ve bu, kareyi de daha düşük sıralı floşu (5-6-7-8-9) da yener.",
+    "yanilgi": "Kareyi ya da as yüksek floşu görünce daha yukarıya bakmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nuts",
+     "board": "9♠ 8♠ 7♠ 2♦ 2♣"
+    }
+   }
+  ]
+ },
+ "o1-k": {
+  "anlatim": [
+   "Bu kontrol, ünitenin beş dersinden karışık sorular içerir. Takıldığın yerde ilgili derse dönmen yeterli."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Destede her renkten kaç kart vardır?",
+    "secenekler": [
+     "4",
+     "10",
+     "13",
+     "52"
+    ],
+    "dogru": 2,
+    "neden": "52 kart dört renge eşit dağılır; her renkte 2'den A'ya 13 kart bulunur.",
+    "yanilgi": "Renk sayısı (4) ile renk başına kart sayısını (13) karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      52,
+      4
+     ],
+     "degerler": [
+      4,
+      10,
+      13,
+      52
+     ]
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Kartları aynı değerde olan iki floştan maça olanı kazanır.",
+    "dogru": false,
+    "neden": "Renkler arasında üstünlük yoktur. Beş kartın değerleri aynıysa eller eşittir.",
+    "yanilgi": "Maçayı en güçlü renk saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "maça": "A♠ J♠ 8♠ 4♠ 2♠",
+      "kupa": "A♥ J♥ 8♥ 4♥ 2♥"
+     },
+     "iddia": "maça",
+     "ornek": true
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "siralama",
+    "zorluk": 2,
+    "soru": "Elleri en zayıftan en güçlüye doğru sırala.",
+    "secenekler": [
+     "Per",
+     "Üçlü",
+     "Kent",
+     "Full house",
+     "Kare"
+    ],
+    "neden": "Tam sıranın içinden beş el: per < üçlü < kent < full house < kare.",
+    "yanilgi": "Kenti üçlünün altına koymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriSirasi",
+     "yon": "artan"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "T♦ T♣ T♥ 6♠ 6♦ hangi eldir?",
+    "secenekler": [
+     "Üçlü",
+     "İki per",
+     "Full house",
+     "Kare"
+    ],
+    "dogru": 2,
+    "neden": "Üç onlu ve iki altılı: bir üçlü ile bir çift full house eder.",
+    "yanilgi": "Yalnızca üç onluyu görüp eli üçlü saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "T♦ T♣ T♥ 6♠ 6♦"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "7♣ 7♦ J♠ J♥ 2♠ hangi eldir?",
+    "secenekler": [
+     "Per",
+     "İki per",
+     "Üçlü",
+     "Full house"
+    ],
+    "dogru": 1,
+    "neden": "İki ayrı çift var: valeler ve yedililer. Bu iki perdir; beşinci kart kicker'dır.",
+    "yanilgi": "İki çifti full house ile karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "7♣ 7♦ J♠ J♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Hangi el daha güçlüdür?",
+    "secenekler": [
+     "9♠ 9♦ 9♣ A♥ K♠",
+     "3♣ 4♦ 5♠ 6♣ 7♥"
+    ],
+    "dogru": 1,
+    "neden": "İkinci el kenttir (3-4-5-6-7) ve kent üçlüyü yener. Kartların küçük olması el çeşidinin önüne geçmez.",
+    "yanilgi": "Üç dokuzlu ile as ve papazı, küçük kartlı kentten üstün sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "9♠ 9♦ 9♣ A♥ K♠",
+      "b": "3♣ 4♦ 5♠ 6♣ 7♥"
+     },
+     "degerler": [
+      "a",
+      "b"
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "K♠ A♦ 2♣ 3♥ 4♠ bir kenttir.",
+    "dogru": false,
+    "neden": "Kent astan dönemez. As yalnızca T-J-Q-K-A'nın üstünde ya da A-2-3-4-5'in altında durur.",
+    "yanilgi": "Ası iki uçta aynı anda kullanmaya çalışmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "K♠ A♦ 2♣ 3♥ 4♠",
+     "iddia": "kent"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Elin: 5♣ 5♦. Board: 5♠ K♥ K♦ 9♣ 2♠. Elin hangi çeşittir?",
+    "secenekler": [
+     "Üçlü",
+     "İki per",
+     "Full house",
+     "Kare"
+    ],
+    "dogru": 2,
+    "neden": "Üç beşlin var ve board'da papaz çifti duruyor: 5-5-5-K-K full house eder.",
+    "yanilgi": "Kendi üçlüsünü görüp board'daki çifti hesaba katmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "5♣ 5♦ 5♠ K♥ K♦ 9♣ 2♠"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Elin: A♠ 4♦. Board: K♠ Q♠ 8♠ 6♠ 2♥. En iyi beş kartının içinde kaç kapalı kartın var?",
+    "dogru": 1,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "En iyi elin maça floşudur: A♠ K♠ Q♠ 8♠ 6♠. Kapalı kartlarından yalnızca A♠ kullanılır; 4♦ dışarıda kalır.",
+    "yanilgi": "İki kapalı kartın da mutlaka kullanıldığını düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "cepKartSayisi",
+     "el": "A♠ 4♦",
+     "board": "K♠ Q♠ 8♠ 6♠ 2♥"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: Q♣ Q♦ 8♠ 5♥ 3♦. Ali: A♠ Q♥. Berk: Q♠ J♦. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de üç kız var. Eşitliği kicker bozar: Ali'nin ası, Berk'in valesini yener.",
+    "yanilgi": "Aynı üçlüde beraberlik olacağını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ Q♥",
+      "Berk": "Q♠ J♦"
+     },
+     "board": "Q♣ Q♦ 8♠ 5♥ 3♦"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: T♥ 9♥ 8♥ 4♣ 4♦. Bu board'da nuts hangi el çeşididir?",
+    "secenekler": [
+     "Kare",
+     "Full house",
+     "Floş",
+     "Sıralı floş"
+    ],
+    "dogru": 3,
+    "neden": "Board'da art arda üç kupa var. Q♥ J♥ tutan oyuncu 8-9-T-J-Q sıralı floşunu kurar; bu, kareyi de yener.",
+    "yanilgi": "Çifti görünce kareyi en iyi el sayıp sıralı floşu aramamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nutsKategori",
+     "board": "T♥ 9♥ 8♥ 4♣ 4♦"
+    }
+   },
+   {
+    "kimlik": "a12",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: T♠ J♦ Q♣ K♥ A♠. Ali: A♦ A♣. Berk: 7♦ 2♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "Board'un kendisi en yüksek kenttir (T-J-Q-K-A) ve iki oyuncunun da en iyi beşlisi budur. Ali'nin üç ası kentten zayıftır; eller eşittir.",
+    "yanilgi": "Güçlü kapalı kartların mutlaka kazandırdığını düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♦ A♣",
+      "Berk": "7♦ 2♣"
+     },
+     "board": "T♠ J♦ Q♣ K♥ A♠"
+    }
+   }
+  ]
+ },
+ "o1-r": {
+  "anlatim": [
+   "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer. Her soruda \"neden\" açıklamasını okumaya zaman ayır."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "A♠ A♦ K♣ Q♥ J♠ eli, 3♠ 3♦ 2♣ 2♥ 4♠ elini yener.",
+    "dogru": false,
+    "neden": "İlk el per, ikincisi iki perdir. El çeşidi kart büyüklüğünden önce gelir: iki per, peri yener.",
+    "yanilgi": "Asların büyüklüğüne bakıp el çeşidini atlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "a": "A♠ A♦ K♣ Q♥ J♠",
+      "b": "3♠ 3♦ 2♣ 2♥ 4♠"
+     },
+     "iddia": "a"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Hangisi diğer üçünü de yener?",
+    "secenekler": [
+     "Kent",
+     "Üçlü",
+     "Floş",
+     "İki per"
+    ],
+    "dogru": 2,
+    "neden": "Sıra: iki per < üçlü < kent < floş. Dördünün en güçlüsü floştur.",
+    "yanilgi": "Kenti floşun üstünde sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "enGucluKategori"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Elin: 4♠ 4♦. Board: A♣ A♦ K♠ K♥ 7♦. En iyi beş kartının içinde kaç kapalı kartın var?",
+    "dogru": 0,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "El beş karttır; \"üç per\" diye bir el yoktur. En iyi beşlin A-A-K-K-7'dir: board'daki iki per ve kicker olarak yedili. Dörtlülerin dışarıda kalır.",
+    "yanilgi": "Üç çifti birden saymaya çalışmak ya da cep çiftini mutlaka elin içinde görmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "cepKartSayisi",
+     "el": "4♠ 4♦",
+     "board": "A♣ A♦ K♠ K♥ 7♦"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: 9♣ 8♦ 5♠ 3♥ 2♦. Ali: A♠ K♠. Berk: A♥ K♥. Kim kazanır?",
+    "secenekler": [
+     "Ali, çünkü maça kupadan üstündür",
+     "Berk, çünkü kupa maçadan üstündür",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "İkisinin de en iyi beşlisi A-K-9-8-5'tir. Renkler eşitliği bozmaz; eller eşittir.",
+    "yanilgi": "Renkler arasında bir sıralama olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ K♠",
+      "Berk": "A♥ K♥"
+     },
+     "board": "9♣ 8♦ 5♠ 3♥ 2♦",
+     "degerler": [
+      "Ali",
+      "Berk",
+      "Beraberlik"
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "As, kentte hem en üstte (T-J-Q-K-A) hem en altta (A-2-3-4-5) kullanılabilir.",
+    "dogru": true,
+    "neden": "As iki uçta da durabilir; ama aynı kentte ikisini birden yapamaz, yani kent astan dönemez.",
+    "yanilgi": "Ası yalnızca en yüksek kart sayıp A-2-3-4-5 kentini görmemek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: A♠ A♦ K♣ 9♥ 8♦. Ali: Q♠ 7♣. Berk: Q♦ 2♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "İkisinin de en iyi beşlisi A-A-K-Q-9'dur. Yedili ve ikili altıncı karttır; hiç sayılmaz.",
+    "yanilgi": "Altıncı kartın eşitliği bozduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "Q♠ 7♣",
+      "Berk": "Q♦ 2♣"
+     },
+     "board": "A♠ A♦ K♣ 9♥ 8♦"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "8♥ 9♥ T♥ J♥ Q♠ hangi eldir?",
+    "secenekler": [
+     "Floş",
+     "Sıralı floş",
+     "Kent",
+     "Yüksek kart"
+    ],
+    "dogru": 2,
+    "neden": "Kartlar art arda olduğu için kenttir. Yalnızca dört kart kupa; floş için beşinin de aynı renkten olması gerekir.",
+    "yanilgi": "Dört aynı renkli kartı floş saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "8♥ 9♥ T♥ J♥ Q♠"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: 6♣ 6♦ 6♠ 6♥ 9♦. Ali: K♠ K♥. Berk: A♣ 2♦. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 1,
+    "neden": "Kare board'da; herkesin eli dört altılı ve bir kicker'dır. Berk'in ası, Ali'nin papazını yener. Ali'nin papaz çifti beş kartın içine sığmaz.",
+    "yanilgi": "Cep çiftinin her durumda yüksek tek karttan iyi olduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "K♠ K♥",
+      "Berk": "A♣ 2♦"
+     },
+     "board": "6♣ 6♦ 6♠ 6♥ 9♦"
+    }
+   }
+  ]
+ }
+}
