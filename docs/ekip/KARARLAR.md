@@ -69,3 +69,13 @@ Ajan 5 spotu projenin değerlendiricisini kullanmadan kendi yazdığı hesaplay�
 ## 2026-11-12 · Kapı D: müfredat o1–o2 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
 
 Ajan 58 kural/terim sorusunun hepsini ve betikli 111 sorunun neredeyse tamamını kendisi çözdü; doğrulukta hata yok. İstenen dört metin düzeltmesi uygulandı: preflop/postflop, pot, chip ve board ilk kullanıldıkları derste tanımlanıyor; "cep çifti" yerine "kapalı kartlarındaki çift"; bahis turunun bitiş kuralı tamamlandı ("elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa"); raporlardaki betik iddiası gerçeğe indirildi (pot ve sayı sorularında terimler elle girilir, betik işlemi doğrular). Kapının koşuluna göre testler yeşil olunca yeni kapı gerekmeden ONAY sayılır. İçerik, Öğren ekranı bağlanınca görünür olacak.
+
+## 2026-11-12 · Kapı A: el motoru · ONAY
+
+Ajan 699/699 testi ve typecheck'i kendisi çalıştırdı; eksik all-in, min raise, BB preflop seçeneği, postflop ve heads-up konuşma sırası, yan pot ve iade, ante senaryolarını elle kurup doğruladı. Gizlilik: rakip eli durumda tutulmuyor, yalnızca showdown olayında görünüyor; testler bunu tüm spotlarda iki hatla kanıtlıyor. Değerlendirme: ilk karardan sonra her karar "tahmini"; gerekçelerde kesinlik dili yok; MC tohumlu, aynı durum aynı kademeyi verir. Rakip: 2082 aksiyonun yaklaşık %5'i all-in, nuts ile fold yok.
+
+Uygulayıcı kararları kabul edildi: seçeneklerde olmayan preflop hamlesi "hata"; stack'i bitiren call "call" (olayda stack 0); hero fold edince el oynatılmaz; board ve rakip elleri yalnızca spot kimliğine bağlı; küçük MC (tahmini etiketiyle); gizlilik kriptografik değil.
+
+Engellemeyen notlar: bölünen potta artan kuruş butonun solundaki ilk oyuncuya gitmeli (şu an SEATS sırası); heroNet BB ante'yi düşmüyor (replay.ts ile aynı model).
+
+Arayüz (C) için kabul ölçütleri: olaylar sırayla oynatılır, son rakip aksiyonu son `aksiyon` olayından türetilir, miktarlar sokakta toplamdır; arayüz ve koç isteği yalnızca `state` ve `olaylar` kullanır, `gizliDagitim`/`araliklar.ts` import edilmez; "Bu eli tekrar oyna" aynı kartları getirdiği için arayüz bunu açıkça söyler; tahmini kararlar "Tahmini değerlendirme" etiketiyle, özet ekranında "solver değildir" notu; hero fold edince çok oyunculu potta "el oynatılmadı" denir.
