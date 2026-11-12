@@ -24,6 +24,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Kırmızı testle yayın yok (KARARLAR.md, karar 6).
+      - run: npm run typecheck
+      - run: npm test
       # Statik sürümde sunucu yoktur: API uç noktaları derlemeden çıkarılır.
       - run: rm -rf src/app/api
       - run: npm run build

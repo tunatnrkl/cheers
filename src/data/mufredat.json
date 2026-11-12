@@ -1,0 +1,4304 @@
+{
+ "surum": 1,
+ "dil": "tr",
+ "varsayimlar": {
+  "cash": "6-max, 100 BB, 2,5 BB açılış, rake yok sayılır.",
+  "turnuva": "Aksi yazılmadıkça BB ante 1 BB; ICM yalnızca ICM ünitelerinde hesaba katılır."
+ },
+ "pistler": [
+  {
+   "kimlik": "cash",
+   "baslik": "Cash",
+   "aciklama": "6 kişilik masa, 100 BB, 2,5 BB açılış, rake yok sayılır. Hiç bilmeyenden ileri seviyeye.",
+   "uniteler": [
+    "o1",
+    "o2",
+    "o3",
+    "o4",
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "c10",
+    "c11",
+    "c12",
+    "c13"
+   ]
+  },
+  {
+   "kimlik": "turnuva",
+   "baslik": "Turnuva",
+   "aciklama": "Temelden başlar; stack derinliği, push/fold, ICM ve özel formatlara uzanır.",
+   "uniteler": [
+    "o1",
+    "o2",
+    "t1",
+    "o3",
+    "t2",
+    "o4",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10"
+   ]
+  }
+ ],
+ "uniteler": [
+  {
+   "kimlik": "o1",
+   "baslik": "Kartlar ve eller",
+   "seviye": 1,
+   "renk": "#F6EBD0",
+   "ozet": "Desteyi, on el sıralamasını ve beş kart kuralını öğren.",
+   "dersler": [
+    {
+     "kimlik": "o1-d1",
+     "baslik": "Deste ve kartlar",
+     "tur": "ders",
+     "onkosul": [],
+     "kazanimlar": [
+      "52 kartı, dört rengi ve sıra değerlerini (2'den A'ya) tanır; kart yazımını (A♠, Kh) okur."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-d2",
+     "baslik": "El sıralaması: yüksek karttan üçlüye",
+     "tur": "ders",
+     "onkosul": [
+      "o1-d1"
+     ],
+     "kazanimlar": [
+      "Yüksek kart, per, iki per ve üçlüyü ayırt eder ve sıralar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-d3",
+     "baslik": "El sıralaması: kentten royal floşa",
+     "tur": "ders",
+     "onkosul": [
+      "o1-d2"
+     ],
+     "kazanimlar": [
+      "Kent, floş, full house, kare ve sıralı floşu ayırt eder; on elin tam sırasını bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-d4",
+     "baslik": "Beş kart kuralı ve kicker",
+     "tur": "ders",
+     "onkosul": [
+      "o1-d3"
+     ],
+     "kazanimlar": [
+      "En iyi elin yedi karttan seçilen beş kart olduğunu ve kicker'ın eşitliği nasıl bozduğunu uygular."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-d5",
+     "baslik": "Board'u okumak",
+     "tur": "ders",
+     "onkosul": [
+      "o1-d4"
+     ],
+     "kazanimlar": [
+      "Verilen el ve board'da kendi en iyi beş kartını ve board'un izin verdiği en güçlü eli (nuts) bulur."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-k",
+     "baslik": "Kontrol: Kartlar ve eller",
+     "tur": "kontrol",
+     "onkosul": [
+      "o1-d5"
+     ],
+     "kazanimlar": [
+      "\"Kartlar ve eller\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o1-r",
+     "baslik": "Tekrar: Kartlar ve eller",
+     "tur": "tekrar",
+     "onkosul": [
+      "o1-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "o2",
+   "baslik": "Masa ve el akışı",
+   "seviye": 1,
+   "renk": "#F6EBD0",
+   "ozet": "Blind'ler, aksiyonlar, sokaklar, showdown ve pot hesabı.",
+   "dersler": [
+    {
+     "kimlik": "o2-d1",
+     "baslik": "Buton ve blind'ler",
+     "tur": "ders",
+     "onkosul": [
+      "o1-k"
+     ],
+     "kazanimlar": [
+      "Dealer butonunu, küçük ve büyük blind'i ve blind'lerin neden zorunlu olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-d2",
+     "baslik": "Aksiyonlar",
+     "tur": "ders",
+     "onkosul": [
+      "o2-d1"
+     ],
+     "kazanimlar": [
+      "Fold, check, call, bet ve raise'in ne zaman yapılabildiğini bilir; check ile call'u karıştırmaz."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-d3",
+     "baslik": "Sokaklar: preflop'tan river'a",
+     "tur": "ders",
+     "onkosul": [
+      "o2-d2"
+     ],
+     "kazanimlar": [
+      "Preflop, flop, turn ve river'da kaç kart açıldığını ve kimin önce konuştuğunu sıralar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-d4",
+     "baslik": "Showdown ve kazanan",
+     "tur": "ders",
+     "onkosul": [
+      "o2-d3",
+      "o1-d4"
+     ],
+     "kazanimlar": [
+      "Showdown'da kazananı, beraberliği ve potun bölünmesini belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-d5",
+     "baslik": "Pot nasıl büyür",
+     "tur": "ders",
+     "onkosul": [
+      "o2-d4"
+     ],
+     "kazanimlar": [
+      "Blind'ler ve bahislerden potu toplar; bir bahsi görmek için ödenecek miktarı hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-k",
+     "baslik": "Kontrol: Masa ve el akışı",
+     "tur": "kontrol",
+     "onkosul": [
+      "o2-d5"
+     ],
+     "kazanimlar": [
+      "\"Masa ve el akışı\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-r",
+     "baslik": "Tekrar: Masa ve el akışı",
+     "tur": "tekrar",
+     "onkosul": [
+      "o2-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o2-t",
+     "baslik": "Temel testi: kartlar ve masa",
+     "tur": "test",
+     "onkosul": [
+      "o2-k"
+     ],
+     "seviyeAtlar": 1,
+     "kapsam": "ortak",
+     "kazanimlar": [
+      "ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "o3",
+   "baslik": "Pozisyon",
+   "seviye": 2,
+   "renk": "#F6EBD0",
+   "ozet": "Koltuk adları ve son konuşmanın neden avantaj olduğu.",
+   "dersler": [
+    {
+     "kimlik": "o3-d1",
+     "baslik": "Koltuk adları",
+     "tur": "ders",
+     "onkosul": [
+      "o2-k"
+     ],
+     "kazanimlar": [
+      "6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-d2",
+     "baslik": "Pozisyonda ve pozisyonsuz",
+     "tur": "ders",
+     "onkosul": [
+      "o3-d1",
+      "o2-d3"
+     ],
+     "kazanimlar": [
+      "Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-d3",
+     "baslik": "Son konuşmanın değeri",
+     "tur": "ders",
+     "onkosul": [
+      "o3-d2"
+     ],
+     "kazanimlar": [
+      "Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-d4",
+     "baslik": "Erken, geç pozisyon ve blind'ler",
+     "tur": "ders",
+     "onkosul": [
+      "o3-d3"
+     ],
+     "kazanimlar": [
+      "Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-d5",
+     "baslik": "BB cinsinden düşünmek",
+     "tur": "ders",
+     "onkosul": [
+      "o3-d4",
+      "o2-d5"
+     ],
+     "kazanimlar": [
+      "Stack ve bahisleri BB'ye çevirir; iki oyuncu arasındaki efektif stack'i bulur."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-k",
+     "baslik": "Kontrol: Pozisyon",
+     "tur": "kontrol",
+     "onkosul": [
+      "o3-d5"
+     ],
+     "kazanimlar": [
+      "\"Pozisyon\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o3-r",
+     "baslik": "Tekrar: Pozisyon",
+     "tur": "tekrar",
+     "onkosul": [
+      "o3-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "o4",
+   "baslik": "Başlangıç elleri",
+   "seviye": 3,
+   "renk": "#E0A526",
+   "ozet": "169 başlangıç eli, kategoriler ve domine edilme.",
+   "dersler": [
+    {
+     "kimlik": "o4-d1",
+     "baslik": "El kategorileri",
+     "tur": "ders",
+     "onkosul": [
+      "o3-k"
+     ],
+     "kazanimlar": [
+      "Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326)."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-d2",
+     "baslik": "Range matrisini okumak",
+     "tur": "ders",
+     "onkosul": [
+      "o4-d1"
+     ],
+     "kazanimlar": [
+      "13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-d3",
+     "baslik": "Domine edilme ve kicker sorunu",
+     "tur": "ders",
+     "onkosul": [
+      "o4-d2",
+      "o1-d4"
+     ],
+     "kazanimlar": [
+      "AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-d4",
+     "baslik": "Sıkı ve agresif oyunun mantığı",
+     "tur": "ders",
+     "onkosul": [
+      "o4-d3",
+      "o3-d4"
+     ],
+     "kazanimlar": [
+      "Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-d5",
+     "baslik": "Limp neden çoğunlukla zayıf",
+     "tur": "ders",
+     "onkosul": [
+      "o4-d4"
+     ],
+     "kazanimlar": [
+      "İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-k",
+     "baslik": "Kontrol: Başlangıç elleri",
+     "tur": "kontrol",
+     "onkosul": [
+      "o4-d5"
+     ],
+     "kazanimlar": [
+      "\"Başlangıç elleri\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-r",
+     "baslik": "Tekrar: Başlangıç elleri",
+     "tur": "tekrar",
+     "onkosul": [
+      "o4-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "o4-t",
+     "baslik": "Temel testi: pozisyon ve başlangıç elleri",
+     "tur": "test",
+     "onkosul": [
+      "o4-k"
+     ],
+     "seviyeAtlar": 3,
+     "kapsam": "ortak",
+     "kazanimlar": [
+      "ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c5",
+   "baslik": "Açılış aralıkları",
+   "seviye": 3,
+   "renk": "#E0A526",
+   "ozet": "Herkes fold ettiğinde hangi pozisyondan hangi ellerle açılır.",
+   "dersler": [
+    {
+     "kimlik": "c5-d1",
+     "baslik": "Açılış boyutu",
+     "tur": "ders",
+     "onkosul": [
+      "o4-k"
+     ],
+     "kazanimlar": [
+      "Varsayılan 2,5 BB açılışın gerekçesini ve boyutun eli ele vermemesi gerektiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-d2",
+     "baslik": "UTG ve HJ açılışları",
+     "tur": "ders",
+     "onkosul": [
+      "c5-d1",
+      "o4-d2"
+     ],
+     "kazanimlar": [
+      "Erken pozisyonların sıkı açılış aralığını matriste işaretler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-d3",
+     "baslik": "CO ve BTN açılışları",
+     "tur": "ders",
+     "onkosul": [
+      "c5-d2"
+     ],
+     "kazanimlar": [
+      "Geç pozisyonda aralığın neden genişlediğini açıklar ve örnek elleri sınıflar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-d4",
+     "baslik": "SB'den açılış",
+     "tur": "ders",
+     "onkosul": [
+      "c5-d3"
+     ],
+     "kazanimlar": [
+      "SB'nin pozisyonsuz kalacağını hesaba katarak açılış ya da fold kararını verir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-d5",
+     "baslik": "Sınırdaki eller",
+     "tur": "ders",
+     "onkosul": [
+      "c5-d4"
+     ],
+     "kazanimlar": [
+      "Aralığın kenarındaki ellerde kararın yakın olduğunu ve masaya göre değişebildiğini bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-d6",
+     "baslik": "Rakibe göre küçük ayar",
+     "tur": "ders",
+     "onkosul": [
+      "c5-d5"
+     ],
+     "kazanimlar": [
+      "Blind'lerdeki oyuncular sıkı ya da gevşekse açılışı hangi yönde ayarlayacağını söyler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-k",
+     "baslik": "Kontrol: Açılış aralıkları",
+     "tur": "kontrol",
+     "onkosul": [
+      "c5-d6"
+     ],
+     "kazanimlar": [
+      "\"Açılış aralıkları\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c5-r",
+     "baslik": "Tekrar: Açılış aralıkları",
+     "tur": "tekrar",
+     "onkosul": [
+      "c5-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c6",
+   "baslik": "Blind savunması",
+   "seviye": 4,
+   "renk": "#E0A526",
+   "ozet": "Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.",
+   "dersler": [
+    {
+     "kimlik": "c6-d1",
+     "baslik": "Fiyat: gereken equity",
+     "tur": "ders",
+     "onkosul": [
+      "c5-k",
+      "o2-d5"
+     ],
+     "kazanimlar": [
+      "Equity'yi potun uzun vadedeki payı olarak tanır; açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot)."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-d2",
+     "baslik": "BB savunması ve açanın pozisyonu",
+     "tur": "ders",
+     "onkosul": [
+      "c6-d1",
+      "c5-d3"
+     ],
+     "kazanimlar": [
+      "Aynı fiyatta UTG'ye karşı dar, BTN'ye karşı geniş savunmanın nedenini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-d3",
+     "baslik": "Equity realization",
+     "tur": "ders",
+     "onkosul": [
+      "c6-d2"
+     ],
+     "kazanimlar": [
+      "Ham equity'nin tamamının neden kullanılamadığını; suited ve bağlantılı ellerin avantajını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-d4",
+     "baslik": "SB stratejisi",
+     "tur": "ders",
+     "onkosul": [
+      "c6-d3"
+     ],
+     "kazanimlar": [
+      "SB'de açılışa karşı call yerine çoğunlukla yeniden raise (3-bet) ya da fold oynamanın gerekçesini pozisyonsuzluk ve arkadaki BB ile açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-d5",
+     "baslik": "Çok oyunculu potta BB",
+     "tur": "ders",
+     "onkosul": [
+      "c6-d4"
+     ],
+     "kazanimlar": [
+      "Açılış ve call sonrası iyi fiyatla hangi el tiplerinin savunulduğunu seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-k",
+     "baslik": "Kontrol: Blind savunması",
+     "tur": "kontrol",
+     "onkosul": [
+      "c6-d5"
+     ],
+     "kazanimlar": [
+      "\"Blind savunması\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-r",
+     "baslik": "Tekrar: Blind savunması",
+     "tur": "tekrar",
+     "onkosul": [
+      "c6-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c6-t",
+     "baslik": "Seviye 4 testi",
+     "tur": "test",
+     "onkosul": [
+      "c6-k"
+     ],
+     "seviyeAtlar": 4,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c7",
+   "baslik": "3-bet ve ötesi",
+   "seviye": 5,
+   "renk": "#E0A526",
+   "ozet": "3-bet, 4-bet, 5-bet, squeeze, iso-raise ve blokerler.",
+   "dersler": [
+    {
+     "kimlik": "c7-d1",
+     "baslik": "3-bet nedir, neden yapılır",
+     "tur": "ders",
+     "onkosul": [
+      "c6-k",
+      "c5-d3",
+      "c6-d4"
+     ],
+     "kazanimlar": [
+      "3-bet'in iki amacını ayırır: value ve fold equity."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d2",
+     "baslik": "Value 3-bet ve blöf 3-bet",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d1"
+     ],
+     "kazanimlar": [
+      "Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır; value ve blöf 3-bet'in birbirine oranının neden önemli olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d3",
+     "baslik": "Blokerler",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d2",
+      "o4-d1"
+     ],
+     "kazanimlar": [
+      "Elindeki bir asın rakibin AA ve AK kombinasyonlarını nasıl azalttığını sayar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d4",
+     "baslik": "3-bet boyutları",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d3",
+      "o3-d2"
+     ],
+     "kazanimlar": [
+      "Pozisyonda ve pozisyonsuz 3-bet boyutunun neden farklı olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d5",
+     "baslik": "3-bet'e karşı oynamak",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d4"
+     ],
+     "kazanimlar": [
+      "Açtığı ele 3-bet gelince call, 4-bet ve fold arasında seçim yapar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d6",
+     "baslik": "4-bet ve 5-bet",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d5"
+     ],
+     "kazanimlar": [
+      "100 BB'de 4-bet ve 5-bet all-in aralıklarının neden dar olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d7",
+     "baslik": "Squeeze",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d6"
+     ],
+     "kazanimlar": [
+      "Açılış ve call sonrası squeeze'in neden daha büyük boyut ve fazladan fold equity taşıdığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-d8",
+     "baslik": "Iso-raise",
+     "tur": "ders",
+     "onkosul": [
+      "c7-d7",
+      "o4-d5"
+     ],
+     "kazanimlar": [
+      "Limp eden oyuncuyu izole etmenin amacını ve boyutunu belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-k",
+     "baslik": "Kontrol: 3-bet ve ötesi",
+     "tur": "kontrol",
+     "onkosul": [
+      "c7-d8"
+     ],
+     "kazanimlar": [
+      "\"3-bet ve ötesi\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c7-r",
+     "baslik": "Tekrar: 3-bet ve ötesi",
+     "tur": "tekrar",
+     "onkosul": [
+      "c7-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c8",
+   "baslik": "Postflop matematiği",
+   "seviye": 5,
+   "renk": "#5FB58A",
+   "ozet": "Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.",
+   "dersler": [
+    {
+     "kimlik": "c8-d1",
+     "baslik": "Equity nedir",
+     "tur": "ders",
+     "onkosul": [
+      "c7-k",
+      "c6-d1"
+     ],
+     "kazanimlar": [
+      "Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-d2",
+     "baslik": "Outs saymak",
+     "tur": "ders",
+     "onkosul": [
+      "c8-d1",
+      "o1-d5"
+     ],
+     "kazanimlar": [
+      "Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-d3",
+     "baslik": "2 ve 4 kuralı",
+     "tur": "ders",
+     "onkosul": [
+      "c8-d2"
+     ],
+     "kazanimlar": [
+      "Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-d4",
+     "baslik": "Pot odds",
+     "tur": "ders",
+     "onkosul": [
+      "c8-d3",
+      "c6-d1"
+     ],
+     "kazanimlar": [
+      "Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-d5",
+     "baslik": "Implied ve reverse implied odds",
+     "tur": "ders",
+     "onkosul": [
+      "c8-d4"
+     ],
+     "kazanimlar": [
+      "Sonradan kazanılacak ya da kaybedilecek chip'lerin kararı nasıl değiştirdiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-d6",
+     "baslik": "SPR",
+     "tur": "ders",
+     "onkosul": [
+      "c8-d5",
+      "o3-d5"
+     ],
+     "kazanimlar": [
+      "SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-k",
+     "baslik": "Kontrol: Postflop matematiği",
+     "tur": "kontrol",
+     "onkosul": [
+      "c8-d6"
+     ],
+     "kazanimlar": [
+      "\"Postflop matematiği\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-r",
+     "baslik": "Tekrar: Postflop matematiği",
+     "tur": "tekrar",
+     "onkosul": [
+      "c8-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c8-t",
+     "baslik": "Seviye 5 testi",
+     "tur": "test",
+     "onkosul": [
+      "c8-k"
+     ],
+     "seviyeAtlar": 5,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c9",
+   "baslik": "Flop: board ve c-bet",
+   "seviye": 6,
+   "renk": "#6FA8DC",
+   "ozet": "Board dokusu, range avantajı ve c-bet kararları.",
+   "dersler": [
+    {
+     "kimlik": "c9-d1",
+     "baslik": "Board dokusu",
+     "tur": "ders",
+     "onkosul": [
+      "c8-k",
+      "o1-d5"
+     ],
+     "kazanimlar": [
+      "Kuru, ıslak, paired ve monotone board'ları tanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-d2",
+     "baslik": "Range avantajı ve nut avantajı",
+     "tur": "ders",
+     "onkosul": [
+      "c9-d1",
+      "c5-d3",
+      "c6-d2"
+     ],
+     "kazanimlar": [
+      "Verilen board'un açana mı savunana mı daha çok yaradığını değerlendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-d3",
+     "baslik": "C-bet: ne zaman",
+     "tur": "ders",
+     "onkosul": [
+      "c9-d2"
+     ],
+     "kazanimlar": [
+      "Range avantajı ve board dokusuna göre c-bet ya da check seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-d4",
+     "baslik": "C-bet boyutu",
+     "tur": "ders",
+     "onkosul": [
+      "c9-d3"
+     ],
+     "kazanimlar": [
+      "Kuru board'da küçük, ıslak board'da daha büyük boyutun gerekçesini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-d5",
+     "baslik": "C-bet'e karşı savunma",
+     "tur": "ders",
+     "onkosul": [
+      "c9-d4",
+      "c8-d4"
+     ],
+     "kazanimlar": [
+      "Fiyat ve el gücüne göre fold, call ya da raise seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-d6",
+     "baslik": "Pozisyonun postflop değeri",
+     "tur": "ders",
+     "onkosul": [
+      "c9-d5",
+      "o3-d3"
+     ],
+     "kazanimlar": [
+      "Aynı elin IP ve OOP oynanışındaki farkı açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-k",
+     "baslik": "Kontrol: Flop: board ve c-bet",
+     "tur": "kontrol",
+     "onkosul": [
+      "c9-d6"
+     ],
+     "kazanimlar": [
+      "\"Flop: board ve c-bet\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c9-r",
+     "baslik": "Tekrar: Flop: board ve c-bet",
+     "tur": "tekrar",
+     "onkosul": [
+      "c9-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c10",
+   "baslik": "Value ve blöf",
+   "seviye": 7,
+   "renk": "#6FA8DC",
+   "ozet": "Value bet, boyut, blöf seçimi, check-raise, donk bet ve pot kontrolü.",
+   "dersler": [
+    {
+     "kimlik": "c10-d1",
+     "baslik": "Value bet",
+     "tur": "ders",
+     "onkosul": [
+      "c9-k"
+     ],
+     "kazanimlar": [
+      "\"Daha zayıf hangi eller görür?\" sorusuyla value bet kararını verir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-d2",
+     "baslik": "Value boyutlandırma",
+     "tur": "ders",
+     "onkosul": [
+      "c10-d1",
+      "c9-d4"
+     ],
+     "kazanimlar": [
+      "Rakibin görecek aralığına göre boyut seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-d3",
+     "baslik": "Blöf seçimi",
+     "tur": "ders",
+     "onkosul": [
+      "c10-d2",
+      "c8-d1",
+      "c7-d3"
+     ],
+     "kazanimlar": [
+      "Yarı blöfü saf blöften ayırır; equity ve bloker taşıyan elleri blöf adayı seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-d4",
+     "baslik": "Check-raise",
+     "tur": "ders",
+     "onkosul": [
+      "c10-d3",
+      "c9-d5"
+     ],
+     "kazanimlar": [
+      "Value ve yarı blöf amaçlı check-raise adaylarını seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-d5",
+     "baslik": "Donk bet",
+     "tur": "ders",
+     "onkosul": [
+      "c10-d4",
+      "c9-d2"
+     ],
+     "kazanimlar": [
+      "Donk bet'i tanımlar; neden seyrek kullanıldığını ve hangi board'larda anlam kazandığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-d6",
+     "baslik": "Pot kontrolü",
+     "tur": "ders",
+     "onkosul": [
+      "c10-d5",
+      "c8-d6"
+     ],
+     "kazanimlar": [
+      "Orta güçteki elle potu küçük tutmanın gerekçesini SPR ile ilişkilendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-k",
+     "baslik": "Kontrol: Value ve blöf",
+     "tur": "kontrol",
+     "onkosul": [
+      "c10-d6"
+     ],
+     "kazanimlar": [
+      "\"Value ve blöf\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c10-r",
+     "baslik": "Tekrar: Value ve blöf",
+     "tur": "tekrar",
+     "onkosul": [
+      "c10-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c11",
+   "baslik": "Turn ve 3-bet potları",
+   "seviye": 8,
+   "renk": "#6FA8DC",
+   "ozet": "Turn kararları, ikinci barrel ve düşük SPR'li 3-bet potları.",
+   "dersler": [
+    {
+     "kimlik": "c11-d1",
+     "baslik": "Turn kartı kimi güçlendirdi",
+     "tur": "ders",
+     "onkosul": [
+      "c10-k",
+      "c9-d2"
+     ],
+     "kazanimlar": [
+      "Turn kartının iki aralığa etkisini değerlendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-d2",
+     "baslik": "İkinci barrel ya da check",
+     "tur": "ders",
+     "onkosul": [
+      "c11-d1",
+      "c10-d3"
+     ],
+     "kazanimlar": [
+      "Turn'de bahse devam ya da check kararını equity ve fold equity ile gerekçelendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-d3",
+     "baslik": "Turn'de check-raise ve probe bet",
+     "tur": "ders",
+     "onkosul": [
+      "c11-d2",
+      "c10-d4"
+     ],
+     "kazanimlar": [
+      "Flop check'lendikten sonra probe bet'i ve turn check-raise'i tanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-d4",
+     "baslik": "3-bet potlarında düşük SPR",
+     "tur": "ders",
+     "onkosul": [
+      "c11-d3",
+      "c7-d5",
+      "c8-d6"
+     ],
+     "kazanimlar": [
+      "3-bet potunda SPR'nin neden düşük olduğunu ve bunun el değerlerini nasıl değiştirdiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-d5",
+     "baslik": "IP ve OOP planı",
+     "tur": "ders",
+     "onkosul": [
+      "c11-d4",
+      "c9-d6"
+     ],
+     "kazanimlar": [
+      "Aynı spotta pozisyona göre bahis ve check sıklığının yönünü belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-k",
+     "baslik": "Kontrol: Turn ve 3-bet potları",
+     "tur": "kontrol",
+     "onkosul": [
+      "c11-d5"
+     ],
+     "kazanimlar": [
+      "\"Turn ve 3-bet potları\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-r",
+     "baslik": "Tekrar: Turn ve 3-bet potları",
+     "tur": "tekrar",
+     "onkosul": [
+      "c11-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c11-t",
+     "baslik": "Seviye 6-8 testi",
+     "tur": "test",
+     "onkosul": [
+      "c11-k"
+     ],
+     "seviyeAtlar": 8,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c12",
+   "baslik": "River",
+   "seviye": 9,
+   "renk": "#C58BD8",
+   "ozet": "İnce value, bluff catch, MDF, blokerler ve polarizasyon.",
+   "dersler": [
+    {
+     "kimlik": "c12-d1",
+     "baslik": "İnce value",
+     "tur": "ders",
+     "onkosul": [
+      "c11-k",
+      "c10-d2"
+     ],
+     "kazanimlar": [
+      "River'da orta güçteki elle küçük value bet fırsatını tanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-d2",
+     "baslik": "Bluff catch",
+     "tur": "ders",
+     "onkosul": [
+      "c12-d1",
+      "c8-d4"
+     ],
+     "kazanimlar": [
+      "Yalnızca blöfleri yenen eli tanır; fiyatla rakibin blöf sıklığını karşılaştırır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-d3",
+     "baslik": "MDF ve alpha",
+     "tur": "ders",
+     "onkosul": [
+      "c12-d2"
+     ],
+     "kazanimlar": [
+      "Bahis boyutundan MDF ve alpha'yı hesaplar; bunların teorik çıpa olduğunu, kural olmadığını bilir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-d4",
+     "baslik": "Blokerlerle river kararı",
+     "tur": "ders",
+     "onkosul": [
+      "c12-d3",
+      "c7-d3"
+     ],
+     "kazanimlar": [
+      "Value kombinasyonlarını bloke eden ve blöfleri bloke etmeyen eli call adayı seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-d5",
+     "baslik": "Polarize ve birleşik aralık",
+     "tur": "ders",
+     "onkosul": [
+      "c12-d4"
+     ],
+     "kazanimlar": [
+      "Polarize ve birleşik bahis aralıklarını ayırır; boyutla ilişkisini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-d6",
+     "baslik": "Overbet fikri",
+     "tur": "ders",
+     "onkosul": [
+      "c12-d5",
+      "c9-d2"
+     ],
+     "kazanimlar": [
+      "Nut avantajı olan aralığın neden pottan büyük bahis yapabildiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-k",
+     "baslik": "Kontrol: River",
+     "tur": "kontrol",
+     "onkosul": [
+      "c12-d6"
+     ],
+     "kazanimlar": [
+      "\"River\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c12-r",
+     "baslik": "Tekrar: River",
+     "tur": "tekrar",
+     "onkosul": [
+      "c12-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "c13",
+   "baslik": "İleri konular",
+   "seviye": 10,
+   "renk": "#C58BD8",
+   "ozet": "Çok oyunculu potlar, el okuma, sömürücü oyun ve zihinsel oyun.",
+   "dersler": [
+    {
+     "kimlik": "c13-d1",
+     "baslik": "Çok oyunculu potlar",
+     "tur": "ders",
+     "onkosul": [
+      "c12-k"
+     ],
+     "kazanimlar": [
+      "Oyuncu sayısı arttıkça blöfün neden azaldığını ve value eşiğinin yükseldiğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-d2",
+     "baslik": "El okuma süreci",
+     "tur": "ders",
+     "onkosul": [
+      "c13-d1",
+      "c11-d1"
+     ],
+     "kazanimlar": [
+      "Rakip aralığını preflop'tan river'a aksiyonlarla adım adım daraltır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-d3",
+     "baslik": "Sömürücü sapmalar",
+     "tur": "ders",
+     "onkosul": [
+      "c13-d2",
+      "c12-d3"
+     ],
+     "kazanimlar": [
+      "Dengeli stratejiden ne zaman ve hangi kanıtla sapılacağını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-d4",
+     "baslik": "Rakip eğilimleri",
+     "tur": "ders",
+     "onkosul": [
+      "c13-d3"
+     ],
+     "kazanimlar": [
+      "Fazla fold eden ve fazla call eden rakibe karşı ayarı seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-d5",
+     "baslik": "Tilt ve zihinsel oyun",
+     "tur": "ders",
+     "onkosul": [
+      "c13-d4"
+     ],
+     "kazanimlar": [
+      "Tilt belirtilerini tanır; mola ve oturum sınırı gibi önlemleri sayar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-d6",
+     "baslik": "Oyununu gözden geçirme",
+     "tur": "ders",
+     "onkosul": [
+      "c13-d5"
+     ],
+     "kazanimlar": [
+      "Bir eli sonuçtan bağımsız, karar kalitesiyle değerlendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-k",
+     "baslik": "Kontrol: İleri konular",
+     "tur": "kontrol",
+     "onkosul": [
+      "c13-d6"
+     ],
+     "kazanimlar": [
+      "\"İleri konular\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-r",
+     "baslik": "Tekrar: İleri konular",
+     "tur": "tekrar",
+     "onkosul": [
+      "c13-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "c13-t",
+     "baslik": "Cash bitirme testi",
+     "tur": "test",
+     "onkosul": [
+      "c13-k"
+     ],
+     "seviyeAtlar": 10,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t1",
+   "baslik": "Turnuva nedir",
+   "seviye": 1,
+   "renk": "#F0715A",
+   "ozet": "Formatlar, blind seviyeleri, ante ve ödül yapısı.",
+   "dersler": [
+    {
+     "kimlik": "t1-d1",
+     "baslik": "Turnuva ile cash farkı",
+     "tur": "ders",
+     "onkosul": [
+      "o2-k"
+     ],
+     "kazanimlar": [
+      "Chip'lerin geri alınamadığını, elenmenin kalıcı olduğunu ve blind'lerin arttığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-d2",
+     "baslik": "Formatlar",
+     "tur": "ders",
+     "onkosul": [
+      "t1-d1"
+     ],
+     "kazanimlar": [
+      "Freezeout, re-entry, sit & go ve çok masalı turnuvayı ayırt eder."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-d3",
+     "baslik": "Blind seviyeleri",
+     "tur": "ders",
+     "onkosul": [
+      "t1-d2",
+      "o2-d1"
+     ],
+     "kazanimlar": [
+      "Seviye süresini ve blind artışının stack'i BB cinsinden nasıl erittiğini hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-d4",
+     "baslik": "Ante ve BB ante",
+     "tur": "ders",
+     "onkosul": [
+      "t1-d3",
+      "o2-d5"
+     ],
+     "kazanimlar": [
+      "Ante'nin potu nasıl büyüttüğünü hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-d5",
+     "baslik": "Ödül yapısı",
+     "tur": "ders",
+     "onkosul": [
+      "t1-d4"
+     ],
+     "kazanimlar": [
+      "Paraya girmenin (ITM) ve kademeli ödül dağılımının ne olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-k",
+     "baslik": "Kontrol: Turnuva nedir",
+     "tur": "kontrol",
+     "onkosul": [
+      "t1-d5"
+     ],
+     "kazanimlar": [
+      "\"Turnuva nedir\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t1-r",
+     "baslik": "Tekrar: Turnuva nedir",
+     "tur": "tekrar",
+     "onkosul": [
+      "t1-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t2",
+   "baslik": "Stack'i ölçmek",
+   "seviye": 2,
+   "renk": "#F0715A",
+   "ozet": "BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.",
+   "dersler": [
+    {
+     "kimlik": "t2-d1",
+     "baslik": "Stack kaç BB",
+     "tur": "ders",
+     "onkosul": [
+      "o3-k",
+      "o3-d5"
+     ],
+     "kazanimlar": [
+      "Chip sayısını BB'ye çevirir; derin, orta ve kısa stack bölgelerini tanır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-d2",
+     "baslik": "M oranı",
+     "tur": "ders",
+     "onkosul": [
+      "t2-d1",
+      "t1-d4"
+     ],
+     "kazanimlar": [
+      "M'yi hesaplar (stack / bir turun maliyeti) ve BB ölçüsüyle ilişkisini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-d3",
+     "baslik": "Efektif stack turnuvada",
+     "tur": "ders",
+     "onkosul": [
+      "t2-d2"
+     ],
+     "kazanimlar": [
+      "Farklı stack'ler karşılaştığında riskteki miktarı bulur."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-d4",
+     "baslik": "Ortalama stack ve aşamalar",
+     "tur": "ders",
+     "onkosul": [
+      "t2-d3"
+     ],
+     "kazanimlar": [
+      "Erken, orta ve geç aşamayı blind ve ortalama stack ile tanımlar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-d5",
+     "baslik": "Chip'in değeri sabit değil",
+     "tur": "ders",
+     "onkosul": [
+      "t2-d4",
+      "t1-d5"
+     ],
+     "kazanimlar": [
+      "Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-k",
+     "baslik": "Kontrol: Stack'i ölçmek",
+     "tur": "kontrol",
+     "onkosul": [
+      "t2-d5"
+     ],
+     "kazanimlar": [
+      "\"Stack'i ölçmek\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-r",
+     "baslik": "Tekrar: Stack'i ölçmek",
+     "tur": "tekrar",
+     "onkosul": [
+      "t2-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t2-t",
+     "baslik": "Turnuva seviye 1-2 testi",
+     "tur": "test",
+     "onkosul": [
+      "t2-k"
+     ],
+     "seviyeAtlar": 2,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t3",
+   "baslik": "Derin stack oyunu",
+   "seviye": 3,
+   "renk": "#F0715A",
+   "ozet": "40 BB ve üstü: açılış boyutu, ante'li potta çalma, BB savunması.",
+   "dersler": [
+    {
+     "kimlik": "t3-d1",
+     "baslik": "Erken aşama planı",
+     "tur": "ders",
+     "onkosul": [
+      "o4-k",
+      "t2-k",
+      "t1-k",
+      "o4-d4"
+     ],
+     "kazanimlar": [
+      "Derin stack'te pozisyon ve el seçiminin önceliğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-d2",
+     "baslik": "Turnuvada açılış aralıkları",
+     "tur": "ders",
+     "onkosul": [
+      "t3-d1",
+      "o4-d2",
+      "o3-d4"
+     ],
+     "kazanimlar": [
+      "Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-d3",
+     "baslik": "Turnuvada açılış boyutu",
+     "tur": "ders",
+     "onkosul": [
+      "t3-d2"
+     ],
+     "kazanimlar": [
+      "2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-d4",
+     "baslik": "Ante'li potta çalma",
+     "tur": "ders",
+     "onkosul": [
+      "t3-d3",
+      "t1-d4"
+     ],
+     "kazanimlar": [
+      "Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-d5",
+     "baslik": "Ante ile BB savunması",
+     "tur": "ders",
+     "onkosul": [
+      "t3-d4"
+     ],
+     "kazanimlar": [
+      "Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-d6",
+     "baslik": "3-bet'e kısa giriş",
+     "tur": "ders",
+     "onkosul": [
+      "t3-d5"
+     ],
+     "kazanimlar": [
+      "3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-k",
+     "baslik": "Kontrol: Derin stack oyunu",
+     "tur": "kontrol",
+     "onkosul": [
+      "t3-d6"
+     ],
+     "kazanimlar": [
+      "\"Derin stack oyunu\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t3-r",
+     "baslik": "Tekrar: Derin stack oyunu",
+     "tur": "tekrar",
+     "onkosul": [
+      "t3-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t4",
+   "baslik": "Orta stack oyunu",
+   "seviye": 4,
+   "renk": "#F0715A",
+   "ozet": "20 ile 40 BB: aralıkların değişmesi, 3-bet/fold ve resteal.",
+   "dersler": [
+    {
+     "kimlik": "t4-d1",
+     "baslik": "Stack kısaldıkça ne değişir",
+     "tur": "ders",
+     "onkosul": [
+      "t3-k",
+      "t2-d1",
+      "t3-d2"
+     ],
+     "kazanimlar": [
+      "Açılış aralığının stack kısaldıkça nasıl değiştiğini; spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-d2",
+     "baslik": "3-bet ya da fold",
+     "tur": "ders",
+     "onkosul": [
+      "t4-d1",
+      "t3-d6"
+     ],
+     "kazanimlar": [
+      "Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-d3",
+     "baslik": "Resteal: 3-bet all-in",
+     "tur": "ders",
+     "onkosul": [
+      "t4-d2"
+     ],
+     "kazanimlar": [
+      "15 ile 25 BB arasında geç pozisyon açılışına all-in adaylarını seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-d4",
+     "baslik": "Açılışa call mı, all-in mi",
+     "tur": "ders",
+     "onkosul": [
+      "t4-d3"
+     ],
+     "kazanimlar": [
+      "Stack derinliği ve pozisyona göre iki seçeneği karşılaştırır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-d5",
+     "baslik": "Düşük SPR'de postflop",
+     "tur": "ders",
+     "onkosul": [
+      "t4-d4"
+     ],
+     "kazanimlar": [
+      "SPR'yi hesaplar; top pair ile stack'i koymanın ne zaman doğal olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-k",
+     "baslik": "Kontrol: Orta stack oyunu",
+     "tur": "kontrol",
+     "onkosul": [
+      "t4-d5"
+     ],
+     "kazanimlar": [
+      "\"Orta stack oyunu\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-r",
+     "baslik": "Tekrar: Orta stack oyunu",
+     "tur": "tekrar",
+     "onkosul": [
+      "t4-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t4-t",
+     "baslik": "Turnuva seviye 3-4 testi",
+     "tur": "test",
+     "onkosul": [
+      "t4-k"
+     ],
+     "seviyeAtlar": 4,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t5",
+   "baslik": "Push/fold",
+   "seviye": 5,
+   "renk": "#F0715A",
+   "ozet": "Kısa stack: all-in ya da fold, pozisyona göre push aralıkları.",
+   "dersler": [
+    {
+     "kimlik": "t5-d1",
+     "baslik": "Neden all-in ya da fold",
+     "tur": "ders",
+     "onkosul": [
+      "t4-k",
+      "t4-d1"
+     ],
+     "kazanimlar": [
+      "Kısa stack'te küçük açılışın sakıncalarını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d2",
+     "baslik": "Fold equity",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d1"
+     ],
+     "kazanimlar": [
+      "All-in'in iki kazanma yolunu ayırır; stack kısaldıkça fold equity'nin azaldığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d3",
+     "baslik": "10 BB: pozisyona göre push",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d2",
+      "o4-d2"
+     ],
+     "kazanimlar": [
+      "10 BB ile pozisyona göre push aralığının genişliğini sıralar ve örnek elleri sınıflar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d4",
+     "baslik": "6 BB ve altı",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d3"
+     ],
+     "kazanimlar": [
+      "Çok kısa stack'te aralığın neden iyice genişlediğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d5",
+     "baslik": "15 BB: push mu, açılış mı",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d4"
+     ],
+     "kazanimlar": [
+      "15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d6",
+     "baslik": "SB'den BB'ye karşı",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d5"
+     ],
+     "kazanimlar": [
+      "Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-d7",
+     "baslik": "Nash mantığı",
+     "tur": "ders",
+     "onkosul": [
+      "t5-d6"
+     ],
+     "kazanimlar": [
+      "Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-k",
+     "baslik": "Kontrol: Push/fold",
+     "tur": "kontrol",
+     "onkosul": [
+      "t5-d7"
+     ],
+     "kazanimlar": [
+      "\"Push/fold\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t5-r",
+     "baslik": "Tekrar: Push/fold",
+     "tur": "tekrar",
+     "onkosul": [
+      "t5-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t6",
+   "baslik": "All-in'e call",
+   "seviye": 6,
+   "renk": "#F0715A",
+   "ozet": "Fiyat, rakibin itme aralığı ve aralığa karşı equity.",
+   "dersler": [
+    {
+     "kimlik": "t6-d1",
+     "baslik": "Fiyat: gereken equity",
+     "tur": "ders",
+     "onkosul": [
+      "t5-k",
+      "t3-d5"
+     ],
+     "kazanimlar": [
+      "All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-d2",
+     "baslik": "Rakibin itme aralığı",
+     "tur": "ders",
+     "onkosul": [
+      "t6-d1",
+      "t5-d3"
+     ],
+     "kazanimlar": [
+      "Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-d3",
+     "baslik": "Aralığa karşı equity",
+     "tur": "ders",
+     "onkosul": [
+      "t6-d2"
+     ],
+     "kazanimlar": [
+      "Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-d4",
+     "baslik": "BB'den call",
+     "tur": "ders",
+     "onkosul": [
+      "t6-d3"
+     ],
+     "kazanimlar": [
+      "Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-d5",
+     "baslik": "Arkanda oyuncu varken",
+     "tur": "ders",
+     "onkosul": [
+      "t6-d4"
+     ],
+     "kazanimlar": [
+      "Arkada konuşacak oyuncu varken call aralığının neden daraldığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-d6",
+     "baslik": "Açılışına all-in gelirse",
+     "tur": "ders",
+     "onkosul": [
+      "t6-d5",
+      "t4-d3"
+     ],
+     "kazanimlar": [
+      "Açtıktan sonra gelen all-in'e fiyat ve aralıkla karar verir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-k",
+     "baslik": "Kontrol: All-in'e call",
+     "tur": "kontrol",
+     "onkosul": [
+      "t6-d6"
+     ],
+     "kazanimlar": [
+      "\"All-in'e call\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-r",
+     "baslik": "Tekrar: All-in'e call",
+     "tur": "tekrar",
+     "onkosul": [
+      "t6-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t6-t",
+     "baslik": "Turnuva seviye 5-6 testi",
+     "tur": "test",
+     "onkosul": [
+      "t6-k"
+     ],
+     "seviyeAtlar": 6,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t7",
+   "baslik": "ICM temeli",
+   "seviye": 7,
+   "renk": "#E58A3C",
+   "ozet": "Chip değeri ile para değeri, ICM hesabı ve risk primi.",
+   "dersler": [
+    {
+     "kimlik": "t7-d1",
+     "baslik": "Chip EV ve para EV",
+     "tur": "ders",
+     "onkosul": [
+      "t6-k",
+      "t2-d5"
+     ],
+     "kazanimlar": [
+      "Chip kazancının ödül payına birebir çevrilmediğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-d2",
+     "baslik": "ICM nasıl hesaplanır",
+     "tur": "ders",
+     "onkosul": [
+      "t7-d1",
+      "t1-d5"
+     ],
+     "kazanimlar": [
+      "Üç oyunculu basit bir örnekte ICM paylarını adım adım hesaplar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-d3",
+     "baslik": "Risk primi",
+     "tur": "ders",
+     "onkosul": [
+      "t7-d2",
+      "t6-d1"
+     ],
+     "kazanimlar": [
+      "ICM altında call için gereken equity'nin neden chip hesabından yüksek olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-d4",
+     "baslik": "Stack rolleri",
+     "tur": "ders",
+     "onkosul": [
+      "t7-d3"
+     ],
+     "kazanimlar": [
+      "Büyük, orta ve kısa stack'in ICM altındaki özgürlük ve kısıtlarını sıralar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-d5",
+     "baslik": "ICM'de call aralığı",
+     "tur": "ders",
+     "onkosul": [
+      "t7-d4",
+      "t6-d4"
+     ],
+     "kazanimlar": [
+      "Aynı spotta ICM baskısıyla call aralığının daraldığı yönü belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-k",
+     "baslik": "Kontrol: ICM temeli",
+     "tur": "kontrol",
+     "onkosul": [
+      "t7-d5"
+     ],
+     "kazanimlar": [
+      "\"ICM temeli\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t7-r",
+     "baslik": "Tekrar: ICM temeli",
+     "tur": "tekrar",
+     "onkosul": [
+      "t7-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t8",
+   "baslik": "Balon ve final masası",
+   "seviye": 8,
+   "renk": "#E58A3C",
+   "ozet": "Balon oyunu, para atlamaları ve final masa dinamikleri.",
+   "dersler": [
+    {
+     "kimlik": "t8-d1",
+     "baslik": "Balon: baskıyı kim kurar",
+     "tur": "ders",
+     "onkosul": [
+      "t7-k",
+      "t7-d4"
+     ],
+     "kazanimlar": [
+      "Büyük stack'in orta stack'lere baskısını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-d2",
+     "baslik": "Balonda kısa stack",
+     "tur": "ders",
+     "onkosul": [
+      "t8-d1",
+      "t5-d3"
+     ],
+     "kazanimlar": [
+      "Kısa stack'in push aralığını ve beklemenin bedelini değerlendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-d3",
+     "baslik": "Balonda orta stack",
+     "tur": "ders",
+     "onkosul": [
+      "t8-d2"
+     ],
+     "kazanimlar": [
+      "Orta stack'in neden en kısıtlı oyuncu olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-d4",
+     "baslik": "Para atlamaları",
+     "tur": "ders",
+     "onkosul": [
+      "t8-d3",
+      "t7-d3"
+     ],
+     "kazanimlar": [
+      "Ödül basamağı büyüdükçe risk priminin arttığını örnekle gösterir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-d5",
+     "baslik": "Final masa dinamikleri",
+     "tur": "ders",
+     "onkosul": [
+      "t8-d4"
+     ],
+     "kazanimlar": [
+      "Stack dağılımına göre kimin kime baskı kurabildiğini belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-d6",
+     "baslik": "Final masada plan",
+     "tur": "ders",
+     "onkosul": [
+      "t8-d5"
+     ],
+     "kazanimlar": [
+      "Kendi stack'ine göre agresiflik düzeyini seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-k",
+     "baslik": "Kontrol: Balon ve final masası",
+     "tur": "kontrol",
+     "onkosul": [
+      "t8-d6"
+     ],
+     "kazanimlar": [
+      "\"Balon ve final masası\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-r",
+     "baslik": "Tekrar: Balon ve final masası",
+     "tur": "tekrar",
+     "onkosul": [
+      "t8-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t8-t",
+     "baslik": "Turnuva seviye 7-8 testi",
+     "tur": "test",
+     "onkosul": [
+      "t8-k"
+     ],
+     "seviyeAtlar": 8,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 8 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t9",
+   "baslik": "Özel formatlar",
+   "seviye": 9,
+   "renk": "#F0715A",
+   "ozet": "Bounty, PKO ve satellite turnuvalarında değişen hesap.",
+   "dersler": [
+    {
+     "kimlik": "t9-d1",
+     "baslik": "Bounty mantığı",
+     "tur": "ders",
+     "onkosul": [
+      "t8-k",
+      "t6-d1"
+     ],
+     "kazanimlar": [
+      "Eleme ödülünün all-in kararına fazladan değer eklediğini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-d2",
+     "baslik": "PKO: ödülün chip karşılığı",
+     "tur": "ders",
+     "onkosul": [
+      "t9-d1"
+     ],
+     "kazanimlar": [
+      "Ödülü yaklaşık chip değerine çevirme fikrini ve bunun basitleştirme olduğunu açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-d3",
+     "baslik": "PKO'da call aralığı",
+     "tur": "ders",
+     "onkosul": [
+      "t9-d2",
+      "t6-d4"
+     ],
+     "kazanimlar": [
+      "Rakibi kapsadığında call aralığının genişlediği yönü belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-d4",
+     "baslik": "Satellite: hedef hayatta kalmak",
+     "tur": "ders",
+     "onkosul": [
+      "t9-d3",
+      "t7-d1"
+     ],
+     "kazanimlar": [
+      "Tüm ödüllerin eşit olduğu yapıda chip biriktirmenin sınırlı değerini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-d5",
+     "baslik": "Satellite'ta aşırı ICM",
+     "tur": "ders",
+     "onkosul": [
+      "t9-d4",
+      "t7-d5"
+     ],
+     "kazanimlar": [
+      "Balonda çok güçlü ellerin bile fold edilebildiği durumun mantığını açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-k",
+     "baslik": "Kontrol: Özel formatlar",
+     "tur": "kontrol",
+     "onkosul": [
+      "t9-d5"
+     ],
+     "kazanimlar": [
+      "\"Özel formatlar\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t9-r",
+     "baslik": "Tekrar: Özel formatlar",
+     "tur": "tekrar",
+     "onkosul": [
+      "t9-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  },
+  {
+   "kimlik": "t10",
+   "baslik": "Heads-up ve ileri oyun",
+   "seviye": 10,
+   "renk": "#C58BD8",
+   "ozet": "Heads-up, aşama planı, ICM'de sömürücü oyun ve zihinsel dayanıklılık.",
+   "dersler": [
+    {
+     "kimlik": "t10-d1",
+     "baslik": "Heads-up: aralıklar genişler",
+     "tur": "ders",
+     "onkosul": [
+      "t9-k",
+      "o3-d1"
+     ],
+     "kazanimlar": [
+      "İki kişilik oyunda pozisyon ve blind düzenini ve aralıkların genişlemesini açıklar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-d2",
+     "baslik": "Heads-up push/fold",
+     "tur": "ders",
+     "onkosul": [
+      "t10-d1",
+      "t5-d6"
+     ],
+     "kazanimlar": [
+      "Kısa stack heads-up'ta push ve call aralıklarının yönünü belirler."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-d3",
+     "baslik": "Aşama planı",
+     "tur": "ders",
+     "onkosul": [
+      "t10-d2",
+      "t2-d4"
+     ],
+     "kazanimlar": [
+      "Erken, orta ve geç aşama için öncelikleri sıralar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-d4",
+     "baslik": "ICM'de sömürücü oyun",
+     "tur": "ders",
+     "onkosul": [
+      "t10-d3",
+      "t8-d1"
+     ],
+     "kazanimlar": [
+      "Rakiplerin ICM hatalarına (fazla call, fazla fold) karşı ayarı seçer."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-d5",
+     "baslik": "Zihinsel dayanıklılık",
+     "tur": "ders",
+     "onkosul": [
+      "t10-d4"
+     ],
+     "kazanimlar": [
+      "Uzun turnuvada dikkat ve duygu yönetimi için önlemleri sayar."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-d6",
+     "baslik": "Turnuvanı gözden geçirme",
+     "tur": "ders",
+     "onkosul": [
+      "t10-d5"
+     ],
+     "kazanimlar": [
+      "Kritik elleri sonuçtan bağımsız, kararın gerekçesiyle değerlendirir."
+     ],
+     "sureDk": 5,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 10,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 10,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-k",
+     "baslik": "Kontrol: Heads-up ve ileri oyun",
+     "tur": "kontrol",
+     "onkosul": [
+      "t10-d6"
+     ],
+     "kazanimlar": [
+      "\"Heads-up ve ileri oyun\" ünitesinin kazanımlarını karışık sorularda uygular."
+     ],
+     "sureDk": 6,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 12,
+      "oran": 0.8
+     },
+     "hedefAlistirma": 12,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-r",
+     "baslik": "Tekrar: Heads-up ve ileri oyun",
+     "tur": "tekrar",
+     "onkosul": [
+      "t10-k"
+     ],
+     "zorunlu": false,
+     "kazanimlar": [
+      "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
+     ],
+     "sureDk": 4,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 8,
+      "oran": 0.75
+     },
+     "hedefAlistirma": 8,
+     "durum": "iskelet",
+     "alistirmalar": []
+    },
+    {
+     "kimlik": "t10-t",
+     "baslik": "Turnuva bitirme testi",
+     "tur": "test",
+     "onkosul": [
+      "t10-k"
+     ],
+     "seviyeAtlar": 10,
+     "kapsam": "pist",
+     "kazanimlar": [
+      "bu pistte seviye 10 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
+     ],
+     "sureDk": 10,
+     "anlatim": [],
+     "terimler": [],
+     "ustalik": {
+      "son": 20,
+      "oran": 0.85
+     },
+     "hedefAlistirma": 20,
+     "durum": "iskelet",
+     "alistirmalar": []
+    }
+   ]
+  }
+ ]
+}
