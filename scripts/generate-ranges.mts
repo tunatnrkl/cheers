@@ -396,6 +396,93 @@ for (let guard = 0; guard < 200000 && potOdds.length < 70; guard++) {
   });
 }
 drills.push(...potOdds);
+
+// ── 5) Cash: river'da value bet ya da check (13. çalışma) ─────────────
+// BTN açtı, BB call etti; flop ve turn check-check, river'da BB check. BTN'desin.
+// Seçenekler: check ya da pot'un üçte biri (1,8 BB). Karar kesin kombinasyon sayımıyla:
+// BB'nin her kombinasyonu için bahsin check'e göre farkı toplanır (call: B(2s−1), fold: P(1−s);
+// s = kahramanın o ele karşı showdown sonucu 1 / 0,5 / 0). Check-raise modellenmez.
+// İki call senaryosu ölçülür: geniş (her çift ve üstü call) ve sıkı (yalnızca üst çift, overpair
+// ve üstü). İki senaryoda cevap aynı değilse ya da fark küçükse spot alınmaz.
+const VALUE_EXCLUDE = ["AA", "KK", "QQ", "AKs", "AKo"]; // BB bunlarla preflop 3-bet ederdi (varsayım)
+const VALUE_POT = 5.5;
+const VALUE_BET = 1.8;
+const VALUE_MARGIN = 0.07; // kombinasyon başına en az 0,07 × bahis fark
+const rndValue = mulberry32(20261113);
+const category = (v: number) => Math.floor(v / 16 ** 5);
+const bbRange = (out.cash.BTN as string[]).filter((l) => !VALUE_EXCLUDE.includes(l));
+const bbCombos = rangeCombos(bbRange);
+function valueDelta(hero: number[], board: number[], strict: boolean) {
+  const used = new Set([...hero, ...board]);
+  const boardTop = Math.max(...board.map((c) => c >> 2));
+  const h = evaluate7([...hero, ...board]);
+  let delta = 0;
+  let n = 0;
+  let callers = 0;
+  let callScore = 0;
+  for (const [a, b] of bbCombos) {
+    if (used.has(a) || used.has(b)) continue;
+    n++;
+    const v = evaluate7([a, b, ...board]);
+    const s = h > v ? 1 : h === v ? 0.5 : 0;
+    const cat = category(v);
+    const pairRank = Math.floor(v / 16 ** 4) % 16;
+    const calls = strict ? cat >= 2 || (cat === 1 && pairRank >= boardTop) : cat >= 1;
+    if (calls) {
+      callers++;
+      callScore += s;
+      delta += VALUE_BET * (2 * s - 1);
+    } else delta += VALUE_POT * (1 - s);
+  }
+  return { perCombo: delta / n / VALUE_BET, n, callers, eqCalled: callers ? callScore / callers : 0 };
+}
+const valueDrills: Drill[] = [];
+const valueCounts = { bet: 0, check: 0 };
+const btnCombos = rangeCombos(out.cash.BTN as string[]);
+for (let guard = 0; guard < 400000 && valueDrills.length < 60; guard++) {
+  const [h1, h2] = btnCombos[Math.floor(rndValue() * btnCombos.length)];
+  const deck = Array.from({ length: 52 }, (_, i) => i).filter((c) => c !== h1 && c !== h2);
+  for (let i = 0; i < 5; i++) {
+    const j = i + Math.floor(rndValue() * (deck.length - i));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  const board = deck.slice(0, 5);
+  const hero = [h1, h2];
+  // Board tek başına çiftsiz/elsiz olmalı ve kahramanın elinde en az bir çift (kendi kartıyla) olmalı
+  if (category(evaluate7(board)) !== 0) continue;
+  const heroCat = category(evaluate7([...hero, ...board]));
+  if (heroCat < 1) continue;
+  const id = `v-${hero.map(cardStr).join("")}-${board.map(cardStr).join("")}`;
+  if (valueDrills.some((d) => d.id === id)) continue;
+  const loose = valueDelta(hero, board, false);
+  const strict = valueDelta(hero, board, true);
+  if (Math.sign(loose.perCombo) !== Math.sign(strict.perCombo)) continue;
+  if (Math.min(Math.abs(loose.perCombo), Math.abs(strict.perCombo)) < VALUE_MARGIN) continue;
+  if (strict.callers < 20) continue; // sıkı senaryoda da call eden anlamlı bir aralık olmalı
+  const bet = loose.perCombo > 0;
+  if (valueCounts[bet ? "bet" : "check"] >= 30) continue;
+  valueCounts[bet ? "bet" : "check"]++;
+
+  const heroCards = hero.map(cardStr).join("");
+  const flop = board.slice(0, 3).map(cardStr).join("");
+  const [turn, river] = [cardStr(board[3]), cardStr(board[4])];
+  const eL = pct(loose.eqCalled);
+  const eS = pct(strict.eqCalled);
+  valueDrills.push({
+    id,
+    title: `River'da ${pretty(heroCards)}: value bet mi?`,
+    game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: heroCards, board: flop + turn + river, potBB: VALUE_POT,
+    seq: ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", "BTN x", `T ${turn}`, "BB x", "BTN x", `R ${river}`, "BB x"],
+    note: `Varsayım: BB'nin aralığı sitedeki buton açılış aralığı, AA, KK, QQ ve AK hariç (bunlarla 3-bet ederdi), önceki check'lerle daralmamış; 1,8 BB'lik bahse çift ve üstüyle call eder, çiftsiz ellerle fold eder, check-raise yapmaz.`,
+    options: ["Check", "Bahis 1,8 BB (pot'un üçte biri)"], correct: bet ? 1 : 0, topic: "value", level: 2,
+    reasoning: bet
+      ? `Value bet'in sorusu: call eden eller içinde senden kötü olanlar çoğunlukta mı? BB'nin bu bahse call edeceği ${loose.callers} kombinasyona karşı showdown payın %${eL} (beraberlik yarım sayıldı); fold eden çiftsiz eller zaten sana kaybediyordu. Call edenlerin yarısından fazlasını yendiğin için bahis, check'e göre kâr ekler. BB yalnızca üst çift, overpair ve üstüyle call etse bile bu oran %${eS} ve bahis yine önde kalır.`
+      : `Value bet'in sorusu: call eden eller içinde senden kötü olanlar çoğunlukta mı? Burada değil: BB'nin bu bahse call edeceği ${loose.callers} kombinasyona karşı showdown payın yalnızca %${eL} (beraberlik yarım sayıldı). Call edenlerin çoğu senden iyi; bahis check'e göre kayıp ekler. Elin showdown'da kazanabilir, check bunu bedavaya görür. BB yalnızca üst çift, overpair ve üstüyle call etse oran %${eS}; sonuç değişmiyor.`,
+  });
+}
+drills.push(...valueDrills);
+console.log("value:", valueDrills.length, valueCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);

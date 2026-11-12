@@ -4,6 +4,10 @@ Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma �
 
 Son güncelleme: **2026-11-12, 13. çalışma**
 
+## Kalıcı kullanıcı talimatı (13. çalışmada verildi)
+
+**Her çalışmada, o an en az spotu olan konuya en az 50 yeni alıştırma eklenir.** Önce konu sayıları ölçülür (`HANDS`'i `topic`'e göre say). Spotlar mümkünse `scripts/generate-ranges.mts`'e yeni bir bölüm olarak, kendi tohumlu üreteciyle ve dosyanın sonuna eklenir (önceki bölümlerin çıktısı bayt bayt aynı kalmalı; `drills.json`'un ilk kısmı eskisiyle karşılaştırılır). Kalite kuralları gevşetilmez: cevap kesin sayım ya da testte yeniden ölçülen bir modelle belirlenir, rakip aralığı ve varsayımlar `note`'ta tek cümle, sınırda olanlar alınmaz, üreteçten bağımsız bir test her spotu yeniden hesaplar. Konu doğrulanabilir bir modelle 50 spota ulaştırılamıyorsa uydurma yapılmaz: eklenebilen sayı ve engel raporda ve bildirimde açıkça yazılır.
+
 ## Kullanıcıdan beklenenler (önemli)
 
 1. **Dal akışı (13'te de açık):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9 (`g2abma`), 10 (`syhmqe`), 11 (`h0lmvh`), 12 (`iawfi2`) birleştirilmedi; 13. çalışma onların üzerine kuruldu: **`claude/wizardly-meitner-56jps3` (en güncel dal, 9–13'ü içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
@@ -16,10 +20,10 @@ Son güncelleme: **2026-11-12, 13. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- 583 spot (65 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 12), 138 sözlük terimi, 9 blog yazısı, **5 quiz / 34 soru** (`/quiz`; 12'de 4, 13'te pot odds quiz'i eklendi).
+- 643 spot (65 elle yazılmış + 578 üretilmiş; `callshove` 122, `icm` 12, `value` 63), 138 sözlük terimi, 9 blog yazısı, **5 quiz / 34 soru** (`/quiz`; 12'de 4, 13'te pot odds quiz'i eklendi).
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
 - Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (13. çalışma): `npm test` **688/688**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- Sağlık (13. çalışma): `npm test` **750/750**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
 - Profil (9): konu tablosu ve çalışma önerisi üyede sunucunun konu toplamlarından; CSV/JSON dökümü `GET /api/attempts/export` ile bütün kayıtlar (12.345 kayıtla PostgreSQL'de doğrulandı). Yalnızca Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
 - Quiz'ler GitHub Pages ayarlarıyla (`basePath=/cheers`, statik) ve açık/koyu temada denendi (13): öneksiz bağlantı ve 4xx yok, metin kontrastı ≥ 4,79 (açık tema en düşük, eşiğe yakın).
@@ -35,6 +39,7 @@ Son güncelleme: **2026-11-12, 13. çalışma**
 | `pot-odds-ve-cekisler` quiz'i (8 soru): fiyat, tek/iki kart, gutshot, görülmeyen kart (46/44), 4 kuralının hatası, implied odds, yarım pot; c13, c17, c18, c19 ve bir açık kartlı spota bağlı; blog düğmesi artık bu quiz'i açıyor | Poker Eğitim, Poker Uzmanı | ✅ |
 | 8 quiz testi (`replay` fiyatları, evaluator ile kart kart out sayımı, kesin olasılıklar) + genel payda testi (71 oran, eski c19 metnini yakalıyor) | QA | ✅ |
 | Q-6: c19 gerekçesi 8/44 ≈ %18 → 8/46 ≈ %17,4 (gereken %16,7, fark < 1 puan); "kıl payı" ve implied odds açıkça yazıldı, testli | Poker Uzmanı, QA | ✅ |
+| **Talimat (13, ek):** en az spotlu konu `value` (3) → 60 river value spotu (`v-…`; 30 bahis, 30 check): üreteçte 5. bölüm, tohum 20261113; BB aralığı = BTN açılış aralığı − AA, KK, QQ, AK; iki call senaryosunda (çift+ / üst çift+) kesin kombinasyon sayımı; bağımsız test (cevap ters çevrilince yakalıyor); önceki 518 üretilmiş spot bayt bayt aynı; masa 390/1366 px, "Value bet (63)" filtresi, taşma ve konsol hatası yok | Poker Uzmanı, QA | ✅ |
 | 12'nin QA eksikleri: Pages `basePath` statik derleme (5 quiz, iki tema, 390/1366 px; öneksiz bağlantı 0, 4xx 0, konsol 0); kontrast ölçümü (koyu ≥ 5,53, açık ≥ 4,79, soluk seçenekler opaklıkla 6,32/7,91) | QA | ✅ (gerçek ekran okuyucu, yayındaki site, ikon/kenarlık kontrastı denenmedi) |
 
 ### 12. çalışma — rapor: [`docs/ekip/2026-11-12/16-calisma-12-kapanis.md`](docs/ekip/2026-11-12/16-calisma-12-kapanis.md)
@@ -228,6 +233,7 @@ Son güncelleme: **2026-11-12, 13. çalışma**
 - Push aralıklarının Nash tablolarına yakınlığı bilinmiyor.
 - CS-1'deki dar/geniş senaryo oranları (%60, %150) keyfi; gerçek oyuncu sapmasını temsil ettiği doğrulanamadı.
 - Set mining "15–20 kat" kuralının kaynağı.
+- River value spotları (13): BB aralığının önceki check'lerle daralmadığı, call kararının yalnızca el kategorisine bağlı olduğu ve check-raise olmadığı varsayım; gerçek oyuncu davranışını temsil ettiği doğrulanamadı. Solver karşılaştırması yok. Bahis boyutu tek (1,8 BB, pot'un üçte biri).
 - Pot odds quiz'i (13): out'lar "temiz" varsayılıyor; implied odds sorularında (2, 7) kesin sayı yok, niteliksel ifadeler c13/c17 gerekçelerine dayanıyor. Kontrast ölçümünde yarı saydam arka planlar opak sayıldı.
 - Quiz davranış değerlendirmesindeki atıflar (Roediger ve Karpicke 2006, Dunlosky ve ark. 2013, Shute 2008) hafızadan; kaynak açılmadı (12). Quiz'in bu sitedeki öğrenmeye etkisi ölçülmedi.
 - Dunlosky ve ark. 2013 ile Kluger–DeNisi 1996 atıfları (10 numaralı spesifikasyon) hafızadan; kaynak açılıp doğrulanmadı.
@@ -249,6 +255,7 @@ Son güncelleme: **2026-11-12, 13. çalışma**
 
 ## Sonraki öncelikler
 
+0. **Kalıcı talimat:** en az spotlu konuyu ölç, ona en az 50 spot ekle. 13 sonrası sayılar: `3bet` 5, `cbet` 5, `blof` 5, `savunma` 6, `spr` 6, `icm` 12. Sıradaki aday `3bet`/`cbet`/`blof` (eşit; önce doğrulanabilir model kurulabilecek olan seçilmeli, örn. blöf için river'da rakibin fold oranını kombinasyon sayımıyla ölçen bir model).
 1. **Dal kontrolü:** `56jps3` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
 2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar. Gelmediyse: **c-bet quiz'i** (c-bet spotları c14, c15, c23 vb. ve `c-bet-ne-zaman` yazısı; önce spot sayıları yeniden okunmalı, Q-6 gibi kaymalar aranmalı) ya da **CS-3 son adımı** (final masası ödül sıçraması için 2 ICM spotu + quiz; `icm-callfold.mts` / `icm-push.mts`).
 3. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
