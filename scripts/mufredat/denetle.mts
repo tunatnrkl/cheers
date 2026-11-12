@@ -278,7 +278,7 @@ export function denetle(m: Mufredat): Sonuc {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const yol = new URL("../../src/data/mufredat.json", import.meta.url);
   const s = denetle(JSON.parse(readFileSync(yol, "utf8")));
-  console.log(`${s.dolu} dolu ders, ${s.alistirma} alıştırma; ${s.denetlenen} tanesi betikle yeniden hesaplandı.`);
+  console.log(`${s.dolu} dolu ders, ${s.alistirma} alıştırma; ${s.denetlenen} tanesi betikle denetlendi.`);
   for (const e of s.eksik) console.log("denetimsiz kart sorusu:", e);
   for (const e of s.hatalar) console.log("HATA:", e);
   process.exit(s.hatalar.length || s.eksik.length ? 1 : 0);

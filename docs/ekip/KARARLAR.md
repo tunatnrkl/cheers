@@ -65,3 +65,7 @@ Ajan 5 spotu projenin değerlendiricisini kullanmadan kendi yazdığı hesaplay�
 - 25 call cevabı, rakibin çekişle all-in yaptığı varsayımına bağlı; gerekçeler bunu söylüyor. Dar/geniş aralık sınırı "doğrulama gerekli" olarak raporda.
 - **Ayrı iş olarak kayda alındı:** 17 spotta hero BTN'den açılış aralığı dışındaki bir elle açmış görünüyor (eski üretimden); pot odds hesabını etkilemiyor.
 - **El motoru (A) kabul ölçütüne eklendi:** showdown'da rakip eli aralıktan sabit tohumla türetilir; el bitmeden hiçbir yerde bulunmaz.
+
+## 2026-11-12 · Kapı D: müfredat o1–o2 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan 58 kural/terim sorusunun hepsini ve betikli 111 sorunun neredeyse tamamını kendisi çözdü; doğrulukta hata yok. İstenen dört metin düzeltmesi uygulandı: preflop/postflop, pot, chip ve board ilk kullanıldıkları derste tanımlanıyor; "cep çifti" yerine "kapalı kartlarındaki çift"; bahis turunun bitiş kuralı tamamlandı ("elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa"); raporlardaki betik iddiası gerçeğe indirildi (pot ve sayı sorularında terimler elle girilir, betik işlemi doğrular). Kapının koşuluna göre testler yeşil olunca yeni kapı gerekmeden ONAY sayılır. İçerik, Öğren ekranı bağlanınca görünür olacak.

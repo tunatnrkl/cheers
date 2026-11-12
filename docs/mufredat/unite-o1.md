@@ -15,7 +15,7 @@ Hedef kitle: hiç poker bilmeyen. 7 ders (5 normal + kontrol + tekrar), 74 alı�
 
 **Toplam tip dağılımı:** seçmeli 41, doğru/yanlış 13, sayı 9, sıralama 6, eşleştirme 5.
 
-**Betik sonucu:** 74 alıştırmanın 62'si `denetle.mts` ile yeniden hesaplandı, hata 0. Türler: kazanan 23, el çeşidi 11, sıralama 4, nuts çeşidi 3, kapalı kart sayısı 3, aritmetik 7, nuts eli 2, eşleştirme 2, diğer 7. Denetimsiz 12 soru terim ve kural sorusudur (renk adları, harf yazımı, "kicker'ı kim bozar" gibi).
+**Betik sonucu:** 74 alıştırmanın 62'si `denetle.mts` ile denetlendi, hata 0. Aritmetik sorularda terimler elle girildi; `ornek: true` taşıyan 3 kural sorusu tek temsilî örnekle sınandı. Türler: kazanan 23, el çeşidi 11, sıralama 4, nuts çeşidi 3, kapalı kart sayısı 3, aritmetik 7, nuts eli 2, eşleştirme 2, diğer 7. Denetimsiz 12 soru terim ve kural sorusudur (renk adları, harf yazımı, "kicker'ı kim bozar" gibi).
 
 ## Kurallar ve tasarım
 

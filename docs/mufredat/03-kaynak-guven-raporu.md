@@ -36,5 +36,7 @@ Bu iki ünitedeki bütün alıştırmalar `dogrulamaGerekli: false`. İçerik Te
 
 ### Doğrulama
 
-- 111 alıştırma (169'un %66'sı) `scripts/mufredat/denetle.mts` ile bağımsız olarak yeniden hesaplanır: el çeşidi, kazanan, en iyi beşli, kullanılan kapalı kart sayısı, nuts, el sıralaması ve bütün pot/sayı aritmetiği. Betik ayrıca aynı kartın bir soruda iki kez geçmesini, denetimdeki kartın soru metninde görünmemesini ve birden fazla cevabı olan "kaç kapalı kart" sorularını reddeder. `npm test` içinde `src/lib/mufredat/denetle.test.ts` olarak çalışır.
+- 111 alıştırma (169'un %66'sı) `scripts/mufredat/denetle.mts` ile denetlenir. El çeşidi, kazanan, en iyi beşli, kullanılan kapalı kart sayısı, nuts ve el sıralaması `evaluator.ts` ile bağımsız olarak yeniden hesaplanır; betik bu sorulardaki kartların soru metninde göründüğünü de denetler.
+- Pot ve sayı sorularında toplanacak terimler (`denetim.terimler`) elle girilir; betik toplamayı, çarpmayı ya da bölmeyi doğrular. Senaryonun (kim ne kadar koydu, kim fold etti) terimlere doğru çevrildiği betikle değil, elle kontrol edildi.
+- `ornek: true` taşıyan dört doğru/yanlış sorusu (o1-d2/a5, o1-d3/a3, o1-k/a2, o2-t/a6) genel bir kuralı soruyor (ör. "Üçlü, iki peri yener"); betik kuralı yalnızca tek bir temsilî örnekle sınar, kuralın genelliğini kanıtlamaz. Betik ayrıca aynı kartın bir soruda iki kez geçmesini, denetimdeki kartın soru metninde görünmemesini ve birden fazla cevabı olan "kaç kapalı kart" sorularını reddeder. `npm test` içinde `src/lib/mufredat/denetle.test.ts` olarak çalışır.
 - Kalan 58 alıştırma kural ve terim sorusudur (ör. "Önünde bahis yokken call edebilir misin?"). Makinece hesaplanamaz; yukarıdaki kural listesiyle tek tek elden karşılaştırıldı.
