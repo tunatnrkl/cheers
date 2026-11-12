@@ -344,6 +344,24 @@ export const QUIZZES: Quiz[] = [
         why: "UTG'nin aralığı (yaklaşık %15) butonunkinden (yaklaşık %43) çok daha güçlü. J4o eşiğin hemen üstünde kalıyor ve J'li per yaptığında sık sık daha iyi kicker'a kaybediyor (domine). Fiyat aynı olsa da savunma aralığı açana göre daralır.",
         spot: "c35",
       },
+      {
+        q: "HJ 2,5 BB açtı, SB fold etti, BB'de A7o var. Gereken equity %27,3; A7o'nun HJ aralığına karşı ham equity'si yaklaşık %42,5. Pozisyon dışında equity'nin yalnızca %70'ini kullanabildiğini varsayarsan ne olur?",
+        options: [
+          "0,7 × 42,5 ≈ %29,7; eşiğin hâlâ üstünde, call",
+          "Eşiğin altına düşer, fold",
+          "Realization pot odds'u değiştirmez, hesaba katılmaz",
+        ],
+        correct: 0,
+        why: "Call için ham equity'nin yalnızca yaklaşık %64'ünü (27,3 / 42,5) kullanmak yetiyor. A7o sık sık domine olur, bu yüzden realization'ı düşük olabilir; ama %70 gibi kötümser bir varsayımda bile karar değişmiyor. %70 bu sitenin varsayımıdır, ölçülmüş bir değer değildir.",
+        spot: "bd-HJ25-Ac7h",
+      },
+      {
+        q: "CO 3 BB açtı, SB fold etti, BB'de 83s var. Gereken equity %30,8; 83s'in CO aralığına karşı ham equity'si yaklaşık %32,9. Call'un kârlı olması için bu equity'nin ne kadarını kullanması gerekir?",
+        options: ["%64", "%80", "%93", "%107"],
+        correct: 2,
+        why: "30,8 / 32,9 ≈ %93. Pozisyon dışında, düşük kartlı bir el için bu gerçekçi değil; %90'ı kullansa bile ≈ %29,6 ile eşiğin altında kalır: fold. Aynı el 2,5 BB'lik açılışa karşı yaklaşık %83'ünü kullanmayı gerektirirdi; bu, kararın el türüne ve rakibe bağlı olduğu gri bölgedir.",
+        spot: "bd-CO3-8s3s",
+      },
     ],
   },
   {

@@ -867,6 +867,97 @@ for (let guard = 0; guard < 20000 && barrelDrills.length < 60; guard++) {
 }
 drills.push(...barrelDrills);
 console.log("ikinci barrel:", barrelDrills.length, barrelCounts);
+// ── 9) Cash: BB'desin, açılışa call ya da fold (19. çalışma) ─────────
+// UTG/HJ/CO/BTN sitedeki açılış aralığıyla 2,5 BB açar (CO ve BTN ayrıca 3 BB), aradakiler ve SB fold eder.
+// Açılış A için pot A + 1,5, call A − 1, call sonrası pot 2A + 0,5: gereken equity (A − 1) / (2A + 0,5)
+// (2,5 BB → %27,3; 3 BB → %30,8; rake yok). Ham equity açılış aralığına karşı Monte Carlo ile ölçülür;
+// pozisyon dışında bunun yalnızca bir kısmı kullanılabilir (equity realization).
+// Varsayım: temel R = %80; cevap R = %70 ve R = %90'da da aynı olmalı ve iki uçta da eşikten en az 1 puan
+// uzak kalmalı (call: eq × 0,7 ≥ gereken + 1; fold: eq × 0,9 ≤ gereken − 1). Zayıf offsuit ellerin pozisyon
+// dışında %90'dan fazlasını kullanması gerçekçi değil. Böylece realization'ı belirsiz bırakan eller
+// (sınırda olanlar) alınmaz. 3-bet seçeneği yok; 3-bet'e uygun en güçlü eller alınmaz.
+const rndDef = mulberry32(20261190);
+const rndDefCheck = mulberry32(20261191);
+const DEF_R = { low: 0.7, base: 0.8, high: 0.9 };
+const DEF_GAP = 0.01;
+const DEF_EXCLUDE = ["AA", "KK", "QQ", "JJ", "TT", "AKs", "AQs", "AKo", "AQo"];
+const DEF_CONFIGS: { pos: "UTG" | "HJ" | "CO" | "BTN"; open: number }[] = [
+  { pos: "UTG", open: 2.5 },
+  { pos: "HJ", open: 2.5 },
+  { pos: "CO", open: 2.5 },
+  { pos: "BTN", open: 2.5 },
+  { pos: "CO", open: 3 },
+  { pos: "BTN", open: 3 },
+];
+const DEF_CAP = { call: 6, fold: 8 }; // senaryo başına; toplamda en fazla 30 + 30
+const defendDrills: Drill[] = [];
+const defendCounts = { call: 0, fold: 0 };
+for (const { pos, open } of DEF_CONFIGS) {
+  const openList = out.cash[pos] as string[];
+  const openC = rangeCombos(openList);
+  const need = (open - 1) / (2 * open + 0.5);
+  const local = { call: 0, fold: 0 };
+  const order = labels.filter((l) => !DEF_EXCLUDE.includes(l));
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rndDef() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  for (const l of order) {
+    const full = (k: "call" | "fold") => local[k] >= DEF_CAP[k] || defendCounts[k] >= 30;
+    if (full("call") && full("fold")) break;
+    const s1 = Math.floor(rndDef() * 4);
+    const s2 = l.length === 3 && l[2] === "s" ? s1 : (s1 + 1 + Math.floor(rndDef() * 3)) % 4;
+    const cards = l[0] + SUITS[s1] + l[1] + SUITS[s2];
+    const hero: [number, number] = [toCard(cards.slice(0, 2)), toCard(cards.slice(2))];
+    // Hızlı ön eleme (8.000 deneme, eşiğe 0,5 puan pay); kalanlar 80.000 denemeyle yeniden ölçülür.
+    const quick = equityVsRange(hero, openC, 8000, rndDefCheck);
+    const callQ = quick * DEF_R.low >= need + DEF_GAP - 0.005;
+    const foldQ = quick * DEF_R.high <= need - DEF_GAP + 0.005;
+    if (!callQ && !foldQ) continue;
+    const key = callQ ? "call" : "fold";
+    if (full(key)) continue;
+    // Gösterilen sayı 80.000 denemeden (standart hata ≈ ±0,17 puan); eşik koşulu bu ölçümle denetlenir.
+    const eq = equityVsRange(hero, openC, 80000, rndDefCheck);
+    const ok = key === "call" ? eq * DEF_R.low >= need + DEF_GAP : eq * DEF_R.high <= need - DEF_GAP;
+    if (!ok) continue;
+    local[key]++;
+    defendCounts[key]++;
+    const order6 = ["UTG", "HJ", "CO", "BTN", "SB"];
+    const seq = [`${pos} r${open}`, ...order6.slice(order6.indexOf(pos) + 1).map((p) => `${p} f`)];
+    const eP = Math.round(eq * 1000) / 10;
+    const at = (r: number) => num(Math.round(eq * r * 1000) / 10);
+    const needP = num(Math.round(need * 1000) / 10);
+    const needR = Math.round((need / eq) * 100);
+    const acc = numSuffix(needR, "i");
+    const openPctS = numSuffix(Math.round(pctOfCombos(openList)), "i");
+    const head =
+      `${pos} ${num(open)} BB açtı, SB fold etti. Ortada ${num(open + 1.5)} BB var; ${num(open - 1)} BB ödeyip ${num(2 * open + 0.5)} BB'lik pot için oynuyorsun: ` +
+      `gereken equity ${num(open - 1)} / ${num(2 * open + 0.5)} ≈ %${needP}. ${pretty(cards)}, ${GEN[pos]} açılış aralığına karşı ham olarak yaklaşık %${num(eP)} equity taşır. `;
+    const body =
+      key === "call"
+        ? `Pozisyon dışında bunun hepsini kullanamazsın. Equity'nin %80'ini kullandığını varsayarsak ≈ %${at(0.8)}, eşiğin rahatça üstünde. Realization %70'e düşse bile ≈ %${at(0.7)}; hâlâ eşiğin üstünde. Fold, açılışa kârlı biçimde karşılık verebilecek bir eli bırakmak olur: call.`
+        : (eq < need
+            ? `Ham equity zaten eşiğin altında; equity'nin tamamını kullansan bile call kârlı olmazdı. Pozisyon dışında %90 bile iyimser bir varsayım ve onunla ≈ %${at(0.9)}. `
+            : `Call'un kârlı olması için bu equity'nin yaklaşık ${acc}n${acc.slice(-1)} kullanman gerekirdi. Pozisyon dışında %90 bile iyimser bir varsayım ve onunla bile ≈ %${at(0.9)}, eşiğin altında. `) +
+          (pos === "UTG" || pos === "HJ"
+            ? `${pos} sıkı açtığı için bu el çoğu zaman geride ya da domine durumda: fold.`
+            : open > 2.5
+              ? `Açılış büyüdükçe fiyat kötüleşir; 2,5 BB'de gereken %27,3 olurdu. Bu fiyata fold.`
+              : `Fiyat iyi olsa da el bu aralığa karşı yeterince equity taşımıyor: fold.`);
+    defendDrills.push({
+      id: `bd-${pos}${String(open).replace(".", "")}-${cards}`,
+      title: `BB'de ${l}: ${pos} ${num(open)} BB açtı`,
+      game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
+      hero: cards, potBB: open + 1.5, seq,
+      note: `Varsayım: 6-max cash, 100 BB, rake yok. ${pos} sitedeki ${pos} açılış aralığıyla (ellerin yaklaşık ${openPctS}) ${num(open)} BB açar. Pozisyon dışında ham equity'nin bir kısmı kullanılabilir (equity realization): temel varsayım %80, cevap %70 ve %90'da da aynı. 3-bet seçeneği yok; en güçlü eller (TT+, AQs+, AQo+) bu alıştırmaya alınmadı.`,
+      options: ["Fold", `Call (${num(open - 1)} BB daha)`], correct: key === "call" ? 1 : 0, topic: "savunma", level: 2,
+      reasoning: head + body,
+    });
+  }
+  console.log(`BB savunması ${pos} ${open}:`, local);
+}
+drills.push(...defendDrills);
+console.log("BB savunması:", defendDrills.length, defendCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);

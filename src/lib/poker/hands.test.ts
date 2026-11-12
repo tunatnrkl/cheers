@@ -1111,3 +1111,104 @@ describe("blog: turn-ikinci-barrel", () => {
     }
   });
 });
+
+// 19. çalışma: BB'den açılışa call ya da fold (bd-). Üreteçten bağımsız yeniden hesap.
+// Açılış aralığı ranges.json'dan; açılış boyutu A replay'den. Gereken equity (A − 1) / (2A + 0,5).
+// Ham equity ayrı tohumlu Monte Carlo ile ölçülür. Call cevabı realization %70'te, fold cevabı %90'da da
+// eşiğin doğru tarafında kalmalı (yalnızca örnekleme payı kadar tolerans); gerekçedeki sayılar yeniden hesaplanır.
+describe("BB savunması spotları (bd-)", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("bd-"));
+  const RK = "23456789TJQKA";
+  const combosOf = (labels: string[]): [number, number][] => {
+    const out: [number, number][] = [];
+    for (const l of labels) {
+      const a = RK.indexOf(l[0]);
+      const b = RK.indexOf(l[1]);
+      for (let s1 = 0; s1 < 4; s1++)
+        for (let s2 = 0; s2 < 4; s2++) {
+          if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+          out.push([a * 4 + s1, b * 4 + s2]);
+        }
+    }
+    return out;
+  };
+  let seed = 4242;
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const equityVs = (hero: number[], range: [number, number][], trials: number) => {
+    const live = range.filter(([x, y]) => !hero.includes(x) && !hero.includes(y));
+    let score = 0;
+    for (let t = 0; t < trials; t++) {
+      const v = live[Math.floor(rnd() * live.length)];
+      const used = new Set([...hero, ...v]);
+      const board: number[] = [];
+      while (board.length < 5) {
+        const c = Math.floor(rnd() * 52);
+        if (!used.has(c)) {
+          used.add(c);
+          board.push(c);
+        }
+      }
+      const a = evaluate7([...hero, ...board]);
+      const b = evaluate7([...v, ...board]);
+      score += a > b ? 1 : a === b ? 0.5 : 0;
+    }
+    return score / trials;
+  };
+  const dec = (s: string) => Number(s.replace(",", "."));
+  const label = (cards: string) => {
+    const [a, b] = [cards[0], cards[2]].sort((x, y) => RK.indexOf(y) - RK.indexOf(x));
+    return a === b ? a + b : a + b + (cards[1] === cards[3] ? "s" : "o");
+  };
+
+  it("en az 50 spot, iki cevap da en az 15, konu savunma, durum ve fiyat doğru", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+    const excluded = ["AA", "KK", "QQ", "JJ", "TT", "AKs", "AQs", "AKo", "AQo"];
+    for (const h of list) {
+      expect(h.topic, h.id).toBe("savunma");
+      expect(h.heroPos).toBe("BB");
+      const r = replay(h);
+      const open = r.toCall + 1;
+      expect([2.5, 3], h.id).toContain(open);
+      expect(r.pot, h.id).toBeCloseTo(open + 1.5, 5);
+      expect(r.next, h.id).toBe("BB");
+      expect(h.options[1], h.id).toBe(`Call (${String(open - 1).replace(".", ",")} BB daha)`);
+      expect(excluded, h.id).not.toContain(label(h.hero));
+      const need = (open - 1) / (2 * open + 0.5);
+      expect(h.reasoning, h.id).toContain(`≈ %${(Math.round(need * 1000) / 10).toString().replace(".", ",")}.`);
+      const opener = h.seq[0].split(" ")[0];
+      const pctOpen = Math.round(combosOf((ranges.cash as Record<string, string[]>)[opener]).length / 13.26);
+      expect(h.note, h.id).toMatch(new RegExp(`ellerin yaklaşık %${pctOpen}'`));
+    }
+  });
+
+  it("cevap realization'ın iki ucunda da doğru; gerekçedeki equity ve çarpımlar yeniden hesaba uyuyor", () => {
+    const cash = ranges.cash as Record<string, string[]>;
+    for (const h of list) {
+      const r = replay(h);
+      const open = r.toCall + 1;
+      const need = (open - 1) / (2 * open + 0.5);
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const eq = equityVs(hero, combosOf(cash[h.seq[0].split(" ")[0]]), 60000);
+      // İki bağımsız Monte Carlo (60.000 ve 80.000 deneme): fark için standart hata ≈ 0,27 puan.
+      if (h.correct === 1) expect(eq * 0.7, `${h.id} eq=${eq}`).toBeGreaterThanOrEqual(need + 0.005);
+      else expect(eq * 0.9, `${h.id} eq=${eq}`).toBeLessThanOrEqual(need - 0.005);
+      const shown = dec(h.reasoning.match(/yaklaşık %([\d,]+) equity taşır/)![1]);
+      expect(Math.abs(shown - 100 * eq), h.id).toBeLessThanOrEqual(0.9);
+      const products = [...h.reasoning.matchAll(/≈ %(\d+(?:,\d+)?)/g)].map((m) => dec(m[1])).slice(1);
+      const factors = h.correct === 1 ? [0.8, 0.7] : [0.9];
+      expect(products.length, h.id).toBe(factors.length);
+      factors.forEach((f, i) => expect(Math.abs(products[i] - shown * f), `${h.id} ×${f}`).toBeLessThanOrEqual(0.1)); // iki yuvarlama: 0,05 × f + 0,05
+      if (h.correct === 0 && shown * 1 >= need * 100) {
+        const k = Number(h.reasoning.match(/equity'nin yaklaşık %(\d+)'/)![1]);
+        expect(Math.abs(k - (100 * need * 100) / shown), h.id).toBeLessThanOrEqual(0.6);
+      }
+    }
+  }, 120000);
+});

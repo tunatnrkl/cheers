@@ -180,6 +180,42 @@ describe("blind savunması quiz'i: equity iddiaları", () => {
     expect(need / utg).toBeLessThan(0.965);
     expect(eqVs("Jd4c", cash.BTN) - utg).toBeGreaterThan(0.03);
   });
+
+  // 19. çalışma: bd- spotlarına bağlı sorular ve blog'daki "gereken oran" bölümü
+  it("9: A7o HJ'ye karşı ~%42,5; %70 realization'da eşiğin üstünde, gereken oran ~%64", () => {
+    const eq = eqVs("Ac7h", cash.HJ);
+    expect(Math.abs(eq - 0.425)).toBeLessThan(0.006);
+    expect(eq * 0.7).toBeGreaterThan(need);
+    expect(Math.abs(0.7 * 42.5 - 29.75)).toBeLessThan(0.01); // metinde ≈ %29,7
+    expect(Math.round((100 * need) / 0.425)).toBe(64);
+    expect(answer("blind-savunmasi", 9)).toMatch(/^0,7 × 42,5 ≈ %29,7/);
+    const spot = HANDS.find((h) => h.id === question("blind-savunmasi", 9).spot)!;
+    expect(spot.correct).toBe(1);
+    expect(spot.reasoning).toContain("%42,5");
+    expect(spot.reasoning).toContain("%29,7");
+  });
+
+  it("10: 83s CO'nun 3 BB açılışına karşı ~%32,9; gereken oran ~%93, 2,5 BB'de ~%83", () => {
+    const eq = eqVs("8s3s", cash.CO);
+    expect(Math.abs(eq - 0.329)).toBeLessThan(0.006);
+    const need3 = requiredEquity(4.5, 2);
+    expect(need3).toBeCloseTo(2 / 6.5, 10);
+    expect(eq * 0.9).toBeLessThan(need3);
+    expect(answer("blind-savunmasi", 10)).toBe("%93");
+    expect(Math.abs((100 * need3) / eq - 93.5)).toBeLessThan(1.5);
+    expect(Math.abs((100 * need) / eq - 83)).toBeLessThan(1.5);
+    const spot = HANDS.find((h) => h.id === question("blind-savunmasi", 10).spot)!;
+    expect(spot.correct).toBe(0);
+    for (const t of ["%30,8", "%32,9", "%93'ünü", "%29,6"]) expect(spot.reasoning, t).toContain(t);
+  });
+
+  it("blog: blind savunması yazısındaki gereken oran örnekleri spotlarla ve sorularla aynı", () => {
+    const post = POST_BY_SLUG.get("blind-savunmasi-fiyat-aralik-pozisyon")!;
+    const text = post.body.map((b) => b.p).join(" ");
+    for (const t of ["27,3 / 42,5 ≈ %64", "≈ %29,7", "30,8 / 32,9 ≈ %93", "≈ %29,6", "yaklaşık %83'ünü", "60 BB savunması spotu"])
+      expect(text, t).toContain(t);
+    expect(HANDS.filter((h) => h.id.startsWith("bd-")).length).toBe(60);
+  });
 });
 
 describe("SPR ve value quiz'i: hesaplar", () => {
