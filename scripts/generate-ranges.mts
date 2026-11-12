@@ -719,6 +719,154 @@ for (const cfg of RESTEAL_CONFIGS) {
 }
 drills.push(...restealDrills);
 console.log("3-bet all-in:", restealDrills.length, restealCounts);
+
+// ── 8) Cash: turn'de ikinci barrel ya da check (18. çalışma) ─────────
+// BTN açtı, BB call etti; flop'ta BB check, BTN 1,8 BB c-bet, BB call; turn'de BB check. BTN'desin,
+// elinde çift yok (çekiş olabilir). Seçenekler: check ya da 6 BB (9,1 BB'lik pot'un yaklaşık üçte ikisi).
+// BB'nin aralığı 5. bölümdeki aralık, flop'taki call kuralıyla daraltılır. Her kombinasyon için kahramanın
+// showdown payı s, 44 river kartının hepsi sayılarak bulunur (Monte Carlo yok). Varsayım: iki yolda da
+// river'da bahis olmaz, el showdown'a gider; check-raise yok. Bahsin check'e göre farkı:
+// call eden elde B(2s − 1), fold eden elde P(1 − s). Üç turn call senaryosu: sıkı (iki çift+, üst çift/
+// overpair, güçlü çekiş), temel (+ ikinci çift ve aradaki cep çiftleri), geniş (her çift, her çekiş).
+// Cevap üçünde aynı ve fark kombinasyon başına en az 0,07 × bahis olmalı.
+type BarrelMode = "strict" | "base" | "wide";
+const rndBarrel = mulberry32(20261181);
+const BARREL_POT = 9.1;
+const BARREL_BET = 6;
+const isStraightMask = (m: number) => {
+  for (let h = 12; h >= 4; h--) if (((m >> (h - 4)) & 0x1f) === 0x1f) return true;
+  return (m & 0x100f) === 0x100f;
+};
+const rankMask = (cs: number[]) => cs.reduce((m, c) => m | (1 << (c >> 2)), 0);
+/** Kent çekişi: board'a tek başına eklendiğinde kent yapmayan, bu ele eklendiğinde kent yapan rank sayısı. */
+function straightDrawRanks(hole: number[], board: number[]): number {
+  const m = rankMask([...hole, ...board]);
+  const bm = rankMask(board);
+  if (isStraightMask(m)) return 0;
+  let k = 0;
+  for (let r = 0; r < 13; r++) if (!(m & (1 << r)) && isStraightMask(m | (1 << r)) && !isStraightMask(bm | (1 << r))) k++;
+  return k;
+}
+/** Floş çekişi: aynı renkten tam 4 kart, en az biri elde. */
+const hasFlushDraw = (hole: number[], board: number[]) =>
+  [0, 1, 2, 3].some((s) => [...hole, ...board].filter((c) => (c & 3) === s).length === 4 && hole.some((c) => (c & 3) === s));
+function flopCall(h: number[], flop: number[]): boolean {
+  if (category(evaluate7([...h, ...flop])) >= 1) return true;
+  if (hasFlushDraw(h, flop) || straightDrawRanks(h, flop) >= 1) return true;
+  if (h[0] >> 2 === 12 || h[1] >> 2 === 12) return true;
+  const top = Math.max(...flop.map((c) => c >> 2));
+  return h[0] >> 2 > top && h[1] >> 2 > top;
+}
+function turnCall(h: number[], board: number[], mode: BarrelMode): boolean {
+  const v = evaluate7([...h, ...board]);
+  const cat = category(v);
+  if (cat >= 2 || hasFlushDraw(h, board) || straightDrawRanks(h, board) >= 2) return true;
+  const pairRank = Math.floor(v / 16 ** 4) % 16;
+  const br = board.map((c) => c >> 2).sort((x, y) => y - x);
+  if (mode === "strict") return cat === 1 && pairRank >= br[0];
+  if (mode === "base") return cat === 1 && pairRank >= br[1];
+  return cat === 1 || straightDrawRanks(h, board) >= 1;
+}
+function barrelDelta(hero: number[], board: number[]) {
+  const used = new Set([...hero, ...board]);
+  const flop = board.slice(0, 3);
+  const res = Object.fromEntries(
+    (["strict", "base", "wide"] as BarrelMode[]).map((m) => [m, { d: 0, n: 0, callers: 0, callScore: 0, foldBeatsYou: 0 }]),
+  ) as Record<BarrelMode, { d: number; n: number; callers: number; callScore: number; foldBeatsYou: number }>;
+  for (const [a, b] of bbCombos) {
+    if (used.has(a) || used.has(b) || !flopCall([a, b], flop)) continue;
+    let s = 0;
+    let k = 0;
+    for (let r = 0; r < 52; r++) {
+      if (used.has(r) || r === a || r === b) continue;
+      const hv = evaluate7([...hero, ...board, r]);
+      const vv = evaluate7([a, b, ...board, r]);
+      s += hv > vv ? 1 : hv === vv ? 0.5 : 0;
+      k++;
+    }
+    s /= k;
+    for (const m of ["strict", "base", "wide"] as BarrelMode[]) {
+      const x = res[m];
+      x.n++;
+      if (turnCall([a, b], board, m)) {
+        x.callers++;
+        x.callScore += s;
+        x.d += BARREL_BET * (2 * s - 1);
+      } else {
+        x.foldBeatsYou += 1 - s;
+        x.d += BARREL_POT * (1 - s);
+      }
+    }
+  }
+  return res;
+}
+const barrelDrills: Drill[] = [];
+const barrelCounts = { bet: 0, check: 0 };
+for (let guard = 0; guard < 20000 && barrelDrills.length < 60; guard++) {
+  const [h1, h2] = btnCombos[Math.floor(rndBarrel() * btnCombos.length)];
+  const deck = Array.from({ length: 52 }, (_, i) => i).filter((c) => c !== h1 && c !== h2);
+  for (let i = 0; i < 4; i++) {
+    const j = i + Math.floor(rndBarrel() * (deck.length - i));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  const board = deck.slice(0, 4);
+  const hero = [h1, h2];
+  // Board çiftsiz; kahramanın turn'de çifti (ya da daha iyisi) yok
+  if (new Set(board.map((c) => c >> 2)).size !== 4) continue;
+  if (category(evaluate7([...hero, ...board])) !== 0) continue;
+  const id = `b2-${hero.map(cardStr).join("")}-${board.map(cardStr).join("")}`;
+  if (barrelDrills.some((d) => d.id === id)) continue;
+  const r = barrelDelta(hero, board);
+  const per = (["strict", "base", "wide"] as BarrelMode[]).map((m) => r[m].d / r[m].n / BARREL_BET);
+  if (per.some((p) => Math.sign(p) !== Math.sign(per[0]))) continue;
+  if (Math.min(...per.map(Math.abs)) < VALUE_MARGIN) continue;
+  const bet = per[0] > 0;
+  if (barrelCounts[bet ? "bet" : "check"] >= 30) continue;
+  barrelCounts[bet ? "bet" : "check"]++;
+
+  const b = r.base;
+  const heroCards = hero.map(cardStr).join("");
+  const flop = board.slice(0, 3).map(cardStr).join("");
+  const turn = cardStr(board[3]);
+  const callP = pct(b.callers / b.n);
+  const eqC = pct(b.callScore / b.callers);
+  const winP = pct(b.foldBeatsYou / b.n);
+  const lossPerCall = Math.round(BARREL_BET * (1 - 2 * (eqC / 100)) * 10) / 10;
+  const gain = Math.round((winP / 100) * BARREL_POT * 10) / 10;
+  const cost = Math.round((callP / 100) * lossPerCall * 10) / 10;
+  const net = b.d / b.n;
+  const heroDraw = hasFlushDraw(hero, board) ? "floş çekişin" : straightDrawRanks(hero, board) >= 2 ? "açık uçlu kent çekişin" : straightDrawRanks(hero, board) === 1 ? "gutshot'ın" : "";
+  const drawLine = heroDraw ? ` Elinde ${heroDraw} var; call gördüğünde river'da tamamlama şansın bu paya dahil.` : "";
+  const foldShare = winP / Math.max(1, 100 - callP); // fold edenlerin içinde seni yenenlerin payı
+  const ending = bet
+    ? `Bahis check'e göre el başına ortalama ≈ ${sgn(net)} BB ekler. ` +
+      (foldShare > 0.5
+        ? "Fold edecek ellerin çoğu showdown'da seni yenerdi; bahis onları kaçırır."
+        : `Fold ettirdiğin ellerin çoğu zaten sana kaybediyordu, ama call eden el az; fold edip seni yenecek ellerden gelen pot (≈ ${num(gain)} BB) call edenlere kaybettiğinden (≈ ${num(cost)} BB) fazla.`)
+    : `Bahis check'e göre el başına ortalama ≈ ${sgn(-net)} BB kaybettirir. ` +
+      (callP >= 75
+        ? "BB'nin flop'ta call ettiği ellerin büyük kısmı bu turn'de de devam eder; blöfün işe yarayacağı el az."
+        : foldShare < 0.5
+          ? "Fold edecek ellerin çoğu showdown'da zaten sana kaybediyordu; bahis yalnızca seni yenenlerle oynar."
+          : `Fold ettireceğin ellerin çoğu seni yenerdi, ama call edenlere kaybettiğin (≈ ${num(cost)} BB) bu pottan (≈ ${num(gain)} BB) fazla.`);
+  barrelDrills.push({
+    id,
+    title: `Turn'de ${pretty(heroCards)}: ikinci barrel mı, check mi?`,
+    game: "cash", street: "turn", heroPos: "BTN", stackBB: 100,
+    hero: heroCards, board: flop + turn, potBB: BARREL_POT,
+    seq: ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", "BTN b1.8", "BB c", `T ${turn}`, "BB x"],
+    note: "Varsayım: BB'nin aralığı sitedeki buton açılış aralığı, AA, KK, QQ ve AK hariç; flop'taki 1,8 BB'lik c-bet'e her çift, her floş ve kent çekişiyle (gutshot dahil), elinde as olan ya da board'un üstünde iki kartı olan ellerle call etti; turn'de 6 BB'ye iki çift ve üstü, board'un ikinci büyük kartı ya da daha yüksek bir çift, floş çekişi ve açık uçlu (ya da çift gutshot) kent çekişiyle call eder, check-raise yapmaz; iki yolda da river'da bahis olmaz, el showdown'a gider.",
+    options: ["Check", "Bahis 6 BB (pot'un yaklaşık üçte ikisi)"], correct: bet ? 1 : 0, topic: "cbet", level: 2,
+    reasoning:
+      `Turn'de elinde çift yok; ikinci barrel'ın değeri, BB'nin flop'ta call ettiği ellerden hangilerini fold ettirdiğine bağlı. Bu ellerin hepsi sayıldı (river kartlarının hepsi dahil):\n` +
+      `- Yaklaşık ${numSuffix(callP, "i")} 6 BB'ye call eder; onlara karşı payın yaklaşık %${eqC}. Call gören her el sana ortalama 6 × (1 − 2 × ${num(eqC / 100)}) ≈ ${num(lossPerCall)} BB kaybettirir.${drawLine}\n` +
+      `- Yaklaşık ${numSuffix(winP, "i")} fold eder ama check'te showdown'da seni yenerdi; her biri 9,1 BB'lik potu sana bırakır.\n` +
+      `Toplam: ${num(winP / 100)} × 9,1 − ${num(callP / 100)} × ${num(lossPerCall)} ≈ ${num(gain)} − ${num(cost)}. ${ending} ` +
+      `BB yalnızca üst çift, overpair ve güçlü çekişle call etse de (sıkı) ya da her çift ve gutshot'la call etse de (geniş) cevap aynı.`,
+  });
+}
+drills.push(...barrelDrills);
+console.log("ikinci barrel:", barrelDrills.length, barrelCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);

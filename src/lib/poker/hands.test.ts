@@ -960,3 +960,154 @@ describe("3-bet all-in spotları (r3-)", () => {
       }
   }, 60000);
 });
+
+// 18. çalışma: turn'de ikinci barrel ya da check (b2-). Üreteçten bağımsız yeniden hesap.
+// BB'nin aralığı (buton açılışı − AA, KK, QQ, AK) spotun notundaki flop call kuralıyla daraltılır; her
+// kombinasyon için kahramanın showdown payı 44 river kartının hepsi sayılarak bulunur. Bahsin check'e göre
+// farkı call eden elde 6(2s − 1), fold eden elde 9,1(1 − s). Üç turn call senaryosunda işaret cevapla aynı ve
+// fark kombinasyon başına en az 0,07 × 6 olmalı; gerekçedeki yüzdeler ve ortalama fark yeniden hesaplanır.
+describe("turn ikinci barrel spotları (b2-)", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("b2-"));
+  const RK = "23456789TJQKA";
+  const bbLabels = (ranges.cash as Record<string, string[]>).BTN.filter((l) => !["AA", "KK", "QQ", "AKs", "AKo"].includes(l));
+  const combos: [number, number][] = [];
+  for (const l of bbLabels) {
+    const a = RK.indexOf(l[0]);
+    const b = RK.indexOf(l[1]);
+    for (let s1 = 0; s1 < 4; s1++)
+      for (let s2 = 0; s2 < 4; s2++) {
+        if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+        combos.push([a * 4 + s1, b * 4 + s2]);
+      }
+  }
+  const cat = (v: number) => Math.floor(v / 16 ** 5);
+  // Kent pencereleri: 5 ardışık rank ve A-2-3-4-5.
+  const windows = [[12, 0, 1, 2, 3], ...Array.from({ length: 9 }, (_, i) => [i, i + 1, i + 2, i + 3, i + 4])];
+  const hasStraight = (ranks: Set<number>) => windows.some((w) => w.every((r) => ranks.has(r)));
+  /** Bu ele bir kart eklendiğinde kent yapan, ama board'a eklendiğinde yapmayan rank'lar. */
+  const strOuts = (hole: number[], board: number[]) => {
+    const all = new Set([...hole, ...board].map((c) => c >> 2));
+    const bd = new Set(board.map((c) => c >> 2));
+    if (hasStraight(all)) return 0;
+    let k = 0;
+    for (let r = 0; r < 13; r++) {
+      if (all.has(r)) continue;
+      if (hasStraight(new Set([...all, r])) && !hasStraight(new Set([...bd, r]))) k++;
+    }
+    return k;
+  };
+  const fd = (hole: number[], board: number[]) =>
+    [0, 1, 2, 3].some((s) => hole.some((c) => (c & 3) === s) && [...hole, ...board].filter((c) => (c & 3) === s).length === 4);
+
+  it("en az 50 spot, cevaplar iki tarafa dağılmış, konu c-bet, not kuralları içeriyor", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+    for (const h of list) {
+      expect(h.topic, h.id).toBe("cbet");
+      for (const t of ["AA, KK, QQ ve AK hariç", "gutshot dahil", "elinde as olan", "board'un üstünde iki kartı", "board'un ikinci büyük kartı ya da daha yüksek bir çift", "check-raise yapmaz", "river'da bahis olmaz"])
+        expect(h.note, `${h.id} ${t}`).toContain(t);
+    }
+  });
+
+  it("karar üç call senaryosunda da tam sayımla aynı; gerekçedeki sayılar doğru", () => {
+    for (const h of list) {
+      const r = replay(h);
+      expect(r.pot, h.id).toBeCloseTo(9.1, 5);
+      expect(r.toCall, h.id).toBe(0);
+      expect(h.options[1]).toContain("6 BB");
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const board = h.board!.match(/.{2}/g)!.map(cardFromString);
+      const flop = board.slice(0, 3);
+      expect(new Set(board.map((c) => c >> 2)).size, h.id).toBe(4);
+      expect(cat(evaluate7([...hero, ...board])), h.id).toBe(0);
+      const ranks = board.map((c) => c >> 2).sort((x, y) => y - x);
+      const flopTop = Math.max(...flop.map((c) => c >> 2));
+      const acc = { strict: [0, 0, 0, 0, 0], base: [0, 0, 0, 0, 0], wide: [0, 0, 0, 0, 0] }; // d, n, callers, callScore, foldLose
+      for (const [a, b] of combos) {
+        const used = [...hero, ...board];
+        if (used.includes(a) || used.includes(b)) continue;
+        const hole = [a, b];
+        const flopCall =
+          cat(evaluate7([...hole, ...flop])) >= 1 || fd(hole, flop) || strOuts(hole, flop) >= 1 ||
+          a >> 2 === 12 || b >> 2 === 12 || (a >> 2 > flopTop && b >> 2 > flopTop);
+        if (!flopCall) continue;
+        let s = 0;
+        let k = 0;
+        for (let c = 0; c < 52; c++) {
+          if (used.includes(c) || c === a || c === b) continue;
+          const hv = evaluate7([...hero, ...board, c]);
+          const vv = evaluate7([...hole, ...board, c]);
+          s += hv > vv ? 1 : hv === vv ? 0.5 : 0;
+          k++;
+        }
+        expect(k).toBe(44);
+        s /= k;
+        const v = evaluate7([...hole, ...board]);
+        const pr = Math.floor(v / 16 ** 4) % 16;
+        const always = cat(v) >= 2 || fd(hole, board) || strOuts(hole, board) >= 2;
+        const calls = {
+          strict: always || (cat(v) === 1 && pr >= ranks[0]),
+          base: always || (cat(v) === 1 && pr >= ranks[1]),
+          wide: always || cat(v) === 1 || strOuts(hole, board) >= 1,
+        };
+        for (const m of ["strict", "base", "wide"] as const) {
+          const x = acc[m];
+          x[1]++;
+          if (calls[m]) {
+            x[0] += 6 * (2 * s - 1);
+            x[2]++;
+            x[3] += s;
+          } else {
+            x[0] += 9.1 * (1 - s);
+            x[4] += 1 - s;
+          }
+        }
+      }
+      for (const m of ["strict", "base", "wide"] as const) {
+        const per = acc[m][0] / acc[m][1] / 6;
+        expect(per > 0, `${h.id} ${m}`).toBe(h.correct === 1);
+        expect(Math.abs(per), `${h.id} ${m}`).toBeGreaterThanOrEqual(0.07);
+      }
+      const [d, n, callers, callScore, foldLose] = acc.base;
+      const m = h.reasoning.match(/Yaklaşık %(\d+)'\S+ 6 BB'ye call eder; onlara karşı payın yaklaşık %(\d+)\./)!;
+      const w = h.reasoning.match(/Yaklaşık %(\d+)'\S+ fold eder ama check'te/)!;
+      const net = h.reasoning.match(/ortalama ≈ (\d+(?:,\d+)?) BB (ekler|kaybettirir)/)!;
+      expect(Math.abs(Number(m[1]) - (100 * callers) / n), h.id).toBeLessThanOrEqual(0.6);
+      expect(Math.abs(Number(m[2]) - (100 * callScore) / callers), h.id).toBeLessThanOrEqual(0.6);
+      expect(Math.abs(Number(w[1]) - (100 * foldLose) / n), h.id).toBeLessThanOrEqual(0.6);
+      expect(net[2], h.id).toBe(h.correct === 1 ? "ekler" : "kaybettirir");
+      expect(Math.abs(parseFloat(net[1].replace(",", ".")) - Math.abs(d / n)), h.id).toBeLessThanOrEqual(0.06);
+    }
+  }, 120000);
+});
+
+// 18. çalışma: turn-ikinci-barrel yazısı. Yazıdaki örnek sayılar spot gerekçelerinde de geçmeli
+// (gerekçeler yukarıda tam sayımla denetleniyor); başabaş fold sıklığı yeniden hesaplanır.
+describe("blog: turn-ikinci-barrel", () => {
+  it("örnek sayılar spotlarla aynı, başabaş %39,7", () => {
+    const post = POSTS.find((p) => p.slug === "turn-ikinci-barrel")!;
+    const text = post.body.map((b) => `${b.h ?? ""} ${b.p}`).join("\n");
+    expect((6 / (9.1 + 6)) * 100).toBeCloseTo(39.7, 1);
+    expect(text).toContain("%39,7");
+    expect(text).toContain("60 turn spotu");
+    expect(HANDS.filter((h) => h.id.startsWith("b2-")).length).toBe(60);
+    const hi = HANDS.filter((h) => h.id.startsWith("b2-") && /[AK]/.test(h.board!.replace(/[shdc]/g, "")));
+    expect(hi.filter((h) => h.correct === 0).length).toBe(24);
+    expect(hi.filter((h) => h.correct === 1).length).toBe(8);
+    expect(text).toContain("30 check cevabının 24'ünü, 30 bahis cevabının ise yalnızca 8'ini");
+    const ex: Record<string, string[]> = {
+      "b2-QdJs-7s3c6s2d": ["%30'u", "%17", "6 × (1 − 2 × 0,17) ≈ 4 BB", "%45'i", "≈ 4,1 − 1,2", "≈ 3 BB ekler"],
+      "b2-9s7s-Ac2d3d4c": ["%97'si", "%3", "0,03 × 9,1 − 0,97 × 5,2 ≈ 0,3 − 5", "≈ 4,7 BB kaybettirir"],
+      "b2-As5s-Ks7h4h3s": ["%61'i", "%43", "6 × (1 − 2 × 0,43) ≈ 0,8 BB", "%21'i", "0,21 × 9,1 − 0,61 × 0,8 ≈ 1,9 − 0,5", "≈ 1,4 BB ekler"],
+    };
+    for (const [id, nums] of Object.entries(ex)) {
+      const h = HANDS.find((x) => x.id === id)!;
+      expect(h.correct, id).toBe(id === "b2-9s7s-Ac2d3d4c" ? 0 : 1);
+      for (const t of nums) {
+        expect(h.reasoning, `${id} ${t}`).toContain(t);
+        expect(text, `${id} ${t}`).toContain(t);
+      }
+    }
+  });
+});

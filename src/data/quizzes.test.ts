@@ -461,6 +461,29 @@ describe("quiz: c-bet-ve-barrel", () => {
     expect(st).toBe(4);
     expect(answer(Z, 8)).toMatch(/^%40 fold gerekir/);
   });
+
+  // 9–10: turn ikinci barrel spotları (b2-). Spotların sayıları hands.test.ts'te tam sayımla yeniden
+  // hesaplanıyor; burada soru metnindeki sayıların spot gerekçesindekilerle aynı olduğu denetlenir.
+  it("9–10: b2 spotlarının cevabı ve sayıları quiz'le aynı; yazı quiz'e bağlı", () => {
+    expect(QUIZ_BY_SLUG.get(Z)!.posts).toContain("turn-ikinci-barrel");
+    expect(POST_BY_SLUG.has("turn-ikinci-barrel")).toBe(true);
+    const cases = [
+      { n: 9, id: "b2-QdJs-7s3c6s2d", bet: true, nums: ["%30'u", "%45'i", "%17", "0,17) ≈ 4 BB", "4,1", "≈ 3 BB ekler"] },
+      { n: 10, id: "b2-9s7s-Ac2d3d4c", bet: false, nums: ["%97'si", "%3", "0,03 × 9,1 − 0,97 × 5,2 ≈ 0,3 − 5", "≈ 4,7 BB kaybettirir"] },
+    ];
+    for (const c of cases) {
+      const q = question(Z, c.n);
+      const h = HANDS.find((x) => x.id === c.id)!;
+      expect(q.spot).toBe(c.id);
+      expect(h.correct, c.id).toBe(c.bet ? 1 : 0);
+      expect(answer(Z, c.n).startsWith(c.bet ? "Bahis" : "Check"), c.id).toBe(true);
+      expect(spot(c.id).pot).toBeCloseTo(9.1, 5);
+      for (const t of c.nums) {
+        expect(h.reasoning, `${c.id} ${t}`).toContain(t);
+        expect(q.q + " " + q.why, `${c.id} ${t}`).toContain(t);
+      }
+    }
+  });
 });
 
 describe("quiz: 3-bet-ve-squeeze", () => {

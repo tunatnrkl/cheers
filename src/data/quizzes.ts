@@ -115,7 +115,7 @@ export const QUIZZES: Quiz[] = [
     topic: "cbet",
     assumptions:
       "Cash, 100 BB, rake yok (7. soru hariç: turnuva, 20 BB, ante 1). Fiyat, başabaş fold sıklığı, out ve SPR kesin hesaptır. \"Board kime uyuyor\" ve rakip aralığıyla ilgili yargılar yaygın kabul gören ilkelerdir; bu sitede solver ile karşılaştırılmadı. Rakibin gerçekte ne sıklıkla fold ettiği rakibe bağlıdır ve burada tahmin edilmez.",
-    posts: ["c-bet-ne-zaman", "pot-odds-adim-adim"],
+    posts: ["c-bet-ne-zaman", "pot-odds-adim-adim", "turn-ikinci-barrel"],
     questions: [
       {
         q: "Flop'ta pot 5,5 BB. Iska geçtin ve 1/3 pot (≈1,8 BB) blöf c-bet'i düşünüyorsun. Bahsin hemen kâra geçmesi için rakip en az ne sıklıkla fold etmeli?",
@@ -177,6 +177,30 @@ export const QUIZZES: Quiz[] = [
         correct: 2,
         why: "6 / (9 + 6) = %40. Neredeyse hiç fold etmeyen birine karşı bu sıklık gelmez; blöf chip kaybettirir. Check ile river'ı bedava görürsün: on gelirse kent yaparsın, as ya da dam gelirse per'in kazanabilir. Pot kadar bahis eşiği %50'ye çıkarır, durumu kötüleştirir. Bu rakibe karşı tersini yap: blöfü azalt, value bet'i artır.",
         spot: "c28",
+      },
+      {
+        q: "Butonda QJ offsuit; board 7-3-6-2, flop c-bet'in call gördü, turn'de BB check etti, pot 9,1 BB. Varsayılan rakip modelinde BB'nin flop'ta call ettiği ellerin yaklaşık %30'u 6 BB'ye call eder, yaklaşık %45'i fold eder ama check'te seni yenerdi. Ne yapmalısın?",
+        options: [
+          "Check: QJ'nin showdown değeri var",
+          "Bahis: fold edecek ellerin çoğu seni yenerdi, bahis onları kaçırır",
+          "Check: BB flop'ta call ettiği için turn'de de call eder",
+          "Bahis: turn'de her zaman ikinci barrel yapılır",
+        ],
+        correct: 1,
+        why: "Bahsin kazancı, fold edip check'te seni yenecek ellerden gelir: 0,45 × 9,1 ≈ 4,1 BB. Maliyeti call edenlerden: onlara karşı payın yaklaşık %17, her call ortalama 6 × (1 − 2 × 0,17) ≈ 4 BB kaybettirir, toplam 0,3 × 4 ≈ 1,2 BB. Bahis el başına ortalama ≈ 3 BB ekler. Flop'ta as ya da overcard'la call eden eller bu düşük turn'de bir şey bulmadı. \"Her zaman barrel\" yanlış: sonraki soruda check doğru.",
+        spot: "b2-QdJs-7s3c6s2d",
+      },
+      {
+        q: "Butonda 97 suited; board A-2-3-4 (sende çift yok), aynı senaryo. BB'nin flop'ta call ettiği ellerin yaklaşık %97'si 6 BB'ye call eder. Ne yapmalısın?",
+        options: [
+          "Bahis: board korkutucu, BB fold eder",
+          "Bahis: elin showdown'da kazanamaz, o yüzden blöf",
+          "Check: fold ettirecek el neredeyse yok",
+          "Bahis: as geldi, rakip asla call edemez",
+        ],
+        correct: 2,
+        why: "A-2-3 flop'unda BB her asla, her çiftle ve her kent çekişiyle call etti; turn 4, elinde 5 olan herkese kent yaptırdı. Fold edip seni yenecek el yalnızca yaklaşık %3: 0,03 × 9,1 − 0,97 × 5,2 ≈ 0,3 − 5, bahis el başına ortalama ≈ 4,7 BB kaybettirir. Showdown değerinin olmaması tek başına blöf gerekçesi değildir; fold ettirecek bir el de olmalı.",
+        spot: "b2-9s7s-Ac2d3d4c",
       },
     ],
   },
