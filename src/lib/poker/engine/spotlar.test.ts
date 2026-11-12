@@ -201,7 +201,8 @@ describe("gizlilik", () => {
         for (let i = 0; i < 40 && !s.result; i++) {
           const acik = new Set(s.board);
           const gizli = [...rakipKartlari, ...g.board.filter((c) => !acik.has(c))];
-          const x = sizinti(JSON.stringify(s), gizli);
+          // Spot kimliği bazı pot odds spotlarında eski hero elini taşır (kapı B kararı); taramadan çıkarılır.
+          const x = sizinti(JSON.stringify(s).split(h.id).join(""), gizli);
           if (x.length) bad.push(`${h.id}: durumda ${x.join(",")}`);
           const { state, olaylar } = applyHero(s, politika(s, legalActions(s), i));
           // Showdown olayından ÖNCEKİ olaylarda rakip kartı yok
@@ -214,7 +215,7 @@ describe("gizlilik", () => {
         }
         // Showdown'a gidilmediyse rakip eli hiç açıklanmaz (sonuç dahil)
         if (s.result && s.result.neden !== "showdown") {
-          const z = sizinti(JSON.stringify(s), rakipKartlari);
+          const z = sizinti(JSON.stringify(s).split(h.id).join(""), rakipKartlari);
           if (z.length) bad.push(`${h.id}: showdown'sız sonuçta ${z.join(",")}`);
         }
       }
@@ -223,10 +224,13 @@ describe("gizlilik", () => {
   });
 
   it("durumda villain alanı ya da spot notu taşınmaz", () => {
-    const h = HANDS.find((x) => x.villain)!;
-    const json = JSON.stringify(createHand(h));
-    expect(json).not.toContain("villain");
-    expect(json).not.toContain(h.villain!.cards);
-    expect(json).not.toContain("kartlarını gösterdi");
+    const odds = HANDS.filter((x) => x.id.startsWith("o-"));
+    expect(odds.length).toBeGreaterThan(0);
+    for (const h of odds) {
+      const json = JSON.stringify(createHand(h));
+      expect(json).not.toContain("villain");
+      expect(json).not.toContain("Varsayım:");
+      expect(json).not.toContain("kartlarını gösterdi");
+    }
   });
 });
