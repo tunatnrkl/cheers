@@ -2,7 +2,7 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-12, 20. çalışma**
+Son güncelleme: **2026-11-12, 21. çalışma**
 
 ## Kalıcı kullanıcı talimatı (13. çalışmada verildi)
 
@@ -12,8 +12,8 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dal akışı (20):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9–20 birleştirilmedi. **En güncel dal: `claude/wizardly-meitner-0vqn8r` (9–20; `uaxxzk`'nin üzerine).** Yalnızca bunu birleştirmek yeterli; `uaxxzk`, `3x1qey`, `h9bh3c` ve `p4oajz` onun içinde. Not: 18. ve 19. çalışmanın dalı varsayılan dalda başlatılmıştı; ikisi de zincire taşındı. Birleştirilmemesi gerekenler: `56jps3` (içeriği bu dalda), `hou5l2` (9. çalışmanın paralel, eski bir kopyası; G-2'yi farklı biçimde yapıyor, çakışır), `05x26x`, `admiring-babbage-*` (P-4).
-2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (20'de hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
+1. **Dal akışı (21):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9–21 birleştirilmedi. **En güncel dal: `claude/wizardly-meitner-219ddq` (9–21; `0vqn8r`'nin üzerine).** Yalnızca bunu birleştirmek yeterli; `0vqn8r`, `uaxxzk`, `3x1qey`, `h9bh3c` ve `p4oajz` onun içinde. Not: 18. ve 19. çalışmanın dalı varsayılan dalda başlatılmıştı; ikisi de zincire taşındı. Birleştirilmemesi gerekenler: `56jps3` (içeriği bu dalda), `hou5l2` (9. çalışmanın paralel, eski bir kopyası; G-2'yi farklı biçimde yapıyor, çakışır), `05x26x`, `admiring-babbage-*` (P-4).
+2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (21'de hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
 5. **B-1 ürün kararı** (`acceptable` alanı): poker içerik işlerinin (c39, sınırda spotlar) tek engeli.
@@ -22,19 +22,29 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- **943 spot** (65 elle yazılmış + 878 üretilmiş). Konu sayıları (20 sonu): **`icm` 12**, `value` 63, `3bet` 65, `blof` 65, `cbet` 65, `savunma` 66, **`spr` 66**, `odds` 75, `acilis` 122, `callshove` 122, `pushfold` 222. 138 sözlük terimi, 12 blog yazısı, 7 quiz / 55 soru (`/quiz`).
+- **1003 spot** (65 elle yazılmış + 938 üretilmiş). Konu sayıları (21 sonu): **`value` 63**, `3bet` 65, `blof` 65, `cbet` 65, `savunma` 66, `spr` 66, **`icm` 72**, `odds` 75, `acilis` 122, `callshove` 122, `pushfold` 222. 138 sözlük terimi, 13 blog yazısı, 7 quiz / 57 soru (`/quiz`).
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
 - Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (20. çalışma): `npm test` **1089/1089**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (önceki 818 üretilmiş spot bayt bayt aynı); süre ≈ 3,3 dk (SPR bölümünün tam sayımı). Temiz klonda önce `npm ci` gerekir.
+- Sağlık (21. çalışma): `npm test` **1154/1154**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (önceki 878 üretilmiş spot bayt bayt aynı); süre ≈ 4,1 dk. Temiz klonda önce `npm ci` gerekir.
 - Profil (9): konu tablosu ve çalışma önerisi üyede sunucunun konu toplamlarından; CSV/JSON dökümü `GET /api/attempts/export` ile bütün kayıtlar (12.345 kayıtla PostgreSQL'de doğrulandı). Yalnızca Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
 - Koç sohbeti (16): sunuculu kurulumda API anahtarı yoksa "Neden?" artık spotun yazılı gerekçesini gösteriyor (F-1). Statik sürümde zaten öyleydi.
-- 7 quiz, 55 soru (`/quiz`; `blind-savunmasi` 10 soruyla üst sınırda, `spr-ve-value` 9): pot odds, c-bet ve barrel (14), 3-bet ve squeeze (15), blind savunması, SPR ve value, bubble call/fold, bubble push/fold.
+- 7 quiz, 57 soru (`/quiz`; `blind-savunmasi` 10 soruyla üst sınırda, `spr-ve-value` 9, `bubble-call-fold` 8): pot odds, c-bet ve barrel (14), 3-bet ve squeeze (15), blind savunması, SPR ve value, bubble call/fold, bubble push/fold.
 - Quiz'ler GitHub Pages ayarlarıyla (`basePath=/cheers`, statik) ve açık/koyu temada denendi (13): öneksiz bağlantı ve 4xx yok, metin kontrastı ≥ 4,79 (açık tema en düşük, eşiğe yakın).
 - ICM hesap makinesi (10): `5.000` binlik, `%50` yüzde okunuyor; atılan ve 9'u aşan girişler arayüzde söyleniyor (`icmInput.ts`, testli).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 21. çalışma — rapor: [`docs/ekip/2026-11-12/25-calisma-21-kapanis.md`](docs/ekip/2026-11-12/25-calisma-21-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| Kalıcı talimat: en az spotlu `icm` (12) → **60 bubble call/fold spotu** (`ic-…`; sit & go, 4 oyuncu, ödüller %50/%30/%20 varsayım; CO/BTN/SB referans push aralığıyla all-in, kahraman BB'de; 8 stack dağılımı); üreteçte 11. bölüm, tohum 20261210/11; 30 call / 30 fold (26'sı chip'e göre call, ICM'e göre fold); önceki 878 üretilmiş spot bayt bayt aynı | Poker Uzmanı | ✅ (revizyon notu: 30 call'un 14'ü AA–JJ/AK, öğretici değeri düşük) |
+| Üreteçten bağımsız test (replay + `icm()` + ayrı Monte Carlo, komşu aralık kuralı yeniden yazıldı); ters çevrilmiş cevabı ve 1 puan değiştirilmiş eşiği yakaladığı denendi; IC-1 test toleransı yayından önce düzeltildi | QA | ✅ |
+| Blog: `spr-ve-all-in-fiyati` (13. yazı): fiyat tablosu, dört `sp` örneği, varsayımlar; testli; `spr-ve-value` quiz'inin `posts[0]`'ı | Content, Poker Uzmanı, QA | ✅ |
+| `bubble-call-fold` quiz'i 7–8. sorular (`ic-` spotlarına bağlı; AKo/KQo aynı dağılımda, kapsayan stack'te küçük risk primi), testli | Poker Eğitim, QA | ✅ |
+| Playwright 390/1366 px: iki ic spotu, "ICM ve bubble (72)", yazı, quiz 7–8 ve spot bağlantıları; taşma 0, konsol/4xx 0 | QA | ✅ (açık tema, Pages, ekran okuyucu denenmedi) |
 
 ### 20. çalışma — rapor: [`docs/ekip/2026-11-12/24-calisma-20-kapanis.md`](docs/ekip/2026-11-12/24-calisma-20-kapanis.md)
 
@@ -217,8 +227,9 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 ## Devam eden / açık işler
 
-0. **Kalıcı talimat (20):** en az spotlu konu artık `icm` (12). ICM için üretilebilir model var (`ib`/`ip` yöntemi); üreteçte henüz bölüm yok.
-9. **SPR içerik boşluğu (20):** SPR için blog yazısı yok; `sp` modelinde kahramanın kendi bahsi/all-in'i (SPR'ye göre bahis boyutu, commit kararı) ve 3-bet potu senaryosu yok.
+0. **Kalıcı talimat (21):** en az spotlu konu artık `value` (63).
+10. **ICM üreteci (21):** call tarafında premium el sınırı yok (30 call'un 14'ü AA–JJ/AK). SB push tarafı (`ip` yöntemi) üreteçte bölüm değil; final masası ödül sıçraması yok.
+9. **SPR içerik boşluğu (20, 21'de kısmen):** SPR yazısı yazıldı. `sp` modelinde kahramanın kendi bahsi/all-in'i (SPR'ye göre bahis boyutu, commit kararı) ve 3-bet potu senaryosu yok.
 1. **3-bet içerik boşluğu (15, 17'de kısmen):** kısa stack all-in/fold eklendi, 3-bet yazısı yazıldı. Hâlâ yok: 100 BB'de 3-bet'e karşı pozisyonda devam (IP call/4-bet), 4-bet'e karşı karar, blind-vs-blind 3-bet. `r3` bölümünde orta güçte fold spotu ve BTN açılışına fold spotu yok (daha derin stack ya da 2,5 BB açılışla eklenebilir). Bütün konularda quiz var (`odds`, `cbet`, `3bet`, `savunma`, `spr/value`, ICM).
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 3. **`acceptable?: number[]` alanı** (B-1): c09, c10 (sınırda, 15), c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
@@ -229,6 +240,9 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 8. **BB savunması boşluğu (19):** SB'ye karşı BB (pozisyonda), min-raise (2 BB), turnuvada ante'li savunma, 3-bet seçeneği ve BTN 2,5 BB'ye fold spotu yok.
 
 ## Alınan teknik ve ürün kararları
+
+- **ICM bubble spotları (21):** sit & go, 4 oyuncu [CO, BTN, SB, BB], ödüller %50/%30/%20 (varsayım), ante 1 ölü para. All-in yapan ranges.json'daki push aralığıyla iter; kahraman BB'de ve onu kapsar ya da eşittir. Eşik (F − L) / (W − L), stack'ler replay'le aynı muhasebe. Equity 80.000 deneme (ayrı üreteç). Cevap eşikten ≥ 3,5 puan; komşu aralıklar (ranges.json push aralıklarından yüzdesi 0,7× ve 1,4× hedefe en yakın, > %80 ise her el) aynı cevap ve ≥ 1 puan. "Chip hesabıyla call / bile fold" cümlesi chip eşiğinden ≥ 2 puan uzaksa. Dağılım başına en fazla 4 call, 8 ICM-fold, 1 chip-fold.
+- **Monte Carlo'dan türeyen sayıların testi (21):** türetilmiş bir sayı (ör. call payı = eq × W + (1 − eq) × L) gerekçedeki equity'den hesaplanarak karşılaştırılır; testin kendi Monte Carlo'su yalnızca equity'nin kendisini (±1 puan) ve cevabı denetler.
 
 - **SPR all-in spotları (20):** turnuva, chip EV, BTN 2 BB açar, BB call, ante 1 (flop pot 5,5). BB flop'ta R = S − 2 all-in; gereken R / (5,5 + 2R). BB'nin all-in aralığı dört iç içe kuraldan biri (çok sıkı: overpair, iki çift+; sıkı: + üst çift, floş çekişi; orta: + ikinci çift, açık uçlu/çift gutshot; geniş: flop call kuralı) ve stack'le daralır (12 geniş, 16/22 orta, 30 sıkı, 40 çok sıkı; varsayım). Equity tam sayımla (990 runout). Cevap varsayılan kuralda ve komşu iki kuralda aynı, üçünde de eşikten ≥ 3,5 puan. Gerekçe komşu equity'leri yazar.
 - **Out oranı denetimi (20):** "N / 4x" regex'i ondalıklı paydayı ("20 / 45,5") oran saymaz.
@@ -278,6 +292,7 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 | # | Yer | Önem | Durum |
 |---|---|---|---|
+| IC-1 | ic testinin ilk sürümü call payını testin kendi equity'siyle ±0,3 puan karşılaştırıyordu; Monte Carlo farkı bir spotta sınırı aştı (yanlış alarm) | Düşük | Yayından önce düzeltildi (21): gerekçedeki equity'den hesap |
 | S-1 | "Out oranı paydası" testi "20 / 45,5" pot ifadesini out oranı sanıyordu (yanlış pozitif, 12 sp spotu) | Düşük | Düzeltildi (20): regex ondalıklı paydayı dışlıyor |
 | D-0 | bd ilk modeli: realization bandı %65–%95 ile yalnızca 3 (sonra 17) fold spotu | Orta | Yayından önce düzeltildi (19): bant %70–%90, CO/BTN 3 BB açılışı eklendi |
 | D-1 | bd fold gerekçesi "equity'nin %102'sini kullanman gerekirdi" diyordu | Düşük | Yayından önce düzeltildi (19): ham equity eşiğin altındaysa ayrı cümle |
@@ -327,6 +342,8 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 ## Doğrulanamayan konular
 
+- ICM bubble spotları (21): ödül yapısı (%50/%30/%20) ve all-in yapanın referans push aralığı varsayım (sitenin kendi sıralaması, Nash/solver değil); bubble'da gerçek oyuncuların bu aralıklarla itip itmediği bilinmiyor. Tek el ICM, FGS yok; bağımsız bir ICM aracıyla karşılaştırılmadı. Beraberlik yarım sayıldı (ICM'de yaklaşım).
+
 - SPR all-in spotları (20): BB'nin flop all-in kuralları ve stack derinleştikçe daralması ekip varsayımı; oyuncu havuzu ya da solver ile karşılaştırılmadı. 12–16 BB'de 2 BB açılış ve BB'nin call etmesi basitleştirme (bu stack'lerde preflop all-in daha yaygın olabilir). BB'nin preflop aralığı cash'ten türetilen buton aralığı. ICM yok.
 
 - BB savunması spotları (19): realization'ın her el için aynı ve %70–%90 arasında olduğu varsayımı; gerçekte el türüne göre değişir (domine olmaya yatkın offsuit eller daha az kullanır). A4o vs HJ, K5o vs BTN gibi call'lar realization %70'in altındaysa geçersizleşir. Rake yok (rake call aralığını daraltır). 3-bet'in bazı call'lardan iyi olabileceği modellenmedi. Solver ya da oyuncu verisiyle karşılaştırılmadı.
@@ -353,6 +370,7 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 ## Atlanan roller
 
+- **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend** (21): veri yok; yeni mekanik, ekran, uç nokta yok.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend, Content** (20): veri yok; yeni mekanik, ekran, uç nokta yok; SPR yazısı bir sonraki çalışmaya önerildi.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend** (19): veri yok; yeni mekanik, ekran, uç nokta yok.
 
@@ -375,12 +393,12 @@ Son güncelleme: **2026-11-12, 20. çalışma**
 
 ## Sonraki öncelikler
 
-0. **Kalıcı talimat:** konu sayılarını ölç. 20 sonu: `icm` 12 (tek aday), sonra `value` 63. ICM için aday model: `ib`/`ip` yöntemini (tek el Malmuth-Harville, ödül yapısı varsayımı `note`'ta, BB call aralığı kendi ICM eşiğinden, chip senaryosu ile çapraz kontrol) üreteçte bölüm olarak kurmak; bubble'da SB → BB push/fold ya da call/fold, birden çok stack dağılımı. Bağımsız test `icm()` (`src/lib/poker/math.ts`) ile. Model kurulamazsa uydurma yok; engel raporda ve bildirimde yazılır. `npm run ranges` ≈ 3,3 dk.
-1. **Dal kontrolü:** `0vqn8r` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git checkout -B <kendi dalı> origin/claude/wizardly-meitner-0vqn8r`); yan dallarda zincir dışı commit var mı bak. Temiz klonda `npm ci`.
-2. **SPR yazısı** (Content): `sp` örnekleriyle gereken equity tablosu (SPR 1,8 → %39,2 … 6,9 → %46,6) ve aralık varsayımı; quiz'in `posts`'una bağla.
+0. **Kalıcı talimat:** konu sayılarını ölç. 21 sonu: **`value` 63** (tek aday), sonra `3bet`/`blof`/`cbet` 65. Aday model: 5. bölümün kombinasyon sayımıyla river value'da ikinci bahis boyutu (2/3 pot) ya da daralmış BB aralığına (flop/turn call kuralları, 18. bölüm) karşı river value. Model kurulamazsa uydurma yok; engel raporda ve bildirimde yazılır. `npm run ranges` ≈ 4,1 dk.
+1. **Dal kontrolü:** `219ddq` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git checkout -B <kendi dalı> origin/claude/wizardly-meitner-219ddq`); yan dallarda zincir dışı commit var mı bak. Temiz klonda `npm ci`.
+2. **ICM üreteci iyileştirmesi:** call tarafında premium el sınırı (dağılım başına ≤ 1 AA–JJ/AK), SB push bölümü (`ip` yöntemi: BB'nin ICM'e göre call aralığı + chip senaryosu).
 3. **bd genişletme:** SB'ye karşı BB, min-raise, ante'li turnuva savunması; b2'de river value / delayed c-bet; r3'te orta güçte fold.
 4. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar (c09, c10, c35).
-5. CS-3 son adımı (final masası ödül sıçraması). P-4 (kullanıcı isterse): `admiring-babbage-*` denetimi.
+5. P-4 (kullanıcı isterse): `admiring-babbage-*` denetimi.
 
 **Yerel PostgreSQL ile deneme (8 ve 9'da çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb -h /tmp cheers`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. Sunucuyu yeniden başlatırken `pkill -f next-server` gerekir (`next start` alt süreci kalıyor; 9'da eski sürüm yanıt verdi). Toplu veri için `psql \copy`. İş bitince sunucu ve Postgres durdurulmalı, `.env.local` silinmeli.
 

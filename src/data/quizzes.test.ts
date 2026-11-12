@@ -623,3 +623,35 @@ describe("quiz: 3-bet-ve-squeeze", () => {
     expect(answer(Z, 7)).toBe("9 BB'de ≈ %31, 13 BB'de ≈ %36");
   });
 });
+
+// 21. çalışma: ic- spotlarına bağlı bubble soruları. Spotların sayıları hands.test.ts'te üreteçten
+// bağımsız yeniden hesaplanıyor; burada soruların aynı sayıları kullandığı denetlenir.
+describe("Bubble call/fold quiz'i: ic- spotları (7–8)", () => {
+  const Z = "bubble-call-fold";
+  const spot = (id: string) => HANDS.find((h) => h.id === id)!;
+  it("7: aynı stack dağılımında AKo call, KQo fold (chip'e göre call)", () => {
+    const q = question(Z, 7);
+    expect(q.spot).toBe("ic-SB15-15-KsQh");
+    expect(answer(Z, 7)).toBe("Yalnızca AKo ile");
+    const ak = spot("ic-SB15-15-AcKh");
+    const kq = spot("ic-SB15-15-KsQh");
+    expect(ak.correct).toBe(1);
+    expect(kq.correct).toBe(0);
+    expect(ak.note).toBe(kq.note);
+    for (const t of ["%45,2", "%58,2", "%64,4", "6,2 puan", "13 puan"]) {
+      expect(ak.reasoning, t).toContain(t);
+      expect(q.q + q.why, t).toContain(t.replace(" puan", ""));
+    }
+    for (const t of ["%52,9", "5,2 puan", "Chip hesabıyla call kârlı olurdu"]) expect(kq.reasoning, t).toContain(t);
+    expect(q.q).toContain("%52,9");
+    expect(q.why).toContain("5,2 puan");
+  });
+  it("8: kahraman kapsıyor, risk primi ≈ 2,6 puan; 22 call", () => {
+    const q = question(Z, 8);
+    const h = spot(q.spot!);
+    expect(h.correct).toBe(1);
+    for (const t of ["%38,5", "%41,1", "19 BB ile kalırsın", "%48,6", "2,6 puan", "%68'"]) expect(h.reasoning + h.note, t).toContain(t);
+    for (const t of ["%38,5", "%41,1", "19 BB", "%48,6", "2,6 puan", "%68'"]) expect(q.q + q.why + q.options.join(" "), t).toContain(t);
+    expect(answer(Z, 8)).toContain("elenme riskin yok");
+  });
+});

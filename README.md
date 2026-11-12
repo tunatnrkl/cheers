@@ -1,6 +1,6 @@
 # Cheers
 
-Türkçe bir Texas Hold'em alıştırma masası: 943 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük, blog ve kısa tekrar quiz'leri. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 1003 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük, blog ve kısa tekrar quiz'leri. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -95,8 +95,8 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
-| `/blog`, `/blog/[slug]` | 12 özgün yazı |
-| `/quiz`, `/quiz/[slug]` | 7 quiz, 55 çoktan seçmeli soru (pot odds ve çekişler, c-bet ve barrel, 3-bet ve squeeze, blind savunması, SPR ve value, bubble'da call ve push). Seçimden sonra doğru cevap ve gerekçe; ilgili spot masada açılır. Puan, süre, seri ya da kayıt yok |
+| `/blog`, `/blog/[slug]` | 13 özgün yazı |
+| `/quiz`, `/quiz/[slug]` | 7 quiz, 57 çoktan seçmeli soru (pot odds ve çekişler, c-bet ve barrel, 3-bet ve squeeze, blind savunması, SPR ve value, bubble'da call ve push). Seçimden sonra doğru cevap ve gerekçe; ilgili spot masada açılır. Puan, süre, seri ya da kayıt yok |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu
@@ -161,7 +161,7 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**943 spot:**
+**1003 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
@@ -176,8 +176,9 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | Turn'de ikinci barrel ya da check (BTN, flop c-bet'i call gördü, kahramanın çifti yok) | 60 | BB'nin aralığı flop call kuralıyla daraltılır (`note`'ta); her kombinasyon için kahramanın showdown payı 44 river kartının hepsi sayılarak bulunur, river'da bahis olmadığı varsayılır. Bahsin check'e göre farkı call eden elde 6(2s − 1), fold eden elde 9,1(1 − s). Üç turn call senaryosunda (sıkı: üst çift ve güçlü çekiş; temel: + ikinci çift; geniş: her çift ve gutshot) aynı işaret ve kombinasyon başına en az 0,07 × bahis fark şartı |
 | BB'den açılışa call ya da fold (cash, 100 BB; UTG/HJ/CO/BTN 2,5 BB, CO/BTN 3 BB) | 60 | Gereken equity (A − 1) / (2A + 0,5); elin açılış aralığına karşı ham equity'si Monte Carlo (80.000 deneme). Pozisyon dışında ham equity'nin bir kısmı kullanılır (realization): call cevabı %70'te, fold cevabı %90'da da eşikten en az 1 puan uzak olmalı; arada kalan eller (gri bölge) ve 3-bet'e uygun en güçlü eller (TT+, AQs+, AQo+) alınmaz. %70 / %90 varsayımdır, solver ölçümü değildir |
 | Flop'ta BB all-in yaptı, SPR'ye göre call ya da fold (turnuva, 12–40 BB, ante 1; kahramanın tek çifti var) | 60 | Gereken equity R / (5,5 + 2R). Kahramanın equity'si BB'nin all-in aralığındaki her kombinasyon × turn ve river'ın bütün kombinasyonları (990) sayılarak bulunur; tahmin yok. All-in aralığı iç içe dört kuraldan biri (`note`'ta) ve stack derinleştikçe daralır (varsayım). Cevap bir sıkı ve bir geniş komşu kuralda da aynı ve üçünde de eşikten en az 3,5 puan uzak olmalı |
+| Bubble'da BB'den all-in'e ICM ile call ya da fold (sit & go, 4 oyuncu, ilk 3 ödül; ödüller %50 / %30 / %20 varsayım) | 60 | All-in yapan sitedeki referans push aralığıyla iter (`note`'ta). Gereken equity tek el ICM'den (Malmuth-Harville): (F − L) / (W − L). Equity Monte Carlo (80.000 deneme); cevap ICM eşiğinden en az 3,5 puan uzak ve all-in yapan ≈ 0,7 kat ya da ≈ 1,4 kat genişlikte iterse de aynı olmalı. Gerekçe chip eşiğini, ICM eşiğini ve aradaki risk primini yazar; sonraki eller hesaba katılmaz |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay), river value ve blöf spotlarının ve turn ikinci barrel spotlarının cevabı bağımsız bir kombinasyon sayımıyla, 3-bet all-in spotlarının cevabı spot metnindeki üç call aralığından, BB savunması spotlarının cevabı realization'ın iki ucunda bağımsız bir Monte Carlo ölçümüyle, SPR all-in spotlarının cevabı üç all-in kuralında bağımsız bir tam sayımla yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda, blog yazılarında ve quiz'lerde testle denetlenir. Seçeneklerdeki "1/3 pot bahis (≈1,8 BB)" gibi tutarlar pot ile karşılaştırılır. Quiz'lerdeki fiyat, blöf başabaşı, out, SPR, ICM ve equity sayıları `src/data/quizzes.test.ts` ile yeniden hesaplanır.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay), river value ve blöf spotlarının ve turn ikinci barrel spotlarının cevabı bağımsız bir kombinasyon sayımıyla, 3-bet all-in spotlarının cevabı spot metnindeki üç call aralığından, BB savunması spotlarının cevabı realization'ın iki ucunda bağımsız bir Monte Carlo ölçümüyle, SPR all-in spotlarının cevabı üç all-in kuralında bağımsız bir tam sayımla, bubble ICM spotlarının cevabı `icm()` ve bağımsız bir Monte Carlo ölçümüyle üç push aralığında yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda, blog yazılarında ve quiz'lerde testle denetlenir. Seçeneklerdeki "1/3 pot bahis (≈1,8 BB)" gibi tutarlar pot ile karşılaştırılır. Quiz'lerdeki fiyat, blöf başabaşı, out, SPR, ICM ve equity sayıları `src/data/quizzes.test.ts` ile yeniden hesaplanır.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
@@ -205,7 +206,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (943 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (1003 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |

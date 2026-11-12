@@ -1336,3 +1336,156 @@ describe("SPR all-in spotları (sp-)", () => {
     }
   }, 300_000);
 });
+
+// 21. çalışma: üreteçteki 11. bölüm. Üreteçten bağımsız: stack'ler ve pot replay'den, ICM eşiği
+// src/lib/poker/math.ts'teki icm() ile, equity bu testin kendi Monte Carlo'suyla (ayrı tohum), komşu
+// aralıkların seçim kuralı burada yeniden yazıldı.
+describe("ICM bubble call/fold spotları (ic-)", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("ic-"));
+  const RK = "23456789TJQKA";
+  const P = [50, 30, 20];
+  const combosOf = (labels: string[]): [number, number][] => {
+    const out: [number, number][] = [];
+    for (const l of labels) {
+      const a = RK.indexOf(l[0]);
+      const b = RK.indexOf(l[1]);
+      for (let s1 = 0; s1 < 4; s1++)
+        for (let s2 = 0; s2 < 4; s2++) {
+          if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+          out.push([a * 4 + s1, b * 4 + s2]);
+        }
+    }
+    return out;
+  };
+  const pctOf = (labels: string[]) => (combosOf(labels).length / 1326) * 100;
+  const all169: string[] = [];
+  for (let i = 12; i >= 0; i--) for (let j = 12; j >= 0; j--) all169.push(i === j ? RK[i] + RK[i] : i > j ? RK[i] + RK[j] + "s" : RK[j] + RK[i] + "o");
+  const push = ranges.push as Record<string, Record<string, string[]>>;
+  const refs = ["6", "10", "15"].flatMap((bb) => ["UTG", "HJ", "CO", "BTN", "SB"].map((pos) => push[bb][pos]));
+  const nearest = (target: number) =>
+    target > 80 ? all169 : refs.reduce((b, r) => (Math.abs(pctOf(r) - target) < Math.abs(pctOf(b) - target) ? r : b));
+  let seed = 4242;
+  const rnd = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const eqVs = (hero: number[], labels: string[], trials: number) => {
+    const live = combosOf(labels).filter(([x, y]) => !hero.includes(x) && !hero.includes(y));
+    let s = 0;
+    for (let k = 0; k < trials; k++) {
+      const v = live[Math.floor(rnd() * live.length)];
+      const used = new Set([...hero, ...v]);
+      const b: number[] = [];
+      while (b.length < 5) {
+        const c = Math.floor(rnd() * 52);
+        if (!used.has(c)) {
+          used.add(c);
+          b.push(c);
+        }
+      }
+      const x = evaluate7([...hero, ...b]);
+      const y = evaluate7([...v, ...b]);
+      s += x > y ? 1 : x === y ? 0.5 : 0;
+    }
+    return s / trials;
+  };
+  const pcts = (text: string) => [...text.matchAll(/%(\d+(?:,\d+)?)/g)].map((m) => Number(m[1].replace(",", ".")));
+
+  it("en az 50 spot, iki cevap da dengeli, kimlikler tekil", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(20);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(20);
+    expect(new Set(list.map((h) => h.id)).size).toBe(list.length);
+    for (const h of list) expect(h.topic).toBe("icm");
+  });
+
+  it("cevap ICM eşiğine göre doğru, gerekçedeki sayılar yeniden hesaplanıyor", () => {
+    for (const h of list) {
+      const r = replay(h);
+      expect(r.errors, h.id).toEqual([]);
+      const seats = h.players as (keyof typeof r.seats)[];
+      const vil = seats.find((s) => r.seats[s].allin)!;
+      expect(r.seats[vil].stack, h.id).toBe(0);
+      // İade modellenmiyor: all-in yapan kahramandan büyük olamaz
+      expect(r.seats[vil].start, h.id).toBeLessThanOrEqual(r.seats.BB.start);
+      const me = seats.indexOf("BB");
+      const hs = r.seats.BB.stack;
+      const after = (hero: number, v: number) => seats.map((s) => (s === "BB" ? hero : s === vil ? v : r.seats[s].stack));
+      const ev = (st: number[]) => icm(st, P)[me] / 100;
+      const F = ev(after(hs, r.pot));
+      const W = ev(after(hs + r.pot, 0));
+      const L = ev(after(hs - r.toCall, r.pot + r.toCall));
+      const chip = r.toCall / (r.pot + r.toCall);
+      const need = (F - L) / (W - L);
+      expect(h.options[1]).toBe(`Call (${String(r.toCall).replace(".", ",")} BB)`);
+
+      const def = push[String(r.seats[vil].start)][vil];
+      expect(def, h.id).toBeDefined();
+      expect(h.note).toContain(`ellerin yaklaşık %${Math.round(pctOf(def))}'`);
+      const hero = [cardFromString(h.hero.slice(0, 2)), cardFromString(h.hero.slice(2))];
+      const eq = eqVs(hero, def, 40000);
+      const call = eq > need;
+      expect(h.correct, h.id).toBe(call ? 1 : 0);
+      expect(Math.abs(eq - need), h.id).toBeGreaterThan(0.03);
+      const narrow = nearest(pctOf(def) * 0.7);
+      const wide = nearest(pctOf(def) * 1.4);
+      const eqN = eqVs(hero, narrow, 40000);
+      const eqW = eqVs(hero, wide, 40000);
+      expect(eqN > need, `${h.id} sıkı`).toBe(call);
+      expect(eqW > need, `${h.id} geniş`).toBe(call);
+
+      // Gerekçe: chip eşiği, equity, F, call payı, ICM eşiği, sıkı (yüzde, equity), geniş (yüzde?, equity)
+      const p = pcts(h.reasoning);
+      expect(p[0], h.id).toBeCloseTo(chip * 100, 1);
+      expect(Math.abs(p[1] - eq * 100), h.id).toBeLessThan(1);
+      expect(p[2], h.id).toBeCloseTo(F * 100, 1);
+      // Call payı gerekçedeki equity'den hesaplanır (equity'nin Monte Carlo hatası yukarıda ayrıca sınırlandı)
+      const eqText = p[1] / 100;
+      expect(Math.abs(p[3] - (eqText * W + (1 - eqText) * L) * 100), h.id).toBeLessThan(0.07);
+      expect(p[4], h.id).toBeCloseTo(need * 100, 1);
+      expect(p[5], h.id).toBe(Math.round(pctOf(narrow)));
+      expect(Math.abs(p[6] - eqN * 100), h.id).toBeLessThan(1);
+      const wideIsAll = wide === all169;
+      expect(h.reasoning.includes("her eliyle itse"), h.id).toBe(wideIsAll);
+      if (!wideIsAll) expect(p[7], h.id).toBe(Math.round(pctOf(wide)));
+      expect(Math.abs(p[wideIsAll ? 7 : 8] - eqW * 100), h.id).toBeLessThan(1);
+      if (call) expect(h.reasoning).toContain("üstünde: call");
+      else if (eq > chip + 0.025) expect(h.reasoning, h.id).toContain("Chip hesabıyla call kârlı olurdu");
+      else if (eq < chip - 0.025) expect(h.reasoning, h.id).toContain("Chip hesabıyla bile yetmezdi");
+      const lostAll = r.seats[vil].start >= r.seats.BB.start;
+      expect(h.reasoning.includes("ödülsüz 4. olursun"), h.id).toBe(lostAll);
+    }
+  }, 300_000);
+});
+
+// 21. çalışma: SPR yazısı. Fiyat tablosu formülden, örnek sayılar spotların (tam sayımla üretilen) gerekçesinden.
+describe("blog: spr-ve-all-in-fiyati", () => {
+  it("gereken equity tablosu ve örnekler spotlarla aynı", () => {
+    const post = POSTS.find((p) => p.slug === "spr-ve-all-in-fiyati")!;
+    const text = post.body.map((b) => `${b.h ?? ""} ${b.p}`).join("\n");
+    const fmt = (x: number) => String(Math.round(x * 1000) / 10).replace(".", ",");
+    for (const S of [12, 16, 22, 30, 40]) {
+      const R = S - 2;
+      expect(text, `${S} BB`).toContain(`${R} / ${String(5.5 + 2 * R).replace(".", ",")} ≈ **%${fmt(R / (5.5 + 2 * R))}**`);
+      expect(text).toContain(`SPR ≈ ${String(Math.round((R / 5.5) * 10) / 10).replace(".", ",")}`);
+    }
+    expect(text).toContain("60 flop spotu");
+    expect(HANDS.filter((h) => h.id.startsWith("sp-")).length).toBe(60);
+    const ex: Record<string, { correct: number; nums: string[] }> = {
+      "sp-12-Qc5c-Qh2d7s": { correct: 1, nums: ["%39,2", "%70,1"] },
+      "sp-40-Ah8c-JdKhAd": { correct: 0, nums: ["%46,6", "%10 ", "%39,8"] },
+      "sp-22-9h9c-AcTh7c": { correct: 0, nums: ["%44", "%18,7", "%39,2"] },
+      "sp-40-QsQd-9c8d2h": { correct: 1, nums: ["%46,6", "%53 "] },
+    };
+    for (const [id, { correct, nums }] of Object.entries(ex)) {
+      const h = HANDS.find((x) => x.id === id)!;
+      expect(h.correct, id).toBe(correct);
+      for (const t of nums) {
+        expect(h.reasoning, `${id} ${t}`).toContain(t);
+        expect(text, `${id} ${t}`).toContain(t.trim());
+      }
+    }
+  });
+});

@@ -373,7 +373,7 @@ export const QUIZZES: Quiz[] = [
     topic: "spr",
     assumptions:
       "Cash, 100 BB, rake yok (8–9. sorular hariç: turnuva, ante 1 BB, chip EV, ICM yok). SPR (stack-to-pot ratio): efektif stack'in flop'taki pota oranı. SPR'nin yaklaşık 3'ün altı ya da 10'un üstü olması pratik kurallardır, kesin sınırlar değildir.",
-    posts: ["pot-odds-adim-adim", "c-bet-ne-zaman"],
+    posts: ["spr-ve-all-in-fiyati", "pot-odds-adim-adim", "c-bet-ne-zaman"],
     questions: [
       {
         q: "Buton 2,5 BB açtı, SB fold etti, BB call etti. Flop'ta SPR yaklaşık kaçtır?",
@@ -510,6 +510,24 @@ export const QUIZZES: Quiz[] = [
         correct: 1,
         why: "ICM eşiği %51,5; %48,5 hâlâ altında kalır. Rakip daha geniş itse de bu stack dağılımında fold.",
         spot: "ib01",
+      },
+      {
+        q: "SB 15 BB ile all-in yaptı; sen BB'de 15 BB'sin, CO'nun 35, BTN'nin 15 BB'si var. Chip eşiği %45,2, ICM eşiği %58,2. SB'nin aralığına karşı AKo yaklaşık %64,4, KQo yaklaşık %52,9 equity taşır. Hangisiyle call edersin?",
+        options: ["İkisiyle de", "Yalnızca AKo ile", "Yalnızca KQo ile", "Hiçbiriyle"],
+        correct: 1,
+        why: "AKo ICM eşiğinin yaklaşık 6,2 puan üstünde: call. KQo chip hesabıyla call olurdu (%52,9 > %45,2), ama 13 puanlık risk primi farkı kapatıyor; eşiğin 5,2 puan altında: fold.",
+        spot: "ic-SB15-15-KsQh",
+      },
+      {
+        q: "Sen BB'de 25 BB'sin; SB 6 BB ile all-in yaptı (CO 30, BTN 19 BB). Chip eşiği %38,5, ICM eşiği yalnızca %41,1. Risk primi neden bu kadar küçük?",
+        options: [
+          "Kaybetsen de 19 BB ile oyunda kalırsın; bu elde elenme riskin yok",
+          "SB'nin aralığı çok güçlü olduğu için",
+          "Ante, ICM etkisini ortadan kaldırdığı için",
+        ],
+        correct: 0,
+        why: "Risk primi yaklaşık 2,6 puan. Elenme riski olmadığı için kayıp ödül payını az düşürür; kazanırsan da SB elenir ve bubble biter. Bu yüzden 22 bile, SB'nin geniş aralığına (ellerin yaklaşık %68'i) karşı yaklaşık %48,6 equity ile call eder.",
+        spot: "ic-SB6-25-2s2h",
       },
     ],
   },

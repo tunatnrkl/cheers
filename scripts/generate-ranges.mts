@@ -6,6 +6,7 @@
 import { writeFileSync } from "node:fs";
 import { evaluate7 } from "../src/lib/poker/evaluator.ts";
 import { pctWithSuffix as numSuffix } from "../src/lib/trSuffix.ts";
+import { icm as icmShares } from "../src/lib/poker/math.ts";
 
 const R = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
 const rankIdx = (ch: string) => 12 - R.indexOf(ch);
@@ -1093,6 +1094,139 @@ for (const { S, level } of SPR_CONFIGS) {
 }
 drills.push(...sprDrills);
 console.log("SPR all-in:", sprDrills.length, sprCounts);
+// ── 11) Turnuva: bubble'da BB'desin, all-in'e ICM ile call ya da fold (21. çalışma) ─────────
+// Sit & go bubble'ı: 4 oyuncu (CO, BTN, SB, BB), ilk 3 ödül alır; varsayım: ödüller %50 / %30 / %20.
+// Bir oyuncu (CO, BTN ya da SB) sitedeki referans push aralığıyla all-in yapar, aradakiler fold eder;
+// kahraman BB'de ve all-in yapanı kapsıyor (iade modellenmez). Toplam ante 1 BB (ölü para, stack'ten düşülmez).
+// Tek el ICM (Malmuth-Harville, src/lib/poker/math.ts): fold, kazanç ve kayıptan sonraki stack'lerle
+// kahramanın beklenen ödül payı F, W, L; call için gereken equity (F − L) / (W − L) (beraberlik yarım sayılır).
+// Equity Monte Carlo, ayrı üreteçle 80.000 deneme. Cevap, varsayılan aralıkta ICM eşiğinden en az 3,5 puan
+// uzak olmalı; all-in yapan daha sıkı (≈ 0,7 kat) ya da daha geniş (≈ 1,4 kat, %80'i aşarsa her el) referans
+// aralıkla itse de cevap aynı kalmalı (ve eşikten en az 1 puan uzak). Komşu aralıklar, ranges.json'daki push aralıkları arasından yüzdesi
+// hedefe en yakın olanı (hepsi aynı push sıralamasının tepesinden alındığı için iç içe).
+const rndIcm = mulberry32(20261210);
+const rndIcmCheck = mulberry32(20261211);
+const ICM_PAYOUTS = [50, 30, 20];
+const ICM_SEATS = ["CO", "BTN", "SB", "BB"] as const;
+const ICM_MARGIN = 0.035;
+const ICM_TRIALS = 80000;
+type IcmSeat = (typeof ICM_SEATS)[number];
+const ICM_CONFIGS: { pusher: "CO" | "BTN" | "SB"; P: "6" | "10" | "15"; stacks: Record<IcmSeat, number> }[] = [
+  // Kahraman kısa ya da eşit stack, daha büyük stack'ler var: risk primi yüksek
+  { pusher: "BTN", P: "10", stacks: { CO: 45, BTN: 10, SB: 15, BB: 10 } },
+  { pusher: "BTN", P: "15", stacks: { CO: 40, BTN: 15, SB: 10, BB: 15 } },
+  { pusher: "SB", P: "15", stacks: { CO: 35, BTN: 15, SB: 15, BB: 15 } },
+  { pusher: "SB", P: "15", stacks: { CO: 30, BTN: 25, SB: 15, BB: 20 } },
+  // Kahraman rakibi rahat kapsıyor ya da all-in yapan çok kısa: risk primi düşük
+  { pusher: "BTN", P: "10", stacks: { CO: 15, BTN: 10, SB: 15, BB: 40 } },
+  { pusher: "SB", P: "6", stacks: { CO: 30, BTN: 19, SB: 6, BB: 25 } },
+  { pusher: "BTN", P: "6", stacks: { CO: 40, BTN: 6, SB: 20, BB: 14 } },
+  { pusher: "CO", P: "10", stacks: { CO: 10, BTN: 12, SB: 28, BB: 30 } },
+];
+const ICM_CAP = { call: 4, icmFold: 8, chipFold: 1 }; // stack dağılımı başına (cevaplar dağılımlara yayılsın)
+const ICM_TOTAL = { call: 30, fold: 30 };
+/** ranges.json'daki push aralıkları (stack × pozisyon), kombinasyon yüzdesiyle. */
+const pushRefs = (["6", "10", "15"] as const).flatMap((bb) =>
+  (["UTG", "HJ", "CO", "BTN", "SB"] as const).map((pos) => ({ list: out.push[bb][pos] as string[], pct: pctOfCombos(out.push[bb][pos] as string[]) })),
+);
+function nearestRef(target: number): { list: string[]; pct: number } {
+  if (target > 80) return { list: labels, pct: 100 };
+  return pushRefs.reduce((b, r) => (Math.abs(r.pct - target) < Math.abs(b.pct - target) ? r : b));
+}
+function icmThresholds(c: (typeof ICM_CONFIGS)[number]) {
+  const vi = ICM_SEATS.indexOf(c.pusher);
+  const hi = 3;
+  const P = c.stacks[c.pusher];
+  const posted = ICM_SEATS.map((s, i) => (i === vi ? P : s === "SB" ? 0.5 : s === "BB" ? 1 : 0));
+  const base = ICM_SEATS.map((s, i) => c.stacks[s] - posted[i]);
+  const pot = posted.reduce((a, b) => a + b, 0) + 1;
+  const toCall = P - 1;
+  const mk = (h: number, v: number) => base.map((x, i) => (i === hi ? h : i === vi ? v : x));
+  const ev = (st: number[]) => icmShares(st, ICM_PAYOUTS)[hi] / 100;
+  const F = ev(mk(base[hi], pot));
+  const W = ev(mk(base[hi] + pot, 0));
+  const L = ev(mk(base[hi] - toCall, pot + toCall));
+  return { pot, toCall, chip: toCall / (pot + toCall), icm: (F - L) / (W - L), F, W, L };
+}
+function icmConcrete(l: string): string {
+  const s1 = Math.floor(rndIcm() * 4);
+  if (l.length === 3 && l[2] === "s") return l[0] + SUITS[s1] + l[1] + SUITS[s1];
+  const s2 = (s1 + 1 + Math.floor(rndIcm() * 3)) % 4;
+  return l[0] + SUITS[s1] + l[1] + SUITS[s2];
+}
+const icmDrills: Drill[] = [];
+const icmCounts = { call: 0, icmFold: 0, chipFold: 0 };
+const icmP1 = (x: number) => num(Math.round(x * 1000) / 10);
+for (const c of ICM_CONFIGS) {
+  const t = icmThresholds(c);
+  const H = c.stacks.BB;
+  const P = c.stacks[c.pusher];
+  const defList = out.push[c.P][c.pusher] as string[];
+  const defPct = pctOfCombos(defList);
+  const narrow = nearestRef(defPct * 0.7);
+  const wide = nearestRef(defPct * 1.4);
+  const local = { call: 0, icmFold: 0, chipFold: 0 };
+  const order = [...labels];
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rndIcm() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  for (const l of order) {
+    const cards = icmConcrete(l);
+    const h: [number, number] = [toCard(cards.slice(0, 2)), toCard(cards.slice(2))];
+    // Ön eleme (ucuz): sınıra yakın eller ölçülmez
+    const pre = equityVsRange(h, rangeCombos(defList), 6000, rndIcm);
+    if (Math.abs(pre - t.icm) < ICM_MARGIN + 0.01) continue;
+    const kind = pre > t.icm ? "call" : pre > t.chip + 0.03 ? "icmFold" : pre < t.chip - 0.03 ? "chipFold" : null;
+    if (!kind || local[kind] >= ICM_CAP[kind]) continue;
+    if (kind === "call" ? icmCounts.call >= ICM_TOTAL.call : icmCounts.icmFold + icmCounts.chipFold >= ICM_TOTAL.fold) continue;
+    const eq = equityVsRange(h, rangeCombos(defList), ICM_TRIALS, rndIcmCheck);
+    const eqN = equityVsRange(h, rangeCombos(narrow.list), ICM_TRIALS, rndIcmCheck);
+    const eqW = equityVsRange(h, rangeCombos(wide.list), ICM_TRIALS, rndIcmCheck);
+    const call = eq > t.icm;
+    if (Math.abs(eq - t.icm) < ICM_MARGIN || eqN > t.icm !== call || eqW > t.icm !== call) continue;
+    if (Math.abs(eqN - t.icm) < 0.01 || Math.abs(eqW - t.icm) < 0.01) continue; // Monte Carlo hatası içinde kalmasın
+    // Gerekçedeki "chip hesabıyla call / bile fold" iddiası için chip eşiğinden en az 2 puan
+    const k2 = call ? "call" : eq > t.chip + 0.02 ? "icmFold" : eq < t.chip - 0.02 ? "chipFold" : null;
+    if (k2 !== kind) continue;
+    local[kind]++;
+    icmCounts[kind]++;
+    const callShare = eq * t.W + (1 - eq) * t.L;
+    const gap = num(Math.round(Math.abs(eq - t.icm) * 1000) / 10);
+    const prem = num(Math.round((t.icm - t.chip) * 1000) / 10);
+    const others = ICM_SEATS.filter((s) => s !== "BB");
+    const stackList = [...others].sort((a, b) => c.stacks[b] - c.stacks[a]).map((s) => `${s} ${c.stacks[s]}`).join(", ");
+    const seq = c.pusher === "CO" ? ["CO a", "BTN f", "SB f"] : c.pusher === "BTN" ? ["CO f", "BTN a", "SB f"] : ["CO f", "BTN f", "SB a"];
+    const lose = H - P > 0 ? `${num(H - P)} BB ile kalırsın` : "ödülsüz 4. olursun";
+    const verdict =
+      kind === "call"
+        ? `Risk primine rağmen equity'n eşiğin ${gap} puan üstünde: call.`
+        : kind === "icmFold"
+          ? `Chip hesabıyla call kârlı olurdu; bubble'da ise eşiğin ${gap} puan altında kalıyorsun: fold.`
+          : `Chip hesabıyla bile yetmezdi; ICM ile eşiğin ${gap} puan altındasın: fold.`;
+    const wideTxt = wide.pct === 100 ? "her eliyle itse" : `daha geniş (ellerin yaklaşık ${numSuffix(Math.round(wide.pct), "iyle")}) itse`;
+    icmDrills.push({
+      id: `ic-${c.pusher}${P}-${H}-${cards}`,
+      title: `Bubble: ${c.pusher} ${P} BB all-in, ${H} BB ile BB'de ${l}`,
+      game: "turnuva", street: "preflop", heroPos: "BB", stackBB: H,
+      hero: cards, potBB: t.pot, seq, ante: 1,
+      stacks: Object.fromEntries(others.map((s) => [s, c.stacks[s]])), players: [...ICM_SEATS],
+      note: `Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: ${stackList}, sen ${H} BB. Varsayım: ${c.pusher}, ${P} BB ile ellerin yaklaşık ${numSuffix(Math.round(defPct), "iyle")} all-in yapıyor (sitedeki referans ${c.pusher} ${P} BB push aralığı). Toplam ante 1 BB. Tek el ICM; sonraki eller hesaba katılmadı.`,
+      options: ["Fold", `Call (${num(t.toCall)} BB)`], correct: call ? 1 : 0, topic: "icm", level: 3,
+      reasoning:
+        `Call için ${num(t.toCall)} BB ödeyip ${num(t.pot + t.toCall)} BB'lik pota giriyorsun; yalnızca chip'e bakarsan gereken equity %${icmP1(t.chip)}. ` +
+        `${pretty(cards)}, ${GEN[c.pusher]} all-in aralığına karşı yaklaşık %${icmP1(eq)} equity taşır. ` +
+        `Kaybedersen ${lose}; kazanırsan ${c.pusher} elenir ve bubble biter. ` +
+        `Kendi ICM hesabımızla fold, ödül havuzundaki beklenen payını yaklaşık %${icmP1(t.F)} yapar, call ortalama %${icmP1(callShare)}. Call için gereken equity yaklaşık %${icmP1(t.icm)}: chip eşiğinden ${prem} puan yüksek (risk primi). ` +
+        `${verdict} ` +
+        `${c.pusher} daha sıkı (ellerin yaklaşık ${numSuffix(Math.round(narrow.pct), "iyle")}) itse equity'n ≈ %${icmP1(eqN)}, ${wideTxt} ≈ %${icmP1(eqW)}; cevap değişmiyor.`,
+    });
+    if (icmCounts.call >= ICM_TOTAL.call && icmCounts.icmFold + icmCounts.chipFold >= ICM_TOTAL.fold) break;
+  }
+  console.log(`ICM ${c.pusher} ${P} / BB ${H}: chip %${icmP1(t.chip)} ICM %${icmP1(t.icm)}`, local);
+}
+drills.push(...icmDrills);
+console.log("ICM bubble call/fold:", icmDrills.length, icmCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);
