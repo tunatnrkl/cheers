@@ -47,3 +47,11 @@ Onaylanan tercihler: ortak temel üniteler (o1–o4), bankroll yönetiminin dı�
 Yayın: düzeltmeler yeşil olduğunda yeniden kapı gerekmeden birleştirilebilir (iskelet bağlantısız, kullanıcıya görünmez).
 
 İçerik aşamasına notlar: `c9-d4` ve `t8-d3` "çoğunlukla" ile yumuşatılacak; `c8-d1`'deki equity sayıları üreticiden gelip testle sabitlenecek; dolu derslerde sözlük bağlantısı beklenir.
+
+## 2026-11-12 · Çalışma düzeni: uygulayıcı ajanlar
+
+Ürün sahibi "bana sormak yerine her seferinde bir ajan ata ve işi bitir" dedi. Bundan sonra:
+
+- İşler birbirine dokunmayan iş kollarına bölünür ve her biri ayrı bir uygulayıcı ajana verilir (ayrı çalışma kopyasında). Koordinatör (Claude Code) sonuçları birleştirir, testleri ve derlemeyi çalıştırır.
+- Her iş kolunun çıktısı Onay Ajanı kapısından geçer; ONAY alan ve testleri yeşil olan iş yayınlanır.
+- Sıra sorusu (önce görünen işler mi, müfredat mı) paralel çalışmayla ortadan kalktı. İlk tur: (A) el motoru, (B) rakip eli sızıntısı ve 70 pot odds spotunun yeniden üretimi, (D) müfredat o1–o2 içeriği, (E) Öğren yol haritası ve ders ekranı. İkinci tur: (C) alıştırma ekranı ve koç penceresi (A ve B'ye dayanır), animasyonlar, kalan üniteler, ana sayfa, kutlama.
