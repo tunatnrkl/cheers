@@ -111,20 +111,11 @@ export function PokerTable({ hand, r }: { hand: Hand; r: Replay }) {
 
             <div className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 sm:gap-2" style={{ left: `${x}%`, top: `${y}%` }}>
               <div className="relative flex flex-col items-center">
-                {!hero && !out && hand.villain?.pos === pos ? (
-                  <div className="absolute -top-8 z-20 flex gap-0.5 sm:-top-11" aria-label={`${pos} kartları`}>
-                    {splitCards(hand.villain.cards).map((c) => (
-                      <PlayingCard key={c} card={c} size="xs" />
-                    ))}
+                {!hero && !out && (
+                  <div className="absolute -top-4 flex -space-x-2 sm:-top-6">
+                    <CardBack className="-rotate-6" />
+                    <CardBack className="rotate-6" />
                   </div>
-                ) : (
-                  !hero &&
-                  !out && (
-                    <div className="absolute -top-4 flex -space-x-2 sm:-top-6">
-                      <CardBack className="-rotate-6" />
-                      <CardBack className="rotate-6" />
-                    </div>
-                  )
                 )}
                 <div
                   className={`relative z-10 flex min-w-[58px] flex-col items-center rounded-xl border px-1.5 py-0.5 text-center sm:min-w-[84px] sm:px-2 sm:py-1.5 ${
