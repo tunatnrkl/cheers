@@ -70,18 +70,17 @@ describe("örnek müfredat", () => {
       const el = spotEl(a)!;
       expect(el, a.kimlik).toBeTruthy();
       expect(replay(el).errors, a.kimlik).toEqual([]);
-      expect(el.villain).toBeUndefined();
+      expect(JSON.stringify(el)).not.toContain("villain");
       expect(el.options.length).toBeGreaterThanOrEqual(2);
     }
   });
 
-  it("rakip eli açık olan mevcut bir spot bağlansa bile villain düşer", () => {
-    const acik = HANDS.find((h) => h.villain);
-    if (!acik) return;
-    const el = spotEl({ kimlik: "x", tip: "spot", zorluk: 1, soru: "?", secenekler: acik.options, dogru: 0, neden: "n", yanilgi: "y", dogrulamaGerekli: false, spotKimlik: acik.id })!;
-    expect(el.villain).toBeUndefined();
-    expect(JSON.stringify(el)).not.toContain(acik.villain!.cards);
-    expect(acik.villain).toBeTruthy(); // kaynak veri değişmedi
+  it("bağlanan spotun kopyasında rakip kartı ya da durum notu taşınmaz", () => {
+    // villain alanı veriden kaldırıldı (kapı B); pot odds spotları notta yalnızca aralık anlatır.
+    const odds = HANDS.find((h) => h.id.startsWith("o-"))!;
+    const el = spotEl({ kimlik: "x", tip: "spot", zorluk: 1, soru: "?", secenekler: odds.options, dogru: 0, neden: "n", yanilgi: "y", dogrulamaGerekli: false, spotKimlik: odds.id })!;
+    expect(JSON.stringify(el)).not.toContain("villain");
+    expect(replay(el).errors).toEqual([]);
   });
 });
 

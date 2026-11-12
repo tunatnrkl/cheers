@@ -116,7 +116,7 @@ const sokak = (board: string): Hand["street"] => (board.length >= 10 ? "river" :
 /**
  * Spot alıştırmasını masa bileşeninin beklediği ele çevirir.
  * `spotKimlik` mevcut bir spota bağlanır; `spot` yeni tanımdır.
- * Rakibin eli hiçbir koşulda taşınmaz (değişmez 7): `villain` alanı düşürülür.
+ * Rakibin eli hiçbir koşulda taşınmaz (değişmez 7); spot verisinde rakip kartı alanı yoktur (kapı B).
  */
 export function spotEl(a: Alistirma): Hand | null {
   if (a.tip !== "spot") return null;
@@ -125,7 +125,6 @@ export function spotEl(a: Alistirma): Hand | null {
     const h = HAND_BY_ID.get(a.spotKimlik);
     if (!h) return null;
     const kopya: Hand = { ...h, options: secenekler.length ? secenekler : h.options };
-    delete kopya.villain;
     return kopya;
   }
   const s = a.spot;
