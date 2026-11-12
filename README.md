@@ -1,6 +1,6 @@
 # Cheers
 
-Türkçe bir Texas Hold'em alıştırma masası: 583 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük, blog ve kısa tekrar quiz'leri. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 643 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük, blog ve kısa tekrar quiz'leri. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -161,7 +161,7 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**583 spot:**
+**643 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
@@ -170,8 +170,9 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
 | All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
 | Turn all-in, rakip kartları açık | 70 | Kalan 44 river kartı tek tek sayılır; tahmin yok |
+| River value bet ya da check (BTN, BB check etti) | 60 | BB'nin her kombinasyonu tek tek sayılır (aralık ve call kuralı `note`'ta). Bahsin check'e göre farkı geniş (çift ve üstü call) ve sıkı (üst çift, overpair ve üstü call) senaryoda aynı işaretli ve kombinasyon başına en az 0,07 × bahis olmalı; değilse spot alınmaz |
 
-`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay) yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda, blog yazılarında ve quiz'lerde testle denetlenir. Seçeneklerdeki "1/3 pot bahis (≈1,8 BB)" gibi tutarlar pot ile karşılaştırılır. Quiz'lerdeki fiyat, blöf başabaşı, out, SPR, ICM ve equity sayıları `src/data/quizzes.test.ts` ile yeniden hesaplanır.
+`npm test` her spotu doğrular: aksiyon sırası kurallara uygun, sıra kahramanda, pot verisi hesaplananla aynı, kartlar geçerli ve tekrarsız. Ayrıca pot odds spotlarının cevabı kart sayımıyla, açılış/push spotlarının cevabı referans aralıkla, all-in'e karşı call spotlarının cevabı bağımsız bir Monte Carlo ölçümüyle (en az 3 puan pay), river value spotlarının cevabı bağımsız bir kombinasyon sayımıyla yeniden kontrol edilir. Görünen metinlerde ondalık ayırıcı virgüldür ve yüzdeye gelen ekler (`%54'üyle`, `%12'sinde`, `%27,3'lük`) bütün spotlarda, blog yazılarında ve quiz'lerde testle denetlenir. Seçeneklerdeki "1/3 pot bahis (≈1,8 BB)" gibi tutarlar pot ile karşılaştırılır. Quiz'lerdeki fiyat, blöf başabaşı, out, SPR, ICM ve equity sayıları `src/data/quizzes.test.ts` ile yeniden hesaplanır.
 
 Üretilen spotlar `npm run ranges` ile yeniden oluşturulur (sabit tohum, tekrarlanabilir).
 
@@ -199,7 +200,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (583 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (643 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |

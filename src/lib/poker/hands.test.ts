@@ -633,3 +633,61 @@ describe("seçeneklerdeki pot kesri tutarları", () => {
     expect(bad).toEqual([]);
   });
 });
+
+// 13. çalışma: river value spotları (v-). Üreteçten bağımsız yeniden hesap: BB'nin her
+// kombinasyonu için bahsin check'e göre farkı (call: B(2s−1), fold: P(1−s)). Geniş (çift ve
+// üstü call) ve sıkı (üst çift, overpair ve üstü call) senaryoda işaret cevapla aynı olmalı,
+// fark kombinasyon başına en az 0,07 × bahis.
+describe("river value spotları", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("v-"));
+  const R = "23456789TJQKA";
+  const bbLabels = (ranges.cash as Record<string, string[]>).BTN.filter((l) => !["AA", "KK", "QQ", "AKs", "AKo"].includes(l));
+  const combos: [number, number][] = [];
+  for (const l of bbLabels) {
+    const a = R.indexOf(l[0]);
+    const b = R.indexOf(l[1]);
+    for (let s1 = 0; s1 < 4; s1++)
+      for (let s2 = 0; s2 < 4; s2++) {
+        if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+        combos.push([a * 4 + s1, b * 4 + s2]);
+      }
+  }
+  const cat = (v: number) => Math.floor(v / 16 ** 5);
+
+  it("en az 50 spot, cevaplar iki tarafa dağılmış", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+  });
+
+  it("karar iki call senaryosunda da kombinasyon sayımıyla aynı", () => {
+    for (const h of list) {
+      const r = replay(h);
+      expect(r.pot, h.id).toBeCloseTo(5.5, 5);
+      expect(r.toCall, h.id).toBe(0);
+      expect(h.options[1]).toContain("1,8 BB");
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const board = h.board!.match(/.{2}/g)!.map(cardFromString);
+      expect(cat(evaluate7(board)), h.id).toBe(0);
+      const hv = evaluate7([...hero, ...board]);
+      expect(cat(hv), h.id).toBeGreaterThanOrEqual(1);
+      const top = Math.max(...board.map((c) => c >> 2));
+      for (const strict of [false, true]) {
+        let d = 0;
+        let n = 0;
+        for (const [a, b] of combos) {
+          if ([...hero, ...board].includes(a) || [...hero, ...board].includes(b)) continue;
+          n++;
+          const v = evaluate7([a, b, ...board]);
+          const s = hv > v ? 1 : hv === v ? 0.5 : 0;
+          const pairRank = Math.floor(v / 16 ** 4) % 16;
+          const calls = strict ? cat(v) >= 2 || (cat(v) === 1 && pairRank >= top) : cat(v) >= 1;
+          d += calls ? 1.8 * (2 * s - 1) : 5.5 * (1 - s);
+        }
+        const per = d / n / 1.8;
+        expect(per > 0, `${h.id} ${strict ? "sıkı" : "geniş"}`).toBe(h.correct === 1);
+        expect(Math.abs(per), h.id).toBeGreaterThanOrEqual(0.07);
+      }
+    }
+  });
+});

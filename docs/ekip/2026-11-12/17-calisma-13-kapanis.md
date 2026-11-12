@@ -1,6 +1,6 @@
 # 13. çalışma: pot odds quiz'i, c19 düzeltmesi (Q-6), quiz'lerin Pages ve açık tema QA'sı
 
-**Tarih:** 2026-11-12 · **Dal:** `claude/wizardly-meitner-56jps3` (12. çalışmanın dalı `iawfi2` üzerine kuruldu)
+**Tarih:** 2026-11-12 (ek: kullanıcı talimatıyla 60 value spotu) · **Dal:** `claude/wizardly-meitner-56jps3` (12. çalışmanın dalı `iawfi2` üzerine kuruldu)
 
 ## Başlangıç durumu
 
@@ -85,6 +85,24 @@ Bulunmayan: Pages `basePath` altında kırık bağlantı, kontrast hatası.
 | Quiz QA eksikleri | basePath ve kontrast | ✅ (gerçek ekran okuyucu ve yayındaki site denenmedi; kontrastta ikon/kenarlık ölçülmedi) |
 
 Poker iddiaları yeniden okundu. Soru 2 ve 7'deki niteliksel ifadeler ("as gelince bazı ellere karşı öne geçmen", "sık pes eden rakip set tuttuğunda daha az ödeme yapar") ilk taslakta daha kesindi; yumuşatıldı. Implied odds için hiçbir yerde kesin sayı verilmedi. Out sayıları "temiz" varsayımına dayanıyor; bu varsayım sayfada yazılı.
+
+## Ek: kullanıcı talimatı — en az spotlu konuya 50+ alıştırma
+
+Kullanıcı 13. çalışmanın sonunda kalıcı bir talimat verdi: her çalışmada en az spotu olan konuya en az 50 alıştırma eklenecek. Talimat `HAFIZA.md`'nin başına yazıldı.
+
+**Ölçüm (başlangıç):** `value` 3, `3bet` 5, `cbet` 5, `blof` 5, `savunma` 6, `spr` 6, `icm` 12, `odds` 75, `acilis` 122, `callshove` 122, `pushfold` 222. En az spotlu konu `value`.
+
+**Çıktı:** 60 river value spotu (`v-<kahraman>-<board>`), 30 "bahis", 30 "check".
+
+- **Senaryo:** BTN 2,5 BB açtı, BB call etti; flop ve turn check-check; river'da BB check etti. Pot 5,5 BB, seçenekler Check / Bahis 1,8 BB.
+- **Varsayımlar (`note`'ta tek cümle):** BB'nin aralığı sitedeki buton açılış aralığı eksi AA, KK, QQ, AK (3-bet ederdi), önceki check'lerle daralmamış; bahse çift ve üstüyle call eder, çiftsiz ellerle fold eder; check-raise yok. Bu aralıklar solver çıktısı değildir.
+- **Karar:** BB'nin her kombinasyonu tek tek sayılır. Bahsin check'e göre farkı: call eden elde B(2s − 1), fold eden elde P(1 − s). Board tek başına çiftsiz, kahramanın kendi kartıyla en az bir çifti var (fold eden çiftsiz eller kahramana kaybeder).
+- **Sağlamlık:** Sıkı senaryoda (yalnızca üst çift, overpair ve üstü call) cevap aynı olmalı; iki senaryoda da fark kombinasyon başına en az 0,07 × bahis; sıkı senaryoda en az 20 call eden kombinasyon. Gerekçe iki senaryonun showdown payını da yazıyor.
+- **Tekrarlanabilirlik:** üreteçte 5. bölüm, kendi tohumu (20261113). `npm run ranges` sonrası önceki 518 üretilmiş spot bayt bayt aynı.
+
+**QA:** `hands.test.ts`'te üreteçten bağımsız yeniden hesap (aynı formül, ayrı kod): en az 50 spot, iki tarafta en az 15'er, her spotta pot 5,5, iki senaryoda işaret ve pay. Bir spotun cevabı ters çevrildiğinde test başarısız oldu (`v-Ac8h-2c5h4s8sQs geniş`). Tarayıcı (`next start`, 390/1366 px): `?el=v-KhQh-6h2cJh3h9c` açılıyor, not görünüyor, "Bahis" → "Doğru hamle"; "Value bet (63)" filtresi; taşma 0, konsol hatası 0. `npm test` **750/750**, typecheck ve build temiz.
+
+**Sınırlar (doğrulanamadı):** BB'nin gerçek river call davranışı yalnızca el kategorisine bağlı değildir; check-raise ve önceki sokaklardaki aralık daralması modellenmedi; tek bahis boyutu. Check spotlarının bir kısmı (ör. düşük çift) kolay; zorluk dağılımı ayrıca ayarlanmadı.
 
 ## Kullanıcı kararı gerekenler
 
