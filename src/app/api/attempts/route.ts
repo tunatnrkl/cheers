@@ -7,13 +7,14 @@ import { fail, readJson, sameOrigin } from "@/lib/server/http";
 
 const ATTEMPTS_LIMIT = 5000;
 
-// GET /api/attempts → kullanıcının alıştırma cevapları (yeniden eskiye, en fazla ATTEMPTS_LIMIT)
-// ve tüm cevapların toplamı. Liste kesildiğinde istemci toplamı ayrıca gösterebilir (G-1).
+// GET /api/attempts → kullanıcının alıştırma cevapları (yeniden eskiye, en fazla ATTEMPTS_LIMIT),
+// tüm cevapların toplamı ve konu bazında toplamlar. Toplamlar listeden bağımsızdır: liste
+// kesildiğinde de doğrudur (G-1, G-2). Tam döküm için /api/attempts/export.
 export async function GET() {
   const user = await currentUser();
   if (!user) return fail(401, "Giriş yapman gerekiyor.");
   const pool = db()!;
-  const [list, sum] = await Promise.all([
+  const [list, sum, topics] = await Promise.all([
     pool.query(
       `SELECT hand_id AS "handId", chosen, correct, topic, created_at AS at
          FROM attempts WHERE user_id = $1 ORDER BY created_at DESC LIMIT ${ATTEMPTS_LIMIT}`,
@@ -24,9 +25,14 @@ export async function GET() {
          FROM attempts WHERE user_id = $1`,
       [user.id],
     ),
+    pool.query(
+      `SELECT topic, count(*)::int AS total, count(*) FILTER (WHERE correct)::int AS ok
+         FROM attempts WHERE user_id = $1 GROUP BY topic`,
+      [user.id],
+    ),
   ]);
   return NextResponse.json(
-    { attempts: list.rows, totals: sum.rows[0] },
+    { attempts: list.rows, totals: { ...sum.rows[0], byTopic: topics.rows } },
     { headers: { "Cache-Control": "no-store" } },
   );
 }

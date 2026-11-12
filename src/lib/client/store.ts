@@ -9,6 +9,8 @@ import { STATIC_SITE } from "./env";
 
 export type Attempt = { handId: string; chosen: number; correct: boolean; topic: Topic; at: string };
 export type Saved = { handId: string; note: string; at: string };
+export type TopicCount = { topic: Topic; total: number; ok: number };
+export type Totals = { total: number; ok: number; byTopic?: TopicCount[] };
 export type User = { id: string; email: string; displayName: string | null };
 
 type State = {
@@ -17,9 +19,9 @@ type State = {
   accounts: boolean; // sunucuda hesap sistemi (veritabanı) açık mı
   google: boolean;
   attempts: Attempt[];
-  // Sunucudaki tüm cevapların toplamı. `attempts` listesi 5000'de kesilir; toplam kesilmez (G-1).
-  // Misafirde null: liste tarayıcıdakinin tamamıdır.
-  totals: { total: number; ok: number } | null;
+  // Sunucudaki tüm cevapların toplamı ve konu bazında toplamlar. `attempts` listesi 5000'de
+  // kesilir; toplamlar kesilmez (G-1, G-2). Misafirde null: liste tarayıcıdakinin tamamıdır.
+  totals: Totals | null;
   saved: Saved[];
 };
 
@@ -68,7 +70,7 @@ export async function refresh(): Promise<void> {
   if (me.user) {
     try {
       const [a, s] = await Promise.all([
-        api<{ attempts: Attempt[]; totals?: { total: number; ok: number } }>("/api/attempts"),
+        api<{ attempts: Attempt[]; totals?: Totals }>("/api/attempts"),
         api<{ saved: Saved[] }>("/api/saved"),
       ]);
       set({ ...me, ready: true, attempts: a.attempts, totals: a.totals ?? null, saved: s.saved });
@@ -104,7 +106,7 @@ export async function addAttempt(handId: string, chosen: number): Promise<void> 
   };
   const attempts = [item, ...state.attempts];
   const t = state.totals;
-  set({ attempts, totals: t && { total: t.total + 1, ok: t.ok + (item.correct ? 1 : 0) } });
+  set({ attempts, totals: t && addToTotals(t, item) });
   if (state.user) {
     await api("/api/attempts", { method: "POST", body: JSON.stringify({ items: [{ handId, chosen }] }) }).catch(() => {});
   } else {
@@ -170,6 +172,26 @@ export function clearLocal(): void {
 // ───────────── İstatistik ─────────────
 export type TopicStat = { topic: Topic; ok: number; total: number; rate: number };
 
+/** Yeni bir cevabı sunucu toplamlarına ekler (sayfa yenilenmeden tablo güncel kalsın). */
+export function addToTotals(t: Totals, a: { topic: Topic; correct: boolean }): Totals {
+  const ok = a.correct ? 1 : 0;
+  let byTopic = t.byTopic;
+  if (byTopic) {
+    byTopic = byTopic.some((c) => c.topic === a.topic)
+      ? byTopic.map((c) => (c.topic === a.topic ? { ...c, total: c.total + 1, ok: c.ok + ok } : c))
+      : [...byTopic, { topic: a.topic, total: 1, ok }];
+  }
+  return { total: t.total + 1, ok: t.ok + ok, byTopic };
+}
+
+/** Konu toplamlarından tablo: en zayıf konu başta. */
+export function statsFromCounts(counts: TopicCount[]): TopicStat[] {
+  return counts
+    .filter((c) => c.total > 0)
+    .map((c) => ({ ...c, rate: c.ok / c.total }))
+    .sort((a, b) => a.rate - b.rate || b.total - a.total);
+}
+
 export function topicStats(attempts: { topic: Topic; correct: boolean }[]): TopicStat[] {
   const map = new Map<Topic, { ok: number; total: number }>();
   for (const a of attempts) {
@@ -178,9 +200,21 @@ export function topicStats(attempts: { topic: Topic; correct: boolean }[]): Topi
     if (a.correct) t.ok++;
     map.set(a.topic, t);
   }
-  return [...map]
-    .map(([topic, v]) => ({ topic, ...v, rate: v.ok / v.total }))
-    .sort((a, b) => a.rate - b.rate || b.total - a.total);
+  return statsFromCounts([...map].map(([topic, v]) => ({ topic, ...v })));
+}
+
+/** Üyenin bütün cevapları, sayfa sayfa (G-2). Misafirde tarayıcıdaki liste zaten tamamıdır. */
+export async function fetchAllAttempts(): Promise<Attempt[]> {
+  if (!state.user) return state.attempts;
+  const all: Attempt[] = [];
+  let after = "0";
+  for (let i = 0; i < 1000; i++) {
+    const page = await api<{ attempts: Attempt[]; next: string | null }>(`/api/attempts/export?after=${after}`);
+    all.push(...page.attempts);
+    if (!page.next) return all;
+    after = page.next;
+  }
+  throw new Error("Dışa aktarma çok uzun sürdü. Yeniden dener misin?");
 }
 
 /** Zayıf konu: en az 2 soru çözülmüş ve doğruluk %60'ın altında. */

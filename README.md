@@ -50,7 +50,8 @@ src/
       ai/chat/                POST  — asistan (akışlı düz metin)
       auth/{register,login,logout,me}/   e-posta ile hesap
       auth/google/ (+callback)           Google ile giriş
-      attempts/               GET/POST — alıştırma cevapları (GET: son 5000 + toplam)
+      attempts/               GET/POST — alıştırma cevapları (GET: son 5000 + toplam + konu toplamları)
+        export/               GET — bütün cevaplar, id'ye göre 5000'lik sayfalar (?after=<id>)
       saved/                  GET/PUT/DELETE — kayıtlı eller ve notlar
       hands/ (+[id])          GET — el kütüphanesi
   components/                 PokerTable, ActionStrip, CoachChat, AiPanel, Cards, Nav, ...
@@ -219,7 +220,7 @@ Alıştırma modu, yapay zeka ile alıştırma analizi, kullanıcı hesabı (e-p
 
 ### Bilinen sınırlar
 
-- Üyenin cevap listesi son 5000 kayıtla sınırlıdır; "Çözülen soru" ve "Doğruluk" sunucu toplamından gelir, Gelişim kartı kesintiyi belirtir. Konu tablosu ve CSV/JSON dışa aktarma henüz son 5000 kayıtla sınırlıdır.
+- Üyenin cevap listesi son 5000 kayıtla sınırlıdır; "Çözülen soru", "Doğruluk" ve konu tablosu sunucu toplamlarından gelir, Gelişim kartı kesintiyi belirtir. CSV/JSON dışa aktarma bütün cevapları `/api/attempts/export` üzerinden sayfa sayfa indirir. Misafirde tarayıcı en fazla son 2000 cevabı saklar.
 - Asistan gerçek Claude API'ye karşı denenmedi (geliştirme ortamında anahtar yoktu); akış, önbellek ve hata yolları API'nin akış biçimini taklit eden yerel bir sunucuyla test edildi. Yanıt kalitesi ve sistem talimatı gerçek anahtarla gözden geçirilmeli.
 - Google ile giriş kodu yazıldı ancak gerçek Google kimlik bilgileriyle denenmedi.
 - Sayfa yükleme süresi gerçek mobil ağda ölçülmedi. İçerik sayfaları statik üretilir, harici font ya da görsel yoktur.

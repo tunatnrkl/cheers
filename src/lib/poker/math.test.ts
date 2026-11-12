@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { icm, outsProbability, requiredEquity, spr, bluffBreakEven } from "./math";
+import { icm, outsProbability, parseNumberList, requiredEquity, spr, bluffBreakEven } from "./math";
 import { cardFromString, evaluate7 } from "./evaluator";
 import { matrixLabel, rangePercent } from "./cards";
 
@@ -41,6 +41,37 @@ describe("icm", () => {
     expect(r.reduce((a, b) => a + b, 0)).toBeCloseTo(100);
     expect(r[0]).toBeLessThan(60);
     expect(r[2]).toBeGreaterThan(20);
+  });
+  it("elle hesaplanan değerlerle aynı (Malmuth-Harville)", () => {
+    // 3000/1000, 70/30: 0,75·70 + 0,25·30 = 60
+    const hu = icm([3000, 1000], [70, 30]);
+    expect(hu[0]).toBeCloseTo(60);
+    expect(hu[1]).toBeCloseTo(40);
+    // 5000/3000/2000, 50/30/20: P(1.)=0,5; P(2.)=0,3·5/7+0,2·5/8; P(3.)=kalan → 38,39
+    const r = icm([5000, 3000, 2000], [50, 30, 20]);
+    const p2 = 0.3 * (5 / 7) + 0.2 * (5 / 8);
+    expect(r[0]).toBeCloseTo(0.5 * 50 + p2 * 30 + (1 - 0.5 - p2) * 20, 6);
+    expect(r[0]).toBeCloseTo(38.39, 2);
+  });
+  it("sıfır stack'li oyuncu ödül almaz, diğerlerinin değeri onsuz hesapla aynı", () => {
+    const withZero = icm([5000, 0, 3000, 2000], [50, 30, 20]);
+    const without = icm([5000, 3000, 2000], [50, 30, 20]);
+    expect(withZero[1]).toBe(0);
+    expect([withZero[0], withZero[2], withZero[3]].map((v) => v.toFixed(9))).toEqual(without.map((v) => v.toFixed(9)));
+  });
+});
+
+describe("parseNumberList (hesap makinesi girdisi)", () => {
+  it("virgül, boşluk ve noktalı virgülle ayırır", () => {
+    expect(parseNumberList("5000, 3000;1500  500")).toEqual({ values: [5000, 3000, 1500, 500], ignored: 0 });
+  });
+  it("Türkçe binlik ayırıcıyı binlik okur, ondalığı korur", () => {
+    expect(parseNumberList("1.500, 12.000, 1.250.000").values).toEqual([1500, 12000, 1250000]);
+    expect(parseNumberList("12.5 7.25 0.125").values).toEqual([12.5, 7.25, 0.125]);
+  });
+  it("sıfır, negatif ve okunamayan değerleri sayar, sessizce atmaz", () => {
+    expect(parseNumberList("5000, 0, -20, abc, 3000")).toEqual({ values: [5000, 3000], ignored: 3 });
+    expect(parseNumberList("")).toEqual({ values: [], ignored: 0 });
   });
 });
 

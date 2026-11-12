@@ -1,27 +1,41 @@
-# Proje hafızası — Poker Defteri AI ekibi
+# Proje hafızası — Cheers AI ekibi
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-11, 8. çalışma**
+Son güncelleme: **2026-11-12, 9. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dallar birleştirilmeli (hâlâ açık, 8. çalışmada da hatırlatıldı).** Varsayılan dal `claude/charming-davinci-emhvz1` hâlâ `2b7d6b5`'te. Her çalışma oradan başlıyor. Zincir: `wcrqqc` (4) → `vrsaxz` (5) → `9evl2r` (6) → `p01f35` (7) → **`claude/wizardly-meitner-obr3cs` (8, en güncel dal)**. Her dal bir öncekinin bütün commit'lerini içeriyor; yalnızca en günceli birleştirmek yeterli. `05x26x` yan dalını **birleştirme** (P-2).
-   - **P-3 (8):** `ch8abk` dalının son commit'i `ab8a72b` siteyi **"Cheers"** olarak yeniden markalıyor (logo, renk, font). Bu zincirde yok. İsteniyorsa kullanıcı karar vermeli; uygulama yolu `git cherry-pick ab8a72b` (CSS/layout çakışması beklenir). Ekip markayı kendi başına değiştirmez. Bir sonraki çalışma, dalı yoksa önce `git branch -r` ile en yeni `HAFIZA.md`'yi taşıyan dalı bulmalı (`git log -1 <dal>`) ve kendi dalını onun üzerine kurmalı (`git checkout -B <kendi dalı> origin/<en yeni dal>`).
-2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (8. çalışmada hâlâ yer tutucuydu). Öneri: `HAFIZA.md` (depo kökü).
+1. **9. çalışmanın dalı `claude/wizardly-meitner-hou5l2` varsayılan dala alınmalı** (PR açılmadı; görev metni istemiyor). P-1 ve P-3 kapandı: kullanıcı 8. çalışma zincirini (PR #1) ve "Cheers" markasını (PR #2) varsayılan dala (`claude/charming-davinci-emhvz1`, `8ffc135`) aldı.
+   - Bir sonraki çalışma: kendi dalı varsayılan daldan geride ise önce `git fetch origin` ve `git branch -r` ile `HAFIZA.md`'nin en yeni sürümünü taşıyan dalı bulsun (`git log -1 <dal> -- HAFIZA.md`) ve kendi dalını onun üzerine kursun (`git checkout -B <kendi dalı> origin/<en yeni dal>`).
+2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (9. çalışmada hâlâ yer tutucuydu). Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
+5. **B-1** ürün kararı: karışık stratejili spotlar için `acceptable` alanı (c39 bekliyor).
 
 ## Mevcut durum
 
-- Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
+- Marka **Cheers** (logo `CheersMark`, Fraunces/Manrope). Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
 - 577 spot (59 elle yazılmış + 518 üretilmiş; `callshove` 122), 138 sözlük terimi, 8 blog yazısı.
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
-- Sağlık (8. çalışma): `npm test` **629/629**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- Profilde konu tablosu ve çalışma önerisi üyede sunucu toplamlarından (`totals.byTopic`); CSV/JSON dışa aktarma üyede bütün cevapları `GET /api/attempts/export` ile sayfa sayfa indiriyor (9). Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
+- ICM hesap makinesi Türkçe binlik yazımı ("1.500") okuyor, atlanan değerleri söylüyor (9).
+- Sağlık (9. çalışma): `npm test` **640/640**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 9. çalışma — rapor: [`docs/ekip/2026-11-12/01-calisma-9-kapanis.md`](docs/ekip/2026-11-12/01-calisma-9-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| G-2: `totals.byTopic` (SQL `GROUP BY`), konu tablosu + çalışma önerisi sunucu toplamından | Backend, Frontend | ✅ |
+| G-2: `GET /api/attempts/export?after=<id>` (5000'lik sayfa, yalnızca kendi satırları), profilde tam CSV/JSON, yükleniyor/hata durumu, `(user_id, id)` dizini | Backend, Frontend | ✅ |
+| G-2 QA: PostgreSQL + Playwright 390/1366; 12.075 cevapla SQL ile birebir; 401/400 ve kullanıcı yalıtımı; tam 5000 sınırı | QA | ✅ (E-3 hatası bulundu, düzeltildi) |
+| I-1/I-2: ICM girdisi (`parseNumberList`), atlanan değer notları; el hesabıyla doğrulama (38,39) | Poker Uzmanı, Frontend, QA | ✅ |
+| "Blind savunması" filtresi tarayıcıda (açık iş 6) | QA | ✅ (6 el tek tek sayılmadı) |
+| 9 yeni test (`math.test.ts`, yeni `store.test.ts`) | QA | ✅ |
 
 ### 8. çalışma — rapor: [`docs/ekip/2026-11-11/12-calisma-8-kapanis.md`](docs/ekip/2026-11-11/12-calisma-8-kapanis.md)
 
@@ -30,7 +44,7 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 | t13: SB resteal aralığı `note`'ta (22+, A2s+, A8o+, KTs+, KQo, QJs); 88 ≈ %55, dar aralıkta ≈ %48, gereken %39,3; test | Poker Uzmanı, QA | ✅ |
 | t23 (T-1): `ante: 1`, pot 13,9, all-in 24,8; CO ikinci bahis aralığı `note`'ta; river kesin sayımıyla KT ≈ %56, gereken %22,3; test | Poker Uzmanı, QA | ✅ |
 | Gelişim kartı üye yolu: kayıt → cevap → `/profil`, Playwright 390/1366 px, SQL ile çapraz kontrol | QA | ✅ |
-| G-1: `GET /api/attempts` `totals` döndürüyor; profil toplamı ondan; Gelişim kartında kesinti notu; 6075 kayıtla denendi | Backend, Frontend, QA | ⚠️ Kısmen (G-2 açık) |
+| G-1: `GET /api/attempts` `totals` döndürüyor; profil toplamı ondan; Gelişim kartında kesinti notu; 6075 kayıtla denendi | Backend, Frontend, QA | ✅ (kalan kısım G-2 olarak 9. çalışmada kapandı) |
 
 ### 7. çalışma — rapor: [`docs/ekip/2026-11-11/11-calisma-7-kapanis.md`](docs/ekip/2026-11-11/11-calisma-7-kapanis.md)
 
@@ -89,13 +103,14 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 
 ## Devam eden / açık işler
 
-1. **G-2:** konu tablosu, çalışma önerisi ve CSV/JSON dışa aktarma hâlâ son 5000 cevapla sınırlı ve bunu söylemiyor. Dışa aktarma için sayfalı uç nokta önerildi (KVKK veri taşınabilirliği).
+1. ~~G-2~~ kapandı (9).
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
 4. **CS-3:** ICM'li call/fold varyantı için 8 ellik karşılaştırma seti hazır (04 raporu); henüz spot yok.
 5. "Bu bölümü yorumla" yanıtının içeriği gerçek API anahtarıyla denenmedi.
-6. Alıştırma masasında "Blind savunması" filtresinin 6 el gösterdiği tarayıcıda denenmedi.
-8. ICM hesap makinesinde elenmiş (stack 0) oyuncunun gösterimi kontrol edilmedi.
+6. ~~"Blind savunması" filtresi~~ tarayıcıda denendi (9).
+7. ~~ICM stack 0~~ kapandı (9, I-1/I-2).
+8. Hesap makinelerinin geri kalanı (pot odds, outs, SPR) aynı ayrıştırma sorununu taşıyor mu kontrol edilmedi (I-1'in kardeşi olabilir).
 
 ## Alınan teknik ve ürün kararları
 
@@ -108,6 +123,9 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 - Pot odds gerekçeleri tek sokak üzerinden; iki kartlık oran yalnızca all-in ya da iki sokak garantiliyse.
 - **Ödül döngüsü mekanikleri yok:** seri, rozet, liderlik tablosu, günlük hedef zinciri. Ara kartındaki iki seçenek eşit görsel ağırlıkta.
 - Oturum ritmi verisi yalnızca tarayıcıda (`localStorage["pd:rhythm"]`); sunucuya kişisel veri gitmez.
+- **G-2 kararı (9):** toplamlar (genel ve konu bazında) sunucuda SQL ile; liste ve Gelişim kartı istemcide. Dışa aktarma id'ye göre keyset sayfalama (5000), `ORDER BY attempts.id` (tablo adıyla; bkz. E-3). İmleç yalnızca kullanıcının kendi satırlarında anlamlı.
+- **Hesap makinesi girdisi (9):** `parseNumberList`; "1.500" binlik, "12.5"/"0.125" ondalık; atlanan değer kullanıcıya söylenir, sessizce düşülmez. ICM'de elenmiş oyuncu girdiden çıkar, kalanlar ilk N ödül için yarışır.
+- Dışa aktarma dosya adı `cheers-<tarih>.csv/json` (9).
 - **G-1 kararı (8):** istatistikler istemcide kalır; sunucu yalnızca toplamı (`count`) verir, liste kesildiğinde arayüz bunu söyler. Kullanıcıların kayda değer kısmı 5000'i aşarsa sunucu özeti yeniden değerlendirilir.
 - **İstatistik kuralları (7):** yeni veri toplanmaz, hesap istemcide; `MIN_SAMPLE = 10` altında oran yok; pencereler kayan 7 gün (takvim haftası, günlük ısı haritası yok); tek nötr renk, "düştün/yükseldin" vurgusu yok; ilk görüş ve tekrar ayrı gösterilir.
 - Ondalık ayırıcı: görünen metinde virgül (6. çalışmada uygulandı, testli). Veri alanlarında (`seq`, `potBB`, `stackBB`) nokta.
@@ -138,12 +156,15 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 | T-2 | t13 "yarı yarıya": resteal aralığı yazılmamış | Düşük | Düzeltildi (8) |
 | UX-1 | Ara kartı masaüstünde masanın yerini alıyor, koç kısayolu yok | Düşük | Düzeltildi (6), tarayıcıda doğrulandı |
 | B-1 | Karışık stratejili spotlarda tek doğru cevap | Bilgi | Ürün kararı bekliyor |
-| P-1 | Çalışma dalları varsayılan dala alınmıyor (8 çalışma) | Orta | Açık — kullanıcı aksiyonu gerekiyor |
+| P-1 | Çalışma dalları varsayılan dala alınmıyor | Orta | Kapandı: PR #1 ve #2 birleştirildi (9. çalışmanın dalı bekliyor) |
 | P-2 | `05x26x`, `ch8abk` yan dalları ana zincirle çakışıyor | Bilgi | Birleştirilmemeli |
 | G-1 | `GET /api/attempts` 5000 kayıt sınırı: profil toplamı yanlış, "ilk görüş" eski kayıtları göremez | Düşük | Kısmen (8): toplam sunucudan, kesinti notu var |
-| G-2 | Konu tablosu ve CSV/JSON dışa aktarma son 5000 cevapla sınırlı, söylemiyor | Düşük | Açık |
+| G-2 | Konu tablosu ve CSV/JSON dışa aktarma son 5000 cevapla sınırlı, söylemiyor | Düşük | Düzeltildi (9) |
 | G-3 | `POST /api/attempts` istemcinin `at` zamanını kabul ediyor (yalnızca kendi istatistiğini etkiler) | Bilgi | Bilinçli; sıralama özelliği eklenmeyeceği için risk yok |
-| P-3 | "Cheers" yeniden markalaması (`ch8abk`/`ab8a72b`) ana zincirde yok | Bilgi | Kullanıcı kararı |
+| P-3 | "Cheers" yeniden markalaması ana zincirde yok | Bilgi | Kapandı: kullanıcı PR #2 ile aldı |
+| E-3 | Dışa aktarma `ORDER BY id` metin takma adına bağlandı, satırlar tekrarlandı (12.075 yerine 17.637) | Yüksek (yayın öncesi) | Düzeltildi (9), yayına çıkmadan QA'da |
+| I-1 | ICM girdisinde "1.500" → 1,5; "1,500" → iki oyuncu | Orta | Düzeltildi (9), testli |
+| I-2 | ICM'de 0/negatif stack sessizce atılıyor | Düşük | Düzeltildi (9) |
 
 ## Doğrulanamayan konular
 
@@ -155,6 +176,7 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 - CS-1'deki dar/geniş senaryo oranları (%60, %150) keyfi; gerçek oyuncu sapmasını temsil ettiği doğrulanamadı.
 - Set mining "15–20 kat" kuralının kaynağı.
 - Dunlosky ve ark. 2013 ile Kluger–DeNisi 1996 atıfları (10 numaralı spesifikasyon) hafızadan; kaynak açılıp doğrulanmadı.
+- ICM değerleri Malmuth-Harville modeline dayanır; gerçek bitiş olasılıklarını, beceri farkını ve gelecek blind'ları içermez (hesap makinesi "beklenen pay" diyor).
 - Davranış önerilerindeki süreler (20–30 dk bölüm, 25 dk ara, günde 60–90 dk) genel öğrenme literatüründen; poker eğitimine özgü kanıt yok.
 
 ## Atlanan roller
@@ -163,16 +185,16 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 - **Davranış Bilimleri** (2–6): yeni mekanik önerilmedi. 7'de gelişim kartı için çalıştı.
 - **Backend** (2–6): sunucu değişikliği gerekmedi. 7'de değerlendirdi: yeni uç nokta gerekmiyor.
 - **Poker Eğitim, Content** (7, 8): B-1 kararı gelmeden yeni içerik eklenmedi.
-- **UI/UX, Davranış Bilimleri** (8): yeni ekran ya da mekanik yok; Gelişim kartına yalnızca bilgi notu eklendi.
+- **UI/UX, Davranış Bilimleri** (8, 9): yeni ekran ya da mekanik yok.
+- **Poker Eğitim, Content** (9): B-1 bekliyor; gerçek içerik açığı yok.
 
 ## Sonraki öncelikler
 
-1. **Dal durumu kontrolü (P-1, P-3).** `claude/wizardly-meitner-obr3cs` ana dala alınmadıysa bu daldan devam et (`git checkout -B <kendi dalı> origin/claude/wizardly-meitner-obr3cs`). Kullanıcı "Cheers" markasını seçtiyse önce onu uygula.
-2. **G-2:** sayfalı tam dışa aktarma uç noktası (`GET /api/attempts/export`, yalnızca oturumdaki kullanıcı) ve konu tablosuna kesinti notu. Backend + Frontend + QA.
-3. **ICM hesap makinesinde stack 0** (açık iş 8) ve "Blind savunması" filtresinin tarayıcı kontrolü (açık iş 6): küçük QA işleri.
-4. B-1 ürün kararı gelirse `acceptable` alanı + c39. CS-3 ICM varyantı bunlardan sonra.
+1. **Diğer hesap makineleri (açık iş 8):** pot odds, outs, SPR girdileri "1.500" ve "2,5" gibi Türkçe yazımı doğru okuyor mu; okumuyorsa `parseNumberList`'e benzer bir tek sayı ayrıştırıcısı. Poker Uzmanı + QA.
+2. **B-1 kararı gelirse** `acceptable` alanı + c39; gelmezse **CS-3** (ICM'li call/fold varyantı, 04 raporundaki 8 ellik set). Poker Uzmanı + Poker Eğitim + QA.
+3. Kullanıcı yayın ortamı sağlarsa "Bu bölümü yorumla" ve asistanın gerçek API anahtarıyla denenmesi (açık iş 5).
 
-**Yerel PostgreSQL ile deneme (8'de çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb pokerdefteri`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. İş bitince `.env.local` silinmeli.
+**Yerel PostgreSQL ile deneme (8 ve 9'da çalıştı):** `initdb -A trust` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor; dizini `chown postgres`), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb pokerdefteri`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. İş bitince `.env.local` silinmeli. Playwright: `NODE_PATH=$(npm root -g)` ve `createRequire(import.meta.url)("playwright")`.
 
 ## Agent sorumlulukları
 

@@ -61,3 +61,19 @@ export function icm(stacks: number[], payouts: number[]): number[] {
   walk(stacks.map((_, i) => i), 0, 1);
   return result;
 }
+
+/**
+ * Hesap makinesi girdisini sayılara çevirir: boşluk, virgül ya da noktalı virgülle ayrılır.
+ * Türkçe binlik ayırıcı ("1.500", "12.000") binlik olarak okunur; "12.5" gibi ondalıklar korunur.
+ * Sıfır, negatif ya da okunamayan değerler `ignored` olarak sayılır (sessizce kaybolmasın).
+ */
+export function parseNumberList(input: string): { values: number[]; ignored: number } {
+  const values: number[] = [];
+  let ignored = 0;
+  for (const tok of input.split(/[\s;,]+/).filter(Boolean)) {
+    const n = Number(/^[1-9]\d{0,2}(\.\d{3})+$/.test(tok) ? tok.replace(/\./g, "") : tok);
+    if (Number.isFinite(n) && n > 0) values.push(n);
+    else ignored++;
+  }
+  return { values, ignored };
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { bluffBreakEven, icm, outsProbability, potOddsRatio, requiredEquity, spr } from "@/lib/poker/math";
+import { bluffBreakEven, icm, outsProbability, parseNumberList, potOddsRatio, requiredEquity, spr } from "@/lib/poker/math";
 
 const pct = (x: number) => `%${(x * 100).toFixed(1).replace(".", ",")}`;
 const num = (s: string) => {
@@ -146,9 +146,17 @@ function Spr() {
 function Icm() {
   const [stacks, setStacks] = useState("5000, 3000, 1500, 500");
   const [payouts, setPayouts] = useState("50, 30, 20");
-  const parse = (s: string) => s.split(/[\s;,]+/).map(Number).filter((n) => Number.isFinite(n) && n > 0);
-  const st = parse(stacks).slice(0, 9);
-  const pay = parse(payouts).slice(0, 9);
+  // Sıfır stack (elenmiş oyuncu) hesaba girmez; sessizce kaybolmasın diye aşağıda söylenir.
+  const ps = parseNumberList(stacks);
+  const pp = parseNumberList(payouts);
+  const st = ps.values.slice(0, 9);
+  const pay = pp.values.slice(0, 9);
+  const notes = [
+    ps.ignored && `${ps.ignored} stack değeri (0, negatif ya da okunamayan) hesaba katılmadı. Elenmiş oyuncuyu yazma; kalan oyuncular kalan ödüller için yarışır.`,
+    ps.values.length > 9 && "En fazla 9 stack hesaplanır; fazlası atlandı.",
+    pp.ignored && `${pp.ignored} ödül değeri (0, negatif ya da okunamayan) hesaba katılmadı.`,
+    pay.length > st.length && st.length >= 2 && `${st.length} oyuncu için yalnızca ilk ${st.length} ödül kullanıldı.`,
+  ].filter((n): n is string => typeof n === "string");
   const valid = st.length >= 2 && pay.length >= 1;
   const res = valid ? icm(st, pay) : [];
   const totalChips = st.reduce((a, b) => a + b, 0);
@@ -160,6 +168,11 @@ function Icm() {
         <Field label="Stack'ler (virgülle ayır, en fazla 9 oyuncu)" value={stacks} onChange={setStacks} />
         <Field label="Ödüller (1.'den başlayarak)" value={payouts} onChange={setPayouts} hint="Yüzde ya da tutar; birimi sen seçersin" />
       </div>
+      {notes.length > 0 && (
+        <ul className="mt-3 space-y-1 text-sm text-muted" aria-live="polite">
+          {notes.map((n) => <li key={n}>{n}</li>)}
+        </ul>
+      )}
       {valid ? (
         <div aria-live="polite">
           <div className="mt-4 overflow-x-auto">
@@ -177,7 +190,7 @@ function Icm() {
                 {st.map((s, i) => (
                   <tr key={i} className="border-b border-line">
                     <td className="py-2">{i + 1}. oyuncu</td>
-                    <td className="py-2 text-right">{s}</td>
+                    <td className="py-2 text-right">{s.toLocaleString("tr-TR")}</td>
                     <td className="py-2 text-right">{pct(s / totalChips)}</td>
                     <td className="py-2 text-right font-semibold">{res[i].toFixed(2).replace(".", ",")}</td>
                     <td className="py-2 text-right">{pct(res[i] / totalPay)}</td>

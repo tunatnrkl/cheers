@@ -7,8 +7,10 @@ import { HAND_BY_ID, TOPICS } from "@/data/hands";
 import {
   clearLocal,
   deleteAccount,
+  fetchAllAttempts,
   signIn,
   signOut,
+  statsFromCounts,
   topicStats,
   unsaveHand,
   useProgress,
@@ -45,7 +47,7 @@ function exportData(format: "csv" | "json", attempts: Attempt[], saved: Saved[])
   const day = new Date().toISOString().slice(0, 10);
 
   if (format === "json") {
-    download(`poker-defteri-${day}.json`, "application/json", JSON.stringify({ alistirmalar: rows, kaydedilenEller: notes }, null, 2));
+    download(`cheers-${day}.json`, "application/json", JSON.stringify({ alistirmalar: rows, kaydedilenEller: notes }, null, 2));
     return;
   }
   const lines = [
@@ -54,7 +56,7 @@ function exportData(format: "csv" | "json", attempts: Attempt[], saved: Saved[])
     ...notes.map((n) => ["kayitli-el", n.tarih, n.el, "", "", "", "", n.not].map(csvCell).join(",")),
   ];
   // BOM: Excel Türkçe karakterleri doğru göstersin
-  download(`poker-defteri-${day}.csv`, "text/csv;charset=utf-8", "﻿" + lines.join("\n"));
+  download(`cheers-${day}.csv`, "text/csv;charset=utf-8", "﻿" + lines.join("\n"));
 }
 
 function AuthCard({ google }: { google: boolean }) {
@@ -156,14 +158,30 @@ export function Profile() {
   const p = useProgress();
   const params = useSearchParams();
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [exporting, setExporting] = useState<"csv" | "json" | null>(null);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   if (!p.ready) return <p className="card text-muted">Yükleniyor…</p>;
 
   // Üyede toplamlar sunucudan gelir; liste 5000 cevapta kesildiği için listeden sayılmaz (G-1).
   const total = p.totals?.total ?? p.attempts.length;
   const ok = p.totals?.ok ?? p.attempts.filter((a) => a.correct).length;
-  const stats = topicStats(p.attempts);
+  // Konu tablosu da üyede sunucu toplamlarından: 5000 sınırından etkilenmez (G-2).
+  const stats = p.totals?.byTopic ? statsFromCounts(p.totals.byTopic) : topicStats(p.attempts);
   const weak = weakTopics(stats);
+
+  // Üyede bütün cevaplar sayfa sayfa indirilir; listedeki son 5000 ile yetinilmez (G-2).
+  async function runExport(format: "csv" | "json") {
+    setExporting(format);
+    setExportError(null);
+    try {
+      exportData(format, await fetchAllAttempts(), p.saved);
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : "Dışa aktarma tamamlanamadı. Yeniden dener misin?");
+    } finally {
+      setExporting(null);
+    }
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -242,11 +260,21 @@ export function Profile() {
 
           <section className="card" aria-label="Veri">
             <h2 className="h2">Verilerin</h2>
-            <p className="mt-1 text-sm text-muted">Alıştırma cevaplarını, kayıtlı ellerini ve notlarını indirebilirsin.</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button type="button" className="btn" onClick={() => exportData("csv", p.attempts, p.saved)}>CSV indir</button>
-              <button type="button" className="btn" onClick={() => exportData("json", p.attempts, p.saved)}>JSON indir</button>
+            <p className="mt-1 text-sm text-muted">
+              {p.user
+                ? "Hesabındaki bütün alıştırma cevaplarını, kayıtlı ellerini ve notlarını indirebilirsin."
+                : "Bu cihazda saklanan alıştırma cevaplarını (en fazla son 2.000), kayıtlı ellerini ve notlarını indirebilirsin."}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2" aria-busy={exporting !== null}>
+              {(["csv", "json"] as const).map((f) => (
+                <button key={f} type="button" className="btn" disabled={exporting !== null} onClick={() => void runExport(f)}>
+                  {exporting === f ? "Hazırlanıyor…" : `${f.toUpperCase()} indir`}
+                </button>
+              ))}
             </div>
+            {exportError && (
+              <p className="mt-2 rounded-xl bg-danger-soft px-3 py-2 text-sm text-danger" role="alert">{exportError}</p>
+            )}
 
             <div className="mt-4 border-t border-line pt-4">
               {p.user ? (
