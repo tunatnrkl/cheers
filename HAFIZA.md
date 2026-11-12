@@ -1,4 +1,6 @@
-# Proje hafızası — Poker Defteri AI ekibi
+# Proje hafızası — Cheers AI ekibi
+
+> **Geçici kural (2026-11-12'den itibaren, yeniden tasarım bitince kalkar).** Site "Cheers" olarak baştan kuruluyor (alıştırma motoru, Öğren yolu, tasarım). Bu süre boyunca zamanlanmış ekip çalışmaları **yalnızca `docs/` altına yazar**, `src/`, `scripts/` ve `.github/` dosyalarına dokunmaz; kod gerektiren bulgularını rapora yazıp devreder. Gerekçe: paralel commit'ler 2026-11-11'de 9 dosyada çakışma üretti. Kararlar ve aşama onayları: [`docs/ekip/KARARLAR.md`](docs/ekip/KARARLAR.md), [`docs/ekip/ONAY-AJANI.md`](docs/ekip/ONAY-AJANI.md).
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
@@ -107,6 +109,7 @@ Son güncelleme: **2026-11-11, 8. çalışma**
 - ICM spotlarında ödül yapısı `note`'ta yazılır ve "varsayım" olarak belirtilir; kaybedenin garanti ödülü hesaba katılır.
 - Pot odds gerekçeleri tek sokak üzerinden; iki kartlık oran yalnızca all-in ya da iki sokak garantiliyse.
 - **Ödül döngüsü mekanikleri yok:** seri, rozet, liderlik tablosu, günlük hedef zinciri. Ara kartındaki iki seçenek eşit görsel ağırlıkta.
+  - **Güncelleme (2026-11-12, ürün sahibinin brifi; KARARLAR.md karar 4):** Öğren bölümünde XP, günlük seri ve seviye; alıştırmada 5 ve 10'luk doğru seride kısa "Şerefe!" kutlaması eklenecek. Sınırlar: XP sabit; rastgele ödül, sandık, çarpan, can/kalp, rozet, liderlik tablosu, bildirim ve geri sayım yok; seri kopunca nötr dil; ara kartı ve eşit ağırlıklı iki seçenek korunur. Eski gerekçe (`docs/ekip/2026-11-11/03-oturum-ritmi-spec.md`) bu sınırların dayanağıdır.
 - Oturum ritmi verisi yalnızca tarayıcıda (`localStorage["pd:rhythm"]`); sunucuya kişisel veri gitmez.
 - **G-1 kararı (8):** istatistikler istemcide kalır; sunucu yalnızca toplamı (`count`) verir, liste kesildiğinde arayüz bunu söyler. Kullanıcıların kayda değer kısmı 5000'i aşarsa sunucu özeti yeniden değerlendirilir.
 - **İstatistik kuralları (7):** yeni veri toplanmaz, hesap istemcide; `MIN_SAMPLE = 10` altında oran yok; pencereler kayan 7 gün (takvim haftası, günlük ısı haritası yok); tek nötr renk, "düştün/yükseldin" vurgusu yok; ilk görüş ve tekrar ayrı gösterilir.
