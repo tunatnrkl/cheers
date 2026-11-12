@@ -1,6 +1,6 @@
 # Cheers
 
-Türkçe bir Texas Hold'em alıştırma masası: 580 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
+Türkçe bir Texas Hold'em alıştırma masası: 583 spot, masanın yanında kısa cevap veren yapay zeka koçu, range matrisi, hesap makineleri, sözlük ve blog. Site bir strateji çalışma aracıdır; gerçek parayla oyun oynatmaz, bahis önermez. 18 yaş ve üzeri içindir.
 
 - **Ön yüz:** Next.js 16 (App Router) + React 19 + Tailwind CSS 4
 - **Arka yüz:** Node.js — Next.js route handler'ları ile REST API
@@ -94,7 +94,7 @@ Kullanıcıya bağlı tüm tablolar `ON DELETE CASCADE` ile bağlıdır; hesap s
 | `/araclar` | Pot odds ve gerekli equity, outs'tan yüzde, efektif stack ve SPR, ICM; her birinde "Ne anlama geliyor?" notu |
 | `/cash`, `/turnuva` | Konu anlatımı (stack derinliği, rake, blind yapısı, push/fold, ICM, bubble, final masası) ve ilgili el/araç bağlantıları |
 | `/sozluk` | 138 terim, kategorili ve aranabilir; sitedeki terimler buraya bağlanır |
-| `/blog`, `/blog/[slug]` | 8 özgün yazı |
+| `/blog`, `/blog/[slug]` | 9 özgün yazı |
 | `/gizlilik`, `/sorumlu-oyun` | KVKK aydınlatma metni şablonu; sorumlu oyun ilkeleri ve destek hattı |
 
 ## 3. Yapay zeka entegrasyonu
@@ -159,11 +159,11 @@ Her spot aksiyonlarıyla birlikte yapılandırılmış olarak tutulur. `src/lib/
 
 Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b3.7` bet, `a` all-in; `F`/`T`/`R` flop/turn/river kartları. Preflop'ta sırası geçen ve dizide olmayan oyuncu fold etmiş sayılır. İsteğe bağlı alanlar: `note` (rakip tipi, turnuva durumu), `stacks`, `ante`, `players`, `villain` (kartları açık rakip).
 
-**580 spot:**
+**583 spot:**
 
 | Tür | Sayı | Doğru cevap nasıl belirlenir |
 |---|---|---|
-| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 62 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı. Bubble call/fold spotlarında (`ib01`–`ib03`) eşik, ödül yapısı varsayımıyla ICM'den hesaplanır ve testte yeniden ölçülür |
+| Elle yazılmış spotlar (preflop + postflop, cash + turnuva, ICM) | 65 | Elle yazıldı. Sınırda kalan, tartışmalı bir el çıkarıldı. Bubble call/fold (`ib01`–`ib03`) ve SB push/fold (`ip01`–`ip03`) spotlarında eşik, ödül yapısı varsayımıyla ICM'den hesaplanır ve testte yeniden ölçülür |
 | Cash açılış (herkes fold etti) | 115 | Referans açılış aralığı. Aralık sınırına yakın eller ve pozisyona göre sık açılan suited eller dışarıda |
 | Turnuva push/fold (6, 10, 15 BB) | 211 | Temkinli push aralıkları. Fold cevabı yalnızca açıkça zayıf ellerde |
 | All-in'e karşı call (BB) | 122 | Monte Carlo ile elin, rakibin belirtilen aralığına karşı equity'si. Seçilen her el ayrı bir üreteçle 20.000 denemeyle yeniden ölçülür; gerekli equity'ye 3,5 puandan yakın olanlar dışarıda. Rakip daha sıkı (%60) ya da daha geniş (%150) oynadığında cevap değişiyorsa gerekçe bunu açıkça yazar |
@@ -197,7 +197,7 @@ Dizi biçimi: `f` fold, `x` check, `c` call, `l` limp, `r2.5` raise (toplam), `b
 |---|---|---|
 | 1 | Proje iskeleti: Next.js, Tailwind, tema değişkenleri, karanlık/aydınlık | ✅ |
 | 2 | Navigasyon: mobilde alt menü, masaüstünde üst menü; ana sayfa | ✅ |
-| 3 | Veri modeli ve 50+ el (580 spot, hepsi testli) | ✅ |
+| 3 | Veri modeli ve 50+ el (583 spot, hepsi testli) | ✅ |
 | 4 | Alıştırma masası (kütüphanenin yerini aldı) | ✅ |
 | 5 | Sözlük: 100+ terim (138), arama, terim bağlayıcı | ✅ |
 | 6 | Poker matematiği ve testleri; pot odds, outs, SPR hesap makineleri | ✅ |

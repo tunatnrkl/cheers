@@ -2,12 +2,12 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-11, 10. çalışma**
+Son güncelleme: **2026-11-12, 11. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dal akışı:** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9. çalışma (`g2abma`) birleştirilmedi; 10. çalışma onun üzerine kuruldu: **`claude/wizardly-meitner-syhmqe` (en güncel dal, 9 ve 10'u içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
-2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (9'da hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
+1. **Dal akışı:** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9 (`g2abma`) ve 10 (`syhmqe`) birleştirilmedi; 11. çalışma onların üzerine kuruldu: **`claude/wizardly-meitner-h0lmvh` (en güncel dal, 9, 10 ve 11'i içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
+2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (11'de hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
 5. **B-1 ürün kararı** (`acceptable` alanı): poker içerik işlerinin (c39, sınırda spotlar) tek engeli.
@@ -16,16 +16,25 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- 580 spot (62 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 9), 138 sözlük terimi, 8 blog yazısı.
+- 583 spot (65 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 12), 138 sözlük terimi, 9 blog yazısı.
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
 - Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (10. çalışma): `npm test` **654/654**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- Sağlık (11. çalışma): `npm test` **660/660**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
 - Profil (9): konu tablosu ve çalışma önerisi üyede sunucunun konu toplamlarından; CSV/JSON dökümü `GET /api/attempts/export` ile bütün kayıtlar (12.345 kayıtla PostgreSQL'de doğrulandı). Yalnızca Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
 - ICM hesap makinesi (10): `5.000` binlik, `%50` yüzde okunuyor; atılan ve 9'u aşan girişler arayüzde söyleniyor (`icmInput.ts`, testli).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 11. çalışma — rapor: [`docs/ekip/2026-11-12/15-calisma-11-kapanis.md`](docs/ekip/2026-11-12/15-calisma-11-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| CS-3 push tarafı: betik `docs/ekip/arac/icm-push.mts` (push EV, BB'nin ICM'e göre call aralığı, chip senaryosu); 3 SB push/fold spotu `ip01` (8 BB K6o, all-in), `ip02` (12 BB KJo, 4 BB'lik stack varken fold), `ip03` (chip lideri T9s, all-in); 3 regresyon testi | Poker Uzmanı, QA | ✅ |
+| Blog: `bubble-push-fold-icm` (9. yazı), call ve push tarafını birleştiriyor | Content | ✅ |
+| 5 soruluk push/fold quiz'i (raporda) | Poker Eğitim | ✅ (sitede yayında değil) |
+| Tarayıcı: 3 spot, "ICM ve bubble (12)" filtresi, yazı; 390/1366 px, taşma ve konsol hatası yok | QA | ✅ |
 
 ### 10. çalışma — rapor: [`docs/ekip/2026-11-11/14-calisma-10-kapanis.md`](docs/ekip/2026-11-11/14-calisma-10-kapanis.md)
 
@@ -113,7 +122,7 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 
 1. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 2. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
-3. **CS-3 devamı (10):** call tarafı 3 spotla yapıldı. Bubble'da **itme** (push) tarafı ve final masası ödül sıçramaları için ICM'li spot yok. 6 soruluk quiz yalnızca raporda.
+3. **CS-3 devamı:** call (10) ve SB push (11) tarafı 3'er spotla yapıldı. Final masası ödül sıçramaları için ICM'li spot yok; push tarafında yalnızca SB → BB (iki oyunculu karar) modellendi, arkasında birden fazla oyuncu olan push (ör. CO/BTN'den) yok. 6 + 5 soruluk quiz'ler yalnızca raporlarda (quiz bileşeni yok).
 4. "Bu bölümü yorumla" yanıtının içeriği gerçek API anahtarıyla denenmedi.
 5. **G-4 (9):** Gelişim kartı son 5000 cevapla hesaplanıyor (G-1 kararı gereği, not gösteriliyor). Gerçek kullanım verisi gelmeden değiştirilmeyecek.
 
@@ -131,6 +140,7 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 - **G-2 kararı (9):** tam döküm `GET /api/attempts/export?before=<id>`; sayfa 5000, `id` azalan (`at` istemciden gelebildiği için tarih sıralaması istemcide). `user_id` yalnızca oturumdan. İmleç 1–18 hane. İstemci `collectPages` imleç ilerlemezse ya da 200 sayfa aşılırsa hata verir; yarım dosya indirilmez. Konu tablosu sunucu `GROUP BY topic` toplamından.
 - **Uç nokta değişikliğinde gerçek PostgreSQL denemesi zorunlu (9):** E-1 birim testle yakalanamazdı. SQL'de çıktı takma adıyla aynı adlı sütunu sıralarken tablo adı yazılır.
 - **ICM spotlarında (10):** eşik = (Fold − Kayıp) / (Kazanç − Kayıp), ödül havuzu yüzdesiyle; stack'ler `replay`'den, ante ölü para; rakibin all-in'i kahramanın stack'inden büyük olmamalı (iade modellenmiyor, test bunu denetliyor). Cevap ICM eşiğine 3,5 puandan uzak olmalı; gerekçedeki duyarlılık iddiaları testte ayrıca ölçülür. Her ICM paketinde en az bir "ICM'e rağmen call" spotu olur ("bubble'da her şey fold" genellemesine karşı).
+- **ICM push spotlarında (11):** push EV = (1 − c) × Ç + c × [eq × K + (1 − eq) × L]; c kesin kombinasyon sayımı (kahramanın kartları çıkarılır). BB'nin call aralığı, SB'nin referans push aralığına karşı BB'nin **kendi ICM eşiğini** geçen ellerden türetilir ve `note`'ta açıkça yazılır; ayrıca BB'nin ICM'i yok sayıp **chip eşiğiyle** call ettiği daha geniş senaryo ölçülür. İki senaryoda cevap aynı değilse spot eklenmez. Push spotu yalnızca "Fold / All-in" seçenekli; küçük raise modellenmediyse notta yazılır.
 - **Yeni elle yazılmış spot kimlikleri (10):** `admiring-babbage-*` dalları `t27`–`t30` kullandığı için yeni spotlar konu önekli kimlik alır (`ib01`…). Sayısal `t`/`c` sırası bu dallar çözülene kadar kullanılmaz.
 - **`localStorage` anahtarları (`pd-cevaplar`, `pd-kayitli`, `pd:rhythm`) marka değişse de değiştirilmez:** değiştirmek misafir ilerlemesini siler.
 - **G-1 kararı (8):** istatistikler istemcide kalır; sunucu yalnızca toplamı (`count`) verir, liste kesildiğinde arayüz bunu söyler. Kullanıcıların kayda değer kısmı 5000'i aşarsa sunucu özeti yeniden değerlendirilir.
@@ -175,6 +185,7 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 | I-2 | ICM hesap makinesi `5.000`'i 5 okuyordu | Orta | Düzeltildi (10), testli |
 | I-3 | ICM ödül alanında `%50` atılıyordu | Orta | Düzeltildi (10), testli |
 | I-4 | ICM'de 9 üstü giriş ve ödüllerdeki geçersiz giriş sessizce atılıyordu | Düşük | Düzeltildi (10) |
+| Q-3 | ip01 gerekçe taslağı "ICM baskısı BB'yi sıkıştırır" diyordu; BB'nin ICM eşiği chip eşiğinden yalnızca 3 puan yüksek | Düşük | Yayından önce düzeltildi (11), testli |
 | P-3 | "Cheers" yeniden markalaması (`ch8abk`/`ab8a72b`) ana zincirde yok | Bilgi | Kapandı (9): kullanıcı birleştirdi |
 
 ## Doğrulanamayan konular
@@ -183,6 +194,7 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 - Solver karşılaştırması yapılamadı (c09, c23, c24, c25, c34, c35, c39'daki karışık strateji yorumları; postflop range avantajı iddiaları).
 - t07, t09 ödül yapısı yok.
 - `ib01`–`ib03` (10): ödül yapısı (%50/%30/%20) ve rakip aralıkları varsayım; bubble'da gerçek oyuncuların referans aralıkla itip itmediği ve sonuçların bağımsız bir ICM aracıyla aynı çıkıp çıkmadığı doğrulanamadı. Gelecek el oyunu (future game simulation) hesaba katılmadı; yalnızca tek el ICM.
+- `ip01`–`ip03` (11): ödül yapısı ve BB'nin call aralıkları varsayım. Gerçek oyuncuların ICM'e göre call edip etmediği bilinmiyor (bu yüzden chip senaryosu da ölçüldü). Tek el ICM, FGS yok; bağımsız ICM aracı ya da solver ile karşılaştırılmadı. `ip03`'ün geniş senaryodaki farkı yaklaşık 4,5 puan.
 - t13 ve t23'teki rakip aralıkları (8) ekip tahmini; gerçek oyuncu havuzunu temsil ettiği doğrulanamadı. t23'te implied odds ve river oyunu hesaba katılmadı.
 - Push aralıklarının Nash tablolarına yakınlığı bilinmiyor.
 - CS-1'deki dar/geniş senaryo oranları (%60, %150) keyfi; gerçek oyuncu sapmasını temsil ettiği doğrulanamadı.
@@ -192,19 +204,21 @@ Son güncelleme: **2026-11-11, 10. çalışma**
 
 ## Atlanan roller
 
-- **Data Analyst** (1–10): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
+- **Data Analyst** (1–11): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
 - **Davranış Bilimleri** (2–6): yeni mekanik önerilmedi. 7'de gelişim kartı için çalıştı.
 - **Backend** (2–6): sunucu değişikliği gerekmedi. 7'de değerlendirdi: yeni uç nokta gerekmiyor.
 - **Poker Eğitim, Content** (7, 8): B-1 kararı gelmeden yeni içerik eklenmedi.
 - **UI/UX, Davranış Bilimleri** (8, 9): yeni ekran ya da mekanik yok.
 - **Poker Uzmanı, Poker Eğitim, Content** (9): B-1 kararı gelmeden yeni içerik yok; açık poker doğruluk işi yok.
+- **Davranış Bilimleri, UI/UX, Frontend, Backend** (10, 11): yeni mekanik, ekran ya da uç nokta yok; yalnızca veri ve yazı eklendi.
 - **Davranış Bilimleri, UI/UX, Backend, Content** (10): yeni mekanik, ekran ya da sunucu değişikliği yok; blog yazısı ICM paketi tamamlanınca.
 
 ## Sonraki öncelikler
 
-1. **Dal kontrolü:** `syhmqe` ana dala alındı mı? Alınmadıysa onun üzerine kur.
-2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotların yeniden işaretlenmesi (Poker Uzmanı, Frontend, QA). Gelmediyse **CS-3 devamı:** bubble'da push tarafı (kısa stack itmeli mi, büyük stack'e karşı) 2–3 spot, aynı betikle (`icm-callfold.mts`'ye push modu eklenmeli: rakibin call aralığı ve fold equity gerekir) + ICM blog yazısı (Content) quiz'i de içerecek biçimde.
-3. **P-4 hazırlığı (kullanıcı isterse):** `admiring-babbage-*` dallarındaki spotların kimlik çakışması ve sayısal denetimi. İstenmeden birleştirme yapılmaz.
+1. **Dal kontrolü:** `h0lmvh` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
+2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar. Gelmediyse: **quiz bileşeni** (UI/UX → Frontend → QA). 02, 05, 10 ve 11. raporlarda toplam 4 quiz bekliyor; sitede gösterilecek yer yok. Davranış Bilimleri: puan/seri olmadan, yalnızca cevap + gerekçe; kanıt düzeyiyle (geri getirme pratiği).
+3. **CS-3 son adım (isteğe bağlı):** final masası ödül sıçraması için 2 ICM spotu (3 kişi kaldı, 2. ve 3. ödül farkı); `icm-callfold.mts` / `icm-push.mts` yeniden kullanılabilir.
+4. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
 
 **Yerel PostgreSQL ile deneme (8 ve 9'da çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb -h /tmp cheers`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. Sunucuyu yeniden başlatırken `pkill -f next-server` gerekir (`next start` alt süreci kalıyor; 9'da eski sürüm yanıt verdi). Toplu veri için `psql \copy`. İş bitince sunucu ve Postgres durdurulmalı, `.env.local` silinmeli.
 

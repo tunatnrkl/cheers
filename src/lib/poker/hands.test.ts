@@ -387,6 +387,94 @@ describe("elle yazılmış spotlardaki equity iddiaları", () => {
     // Gerekçedeki sınır: rakip yalnızca ~%17 ile (15 BB CO aralığı) itseydi fold
     expect(equityVsRange("Ah7h", push["15"].CO)).toBeLessThan(icmReq);
   });
+  // CS-3 devamı (11): SB'den push/fold. BB yalnızca call/fold; BB'nin call aralığı nottaki varsayım.
+  const RK = "23456789TJQKA";
+  const expand = (spec: string): string[] => {
+    const out: string[] = [];
+    for (const raw of spec.split(",").map((x) => x.trim())) {
+      const plus = raw.endsWith("+");
+      const t = plus ? raw.slice(0, -1) : raw;
+      if (t[0] === t[1]) {
+        for (let k = RK.indexOf(t[0]); k <= (plus ? 12 : RK.indexOf(t[0])); k++) out.push(RK[k] + RK[k]);
+        continue;
+      }
+      const kinds = t.length === 3 ? [t[2]] : ["s", "o"];
+      for (let k = RK.indexOf(t[1]); k <= (plus ? RK.indexOf(t[0]) - 1 : RK.indexOf(t[1])); k++)
+        for (const s of kinds) out.push(t[0] + RK[k] + s);
+    }
+    return out;
+  };
+  const icmPush = (id: string, callSpec: string) => {
+    const h = HANDS.find((x) => x.id === id)!;
+    const r = replay(h);
+    const seats = (h.players ?? []) as (keyof typeof r.seats)[];
+    const start = seats.map((s) => r.seats[s].start);
+    const me = seats.indexOf("SB");
+    const bb = seats.indexOf("BB");
+    const ante = h.ante ?? 0;
+    const risk = Math.min(start[me], start[bb]);
+    const mk = (dh: number, db: number) => start.map((x, i) => (i === me ? x + dh : i === bb ? x + db : x));
+    const P = [50, 30, 20];
+    const ev = (st: number[]) => icm(st, P)[me];
+    const F = ev(mk(-0.5, 0.5 + ante));
+    const Steal = ev(mk(1 + ante, -1));
+    const W = ev(mk(risk + ante, -risk));
+    const L = ev(mk(-risk, risk + ante));
+    const range = expand(callSpec);
+    const hc = h.hero.match(/.{2}/g)!;
+    const pc = range.flatMap(combos).filter((c) => !hc.includes(c.slice(0, 2)) && !hc.includes(c.slice(2))).length / 1225;
+    const eq = equityVsRange(h.hero, range, 60000);
+    const pushEV = (1 - pc) * Steal + pc * (eq * W + (1 - eq) * L);
+    const need = ((F - (1 - pc) * Steal) / pc - L) / (W - L);
+    const chipNeed = ((-0.5 - (1 - pc) * (1 + ante)) / pc + risk) / (2 * risk + ante);
+    // BB'nin kendi ICM eşiği (BB'nin bakış açısından)
+    const evB = (st: number[]) => icm(st, P)[bb];
+    const bbNeed = (evB(mk(1 + ante, -1)) - evB(mk(risk + ante, -risk))) / (evB(mk(-risk, risk + ante)) - evB(mk(risk + ante, -risk)));
+    return { h, F, pushEV, need, chipNeed, eq, pc, bbNeed };
+  };
+
+  it("ip01: 8 BB'lik SB, K6o ile bubble'da da all-in; BB geniş call etse de", () => {
+    const a = icmPush("ip01", "22+, A2+, K2s+, K6o+, Q8s+, Q9o+, J9s+, JTo, T9s");
+    expect(a.h.correct).toBe(1);
+    expect(a.pc).toBeGreaterThan(0.33);
+    expect(a.pc).toBeLessThan(0.37);
+    expect(a.eq - a.need).toBeGreaterThan(0.035);
+    expect(a.pushEV - a.F).toBeGreaterThan(0.8);
+    expect(a.F).toBeCloseTo(10.15, 1);
+    // Gerekçedeki iddia: BB'nin ICM eşiği (%44) chip eşiğinden (%41) yalnızca ~3 puan yüksek
+    expect(a.bbNeed).toBeGreaterThan(0.435);
+    expect(a.bbNeed).toBeLessThan(0.45);
+    const wide = icmPush("ip01", "22+, A2+, K2+, Q3s+, Q7o+, J7s+, J9o+, T8s+, 98s");
+    expect(wide.pc).toBeGreaterThan(0.41);
+    expect(wide.eq - wide.need).toBeGreaterThan(0.035);
+  });
+
+  it("ip02: 12 BB'lik SB, KJo chip hesabıyla push, 4 BB'lik stack varken ICM ile fold", () => {
+    const a = icmPush("ip02", "22+, A2+, K4s+, K6o+, Q8s+, QTo+, JTs");
+    expect(a.h.correct).toBe(0);
+    expect(a.eq).toBeGreaterThan(a.chipNeed + 0.035);
+    expect(a.need - a.eq).toBeGreaterThan(0.035);
+    expect(a.need).toBeGreaterThan(0.58);
+    expect(a.need).toBeLessThan(0.6);
+    expect(a.F).toBeCloseTo(20.6, 1);
+    const wide = icmPush("ip02", "22+, A2+, K2s+, K6o+, Q7s+, Q9o+, J9s+, JTo, T9s");
+    expect(wide.need - wide.eq).toBeGreaterThan(0.035);
+  });
+
+  it("ip03: chip lideri T9s ile all-in; BB'nin ICM eşiği ~%67, chip aralığıyla call etse de kârlı", () => {
+    const a = icmPush("ip03", "JJ+");
+    expect(a.h.correct).toBe(1);
+    expect(a.bbNeed).toBeGreaterThan(0.66);
+    expect(a.bbNeed).toBeLessThan(0.675);
+    // Nottaki iddia: referans SB 15 BB aralığına karşı JJ eşiği geçer, TT geçmez
+    expect(equityVsRange("JdJc", push["15"].SB)).toBeGreaterThan(a.bbNeed);
+    expect(equityVsRange("TdTc", push["15"].SB)).toBeLessThan(a.bbNeed);
+    expect(a.pushEV - a.F).toBeGreaterThan(0.7);
+    const wide = icmPush("ip03", "22+, A2+, K9s+, KTo+, QTs+");
+    expect(wide.pc).toBeGreaterThan(0.23);
+    expect(wide.pc).toBeLessThan(0.27);
+    expect(wide.eq).toBeGreaterThan(wide.need);
+  });
 });
 
 // Seçenek metnindeki all-in tutarı, replay'deki kahraman stack'iyle uyumlu olmalı

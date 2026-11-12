@@ -456,6 +456,34 @@ const CURATED: Hand[] = [
     reasoning: "ICM her zaman fold demek değildir. Chip hesabı yaklaşık %42 equity ister. Kaybetsen de 30 BB ile hâlâ en büyük stack'sin; ICM eşiği bu yüzden yalnızca yaklaşık %45'e çıkar. A7s bu aralığa karşı yaklaşık %52 taşır: kendi ICM hesabımızla call ödül havuzunun yaklaşık %37,1'ini, fold yaklaşık %36,3'ünü getirir. Kazanırsan bir oyuncu elenir ve bubble biter. Sınır: BTN yalnızca ellerin yaklaşık %17'siyle itseydi equity'n yaklaşık %43'e iner ve fold doğru olurdu. Bu varsayımlarla call.",
   },
 
+  // CS-3 devamı (11): bubble'da SB'den push/fold. BB'nin call aralığı, SB'nin referans push aralığına
+  // karşı ICM'e göre kârlı call ettiği eller. Sayılar: docs/ekip/arac/icm-push.mts,
+  // rapor docs/ekip/2026-11-12/15-calisma-11-kapanis.md
+  {
+    id: "ip01", title: "Bubble'da 8 BB ile SB'de K6 offsuit", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 8,
+    hero: "Kd6c", potBB: 2.5, seq: ["CO f", "BTN f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: CO 40, BTN 27, BB 25, sen 8 BB. Varsayım: BB şu ellerle call ediyor: 22+, A2+, K2s+, K6o+, Q8s+, Q9o+, J9s+, JTo, T9s (ellerin yaklaşık %35'i). Toplam ante 1 BB.",
+    ante: 1, stacks: {CO: 40, BTN: 27, BB: 25}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "All-in (8 BB)"], correct: 1, topic: "icm", level: 2,
+    reasoning: "Ortada 2,5 BB var, stack'inin üçte birine yakın. BB bu aralıkla yaklaşık her üç elden birinde call eder; kalan ikisinde pot çekişmeden senin olur. Görüldüğünde K6o yaklaşık %38 equity taşır. Kendi ICM hesabımızla all-in ödül havuzunun yaklaşık %11,2'sini, fold %10,2'sini getirir. Görüldüğün durumda all-in'in kârlı kalması için yaklaşık %24 equity yeter. BB, ICM'i yok sayıp ellerin yaklaşık %43'üyle call etse bile (K6o ≈ %42, gereken ≈ %32) cevap değişmez. Burada BB'nin ICM eşiği chip eşiğinden yalnızca yaklaşık 3 puan yüksek (%44 / %41); all-in'i kârlı yapan asıl şey, potun stack'ine göre büyüklüğü ve fold equity. Bubble, kısa stack için her eli fold etmek demek değildir. Hesap yalnızca bu eli kapsıyor. Bu varsayımlarla all-in.",
+  },
+  {
+    id: "ip02", title: "Bubble'da 12 BB ile KJ offsuit: masada 4 BB'lik stack var", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 12,
+    hero: "KdJc", potBB: 2.5, seq: ["CO f", "BTN f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: BB 50, BTN 34, sen 12, CO 4 BB. Varsayım: BB şu ellerle call ediyor: 22+, A2+, K4s+, K6o+, Q8s+, QTo+, JTs (ellerin yaklaşık %31'i). Toplam ante 1 BB. Bu soruda küçük raise seçeneği yok; yalnızca all-in ile fold karşılaştırılıyor.",
+    ante: 1, stacks: {CO: 4, BTN: 34, BB: 50}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "All-in (12 BB)"], correct: 0, topic: "icm", level: 3,
+    reasoning: "Chip hesabıyla bu rahat bir all-in olurdu: görüldüğünde yaklaşık %24 equity yeterdi, KJo bu aralığa karşı yaklaşık %47 taşır. Ama CO'nun yalnızca 4 BB'si var; o elenirse sen ödüle girersin. BB 50 BB ile seni kapsıyor, kaybedersen ödülsüz 4. olursun. Kendi ICM hesabımızla fold ödül havuzunun yaklaşık %20,6'sını, all-in %19,7'sini getirir. All-in'in kârlı olması için görüldüğünde yaklaşık %59 equity gerekir; KJo bunun 11 puan altında kalır. BB biraz daha geniş call etse de (ellerin yaklaşık %34'ü) sonuç değişmez. Masada senden çok daha kısa bir stack varken orta stack'in bekleyerek kazanacağı pay, 2,5 BB'lik potu çalmaktan büyüktür. Bu varsayımlarla fold.",
+  },
+  {
+    id: "ip03", title: "Bubble'da chip lideri SB'de T9 suited", game: "turnuva", street: "preflop", heroPos: "SB", stackBB: 45,
+    hero: "Th9h", potBB: 2.5, seq: ["CO f", "BTN f"],
+    note: "Sit & go bubble'ı: 4 oyuncu kaldı, ilk 3 ödül alıyor. Varsayım: ödüller %50 / %30 / %20. Stack'ler: sen 45, BB 20, CO 18, BTN 17 BB. Varsayım: BB, ICM'e göre yalnızca JJ+ ile call ediyor (SB'nin referans 15 BB push aralığına karşı kârlı call'lar). Toplam ante 1 BB.",
+    ante: 1, stacks: {CO: 18, BTN: 17, BB: 20}, players: ["CO", "BTN", "SB", "BB"],
+    options: ["Fold", "All-in (45 BB)"], correct: 1, topic: "icm", level: 3,
+    reasoning: "Bu kez baskıyı sen kuruyorsun. BB call edip kaybederse ödülsüz 4. olur; CO ve BTN de ona yakın stack'lerde. Kendi ICM hesabımızla BB'nin call için yaklaşık %67 equity'ye ihtiyacı var, bu da SB'nin referans push aralığına karşı yalnızca JJ+ ile mümkün. Pot neredeyse her seferinde çekişmeden senin: all-in ödül havuzunun yaklaşık %35,6'sını, fold %34,7'sini getirir. BB ICM'i yok sayıp ellerin yaklaşık %25'iyle call etse bile T9s yaklaşık %41 equity taşır, gereken yaklaşık %37'dir: all-in yine az farkla kârlı. Kaybetsen de 25 BB ile oyunda kalırsın. Bu varsayımlarla all-in.",
+  },
+
   // ───────────── TURNUVA · DİĞER ─────────────
   {
     id: "t14", title: "Turnuvanın başında 66", game: "turnuva", street: "preflop", heroPos: "BTN", stackBB: 150,
