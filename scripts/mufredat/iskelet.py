@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
-"""Müfredat iskeletini üretir: src/data/mufredat.json ve docs/mufredat/01-iskelet.md.
-Yalnızca pist / ünite / ders haritası, önkoşullar ve kazanımlar. Alıştırmalar ünite ünite
-doldurulur (durum: "iskelet" -> "dolu"); dolu dersleri bu betik EZMEZ."""
-import json, os, sys
+"""Müfredatı üretir: src/data/mufredat.json ve docs/mufredat/01-iskelet.md.
+
+Pist / ünite / ders haritası, önkoşullar ve kazanımlar bu dosyada tanımlıdır. Ders içerikleri
+(anlatım, terimler, alıştırmalar) ünite başına ayrı dosyada durur:
+scripts/mufredat/icerik/<unite>.json  ->  {"<ders kimliği>": {"anlatim": [...], "terimler": [...], "alistirmalar": [...]}}
+İçeriği olan ders "dolu" olur. Çıktı yalnızca bu iki kaynaktan üretilir (eski mufredat.json okunmaz);
+betik deterministiktir ve tekrar çalıştırılabilir.
+
+Kullanım: python3 scripts/mufredat/iskelet.py           # dosyaları yazar
+          python3 scripts/mufredat/iskelet.py --kontrol # yazmaz; çıktı güncel değilse 1 ile çıkar"""
+import glob, json, os, sys
 
 RENK = {"temel": "#F6EBD0", "preflop": "#E0A526", "matematik": "#5FB58A", "postflop": "#6FA8DC",
         "ileri": "#C58BD8", "turnuva": "#F0715A", "icm": "#E58A3C"}
@@ -204,13 +211,32 @@ USTALIK = {"ders": dict(son=10, oran=0.8), "kontrol": dict(son=12, oran=0.8), "t
 SURE = {"ders": 5, "kontrol": 6, "test": 10, "tekrar": 4}
 HEDEF = {"ders": 10, "kontrol": 12, "test": 20, "tekrar": 8}
 
-def build(eski):
-    dolu = {d["kimlik"]: d for u in eski.get("uniteler", []) for d in u["dersler"] if d.get("durum") == "dolu"}
+ICERIK_ALANLARI = ("anlatim", "terimler", "alistirmalar")
+
+def icerik_oku(klasor):
+    """icerik/*.json dosyalarını okur; ders kimliği -> içerik. Bilinmeyen alan ya da tekrar eden kimlik hatadır."""
+    icerik = {}
+    for yol in sorted(glob.glob(os.path.join(klasor, "*.json"))):
+        with open(yol, encoding="utf-8") as f:
+            veri = json.load(f)
+        unite = os.path.splitext(os.path.basename(yol))[0]
+        for kim, d in veri.items():
+            if not kim.startswith(unite + "-"):
+                raise SystemExit(f"{yol}: {kim} bu ünitenin dersi değil")
+            if kim in icerik:
+                raise SystemExit(f"{yol}: {kim} iki kez tanımlı")
+            fazla = set(d) - set(ICERIK_ALANLARI)
+            if fazla or "alistirmalar" not in d:
+                raise SystemExit(f"{yol}: {kim} alanları {sorted(ICERIK_ALANLARI)} olmalı (fazla: {sorted(fazla)})")
+            icerik[kim] = d
+    return icerik
+
+def build(icerik):
     uniteler = []
     for u in U:
         k = u["kid"]; dersler = []
         def ekle(d):
-            dersler.append(dolu.get(d["kimlik"], d))
+            dersler.append(d)
         onceki = None
         for i, (baslik, kazanim, ek) in enumerate(u["dersler"], 1):
             kim = f"{k}-d{i}"
@@ -238,7 +264,6 @@ def build(eski):
     for p in PIST.values():
         for a, b in zip(p["uniteler"], p["uniteler"][1:]):
             ilk = by[b]["dersler"][0]
-            if ilk.get("durum") == "dolu": continue
             # Ortak ünite iki pistte farklı öncüle sahipse, yalnızca ortak öncüller zorunlu tutulur.
             ilk.setdefault("_aday", []).append(f"{a}-k")
     for u in uniteler:
@@ -246,15 +271,26 @@ def build(eski):
         pistSayisi = sum(u["kimlik"] in p["uniteler"] for p in PIST.values())
         ortak = [a for a in dict.fromkeys(aday) if aday.count(a) == pistSayisi]
         ilk["onkosul"] = ortak + [o for o in ilk["onkosul"] if o not in ortak]
+    # İçerik birleştirme: içeriği olan ders "dolu" olur.
+    tum = {d["kimlik"]: d for u in uniteler for d in u["dersler"]}
+    for kim in sorted(icerik):
+        if kim not in tum:
+            raise SystemExit(f"içerik dosyasında bilinmeyen ders: {kim}")
+        d = tum[kim]
+        for alan in ICERIK_ALANLARI:
+            d[alan] = icerik[kim].get(alan, [])
+        d["durum"] = "dolu"
     return dict(surum=1, dil="tr",
                 varsayimlar=dict(cash="6-max, 100 BB, 2,5 BB açılış, rake yok sayılır.", turnuva="Aksi yazılmadıkça BB ante 1 BB; ICM yalnızca ICM ünitelerinde hesaba katılır."),
                 pistler=[dict(kimlik=k, **v) for k, v in PIST.items()], uniteler=uniteler)
 
 def rapor(m):
     by = {u["kimlik"]: u for u in m["uniteler"]}
-    L = ["# Müfredat iskeleti", "", "Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile birlikte üretilir; elle düzenlenmez.", ""]
+    L = ["# Müfredat iskeleti", "", "Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile birlikte üretilir; elle düzenlenmez. Ders içerikleri `scripts/mufredat/icerik/<unite>.json` dosyalarındadır.", ""]
     n_ders = sum(len(u["dersler"]) for u in m["uniteler"]); n_al = sum(d["hedefAlistirma"] for u in m["uniteler"] for d in u["dersler"])
-    L += [f"**Toplam:** {len(m['uniteler'])} ünite ({sum(1 for u in m['uniteler'] if u['kimlik'].startswith('o'))} ortak), {n_ders} ders, hedef {n_al} alıştırma.", ""]
+    dolu = [d for u in m["uniteler"] for d in u["dersler"] if d["durum"] == "dolu"]
+    L += [f"**Toplam:** {len(m['uniteler'])} ünite ({sum(1 for u in m['uniteler'] if u['kimlik'].startswith('o'))} ortak), {n_ders} ders, hedef {n_al} alıştırma.", "",
+          f"**Dolu:** {len(dolu)} ders, {sum(len(d['alistirmalar']) for d in dolu)} alıştırma.", ""]
     for p in m["pistler"]:
         us = [by[k] for k in p["uniteler"]]
         L += [f"## {p['baslik']} pisti", "", p["aciklama"], "",
@@ -269,15 +305,35 @@ def rapor(m):
     for u in m["uniteler"]:
         L += [f"### {u['kimlik']} · {u['baslik']} (seviye {u['seviye']})", "", u["ozet"], "", "| Ders | Tür | Kazanım | Önkoşul |", "|---|---|---|---|"]
         for d in u["dersler"]:
-            L.append(f"| `{d['kimlik']}` {d['baslik']} | {d['tur']} | {d['kazanimlar'][0]} | {', '.join(d['onkosul']) or '—'} |")
+            durum = f" ({len(d['alistirmalar'])} alıştırma)" if d["durum"] == "dolu" else ""
+            L.append(f"| `{d['kimlik']}` {d['baslik']}{durum} | {d['tur']} | {d['kazanimlar'][0]} | {', '.join(d['onkosul']) or '—'} |")
         L.append("")
     return "\n".join(L) + "\n"
 
+def main(argv):
+    kontrol = False
+    for a in argv:
+        if a == "--kontrol":
+            kontrol = True
+        else:
+            # --help dahil tanınmayan her argümanda yardım yazılır ve HİÇBİR dosyaya dokunulmaz.
+            print(__doc__)
+            return 0 if a in ("-h", "--help") else 2
+    burasi = os.path.dirname(os.path.abspath(__file__))
+    kok = os.path.join(burasi, "..", "..")
+    m = build(icerik_oku(os.path.join(burasi, "icerik")))
+    hedefler = {os.path.join(kok, "src/data/mufredat.json"): json.dumps(m, ensure_ascii=False, indent=1) + "\n",
+                os.path.join(kok, "docs/mufredat/01-iskelet.md"): rapor(m)}
+    if kontrol:
+        eski = [y for y, metin in hedefler.items() if not os.path.exists(y) or open(y, encoding="utf-8").read() != metin]
+        for y in eski: print("güncel değil:", os.path.relpath(y, kok))
+        return 1 if eski else 0
+    for y, metin in hedefler.items():
+        with open(y, "w", encoding="utf-8") as f: f.write(metin)
+    dolu = [d for u in m["uniteler"] for d in u["dersler"] if d["durum"] == "dolu"]
+    print(len(m["uniteler"]), "ünite,", sum(len(u["dersler"]) for u in m["uniteler"]), "ders;",
+          len(dolu), "dolu ders,", sum(len(d["alistirmalar"]) for d in dolu), "alıştırma")
+    return 0
+
 if __name__ == "__main__":
-    kok = os.path.join(os.path.dirname(__file__), "..", "..")
-    yol = os.path.join(kok, "src/data/mufredat.json")
-    eski = json.load(open(yol)) if os.path.exists(yol) else {}
-    m = build(eski)
-    json.dump(m, open(yol, "w"), ensure_ascii=False, indent=1); open(yol, "a").write("\n")
-    open(os.path.join(kok, "docs/mufredat/01-iskelet.md"), "w").write(rapor(m))
-    print(len(m["uniteler"]), "ünite,", sum(len(u["dersler"]) for u in m["uniteler"]), "ders")
+    sys.exit(main(sys.argv[1:]))

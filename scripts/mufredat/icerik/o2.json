@@ -1,0 +1,1836 @@
+{
+ "o2-d1": {
+  "anlatim": [
+   "Her elde bir oyuncunun önünde \"dealer butonu\" adlı küçük bir disk durur; kısaca buton denir. Buton, o elde kartların kimden başlanarak dağıtıldığını ve kimin hangi sırada konuşacağını belirler. Her elden sonra bir koltuk sola, yani saat yönünde kayar.",
+   "Butonun hemen solundaki oyuncu küçük blind'i (SB), onun solundaki oyuncu büyük blind'i (BB) koyar. Blind, kartlar dağıtılmadan önce konan zorunlu bahistir. Küçük blind genellikle büyük blind'in yarısıdır: büyük blind 1 BB ise küçük blind 0,5 BB'dir.",
+   "Blind'ler neden var? Her elde uğruna oynanacak bir pot olsun diye. Blind olmasaydı herkes yalnızca en güçlü elleri bekleyebilirdi ve oyun dururdu. Buton her el kaydığı için blind sırası herkese eşit gelir.",
+   "Büyük blind aynı zamanda ölçü birimidir. Bahisleri ve chip yığınlarını \"BB\" cinsinden söyleriz: büyük blind'in 100 chip olduğu masada 250 chip, 2,5 BB eder."
+  ],
+  "terimler": [
+   "BTN (Buton)",
+   "Blind",
+   "SB (Small Blind)",
+   "BB (Big Blind)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Küçük blind'i kim koyar?",
+    "secenekler": [
+     "Butondaki oyuncu",
+     "Butonun hemen solundaki oyuncu",
+     "Butonun hemen sağındaki oyuncu",
+     "Masada en çok chip'i olan oyuncu"
+    ],
+    "dogru": 1,
+    "neden": "Küçük blind butonun hemen solundadır; büyük blind de onun solunda oturur.",
+    "yanilgi": "Butondaki oyuncunun blind koyduğunu düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Blind'ler, kartlar dağıtılmadan önce konur.",
+    "dogru": true,
+    "neden": "Blind zorunlu bir bahistir ve el başlamadan konur; oyuncu henüz kartlarını görmemiştir.",
+    "yanilgi": "Blind'in, kartlara bakıldıktan sonra verilen bir karar olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "siralama",
+    "zorluk": 2,
+    "soru": "Butondan başlayarak saat yönünde (sola doğru) sırala.",
+    "secenekler": [
+     "Buton",
+     "Küçük blind",
+     "Büyük blind",
+     "Büyük blind'in solundaki oyuncu"
+    ],
+    "neden": "Butonun solunda küçük blind, onun solunda büyük blind oturur. Sıra saat yönünde ilerler.",
+    "yanilgi": "Küçük ve büyük blind'in yerini değiştirmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Büyük blind 1 BB. Küçük blind genellikle kaç BB'dir?",
+    "dogru": 0.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Küçük blind genellikle büyük blind'in yarısıdır: 1 / 2 = 0,5 BB.",
+    "yanilgi": "İki blind'in aynı büyüklükte olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      1,
+      2
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "El başladı; blind'ler kondu, başka kimse chip koymadı. Potta kaç BB var?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Küçük blind 0,5 BB, büyük blind 1 BB: 0,5 + 1 = 1,5 BB.",
+    "yanilgi": "Yalnızca büyük blind'i sayıp 1 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Blind'leri her elde aynı iki oyuncu koyar.",
+    "dogru": false,
+    "neden": "Buton her elden sonra bir koltuk sola kayar; blind'ler de onunla birlikte kayar. Bir turda herkes birer kez küçük ve büyük blind koyar.",
+    "yanilgi": "Blind'i belirli oyunculara verilmiş kalıcı bir görev sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Blind'ler neden zorunludur?",
+    "secenekler": [
+     "Oyunu düzenleyene ücret ödemek için",
+     "Güçlü eli olan oyuncuyu ödüllendirmek için",
+     "Her elde uğruna oynanacak bir pot olsun diye",
+     "Oyunu yavaşlatmak için"
+    ],
+    "dogru": 2,
+    "neden": "Blind'ler potu başlatır. Ortada kazanılacak bir şey olmasa herkes yalnızca en güçlü elleri beklerdi.",
+    "yanilgi": "Blind'i bir giriş ücreti ya da kesinti sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Kısa tekrar: 9♠ 9♦ 9♣ 4♥ 4♠ hangi eldir?",
+    "secenekler": [
+     "Üçlü",
+     "İki per",
+     "Full house",
+     "Kare"
+    ],
+    "dogru": 2,
+    "neden": "Üç dokuzlu ve iki dörtlü: bir üçlü ile bir çift full house eder.",
+    "yanilgi": "Yalnızca üçlüyü görüp yanındaki çifti atlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "9♠ 9♦ 9♣ 4♥ 4♠"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Büyük blind 200 chip. 500 chip'lik bir bahis kaç BB eder?",
+    "dogru": 2.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Chip miktarını büyük blind'e böl: 500 / 200 = 2,5 BB.",
+    "yanilgi": "Chip sayısını küçük blind'e bölmek ya da doğrudan chip olarak söylemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      500,
+      200
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Bu elde büyük blind'i sen koydun. Bir sonraki elde ne koyarsın?",
+    "secenekler": [
+     "Yine büyük blind",
+     "Küçük blind",
+     "Hiçbir şey; buton sana gelir",
+     "Hiçbir şey; blind sıran bir tur sonra gelir"
+    ],
+    "dogru": 1,
+    "neden": "Buton bir koltuk sola kayınca blind'ler de kayar. Bu elin büyük blind'i, bir sonraki elin küçük blind'i olur.",
+    "yanilgi": "Blind'lerin butonla birlikte kaydığını unutmak ya da kayma yönünü ters düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "6 kişilik masada buton tam bir tur attı (6 el oynandı). Bu sürede blind olarak toplam kaç BB koydun?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Bir turda bir kez küçük blind (0,5 BB), bir kez büyük blind (1 BB) koyarsın: 0,5 + 1 = 1,5 BB. Kalan dört elde zorunlu bahsin yoktur.",
+    "yanilgi": "Her elde blind koyulduğunu düşünüp 6 ile çarpmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   }
+  ]
+ },
+ "o2-d2": {
+  "anlatim": [
+   "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak).",
+   "Önünde bahis varsa üç seçeneğin var: fold (eli bırakmak; pota koydukların geri gelmez), call (bahsi aynı miktarla görmek) ya da raise (bahsi artırmak). Bahis varken check diyemezsin; elde kalmak için en az call etmen gerekir.",
+   "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır.",
+   "Bir bahis turu, biri dışında herkes fold ettiğinde ya da kalan herkes aynı miktarı koyduğunda biter. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
+  ],
+  "terimler": [
+   "Fold",
+   "Check",
+   "Call",
+   "Bet",
+   "Raise",
+   "Check-raise"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "eslestirme",
+    "zorluk": 1,
+    "soru": "Aksiyonu tanımıyla eşleştir.",
+    "secenekler": [
+     [
+      "Fold",
+      "Eli bırakmak"
+     ],
+     [
+      "Check",
+      "Bahis yokken bahis koymadan sırayı geçmek"
+     ],
+     [
+      "Call",
+      "Önündeki bahsi aynı miktarla görmek"
+     ],
+     [
+      "Bet",
+      "O turun ilk bahsini koymak"
+     ],
+     [
+      "Raise",
+      "Önündeki bahsi artırmak"
+     ]
+    ],
+    "neden": "Beş temel aksiyon bunlardır. Hangisini yapabileceğin, önünde bahis olup olmadığına bağlıdır.",
+    "yanilgi": "Check ile call'u, bet ile raise'i aynı şey sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Flop'ta sıra sende ve bu turda henüz kimse bahis yapmadı. Hangisini yapabilirsin?",
+    "secenekler": [
+     "Call",
+     "Raise",
+     "Check"
+    ],
+    "dogru": 2,
+    "neden": "Bahis yokken check diyebilir ya da bet yapabilirsin. Call ve raise için önünde bir bahis olması gerekir.",
+    "yanilgi": "Görülecek bahis yokken call demeye çalışmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Rakibin bahis yaptı. Check diyerek elde kalabilirsin.",
+    "dogru": false,
+    "neden": "Önünde bahis varken check yoktur. Elde kalmak için call ya da raise gerekir; istemiyorsan fold edersin.",
+    "yanilgi": "Check'i her durumda geçerli bir \"pas\" sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Kısa tekrar: K♠ K♦ 7♣ 7♥ 2♠ hangi eldir?",
+    "secenekler": [
+     "Per",
+     "İki per",
+     "Üçlü",
+     "Full house"
+    ],
+    "dogru": 1,
+    "neden": "İki ayrı çift var: papazlar ve yedililer. Bu iki perdir.",
+    "yanilgi": "İki çifti full house ile karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "K♠ K♦ 7♣ 7♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Rakibin 3 BB bet yaptı, sen ortaya toplam 9 BB koydun. Bu hangi aksiyondur?",
+    "secenekler": [
+     "Bet",
+     "Call",
+     "Raise",
+     "Check"
+    ],
+    "dogru": 2,
+    "neden": "Var olan bir bahsin üstüne çıktın; bu raise'dir. Call olsaydı tam 3 BB koyardın.",
+    "yanilgi": "Her chip koymaya \"bet\" demek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Fold eden oyuncu, o elde pota koyduğu chip'leri geri alır.",
+    "dogru": false,
+    "neden": "Fold edince elden çıkarsın ve o ana kadar koydukların potta kalır.",
+    "yanilgi": "Fold'u bir tür \"geri alma\" sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Flop'ta ilk konuşan sensin ve chip koymak istiyorsun. Bu aksiyonun adı nedir?",
+    "secenekler": [
+     "Raise",
+     "Bet",
+     "Call",
+     "Check"
+    ],
+    "dogru": 1,
+    "neden": "O turda ilk bahsi koymak bet'tir. Raise diyebilmek için önünde bir bahis olması gerekir.",
+    "yanilgi": "Bet ile raise'i karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "eslestirme",
+    "zorluk": 3,
+    "soru": "Durumu, o durumdaki seçeneklerle eşleştir.",
+    "secenekler": [
+     [
+      "Postflop, önünde bahis yok",
+      "Check ya da bet"
+     ],
+     [
+      "Önünde bir bet var",
+      "Fold, call ya da raise"
+     ],
+     [
+      "Preflop, kimse raise yapmadı ve sıra büyük blind'de",
+      "Check ya da raise"
+     ]
+    ],
+    "neden": "Bahis yoksa check ya da bet; bahis varsa fold, call ya da raise. Büyük blind zaten 1 BB koyduğu için raise gelmediyse check diyebilir ya da kendisi raise yapabilir.",
+    "yanilgi": "Büyük blind'in preflop'ta mutlaka call etmesi gerektiğini düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Preflop: herkes fold etti, küçük blind eksik kalan 0,5 BB'yi ekleyerek call etti. Sıra büyük blind'de. Hangisi doğrudur?",
+    "secenekler": [
+     "Yalnızca call edebilir",
+     "Check diyebilir ya da raise yapabilir",
+     "Fold etmek zorundadır",
+     "Yalnızca check diyebilir"
+    ],
+    "dogru": 1,
+    "neden": "Büyük blind 1 BB'yi zaten koydu ve kimse artırmadı; ödeyeceği bir fark yok. Check diyerek flop'u görebilir ya da raise yapabilir.",
+    "yanilgi": "Büyük blind'in sırası geldiğinde yeniden chip koyması gerektiğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Flop: Ali check dedi, Berk bet yaptı, Can call etti. Sıra yeniden Ali'de. Ali'nin seçenekleri nelerdir?",
+    "secenekler": [
+     "Check ya da bet",
+     "Yalnızca fold ya da call",
+     "Fold, call ya da raise",
+     "Check, çünkü daha önce check demişti"
+    ],
+    "dogru": 2,
+    "neden": "Artık Ali'nin önünde bir bahis var. Fold edebilir, call edebilir ya da raise yapabilir; check seçeneği kalmadı.",
+    "yanilgi": "Daha önce check diyen oyuncunun o turda yalnızca check diyebileceğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a11",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "Aynı bahis turunda bir oyuncu önce check deyip, rakibi bet yapınca raise yapabilir.",
+    "dogru": true,
+    "neden": "Bu kurallara uygundur ve adı check-raise'dir. Check demek, o turda sonradan raise yapma hakkını ortadan kaldırmaz.",
+    "yanilgi": "Check diyen oyuncunun o turda artık yalnızca call ya da fold edebileceğini düşünmek.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "o2-d3": {
+  "anlatim": [
+   "Bir el en fazla dört bahis turundan oluşur; her tura \"sokak\" da denir. Preflop: herkese iki kapalı kart dağıtılır, ortada henüz kart yoktur. Flop: ortaya üç kart birden açılır. Turn: dördüncü kart açılır. River: beşinci ve son kart açılır. Toplam 3 + 1 + 1 = 5 ortak kart.",
+   "Her kart açılışından sonra bir bahis turu oynanır. Flop, turn ve river'ın ortak adı postflop'tur. El her zaman river'a kadar sürmez: bir bahis turunda biri dışında herkes fold ederse el orada biter ve kalan oyuncu potu alır.",
+   "Kim önce konuşur? Preflop'ta ilk söz büyük blind'in solundaki oyuncudadır; sıra saat yönünde ilerler ve en son büyük blind konuşur. Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır: küçük blind hâlâ eldeyse o başlar. Buton eldeyse postflop'ta her turda en son konuşur."
+  ],
+  "terimler": [
+   "Preflop",
+   "Flop",
+   "Turn",
+   "River",
+   "Postflop",
+   "Board"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "siralama",
+    "zorluk": 1,
+    "soru": "Sokakları oynandıkları sıraya koy.",
+    "secenekler": [
+     "Preflop",
+     "Flop",
+     "Turn",
+     "River"
+    ],
+    "neden": "Önce kapalı kartlarla preflop oynanır; sonra flop, turn ve river açılır.",
+    "yanilgi": "Turn ile river'ın sırasını karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Flop'ta ortaya kaç kart açılır?",
+    "dogru": 3,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "Flop üç kartın birden açıldığı sokaktır. Turn ve river'da birer kart açılır.",
+    "yanilgi": "Her sokakta tek kart açıldığını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Sokağı, o sırada ortada duran kart sayısıyla eşleştir.",
+    "secenekler": [
+     [
+      "Preflop",
+      "Ortada kart yok"
+     ],
+     [
+      "Flop",
+      "Ortada 3 kart"
+     ],
+     [
+      "Turn",
+      "Ortada 4 kart"
+     ],
+     [
+      "River",
+      "Ortada 5 kart"
+     ]
+    ],
+    "neden": "Flop'ta üç kart açılır; turn dördüncüyü, river beşinciyi ekler.",
+    "yanilgi": "Turn'de iki kart açıldığını düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Preflop'ta ilk kim konuşur?",
+    "secenekler": [
+     "Küçük blind",
+     "Büyük blind",
+     "Büyük blind'in solundaki oyuncu",
+     "Buton"
+    ],
+    "dogru": 2,
+    "neden": "Blind'ler zorunlu bahislerini zaten koymuştur; ilk karar büyük blind'in solundaki oyuncunundur.",
+    "yanilgi": "Her sokakta küçük blind'in başladığını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Flop açıldı; kimse fold etmedi. İlk kim konuşur?",
+    "secenekler": [
+     "Küçük blind",
+     "Büyük blind",
+     "Büyük blind'in solundaki oyuncu",
+     "Buton"
+    ],
+    "dogru": 0,
+    "neden": "Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır. Küçük blind eldeyse o başlar.",
+    "yanilgi": "Preflop'taki sırayı postflop'a taşımak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Her el mutlaka river'a kadar oynanır.",
+    "dogru": false,
+    "neden": "Bir bahis turunda biri dışında herkes fold ederse el orada biter. Birçok el flop'u bile görmeden sonuçlanır.",
+    "yanilgi": "Beş ortak kartın her elde açıldığını düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Kısa tekrar: Elin: A♥ 5♥. Flop: K♥ 9♥ 2♥. Şu anda elin hangi çeşittir?",
+    "secenekler": [
+     "Yüksek kart",
+     "Per",
+     "Kent",
+     "Floş"
+    ],
+    "dogru": 3,
+    "neden": "İki kapalı kartın ve flop'taki üç kart: beşi de kupa. Bu floştur.",
+    "yanilgi": "Floş için beş ortak kartın da açılmasını beklemek gerektiğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "A♥ 5♥ K♥ 9♥ 2♥"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Preflop'ta en son konuşma sırası kimdedir?",
+    "secenekler": [
+     "Buton",
+     "Küçük blind",
+     "Büyük blind",
+     "Büyük blind'in solundaki oyuncu"
+    ],
+    "dogru": 2,
+    "neden": "Preflop'ta sıra büyük blind'in solundan başlar ve saat yönünde döner; en son büyük blind konuşur.",
+    "yanilgi": "Butonun her sokakta en son konuştuğunu sanmak; bu yalnızca postflop için doğrudur.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Küçük blind preflop'ta fold etti. Flop'u büyük blind ve buton görüyor. Flop'ta ilk kim konuşur?",
+    "secenekler": [
+     "Buton",
+     "Büyük blind",
+     "Preflop'ta raise yapan oyuncu",
+     "Kartı yüksek olan oyuncu"
+    ],
+    "dogru": 1,
+    "neden": "Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır. Küçük blind elde olmadığı için sıra büyük blind'e düşer.",
+    "yanilgi": "Konuşma sırasını son raise'i yapan oyuncunun belirlediğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a10",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Turn açıldı. İki kapalı kartınla birlikte toplam kaç kart görüyorsun?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "İki kapalı kart, flop'taki üç kart ve turn kartı: 2 + 3 + 1 = 6.",
+    "yanilgi": "Turn'ü flop'la birlikte sayıp bir kart eksik ya da fazla bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2,
+      3,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "siralama",
+    "zorluk": 5,
+    "soru": "Flop'u üç oyuncu görüyor: buton, büyük blind ve butonun sağındaki oyuncu. Flop'taki konuşma sırasını kur.",
+    "secenekler": [
+     "Büyük blind",
+     "Butonun sağındaki oyuncu",
+     "Buton"
+    ],
+    "neden": "Sıra butonun solundan başlar ve saat yönünde döner. Küçük blind elde olmadığı için büyük blind başlar; butonun sağındaki oyuncu ondan sonra, buton en son konuşur.",
+    "yanilgi": "Butonun sağındaki oyuncuyu butondan sonra konuşturmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "o2-d4": {
+  "anlatim": [
+   "River'daki bahis turu da bittiğinde elde hâlâ birden fazla oyuncu varsa showdown yapılır: kalan oyuncular kartlarını açar ve en iyi beş kartlık ele sahip olan potu alır. Kimin ne söylediği değil, masadaki kartlar belirler.",
+   "Showdown'a gelmeden de kazanılabilir. Bir bahis turunda senin dışındaki herkes fold ederse pot senindir ve kartlarını göstermen gerekmez.",
+   "İki oyuncunun en iyi beş kartı tam olarak eşitse beraberlik olur ve pot eşit bölünür. Renkler eşitliği bozmaz; altıncı ve yedinci kartlar da bozmaz. En sık görülen örnek: en iyi beş kart board'un kendisiyse eldeki herkes potu paylaşır.",
+   "Kazananı bulmanın yolu hep aynıdır: her oyuncu için yedi karttan en iyi beşliyi kur, önce el çeşidini karşılaştır, çeşit aynıysa değerlere ve kicker'a bak."
+  ],
+  "terimler": [
+   "Showdown",
+   "Pot",
+   "Kicker",
+   "Board"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Showdown nedir?",
+    "secenekler": [
+     "İlk üç ortak kartın açılması",
+     "Son bahis turundan sonra kalan oyuncuların kartlarını açması",
+     "Bir oyuncunun bütün chip'lerini ortaya koyması",
+     "Blind'lerin konması"
+    ],
+    "dogru": 1,
+    "neden": "Showdown, river'daki bahisler bittikten sonra elde kalanların kartlarını açtığı ve kazananın belirlendiği andır.",
+    "yanilgi": "Showdown'u bir bahis türü sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Biri dışında herkes fold ederse kalan oyuncu, kartlarını göstermeden potu alır.",
+    "dogru": true,
+    "neden": "Elde tek oyuncu kaldığında karşılaştırılacak başka el yoktur; pot ona verilir ve kartlarını açması gerekmez.",
+    "yanilgi": "Potu almak için her zaman kartların gösterilmesi gerektiğini düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Board: K♠ 9♦ 6♣ 4♥ 2♠. Ali: K♦ Q♣. Berk: 9♠ 9♥. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 1,
+    "neden": "Ali'nin papaz peri var. Berk'in cebindeki dokuzlular board'daki dokuzluyla üçlü yapıyor; üçlü peri yener.",
+    "yanilgi": "Board'daki en yüksek kartla yapılan peri en iyi el sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "K♦ Q♣",
+      "Berk": "9♠ 9♥"
+     },
+     "board": "K♠ 9♦ 6♣ 4♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Board: A♥ J♦ 8♠ 5♣ 3♦. Ali: A♠ T♣. Berk: K♦ K♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de per var: Ali'de aslar, Berk'te papazlar. As peri papaz perini yener.",
+    "yanilgi": "Cepteki çifti, board'la yapılan perden her zaman güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ T♣",
+      "Berk": "K♦ K♣"
+     },
+     "board": "A♥ J♦ 8♠ 5♣ 3♦"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Pot 12 BB. İki oyuncu showdown'da berabere kaldı. Her biri kaç BB alır?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Beraberlikte pot eşit bölünür: 12 / 2 = 6 BB.",
+    "yanilgi": "Beraberlikte potun kimseye verilmediğini ya da bir sonraki ele kaldığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      12,
+      2
+     ]
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: 7♠ 8♦ 9♣ T♥ J♠. Ali: A♠ A♦. Berk: K♣ 2♦. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "Board'un kendisi kenttir (7-8-9-T-J). Kimsede kız olmadığı için daha yüksek kent yok; iki oyuncu da board'u oynar ve pot bölünür.",
+    "yanilgi": "As çiftinin board'daki kentten güçlü olduğunu düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ A♦",
+      "Berk": "K♣ 2♦"
+     },
+     "board": "7♠ 8♦ 9♣ T♥ J♠"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Showdown'da iki el eşitse maça taşıyan oyuncu kazanır.",
+    "dogru": false,
+    "neden": "Renkler arasında üstünlük yoktur. En iyi beş kart eşitse pot bölünür.",
+    "yanilgi": "Eşitliği bozmak için renge bakmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Pot 9 BB. Üç oyuncu showdown'da tam eşit çıktı. Her biri kaç BB alır?",
+    "dogru": 3,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Pot, eşit çıkan bütün oyuncular arasında bölünür: 9 / 3 = 3 BB.",
+    "yanilgi": "Potun yalnızca iki oyuncu arasında bölünebildiğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      9,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: Q♥ 9♥ 6♥ 3♥ 2♠. Ali: A♠ K♥. Berk: J♥ J♦. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de kupa floşu var. Floşlar en yüksek karttan karşılaştırılır: Ali'nin floşu papazla, Berk'inki kızla başlıyor (kız board'da). Ali kazanır.",
+    "yanilgi": "Floşu olan iki oyuncunun berabere kaldığını ya da cep çiftinin fark yarattığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ K♥",
+      "Berk": "J♥ J♦"
+     },
+     "board": "Q♥ 9♥ 6♥ 3♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: 8♣ 8♦ K♥ 5♠ 2♦. Ali: 8♠ 7♠. Berk: 8♥ A♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 1,
+    "neden": "İkisinde de üç sekizli var. Kicker'lara bakılır: Berk'in ası, Ali'nin en iyi kicker'ı olan board'daki papazı yener.",
+    "yanilgi": "Aynı üçlüde beraberlik olacağını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "8♠ 7♠",
+      "Berk": "8♥ A♣"
+     },
+     "board": "8♣ 8♦ K♥ 5♠ 2♦"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: A♣ A♦ 7♠ 7♥ K♦. Ali: K♠ Q♠. Berk: 7♣ 2♦. Can: A♥ 3♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Can",
+     "Berk ve Can berabere"
+    ],
+    "dogru": 2,
+    "neden": "Ali'nin iki peri var (aslar ve papazlar). Berk'in full house'u 7-7-7-A-A, Can'ınki A-A-A-7-7. Full house'ta önce üçlüye bakılır: üç as, üç yediliyi yener.",
+    "yanilgi": "İki full house'u eşit saymak ya da hangisinin üçlü olduğuna bakmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "K♠ Q♠",
+      "Berk": "7♣ 2♦",
+      "Can": "A♥ 3♣"
+     },
+     "board": "A♣ A♦ 7♠ 7♥ K♦",
+     "degerler": [
+      "Ali",
+      "Berk",
+      "Can",
+      "Berk+Can"
+     ]
+    }
+   }
+  ]
+ },
+ "o2-d5": {
+  "anlatim": [
+   "Pot, o elde ortada biriken chip'lerin toplamıdır. El başlarken potta yalnızca blind'ler vardır: 0,5 + 1 = 1,5 BB. Sonra pota konan her chip eklenir: call'lar, bet'ler ve raise'ler.",
+   "Örnek: Buton 2,5 BB'ye raise yapıyor. Küçük blind fold ediyor; koyduğu 0,5 BB potta kalıyor. Büyük blind call ediyor. Pot = 0,5 (küçük blind) + 2,5 (buton) + 2,5 (büyük blind) = 5,5 BB.",
+   "Bir bahsi görmek için ödeyeceğin miktar, bahis ile o turda zaten koyduğun miktarın farkıdır. Örnekte büyük blind 1 BB'yi zaten koymuştu; 2,5 BB'lik raise'i görmek için 2,5 − 1 = 1,5 BB ekledi. Her yeni bahis turunda bu hesap sıfırdan başlar: flop'ta henüz kimse bir şey koymamıştır.",
+   "Postflop'ta da aynı toplama sürer. Pot 5,5 BB iken biri 3 BB bet yapar ve rakibi call ederse yeni pot 5,5 + 3 + 3 = 11,5 BB olur. Potu her an bilmek, ileride göreceğin bütün hesapların ilk adımıdır."
+  ],
+  "terimler": [
+   "Pot",
+   "Blind",
+   "Call",
+   "Bet",
+   "Raise",
+   "BB (Big Blind)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "El başladı ve yalnızca blind'ler kondu. Pot kaç BB?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Küçük blind 0,5 BB, büyük blind 1 BB: 0,5 + 1 = 1,5 BB.",
+    "yanilgi": "Küçük blind'i saymayı unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Fold eden oyuncunun daha önce koyduğu chip'ler potta kalır.",
+    "dogru": true,
+    "neden": "Pota giren chip geri çıkmaz. Fold eden oyuncu yalnızca daha fazla koymaktan vazgeçer.",
+    "yanilgi": "Fold eden oyuncunun koyduklarını pottan düşmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Pot 6 BB. Rakibin 3 BB bet yaptı, sen call ettin. Pot kaç BB oldu?",
+    "dogru": 12,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Önceki pot, bet ve call toplanır: 6 + 3 + 3 = 12 BB.",
+    "yanilgi": "Yalnızca bet'i ekleyip call'u unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      6,
+      3,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Preflop: buton 2,5 BB'ye raise yaptı, küçük blind fold etti, büyük blind call etti. Pot kaç BB?",
+    "secenekler": [
+     "4 BB",
+     "5 BB",
+     "5,5 BB",
+     "6 BB"
+    ],
+    "dogru": 2,
+    "neden": "0,5 (fold eden küçük blind) + 2,5 (buton) + 2,5 (büyük blind'in toplamı) = 5,5 BB.",
+    "yanilgi": "Fold eden küçük blind'in 0,5 BB'sini unutmak ya da büyük blind'i 1 + 2,5 diye iki kez saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      2.5,
+      2.5
+     ],
+     "degerler": [
+      4,
+      5,
+      5.5,
+      6
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Büyük blind'desin ve 1 BB'ni koydun. Bir oyuncu 3 BB'ye raise yaptı. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 2,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Ödeyeceğin, bahis ile zaten koyduğunun farkıdır: 3 − 1 = 2 BB.",
+    "yanilgi": "Zaten koyduğu blind'i hesaba katmayıp 3 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Küçük blind'desin ve 0,5 BB'ni koydun. Bir oyuncu 2,5 BB'ye raise yaptı. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 2,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "2,5 − 0,5 = 2 BB eklersin.",
+    "yanilgi": "Küçük blind'in call'unun büyük blind'inkiyle aynı tuttuğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2.5,
+      -0.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Kısa tekrar: Board: K♣ 9♦ 5♠ 3♥ 2♦. Ali: K♠ J♥. Berk: K♦ T♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de papaz peri var. Kicker belirler: Ali'nin valesi, Berk'in onlusunu yener.",
+    "yanilgi": "Aynı perde potun bölündüğünü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "K♠ J♥",
+      "Berk": "K♦ T♣"
+     },
+     "board": "K♣ 9♦ 5♠ 3♥ 2♦"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Preflop'ta 2,5 BB koymuştun. Flop'ta rakibin 4 BB bet yaptı. Call etmek için 4 − 2,5 = 1,5 BB koyman yeter.",
+    "dogru": false,
+    "neden": "Önceki sokakta koydukların artık pottadır ve yeni turda sayılmaz. Flop'taki 4 BB'lik bet'i görmek için 4 BB koyarsın.",
+    "yanilgi": "Önceki sokaklarda koyulan chip'leri yeni turdaki bahisten düşmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Preflop: ilk konuşan oyuncu 2,5 BB'ye raise yaptı, buton call etti, küçük blind fold etti, büyük blind call etti. Flop'a kaç BB'lik potla gidilir?",
+    "dogru": 8,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 (küçük blind) + 2,5 + 2,5 + 2,5 (üç oyuncunun toplamları) = 8 BB.",
+    "yanilgi": "Büyük blind'in 1 BB'sini 2,5 BB'nin üstüne ayrıca eklemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      2.5,
+      2.5,
+      2.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Flop'ta pot 6 BB. Ali 4 BB bet yaptı, Berk 12 BB'ye raise yaptı, Ali call etti. Pot kaç BB oldu?",
+    "dogru": 30,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Tur sonunda iki oyuncu da 12'şer BB koymuş olur (Ali 4 + 8). Pot = 6 + 12 + 12 = 30 BB.",
+    "yanilgi": "Ali'nin ilk 4 BB'sini 12 BB'nin üstüne ayrıca ekleyip 34 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      6,
+      12,
+      12
+     ]
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Flop'a 5,5 BB'lik potla gelindi. Flop: büyük blind check, buton 3,5 BB bet, büyük blind call. Turn: büyük blind check, buton 8 BB bet, büyük blind call. River'a kaç BB'lik potla gidilir?",
+    "dogru": 28.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Flop sonrası: 5,5 + 3,5 + 3,5 = 12,5 BB. Turn sonrası: 12,5 + 8 + 8 = 28,5 BB.",
+    "yanilgi": "Call'ları eklemeyi unutmak ya da bir sokağı atlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      5.5,
+      3.5,
+      3.5,
+      8,
+      8
+     ]
+    }
+   }
+  ]
+ },
+ "o2-k": {
+  "anlatim": [
+   "Bu kontrol, ünitenin beş dersinden karışık sorular içerir. Pot sorularında adım adım toplamaktan çekinme."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Butonun hemen solunda hangi oyuncu oturur?",
+    "secenekler": [
+     "Büyük blind",
+     "Küçük blind",
+     "Preflop'ta ilk konuşan oyuncu",
+     "Bir önceki elin butonu"
+    ],
+    "dogru": 1,
+    "neden": "Butonun solunda küçük blind, onun solunda büyük blind oturur.",
+    "yanilgi": "İki blind'in yerini karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "eslestirme",
+    "zorluk": 1,
+    "soru": "Terimi tanımıyla eşleştir.",
+    "secenekler": [
+     [
+      "Preflop",
+      "Ortak kart açılmadan önceki bahis turu"
+     ],
+     [
+      "Flop",
+      "İlk üç ortak kart"
+     ],
+     [
+      "Turn",
+      "Dördüncü ortak kart"
+     ],
+     [
+      "River",
+      "Beşinci ve son ortak kart"
+     ],
+     [
+      "Showdown",
+      "Kalan oyuncuların kartlarını açması"
+     ]
+    ],
+    "neden": "Bir el bu sırayla ilerler: preflop, flop, turn, river ve gerekirse showdown.",
+    "yanilgi": "Turn ile river'ı karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Önünde bahis yokken call edebilirsin.",
+    "dogru": false,
+    "neden": "Call, var olan bir bahsi görmektir. Bahis yoksa seçeneklerin check ya da bet'tir.",
+    "yanilgi": "Check ile call'u aynı şey sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Rakibin bet yaptı. Aşağıdakilerden hangisi seçeneklerin arasında değildir?",
+    "secenekler": [
+     "Fold",
+     "Call",
+     "Check",
+     "Raise"
+    ],
+    "dogru": 2,
+    "neden": "Önünde bahis varken check diyemezsin. Fold, call ve raise seçeneklerin.",
+    "yanilgi": "Check'i her zaman açık bir seçenek sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Preflop: herkes fold etti, küçük blind 3 BB'ye raise yaptı, büyük blind call etti. Pot kaç BB?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "\"3 BB'ye raise\" küçük blind'in toplamının 3 BB olduğunu söyler; büyük blind de toplam 3 BB koyar. 3 + 3 = 6 BB.",
+    "yanilgi": "Küçük blind'in 0,5 BB'sini 3 BB'nin üstüne ayrıca eklemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Flop'u küçük blind, büyük blind ve buton görüyor. İlk kim konuşur?",
+    "secenekler": [
+     "Buton",
+     "Büyük blind",
+     "Küçük blind",
+     "Preflop'ta raise yapan oyuncu"
+    ],
+    "dogru": 2,
+    "neden": "Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır: küçük blind.",
+    "yanilgi": "Preflop'ta en son konuşan büyük blind'in postflop'ta da en son konuştuğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: J♠ T♦ 6♣ 4♥ 2♠. Ali: A♠ J♦. Berk: K♦ J♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de vale peri var. Kicker belirler: Ali'nin ası, Berk'in papazını yener.",
+    "yanilgi": "Aynı perde potun bölündüğünü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ J♦",
+      "Berk": "K♦ J♣"
+     },
+     "board": "J♠ T♦ 6♣ 4♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Preflop'ta kimse raise yapmadıysa büyük blind sırası geldiğinde check diyebilir.",
+    "dogru": true,
+    "neden": "Büyük blind 1 BB'yi zaten koymuştur. Kimse artırmadıysa ödeyeceği fark yoktur; check diyebilir ya da raise yapabilir.",
+    "yanilgi": "Preflop'ta check'in hiç mümkün olmadığını düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Büyük blind'desin ve 1 BB'ni koydun. Buton 2,5 BB'ye raise yaptı, küçük blind 9 BB'ye yeniden raise yaptı. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 8,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Görmen gereken son bahis 9 BB; 1 BB'yi zaten koydun: 9 − 1 = 8 BB.",
+    "yanilgi": "İki raise'i toplamak ya da ilk raise'e göre hesaplamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      9,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: A♥ K♥ 9♥ 5♥ 3♥. Ali: Q♠ Q♦. Berk: 2♥ 2♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 2,
+    "neden": "Board'un kendisi floştur: A-K-9-5-3 kupa. Berk'in 2♥'si board'daki en küçük kupadan (3♥) da küçük olduğu için elini iyileştirmez. İkisi de board'u oynar; pot bölünür.",
+    "yanilgi": "Elinde o renkten kart olan oyuncunun mutlaka daha iyi floş yaptığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "Q♠ Q♦",
+      "Berk": "2♥ 2♣"
+     },
+     "board": "A♥ K♥ 9♥ 5♥ 3♥"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Pot 15 BB. İki oyuncu showdown'da berabere kaldı. Her biri kaç BB alır?",
+    "dogru": 7.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Pot eşit bölünür: 15 / 2 = 7,5 BB.",
+    "yanilgi": "Tek sayılı potun bölünemeyeceğini düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      15,
+      2
+     ]
+    }
+   },
+   {
+    "kimlik": "a12",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Preflop: ilk konuşan oyuncu 2,5 BB'ye raise yaptı, buton call etti, küçük blind fold etti, büyük blind call etti. Flop: büyük blind check dedi, ilk oyuncu 4 BB bet yaptı, buton fold etti, büyük blind call etti. Turn'e kaç BB'lik potla gidilir?",
+    "dogru": 16,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Preflop: 0,5 + 2,5 + 2,5 + 2,5 = 8 BB. Flop: 8 + 4 + 4 = 16 BB.",
+    "yanilgi": "Fold eden oyuncuların koyduklarını pottan çıkarmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      2.5,
+      2.5,
+      2.5,
+      4,
+      4
+     ]
+    }
+   }
+  ]
+ },
+ "o2-r": {
+  "anlatim": [
+   "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer. Her soruda \"neden\" açıklamasını okumaya zaman ayır."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Check ile call aynı şeydir; ikisinde de elde kalırsın ve chip koymazsın.",
+    "dogru": false,
+    "neden": "İkisinde de elde kalırsın ama check bedavadır ve yalnızca bahis yokken yapılır. Call'da önündeki bahis kadar chip koyarsın.",
+    "yanilgi": "İki aksiyonu \"devam etmek\" diye tek bir şey saymak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Flop'ta buton elde. Bahis turunda en son kim konuşur?",
+    "secenekler": [
+     "Büyük blind",
+     "Küçük blind",
+     "Buton",
+     "Preflop'ta ilk konuşan oyuncu"
+    ],
+    "dogru": 2,
+    "neden": "Postflop'ta sıra butonun solundan başlar ve butonda biter. Buton eldeyse her postflop turunda en son konuşur.",
+    "yanilgi": "Preflop'ta en son konuşan büyük blind'i postflop'ta da sona koymak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Preflop: buton 2,5 BB'ye raise yaptı; küçük blind ve büyük blind fold etti. Butonun aldığı pot (kendi koyduğu dahil) kaç BB?",
+    "dogru": 4,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Blind'ler fold etse de koydukları potta kalır: 0,5 + 1 + 2,5 = 4 BB.",
+    "yanilgi": "Fold eden blind'leri pottan düşmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1,
+      2.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Büyük blind'desin ve 1 BB'ni koydun. Bir oyuncu 2 BB'ye raise yaptı. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 1,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "2 − 1 = 1 BB. Blind olarak koyduğun 1 BB bu turdaki bahsine sayılır.",
+    "yanilgi": "Blind'i ayrı bir ödeme sayıp 2 BB daha koymak gerektiğini düşünmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Flop'ta üç, turn'de iki, river'da bir kart açılır.",
+    "dogru": false,
+    "neden": "Flop'ta üç, turn'de bir, river'da bir kart açılır; toplam beş ortak kart.",
+    "yanilgi": "Ortak kart sayısını altı sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      1,
+      1
+     ],
+     "iddia": 6
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: K♣ K♦ 8♠ 8♥ A♦. Ali: Q♠ Q♥. Berk: 9♣ 7♦. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "Berk board'u oynar: K-K-8-8-A. Ali'nin kız çifti board'daki sekizli çiftinden büyük olduğu için onun yerine geçer: K-K-Q-Q-A. İki perde ikinci çift de karşılaştırılır; kızlar sekizlileri yener.",
+    "yanilgi": "Board'da iki per varken eldeki çiftin hiçbir işe yaramadığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "Q♠ Q♥",
+      "Berk": "9♣ 7♦"
+     },
+     "board": "K♣ K♦ 8♠ 8♥ A♦"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Preflop'ta blind'ler arasında konuşma sırası nasıldır?",
+    "secenekler": [
+     "Büyük blind önce konuşur",
+     "Küçük blind önce, büyük blind en son konuşur",
+     "İkisi aynı anda karar verir",
+     "İkisi de butondan önce konuşur"
+    ],
+    "dogru": 1,
+    "neden": "Preflop'ta sıra büyük blind'in solundan başlar, butondan geçer, küçük blind'e ve en son büyük blind'e gelir.",
+    "yanilgi": "Blind'ler chip'i ilk koyduğu için ilk onların konuştuğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Pot 10 BB. Rakibin 5 BB bet yaptı, sen 15 BB'ye raise yaptın, rakibin call etti. Pot kaç BB oldu?",
+    "dogru": 40,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Tur sonunda ikiniz de 15'er BB koymuş olursunuz (rakip 5 + 10). Pot = 10 + 15 + 15 = 40 BB.",
+    "yanilgi": "Rakibin ilk 5 BB'sini 15 BB'nin üstüne ayrıca ekleyip 45 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      10,
+      15,
+      15
+     ]
+    }
+   }
+  ]
+ },
+ "o2-t": {
+  "anlatim": [
+   "Bu test iki üniteyi birlikte yoklar: kartlar ve eller, masa ve el akışı. 20 soru; acele etmene gerek yok."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Texas Hold'em'de jokerlerle birlikte 54 kart kullanılır.",
+    "dogru": false,
+    "neden": "Deste 52 karttır; joker kullanılmaz.",
+    "yanilgi": "Kutudan çıkan bütün kartların oyunda olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "siralama",
+    "zorluk": 1,
+    "soru": "Elleri en güçlüden en zayıfa doğru sırala.",
+    "secenekler": [
+     "Royal floş",
+     "Kare",
+     "Full house",
+     "Floş",
+     "Kent",
+     "Üçlü"
+    ],
+    "neden": "Güçlüden zayıfa: royal floş, kare, full house, floş, kent, üçlü.",
+    "yanilgi": "Floş ile full house'un yerini karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategoriSirasi",
+     "yon": "azalan"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "3♦ 3♣ Q♠ Q♥ Q♦ hangi eldir?",
+    "secenekler": [
+     "İki per",
+     "Üçlü",
+     "Full house",
+     "Kare"
+    ],
+    "dogru": 2,
+    "neden": "Üç kız ve iki üçlü: bir üçlü ile bir çift full house eder.",
+    "yanilgi": "Kartların yazılış sırasına aldanıp çifti görüp üçlüyü atlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kategori",
+     "kartlar": "3♦ 3♣ Q♠ Q♥ Q♦"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Turn nedir?",
+    "secenekler": [
+     "İlk üç ortak kart",
+     "Dördüncü ortak kart ve o turdaki bahisler",
+     "Beşinci ortak kart ve o turdaki bahisler",
+     "Kartların açılıp kazananın belirlendiği an"
+    ],
+    "dogru": 1,
+    "neden": "Flop'tan sonra açılan dördüncü ortak karta ve o bahis turuna turn denir.",
+    "yanilgi": "Turn ile river'ı karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Terimi tanımıyla eşleştir.",
+    "secenekler": [
+     [
+      "Buton",
+      "Konuşma sırasını belirleyen ve her el bir koltuk kayan disk"
+     ],
+     [
+      "Küçük blind",
+      "Butonun solundaki oyuncunun zorunlu bahsi"
+     ],
+     [
+      "Büyük blind",
+      "Küçük blind'in solundaki oyuncunun zorunlu bahsi"
+     ],
+     [
+      "Pot",
+      "O elde ortada biriken chip'lerin toplamı"
+     ]
+    ],
+    "neden": "Buton sırayı belirler; solundaki iki oyuncu blind'leri koyar ve bu blind'ler potu başlatır.",
+    "yanilgi": "Butonun da zorunlu bahis koyduğunu düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "A-2-3-4-5 kenti, 2-3-4-5-6 kentine yenilir.",
+    "dogru": true,
+    "neden": "A-2-3-4-5 kentinde as en alttadır ve kent 5'te biter. 6'da biten kent daha yüksektir.",
+    "yanilgi": "İçinde as olan kenti en güçlü kent sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "beş": "A♠ 2♦ 3♣ 4♥ 5♠",
+      "altı": "2♣ 3♦ 4♠ 5♣ 6♥"
+     },
+     "iddia": "altı",
+     "ornek": true
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Önünde bahis yok ve chip koymadan elde kalmak istiyorsun. Hangi aksiyonu yaparsın?",
+    "secenekler": [
+     "Call",
+     "Fold",
+     "Check",
+     "Bet"
+    ],
+    "dogru": 2,
+    "neden": "Bahis yokken sırayı chip koymadan geçmek check'tir.",
+    "yanilgi": "Bu duruma call demek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Blind'ler kondu. Bir oyuncu 3 BB'ye raise yaptı ve diğer herkes fold etti. Pot kaç BB?",
+    "dogru": 4.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 + 1 + 3 = 4,5 BB. Fold eden blind'lerin koydukları potta kalır.",
+    "yanilgi": "Blind'leri saymayı unutup 3 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Board: 9♥ 8♥ 7♣ 2♥ K♠. Ali: J♠ T♠. Berk: A♥ 3♥. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 1,
+    "neden": "Ali'nin kenti var (7-8-9-T-J). Berk'in beş kupası var: floş. Floş kenti yener.",
+    "yanilgi": "Kenti floştan güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "J♠ T♠",
+      "Berk": "A♥ 3♥"
+     },
+     "board": "9♥ 8♥ 7♣ 2♥ K♠"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "siralama",
+    "zorluk": 3,
+    "soru": "Bir elin akışını baştan sona sırala.",
+    "secenekler": [
+     "Blind'ler konur",
+     "Kapalı kartlar dağıtılır",
+     "Preflop bahis turu",
+     "Flop açılır",
+     "Turn açılır",
+     "River açılır",
+     "Showdown"
+    ],
+    "neden": "Önce blind'ler konur ve kartlar dağıtılır; sonra preflop, flop, turn ve river oynanır. Elde birden fazla oyuncu kaldıysa showdown yapılır.",
+    "yanilgi": "Blind'lerin kartlar dağıtıldıktan sonra konduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Elin: Q♠ J♠. Board: T♠ 9♦ 8♣ 3♥ 2♦. En iyi beş kartının içinde kaç kapalı kartın var?",
+    "dogru": 2,
+    "tolerans": 0,
+    "birim": "kart",
+    "neden": "En iyi elin kenttir: 8-9-T-J-Q. Kız ve vale senin kapalı kartların; ikisi de kullanılır.",
+    "yanilgi": "Aynı renkten üç kartı görüp floş aramak ve kenti kaçırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "cepKartSayisi",
+     "el": "Q♠ J♠",
+     "board": "T♠ 9♦ 8♣ 3♥ 2♦"
+    }
+   },
+   {
+    "kimlik": "a12",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Buton eldeyse postflop'taki her bahis turunda en son o konuşur.",
+    "dogru": true,
+    "neden": "Postflop'ta sıra butonun solundan başlar ve saat yönünde dönerek butonda biter.",
+    "yanilgi": "Preflop sırasını postflop'a taşıyıp büyük blind'i sona koymak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a13",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: K♠ K♦ 9♣ 5♥ 2♠. Bu board'da nuts hangi el çeşididir?",
+    "secenekler": [
+     "Full house",
+     "Kare",
+     "Floş",
+     "Üçlü"
+    ],
+    "dogru": 1,
+    "neden": "Board'da iki papaz var; kalan iki papazı tutan oyuncu kare yapar. Floş ve sıralı floş için yeterli kart yok.",
+    "yanilgi": "Çiftli board'da full house'u en iyi el sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nutsKategori",
+     "board": "K♠ K♦ 9♣ 5♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a14",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Flop'ta pot 8 BB. Rakibin 6 BB bet yaptı. Call edersen pot kaç BB olur?",
+    "dogru": 20,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "8 + 6 + 6 = 20 BB.",
+    "yanilgi": "Kendi call'unu pota eklemeyi unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      8,
+      6,
+      6
+     ]
+    }
+   },
+   {
+    "kimlik": "a15",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Board: A♠ Q♦ Q♣ 7♥ 3♠. Ali: A♦ 9♦. Berk: K♠ Q♥. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 1,
+    "neden": "Ali'nin iki peri var (aslar ve kızlar). Berk'in üç kızı var. Üçlü iki peri yener.",
+    "yanilgi": "As içeren iki peri üçlüden güçlü sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♦ 9♦",
+      "Berk": "K♠ Q♥"
+     },
+     "board": "A♠ Q♦ Q♣ 7♥ 3♠"
+    }
+   },
+   {
+    "kimlik": "a16",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Rakibin 5 BB koydu. Sen toplam 15 BB koydun. Rakibin 10 BB daha ekledi. Bu üç aksiyon sırasıyla nedir?",
+    "secenekler": [
+     "Bet, call, raise",
+     "Bet, raise, call",
+     "Raise, bet, call",
+     "Call, raise, bet"
+    ],
+    "dogru": 1,
+    "neden": "İlk bahis bet'tir. Onun üstüne çıkmak raise'dir. Farkı ekleyip eşitlemek call'dur.",
+    "yanilgi": "Chip koymanın her türüne bet demek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a17",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Büyük blind'desin ve 1 BB'ni koydun. Bir oyuncu 2,5 BB'ye raise yaptı, bir başkası call etti. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Görülecek bahis 2,5 BB; 1 BB'yi zaten koydun: 2,5 − 1 = 1,5 BB. Arada kaç kişinin call ettiği bunu değiştirmez.",
+    "yanilgi": "Raise ile call'u toplayıp 5 BB üzerinden hesap yapmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2.5,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a18",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: 5♠ 5♦ 5♣ K♥ 2♠. Ali: A♠ K♦. Berk: 2♦ 2♣. Kim kazanır?",
+    "secenekler": [
+     "Ali",
+     "Berk",
+     "Beraberlik"
+    ],
+    "dogru": 0,
+    "neden": "İkisinde de full house var. Ali: 5-5-5-K-K. Berk'in en iyisi de üç beşlili full house'tur: 5-5-5-2-2. Üçlüler eşit olduğundan çifte bakılır; papazlar ikilileri yener.",
+    "yanilgi": "Cep çiftiyle yapılan full house'u her zaman üstün sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kazanan",
+     "eller": {
+      "Ali": "A♠ K♦",
+      "Berk": "2♦ 2♣"
+     },
+     "board": "5♠ 5♦ 5♣ K♥ 2♠"
+    }
+   },
+   {
+    "kimlik": "a19",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "Preflop: buton 2,5 BB'ye raise yaptı, küçük blind ve büyük blind call etti. Flop: iki blind check dedi, buton 5 BB bet yaptı, küçük blind fold etti, büyük blind call etti. Turn'e kaç BB'lik potla gidilir?",
+    "dogru": 17.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Preflop: 2,5 + 2,5 + 2,5 = 7,5 BB. Flop: 7,5 + 5 + 5 = 17,5 BB.",
+    "yanilgi": "Blind'leri 2,5 BB'lerin üstüne ayrıca eklemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2.5,
+      2.5,
+      2.5,
+      5,
+      5
+     ]
+    }
+   },
+   {
+    "kimlik": "a20",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Board: A♦ K♦ Q♦ 8♣ 8♠. Hangi kapalı kartlar nuts'tır?",
+    "secenekler": [
+     "8♥ 8♦",
+     "A♠ A♥",
+     "9♦ 2♦",
+     "J♦ T♦"
+    ],
+    "dogru": 3,
+    "neden": "Board'da A♦ K♦ Q♦ var. J♦ T♦ ile royal floş tamamlanır; bu, kareyi de full house'u da yener.",
+    "yanilgi": "Çifti görünce kareyi en iyi el sayıp daha yukarıya bakmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "nuts",
+     "board": "A♦ K♦ Q♦ 8♣ 8♠"
+    }
+   }
+  ]
+ }
+}
