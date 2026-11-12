@@ -497,3 +497,21 @@ describe("seçeneklerdeki all-in tutarları", () => {
     expect(checked).toBeGreaterThan(3);
   });
 });
+
+// Q-6 (13. çalışma): c19 gerekçesi rakip kartları kapalıyken 8 / 44 yazıyordu.
+// Gerekçedeki "N / 4x" oranının paydası görülmeyen kart sayısıyla aynı olmalı:
+// rakip kartları kapalıysa flop'ta 47, turn'de 46; açıksa 45 ve 44.
+describe("gerekçelerdeki out oranlarının paydası", () => {
+  it("görülmeyen kart sayısıyla tutarlı", () => {
+    const bad: string[] = [];
+    let checked = 0;
+    for (const h of HANDS)
+      for (const m of h.reasoning.matchAll(/(\d+)\s*\/\s*(4[4-7])\b/g)) {
+        checked++;
+        const unseen = 52 - 2 - (h.villain ? 2 : 0) - (h.street === "turn" ? 4 : 3);
+        if (+m[2] !== unseen) bad.push(`${h.id}: ${m[0]} (beklenen /${unseen})`);
+      }
+    expect(checked).toBeGreaterThan(50);
+    expect(bad).toEqual([]);
+  });
+});

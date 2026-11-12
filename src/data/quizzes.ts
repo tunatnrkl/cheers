@@ -30,6 +30,83 @@ export type Quiz = {
 
 export const QUIZZES: Quiz[] = [
   {
+    slug: "pot-odds-ve-cekisler",
+    title: "Pot odds ve çekişler: fiyat, out, implied odds",
+    summary: "Call için gereken equity'yi bul, out'larını doğru say ve fiyat yetmediğinde implied odds'un ne zaman işe yaradığını gör.",
+    level: "Başlangıç–orta",
+    game: "cash",
+    topic: "odds",
+    assumptions:
+      "Cash, rake yok. Out'ların hepsi temiz sayılır: tuttuğunda rakibe daha iyi el yaptırmaz. Rakibin kartları açık değilse onları da görülmeyen kartlara sayarsın. Olasılıklar kesin hesaptır; 2 ve 4 kuralı yalnızca yaklaşık tahmindir. Implied odds için kesin bir sayı verilmez, çünkü tutunca ne kadar kazanacağın rakibe bağlıdır.",
+    posts: ["pot-odds-adim-adim", "c-bet-ne-zaman"],
+    questions: [
+      {
+        q: "Flop'ta pot 5,5 BB. Rakip 3,7 BB bahis yaptı. Call için en az ne kadar equity gerekir?",
+        options: ["%22", "%29", "%40", "%67"],
+        correct: 1,
+        why: "Rakibin bahsiyle ortada 9,2 BB var. 3,7 BB ödeyip 12,9 BB'lik pot için oynuyorsun: 3,7 / 12,9 ≈ %28,7. %40, call'u paydaya eklemeyi unutunca çıkar (3,7 / 9,2); %67 ise bahsi yalnızca eski pota böler (3,7 / 5,5).",
+        spot: "c17",
+      },
+      {
+        q: "Aynı elde nut floş çekişin var (9 out). Rakip turn'de de bahis yapabilecekse fiyatla hangi olasılığı karşılaştırmak daha gerçekçidir?",
+        options: ["River'a kadar tutma: ≈ %35", "%50, çünkü ya tutar ya tutmaz", "Yalnızca turn kartında tutma: ≈ %19", "4 kuralıyla: ≈ %36"],
+        correct: 2,
+        why: "Flop'ta 47 kart görmüyorsun: 9 / 47 ≈ %19,1. İki kartlık %35 yalnızca all-in'de ya da turn'ü bedava göreceğin kesinse geçerlidir. %19, gereken %28,7'nin altında; bu yüzden c17'de call'u taşıyan yalnızca fiyat değil; as gelince bazı ellere karşı öne geçmen ve floş tutunca kazanacağın ek chip'ler (implied odds).",
+        spot: "c17",
+      },
+      {
+        q: "Turn'de pot 12 BB. Rakip pot kadar, 12 BB bahis yaptı. Elinde yalnızca gutshot var (4 out); geride yaklaşık 72 BB kalıyor. Bu spotta en iyi seçenek hangisi?",
+        options: [
+          "Fold: river'da tutma ≈ %9, gereken ≈ %33",
+          "Call: gutshot bu fiyatı karşılar",
+          "Call: tutunca kazanılacak chip'ler farkı kapatır",
+          "%9 ile %33 arasındaki fark önemsiz",
+        ],
+        correct: 0,
+        why: "Gereken equity 12 / 36 ≈ %33,3; tutma olasılığı 4 / 46 ≈ %8,7. Başabaş için tutunca yaklaşık 102 BB daha kazanman gerekir; rakibin geride kalan bütün stack'i (≈ 72 BB) bile yetmez. Fiyat bu kadar kötüyken implied odds kurtarmaz.",
+        spot: "c18",
+      },
+      {
+        q: "Turn'de pot 16 BB, rakip 4 BB bahis yaptı. Çift uçlu kent çekişin var (8 out), rakibin kartlarını bilmiyorsun. River'da tutma olasılığı nedir?",
+        options: ["8 / 44 ≈ %18,2", "8 / 46 ≈ %17,4", "8 / 47 ≈ %17,0", "2 kuralıyla tam %16"],
+        correct: 1,
+        why: "Turn'de 52 − 2 (senin kartların) − 4 (board) = 46 kart görmüyorsun; rakibin kartları da bunların içinde. Gereken equity 4 / 24 ≈ %16,7, yani fiyat kıl payı (1 puandan az) yetiyor. Call'u rahatlatan pozisyonda olman ve tutunca ek chip kazanabilmen.",
+        spot: "c19",
+      },
+      {
+        q: "Turn'de rakip all-in yaptı ve kartlarını açtı. River için kaç görülmeyen kart kalır?",
+        options: ["46", "47", "48", "44"],
+        correct: 3,
+        why: "52 − 2 (senin) − 2 (rakibin açık kartları) − 4 (board) = 44. Alıştırma masasındaki \"Turn all-in\" spotlarında oranlar bu yüzden 44'e bölünür. Örnek: 9 out → 9 / 44 ≈ %20,5; 34,75 BB'lik call için gereken ≈ %43,2, fold. All-in olduğu için implied odds yoktur.",
+        spot: "o-QhKc-6cAh7hJc",
+      },
+      {
+        q: "Flop'ta 15 out'lu bir çekişin var (floş + açık uçlu kent) ve all-in olduğun için iki kartı da göreceksin. River'a kadar tutma olasılığı yaklaşık kaçtır?",
+        options: ["%30", "%45", "%54", "%60"],
+        correct: 2,
+        why: "Kesin hesap: 1 − (32 / 47 × 31 / 46) ≈ %54,1. 4 kuralı 15 × 4 = %60 der; out sayısı arttıkça kural olasılığı fazla tahmin eder. 9 out'ta fark küçüktür: kural %36, kesin ≈ %35,0.",
+      },
+      {
+        q: "UTG 2,5 BB açtı, butonda 44 ile call etmeyi düşünüyorsun. Hangi durum bu call'u en çok destekler?",
+        options: [
+          "Stack'ler 200 BB ve UTG'nin aralığı güçlü",
+          "Stack'ler 20 BB",
+          "Flop'ta set olasılığı ≈ %25 olduğu için her derinlikte",
+          "UTG'nin flop'ta sık sık pes eden biri olması",
+        ],
+        correct: 0,
+        why: "Flop'ta set ya da daha iyisi yapma olasılığı ≈ %11,8 (yaklaşık 7,5'e 1). Tek başına fiyat yetmez; call'u kârlı yapan, set tutunca kazanacağın ek chip'lerdir. Bunun için derin stack ve set'e karşı chip verebilecek güçlü eller gerekir. 20 BB'de kazanılabilecek ek chip sınırlıdır; sık pes eden rakip de set tuttuğunda daha az ödeme yapar.",
+        spot: "c13",
+      },
+      {
+        q: "Rakip yarım pot bahis yaptı (pot 10 BB, bahis 5 BB). Call için gereken equity nedir?",
+        options: ["%20", "%25", "%33", "%50"],
+        correct: 1,
+        why: "Ortada 15 BB var, 5 BB ödüyorsun: 5 / 20 = %25. Pot ne kadar olursa olsun yarım pot bahis her zaman %25 ister; pot kadar bahis %33, üçte bir pot bahis %20 ister.",
+      },
+    ],
+  },
+  {
     slug: "blind-savunmasi",
     title: "Blind savunması: fiyat, aralık, pozisyon",
     summary: "BB'de ne kadar equity gerekir, ham equity neden yetmez ve açanın pozisyonu kararı nasıl değiştirir?",

@@ -4,7 +4,7 @@ import { HANDS } from "./hands";
 import { POST_BY_SLUG } from "./blog";
 import { pctSuffixProblem } from "@/lib/trSuffix";
 import { cardFromString, evaluate7 } from "@/lib/poker/evaluator";
-import { requiredEquity, bluffBreakEven, icm } from "@/lib/poker/math";
+import { requiredEquity, bluffBreakEven, icm, outsProbability } from "@/lib/poker/math";
 import { replay } from "@/lib/poker/replay";
 import ranges from "./ranges.json";
 
@@ -240,5 +240,109 @@ describe("bubble call/fold quiz'i: ib01 sayıları", () => {
     expect(L).toBeCloseTo(0, 5);
     expect((F - L) / (W - L)).toBeCloseTo(0.515, 2);
     expect(answer("bubble-call-fold", 3)).toBe("%51,5");
+  });
+});
+
+describe("pot odds quiz'i: hesaplar", () => {
+  const Z = "pot-odds-ve-cekisler";
+  const spot = (id: string) => replay(HANDS.find((h) => h.id === id)!);
+  const cards = (s: string) => (s.match(/.{2}/g) ?? []).map(cardFromString);
+  /** Hero'nun rakibi river'da geçtiği kart sayısı ve görülmeyen kart sayısı. */
+  const riverOuts = (hero: string, board: string, villain: string, villainKnown: boolean) => {
+    const h = cards(hero);
+    const b = cards(board);
+    const v = cards(villain);
+    const used = new Set([...h, ...b, ...v]);
+    let outs = 0;
+    for (let c = 0; c < 52; c++) {
+      if (used.has(c)) continue;
+      if (evaluate7([...h, ...b, c]) > evaluate7([...v, ...b, c])) outs++;
+    }
+    return { outs, unseen: 52 - h.length - b.length - (villainKnown ? v.length : 0) };
+  };
+
+  it("1: c17 fiyatı 3,7 / 12,9 ≈ %28,7; yaygın hatalar %40 ve %67", () => {
+    const r = spot("c17");
+    expect(r.pot).toBeCloseTo(9.2, 5);
+    expect(r.toCall).toBeCloseTo(3.7, 5);
+    expect(requiredEquity(r.pot, r.toCall)).toBeCloseTo(0.287, 3);
+    expect(answer(Z, 1)).toBe("%29");
+    expect(3.7 / 9.2).toBeCloseTo(0.402, 3);
+    expect(3.7 / 5.5).toBeCloseTo(0.673, 3);
+  });
+
+  it("2: 9 out, flop'tan turn'e 9/47 ≈ %19,1; river'a kadar ≈ %35,0", () => {
+    const p = outsProbability(9, "flop");
+    expect(p.nextCard).toBeCloseTo(0.191, 3);
+    expect(p.byRiver).toBeCloseTo(0.350, 3);
+    expect(p.nextCard).toBeLessThan(requiredEquity(9.2, 3.7));
+  });
+
+  it("3: c18 gutshot 4/46 ≈ %8,7, gereken %33,3; başabaş için ≈ 102 BB ek kazanç, geride ≈ 72 BB", () => {
+    const r = spot("c18");
+    expect(r.toCall).toBeCloseTo(12, 5);
+    expect(r.pot).toBeCloseTo(24, 5);
+    const need = requiredEquity(r.pot, r.toCall);
+    expect(need).toBeCloseTo(1 / 3, 4);
+    const p = 4 / 46;
+    expect(r.toCall / p - (r.pot + r.toCall)).toBeCloseTo(102, 0);
+    const behind = r.seats.BB.stack - r.toCall;
+    expect(behind).toBeCloseTo(72.25, 2);
+    expect(behind).toBeLessThan(102);
+    // Gutshot gerçekten 4 out: tek pair'e (A) karşı yalnızca 9'lar kazanıyor
+    const h = HANDS.find((x) => x.id === "c18")!;
+    expect(riverOuts(h.hero, h.board!, "AhQs", false).outs).toBe(4);
+  });
+
+  it("4: c19 (Q-6) 8/46 ≈ %17,4 > gereken 4/24 ≈ %16,7, fark 1 puandan az", () => {
+    const r = spot("c19");
+    expect(r.pot).toBeCloseTo(20, 5);
+    expect(r.toCall).toBeCloseTo(4, 5);
+    const need = requiredEquity(r.pot, r.toCall);
+    const h = HANDS.find((x) => x.id === "c19")!;
+    const { outs, unseen } = riverOuts(h.hero, h.board!, "KhQs", false);
+    expect(outs).toBe(8);
+    expect(unseen).toBe(46);
+    expect(outs / unseen).toBeCloseTo(0.174, 3);
+    expect(outs / unseen - need).toBeGreaterThan(0);
+    expect(outs / unseen - need).toBeLessThan(0.01);
+    expect(answer(Z, 4)).toBe("8 / 46 ≈ %17,4");
+    expect(h.reasoning).toContain("8 / 46");
+    expect(h.reasoning).not.toContain("8 / 44");
+    expect(r.seats.BTN.stack).toBeCloseTo(72.25, 2);
+  });
+
+  it("5: açık kartlı all-in spotu 9 out / 44, gereken ≈ %43,2", () => {
+    const h = HANDS.find((x) => x.id === "o-QhKc-6cAh7hJc")!;
+    const r = replay(h);
+    const { outs, unseen } = riverOuts(h.hero, h.board!, h.villain!.cards, true);
+    expect(unseen).toBe(44);
+    expect(outs).toBe(9);
+    expect(requiredEquity(r.pot, r.toCall)).toBeCloseTo(0.432, 3);
+    expect(answer(Z, 5)).toBe("44");
+    expect(h.correct).toBe(0);
+  });
+
+  it("6: 15 out, iki kart ≈ %54,1; 4 kuralı %60", () => {
+    const p = outsProbability(15, "flop");
+    expect(p.byRiver).toBeCloseTo(0.541, 3);
+    expect(p.rule).toBeCloseTo(0.6, 6);
+    expect(answer(Z, 6)).toBe("%54");
+    expect(outsProbability(9, "flop").rule).toBeCloseTo(0.36, 6);
+  });
+
+  it("7: c13 derin stack (200 BB), set ≈ %11,8", () => {
+    const h = HANDS.find((x) => x.id === "c13")!;
+    expect(h.note).toContain("200 BB");
+    expect(h.correct).toBe(1);
+    const C3 = (n: number) => (n * (n - 1) * (n - 2)) / 6;
+    expect(1 - C3(48) / C3(50)).toBeCloseTo(0.118, 3);
+  });
+
+  it("8: yarım pot %25, pot kadar %33, üçte bir pot %20", () => {
+    expect(requiredEquity(15, 5)).toBeCloseTo(0.25, 6);
+    expect(requiredEquity(20, 10)).toBeCloseTo(1 / 3, 6);
+    expect(requiredEquity(10 + 10 / 3, 10 / 3)).toBeCloseTo(0.2, 6);
+    expect(answer(Z, 8)).toBe("%25");
   });
 });

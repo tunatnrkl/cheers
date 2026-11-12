@@ -181,7 +181,7 @@ const CURATED: Hand[] = [
     id: "c19", title: "Çift uçlu kent çekişine küçük bahis", game: "cash", street: "turn", heroPos: "BTN", stackBB: 80,
     hero: "9c8c", board: "Kd7s6h2c", potBB: 20, seq: ["BTN r2.5", "SB f", "BB r7.75", "BTN c", "F Kd7s6h", "BB x", "BTN x", "T 2c", "BB b4"],
     options: ["Fold", "Call (4 BB)", "Raise 14 BB"], correct: 1, topic: "odds", level: 2,
-    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %17. Çift uçlu kent çekişi 8 out'la river'da yaklaşık %18 tutar (8 / 44); yani fiyat tek başına zaten yeterli. Pozisyondasın ve tutarsan ek chip kazanma şansın (implied odds) da var; bu, call'u daha da rahat yapar.",
+    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity 4 / 24 ≈ %16,7. Turn'de 46 kart görmüyorsun; çift uçlu kent çekişi 8 out'la river'da 8 / 46 ≈ %17,4 tutar. Fiyat kıl payı yetiyor, fark 1 puanın altında. Call'u rahatlatan, pozisyonda olman ve geride 72 BB varken tutarsan ek chip kazanabilmen (implied odds).",
   },
   {
     id: "c20", title: "River'da top pair: value bet", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
