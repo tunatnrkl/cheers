@@ -92,6 +92,12 @@ export function CoachChat({ hand, chosen, trigger }: Props) {
       });
       if (!res.ok || !res.body) {
         const data = await res.json().catch(() => ({}));
+        // F-1 (16. çalışma): asistan yapılandırılmamışsa (503) "Neden?" sorusuna elin yazılı gerekçesi gösterilir;
+        // aksi halde sunuculu kurulumda gerekçe hiç görünmüyordu.
+        if (res.status === 503 && answered && /neden/i.test(q)) {
+          update({ content: hand.reasoning });
+          return;
+        }
         update({ content: data.error || "Koç şu an yanıt veremiyor.", error: true });
         return;
       }

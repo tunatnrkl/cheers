@@ -2,16 +2,18 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-12, 15. çalışma**
+Son güncelleme: **2026-11-12, 16. çalışma**
 
 ## Kalıcı kullanıcı talimatı (13. çalışmada verildi)
 
 **Her çalışmada, o an en az spotu olan konuya en az 50 yeni alıştırma eklenir.** Önce konu sayıları ölçülür (`HANDS`'i `topic`'e göre say). Spotlar mümkünse `scripts/generate-ranges.mts`'e yeni bir bölüm olarak, kendi tohumlu üreteciyle ve dosyanın sonuna eklenir (önceki bölümlerin çıktısı bayt bayt aynı kalmalı; `drills.json`'un ilk kısmı eskisiyle karşılaştırılır). Kalite kuralları gevşetilmez: cevap kesin sayım ya da testte yeniden ölçülen bir modelle belirlenir, rakip aralığı ve varsayımlar `note`'ta tek cümle, sınırda olanlar alınmaz, üreteçten bağımsız bir test her spotu yeniden hesaplar. Konu doğrulanabilir bir modelle 50 spota ulaştırılamıyorsa uydurma yapılmaz: eklenebilen sayı ve engel raporda ve bildirimde açıkça yazılır.
 
+> **Uyarı (16):** 14. ve 15. çalışmalar bu talimatı içermeyen bir commit'ten (`ac8c3d7`) dallandığı için talimatı ve 60 value spotunu (`b211215`, dal `56jps3`) görmedi; iki çalışma talimatı uygulamadı. 16. çalışma `b211215`'i bu zincire aldı. Dal kurarken **"Son güncelleme" numarası en büyük olan** dalı seç, ama ayrıca yan dallarda (`git log <senin dalın>..origin/<dal>`) zincirde olmayan commit kalıp kalmadığına bak.
+
 ## Kullanıcıdan beklenenler (önemli)
 
-1. **Dal akışı (15'te de açık):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9 (`g2abma`) … 14 (`ct3uj1`) birleştirilmedi; 15. çalışma onların üzerine kuruldu: **`claude/wizardly-meitner-stm5g6` (en güncel dal, 9–15'i içerir)**. Yalnızca bunu birleştirmek yeterli. Sonraki çalışma önce `git branch -r --sort=-committerdate | head` ile en yeni dalı bulmalı, `HAFIZA.md`'deki "Son güncelleme" satırına bakmalı ve kendi dalını en yeni hafızayı taşıyan dalın üzerine kurmalı (`git checkout -B <kendi dalı> origin/<o dal>`).
-2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (15'te hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
+1. **Dal akışı (16):** varsayılan dal `claude/charming-davinci-emhvz1` 1–8. çalışmaları içeriyor (PR #1, #2). 9–16 birleştirilmedi. **En güncel dal: `claude/wizardly-meitner-p4oajz` (9–16 + 13'ün ek commit'i).** Yalnızca bunu birleştirmek yeterli. Birleştirilmemesi gerekenler: `56jps3` (içeriği bu dalda), `hou5l2` (9. çalışmanın paralel, eski bir kopyası; G-2'yi farklı biçimde yapıyor, çakışır), `05x26x`, `admiring-babbage-*` (P-4).
+2. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (16'da hâlâ yer tutucu). Öneri: `HAFIZA.md` (depo kökü).
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi (README Aşama 1, adım 10).
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
 5. **B-1 ürün kararı** (`acceptable` alanı): poker içerik işlerinin (c39, sınırda spotlar) tek engeli.
@@ -20,23 +22,30 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 ## Mevcut durum
 
 - Next.js 16 + React 19 + PostgreSQL + Claude API. Türkçe Texas Hold'em çalışma sitesi, gerçek parayla oyun yok, 18+.
-- 583 spot (65 elle yazılmış + 518 üretilmiş; `callshove` 122, `icm` 12), 138 sözlük terimi, 9 blog yazısı, **7 quiz / 49 soru** (`/quiz`).
+- **703 spot** (65 elle yazılmış + 638 üretilmiş). Konu sayıları (16 sonu): `3bet` 5, `cbet` 5, `savunma` 6, `spr` 6, `icm` 12, `value` 63, **`blof` 65**, `odds` 75, `acilis` 122, `callshove` 122, `pushfold` 222. 138 sözlük terimi, **10 blog yazısı**, 7 quiz / 49 soru (`/quiz`).
 - `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
 - Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (15. çalışma): `npm test` **708/708**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
-<!--13ek-->
-- 643 spot (65 elle yazılmış + 578 üretilmiş; `callshove` 122, `icm` 12, `value` 63), 138 sözlük terimi, 9 blog yazısı, **5 quiz / 34 soru** (`/quiz`; 12'de 4, 13'te pot odds quiz'i eklendi).
-- `/profil`'de **Gelişim** kartı (7); 8'de gerçek PostgreSQL ile üye yolu denendi, sayılar SQL ile birebir. Üyede "Çözülen soru/Doğruluk" sunucu toplamından (5000 sınırından etkilenmez): kayan 7 günlük pencerelerle 8 haftalık eğilim, pozisyona göre doğruluk (oyun tipi filtresi), ilk görüş / tekrar ayrımı; 10 cevaptan azında oran yok.
-- Marka: **Cheers** (PR #2 ile ana dalda). 13 sayfa birleştirme sonrası tarandı (9): eski ad yok, 390 px'te taşma yok.
-- Sağlık (13. çalışma): `npm test` **750/750**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı).
+- Sağlık (16. çalışma): `npm test` **833/833**, `npm run typecheck` temiz, `npm run build` temiz. `npm run ranges` tekrarlanabilir (aynı tohumla bayt bayt aynı çıktı; önceki 578 üretilmiş spot değişmedi).
 - Profil (9): konu tablosu ve çalışma önerisi üyede sunucunun konu toplamlarından; CSV/JSON dökümü `GET /api/attempts/export` ile bütün kayıtlar (12.345 kayıtla PostgreSQL'de doğrulandı). Yalnızca Gelişim kartı son 5000 cevapla sınırlı ve bunu söylüyor.
 - Alıştırma masasında `Seri` sayacı yok; engellemeyen ara kartı var (varsayılan 20 elde bir ya da 25 dakikada bir, ayarlanabilir). Masaüstünde soluk masanın üstünde, koç panelinde "Bu bölümü yorumla" kısayoluyla; mobilde masanın yerinde. Tarayıcıda doğrulandı (6).
+- Koç sohbeti (16): sunuculu kurulumda API anahtarı yoksa "Neden?" artık spotun yazılı gerekçesini gösteriyor (F-1). Statik sürümde zaten öyleydi.
 - 7 quiz, 49 soru (`/quiz`): pot odds, c-bet ve barrel (14), 3-bet ve squeeze (15), blind savunması, SPR ve value, bubble call/fold, bubble push/fold.
 - Quiz'ler GitHub Pages ayarlarıyla (`basePath=/cheers`, statik) ve açık/koyu temada denendi (13): öneksiz bağlantı ve 4xx yok, metin kontrastı ≥ 4,79 (açık tema en düşük, eşiğe yakın).
 - ICM hesap makinesi (10): `5.000` binlik, `%50` yüzde okunuyor; atılan ve 9'u aşan girişler arayüzde söyleniyor (`icmInput.ts`, testli).
 - Görünen bütün spot metinlerinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts` ile üretiliyor.
 
 ## Tamamlananlar
+
+### 16. çalışma — rapor: [`docs/ekip/2026-11-12/20-calisma-16-kapanis.md`](docs/ekip/2026-11-12/20-calisma-16-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| Dal onarımı: 13'ün ek commit'i `b211215` (kalıcı talimat + 60 value spotu) 15'in zincirine alındı; README, test ve hafıza çakışmaları çözüldü; `npm run ranges` bayt bayt aynı | CEO, QA | ✅ |
+| Kalıcı talimat: en az spotlu konular `3bet`/`cbet`/`blof` (5'er); doğrulanabilir model kurulabilen `blof` seçildi → **60 river blöf/check spotu** (`bl-…`, 30 bahis, 30 check), üreteçte 6. bölüm, tohum 20261116; üç call senaryosunda aynı cevap ve ≥ 0,07 × bahis fark; önceki 578 üretilmiş spot bayt bayt aynı | Poker Uzmanı | ✅ |
+| Üreteçten bağımsız test (3 senaryo, gerekçedeki oran ±0,006, eşik 1,8/5,5); cevabı ters çevrilmiş spotu yakaladığı denendi | QA | ✅ |
+| Blog: `river-blof-mu-check-mi` (10. yazı): %24,7 kuralı, "fold ettirdiğin eller kimdi?" oranı, 3 örnek spot; yazıdaki 15 sayı testte yeniden hesaplanıyor | Content, Poker Uzmanı, QA | ✅ |
+| F-1: sunuculu kurulumda API anahtarı yokken "Neden?" gerekçeyi göstermiyordu; 503'te yazılı gerekçeye düşüyor | Frontend, QA | ✅ |
+| Playwright 390/1366 px: yazı, iki spot (bahis/check), "Blöf ve bluff catch (65)" filtresi, gerekçe, taşma 0, konsol/4xx 0 | QA | ✅ (açık tema, Pages, ekran okuyucu denenmedi) |
 
 ### 15. çalışma — rapor: [`docs/ekip/2026-11-12/19-calisma-15-kapanis.md`](docs/ekip/2026-11-12/19-calisma-15-kapanis.md)
 
@@ -171,6 +180,7 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 
 ## Devam eden / açık işler
 
+0. **Kalıcı talimat (16):** `3bet` ve `cbet` hâlâ 5'er spot; sıradaki çalışma birini 50+'ya çıkarmalı.
 1. **3-bet içerik boşluğu (15):** 3-bet'e karşı pozisyonda devam (IP call/4-bet), 4-bet'e karşı karar ve blind-vs-blind 3-bet spotu yok; 3-bet konulu blog yazısı yok. Bütün konularda quiz var (`odds`, `cbet`, `3bet`, `savunma`, `spr/value`, ICM).
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 3. **`acceptable?: number[]` alanı** (B-1): c09, c10 (sınırda, 15), c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
@@ -181,6 +191,9 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 
 ## Alınan teknik ve ürün kararları
 
+- **River blöf spotları (16):** value bölümünün senaryosu ve BB aralığı; kahramanın eli yalnızca yüksek kart. Bahsin check'e göre farkı = 1,8 × (call eden) − 5,5 × (fold edip kahramanı yenecek), beraberlik yarım. Gerekçe bunu tek orana indirir: (fold edip seni yenecek) / (call eden) > 1,8 / 5,5 ≈ 0,33. Üç call senaryosu (temel çift+, sıkı üst çift+, geniş çift+ veya elinde as) aynı cevabı vermeli; blöf cevabı geniş senaryoya, check cevabı sıkı senaryoya dayanıklı. Gerekçedeki oran testte ±0,006 ile yeniden hesaplanır.
+- **Koç sohbeti yedeği (16):** asistan 503 döndürürse "Neden?" sorusuna spotun `reasoning` metni gösterilir; diğer sorular hata mesajını korur.
+- **Dal seçimi (16):** "Son güncelleme" numarası en büyük dal temel alınır; ayrıca `git log <dal>..origin/<yan dal>` ile zincir dışı commit aranır (14–15'in kalıcı talimatı kaçırması gibi).
 - **Hafıza dosyası kökteki `HAFIZA.md`.** `docs/ekip/HAFIZA.md` yalnızca yönlendirme.
 - Equity iddiaları projenin kendi değerlendiricisiyle ve `ranges.json` ile kontrol edilir. Bu aralıklar yaklaşıktır, solver çıktısı değildir; her raporda böyle yazılır. Mümkünse tam sayım yapılır.
 - **Pot hesabında karşılanmayan (uncalled) bahis pota sayılmaz.** Gereken equity = call / (call sonrası gerçekten çekişilen pot). Sayılar `replay` çıktısından alınır, elle değil.
@@ -253,10 +266,13 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 | A-2 | C-bet quiz taslağında kart renk sembolleri tutarsız çiziliyordu (kupa emoji) | Düşük | Yayından önce düzeltildi (14) |
 | Q-9 | c09: "yalnızca KK+ ile 3-bet atan rakibe karşı call daha güvenli"; QQ KK+'ya karşı ≈ %18, gereken %31,4 | Düşük | Düzeltildi (15), testli |
 | Q-10 | c10: fold cevabı ham equity'ye göre eşiğin 3,1 puan üstünde (sınırda) ve gerekçe bunu söylemiyordu | Düşük–orta | Düzeltildi (15): fiyat, realization %91, aralık duyarlılığı yazıldı, testli; B-1 adayı |
+| P-5 | 14. ve 15. çalışma, 13'ün ek commit'inden (kalıcı talimat + 60 value spotu) habersiz dallandı; iki çalışmada talimat uygulanmadı | Orta | Düzeltildi (16): commit zincire alındı, dal seçimi kuralı yazıldı |
+| F-1 | Sunuculu kurulumda API anahtarı yokken "Neden?" yalnızca hata gösteriyor, spotun gerekçesi hiç görünmüyordu | Orta | Düzeltildi (16), tarayıcıda doğrulandı |
 | P-3 | "Cheers" yeniden markalaması (`ch8abk`/`ab8a72b`) ana zincirde yok | Bilgi | Kapandı (9): kullanıcı birleştirdi |
 
 ## Doğrulanamayan konular
 
+- River blöf spotları (16): value spotlarıyla aynı varsayımlar (BB aralığı daralmamış, call yalnızca el kategorisine bağlı, check-raise yok, tek bahis boyutu). Gerçek oyuncuların çiftsiz ellerle (özellikle as yüksekle) bu kadar sık fold edip etmediği bilinmiyor; bu yüzden geniş senaryo ölçüldü. BB'nin üç sokak boyunca kent/floşla check etmesi gerçekte daha seyrek olabilir. Solver karşılaştırması yok; blöf seçiminde solver'ların kullandığı denge (blöf/value oranı) modellenmedi, karar yalnızca bu rakip modeline karşı en iyi cevap.
 - 3-bet aralıkları (15): c09, c10'daki buton 3-bet aralıkları ve c12'deki buton flat aralığı ekip tahmini; solver ya da oyuncu havuzu verisiyle karşılaştırılmadı. c10'daki "pozisyon dışında %91 realization gerçekçi değil" yargısı ölçülmedi. Monte Carlo sapması ±0,3 puan civarı.
 - c36'daki butonun call aralığı (CO aralığı − AA–JJ, AK, AQs) bir varsayım.
 - Solver karşılaştırması yapılamadı (c09, c23, c24, c25, c34, c35, c39'daki karışık strateji yorumları; postflop range avantajı iddiaları).
@@ -276,6 +292,7 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 
 ## Atlanan roller
 
+- **Data Analyst, Davranış Bilimleri, UI/UX, Backend, Poker Eğitim** (16): veri yok; yeni mekanik, ekran ya da uç nokta yok; quiz gerekmedi (60 spot + yazı yeterli yük). F-1 küçük bir Frontend düzeltmesi, ayrı spesifikasyon gerektirmedi.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend, Content** (15): veri yok; yeni mekanik, ekran, uç nokta yok; 3-bet yazısı bir sonraki çalışmaya önerildi.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Frontend, Backend, Content** (14): veri yok; yeni mekanik, ekran, uç nokta yok (var olan quiz bileşeni); `c-bet-ne-zaman` yazısı zaten var.
 - **Data Analyst, Davranış Bilimleri, UI/UX, Backend, Content** (13): veri yok; yeni mekanik, ekran ya da uç nokta yok; pot odds yazısı zaten vardı.
@@ -292,15 +309,12 @@ Son güncelleme: **2026-11-12, 15. çalışma**
 
 ## Sonraki öncelikler
 
-1. **Dal kontrolü:** `stm5g6` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
-2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar (c09, c10, c35). Gelmediyse: **3-bet yazısı** (Content: c07–c10, c12'nin ölçülmüş sayılarıyla; quiz'in `posts[0]`'ı ona çevrilir) ve/veya **3-bet boşluğu** (IP'de 3-bet'e karşı ya da 4-bet'e karşı 1–2 spot; aralık notta, `3bet-denetim.mts` ile ölçülmüş).
-3. **CS-3 son adımı** (final masası ödül sıçraması için 2 ICM spotu) ya da c-bet boşluğu (delayed c-bet / check-raise'e karşı c-bet).
-4. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
-<!--13ek-->
-0. **Kalıcı talimat:** en az spotlu konuyu ölç, ona en az 50 spot ekle. 13 sonrası sayılar: `3bet` 5, `cbet` 5, `blof` 5, `savunma` 6, `spr` 6, `icm` 12. Sıradaki aday `3bet`/`cbet`/`blof` (eşit; önce doğrulanabilir model kurulabilecek olan seçilmeli, örn. blöf için river'da rakibin fold oranını kombinasyon sayımıyla ölçen bir model).
-1. **Dal kontrolü:** `56jps3` ana dala alındı mı? Alınmadıysa onun üzerine kur (`git branch -r --sort=-committerdate | head`, sonra `HAFIZA.md` "Son güncelleme").
-2. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar. Gelmediyse: **c-bet quiz'i** (c-bet spotları c14, c15, c23 vb. ve `c-bet-ne-zaman` yazısı; önce spot sayıları yeniden okunmalı, Q-6 gibi kaymalar aranmalı) ya da **CS-3 son adımı** (final masası ödül sıçraması için 2 ICM spotu + quiz; `icm-callfold.mts` / `icm-push.mts`).
-3. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
+0. **Kalıcı talimat:** konu sayılarını ölç. 16 sonu: `3bet` 5, `cbet` 5, `savunma` 6, `spr` 6. Sıradaki aday `3bet` ya da `cbet`. Öneriler: `3bet` için **kısa stack'te (20–40 BB) 3-bet'e karşı all-in ya da fold** (rakibin 3-bet aralığı `note`'ta, Monte Carlo + bağımsız test, callshove bölümüne benzer, dar/geniş aralıkta aynı cevap şartı); `cbet` için **turn'de ikinci barrel blöfü** (blöf bölümüyle aynı kombinasyon sayımı; BB'nin flop call aralığı `note`'ta). Model kurulamazsa uydurma yok, raporda engel yazılır.
+1. **Dal kontrolü:** `p4oajz` ana dala alındı mı? Alınmadıysa onun üzerine kur; yan dallarda zincir dışı commit var mı bak (16'daki uyarı).
+2. **3-bet yazısı** (Content, 15'ten devreden): c07–c10, c12'nin ölçülmüş sayılarıyla; quiz'in `posts[0]`'ı ona çevrilir.
+3. **B-1 kararı geldiyse:** `acceptable` alanı + c39 + sınırda spotlar (c09, c10, c35).
+4. CS-3 son adımı (final masası ödül sıçraması) ya da c-bet boşluğu (delayed c-bet / check-raise'e karşı c-bet).
+5. **P-4 (kullanıcı isterse):** `admiring-babbage-*` dallarının denetimi.
 
 **Yerel PostgreSQL ile deneme (8 ve 9'da çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb -h /tmp cheers`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. Sunucuyu yeniden başlatırken `pkill -f next-server` gerekir (`next start` alt süreci kalıyor; 9'da eski sürüm yanıt verdi). Toplu veri için `psql \copy`. İş bitince sunucu ve Postgres durdurulmalı, `.env.local` silinmeli.
 

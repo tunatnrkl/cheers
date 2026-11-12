@@ -61,6 +61,7 @@ describe("el verisi", () => {
 // Üretilen ellerin cevaplarını bağımsız olarak yeniden doğrular.
 import { cardFromString, evaluate7 } from "./evaluator";
 import ranges from "@/data/ranges.json";
+import { POSTS } from "@/data/blog";
 
 describe("üretilen ellerin cevapları", () => {
   it("pot odds elleri: kalan kartlar sayıldığında karar doğru", () => {
@@ -689,5 +690,122 @@ describe("river value spotları", () => {
         expect(Math.abs(per), h.id).toBeGreaterThanOrEqual(0.07);
       }
     }
+  });
+});
+
+// 16. çalışma: river blöf spotları (bl-). Üreteçten bağımsız yeniden hesap. Kahramanın çifti yok;
+// bahsin check'e göre farkı call eden elde B(2s−1), fold eden elde P(1−s). Üç call senaryosunda
+// (temel: çift ve üstü; sıkı: üst çift, overpair ve üstü; geniş: çift ve üstü + elinde as olan her el)
+// işaret cevapla aynı, fark kombinasyon başına en az 0,07 × bahis olmalı. Gerekçedeki oran
+// (fold edip seni yenecek eller / call eden eller) temel senaryodan yeniden hesaplanır.
+describe("river blöf spotları", () => {
+  const list = HANDS.filter((h) => h.id.startsWith("bl-"));
+  const R = "23456789TJQKA";
+  const bbLabels = (ranges.cash as Record<string, string[]>).BTN.filter((l) => !["AA", "KK", "QQ", "AKs", "AKo"].includes(l));
+  const combos: [number, number][] = [];
+  for (const l of bbLabels) {
+    const a = R.indexOf(l[0]);
+    const b = R.indexOf(l[1]);
+    for (let s1 = 0; s1 < 4; s1++)
+      for (let s2 = 0; s2 < 4; s2++) {
+        if (l.length === 2 ? s2 <= s1 : l[2] === "s" ? s1 !== s2 : s1 === s2) continue;
+        combos.push([a * 4 + s1, b * 4 + s2]);
+      }
+  }
+  const cat = (v: number) => Math.floor(v / 16 ** 5);
+
+  it("en az 50 spot, cevaplar iki tarafa dağılmış, konu blöf", () => {
+    expect(list.length).toBeGreaterThanOrEqual(50);
+    expect(list.filter((h) => h.correct === 1).length).toBeGreaterThanOrEqual(15);
+    expect(list.filter((h) => h.correct === 0).length).toBeGreaterThanOrEqual(15);
+    for (const h of list) expect(h.topic, h.id).toBe("blof");
+  });
+
+  it("karar üç call senaryosunda da kombinasyon sayımıyla aynı; gerekçedeki oran doğru", () => {
+    for (const h of list) {
+      const r = replay(h);
+      expect(r.pot, h.id).toBeCloseTo(5.5, 5);
+      expect(r.toCall, h.id).toBe(0);
+      expect(h.options[1]).toContain("1,8 BB");
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const board = h.board!.match(/.{2}/g)!.map(cardFromString);
+      expect(cat(evaluate7(board)), h.id).toBe(0);
+      const hv = evaluate7([...hero, ...board]);
+      expect(cat(hv), h.id).toBe(0);
+      const top = Math.max(...board.map((c) => c >> 2));
+      for (const mode of ["base", "strict", "wide"] as const) {
+        let d = 0;
+        let n = 0;
+        let callers = 0;
+        let lose = 0;
+        for (const [a, b] of combos) {
+          if ([...hero, ...board].includes(a) || [...hero, ...board].includes(b)) continue;
+          n++;
+          const v = evaluate7([a, b, ...board]);
+          const s = hv > v ? 1 : hv === v ? 0.5 : 0;
+          const pairRank = Math.floor(v / 16 ** 4) % 16;
+          const calls =
+            mode === "strict" ? cat(v) >= 2 || (cat(v) === 1 && pairRank >= top)
+            : mode === "wide" ? cat(v) >= 1 || a >> 2 === 12 || b >> 2 === 12
+            : cat(v) >= 1;
+          if (calls) {
+            callers++;
+            d += 1.8 * (2 * s - 1);
+          } else {
+            lose += 1 - s;
+            d += 5.5 * (1 - s);
+          }
+        }
+        const per = d / n / 1.8;
+        expect(per > 0, `${h.id} ${mode}`).toBe(h.correct === 1);
+        expect(Math.abs(per), `${h.id} ${mode}`).toBeGreaterThanOrEqual(0.07);
+        if (mode === "base") {
+          const shown = parseFloat(h.reasoning.match(/burada oran ≈ (\d+,\d+)/)![1].replace(",", "."));
+          expect(Math.abs(shown - lose / callers), h.id).toBeLessThanOrEqual(0.006);
+          expect(lose / callers > 1.8 / 5.5, h.id).toBe(h.correct === 1);
+        }
+      }
+    }
+  });
+
+  // Blog: river-blof-mu-check-mi. Yazıdaki yüzdeler ve oranlar temel senaryodan yeniden hesaplanır.
+  it("blog: river blöf yazısındaki örnek sayılar spotlarla aynı", () => {
+    const post = POSTS.find((p) => p.slug === "river-blof-mu-check-mi")!;
+    const text = post.body.map((b) => b.p).join(" ");
+    const stats = (id: string) => {
+      const h = HANDS.find((x) => x.id === id)!;
+      const hero = h.hero.match(/.{2}/g)!.map(cardFromString);
+      const board = h.board!.match(/.{2}/g)!.map(cardFromString);
+      const hv = evaluate7([...hero, ...board]);
+      let n = 0, callers = 0, lose = 0, win = 0;
+      for (const [a, b] of combos) {
+        if ([...hero, ...board].includes(a) || [...hero, ...board].includes(b)) continue;
+        n++;
+        const v = evaluate7([a, b, ...board]);
+        const s = hv > v ? 1 : hv === v ? 0.5 : 0;
+        if (cat(v) >= 1) callers++;
+        else { lose += 1 - s; win += s; }
+      }
+      return { h, call: Math.round((100 * callers) / n), fold: Math.round((100 * (n - callers)) / n), lose: Math.round((100 * lose) / n), sd: Math.round((100 * win) / n), beatFold: Math.round((100 * win) / (n - callers)), ratio: lose / callers };
+    };
+    const j9 = stats("bl-Jh9d-4d8c6c2d5s");
+    expect(j9.h.correct).toBe(1);
+    expect([j9.call, j9.fold, j9.lose, j9.sd]).toEqual([56, 44, 40, 4]);
+    expect(j9.ratio).toBeCloseTo(0.71, 2);
+    const j4 = stats("bl-Jd4d-2cAc8s7dTs");
+    expect(j4.h.correct).toBe(1);
+    expect(j4.ratio).toBeCloseTo(0.38, 2);
+    const k9 = stats("bl-Kd9c-5sQc2d4s3h");
+    expect(k9.h.correct).toBe(0);
+    expect([k9.call, k9.fold, k9.beatFold, k9.lose]).toEqual([73, 27, 75, 7]);
+    expect(k9.ratio).toBeCloseTo(0.09, 2);
+    const e6 = stats("bl-8c6c-TsQsKc5cJh");
+    expect(e6.h.correct).toBe(0);
+    expect(e6.call).toBe(98);
+    expect(e6.ratio).toBeCloseTo(0.01, 2);
+    for (const t of ["%56'sı", "%44'ü", "%40'ı", "%4'ünde", "≈ 0,71", "≈ 0,38", "%73'ü", "%27'si", "%75'i", "%7'si", "≈ 0,09", "%98'i", "≈ 0,01", "%24,7", "60 river spotu"])
+      expect(text, t).toContain(t);
+    expect(HANDS.filter((h) => h.id.startsWith("bl-")).length).toBe(60);
+    expect((1.8 / 7.3) * 100).toBeCloseTo(24.7, 1);
   });
 });

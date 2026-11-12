@@ -483,6 +483,104 @@ for (let guard = 0; guard < 400000 && valueDrills.length < 60; guard++) {
 }
 drills.push(...valueDrills);
 console.log("value:", valueDrills.length, valueCounts);
+
+// ── 6) Cash: river'da blöf ya da check (16. çalışma) ─────────────────
+// 5. bölümle aynı senaryo, ama kahramanın elinde çift yok (yalnızca yüksek kart). Seçenekler:
+// check ya da 1,8 BB. Karar yine BB'nin her kombinasyonu sayılarak: bahsin check'e göre farkı
+// call eden elde B(2s − 1), fold eden elde P(1 − s). Blöfün kazancı, showdown'da seni yenecek
+// ama bahse fold eden ellerden gelir; kaybı, call eden ellerden.
+// Üç call senaryosu ölçülür ve cevap üçünde de aynı olmalı: temel (her çift ve üstü call),
+// sıkı (yalnızca üst çift, overpair ve üstü) ve geniş (çift ve üstüne ek olarak elinde as olan
+// her el call). Blöf cevabı geniş senaryoya, check cevabı sıkı senaryoya dayanıklı olur.
+type BluffMode = "base" | "strict" | "wide";
+const rndBluff = mulberry32(20261116);
+function bluffDelta(hero: number[], board: number[], mode: BluffMode) {
+  const used = new Set([...hero, ...board]);
+  const boardTop = Math.max(...board.map((c) => c >> 2));
+  const h = evaluate7([...hero, ...board]);
+  let delta = 0;
+  let n = 0;
+  let callers = 0;
+  let foldBeatsYou = 0; // fold eden ama showdown'da seni yenecek eller (beraberlik yarım)
+  for (const [a, b] of bbCombos) {
+    if (used.has(a) || used.has(b)) continue;
+    n++;
+    const v = evaluate7([a, b, ...board]);
+    const s = h > v ? 1 : h === v ? 0.5 : 0;
+    const cat = category(v);
+    const pairRank = Math.floor(v / 16 ** 4) % 16;
+    const calls =
+      mode === "strict" ? cat >= 2 || (cat === 1 && pairRank >= boardTop)
+      : mode === "wide" ? cat >= 1 || a >> 2 === 12 || b >> 2 === 12
+      : cat >= 1;
+    if (calls) {
+      callers++;
+      delta += VALUE_BET * (2 * s - 1);
+    } else {
+      foldBeatsYou += 1 - s;
+      delta += VALUE_POT * (1 - s);
+    }
+  }
+  return { perCombo: delta / n / VALUE_BET, n, callers, foldBeatsYou };
+}
+const bluffDrills: Drill[] = [];
+const bluffCounts = { bet: 0, check: 0 };
+for (let guard = 0; guard < 400000 && bluffDrills.length < 60; guard++) {
+  const [h1, h2] = btnCombos[Math.floor(rndBluff() * btnCombos.length)];
+  const deck = Array.from({ length: 52 }, (_, i) => i).filter((c) => c !== h1 && c !== h2);
+  for (let i = 0; i < 5; i++) {
+    const j = i + Math.floor(rndBluff() * (deck.length - i));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  const board = deck.slice(0, 5);
+  const hero = [h1, h2];
+  // Board tek başına elsiz; kahramanın da çifti, kenti, floşu yok (yalnızca yüksek kart)
+  if (category(evaluate7(board)) !== 0) continue;
+  if (category(evaluate7([...hero, ...board])) !== 0) continue;
+  const id = `bl-${hero.map(cardStr).join("")}-${board.map(cardStr).join("")}`;
+  if (bluffDrills.some((d) => d.id === id)) continue;
+  const base = bluffDelta(hero, board, "base");
+  const strict = bluffDelta(hero, board, "strict");
+  const wide = bluffDelta(hero, board, "wide");
+  const signs = [base, strict, wide].map((x) => Math.sign(x.perCombo));
+  if (signs.some((x) => x !== signs[0])) continue;
+  if (Math.min(...[base, strict, wide].map((x) => Math.abs(x.perCombo))) < VALUE_MARGIN) continue;
+  const bet = base.perCombo > 0;
+  if (bluffCounts[bet ? "bet" : "check"] >= 30) continue;
+  bluffCounts[bet ? "bet" : "check"]++;
+
+  const heroCards = hero.map(cardStr).join("");
+  const flop = board.slice(0, 3).map(cardStr).join("");
+  const [turn, river] = [cardStr(board[3]), cardStr(board[4])];
+  const folders = base.n - base.callers;
+  const callPct = pct(base.callers / base.n);
+  const foldPct = pct(folders / base.n);
+  const winPct = pct(base.foldBeatsYou / base.n);
+  const sdPct = pct((folders - base.foldBeatsYou) / base.n); // check'te showdown payın (call edenlerin hepsi seni yener)
+  const beatFoldPct = pct((folders - base.foldBeatsYou) / folders);
+  const ratio = num(Math.round((base.foldBeatsYou / base.callers) * 100) / 100);
+  const ending = bet
+    ? `Check edersen showdown'da BB'nin ellerinin yalnızca yaklaşık ${numSuffix(sdPct, "inde")} kazanırsın; bahis, check'e göre kâr ekler. BB elinde as olan her elle call etse bile sonuç değişmiyor.`
+    : foldPct < 10
+      ? `Bu board'da BB'nin aralığının büyük kısmı en az bir çift ya da daha iyisini yaptı; bahse fold edecek el neredeyse yok (aralığın yaklaşık ${numSuffix(foldPct, "i")}). Bahis neredeyse her seferinde call görür ve kaybeder; check daha az kaybettirir. BB yalnızca üst çift ve üstüyle call etse bile sonuç değişmiyor.`
+      : `Bahse fold edecek ellerin (aralığın yaklaşık ${numSuffix(foldPct, "i")}) yaklaşık ${numSuffix(beatFoldPct, "i")} showdown'da zaten sana kaybediyordu; bahis onları kaçırır, geriye yalnızca seni yenen eller kalır. ${sdPct >= 20 ? "Check, showdown değerini bedavaya görür." : "Check daha az kaybettirir."} BB yalnızca üst çift ve üstüyle call etse bile sonuç değişmiyor.`;
+  bluffDrills.push({
+    id,
+    title: `River'da ${pretty(heroCards)}: blöf mü, check mi?`,
+    game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
+    hero: heroCards, board: flop + turn + river, potBB: VALUE_POT,
+    seq: ["BTN r2.5", "SB f", "BB c", `F ${flop}`, "BB x", "BTN x", `T ${turn}`, "BB x", "BTN x", `R ${river}`, "BB x"],
+    note: `Varsayım: BB'nin aralığı sitedeki buton açılış aralığı, AA, KK, QQ ve AK hariç (bunlarla 3-bet ederdi), önceki check'lerle daralmamış; 1,8 BB'lik bahse çift ve üstüyle call eder, çiftsiz ellerle (as yüksek dahil) fold eder, check-raise yapmaz.`,
+    options: ["Check", "Bahis 1,8 BB (pot'un üçte biri)"], correct: bet ? 1 : 0, topic: "blof", level: 2,
+    reasoning:
+      `Elinde çift yok; bahse yalnızca seni yenen eller call eder. Bu yüzden soru şu: fold ettireceğin eller arasında showdown'da seni yenecek olanlar yeterince çok mu? ` +
+      `BB'nin aralığının yaklaşık ${numSuffix(callPct, "i")} call eder (her biri sana 1,8 BB kaybettirir), yaklaşık ${numSuffix(winPct, "i")} ise fold eder ama check'te seni yenerdi (her biri 5,5 BB'lik potu sana kazandırır). ` +
+      `Blöf, ikinci grubun birinciye oranı 1,8/5,5 ≈ 0,33 değerini geçerse kârlı; burada oran ≈ ${ratio}. ` +
+      ending,
+  });
+}
+drills.push(...bluffDrills);
+console.log("blöf:", bluffDrills.length, bluffCounts);
 console.log("callshove: sınırda çıkarılan", dropped.length, dropped.join(", "));
 console.log("callshove: aralığa duyarlı", sensitive.length, sensitive.join(" "));
 console.log("pot odds:", potOdds.length, counts);
