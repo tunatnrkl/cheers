@@ -6,6 +6,8 @@
 // çalışma aralıklarına göre (solver çıktısı değil), kenar payı bırakılarak denetlenir; gereken equity
 // formülle, aralığa karşı equity sabit tohumlu Monte Carlo ile yeniden hesaplanır. Turnuva hesapları (ante'li pot,
 // M oranı, blind artışında BB erimesi, ortalama stack, ödül payları) girdileri senaryodan elle girilerek yeniden yapılır.
+// Cash c7–c8: bloker kombinasyonları, outs ve kazandıran kartlar (kartlar tek tek denenir), 2 ve 4 kuralı ile kesin
+// tutma olasılığı, el ele equity (öğretim örneği), implied odds başabaşı ve o-… spotlarının fiyatı.
 // Alıştırmadaki `denetim` alanı neyin hesaplanacağını söyler; cevap `dogru` ile karşılaştırılır.
 //
 // Çalıştırma: node scripts/mufredat/denetle.mts   (hata varsa 1 ile çıkar)
@@ -205,7 +207,12 @@ export function acilisDurumu(poz: string, el: string): "ac" | "fold" | "sinir" {
   if (karisik(el, poz)) return "sinir";
   return BASLANGIC.get(el)! >= toplam + PAY ? "fold" : "sinir";
 }
-export const aralikYuzdesi = (poz: string) => (listeKombo(RANGES.cash[poz]) / IKILILER.length) * 100;
+// drills.json'daki üretilmiş spotlar (o-… pot odds spotlarının fiyatı için)
+type DrillSpot = { id: string; potBB: number; options: string[] };
+const DRILLS = new Map<string, DrillSpot>(
+  (JSON.parse(readFileSync(new URL("../../src/data/drills.json", import.meta.url), "utf8")) as DrillSpot[]).map((h) => [h.id, h]),
+);
+export const aralikYuzdesi =(poz: string) => (listeKombo(RANGES.cash[poz]) / IKILILER.length) * 100;
 
 // ── Aralığa karşı equity: sabit tohumlu Monte Carlo ──
 function tohumlu(t: number) {
@@ -726,6 +733,136 @@ export function alistirmaDenetle(a: Al): string[] {
         }
         const r = d.sonuc === "oran" ? (toplam - tutan) / tutan : (tutan / toplam) * 100;
         sayiKarsila(r, d.sonuc === "oran" ? "tutmama/tutma oranı" : "flop'ta tutma yüzdesi", 0.06);
+        break;
+      }
+      // ── Cash c7–c8: blokerler, outs, 2 ve 4 kuralı, el ele equity, implied odds, spot fiyatı ──
+      case "blokerKombo": {
+        // Elindeki kart(lar) görülürken rakibin bu el adlarından kaç kombinasyonu kalır (kartlar tek tek sayılır).
+        const benim = kartlar(d.kartlar as string);
+        benzersiz(benim, "kartlar");
+        gorunurMu(a, [d.kartlar as string]);
+        const adlar = d.eller as string[];
+        if (new Set(adlar).size !== adlar.length) throw new Error("aynı el adı iki kez sayılmış");
+        adlar.forEach(kombo);
+        const n = IKILILER.filter(([x, y]) => adlar.includes(elAdi(x, y)) && !benim.includes(x) && !benim.includes(y)).length;
+        sayiKarsila(n, "kalan kombinasyon", 0);
+        break;
+      }
+      case "outs": {
+        // Görülmeyen kartlardan (52 − el − board) hangileri sıradaki kartta eli en az `hedef` el çeşidine çıkarır.
+        // Eli zaten hedefteyse soru anlamsızdır (hata). Kartlar evaluator ile tek tek denenir.
+        const el = kartlar(d.el as string), board = kartlar(d.board as string);
+        benzersiz([...el, ...board], "el ve board");
+        if (board.length < 3 || board.length > 4) throw new Error("outs için board 3 ya da 4 kart olmalı");
+        gorunurMu(a, [d.el as string, d.board as string]);
+        const hedef = katSira(d.hedef as string);
+        if (kategori(deger([...el, ...board])) >= hedef) throw new Error(`el zaten ${d.hedef} ya da daha iyisi`);
+        const kalan = DESTE.filter((c) => !el.includes(c) && !board.includes(c));
+        const n = kalan.filter((c) => kategori(deger([...el, ...board, c])) >= hedef).length;
+        sayiKarsila(n, "outs", 0);
+        break;
+      }
+      case "kazandiranKart": {
+        // ÖĞRETİM ÖRNEĞİ (rakip eli açıkça verilmiş): turn board'unda river'da kahramanı rakibin önüne geçiren kart sayısı.
+        // Kahraman şu an geride olmalı; berabere bitiren kart sayılmaz.
+        const el = kartlar(d.el as string), rakip = kartlar(d.rakip as string), board = kartlar(d.board as string);
+        benzersiz([...el, ...rakip, ...board], "eller ve board");
+        if (board.length !== 4) throw new Error("kazandiranKart için board 4 kart (turn) olmalı");
+        gorunurMu(a, [d.el as string, d.rakip as string, d.board as string]);
+        if (deger([...el, ...board]) >= deger([...rakip, ...board])) throw new Error("kahraman turn'de geride değil");
+        const kalan = DESTE.filter((c) => ![...el, ...rakip, ...board].includes(c));
+        const n = kalan.filter((c) => deger([...el, ...board, c]) > deger([...rakip, ...board, c])).length;
+        sayiKarsila(n, "kazandıran river kartı", 0);
+        break;
+      }
+      case "tutma": {
+        // Outs'tan tutma yüzdesi. Görülmeyen kart: flop'ta 47, turn'de 46.
+        // gercek: flop'tan river'a (iki kart) 1 − C(47−outs, 2) / C(47, 2); tek kart outs / görülmeyen.
+        // kural: iki kart outs × 4, tek kart outs × 2. fark: kural − gercek (puan).
+        const o = Number(d.outs), sokak = d.sokak as string, kart = Number(d.kart ?? (sokak === "flop" ? 2 : 1));
+        if (!Number.isInteger(o) || o < 0 || o > 20) throw new Error(`outs sayısı geçersiz: ${d.outs}`);
+        if (!(sokak === "flop" || (sokak === "turn" && kart === 1)) || ![1, 2].includes(kart)) throw new Error("tutma: sokak flop (1 ya da 2 kart) ya da turn (1 kart) olmalı");
+        const gorulmeyen = sokak === "flop" ? 47 : 46;
+        const C2 = (n: number) => (n * (n - 1)) / 2;
+        const gercek = kart === 2 ? (1 - C2(47 - o) / C2(47)) * 100 : (o / gorulmeyen) * 100;
+        const kural = o * (kart === 2 ? 4 : 2);
+        const r = d.sonuc === "kural" ? kural : d.sonuc === "fark" ? kural - gercek : d.sonuc === "gercek" ? gercek : NaN;
+        if (Number.isNaN(r)) throw new Error(`tutma sonucu "gercek", "kural" ya da "fark" olmalı`);
+        sayiKarsila(r, `tutma (${d.sonuc})`, 0.06);
+        break;
+      }
+      case "tutmaKart": {
+        // Flop'tan river'a bütün C(47, 2) = 1081 turn–river ikilisi sayılarak eli en az `hedef` çeşide çıkaran oran (%).
+        const el = kartlar(d.el as string), board = kartlar(d.board as string);
+        benzersiz([...el, ...board], "el ve board");
+        if (board.length !== 3) throw new Error("tutmaKart için board 3 kart (flop) olmalı");
+        gorunurMu(a, [d.el as string, d.board as string]);
+        const hedef = katSira(d.hedef as string);
+        const kalan = DESTE.filter((c) => !el.includes(c) && !board.includes(c));
+        let tutan = 0, toplam = 0;
+        for (const [t, rv] of kombinasyon(kalan, 2)) {
+          toplam++;
+          if (kategori(deger([...el, ...board, t, rv])) >= hedef) tutan++;
+        }
+        sayiKarsila((tutan / toplam) * 100, "tutma yüzdesi", 0.06);
+        break;
+      }
+      case "equityEle": {
+        // ÖĞRETİM ÖRNEĞİ: iki somut elin birbirine karşı equity'si (%; beraberlik yarım).
+        // Board 3 ya da 4 kartsa kalan kartlar tek tek sayılır (kesin); board yoksa sabit tohumlu Monte Carlo
+        // (40.000 deneme) ve metindeki "yaklaşık" değer en fazla 1,5 puan sapabilir.
+        const el = kartlar(d.el as string), rakip = kartlar(d.rakip as string), board = d.board ? kartlar(d.board as string) : [];
+        benzersiz([...el, ...rakip, ...board], "eller ve board");
+        gorunurMu(a, [d.el as string, d.rakip as string, ...(d.board ? [d.board as string] : [])]);
+        const kalan = DESTE.filter((c) => ![...el, ...rakip, ...board].includes(c));
+        let puan = 0, n = 0;
+        const say = (b: number[]) => {
+          const x = deger([...el, ...b]), y = deger([...rakip, ...b]);
+          puan += x > y ? 1 : x === y ? 0.5 : 0;
+          n++;
+        };
+        if (board.length === 3 || board.length === 4) for (const ek of kombinasyon(kalan, 5 - board.length)) say([...board, ...ek]);
+        else if (board.length === 0) {
+          const rnd = tohumlu(20261113), deste = kalan.slice();
+          for (let t = 0; t < 40000; t++) {
+            for (let i = 0; i < 5; i++) {
+              const j = i + Math.floor(rnd() * (deste.length - i));
+              [deste[i], deste[j]] = [deste[j], deste[i]];
+            }
+            say(deste.slice(0, 5));
+          }
+        } else throw new Error("equityEle için board 0, 3 ya da 4 kart olmalı");
+        const r = (puan / n) * 100;
+        if (board.length === 0) {
+          if (Math.abs(r - (d.yaklasik as number)) > 1.5) hata(`equity yaklaşık %${r.toFixed(1)}, metinde %${d.yaklasik}`);
+          if (a.tip === "secmeli") tekCevap((i) => Math.abs(trSayi(sec[i]) - r) <= 1.5, `equity %${r.toFixed(1)}`);
+          else if ("iddia" in d) iddiaDY(Math.abs(r - (d.iddia as number)) <= 1.5);
+          else if (a.tip === "sayi") hata("Monte Carlo equity'si sayı sorusunda kullanılmaz; seçmeli yaz");
+        } else sayiKarsila(r, "equity", 0.06);
+        break;
+      }
+      case "impliedBasabas": {
+        // Call'un başabaş olması için çekiş tuttuğunda SONRADAN kazanılması gereken en az miktar (BB):
+        // X = call × (1 / eq − 1) − pot. pot: call öncesi pot (rakibin bahsi dahil). eq: tutma oranı;
+        // `eq` (%) verilir ya da outs'tan tek kart için hesaplanır (flop'ta outs / 47, turn'de outs / 46).
+        // Türetme: eq × (pot + X) − (1 − eq) × call = 0. Tutunca hep kazanıp, tutmayınca hep kaybetme varsayımı.
+        const call = Number(d.call), pot = Number(d.pot);
+        const eq = d.eq !== undefined ? Number(d.eq) / 100 : Number(d.outs) / (d.sokak === "flop" ? 47 : d.sokak === "turn" ? 46 : NaN);
+        if (!(eq > 0 && eq < 1)) throw new Error("impliedBasabas: eq ya da outs + sokak gerekli");
+        sayiKarsila(call * (1 / eq - 1) - pot, "gereken ek kazanç", 0.06);
+        break;
+      }
+      case "spotFiyat": {
+        // drills.json'daki bir spotun fiyatı: gereken equity = call / (spot potu + call). Spot potu rakibin bahsini içerir;
+        // call miktarı spotun "Call (… BB)" seçeneğinden okunur. Metindeki değer (gereken) en fazla 0,6 puan sapabilir.
+        const h = DRILLS.get(d.spot as string);
+        if (!h) throw new Error(`drills.json'da spot yok: ${d.spot}`);
+        const callSec = h.options.find((o) => o.startsWith("Call"));
+        if (!callSec) throw new Error(`${d.spot}: call seçeneği yok`);
+        const call = trSayi(callSec.replace(/^[^(]*\(/, ""));
+        const r = (call / (h.potBB + call)) * 100;
+        if (Math.abs(r - Number(d.gereken)) > 0.6) hata(`${d.spot}: gereken equity %${r.toFixed(1)}, metinde %${d.gereken}`);
+        if (a.tip === "spot" && a.secenekler && JSON.stringify(a.secenekler) !== JSON.stringify(h.options)) hata(`${d.spot}: seçenekler spotla aynı değil`);
         break;
       }
       default:
