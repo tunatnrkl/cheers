@@ -227,6 +227,7 @@ h3,
   z-index: 30;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   overscroll-behavior: none;
 }
 @media (max-width: 767px) {
@@ -246,7 +247,7 @@ h3,
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(100cqw, 185cqh);
+  width: min(100cqw, 170cqh);
   height: min(100cqh, 150cqw);
   translate: -50% -50%;
   --kart-w: clamp(22px, 8.6cqmin, 60px);

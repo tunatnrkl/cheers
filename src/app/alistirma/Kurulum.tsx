@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { HANDS, TOPICS, type Topic } from "@/data/hands";
 import type { RhythmEvery } from "@/lib/client/rhythm";
 import { AYAR_SAYISI, Ayarlar, Haplar } from "./Ayarlar";
@@ -32,7 +32,7 @@ type Props = {
   cozulen: number;
 };
 
-function Bolum({ baslik, children }: { baslik: string; children: React.ReactNode }) {
+function Bolum({ baslik, children }: { baslik: string; children: ReactNode }) {
   return (
     <section className="grid gap-2">
       <h3 className="font-sans text-[13px] font-bold tracking-wide text-t-muted uppercase">{baslik}</h3>

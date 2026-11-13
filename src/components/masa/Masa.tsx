@@ -20,7 +20,7 @@ const MERKEZ: [number, number] = [50, 47];
 /** Bahis çipinin konumu: koltuktan merkeze doğru. Hero'nunki kartlarının solunda. */
 function bahisKonumu(slot: number, x: number, y: number): [number, number] {
   if (slot === 0) return [31, 77];
-  return [x + 0.38 * (50 - x), y + (x === 50 ? 0.34 : 0.14) * (MERKEZ[1] - y)];
+  return [x + 0.38 * (50 - x), y + (x === 50 ? 0.45 : 0.14) * (MERKEZ[1] - y)];
 }
 
 const RENK_SINIFI: Record<string, string> = {
