@@ -90,7 +90,7 @@ export function Masa({ heroPos, heroKartlar, gorunum: g, dagitim, siraSende, son
       <div className="masa-oval" aria-hidden="true" />
 
       {/* Orta: pot ve board */}
-      <div className="masa-poz flex flex-col items-center gap-[1.4cqmin]" style={{ "--x": `${MERKEZ[0]}%`, "--y": `${MERKEZ[1]}%` } as CSSProperties}>
+      <div className="masa-poz masa-merkez flex flex-col items-center gap-[1.4cqmin]" style={{ "--x": `${MERKEZ[0]}%`, "--y": `${MERKEZ[1]}%` } as CSSProperties}>
         <p className="masa-yazi rounded-full bg-black/40 px-3 py-0.5 font-bold text-t-ink tabular-nums" aria-live="off">
           Pot <span className="text-t-act">{fmt(pot)}</span> BB
         </p>
@@ -141,7 +141,7 @@ export function Masa({ heroPos, heroKartlar, gorunum: g, dagitim, siraSende, son
             {st.bet > 0 && (
               <div
                 key={`${pos}-${st.bet}-${kalici ? tekrar : 0}`}
-                className="masa-poz masa-yazi anim-cip flex items-center gap-1 rounded-full bg-black/55 py-0.5 pr-2 pl-0.5 font-bold text-t-ink tabular-nums"
+                className={`masa-poz masa-yazi anim-cip ${slot === 0 ? "bahis-hero" : ""} flex items-center gap-1 rounded-full bg-black/55 py-0.5 pr-2 pl-0.5 font-bold text-t-ink tabular-nums`}
                 style={{ "--x": `${bx}%`, "--y": `${by}%`, "--dx": `${(x - bx).toFixed(1)}cqw`, "--dy": `${(y - by).toFixed(1)}cqh` } as CSSProperties}
                 aria-hidden="true"
               >
@@ -216,7 +216,7 @@ export function Masa({ heroPos, heroKartlar, gorunum: g, dagitim, siraSende, son
                 {pos === "BTN" && (
                   <span
                     aria-hidden="true"
-                    className={`absolute -top-[6%] z-20 grid size-[clamp(14px,3.6cqmin,20px)] place-items-center rounded-full bg-white text-[clamp(8px,2cqmin,11px)] font-extrabold text-black shadow ${
+                    className={`absolute -bottom-[4%] z-20 grid size-[clamp(14px,3.6cqmin,20px)] place-items-center rounded-full bg-white text-[clamp(8px,2cqmin,11px)] font-extrabold text-black shadow ${
                       x > 50 ? "-left-[14%]" : "-right-[14%]"
                     }`}
                   >
@@ -249,8 +249,8 @@ export function Masa({ heroPos, heroKartlar, gorunum: g, dagitim, siraSende, son
 
             {hero && (
               <div
-                className="masa-poz flex gap-[3px]"
-                style={{ "--x": `${x}%`, "--y": `${y}%`, translate: "-50% calc(-100% - var(--koltuk) / 2 - 3px)" } as CSSProperties}
+                className="masa-poz hero-kartlar flex gap-[3px]"
+                style={{ "--x": `${x}%`, "--y": `${y}%` } as CSSProperties}
                 role="group"
                 aria-label="Senin kartların"
               >

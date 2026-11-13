@@ -193,7 +193,7 @@ export function AksiyonCubugu({ legal, aktif, ekKisayollar = [], onAksiyon, bilg
         </div>
       )}
       <p className="kisayol-ipucu mt-1 hidden text-center text-[11px] text-t-muted lg:block">
-        Kısayollar: F fold · C check/call · R bet/raise · 1–{Math.max(1, Math.min(9, kisayollar.length))} boyut · Enter sonraki el · Esc paneli kapatır
+        Kısayollar: F fold · C check/call · R bet/raise{kisayollar.length > 1 ? ` · 1–${Math.min(9, kisayollar.length)} boyut` : ""} · Enter sonraki el · Esc paneli kapatır
       </p>
     </div>
   );

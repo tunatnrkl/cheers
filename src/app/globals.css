@@ -439,3 +439,32 @@ h3,
 .trainer .koc-pencere[hidden] {
   display: none;
 }
+
+/* Hero kartları: varsayılan olarak koltuğun üstünde */
+.trainer .masa .hero-kartlar {
+  translate: -50% calc(-100% - var(--koltuk) / 2 - 3px);
+}
+/* Kısa ve geniş masa alanı (yatay telefon): masa yayılır, kartlar koltuğun yanına alınır */
+@container (max-height: 300px) and (min-aspect-ratio: 2/1) {
+  .trainer .masa {
+    width: min(100cqw, 330cqh);
+    height: 100cqh;
+    --kart-w: clamp(18px, 13cqh, 40px);
+    --hero-kart-w: clamp(22px, 17cqh, 48px);
+    --koltuk: clamp(32px, 23cqh, 56px);
+    --sirt-w: clamp(11px, 7cqh, 22px);
+    --sd-kart-w: clamp(16px, 11cqh, 34px);
+  }
+}
+@container (max-height: 300px) and (min-aspect-ratio: 2/1) {
+  .trainer .masa .masa-merkez {
+    flex-direction: row;
+  }
+  .trainer .masa .hero-kartlar {
+    translate: calc(-100% - var(--koltuk) / 2 - 6px) -50%;
+  }
+  .trainer .masa .bahis-hero {
+    --x: 64% !important;
+    --y: 72% !important;
+  }
+}

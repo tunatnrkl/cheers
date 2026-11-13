@@ -487,7 +487,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
           </div>
 
           {/* ── Masa alanı ── */}
-          <div className="relative grid min-h-0 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="relative grid min-h-0 grid-cols-1 grid-rows-[minmax(0,1fr)] overflow-hidden lg:grid-cols-[minmax(0,1fr)_auto]">
             <div className="relative flex min-h-0 min-w-0 flex-col" inert={showBreak || panel === "ozet"}>
               <div className="masa-alan flex-1">
               {hand && gorunum && engine ? (
@@ -522,7 +522,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
 
             {/* Sağ panel: aksiyon geçmişi ya da el özeti. Geniş ekranda sütun, dar ekranda masanın üstünde katman. */}
             {sagPanel && hand && r && (
-              <div className="absolute inset-y-0 right-0 z-20 w-[min(360px,92%)] border-l border-t-line shadow-[-12px_0_30px_rgb(0_0_0/0.35)] lg:static lg:w-[340px] lg:shadow-none">
+              <div className="absolute inset-y-0 right-0 z-20 min-h-0 w-[min(360px,92%)] border-l border-t-line shadow-[-12px_0_30px_rgb(0_0_0/0.35)] lg:static lg:w-[340px] lg:shadow-none">
                 {sagPanel === "gecmis" ? (
                   <AksiyonGecmisi r={r} heroPos={hand.heroPos} olaylar={olaylar.slice(0, gosterilen)} onKapat={() => setPanel(null)} />
                 ) : (
