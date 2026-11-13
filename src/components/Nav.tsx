@@ -53,7 +53,7 @@ export function Nav() {
                 key={it.href}
                 href={it.href}
                 aria-current={active(it.href) ? "page" : undefined}
-                className={`inline-flex min-h-11 items-center rounded-xl px-3.5 text-[15px] font-semibold transition ${
+                className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl px-3.5 text-[15px] font-semibold transition ${
                   active(it.href) ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink"
                 }`}
               >

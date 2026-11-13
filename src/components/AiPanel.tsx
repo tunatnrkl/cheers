@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { STATIC_SITE } from "@/lib/client/env";
 import { RichText } from "./RichText";
+import { ButonBaglanti, Ikon } from "./ui";
 
 export type AiContext =
   | { type: "hand"; handId: string }
@@ -90,17 +90,25 @@ export function AiPanel({ title = "Yapay zekaya sor", context, suggestions = [],
   }, [messages]);
 
   if (STATIC_SITE) {
+    // Pages sürümü: yapay zeka yok. Panel kendini asistan gibi göstermez; masadaki koça ve öğrenme yoluna yönlendirir.
     return (
-      <section className="card" aria-label={title}>
-        <h2 className="h2 flex items-center gap-2">
-          <span aria-hidden="true" className="grid size-7 place-items-center rounded-lg bg-soft text-sm">✦</span>
-          {title}
+      <section className="card" aria-labelledby="ai-kapali">
+        <h2 id="ai-kapali" className="h2 flex items-center gap-2.5">
+          <span aria-hidden="true" className="grid size-8 place-items-center rounded-lg bg-soft text-accent-text">
+            <Ikon ad="sohbet" boyut={18} />
+          </span>
+          Takıldığın bir yer mi var?
         </h2>
         <p className="mt-2 text-muted">
-          Yapay zeka asistanı bu demo sürümünde kapalı: asistan bir sunucu ve API anahtarı gerektirir. Eller, alıştırma,
-          range matrisi, hesap makineleri, sözlük ve blog çalışır.
+          Yapay zeka asistanı bu sürümde kapalı; bir sunucu ve API anahtarı gerektirir. Masadaki koç ise çalışır: kararından
+          sonra “Neden?”e dokun, spotun gerekçesini kısaca anlatsın.
         </p>
-        <Link href="/sozluk" className="btn mt-3">Bunun yerine sözlüğe bak</Link>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <ButonBaglanti href="/alistirma">Masada koça sor</ButonBaglanti>
+          <ButonBaglanti href="/ogren" tur="hayalet">
+            Öğrenme yolu
+          </ButonBaglanti>
+        </div>
       </section>
     );
   }
@@ -111,7 +119,9 @@ export function AiPanel({ title = "Yapay zekaya sor", context, suggestions = [],
   return (
     <section className="card flex flex-col gap-3" aria-label={title}>
       <h2 className="h2 flex items-center gap-2">
-        <span aria-hidden="true" className="grid size-7 place-items-center rounded-lg bg-soft text-sm">✦</span>
+        <span aria-hidden="true" className="grid size-8 place-items-center rounded-lg bg-soft text-accent-text">
+          <Ikon ad="sohbet" boyut={18} />
+        </span>
         {title}
       </h2>
 

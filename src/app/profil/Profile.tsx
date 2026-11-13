@@ -17,6 +17,7 @@ import {
   type Attempt,
   type Saved,
 } from "@/lib/client/store";
+import { Buton, ButonA, ButonBaglanti, Hap, Ilerleme, Kart, NotKutusu, SayfaBasligi } from "@/components/ui";
 import { Growth } from "./Growth";
 import { Learning } from "./Learning";
 
@@ -93,9 +94,9 @@ function AuthCard({ google }: { google: boolean }) {
             ["register", "Hesap oluştur"],
           ] as const
         ).map(([v, l]) => (
-          <button key={v} role="tab" type="button" aria-selected={mode === v} className={`chip flex-1 justify-center ${mode === v ? "chip-on" : ""}`} onClick={() => setMode(v)}>
+          <Hap key={v} rol="tab" secili={mode === v} className="flex-1 justify-center" onClick={() => setMode(v)}>
             {l}
-          </button>
+          </Hap>
         ))}
       </div>
 
@@ -133,17 +134,17 @@ function AuthCard({ google }: { google: boolean }) {
         {error && (
           <p className="rounded-xl bg-danger-soft px-3 py-2 text-sm text-danger" role="alert">{error}</p>
         )}
-        <button type="submit" className="btn btn-primary btn-lg" disabled={busy}>
+        <Buton type="submit" tur="birincil" boyut="buyuk" disabled={busy}>
           {busy ? "Bekle…" : mode === "login" ? "Giriş yap" : "Hesap oluştur"}
-        </button>
+        </Buton>
       </form>
 
       {google && (
         <>
           <p className="my-3 text-center text-sm text-muted">ya da</p>
-          <a href="/api/auth/google" className="btn btn-lg w-full">
+          <ButonA href="/api/auth/google" boyut="buyuk" blok>
             Google ile devam et
-          </a>
+          </ButonA>
           <p className="mt-2 text-xs text-muted">
             Google ile devam ederek 18 yaşından büyük olduğunu ve{" "}
             <Link href="/gizlilik" className="link">aydınlatma metnini</Link> kabul ettiğini beyan edersin.
@@ -159,7 +160,23 @@ export function Profile() {
   const params = useSearchParams();
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  if (!p.ready) return <p className="card text-muted">Yükleniyor…</p>;
+  // Başlık, ilerleme okunmadan da çizilir: sayfa ilk boyamada anlamlı, yüklenince yerinden oynamaz
+  const baslik = (
+    <SayfaBasligi
+      baslik={p.user ? `Merhaba${p.user.displayName ? `, ${p.user.displayName}` : ""}` : "Profil"}
+      aciklama={p.user ? p.user.email : "İlerlemen şu an yalnızca bu cihazda saklanıyor. Hesap açarsan tüm cihazlarında görürsün."}
+    />
+  );
+
+  if (!p.ready)
+    return (
+      <div className="flex min-h-[100vh] flex-col gap-6">
+        {baslik}
+        <p className="card text-muted" role="status">
+          Yükleniyor…
+        </p>
+      </div>
+    );
 
   // Üyede toplamlar sunucudan gelir; liste 5000 cevapta kesildiği için listeden sayılmaz (G-1).
   const total = p.totals?.total ?? p.attempts.length;
@@ -168,15 +185,8 @@ export function Profile() {
   const weak = weakTopics(stats);
 
   return (
-    <div className="flex flex-col gap-4">
-      <header>
-        <h1 className="h1">{p.user ? `Merhaba${p.user.displayName ? `, ${p.user.displayName}` : ""}` : "Profil"}</h1>
-        <p className="lead mt-1">
-          {p.user
-            ? p.user.email
-            : "İlerlemen şu an yalnızca bu cihazda saklanıyor. Hesap açarsan tüm cihazlarında görürsün."}
-        </p>
-      </header>
+    <div className="flex min-h-[100vh] flex-col gap-6">
+      {baslik}
 
       {params.get("hata") === "google" && (
         <p className="rounded-xl bg-danger-soft px-3 py-2 text-danger" role="alert">
@@ -186,17 +196,16 @@ export function Profile() {
 
       <div className="grid items-start gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <section className="card" aria-label="Özet">
-            <h2 className="h2">İlerleme</h2>
-            <dl className="mt-3 grid grid-cols-3 gap-2 text-center">
+          <Kart baslik="İlerleme" baslikId="profil-ilerleme">
+            <dl className="mt-3 grid grid-cols-3 gap-2">
               {[
                 ["Çözülen soru", total],
                 ["Doğruluk", total ? `%${Math.round((ok / total) * 100)}` : "—"],
                 ["Kaydedilen el", p.saved.length],
               ].map(([k, v]) => (
-                <div key={k} className="rounded-xl bg-soft px-2 py-3">
-                  <dd className="text-2xl font-bold">{v}</dd>
-                  <dt className="text-xs text-muted">{k}</dt>
+                <div key={k} className="olcu">
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
                 </div>
               ))}
             </dl>
@@ -204,11 +213,13 @@ export function Profile() {
             {total === 0 ? (
               <div className="mt-4">
                 <p className="text-muted">Henüz alıştırma çözmedin.</p>
-                <Link href="/alistirma" className="btn btn-primary mt-3">İlk alıştırmanı yap</Link>
+                <ButonBaglanti href="/alistirma" tur="birincil" className="mt-3">
+                  İlk alıştırmanı yap
+                </ButonBaglanti>
               </div>
             ) : (
               <>
-                <h3 className="mt-5 font-semibold">Konu bazında doğruluk</h3>
+                <h3 className="mt-5 text-lg font-semibold">Konu bazında doğruluk</h3>
                 <ul className="mt-2 space-y-3">
                   {stats.map((s) => (
                     <li key={s.topic}>
@@ -216,13 +227,11 @@ export function Profile() {
                         <span>{TOPICS[s.topic]}</span>
                         <span className="font-semibold">%{Math.round(s.rate * 100)} <span className="font-normal text-muted">({s.ok}/{s.total})</span></span>
                       </div>
-                      <div className="mt-1 h-2 overflow-hidden rounded-full bg-soft" aria-hidden="true">
-                        <div className="h-full rounded-full bg-accent" style={{ width: `${s.rate * 100}%` }} />
-                      </div>
+                      <Ilerleme oran={s.rate} className="mt-1" />
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 rounded-xl bg-soft p-3">
+                <NotKutusu className="mt-4">
                   <p className="font-semibold">Çalışma önerisi</p>
                   {weak.length ? (
                     <p className="mt-1 text-sm">
@@ -241,47 +250,50 @@ export function Profile() {
                       Yapay zekadan ayrıntılı analiz iste →
                     </Link>
                   )}
-                </div>
+                </NotKutusu>
               </>
             )}
-          </section>
+          </Kart>
 
           {total > 0 && <Growth attempts={p.attempts} total={total} />}
           <Learning />
 
-          <section className="card" aria-label="Veri">
-            <h2 className="h2">Verilerin</h2>
+          <Kart baslik="Verilerin" baslikId="profil-veri">
             <p className="mt-1 text-sm text-muted">Alıştırma cevaplarını, kayıtlı ellerini ve notlarını indirebilirsin.</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <button type="button" className="btn" onClick={() => exportData("csv", p.attempts, p.saved)}>CSV indir</button>
-              <button type="button" className="btn" onClick={() => exportData("json", p.attempts, p.saved)}>JSON indir</button>
+              <Buton onClick={() => exportData("csv", p.attempts, p.saved)}>CSV indir</Buton>
+              <Buton onClick={() => exportData("json", p.attempts, p.saved)}>JSON indir</Buton>
             </div>
 
             <div className="mt-4 border-t border-line pt-4">
               {p.user ? (
                 <div className="flex flex-wrap gap-2">
-                  <button type="button" className="btn" onClick={() => void signOut()}>Çıkış yap</button>
+                  <Buton onClick={() => void signOut()}>Çıkış yap</Buton>
                   {!confirmDelete ? (
-                    <button type="button" className="btn text-danger" onClick={() => setConfirmDelete(true)}>Hesabımı sil</button>
+                    <Buton tur="tehlike" onClick={() => setConfirmDelete(true)}>
+                      Hesabımı sil
+                    </Buton>
                   ) : (
                     <div className="w-full rounded-xl bg-danger-soft p-3">
                       <p className="text-sm text-danger">Hesabın, tüm cevapların ve notların kalıcı olarak silinecek. Bu geri alınamaz.</p>
                       <div className="mt-2 flex gap-2">
-                        <button type="button" className="btn border-danger text-danger" onClick={() => void deleteAccount()}>Evet, sil</button>
-                        <button type="button" className="btn" onClick={() => setConfirmDelete(false)}>Vazgeç</button>
+                        <Buton tur="tehlike" className="border-danger" onClick={() => void deleteAccount()}>
+                          Evet, sil
+                        </Buton>
+                        <Buton onClick={() => setConfirmDelete(false)}>Vazgeç</Buton>
                       </div>
                     </div>
                   )}
                 </div>
               ) : (
                 (total > 0 || p.saved.length > 0) && (
-                  <button type="button" className="btn text-danger" onClick={() => confirm("Bu cihazdaki ilerleme silinsin mi?") && clearLocal()}>
+                  <Buton tur="tehlike" onClick={() => confirm("Bu cihazdaki ilerleme silinsin mi?") && clearLocal()}>
                     Bu cihazdaki verileri sil
-                  </button>
+                  </Buton>
                 )
               )}
             </div>
-          </section>
+          </Kart>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -289,13 +301,12 @@ export function Profile() {
             (p.accounts ? (
               <AuthCard google={p.google} />
             ) : (
-              <p className="card text-sm text-muted">
+              <NotKutusu className="text-muted">
                 Bu kurulumda hesap sistemi kapalı (veritabanı bağlı değil). İlerlemen bu cihazda saklanmaya devam eder.
-              </p>
+              </NotKutusu>
             ))}
 
-          <section className="card" aria-label="Kaydedilen eller">
-            <h2 className="h2">Kaydedilen eller</h2>
+          <Kart baslik="Kaydedilen eller" baslikId="profil-kayitli">
             {p.saved.length === 0 ? (
               <p className="mt-2 text-muted">
                 Henüz kayıtlı el yok. Alıştırma masasında yer imi simgesine dokunarak bir eli buraya ekleyebilirsin.
@@ -310,14 +321,20 @@ export function Profile() {
                       </Link>
                       {s.note && <p className="mt-0.5 whitespace-pre-wrap text-sm text-muted">{s.note}</p>}
                     </div>
-                    <button type="button" className="btn shrink-0" aria-label="Kaydı kaldır" onClick={() => void unsaveHand(s.handId)}>
+                    <Buton
+                      boyut="kucuk"
+                      tur="hayalet"
+                      className="shrink-0"
+                      aria-label={`Kaydı kaldır: ${HAND_BY_ID.get(s.handId)?.title ?? s.handId}`}
+                      onClick={() => void unsaveHand(s.handId)}
+                    >
                       Kaldır
-                    </button>
+                    </Buton>
                   </li>
                 ))}
               </ul>
             )}
-          </section>
+          </Kart>
         </div>
       </div>
     </div>

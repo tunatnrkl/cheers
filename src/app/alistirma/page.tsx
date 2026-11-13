@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1 className="sr-only">Alıştırma masası</h1>
+      {/* data-sayfa: footer ilk boyamadan itibaren gizli kalır (globals.css), sayfa kaymaz */}
+      <h1 className="sr-only" data-sayfa="alistirma">
+        Alıştırma masası
+      </h1>
       <Suspense fallback={<div className="h-[60dvh] animate-pulse rounded-2xl bg-[#0d1110]" />}>
         <Trainer />
       </Suspense>

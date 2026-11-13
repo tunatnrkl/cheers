@@ -34,10 +34,10 @@ export function ActionStrip({ r, heroPos }: { r: Replay; heroPos: Seat }) {
         ) : (
           <li
             key={i}
-            className={`flex shrink-0 flex-col justify-center rounded-lg bg-t-panel-2 px-2.5 py-1 leading-tight ${e.act === "fold" ? "opacity-60" : ""}`}
+            className={`flex shrink-0 flex-col justify-center rounded-lg px-2.5 py-1 leading-tight ${e.act === "fold" ? "border border-dashed border-t-line bg-t-panel" : "bg-t-panel-2"}`}
           >
             <span className="text-[10px] font-semibold text-t-muted tabular-nums">
-              {e.pos} <span className="opacity-80">{fmt(e.stack)}</span>
+              {e.pos} <span>{fmt(e.stack)}</span>
             </span>
             <span className={`text-[13px] font-bold ${KIND_TEXT[e.act]}`}>{entryLabel(e)}</span>
           </li>
@@ -45,7 +45,7 @@ export function ActionStrip({ r, heroPos }: { r: Replay; heroPos: Seat }) {
       )}
       <li className="flex shrink-0 flex-col justify-center rounded-lg border border-t-accent/70 bg-t-accent/10 px-2.5 py-1 leading-tight">
         <span className="text-[10px] font-semibold text-t-muted tabular-nums">
-          {heroPos} <span className="opacity-80">{fmt(r.seats[heroPos].stack)}</span>
+          {heroPos} <span>{fmt(r.seats[heroPos].stack)}</span>
         </span>
         <span className="text-[13px] font-bold text-t-accent">Sıra sende</span>
       </li>

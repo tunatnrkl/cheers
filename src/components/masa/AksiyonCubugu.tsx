@@ -103,7 +103,7 @@ export function AksiyonCubugu({ legal, aktif, ekKisayollar = [], onAksiyon, bilg
   const butonSayisi = (legal.fold ? 1 : 0) + 1 + (aralik ? 1 : 0);
 
   return (
-    <div className="border-t border-t-line bg-t-panel px-2 pt-1.5 pb-2 sm:px-3" aria-label="Aksiyonlar" role="region">
+    <div className="border-t border-t-line bg-t-panel px-2 pt-1.5 pb-2 sm:px-3">
       <div className="flex min-h-11 items-center gap-2 text-[13px] sm:text-sm">{bilgi}</div>
 
       {bitis ? (

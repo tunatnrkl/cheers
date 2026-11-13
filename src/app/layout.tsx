@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import "@fontsource-variable/fraunces/full.css";
-import "@fontsource-variable/manrope";
 import "./globals.css";
 import { Main } from "@/components/Main";
 import { Logo, Nav } from "@/components/Nav";
@@ -50,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <strong className="text-ink">18+</strong> · {SITE_NAME} bir strateji çalışma aracıdır. Gerçek parayla oyun
               oynatmaz, bahis önermez, kazanç vaat etmez.
             </p>
-            <nav aria-label="Alt bağlantılar" className="mt-2 flex flex-wrap gap-x-4">
+            <nav aria-label="Alt bağlantılar" className="mt-2 flex flex-wrap gap-x-2">
               {[
                 ["/sorumlu-oyun", "Sorumlu oyun"],
                 ["/gizlilik", "Gizlilik ve KVKK"],
@@ -60,7 +58,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 ["/range", "Range matrisi"],
                 ["/ogren", "Öğren"],
               ].map(([href, label]) => (
-                <Link key={href} href={href} className="inline-flex min-h-11 items-center underline underline-offset-2">
+                // Kısa adlar (Blog, Öğren) için de en az 44x44 dokunma alanı
+                <Link
+                  key={href}
+                  href={href}
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-1.5 underline underline-offset-2 hover:text-ink"
+                >
                   {label}
                 </Link>
               ))}

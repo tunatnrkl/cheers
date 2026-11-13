@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { SayfaBasligi } from "@/components/ui";
 import { Profile } from "./Profile";
 
 export const metadata: Metadata = {
@@ -10,7 +11,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <Suspense>
+    // Yer tutucu: başlık ilk boyamada görünür, footer içerik gelene kadar ekranın altında kalır (kayma yok)
+    <Suspense
+      fallback={
+        <div className="flex min-h-[100vh] flex-col gap-6">
+          <SayfaBasligi baslik="Profil" />
+        </div>
+      }
+    >
       <Profile />
     </Suspense>
   );

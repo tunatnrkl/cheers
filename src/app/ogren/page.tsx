@@ -43,7 +43,7 @@ const GROUPS = [
 export default function Page() {
   return (
     <div className="og flex flex-col gap-12">
-      <Suspense fallback={<div className="h-[60vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />}>
+      <Suspense fallback={<div className="h-[100vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />}>
         <OgrenYol />
       </Suspense>
 
@@ -57,7 +57,7 @@ export default function Page() {
         </header>
         {GROUPS.map((g) => (
           <section key={g.title} aria-label={g.title}>
-            <h3 className="font-sans text-sm font-bold tracking-wide text-muted uppercase">{g.title}</h3>
+            <h3 className="text-xl font-semibold">{g.title}</h3>
             <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {g.items.map(([href, t, d]) => (
                 <li key={href}>

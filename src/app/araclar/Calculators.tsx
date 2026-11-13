@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
+import { type ReactNode, useId, useState } from "react";
+import { Alan, Hap, Kart, NotKutusu, Tablo, hapSinifi } from "@/components/ui";
 import { bluffBreakEven, icm, outsProbability, potOddsRatio, requiredEquity, spr } from "@/lib/poker/math";
 
 const pct = (x: number) => `%${(x * 100).toFixed(1).replace(".", ",")}`;
@@ -11,32 +12,30 @@ const num = (s: string) => {
 
 function Field({ label, value, onChange, hint }: { label: string; value: string; onChange: (v: string) => void; hint?: string }) {
   const id = useId();
+  return <Alan id={id} etiket={label} yardim={hint} inputMode="decimal" value={value} onChange={(e) => onChange(e.target.value)} />;
+}
+
+function Not({ children }: { children: ReactNode }) {
   return (
-    <div>
-      <label htmlFor={id} className="label">
-        {label}
-      </label>
-      <input id={id} className="field" inputMode="decimal" value={value} onChange={(e) => onChange(e.target.value)} />
-      {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
-    </div>
+    <NotKutusu className="mt-3">
+      <strong>Ne anlama geliyor? </strong>
+      {children}
+    </NotKutusu>
   );
 }
 
 function Result({ items, note }: { items: [string, string][]; note: string }) {
   return (
     <div aria-live="polite">
-      <dl className="mt-4 grid grid-cols-2 gap-2 text-center">
+      <dl className="mt-4 grid grid-cols-2 gap-2">
         {items.map(([k, v]) => (
-          <div key={k} className="rounded-xl bg-soft px-2 py-3">
-            <dd className="text-xl font-bold">{v}</dd>
-            <dt className="text-xs text-muted">{k}</dt>
+          <div key={k} className="olcu">
+            <dt>{k}</dt>
+            <dd>{v}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-3 rounded-xl border border-line p-3 text-sm">
-        <strong>Ne anlama geliyor? </strong>
-        {note}
-      </p>
+      <Not>{note}</Not>
     </div>
   );
 }
@@ -49,8 +48,7 @@ function PotOdds() {
   const total = p + b; // rakibin bahsi dahil pot
   const eq = requiredEquity(total, b);
   return (
-    <section className="card" id="pot-odds">
-      <h2 className="h2">Pot odds ve gerekli equity</h2>
+    <Kart id="pot-odds" baslik="Pot odds ve gerekli equity" baslikId="pot-odds-baslik">
       <div className="mt-3 grid grid-cols-2 gap-3">
         <Field label="Bahisten önceki pot" value={pot} onChange={setPot} />
         <Field label="Rakibin bahsi" value={bet} onChange={setBet} hint="Görmen gereken miktar" />
@@ -68,7 +66,7 @@ function PotOdds() {
       ) : (
         <p className="mt-3 text-sm text-muted">Hesap için rakibin bahsini gir.</p>
       )}
-    </section>
+    </Kart>
   );
 }
 
@@ -78,17 +76,16 @@ function Outs() {
   const o = Math.min(20, Math.round(num(outs)));
   const r = outsProbability(o, street);
   return (
-    <section className="card" id="outs">
-      <h2 className="h2">Outs'tan yüzde</h2>
+    <Kart id="outs" baslik="Outs'tan yüzde" baslikId="outs-baslik">
       <div className="mt-3 grid grid-cols-2 gap-3">
         <Field label="Out sayısı" value={outs} onChange={setOuts} hint="Floş çekişi 9, çift uçlu kent 8, gutshot 4" />
         <fieldset>
           <legend className="label">Hangi sokaktasın?</legend>
           <div className="flex gap-2">
             {(["flop", "turn"] as const).map((s) => (
-              <button key={s} type="button" aria-pressed={street === s} className={`chip flex-1 justify-center ${street === s ? "chip-on" : ""}`} onClick={() => setStreet(s)}>
+              <Hap key={s} secili={street === s} className="flex-1 justify-center" onClick={() => setStreet(s)}>
                 {s === "flop" ? "Flop" : "Turn"}
-              </button>
+              </Hap>
             ))}
           </div>
         </fieldset>
@@ -105,7 +102,7 @@ function Outs() {
             : `Tek kart kaldı: ${o} out ile river'da tutma ihtimalin ${pct(r.byRiver)}. Pot odds'un istediği equity bundan yüksekse, yalnızca tuttuğunda ek chip kazanabileceksen (implied odds) call düşünülür.`
         }
       />
-    </section>
+    </Kart>
   );
 }
 
@@ -121,8 +118,7 @@ function Spr() {
         ? "Orta SPR: top pair iyi bir eldir ama üç sokak büyük bahis için genelde iki per ve üstü istenir. Pot kontrolü önem kazanır."
         : "Yüksek SPR: tek per büyük potları nadiren kazanır. Set, kent, floş gibi güçlü eller ve onlara dönüşebilecek çekişler değer kazanır.";
   return (
-    <section className="card" id="spr">
-      <h2 className="h2">Efektif stack ve SPR</h2>
+    <Kart id="spr" baslik="Efektif stack ve SPR" baslikId="spr-baslik">
       <div className="mt-3 grid grid-cols-3 gap-3">
         <Field label="Senin stack'in" value={hero} onChange={setHero} />
         <Field label="Rakibin stack'i" value={villain} onChange={setVillain} />
@@ -139,7 +135,7 @@ function Spr() {
       ) : (
         <p className="mt-3 text-sm text-muted">Hesap için flop'taki potu gir.</p>
       )}
-    </section>
+    </Kart>
   );
 }
 
@@ -154,49 +150,38 @@ function Icm() {
   const totalChips = st.reduce((a, b) => a + b, 0);
   const totalPay = pay.slice(0, st.length).reduce((a, b) => a + b, 0);
   return (
-    <section className="card" id="icm">
-      <h2 className="h2">Basit ICM</h2>
+    <Kart id="icm" baslik="Basit ICM" baslikId="icm-baslik">
       <div className="mt-3 grid gap-3">
         <Field label="Stack'ler (virgülle ayır, en fazla 9 oyuncu)" value={stacks} onChange={setStacks} />
         <Field label="Ödüller (1.'den başlayarak)" value={payouts} onChange={setPayouts} hint="Yüzde ya da tutar; birimi sen seçersin" />
       </div>
       {valid ? (
         <div aria-live="polite">
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-line text-left text-muted">
-                  <th className="py-2 font-medium">Oyuncu</th>
-                  <th className="py-2 text-right font-medium">Stack</th>
-                  <th className="py-2 text-right font-medium">Chip payı</th>
-                  <th className="py-2 text-right font-medium">ICM değeri</th>
-                  <th className="py-2 text-right font-medium">Ödül payı</th>
-                </tr>
-              </thead>
-              <tbody>
-                {st.map((s, i) => (
-                  <tr key={i} className="border-b border-line">
-                    <td className="py-2">{i + 1}. oyuncu</td>
-                    <td className="py-2 text-right">{s}</td>
-                    <td className="py-2 text-right">{pct(s / totalChips)}</td>
-                    <td className="py-2 text-right font-semibold">{res[i].toFixed(2).replace(".", ",")}</td>
-                    <td className="py-2 text-right">{pct(res[i] / totalPay)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-3 rounded-xl border border-line p-3 text-sm">
-            <strong>Ne anlama geliyor? </strong>
+          <Tablo
+            className="mt-4"
+            baslik="ICM sonucu"
+            gizliBaslik
+            sutunlar={["Oyuncu", "Stack", "Chip payı", "ICM değeri", "Ödül payı"]}
+            sayi={[1, 2, 3, 4]}
+            satirBasligi
+            satirlar={st.map((s, i) => [
+              `${i + 1}. oyuncu`,
+              s,
+              pct(s / totalChips),
+              <strong key="d">{res[i].toFixed(2).replace(".", ",")}</strong>,
+              pct(res[i] / totalPay),
+            ])}
+          />
+          <Not>
             “ICM değeri”, o stack'in ödül havuzundan beklenen payıdır. Büyük stack'in ödül payı chip payından küçük, kısa
             stack'inki büyüktür: chip'ler doğrusal olarak ödüle dönüşmez. Bir all-in'i değerlendirmek için kazandığın ve
             kaybettiğin durumdaki stack'leri ayrı ayrı girip aradaki farka bak; kaybın çoğu zaman kazancından büyük çıkar.
-          </p>
+          </Not>
         </div>
       ) : (
         <p className="mt-3 text-sm text-muted">En az iki stack ve bir ödül gir.</p>
       )}
-    </section>
+    </Kart>
   );
 }
 
@@ -210,7 +195,7 @@ export function Calculators() {
           ["#spr", "SPR"],
           ["#icm", "ICM"],
         ].map(([h, l]) => (
-          <a key={h} href={h} className="chip">
+          <a key={h} href={h} className={hapSinifi()}>
             {l}
           </a>
         ))}

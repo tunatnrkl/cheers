@@ -119,12 +119,15 @@ export function Summary({
             Oturumu yapay zekaya analiz ettir
           </button>
         )}
-        <AiPanel
-          title="Oturum analizi"
-          context={{ type: "practice", attempts: answers.slice(-200).map((a) => ({ handId: a.hand.id, chosen: a.chosen })) }}
-          autoAsk={analyze ? { id: analyze, question: "Bu oturumdaki sonuçlarımı analiz eder misin?" } : undefined}
-          placeholder="Sonuçların hakkında sor…"
-        />
+        {/* Pages sürümünde yapay zeka yok; masadayken masaya yönlendiren kapalı panel gösterilmez */}
+        {!STATIC_SITE && (
+          <AiPanel
+            title="Oturum analizi"
+            context={{ type: "practice", attempts: answers.slice(-200).map((a) => ({ handId: a.hand.id, chosen: a.chosen })) }}
+            autoAsk={analyze ? { id: analyze, question: "Bu oturumdaki sonuçlarımı analiz eder misin?" } : undefined}
+            placeholder="Sonuçların hakkında sor…"
+          />
+        )}
       </div>
     </div>
   );

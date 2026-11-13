@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { Buton, Kart } from "@/components/ui";
 import { ogrenGuncelle, ogrenSifirla, useOgren } from "@/lib/ogren/depo";
 import { ANAHTAR, type Durum, disaAktar, iceAktar, pistOzeti, seriGorunen, zayifDersler } from "@/lib/ogren/ilerleme";
 import { GERCEK, ogrenAdresi } from "@/lib/ogren/veri";
@@ -13,7 +14,8 @@ export function Learning() {
   const [mesaj, setMesaj] = useState("");
   const dosya = useRef<HTMLInputElement>(null);
 
-  if (!depo.hazir) return null;
+  // Yer tutucu: depo okunana kadar kart yerini korur, altındaki kartlar kaymaz
+  if (!depo.hazir) return <div className="card min-h-[22rem]" aria-hidden="true" />;
   const simdi = new Date();
   const { durum } = depo;
   const seri = seriGorunen(durum.seri, simdi);
@@ -46,20 +48,20 @@ export function Learning() {
   }
 
   return (
-    <section className="card" aria-labelledby="ogrenme-yolu">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 id="ogrenme-yolu" className="h2">
-          Öğrenme yolu
-        </h2>
+    <Kart
+      baslik="Öğrenme yolu"
+      baslikId="ogrenme-yolu"
+      eylem={
         <Link href="/ogren" className="link inline-flex min-h-11 items-center text-sm">
           Yola git →
         </Link>
-      </div>
+      }
+    >
       {depo.bozukNot && <p className="mt-1 text-sm">Kayıtlı öğrenme ilerlemesi okunamadı; yol baştan başladı. Eski kayıt tarayıcında yedekte duruyor.</p>}
 
       <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {pistler.map(({ p, o }) => (
-          <div key={p.kimlik} className="rounded-xl bg-surface-2 p-3">
+          <div key={p.kimlik} className="flex flex-col rounded-xl bg-surface-2 p-3">
             <dt className="text-xs text-muted">{p.baslik}</dt>
             <dd className="font-bold tabular-nums">{o.toplam ? `%${o.yuzde} · ${o.tamam}/${o.toplam} ders` : "Dersler hazırlanıyor"}</dd>
             <dd className="text-xs text-muted">Seviye {o.seviye}</dd>
@@ -95,16 +97,12 @@ export function Learning() {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <button type="button" className="btn" onClick={indir}>
-          Dışa aktar (JSON)
-        </button>
-        <button type="button" className="btn" onClick={() => dosya.current?.click()}>
-          İçe aktar
-        </button>
+        <Buton onClick={indir}>Dışa aktar (JSON)</Buton>
+        <Buton onClick={() => dosya.current?.click()}>İçe aktar</Buton>
         <input ref={dosya} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-hidden="true" onChange={sec} />
-        <button type="button" className="btn btn-ghost" onClick={() => setOnay("sifirla")}>
+        <Buton tur="hayalet" onClick={() => setOnay("sifirla")}>
           Sıfırla
-        </button>
+        </Buton>
       </div>
 
       {onay && (
@@ -115,9 +113,8 @@ export function Learning() {
               : `"${onay.ad}" mevcut öğrenme ilerlemesinin yerine geçsin mi?`}
           </p>
           <div className="flex gap-2">
-            <button
-              type="button"
-              className="btn btn-primary"
+            <Buton
+              tur="birincil"
               onClick={() => {
                 if (onay === "sifirla") {
                   ogrenSifirla(ANAHTAR);
@@ -131,16 +128,14 @@ export function Learning() {
               }}
             >
               {onay === "sifirla" ? "Evet, sıfırla" : "Evet, içe aktar"}
-            </button>
-            <button type="button" className="btn" onClick={() => setOnay(null)}>
-              Vazgeç
-            </button>
+            </Buton>
+            <Buton onClick={() => setOnay(null)}>Vazgeç</Buton>
           </div>
         </div>
       )}
       <p className="mt-2 text-sm" role="status" aria-live="polite">
         {mesaj}
       </p>
-    </section>
+    </Kart>
   );
 }

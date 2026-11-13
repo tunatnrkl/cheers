@@ -35,7 +35,8 @@ export function KaldiginYer({ mufredat }: { mufredat: Mufredat }) {
           <p id="kaldigin-yer" className="text-sm font-semibold text-muted">
             {ust}
           </p>
-          <p className="truncate font-bold text-ink">{baslik}</p>
+          {/* Uzun ders adları dar ekranda iki satıra iner (kesilmez) */}
+          <p className="line-clamp-2 font-bold leading-snug text-ink">{baslik}</p>
           {o?.ders?.unite && !o.ders.baslik.includes(o.ders.unite) && <p className="truncate text-sm text-muted">{o.ders.unite}</p>}
         </div>
       </div>

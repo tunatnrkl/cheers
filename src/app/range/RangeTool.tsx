@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import { AiPanel } from "@/components/AiPanel";
+import { Buton, ButonBaglanti, Hap, Kart } from "@/components/ui";
 import ranges from "@/data/ranges.json";
 import { STATIC_SITE } from "@/lib/client/env";
 import { MATRIX_RANKS, matrixLabel, rangePercent } from "@/lib/poker/cards";
@@ -58,16 +59,16 @@ export function RangeTool() {
   return (
     <div className="grid items-start gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <div className="flex flex-col gap-3">
-        <div role="tablist" aria-label="Aralık türü" className="flex gap-2">
+        <div role="group" aria-label="Aralık türü" className="flex gap-2">
           {(
             [
               ["cash", "Cash açılış (100 BB)"],
               ["push", "Turnuva push/fold"],
             ] as [Mode, string][]
           ).map(([v, l]) => (
-            <button key={v} role="tab" type="button" aria-selected={mode === v} className={`chip flex-1 justify-center ${mode === v ? "chip-on" : ""}`} onClick={() => setMode(v)}>
+            <Hap key={v} secili={mode === v} className="flex-1 justify-center text-center" onClick={() => setMode(v)}>
               {l}
-            </button>
+            </Hap>
           ))}
         </div>
 
@@ -75,9 +76,9 @@ export function RangeTool() {
           <legend className="label">Pozisyon</legend>
           <div className="flex flex-wrap gap-2">
             {POS.map((p) => (
-              <button key={p} type="button" aria-pressed={pos === p} className={`chip ${pos === p ? "chip-on" : ""}`} onClick={() => setPos(p)}>
+              <Hap key={p} secili={pos === p} onClick={() => setPos(p)}>
                 {p}
-              </button>
+              </Hap>
             ))}
           </div>
         </fieldset>
@@ -87,9 +88,9 @@ export function RangeTool() {
             <legend className="label">Stack</legend>
             <div className="flex gap-2">
               {STACKS.map((s) => (
-                <button key={s} type="button" aria-pressed={stack === s} className={`chip ${stack === s ? "chip-on" : ""}`} onClick={() => setStack(s)}>
+                <Hap key={s} secili={stack === s} onClick={() => setStack(s)}>
                   {s} BB
-                </button>
+                </Hap>
               ))}
             </div>
           </fieldset>
@@ -105,9 +106,9 @@ export function RangeTool() {
                 ["compare", "Karşılaştır"],
               ] as [View, string][]
             ).map(([v, l]) => (
-              <button key={v} type="button" aria-pressed={view === v} className={`chip ${view === v ? "chip-on" : ""}`} onClick={() => setView(v)}>
+              <Hap key={v} secili={view === v} onClick={() => setView(v)}>
                 {l}
-              </button>
+              </Hap>
             ))}
           </div>
         </fieldset>
@@ -129,8 +130,8 @@ export function RangeTool() {
         <div
           className="grid select-none gap-px overflow-hidden rounded-xl border border-line bg-line"
           style={{ gridTemplateColumns: "repeat(13, minmax(0, 1fr))", touchAction: editable ? "none" : "auto" }}
-          role="grid"
-          aria-label={`${pos} aralık matrisi`}
+          role="group"
+          aria-label={`${pos} aralık matrisi: köşegende çiftler, sağ üstte suited, sol altta offsuit eller`}
           onPointerUp={() => (painting.current = null)}
           onPointerLeave={() => (painting.current = null)}
         >
@@ -142,7 +143,6 @@ export function RangeTool() {
                 <button
                   key={label}
                   type="button"
-                  role="gridcell"
                   data-hand={label}
                   aria-pressed={editable ? selected : undefined}
                   aria-label={`${label}${selected ? ", seçili" : ""}`}
@@ -174,16 +174,16 @@ export function RangeTool() {
 
         {view === "compare" && (
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-            <li className="flex items-center gap-2"><span className="size-4 rounded bg-accent" /> İkisinde de var</li>
-            <li className="flex items-center gap-2"><span className="size-4 rounded bg-soft ring-2 ring-inset ring-accent" /> Sende eksik</li>
-            <li className="flex items-center gap-2"><span className="size-4 rounded bg-danger-soft ring-2 ring-inset ring-danger" /> Sende fazla</li>
+            <li className="flex items-center gap-2"><span aria-hidden="true" className="size-4 rounded bg-accent" /> İkisinde de var</li>
+            <li className="flex items-center gap-2"><span aria-hidden="true" className="size-4 rounded bg-soft ring-2 ring-inset ring-accent" /> Sende eksik</li>
+            <li className="flex items-center gap-2"><span aria-hidden="true" className="size-4 rounded bg-danger-soft ring-2 ring-inset ring-danger" /> Sende fazla</li>
           </ul>
         )}
 
         {view !== "ref" && (
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="btn" onClick={() => setMine(new Set(ref))}>Referansı kopyala</button>
-            <button type="button" className="btn" onClick={() => setMine(new Set())}>Temizle</button>
+            <Buton onClick={() => setMine(new Set(ref))}>Referansı kopyala</Buton>
+            <Buton tur="hayalet" onClick={() => setMine(new Set())}>Temizle</Buton>
           </div>
         )}
 
@@ -196,9 +196,9 @@ export function RangeTool() {
       </div>
 
       <div className="flex flex-col gap-3 md:sticky md:top-20">
-        <button
-          type="button"
-          className="btn btn-primary btn-lg"
+        <Buton
+          tur="birincil"
+          boyut="buyuk"
           disabled={mine.size === 0}
           onClick={() => {
             setView("compare");
@@ -206,10 +206,23 @@ export function RangeTool() {
           }}
         >
           {STATIC_SITE ? "Range'imi referansla karşılaştır" : "Range'imi yapay zekaya değerlendir"}
-        </button>
+        </Buton>
         {mine.size === 0 && (
           <p className="text-sm text-muted">Önce “Kendi range'im” görünümünde ellerini işaretle.</p>
         )}
+        {STATIC_SITE ? (
+          // Pages sürümünde yapay zeka yok: kapalı bir panel yerine aralığı masada denemeye yönlendir
+          <Kart baslik="Aralığı masada dene" baslikId="range-masa" className="flex flex-col gap-2">
+            <p className="text-muted">
+              {mode === "cash"
+                ? "Açılış spotlarında aynı kararı masada, aksiyonu görerek verirsin. Karardan sonra koç gerekçeyi anlatır."
+                : "Push/fold spotlarında aynı kararı masada verirsin. Karardan sonra koç gerekçeyi anlatır."}
+            </p>
+            <ButonBaglanti href={mode === "cash" ? "/alistirma?oyun=cash&konu=acilis" : "/alistirma?oyun=turnuva&konu=pushfold"} className="self-start">
+              {mode === "cash" ? "Açılış spotlarını çalış" : "Push/fold spotlarını çalış"}
+            </ButonBaglanti>
+          </Kart>
+        ) : (
         <AiPanel
           title="Range değerlendirmesi"
           context={{ type: "range", mode, position: pos, stackBB: mode === "push" ? stack : undefined, hands: [...mine] }}
@@ -217,6 +230,7 @@ export function RangeTool() {
           suggestions={[`${pos} pozisyonunda aralık neden bu genişlikte?`, "Suited eller neden offsuit'lerden daha çok açılıyor?"]}
           placeholder="Aralıklar hakkında sor…"
         />
+        )}
       </div>
     </div>
   );
