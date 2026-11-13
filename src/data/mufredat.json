@@ -71,7 +71,9 @@
       "On üç değer küçükten büyüğe şöyle dizilir: 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A. T onluyu gösterir (İngilizce \"ten\"). J vale, Q kız, K papaz, A astır. As en yüksek karttır; tek bir istisnası var, onu kent dersinde göreceksin.",
       "Kartları kısa yazarız: önce değer, sonra renk. A♠ maça ası, T♦ karo onlusu, 7♣ sinek yedilisi demektir. Bazı yerlerde simge yerine harf görürsün: s maça, h kupa, d karo, c sinek. Yani Kh ile K♥ aynı karttır."
      ],
-     "terimler": [],
+     "terimler": [
+      "Renk"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
@@ -301,13 +303,17 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Pokerde bir \"el\" her zaman beş karttan oluşur. Eller güçlerine göre sıralanır ve bu sıralama hiç değişmez. On el çeşidi vardır; bu derste en alttaki dördünü, bir sonrakinde üstteki altısını öğreneceksin.",
+      "Pokerde bir \"el\" her zaman beş karttan oluşur. Eller güçlerine göre sıralanır; buna el sıralaması denir ve bu sıralama hiç değişmez. On el çeşidi vardır; bu derste en alttaki dördünü, bir sonrakinde üstteki altısını öğreneceksin.",
       "En zayıf el yüksek karttır: beş kart arasında hiçbir eşleşme yoktur ve elin gücünü en yüksek kart belirler. Bir üstü perdir: aynı değerden iki kart (örneğin iki sekizli). Sonra iki per gelir: iki ayrı çift (örneğin iki vale ve iki dörtlü). Bu dördünün en güçlüsü üçlüdür: aynı değerden üç kart.",
       "Sıra şöyle: yüksek kart < per < iki per < üçlü. Aynı çeşit iki el karşılaşırsa değeri yüksek olan kazanır: as peri papaz perini yener. İki perde önce yüksek çifte bakılır: as ve ikili iki peri, papaz ve kız iki perini yener. Yüksek kartta en yüksek kartlar eşitse sıradaki karta bakılır.",
       "Sıralamanın mantığı basittir: bir el ne kadar seyrek geliyorsa o kadar güçlüdür. Üçlü, iki perden daha seyrek geldiği için onun üstündedir."
      ],
      "terimler": [
-      "İki per"
+      "El sıralaması",
+      "Yüksek kart",
+      "Per",
+      "İki per",
+      "Üçlü"
      ],
      "ustalik": {
       "son": 10,
@@ -565,9 +571,17 @@
       "Üçlünün üstünde altı el daha var. Kent: değerleri art arda gelen beş kart; renkleri karışık olabilir (örneğin 5-6-7-8-9). Floş: aynı renkten beş kart; değerlerinin sıralı olması gerekmez. Floş kenti yener.",
       "Full house bir üçlü ile bir çiftin birleşimidir (örneğin üç papaz ve iki dörtlü). Kare aynı değerden dört karttır. Sıralı floş hem kent hem floştur: aynı renkten, art arda beş kart. Bunların en yükseği olan T-J-Q-K-A aynı renktense royal floş adını alır ve oyunun en güçlü elidir.",
       "As kentte iki uçta da durabilir: T-J-Q-K-A en yüksek kenttir; A-2-3-4-5 ise en düşük kenttir ve burada as 1 gibi sayılır. Kent astan \"dönemez\": Q-K-A-2-3 kent değildir.",
-      "Tam sıra, zayıftan güçlüye: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş. Aynı çeşit iki elde yine değerler konuşur: yüksek biten kent düşük biteni, en yüksek kartı büyük olan floş diğerini, üçlüsü büyük olan full house diğerini yener."
+      "El sıralamasının tamamı, zayıftan güçlüye: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş. Aynı çeşit iki elde yine değerler konuşur: yüksek biten kent düşük biteni, en yüksek kartı büyük olan floş diğerini, üçlüsü büyük olan full house diğerini yener."
      ],
-     "terimler": [],
+     "terimler": [
+      "Kent",
+      "Floş",
+      "Full house",
+      "Kare",
+      "Sıralı floş",
+      "Royal floş",
+      "El sıralaması"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
@@ -865,7 +879,8 @@
      "terimler": [
       "Kapalı kartlar",
       "Board",
-      "Kicker"
+      "Kicker",
+      "Board'u oynamak"
      ],
      "ustalik": {
       "son": 10,
@@ -1998,7 +2013,7 @@
      "anlatim": [
       "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak). Bir elde birkaç bahis turu oynanır: kartlar dağıtıldıktan sonraki ilk tura preflop, ortaya kart açıldıktan sonraki turlara (flop, turn, river) postflop denir; ayrıntısı bir sonraki derste.",
       "Önünde bahis varsa üç seçeneğin var: fold (eli bırakmak; pota koydukların geri gelmez), call (bahsi aynı miktarla görmek) ya da raise (bahsi artırmak). Bahis varken check diyemezsin; elde kalmak için en az call etmen gerekir.",
-      "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır.",
+      "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır. Aynı turda önce check deyip rakip bahis yapınca raise yapmak da kurallara uygundur; buna check-raise denir.",
       "Bir bahis turu, biri dışında herkes fold ettiğinde ya da elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa biter. Kimse bahis yapmadan herkes check derse de tur biter; bu durumda herkesin koyduğu miktar sıfırdır. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
      ],
      "terimler": [
@@ -2213,7 +2228,7 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Bir el en fazla dört bahis turundan oluşur; her tura \"sokak\" da denir. Preflop: herkese iki kapalı kart dağıtılır, ortada henüz kart yoktur. Flop: ortaya üç kart birden açılır. Turn: dördüncü kart açılır. River: beşinci ve son kart açılır. Toplam 3 + 1 + 1 = 5 ortak kart.",
+      "Bir el en fazla dört bahis turundan oluşur; her tura \"sokak\" da denir. Preflop: herkese iki kapalı kart dağıtılır, ortada henüz kart yoktur. Flop: ortaya üç kart birden açılır. Turn: dördüncü kart açılır. River: beşinci ve son kart açılır. Toplam 3 + 1 + 1 = 5 ortak kart; bunların tümüne board denir.",
       "Her kart açılışından sonra bir bahis turu oynanır. Flop, turn ve river'ın ortak adı postflop'tur. El her zaman river'a kadar sürmez: bir bahis turunda biri dışında herkes fold ederse el orada biter ve kalan oyuncu potu alır.",
       "Kim önce konuşur? Preflop'ta ilk söz büyük blind'in solundaki oyuncudadır; sıra saat yönünde ilerler ve en son büyük blind konuşur. Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır: küçük blind hâlâ eldeyse o başlar. Buton eldeyse postflop'ta her turda en son konuşur."
      ],
@@ -2223,7 +2238,8 @@
       "Turn",
       "River",
       "Postflop",
-      "Board"
+      "Board",
+      "Sokak"
      ],
      "ustalik": {
       "son": 10,
@@ -2431,14 +2447,15 @@
      "anlatim": [
       "River'daki bahis turu da bittiğinde elde hâlâ birden fazla oyuncu varsa showdown yapılır: kalan oyuncular kartlarını açar ve en iyi beş kartlık ele sahip olan potu alır. Kimin ne söylediği değil, masadaki kartlar belirler.",
       "Showdown'a gelmeden de kazanılabilir. Bir bahis turunda senin dışındaki herkes fold ederse pot senindir ve kartlarını göstermen gerekmez.",
-      "İki oyuncunun en iyi beş kartı tam olarak eşitse beraberlik olur ve pot eşit bölünür. Renkler eşitliği bozmaz; altıncı ve yedinci kartlar da bozmaz. En sık görülen örnek: en iyi beş kart board'un kendisiyse eldeki herkes potu paylaşır.",
+      "İki oyuncunun en iyi beş kartı tam olarak eşitse beraberlik olur ve pot eşit bölünür; buna bölünen pot denir. Renkler eşitliği bozmaz; altıncı ve yedinci kartlar da bozmaz. En sık görülen örnek: en iyi beş kart board'un kendisiyse eldeki herkes potu paylaşır.",
       "Kazananı bulmanın yolu hep aynıdır: her oyuncu için yedi karttan en iyi beşliyi kur, önce el çeşidini karşılaştır, çeşit aynıysa değerlere ve kicker'a bak."
      ],
      "terimler": [
       "Showdown",
       "Pot",
       "Kicker",
-      "Board"
+      "Board",
+      "Bölünen pot"
      ],
      "ustalik": {
       "son": 10,
@@ -5597,12 +5614,13 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "169 el adı 13 satır ve 13 sütunluk bir tabloya, yani matrise yerleşir. Satırlar ve sütunlar A'dan 2'ye doğru dizilir. Sol üstten sağ alta inen köşegende cep çiftleri durur: AA, KK, … 22.",
+      "169 el adı 13 satır ve 13 sütunluk bir tabloya, yani range matrisine yerleşir. Satırlar ve sütunlar A'dan 2'ye doğru dizilir. Sol üstten sağ alta inen köşegende cep çiftleri durur: AA, KK, … 22.",
       "Köşegenin üstünde suited eller, altında offsuit eller vardır. A satırında K sütunu AKs'dir; K satırında A sütunu AKo'dur. Her el adı matriste bir kez yer alır.",
       "Range (aralık), bir oyuncunun belirli bir durumda tutabileceği ellerin kümesidir. Matriste işaretlenen hücreler bir aralığı gösterir. Aralığın büyüklüğü yüzdeyle söylenir: işaretli ellerin kombinasyonları toplanır, 1326'ya bölünür ve 100 ile çarpılır. Hücreler eşit ağırlıkta değildir: bir offsuit hücre 12, bir çift 6, bir suited hücre 4 kombinasyondur.",
       "Bu derste yalnızca matrisi okumayı öğreniyoruz. Hangi durumda hangi ellerin oynandığı sonraki ünitelerin konusudur."
      ],
      "terimler": [
+      "Range matrisi",
       "Range (aralık)",
       "Kombinasyon (combo)",
       "Suited",
@@ -6147,7 +6165,9 @@
       "Loose",
       "TAG",
       "LAG",
-      "Open (açılış)"
+      "Open (açılış)",
+      "Agresif",
+      "Pasif"
      ],
      "ustalik": {
       "son": 10,

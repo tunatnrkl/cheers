@@ -228,12 +228,13 @@
  },
  "o4-d2": {
   "anlatim": [
-   "169 el adı 13 satır ve 13 sütunluk bir tabloya, yani matrise yerleşir. Satırlar ve sütunlar A'dan 2'ye doğru dizilir. Sol üstten sağ alta inen köşegende cep çiftleri durur: AA, KK, … 22.",
+   "169 el adı 13 satır ve 13 sütunluk bir tabloya, yani range matrisine yerleşir. Satırlar ve sütunlar A'dan 2'ye doğru dizilir. Sol üstten sağ alta inen köşegende cep çiftleri durur: AA, KK, … 22.",
    "Köşegenin üstünde suited eller, altında offsuit eller vardır. A satırında K sütunu AKs'dir; K satırında A sütunu AKo'dur. Her el adı matriste bir kez yer alır.",
    "Range (aralık), bir oyuncunun belirli bir durumda tutabileceği ellerin kümesidir. Matriste işaretlenen hücreler bir aralığı gösterir. Aralığın büyüklüğü yüzdeyle söylenir: işaretli ellerin kombinasyonları toplanır, 1326'ya bölünür ve 100 ile çarpılır. Hücreler eşit ağırlıkta değildir: bir offsuit hücre 12, bir çift 6, bir suited hücre 4 kombinasyondur.",
    "Bu derste yalnızca matrisi okumayı öğreniyoruz. Hangi durumda hangi ellerin oynandığı sonraki ünitelerin konusudur."
   ],
   "terimler": [
+   "Range matrisi",
    "Range (aralık)",
    "Kombinasyon (combo)",
    "Suited",
@@ -744,7 +745,9 @@
    "Loose",
    "TAG",
    "LAG",
-   "Open (açılış)"
+   "Open (açılış)",
+   "Agresif",
+   "Pasif"
   ],
   "alistirmalar": [
    {
