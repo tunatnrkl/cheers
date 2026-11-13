@@ -132,7 +132,7 @@ export function AnaEkran({ k, depo }: { k: Kaynak; depo: DepoDurumu }) {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-display text-[28px] leading-none font-bold tracking-wide uppercase">{p.baslik}</p>
+                    <p className="font-display text-[28px] leading-none font-bold">{p.baslik}</p>
                     <p className="mt-2 text-sm text-muted">{p.aciklama}</p>
                   </div>
                   <div className="og-halka" style={{ "--yuzde": o.yuzde } as React.CSSProperties} aria-hidden="true">

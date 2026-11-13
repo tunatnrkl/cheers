@@ -58,6 +58,8 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
   const [hal, setHal] = useState<KocDurumu>("kapali");
   const [okunmamis, setOkunmamis] = useState(0);
   const [duyuru, setDuyuru] = useState("");
+  /** Kısa ekranda (dar çekmece) hazır sorular ile yazı alanı aynı satırı paylaşır; bu, yazı alanını açar */
+  const [yaziAcik, setYaziAcik] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const balonRef = useRef<HTMLButtonElement>(null);
@@ -240,6 +242,7 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
         aria-modal="false"
         aria-labelledby={baslikId}
         hidden={!acik}
+        data-yazi={yaziAcik ? "1" : undefined}
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             e.stopPropagation();
@@ -248,7 +251,7 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
         }}
         className="koc-pencere anim-koc absolute z-40 flex flex-col overflow-hidden rounded-2xl border border-t-line bg-t-panel shadow-[0_18px_50px_rgb(0_0_0/0.55)]"
       >
-        <header className="flex items-center gap-2 border-b border-t-line py-1 pr-1 pl-3">
+        <header className="koc-baslik flex items-center gap-2 border-b border-t-line py-1 pr-1 pl-3">
           <span aria-hidden="true" className="grid size-8 place-items-center rounded-lg bg-t-accent/15">
             <CheersMark className="size-6" />
           </span>
@@ -306,8 +309,19 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
           )}
         </div>
 
-        <div className="border-t border-t-line p-2">
-          <div className="mb-1.5 flex gap-1.5 overflow-x-auto [scrollbar-width:none]">
+        <div className="koc-alt border-t border-t-line p-2">
+          <div className="koc-hizli mb-1.5 flex gap-1.5 overflow-x-auto [scrollbar-width:none]">
+            {/* Yalnızca kısa çekmecede görünür (globals.css): yazı alanını hazır soruların yerine açar */}
+            <button
+              type="button"
+              onClick={() => {
+                setYaziAcik(true);
+                requestAnimationFrame(() => inputRef.current?.focus({ preventScroll: true }));
+              }}
+              className="koc-yaz-ac min-h-11 shrink-0 items-center rounded-full border border-t-line px-3 text-[13px] font-bold whitespace-nowrap text-t-ink hover:border-t-accent"
+            >
+              Kendin yaz
+            </button>
             {HIZLI_SORULAR.map((c) => (
               <button
                 key={c}
@@ -321,7 +335,7 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
             ))}
           </div>
           <form
-            className="flex gap-2"
+            className="koc-form flex gap-2"
             onSubmit={(e) => {
               e.preventDefault();
               void ask(input);
@@ -338,6 +352,12 @@ export function CoachChat({ hand, chosen, kararlar, durum, trigger, olay }: Prop
               maxLength={500}
               autoComplete="off"
               placeholder="Bu el hakkında sor…"
+              onKeyDown={(e) => {
+                if (e.key === "Escape" && yaziAcik) {
+                  e.stopPropagation();
+                  setYaziAcik(false);
+                }
+              }}
               className="min-h-11 w-full min-w-0 rounded-xl border border-t-line bg-t-panel-2 px-3 text-[15px] text-t-ink placeholder:text-t-muted focus:border-t-accent"
             />
             <button

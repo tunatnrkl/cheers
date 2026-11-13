@@ -48,6 +48,9 @@ function Ikon({ d, className = "" }: { d: string; className?: string }) {
   );
 }
 
+/** Dar ekranda koç açıkken masaya (hero kartları, board) ve 18+ satırına ayrılan en az yükseklik (px) */
+const MASA_PAY = 150;
+
 const IKON_BTN = "grid size-11 shrink-0 place-items-center rounded-xl text-t-muted transition hover:bg-t-panel-2 hover:text-t-ink";
 
 /**
@@ -63,6 +66,37 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
   const ustRef = useRef<HTMLDivElement>(null);
   useSayfaKilidi(kokRef);
   const [kutlama, seriKutla] = useSeriKutlamasi();
+
+  // Klavye odağı: aksiyon butonu pasifleşince ya da çubuk yeniden kurulunca odak BODY'ye düşmesin.
+  // Odak aksiyon alanındaysa ve kaybolduysa aksiyon alanının kendisine (tabIndex -1) alınır;
+  // el sonu panelinin başlığına odak taşıma (ElSonu) bundan sonra çalışır ve önceliklidir.
+  const odakAksiyonda = useRef(false);
+  useEffect(() => {
+    const alan = aksiyonRef.current;
+    if (!alan) return;
+    const giris = () => (odakAksiyonda.current = true);
+    const cikis = (e: FocusEvent) => {
+      const hedef = e.relatedTarget as Node | null;
+      if (hedef && !alan.contains(hedef)) odakAksiyonda.current = false;
+    };
+    const dokunus = (e: PointerEvent) => {
+      if (!alan.contains(e.target as Node)) odakAksiyonda.current = false;
+    };
+    alan.addEventListener("focusin", giris);
+    alan.addEventListener("focusout", cikis);
+    document.addEventListener("pointerdown", dokunus, true);
+    return () => {
+      alan.removeEventListener("focusin", giris);
+      alan.removeEventListener("focusout", cikis);
+      document.removeEventListener("pointerdown", dokunus, true);
+    };
+  });
+  useEffect(() => {
+    if (!odakAksiyonda.current) return;
+    const a = document.activeElement as HTMLElement | null;
+    const kayip = !a || a === document.body || !a.isConnected || (a as HTMLButtonElement).disabled === true;
+    if (kayip) aksiyonRef.current?.focus({ preventScroll: true });
+  });
 
   const baglanti = ["el", "oyun", "konu", "sokak", "pf"].some((k) => params.has(k));
   const [mod, setMod] = useState<"kurulum" | "masa">(baglanti ? "masa" : "kurulum");
@@ -124,14 +158,18 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
     if (!pencere) return;
     const olc = () => {
       const dar = matchMedia("(max-width: 1023px)").matches;
-      const h = pencere.hidden ? 0 : pencere.getBoundingClientRect().height;
-      // Masaya en az ~150 px kalır (çok kısa ekranda pencere masanın altını örtebilir)
       const alan = masaKolonRef.current?.getBoundingClientRect().height ?? 0;
-      setKocBosluk(dar && h ? Math.max(0, Math.min(Math.round(h) + 8, Math.round(alan) - 150)) : 0);
+      // Masaya (hero kartları ve board) ve 18+ satırına en az MASA_PAY kalır: çekmece bundan uzun olamaz,
+      // böylece pencere masayı ya da 18+ satırını örtmez (360x640'ta çekmece kısa düzene geçer).
+      if (dar && alan) kokRef.current?.style.setProperty("--koc-max", `${Math.max(120, Math.round(alan) - MASA_PAY - 8)}px`);
+      else kokRef.current?.style.removeProperty("--koc-max");
+      const h = pencere.hidden ? 0 : pencere.getBoundingClientRect().height;
+      setKocBosluk(dar && h ? Math.max(0, Math.min(Math.round(h) + 8, Math.round(alan) - MASA_PAY)) : 0);
     };
     olc();
     const ro = new ResizeObserver(olc);
     ro.observe(pencere);
+    if (masaKolonRef.current) ro.observe(masaKolonRef.current);
     const mo = new MutationObserver(olc);
     mo.observe(pencere, { attributes: true, attributeFilter: ["hidden"] });
     addEventListener("resize", olc);
@@ -642,7 +680,14 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
           </div>
 
           {/* ── Alt aksiyon çubuğu ── */}
-          <div ref={aksiyonRef} inert={showBreak || panel === "ozet"}>
+          <div
+            ref={aksiyonRef}
+            tabIndex={-1}
+            role="region"
+            aria-label="Aksiyonlar"
+            className="outline-none focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-t-accent"
+            inert={showBreak || panel === "ozet"}
+          >
             <AksiyonCubugu
               key={`${hand?.id}-${elNo}-${engine?.decisions.length ?? 0}`}
               legal={legal}

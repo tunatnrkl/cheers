@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RichText } from "@/components/RichText";
+import { ButonBaglanti, Ikon, Kart, Rozet } from "@/components/ui";
 import { POST_BY_SLUG, POSTS } from "@/data/blog";
 import { SITE_NAME, siteUrl } from "@/lib/site";
 
@@ -37,40 +38,43 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <article className="mx-auto flex max-w-2xl flex-col gap-4">
+    <article className="mx-auto flex w-full max-w-2xl flex-col gap-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <Link href="/blog" className="link inline-flex min-h-11 items-center self-start text-sm">
-        ← Blog
+      <Link href="/blog" className="link -mb-2 inline-flex min-h-11 items-center gap-1.5 self-start text-sm">
+        <Ikon ad="geri" boyut={16} />
+        Blog
       </Link>
-      <header>
-        <span className="tag">{post.tag}</span>
-        <h1 className="h1 mt-2">{post.title}</h1>
-        <p className="mt-1 text-sm text-muted">
+      <header className="sayfa-baslik">
+        <Rozet className="self-start">{post.tag}</Rozet>
+        <h1 className="h1">{post.title}</h1>
+        <p className="text-sm text-muted">
           <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
           </time>{" "}
           · {post.minutes} dk okuma
         </p>
       </header>
-      <div className="flex flex-col gap-4 text-[17px] leading-relaxed">
+      <div className="metin flex flex-col gap-5">
         {post.body.map((b, i) => (
           <section key={i}>
-            {b.h && <h2 className="h2 mb-1">{b.h}</h2>}
+            {b.h && <h2 className="h2 mb-1.5">{b.h}</h2>}
             <RichText text={b.p} />
           </section>
         ))}
       </div>
-      <div className="card mt-2 flex flex-wrap items-center justify-between gap-3">
-        <p className="font-medium">Okuduğunu dene</p>
+      <Kart as="aside" duz className="mt-2 flex flex-wrap items-center justify-between gap-3" aria-label="Okuduğunu dene">
+        <p className="font-display text-lg font-semibold">Okuduğunu dene</p>
         <div className="flex flex-wrap gap-2">
-          <Link href="/alistirma" className="btn btn-primary">Alıştırma yap</Link>
+          <ButonBaglanti href="/alistirma" tur="birincil">
+            Alıştırma yap
+          </ButonBaglanti>
           {process.env.NEXT_PUBLIC_STATIC === "1" ? (
-            <Link href="/ogren" className="btn">Öğrenme yolu</Link>
+            <ButonBaglanti href="/ogren">Öğrenme yolu</ButonBaglanti>
           ) : (
-            <Link href="/yapay-zeka" className="btn">Yapay zekaya sor</Link>
+            <ButonBaglanti href="/yapay-zeka">Yapay zekaya sor</ButonBaglanti>
           )}
         </div>
-      </div>
+      </Kart>
     </article>
   );
 }

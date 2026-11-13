@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SayfaBasligi } from "@/components/ui";
 import { RangeTool } from "./RangeTool";
 
 export const metadata: Metadata = {
@@ -11,13 +12,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-4">
-      <header>
-        <h1 className="h1">Range matrisi</h1>
-        <p className="lead mt-1">
-          Pozisyona göre hangi ellerle açılır? Referansa bak ya da kendi aralığını işaretleyip karşılaştır.
-        </p>
-      </header>
+    <div className="flex flex-col gap-6">
+      <SayfaBasligi
+        baslik="Range matrisi"
+        aciklama="Pozisyona göre hangi ellerle açılır? Referansa bak ya da kendi aralığını işaretleyip karşılaştır."
+      />
       <RangeTool />
     </div>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SayfaBasligi } from "@/components/ui";
 import { Calculators } from "./Calculators";
 
 export const metadata: Metadata = {
@@ -9,11 +10,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="flex flex-col gap-4">
-      <header>
-        <h1 className="h1">Hesap makineleri</h1>
-        <p className="lead mt-1">Sayıları gir; sonucun ne anlama geldiğini hemen altında oku.</p>
-      </header>
+    <div className="flex flex-col gap-6">
+      <SayfaBasligi baslik="Hesap makineleri" aciklama="Sayıları gir; sonucun ne anlama geldiğini hemen altında oku." />
       <Calculators />
     </div>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GLOSSARY } from "@/data/glossary";
+import { SayfaBasligi } from "@/components/ui";
 import { GlossaryList } from "./GlossaryList";
 
 export const metadata: Metadata = {
@@ -17,12 +18,9 @@ export default function Page() {
     hasDefinedTerm: GLOSSARY.map((g) => ({ "@type": "DefinedTerm", name: g.term, description: g.def })),
   };
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <header>
-        <h1 className="h1">Sözlük</h1>
-        <p className="lead mt-1">{GLOSSARY.length} terim. Sitedeki altı noktalı kelimeler buraya bağlanır.</p>
-      </header>
+      <SayfaBasligi baslik="Sözlük" aciklama={`${GLOSSARY.length} terim. Sitedeki altı noktalı kelimeler buraya bağlanır.`} />
       <GlossaryList />
     </div>
   );

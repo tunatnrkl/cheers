@@ -122,7 +122,7 @@ export function PokerTable({ hand, r }: { hand: Hand; r: Replay }) {
                     hero
                       ? "border-t-accent bg-t-panel-2 shadow-[0_0_0_3px_rgb(60_207_142/0.25)]"
                       : out
-                        ? "border-t-line bg-t-panel/70 opacity-45"
+                        ? "border-dashed border-t-line bg-t-panel/70 opacity-80" // fold: soluk ama okunur (AA)
                         : "border-t-line bg-t-panel-2"
                   }`}
                 >

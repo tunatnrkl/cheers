@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Hap, Ilerleme, Kart } from "@/components/ui";
 import { GAMES, type Game } from "@/data/hands";
 import { firstVsRepeat, MIN_SAMPLE, positionStats, weeklyTrend, type Rate, type StatAttempt } from "@/lib/client/stats";
 
@@ -24,9 +25,7 @@ function Row({ label, r }: { label: string; r: Rate }) {
           </span>
         )}
       </div>
-      <div className="mt-1 h-2 overflow-hidden rounded-full bg-soft" aria-hidden="true">
-        {r.rate !== null && <div className="h-full rounded-full bg-accent" style={{ width: `${r.rate * 100}%` }} />}
-      </div>
+      <Ilerleme oran={r.rate ?? 0} className="mt-1" />
     </li>
   );
 }
@@ -41,8 +40,7 @@ export function Growth({ attempts, total }: { attempts: StatAttempt[]; total?: n
   const pos = useMemo(() => positionStats(attempts, game === "all" ? undefined : game), [attempts, game]);
 
   return (
-    <section className="card" aria-labelledby="gelisim-baslik">
-      <h2 id="gelisim-baslik" className="h2">Gelişim</h2>
+    <Kart baslik="Gelişim" baslikId="gelisim-baslik">
       <p className="mt-1 text-sm text-muted">
         {MIN_SAMPLE} cevaptan azında oran gösterilmez. {MIN_SAMPLE} cevapta bile oran kabaca ±25 puan oynayabilir; tek haftaya değil genel eğilime bak.
       </p>
@@ -53,25 +51,25 @@ export function Growth({ attempts, total }: { attempts: StatAttempt[]; total?: n
         </p>
       )}
 
-      <h3 className="mt-4 font-semibold">İlk görüşte ve tekrarda</h3>
+      <h3 className="mt-5 text-lg font-semibold">İlk görüşte ve tekrarda</h3>
       <p className="mt-1 text-xs text-muted">Yanlışlar masada geri döner. İlk görüş oranı, yeni bir spotu ne kadar okuduğunu gösterir.</p>
-      <dl className="mt-2 grid grid-cols-2 gap-2 text-center">
+      <dl className="mt-2 grid grid-cols-2 gap-2">
         {(
           [
             ["İlk görüşte", fr.first],
             ["Tekrarda", fr.repeat],
           ] as const
         ).map(([k, r]) => (
-          <div key={k} className="rounded-xl bg-soft px-2 py-3">
-            <dd className="text-2xl font-bold">{r.rate === null ? "—" : pct(r.rate)}</dd>
-            <dt className="text-xs text-muted">
+          <div key={k} className="olcu">
+            <dt>
               {k} · {r.total} cevap
             </dt>
+            <dd>{r.rate === null ? "—" : pct(r.rate)}</dd>
           </div>
         ))}
       </dl>
 
-      <h3 className="mt-5 font-semibold">Haftalara göre doğruluk</h3>
+      <h3 className="mt-5 text-lg font-semibold">Haftalara göre doğruluk</h3>
       {weeks.length < 2 ? (
         <p className="mt-1 text-sm text-muted">Eğilim için en az iki farklı haftada cevap gerekiyor. Şimdilik yalnızca son haftanın verisi var.</p>
       ) : (
@@ -82,12 +80,12 @@ export function Growth({ attempts, total }: { attempts: StatAttempt[]; total?: n
         </ul>
       )}
 
-      <h3 className="mt-5 font-semibold">Pozisyona göre doğruluk</h3>
+      <h3 className="mt-5 text-lg font-semibold">Pozisyona göre doğruluk</h3>
       <div role="radiogroup" aria-label="Oyun tipi" className="mt-2 flex flex-wrap gap-2">
         {(["all", "cash", "turnuva"] as const).map((g) => (
-          <button key={g} type="button" role="radio" aria-checked={game === g} className={`chip ${game === g ? "chip-on" : ""}`} onClick={() => setGame(g)}>
+          <Hap key={g} rol="radio" secili={game === g} onClick={() => setGame(g)}>
             {g === "all" ? "Tümü" : GAMES[g]}
-          </button>
+          </Hap>
         ))}
       </div>
       {pos.length === 0 ? (
@@ -102,6 +100,6 @@ export function Growth({ attempts, total }: { attempts: StatAttempt[]; total?: n
       <p className="mt-3 text-xs text-muted">
         Bir pozisyonda oran düşükse <Link href="/range" className="link">range matrisinde</Link> o pozisyonun aralığına bakabilirsin.
       </p>
-    </section>
+    </Kart>
   );
 }

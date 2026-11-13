@@ -57,7 +57,7 @@ export default function Page() {
         </header>
         {GROUPS.map((g) => (
           <section key={g.title} aria-label={g.title}>
-            <h3 className="font-sans text-sm font-bold tracking-wide text-muted uppercase">{g.title}</h3>
+            <h3 className="text-xl font-semibold">{g.title}</h3>
             <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {g.items.map(([href, t, d]) => (
                 <li key={href}>

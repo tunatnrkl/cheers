@@ -200,6 +200,88 @@ h3,
   .term {
     @apply cursor-help text-inherit underline decoration-current/40 decoration-dotted underline-offset-4;
   }
+
+  /* ── Bileşen kütüphanesi (src/components/ui) için ek sınıflar; tokenlar yukarıda ── */
+  .btn-sm {
+    /* Görsel olarak sıkı, dokunma alanı yine 44px */
+    @apply px-3 text-sm;
+  }
+  .btn-block {
+    @apply w-full;
+  }
+  .btn-danger {
+    @apply text-danger hover:border-danger/60;
+  }
+  .chip-sm {
+    @apply px-3 text-[13px];
+  }
+  .rozet-notr {
+    @apply bg-surface-2 text-muted;
+  }
+  .rozet-ok {
+    @apply bg-surface-2 text-ink;
+  }
+  /* Bağlantı kartı: tıklanabilir kart, sakin vurgulu kenar */
+  .card-link {
+    @apply flex h-full flex-col transition-colors duration-200 hover:border-accent/60;
+  }
+  .card-flat {
+    @apply shadow-none;
+  }
+  /* Not kutusu: sorumlu oyun, "Ne anlama geliyor?", şablon uyarısı gibi düz bilgi yüzeyi */
+  .not-kutu {
+    @apply rounded-2xl border border-line bg-surface-2 px-4 py-3 text-sm text-ink sm:px-5 sm:py-4;
+  }
+  /* Ölçü kutusu: sayı + etiket (profil, hesap makineleri) */
+  .olcu {
+    @apply flex flex-col-reverse rounded-xl bg-surface-2 px-2 py-3 text-center;
+  }
+  .olcu > dd {
+    @apply text-xl leading-tight font-bold tabular-nums sm:text-2xl;
+  }
+  .olcu > dt {
+    @apply mt-0.5 text-xs text-muted;
+  }
+  /* İlerleme çubuğu */
+  .ilerleme {
+    @apply h-2 overflow-hidden rounded-full border border-line bg-surface-2;
+  }
+  .ilerleme > span {
+    @apply block h-full rounded-full bg-accent transition-[width] duration-300;
+  }
+  /* Tablo: ince çizgiler, sola yaslı başlık, sayılar sağda */
+  .tablo {
+    @apply w-full border-collapse text-sm;
+  }
+  .tablo caption {
+    @apply pb-2 text-left;
+  }
+  .tablo th {
+    @apply border-b border-line py-2 pr-3 text-left align-bottom font-semibold text-muted;
+  }
+  .tablo td {
+    @apply border-b border-line py-2.5 pr-3 align-top;
+  }
+  .tablo .satir-basligi {
+    @apply border-b border-line py-2.5 pr-3 text-left align-top font-semibold whitespace-nowrap text-ink;
+  }
+  .tablo tbody tr:last-child > * {
+    @apply border-b-0;
+  }
+  .tablo .sayi {
+    @apply text-right tabular-nums;
+  }
+  /* Sayfa başlığı bloğu */
+  .sayfa-baslik {
+    @apply flex flex-col gap-2;
+  }
+  /* Okuma metni (blog, rehber) */
+  .metin {
+    @apply text-[17px] leading-relaxed text-ink;
+  }
+  .metin h2 {
+    @apply mt-2;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -229,6 +311,11 @@ h3,
   grid-template-rows: auto minmax(0, 1fr) auto;
   grid-template-columns: minmax(0, 1fr);
   overscroll-behavior: none;
+}
+/* Alıştırma sayfasında footer görünmez (useSayfaKilidi de gizler); CSS ile ilk boyamadan gizli: kayma olmaz.
+   18+ ve sorumlu oyun satırı masanın altında ayrıca yer alır. */
+body:has([data-sayfa="alistirma"]) > footer {
+  display: none;
 }
 @media (max-width: 767px) {
   .trainer.antrenman-kok {
@@ -431,13 +518,44 @@ h3,
     right: 8px;
     width: auto;
     bottom: calc(var(--aksiyon-h, 120px) + 6px);
-    height: min(45dvh, calc(100% - var(--aksiyon-h, 120px) - var(--ust-bar, 52px) - 12px));
+    /* --koc-max (Trainer ölçer): masaya hero kartları ve board için yer, altında 18+ satırı kalır */
+    height: min(45dvh, calc(100% - var(--aksiyon-h, 120px) - var(--ust-bar, 52px) - 12px), var(--koc-max, 100dvh));
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
   }
 }
 .trainer .koc-pencere[hidden] {
   display: none;
+}
+/* Kısa çekmece (ör. 360x640): başlık ve alt bölüm sıkılaşır; hazır sorular ile yazı alanı tek satırı paylaşır */
+.trainer .koc-pencere {
+  container: koc / size;
+}
+.trainer .koc-yaz-ac {
+  display: none;
+}
+@container koc (max-height: 260px) {
+  .trainer .koc-baslik {
+    padding-block: 0;
+  }
+  .trainer .koc-baslik p {
+    display: none;
+  }
+  .trainer .koc-alt {
+    padding: 6px;
+  }
+  .trainer .koc-hizli {
+    margin-bottom: 0;
+  }
+  .trainer .koc-yaz-ac {
+    display: inline-flex;
+  }
+  .trainer .koc-pencere:not([data-yazi="1"]) .koc-form {
+    display: none;
+  }
+  .trainer .koc-pencere[data-yazi="1"] .koc-hizli {
+    display: none;
+  }
 }
 
 /* Hero kartları: varsayılan olarak koltuğun üstünde */
@@ -639,6 +757,24 @@ h3,
   width: 64px;
 }
 .kt-sakin .kt-yazi {
+  font-size: 22px;
+}
+/* Alıştırma masasında: kutlama üst bilgi çubuğunun üstüne, tek satırlık hap olarak oturur;
+   böylece el sonu panelinin başlığını ve masayı örtmez (yükseklik ≤ üst çubuk, 48px). */
+.trainer .kt-katman {
+  top: calc(var(--ust, 61px) + 2px);
+}
+.trainer .kt-kutu {
+  flex-direction: row;
+  gap: 8px;
+  padding: 1px 18px 1px 6px;
+  border-radius: 999px;
+}
+.trainer .kt-kutu .kt-isaret {
+  width: 42px;
+}
+.trainer .kt-yazi {
+  margin-top: 0;
   font-size: 22px;
 }
 /* Ders sonunda, sayfa zemininde (açık temada da okunur) */
