@@ -854,14 +854,14 @@ export function alistirmaDenetle(a: Al): string[] {
       }
       case "spotFiyat": {
         // drills.json'daki bir spotun fiyatı: gereken equity = call / (spot potu + call). Spot potu rakibin bahsini içerir;
-        // call miktarı spotun "Call (… BB)" seçeneğinden okunur. Metindeki değer (gereken) en fazla 0,6 puan sapabilir.
+        // call miktarı spotun "Call (… BB)" seçeneğinden okunur. Metindeki değer (gereken, bir ondalık) en fazla 0,06 puan sapabilir.
         const h = DRILLS.get(d.spot as string);
         if (!h) throw new Error(`drills.json'da spot yok: ${d.spot}`);
         const callSec = h.options.find((o) => o.startsWith("Call"));
         if (!callSec) throw new Error(`${d.spot}: call seçeneği yok`);
         const call = trSayi(callSec.replace(/^[^(]*\(/, ""));
         const r = (call / (h.potBB + call)) * 100;
-        if (Math.abs(r - Number(d.gereken)) > 0.6) hata(`${d.spot}: gereken equity %${r.toFixed(1)}, metinde %${d.gereken}`);
+        if (Math.abs(r - Number(d.gereken)) > 0.06) hata(`${d.spot}: gereken equity %${r.toFixed(1)}, metinde %${d.gereken}`);
         if (a.tip === "spot" && a.secenekler && JSON.stringify(a.secenekler) !== JSON.stringify(h.options)) hata(`${d.spot}: seçenekler spotla aynı değil`);
         break;
       }

@@ -11261,7 +11261,7 @@
      "anlatim": [
       "Bir açılışa karşı eller kabaca üç gruba ayrılır. En güçlü eller (AA, KK gibi) value için 3-bet edilir. Açılışa karşı iyi oynayan ama 3-bet'e devam edecek ellere karşı zayıf kalan orta eller çoğunlukla call edilir; pota henüz para koymamışken bir raise'i görmeye cold call denir. Kalan ellerin bir kısmı blöf 3-bet adayıdır, çoğu ise fold edilir.",
       "Blöf 3-bet için genellikle şu özellikler aranır: görülürse oynanabilir olmak (suited, bağlantılı), rakibin güçlü ellerini azaltan bir kart taşımak (c7-d3) ve call için yeterince iyi olmamak. A5s gibi suited küçük aslar bu yüzden sık seçilir. Hangi ellerin seçileceği pozisyona, rakibe ve stack'e göre değişir; burada bir liste vermiyoruz.",
-      "3-bet aralığı iki biçimde kurulabilir. Lineer aralık en iyi ellerden aşağı doğru kesintisiz iner; sık call eden rakiplere karşı ve call seçeneğinin zayıf olduğu yerlerde (ör. SB'de çoğunlukla 3-bet ya da fold) sık öğretilen biçimdir. Polarize aralık çok güçlü eller ve blöflerden oluşur, ortadaki eller call'a ayrılır; genellikle pozisyondayken, call iyi bir seçenekken kullanılır.",
+      "3-bet aralığı iki biçimde kurulabilir. Lineer aralık en iyi ellerden aşağı doğru kesintisiz iner; sık call eden rakiplere karşı sık öğretilen biçimdir. Call seçeneğinin zayıf olduğu SB'de 3-bet aralığı geniştir ve lineere yakındır; yine de A5s gibi blöf adaylarını içerebilir. Polarize aralık çok güçlü eller ve blöflerden oluşur, ortadaki eller call'a ayrılır; genellikle pozisyondayken, call iyi bir seçenekken kullanılır.",
       "Value ve blöf 3-bet'lerin birbirine oranı önemlidir. Yalnızca value ile 3-bet yaparsan rakipler bunu okur, en güçlü elleri dışında fold eder ve AA bile az kazanır. Çok fazla blöf yaparsan rakipler daha geniş call ya da 4-bet eder ve blöfler chip kaybettirir. Dengeli bir oran, rakibin hem fold'unun hem devamının bir bedeli olmasını sağlar. Kesin oran duruma göre değişir; ilkeyi bilmek yeter."
      ],
      "terimler": [
@@ -11430,7 +11430,7 @@
        "kimlik": "a9",
        "tip": "secmeli",
        "zorluk": 4,
-       "soru": "Rakiplerinin 3-bet'lerine çok sık fold ettiğini fark ettin. Hangisi genellikle mantıklı bir ayardır?",
+       "soru": "Rakiplerinin senin 3-bet'lerine çok sık fold ettiğini fark ettin. Hangisi genellikle mantıklı bir ayardır?",
        "secenekler": [
         "Blöf 3-bet'leri biraz artırmak",
         "3-bet'i tamamen bırakmak",
@@ -12508,7 +12508,7 @@
        "dogru": 61.7,
        "tolerans": 0.1,
        "birim": "%",
-       "neden": "Ek risk 14,5 BB: 14,5 / (14,5 + 9) ≈ %61,7. Bu oran, üç rakibin birlikte fold etmesi içindir.",
+       "neden": "Ek risk 14,5 BB: 14,5 / (14,5 + 9) ≈ %61,7. Bu oran, arkadaki BB dahil dört rakibin birlikte fold etmesi içindir.",
        "yanilgi": "SB'deki 0,5 BB'yi riske katmak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -13129,7 +13129,7 @@
        "kimlik": "a8",
        "tip": "sayi",
        "zorluk": 5,
-       "soru": "CO 2,5 BB açtı. SB'desin (0,5 BB'n potta) ve 12 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "soru": "CO 2,5 BB açtı, BTN fold etti. SB'desin (0,5 BB'n potta) ve 12 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
        "dogru": 74.2,
        "tolerans": 0.1,
        "birim": "%",
@@ -13167,9 +13167,9 @@
      "sureDk": 5,
      "anlatim": [
       "Equity'yi c6-d1'de tanıdın: kartlar sonuna kadar açılsa potun ortalama ne kadarını alacağın. İki türlü hesaplanır. Ele karşı equity, iki somut elin birbirine karşı payıdır. Masada rakibin kartlarını göremezsin; bu yüzden ele karşı örnekler burada yalnızca öğretim örneği olarak, kavramı göstermek için kullanılır.",
-      "Öğretim örneği (preflop, yaklaşık): büyük çift küçük çifte karşı yaklaşık %80'in üstünde (A♠ A♥ – K♣ K♦ ≈ %81). Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif önde (Q♠ Q♥ – A♣ K♦ ≈ %58). Aynı ası paylaşıp kicker'ı kötü olan el domine durumda (A♠ K♣ – A♦ J♥: AK ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+      "Öğretim örneği (preflop, yaklaşık): büyük çift küçük çifte karşı yaklaşık %80'in üstünde (A♠ A♥ – K♣ K♦ ≈ %81). Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif önde (Q♠ Q♥ – A♣ K♦ ≈ %57). Aynı ası paylaşıp kicker'ı kötü olan el domine durumda (A♠ K♣ – A♦ J♥: AK ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
       "Gerçek kararlarda rakibin tek bir eli değil, bir aralığı vardır. Aralığa karşı equity, elinin bu aralıktaki bütün kombinasyonlara karşı ortalama payıdır; kombinasyonu çok olan eller ortalamayı daha çok etkiler. Sitedeki pot odds spotlarında rakibin kartlarını görmezsin; equity'n, notta yazan aralık varsayımına karşı hesaplanır.",
-      "Flop'tan sonra equity çok değişebilir. Öğretim örneği: board K♥ 9♥ 3♣, elinde A♥ 5♥, rakipte K♠ Q♦. Kalan iki kartın bütün ihtimalleri sayıldığında equity'n yaklaşık %45,9'dur: henüz hiçbir şey yapmamış bir çekiş, top pair'e karşı neredeyse yazı-tura durumundadır."
+      "Flop'tan sonra equity çok değişebilir. Öğretim örneği: board K♥ 9♥ 3♣, elinde A♥ 5♥, rakipte K♠ Q♦ (top pair: board'daki en yüksek kartla yapılan per). Kalan iki kartın bütün ihtimalleri sayıldığında equity'n yaklaşık %45,9'dur: henüz hiçbir şey yapmamış bir çekiş, top pair'e karşı neredeyse yazı-tura durumundadır."
      ],
      "terimler": [
       "Equity",
@@ -13218,18 +13218,18 @@
        "secenekler": [
         "%50",
         "%65",
-        "%82",
+        "%81",
         "%97"
        ],
        "dogru": 2,
-       "neden": "Büyük çift küçük çifte karşı yaklaşık %80'in üstündedir (hesaplanan ≈ %81,4). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+       "neden": "Büyük çift küçük çifte karşı yaklaşık %80'in üstündedir (≈ %81). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
        "yanilgi": "Büyük çifti yenilmez sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "equityEle",
         "el": "A♠ A♥",
         "rakip": "K♣ K♦",
-        "yaklasik": 82
+        "yaklasik": 81
        }
       },
       {
@@ -13244,7 +13244,7 @@
         "%80"
        ],
        "dogru": 2,
-       "neden": "Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif öndedir (≈ %57,6). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+       "neden": "Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif öndedir (≈ %57). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
        "yanilgi": "AK'yı çifte karşı favori sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -13273,7 +13273,7 @@
          "Yaklaşık %74'e %26"
         ]
        ],
-       "neden": "Bu üç kalıp betikle hesaplanan değerlere dayanır (≈ %81, ≈ %58, ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+       "neden": "Bu üç kalıp betikle hesaplanan değerlere dayanır (≈ %81, ≈ %57, ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
        "yanilgi": "Her karşılaşmayı yazı-tura sanmak.",
        "dogrulamaGerekli": false
       },
@@ -13289,7 +13289,7 @@
         "%92"
        ],
        "dogru": 2,
-       "neden": "Aynı ası paylaşan ve kicker'ı kötü olan el domine durumdadır; AK yaklaşık %73,5. Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+       "neden": "Aynı ası paylaşan ve kicker'ı kötü olan el domine durumdadır; AK yaklaşık %74. Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
        "yanilgi": "İki asın birbirine eşit olduğunu sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -13836,7 +13836,7 @@
        "zorluk": 5,
        "soru": "Outs sayısı arttıkça 4 kuralı gerçek ihtimali olduğundan büyük gösterme eğilimindedir.",
        "dogru": true,
-       "neden": "9 out'ta fark 1 puan, 15 out'ta yaklaşık 5,9 puandır; iki kartta aynı out'un iki kez gelmesi kuralda çifte sayılır.",
+       "neden": "9 out'ta fark 1 puan, 15 out'ta yaklaşık 5,9 puandır; turn ve river'ın ikisinin de out olduğu durumlar kuralda iki kez sayılır.",
        "yanilgi": "Kuralın hatasının sabit olduğunu sanmak.",
        "dogrulamaGerekli": false
       }
@@ -15154,7 +15154,7 @@
        "kimlik": "a13",
        "tip": "sayi",
        "zorluk": 4,
-       "soru": "UTG 2,5 BB açtı, BTN call etti. SB'den 12 BB'ye squeeze yapıyorsun (0,5 BB'n potta). Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "soru": "UTG 2,5 BB açtı, HJ ve CO fold etti, BTN call etti. SB'den 12 BB'ye squeeze yapıyorsun (0,5 BB'n potta). Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
        "dogru": 63.9,
        "tolerans": 0.1,
        "birim": "%",
@@ -15171,7 +15171,7 @@
        "kimlik": "a14",
        "tip": "sayi",
        "zorluk": 4,
-       "soru": "CO'dan 2,5 BB açtın, SB 11 BB'ye 3-bet yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "soru": "CO'dan 2,5 BB açtın, BTN fold etti, SB 11 BB'ye 3-bet yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
        "dogru": 37.0,
        "tolerans": 0.1,
        "birim": "%",

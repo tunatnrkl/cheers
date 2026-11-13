@@ -24,9 +24,9 @@ Kaynak: `scripts/mufredat/icerik/c8.json`. 9 ders (6 normal + kontrol + tekrar +
 - **`kazandiranKart` (1, öğretim örneği):** rakibin eli soru metninde açıkça "öğretim örneği" diye verilir; river kartları tek tek denenir ve kahramanı öne geçirenler sayılır (kirli out: 8 kent kartından J♥ ve 6♥ rakibe floş verir → 6). Spot alıştırmasında kullanılmaz.
 - **`tutma` (10):** görülmeyen kart flop'ta 47, turn'de 46. Gerçek: iki kart 1 − C(47 − outs, 2) / C(47, 2), tek kart outs / görülmeyen. Kural: outs × 4 ya da × 2. Fark: kural − gerçek (15 out'ta ≈ 5,9 puan). Pay 0,06.
 - **`tutmaKart` (1):** 1081 turn–river ikilisi tek tek sayılarak aynı oranın (A♥ 5♥ / K♥ 9♥ 3♣ → %35,0) formülle aynı çıktığı gösterilir.
-- **`equityEle` (5, öğretim örneği):** iki somut el. Board 3 kartsa 990 turn–river ikilisi tek tek sayılır (A♥ 5♥ – K♠ Q♦ / K♥ 9♥ 3♣ → %45,86); preflop'ta sabit tohumlu Monte Carlo (40.000 deneme), metindeki değer en fazla 1,5 puan sapabilir ve yalnızca seçmeli sorularda kullanılır (AA–KK ≈ 81,4; QQ–AKo ≈ 57,6; AKo–AJo ≈ 73,5; 88–AKo ≈ 56,0).
+- **`equityEle` (5, öğretim örneği):** iki somut el. Board 3 kartsa 990 turn–river ikilisi tek tek sayılır (A♥ 5♥ – K♠ Q♦ / K♥ 9♥ 3♣ → %45,86); preflop'ta sabit tohumlu Monte Carlo (40.000 deneme), metindeki değer en fazla 1,5 puan sapabilir ve yalnızca seçmeli sorularda kullanılır (AA–KK, QQ–AKo, AKo–AJo, 88–AKo). Metinde bu değerler ondalıksız yazılır (≈ %81, ≈ %57, ≈ %74, ≈ %56); Onay Ajanı'nın tam sayımı (%81,26; %57,2; %73,69; %55,57) ile 1 puan içinde.
 - **`impliedBasabas` (5):** X = call × (1 / eq − 1) − pot; türetme denetle.mts'te yazılı (eq × (pot + X) = (1 − eq) × call; tutunca hep kazanma, tutmayınca eli bırakma varsayımı). Örnekler: 3,7 × (47/9 − 1) − 9,2 ≈ 6,4; set için eq = 2304/19600 ≈ %11,76 ile 14,8 ve 18,0 BB. **Bu bir eşiktir; rakibin ne ödeyeceğine dair sayı verilmedi.**
-- **`spotFiyat` (6):** o-… spotlarında gereken equity drills.json'daki pot ve "Call (… BB)" seçeneğinden yeniden hesaplanır ve gerekçedeki sayıyla (±0,6 puan) karşılaştırılır. Spotun aralığa karşı equity'si (ör. %27, %51) betikte yeniden hesaplanmadı; Kapı B'de doğrulanan spot gerekçesinden alındı ve öyle yazıldı.
+- **`spotFiyat` (6):** o-… spotlarında gereken equity drills.json'daki pot ve "Call (… BB)" seçeneğinden yeniden hesaplanır ve gerekçedeki sayıyla (±0,06 puan; gerekçedeki değer bir ondalıkla yazılır) karşılaştırılır. Spotun aralığa karşı equity'si (ör. %27, %51) betikte yeniden hesaplanmadı; Kapı B'de doğrulanan spot gerekçesinden alındı ve öyle yazıldı.
 - `gerekenEquity`, `spr`, `equityAraliga` (QQ'nun AA/KK/AK aralığına karşı ≈ %39,7) önceki ünitelerdeki gibi.
 
 ## Betikle denetlenmeyenler
@@ -39,4 +39,13 @@ Spot alıştırmalarında rakip eli yok; o-… spotlarında soru "kartlarını g
 
 ## Spot verisinde fark edilen tutarsızlık (müfredatta kullanılmadı)
 
-`c19` gerekçesi çift uçlu kent çekişinin river'da tutma oranını "8 / 44" ile veriyor; turn'de görülmeyen kart 46'dır (8 / 46 ≈ %17,4). Karar (call, gereken %16,7) değişmiyor ama sınırda kalıyor. Spot hands.ts'te olduğu için bu iş kolunda düzeltilmedi ve c8'de kullanılmadı.
+`c19` gerekçesi river'da tutma oranını "8 / 44" ile veriyordu; doğrusu 8 / 46 ≈ %17,4. **Düzeltildi (31593ed).** Karar (call, gereken %16,7) değişmedi. Spot c8'de kullanılmadı.
+
+## Onay Ajanı düzeltmeleri (2026-11-13)
+
+- Preflop el ele equity'ler ondalıksız yazıldı (≈ %81, %57, %74, %56); c8-d1/a3'ün doğru seçeneği %82 → %81.
+- c8-d1 anlatımında "top pair" ilk geçtiği yerde tanımlandı.
+- c8-d3/a11 gerekçesi: "turn ve river'ın ikisinin de out olduğu durumlar kuralda iki kez sayılır".
+- `spotFiyat` payı 0,6 → 0,06; gevşek ya da yuvarlanmış değeri yakalayan test eklendi.
+- Sözlükte "2 ve 4 kuralı" tanımına koşul eklendi (iki kartı da ödeme yapmadan göreceksen × 4).
+- c8-t/a13–a14: HJ/CO ve BTN'nin fold ettiği yazıldı.

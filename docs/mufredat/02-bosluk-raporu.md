@@ -80,12 +80,12 @@ Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistin
 
 ### Tanım notları (uygulanmadı)
 
-- **2 ve 4 kuralı** tanımı "flop'ta out × 4 (river'a kadar)" diyor. c8-d3, × 4'ün yalnızca turn ve river ikisi de bedava görülecekse (ör. flop'ta all-in) geçerli olduğunu öğretiyor. Öneri: tanıma "iki kartı da ödeme yapmadan göreceksen" eklenmesi.
+- **2 ve 4 kuralı** tanımı koşulsuz "flop'ta out × 4" diyordu. **Uygulandı (Onay Ajanı):** tanım artık "turn ve river'ı ödeme yapmadan göreceksen (ör. flop'ta all-in) out × 4, yalnızca bir sonraki kartı göreceksen out × 2" diyor; c8-d3 ile uyumlu.
 - **Lineer aralık** tanımındaki "(blöf içermez)" c7-d2 ile uyumlu.
 
 ### Spot ihtiyaçları
 
 - c7'de 11 spot bağlantısı (c05, c07, c08, c09, c10, c11, c12); c8'de 12 (c07, c13, c17, c18, c24, c38 ve altı o-… spotu). Cash pistinde **squeeze** (c12), **4-bet** (c09) ve **iso-raise** (c11) için birer spot var. 4-bet blöfü, 5-bet all-in'e karşı karar, IP squeeze ve 3-bet'e pozisyonda call (ör. BTN'de 99, CO'nun 3-bet'ine karşı) spotları faydalı olur.
 - c8 için **flop'ta çekişle karar** spotu az (c17, c26); o-… spotlarının hepsi turn all-in'i. Flop'ta yarım pot bahse karşı OESD/gutshot spotları (rakip aralığı notta, rakip eli yok) c8-d3/d4'ü güçlendirir.
-- `c19` gerekçesindeki "8 / 44" (doğrusu 8 / 46) düzeltilmeli; bkz. unite-c8.md.
-- `c11` gerekçesi iso-raise boyutunu "normal açılışa limp başına yaklaşık 1 BB" diye anlatıyor (2,5 + 1 = 3,5), spotun boyutu 4 BB. c7-d8 "yaklaşık 3 BB + limp başına 1 BB" diye anlatır (= 4 BB). İkisi de yaklaşık; gerekçe metni tek kurala getirilebilir.
+- `c19` gerekçesindeki "8 / 44" → 8 / 46 (%17,4): **düzeltildi (31593ed).**
+- `c11` gerekçesi iso-raise boyutunu "normal açılışa limp başına yaklaşık 1 BB" diye anlatıyor (2,5 + 1 = 3,5), spotun boyutu 4 BB. c7-d8 "yaklaşık 3 BB + limp başına 1 BB" diye anlatır (= 4 BB). **Düzeltildi (31593ed):** c11 gerekçesi c7-d8'deki kuralla aynı.

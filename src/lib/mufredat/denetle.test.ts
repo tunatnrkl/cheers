@@ -313,6 +313,9 @@ describe("cash c7–c8 hesapları (bloker, outs, 2 ve 4 kuralı, equity, implied
     const a: Al = { ...temel, tip: "spot", soru: "", denetim: { tur: "spotFiyat", spot: "o-Qc4c-3cTh7h8c", gereken: 45.4 } };
     expect(alistirmaDenetle(a)).toEqual([]);
     expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 54.8 } }).join()).toMatch(/gereken equity %45\.4/);
+    // Gevşek tolerans yok: %45,44 yerine %45,6 (ya da yuvarlanmış %45) yakalanır.
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45.6 } }).join()).toMatch(/gereken equity %45\.4/);
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45 } }).join()).toMatch(/gereken equity %45\.4/);
     expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, spot: "o-yok" } }).join()).toMatch(/spot yok/);
   });
 });

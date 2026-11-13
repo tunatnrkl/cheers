@@ -198,7 +198,7 @@
     "anlatim": [
       "Bir açılışa karşı eller kabaca üç gruba ayrılır. En güçlü eller (AA, KK gibi) value için 3-bet edilir. Açılışa karşı iyi oynayan ama 3-bet'e devam edecek ellere karşı zayıf kalan orta eller çoğunlukla call edilir; pota henüz para koymamışken bir raise'i görmeye cold call denir. Kalan ellerin bir kısmı blöf 3-bet adayıdır, çoğu ise fold edilir.",
       "Blöf 3-bet için genellikle şu özellikler aranır: görülürse oynanabilir olmak (suited, bağlantılı), rakibin güçlü ellerini azaltan bir kart taşımak (c7-d3) ve call için yeterince iyi olmamak. A5s gibi suited küçük aslar bu yüzden sık seçilir. Hangi ellerin seçileceği pozisyona, rakibe ve stack'e göre değişir; burada bir liste vermiyoruz.",
-      "3-bet aralığı iki biçimde kurulabilir. Lineer aralık en iyi ellerden aşağı doğru kesintisiz iner; sık call eden rakiplere karşı ve call seçeneğinin zayıf olduğu yerlerde (ör. SB'de çoğunlukla 3-bet ya da fold) sık öğretilen biçimdir. Polarize aralık çok güçlü eller ve blöflerden oluşur, ortadaki eller call'a ayrılır; genellikle pozisyondayken, call iyi bir seçenekken kullanılır.",
+      "3-bet aralığı iki biçimde kurulabilir. Lineer aralık en iyi ellerden aşağı doğru kesintisiz iner; sık call eden rakiplere karşı sık öğretilen biçimdir. Call seçeneğinin zayıf olduğu SB'de 3-bet aralığı geniştir ve lineere yakındır; yine de A5s gibi blöf adaylarını içerebilir. Polarize aralık çok güçlü eller ve blöflerden oluşur, ortadaki eller call'a ayrılır; genellikle pozisyondayken, call iyi bir seçenekken kullanılır.",
       "Value ve blöf 3-bet'lerin birbirine oranı önemlidir. Yalnızca value ile 3-bet yaparsan rakipler bunu okur, en güçlü elleri dışında fold eder ve AA bile az kazanır. Çok fazla blöf yaparsan rakipler daha geniş call ya da 4-bet eder ve blöfler chip kaybettirir. Dengeli bir oran, rakibin hem fold'unun hem devamının bir bedeli olmasını sağlar. Kesin oran duruma göre değişir; ilkeyi bilmek yeter."
     ],
     "terimler": [
@@ -361,7 +361,7 @@
         "kimlik": "a9",
         "tip": "secmeli",
         "zorluk": 4,
-        "soru": "Rakiplerinin 3-bet'lerine çok sık fold ettiğini fark ettin. Hangisi genellikle mantıklı bir ayardır?",
+        "soru": "Rakiplerinin senin 3-bet'lerine çok sık fold ettiğini fark ettin. Hangisi genellikle mantıklı bir ayardır?",
         "secenekler": [
           "Blöf 3-bet'leri biraz artırmak",
           "3-bet'i tamamen bırakmak",
@@ -1357,7 +1357,7 @@
         "dogru": 61.7,
         "tolerans": 0.1,
         "birim": "%",
-        "neden": "Ek risk 14,5 BB: 14,5 / (14,5 + 9) ≈ %61,7. Bu oran, üç rakibin birlikte fold etmesi içindir.",
+        "neden": "Ek risk 14,5 BB: 14,5 / (14,5 + 9) ≈ %61,7. Bu oran, arkadaki BB dahil dört rakibin birlikte fold etmesi içindir.",
         "yanilgi": "SB'deki 0,5 BB'yi riske katmak.",
         "dogrulamaGerekli": false,
         "denetim": {
@@ -1928,7 +1928,7 @@
         "kimlik": "a8",
         "tip": "sayi",
         "zorluk": 5,
-        "soru": "CO 2,5 BB açtı. SB'desin (0,5 BB'n potta) ve 12 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "soru": "CO 2,5 BB açtı, BTN fold etti. SB'desin (0,5 BB'n potta) ve 12 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
         "dogru": 74.2,
         "tolerans": 0.1,
         "birim": "%",

@@ -232,14 +232,14 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; st
 
 ### Yaklaşık (kendi hesabımız)
 
-- Preflop el ele equity'ler (öğretim örneği; Monte Carlo, 40.000 deneme, sabit tohum, ±1,5 puan): AA–KK ≈ %81, QQ–AKo ≈ %58, AKo–AJo ≈ %74, 88–AKo ≈ %56. Bilinen tablolarla uyumlu.
+- Preflop el ele equity'ler (öğretim örneği; Monte Carlo, 40.000 deneme, sabit tohum, ±1,5 puan): AA–KK ≈ %81, QQ–AKo ≈ %57, AKo–AJo ≈ %74, 88–AKo ≈ %56; metinde ondalıksız. Onay Ajanı bunları tam sayımla bağımsız hesapladı (%81,26; %57,2; %73,69; %55,57): hepsi yazılan değere 1 puandan yakın.
 - Aralığa karşı equity (Monte Carlo): J4o BTN'ye ≈ %35, T8s BTN'ye ≈ %41, QQ "AA, KK, AK" aralığına ≈ %40.
 - o-… spotlarının aralığa karşı equity'leri (%11, %27, %46, %51, %58, %62) spotların kendi gerekçelerinden (Kapı B) alındı; bu iş kolunda yeniden hesaplanmadı. Fiyatları betikle yeniden hesaplandı.
 
 ### Genel kabul görmüş ilkeler (yumuşatılmış)
 
 - 3-bet'in iki amacı (value, fold equity); value/blöf dengesinin gerekçesi (oran verilmedi).
-- Lineer aralığın sık call eden rakiplere karşı ve call seçeneğinin zayıf olduğu yerde (SB) "sık öğretilen" biçim olması; polarize aralığın pozisyonda, call iyi bir seçenekken kullanılması.
+- Lineer aralığın sık call eden rakiplere karşı "sık öğretilen" biçim olması; SB'de 3-bet aralığının geniş ve lineere yakın olup yine de blöf adayları içerebilmesi; polarize aralığın pozisyonda, call iyi bir seçenekken kullanılması.
 - Blöf 3-bet adayının özellikleri (oynanabilirlik, bloker, call için yetersizlik); A5s gibi suited küçük asların "sık seçildiği".
 - Boyutlar yaygın başlangıç noktası olarak: 3-bet IP ~3x, OOP ~4x; 4-bet 3-bet'in kabaca 2–2,5 katı; squeeze'de call eden başına bir açılış; iso-raise "basit bir başlangıç kuralı" olarak ~3 BB + limp başına 1 BB.
 - 3-bet'e karşı offsuit, domine olmaya yatkın ellerin genellikle fold edilmesi; QQ+ ve AK'nın çoğunlukla 4-bet ile devam etmesi.
@@ -256,8 +256,8 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; st
 
 ### Emin olunmayan noktalar
 
-- Lineer 3-bet aralığının SB'de "sık öğretilen" biçim olduğu ve 4-bet boyutunun "kabaca 2–2,5 kat" olduğu yaygın öğretim ilkeleridir; solver çıktısıyla doğrulanmadı.
-- c11'in gerekçesindeki boyut kuralı ("normal açılışa limp başına yaklaşık 1 BB" → 3,5 BB) ile c7-d8'deki basit kural (3 BB + limp başına 1 BB → 4 BB) birebir aynı değil; spot boyutu (4 BB) ikincisiyle uyumlu. Bkz. 02.
+- SB'de 3-bet aralığının geniş ve lineere yakın olduğu (yine de A5s gibi blöf adaylarını içerebileceği; c7-d3 ve c7-k ile uyumlu) ve 4-bet boyutunun "kabaca 2–2,5 kat" olduğu yaygın öğretim ilkeleridir; solver çıktısıyla doğrulanmadı.
+- c11 gerekçesindeki boyut kuralı c7-d8'deki basit kuralla (3 BB + limp başına 1 BB → 4 BB) farklıydı; **düzeltildi (31593ed).**
 - Spot cevapları (c07–c13, c17, c18, c24, c38) spotların kendi gerekçelerine dayanır; board'lu aralık equity'si betikte hesaplanmadı.
 
 ### Doğrulama (c7–c8)

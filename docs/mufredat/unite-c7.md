@@ -42,3 +42,10 @@ Kaynak: `scripts/mufredat/icerik/c7.json`. 10 ders (8 normal + kontrol + tekrar)
 ## Terim düzeni
 
 Value, blöf ve fold equity c7-d1'de; cold call, lineer ve polarize aralık c7-d2'de; bloker c7-d3'te; 4-bet c7-d5'te; 5-bet ve all-in c7-d6'da tanımlanır. Sözlüğe "5-bet" eklendi (bkz. 02).
+
+## Onay Ajanı düzeltmeleri (2026-11-13)
+
+- c7-d7/a9: SB'den squeeze'de başabaş oranı, arkadaki BB dahil dört rakibin birlikte fold etmesi içindir (gerekçe düzeltildi; sayı aynı, %61,7).
+- c7-d2/a9: soru tek anlama indirildi ("Rakiplerinin senin 3-bet'lerine…").
+- c7-d2 anlatımı: SB örneği lineer aralığın tanımından çıkarıldı; "SB'de 3-bet aralığı geniştir ve lineere yakındır; yine de A5s gibi blöf adaylarını içerebilir" (c7-d3/a11 ve c7-k/a8 ile uyumlu).
+- c7-r/a8: BTN'nin fold ettiği yazıldı.
