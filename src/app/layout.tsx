@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import "@fontsource-variable/fraunces/full.css";
-import "@fontsource-variable/manrope";
 import "./globals.css";
 import { Main } from "@/components/Main";
 import { Logo, Nav } from "@/components/Nav";

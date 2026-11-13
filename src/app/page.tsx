@@ -165,9 +165,10 @@ export default function Home() {
             <PokerTable hand={demo} r={r} />
             <div className="mt-3 grid grid-cols-3 gap-2">
               {[
-                ["Fold", "bg-t-fold"],
-                ["Call 3,7", "bg-t-call"],
-                ["All-in", "bg-t-allin"],
+                // Masadaki aksiyon butonlarıyla aynı renkler (beyaz yazıyla AA)
+                ["Fold", "bg-[#c2412d]"],
+                ["Call 3,7", "bg-[#157347]"],
+                ["All-in", "bg-[#8f1d24]"],
               ].map(([l, c]) => (
                 <span key={l} className={`grid min-h-12 place-items-center rounded-xl text-sm font-extrabold text-white ${c}`}>
                   {l}
