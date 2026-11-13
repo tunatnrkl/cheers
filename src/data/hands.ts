@@ -134,7 +134,7 @@ const CURATED: Hand[] = [
     hero: "AcTc", potBB: 2.5, seq: ["UTG l"],
     note: "UTG çok el oynayan, pasif bir oyuncu.",
     options: ["Fold", "Limp (arkadan gir)", "4 BB'ye raise"], correct: 2, topic: "acilis", level: 2,
-    reasoning: "Pasif ve gevşek bir oyuncunun limp aralığı zayıftır; ATs ona karşı güçlü bir value elidir. Raise ile blind'ları eleyip bu oyuncuyla pozisyonda baş başa kalırsın (izolasyon). Limp üzerine raise'de boyut, normal açılışa limp başına yaklaşık 1 BB eklenerek büyütülür.",
+    reasoning: "Pasif ve gevşek bir oyuncunun limp aralığı zayıftır; ATs ona karşı güçlü bir value elidir. Raise ile blind'ları eleyip bu oyuncuyla pozisyonda baş başa kalırsın (izolasyon). Limp üzerine raise'de basit bir başlangıç kuralı: yaklaşık 3 BB'ye limp başına 1 BB eklemek (burada 4 BB).",
   },
   {
     id: "c12", title: "BB'de JJ: açılış ve call var", game: "cash", street: "preflop", heroPos: "BB", stackBB: 100,
@@ -179,7 +179,7 @@ const CURATED: Hand[] = [
     id: "c19", title: "Çift uçlu kent çekişine küçük bahis", game: "cash", street: "turn", heroPos: "BTN", stackBB: 80,
     hero: "9c8c", board: "Kd7s6h2c", potBB: 20, seq: ["BTN r2.5", "SB f", "BB r7.75", "BTN c", "F Kd7s6h", "BB x", "BTN x", "T 2c", "BB b4"],
     options: ["Fold", "Call (4 BB)", "Raise 14 BB"], correct: 1, topic: "odds", level: 2,
-    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %17. Çift uçlu kent çekişi 8 out'la river'da yaklaşık %18 tutar (8 / 44); yani fiyat tek başına zaten yeterli. Pozisyondasın ve tutarsan ek chip kazanma şansın (implied odds) da var; bu, call'u daha da rahat yapar.",
+    reasoning: "20 BB'lik pota 4 BB ödüyorsun: gereken equity yaklaşık %17. Çift uçlu kent çekişi 8 out'la river'da yaklaşık %17,4 tutar (görmediğin 46 karttan 8'i); gereken %16,7'nin hemen üstünde, yani fiyat tek başına kıl payı yeterli. Pozisyondasın ve tutarsan ek chip kazanma şansın (implied odds) da var; bu, call'u daha da rahat yapar.",
   },
   {
     id: "c20", title: "River'da top pair: value bet", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
