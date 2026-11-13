@@ -10,7 +10,8 @@ import { fmt } from "@/lib/poker/replay";
  * önerilen olmayan ilk seçenek seçilir; böylece kayıt yanlış cevap olarak düşer.
  */
 export function secenekSirasi(hand: Hand, action: HeroAksiyon, deger: Degerlendirme, legal: LegalActions): number {
-  if (deger.kademe !== "hata") return hand.correct;
+  // Tahmini değerlendirme: hamle spotun seçeneklerine eşleşmedi; kayıt spotun cevabına göre yanlış sayılır
+  if (deger.kademe !== "hata" && !deger.tahmini) return hand.correct;
   const kinds = hand.options.map(optionKind);
   const max = (legal.bet ?? legal.raise)?.max;
   const allin = action.tür === "allin" || ((action.tür === "bet" || action.tür === "raise") && max !== undefined && action.miktar >= max);

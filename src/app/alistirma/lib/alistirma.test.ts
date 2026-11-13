@@ -228,6 +228,18 @@ describe("ilk karar eşlemesi", () => {
     }
   });
 
+  it("seçeneklere eşleşmeyen (tahmini) ilk hamle doğru sayılmaz: c17'de Raise 10", () => {
+    const h = el("c17"); // Fold / Call (3,7 BB) / All-in; doğru: Call
+    const s = createHand(h);
+    const l = legalActions(s);
+    const a = { tür: "raise" as const, miktar: 10 };
+    const k = applyHero(s, a).state.decisions[0];
+    expect(k.tahmini).toBe(true);
+    const i = secenekSirasi(h, a, k, l);
+    expect(i).not.toBe(h.correct);
+    expect(h.options[i]).toBe("All-in"); // aynı türdeki (artırma) seçenek
+  });
+
   it("seçenek boyutları kısayola çevrilir", () => {
     expect(secenekBoyutu("3-bet 9 BB", 4)).toBe(9);
     expect(secenekBoyutu("Call (3 BB)", 4)).toBeNull();
