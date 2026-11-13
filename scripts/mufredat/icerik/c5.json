@@ -189,14 +189,13 @@
  },
  "c5-d2": {
   "anlatim": [
-   "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir. Bu aralıklarda UTG ellerin yaklaşık %15'iyle, HJ yaklaşık %19'uyla açar.",
+   "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir. Bu aralıklarda erken pozisyonlardan UTG ellerin yaklaşık %15'iyle, HJ yaklaşık %19'uyla açar.",
    "UTG aralığı kabaca şunlardan oluşur: yüksek ve orta çiftler, suited asların çoğu, güçlü suited broadway'ler (KQs, KJs, QJs, JTs gibi) ve yalnızca en güçlü offsuit eller (AKo, AQo). Offsuit eller azdır: domine edilmeye yatkındırlar ve her biri 12 kombinasyon eklediği için aralığı hızla büyütürler.",
    "HJ, UTG'nin açtığı her eli açar ve birkaç el ekler: küçük bir çift, KJo ve ATo gibi offsuit broadway'ler, birkaç suited el. Arkada bir oyuncu daha az kaldığı için aralık biraz genişler.",
-   "Bu aralıklarda limp yoktur: aralıktaki el 2,5 BB ile açılır, aralığın dışındaki el fold edilir."
+   "Bu aralıklarda limp yoktur: aralıktaki el 2,5 BB'lik bir açılışla oynanır, aralığın dışındaki el fold edilir."
   ],
   "terimler": [
    "Range (aralık)",
-   "Range matrisi",
    "Erken pozisyon",
    "Open (açılış)"
   ],
@@ -865,8 +864,7 @@
    "Kenardaki eller arasında suited ve bağlantılı olanlar genellikle offsuit ve kopuk olanlardan daha kolay oynanır. Bu dersin alıştırmalarında sınırdaki ellerde iki cevabı da kabul ediyoruz. Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir."
   ],
   "terimler": [
-   "Range (aralık)",
-   "Open (açılış)"
+   "Range (aralık)"
   ],
   "alistirmalar": [
    {

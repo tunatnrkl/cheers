@@ -5,10 +5,10 @@ Kaynak: `scripts/mufredat/icerik/c5.json`. 8 ders (6 normal + kontrol + tekrar),
 | Ders | Tür | Paragraf | Alıştırma | Tipler | Zorluk | Denetimli | dogrulamaGerekli | Sözlük terimleri |
 |---|---|---|---|---|---|---|---|---|
 | `c5-d1` Açılış boyutu | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, sayi 4, secmeli 3 | 1–5 | 4 | 0 | Open (açılış), Min-raise, Bahis boyutu (sizing) |
-| `c5-d2` UTG ve HJ açılışları | ders | 4 | 11 | dogruYanlis 3, range 1, sayi 1, secmeli 3, spot 3 | 1–5 | 9 | 0 | Range (aralık), Range matrisi, Erken pozisyon, Open (açılış) |
+| `c5-d2` UTG ve HJ açılışları | ders | 4 | 11 | dogruYanlis 3, range 1, sayi 1, secmeli 3, spot 3 | 1–5 | 9 | 0 | Range (aralık), Erken pozisyon, Open (açılış) |
 | `c5-d3` CO ve BTN açılışları | ders | 4 | 10 | dogruYanlis 2, range 1, secmeli 4, spot 3 | 1–5 | 8 | 0 | Geç pozisyon, Steal (blind çalma), Range (aralık), Connector |
 | `c5-d4` SB'den açılış | ders | 3 | 10 | dogruYanlis 2, sayi 3, secmeli 2, spot 3 | 1–5 | 8 | 0 | SB (Small Blind), OOP (pozisyon dışı), Open (açılış), Limp |
-| `c5-d5` Sınırdaki eller | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, secmeli 7 | 1–5 | 6 | 3 | Range (aralık), Open (açılış) |
+| `c5-d5` Sınırdaki eller | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, secmeli 7 | 1–5 | 6 | 3 | Range (aralık) |
 | `c5-d6` Rakibe göre küçük ayar | ders | 3 | 10 | dogruYanlis 3, eslestirme 1, sayi 1, secmeli 5 | 1–5 | 4 | 2 | Tight, Loose, Range (aralık) |
 | `c5-k` Kontrol | kontrol | 1 | 12 | dogruYanlis 2, range 1, sayi 2, secmeli 4, spot 3 | 1–5 | 9 | 1 | — |
 | `c5-r` Tekrar | tekrar | 1 | 8 | dogruYanlis 2, sayi 1, secmeli 4, spot 1 | 2–5 | 5 | 1 | — |

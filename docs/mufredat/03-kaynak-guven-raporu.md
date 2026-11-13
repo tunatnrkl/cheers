@@ -85,3 +85,51 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Uydurma sayı, equity yüzdes
   - **Efektif stack ve BB:** stack'ler ve blind elle girilir; betik küçük olanı seçer ve bölmeyi yapar.
   - **Kazanan ve pot:** o1–o2'deki gibi (el değerlendirici; elle girilen terimlerin toplamı).
 - Kalan 69 alıştırma kavram ve strateji ilkesi sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+
+## c5 · Açılış aralıkları, c6 · Blind savunması
+
+Bu iki ünitede strateji iddiaları başlıyor. Kaynaklar: `src/data/ranges.json` (sitenin Range aracı da bunu okur), `docs/ekip/2026-11-11/06-blind-savunmasi-rehberi.md` ve `02-blind-savunmasi-paketi.md`. Rehberdeki ve quizdeki bütün aritmetik `denetle.mts` ile yeniden hesaplandı ve aynı çıktı.
+
+### Kesin olan (kural ya da aritmetik)
+
+- Pot toplamları, call için ödenecek ek miktar (blind'in düşülmesi), 3-bet'te eklenecek miktar.
+- Gereken equity = ödenecek / (call öncesi pot + ödenecek): %27,3 (BTN 2,5 BB, BB), %22,2 (min-raise), %18,8 (açılış + call), %30,8 (3 BB açılış), %33,3 (SB'nin 2,5 BB açılışa ya da BB'nin SB'nin 3 BB açılışına call'u), %15 ve %14,3 (çok oyunculu), %20.
+- Gerekli pay = gereken equity / ham equity. Bu yalnızca bir orandır.
+- Aralık yüzdeleri, ranges.json'daki listelerin kombinasyonları sayılarak bulunur: UTG %15,2, HJ %19,3, CO %27,3, BTN %43,3, SB %38,2.
+- 3-bet tanımı, SB'nin postflop'ta pozisyon dışında olması, BB'nin multiway potta iki rakibe karşı pozisyon dışında olması.
+
+### Yaklaşık (kendi hesabımız; solver çıktısı değil)
+
+- **Açılış aralıkları.** ranges.json'ın kendi notu: "Çalışma amaçlı yaklaşık aralıklardır; solver çıktısı değildir." Bu not c5-d2, d3, d4, d5'in anlatımında, c5-k girişinde ve c6'nın ilgili derslerinde tekrarlanır. Betik bir eli aralığın son ~%4'ünde (53 kombinasyon) ya da hemen dışında kalıyorsa veya karışık oynanan bir suited el ise "sınırda" sayar. Sınırdaki eller yalnızca `dogrulamaGerekli: true` (c5'te 7 alıştırma) ve çoğunda `kabulEdilebilir` ile soruldu. Betiğin bu okuması sitedeki 115 açılış spotunun cevabıyla birebir aynı (test).
+- **Aralığa karşı equity.** Projenin el değerlendiricisiyle Monte Carlo, 40.000 deneme, sabit tohum. Metindeki "yaklaşık" değerler en fazla 1,5 puan sapabilir; rehberdeki değerlerle 0,6 puan içinde.
+- **Açılış boyutu 2,5 BB ve SB'den 3 BB.** Bu bir varsayımdır ("uygulamada 2 ile 3 BB arası yaygındır" diye yazıldı); kural değildir.
+
+### Genel kabul görmüş ilkeler (yumuşatılmış dille)
+
+- Geç pozisyonda aralığın genişlemesi; SB'nin BTN'den biraz dar açması (pozisyon dışında).
+- Sabit açılış boyutunun eli saklaması.
+- Blind'ler sıkıysa kenarda daha geniş, sık yeniden raise geliyorsa daha dar açmak. Ayar yalnızca kenarı etkiler; AA ve 72o değişmez.
+- Açan ne kadar erken pozisyondaysa BB savunmasının daralması (J4o örneği betikle hesaplanan equity'lerle).
+- Equity realization: pozisyon dışında, offsuit ve kopuk ellerin daha az; suited ve bağlantılı ellerin daha çok gerçekleştirmesi. **Oran verilmedi.** 72o'nun BTN'ye karşı fold edilmesi "çoğu çalışma kaynağı fold önerir" diye yazıldı.
+- SB'de açılışa karşı "çoğunlukla 3-bet ya da fold". Hangi ellerle yapılacağı c7'ye bırakıldı.
+- Multiway potta suited/bağlantılı eller ve çiftlerin, offsuit ve domine olmaya yatkın ellerden daha iyi gelmesi. Kesin el listesi verilmedi.
+
+### Bilinçli basitleştirmeler
+
+- SB'de limp seçeneği yalnızca anıldı; öğretilmedi.
+- 3-bet'e karşı oynamak, squeeze ve blokerler c7'ye bırakıldı. c08 spotu (SB A5s 3-bet) gerekçesi blocker kavramını kullandığı için bağlanmadı.
+- Multiway potta equity sayısı verilmedi (betikte çok oyunculu equity hesabı yok).
+
+### Emin olunmayan noktalar
+
+- c34 spotunun (BB'de 72o, BTN 3 BB açtı → fold) kaynak quizinde bir uzman notu var: bazı solver çıktılarında BB, butonun 2,5 BB açılışına karşı çok geniş savunur. Spot bu yüzden 3 BB açılışla kurulmuştu (gereken %30,8 > ham equity ≈ %29,9). Müfredatta c6-r'de bu hâliyle kullanıldı; fiyat ve equity betikle doğrulandı. "Fold" cevabı ham equity'nin eşiğin altında kalmasına dayanır; realization tahminine dayanmaz.
+- c6-d2/a10 ve c6-k'daki c35 spotu (UTG'ye karşı J4o → fold), equity'nin eşiğin ancak 1,7 puan üstünde olduğu bir karardır. Gerekçe: pozisyon dışında ve domine olmaya yatkın. Bu gerekçe realization'a dayanır; sitedeki c35 spotunun cevabıyla aynıdır. Kesin bir realization sayısıyla kanıtlanmadı; bu nedenle "genellikle tercih edilir" diye yazıldı.
+
+### Doğrulama (c5–c6)
+
+- 171 alıştırmadan 102'si `denetle.mts` ile denetlenir: c5 53, c6 49.
+- **Bağımsız hesaplanan:** kombinasyon ve yüzde; gereken equity (pot ve ödenecek elle girilir, oran yeniden hesaplanır); aralığa karşı equity (Monte Carlo); kazanan.
+- **ranges.json'a göre okunan:** açılış kararları. Betik, ranges.json'ın yöntem notundaki sıralama kuralını kenar payını ölçmek için yeniden kurar; aralıkların kendisini doğrulamaz.
+- **Testle sabitlenen:** spot alıştırmalarının seçenek ve cevabının sitedeki spotla aynı olması.
+- Kalan 69 alıştırma kavram ve ilke sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+

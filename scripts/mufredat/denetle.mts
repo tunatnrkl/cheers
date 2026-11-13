@@ -589,6 +589,19 @@ export function alistirmaDenetle(a: Al): string[] {
         const rakip = d.poz ? RANGES.cash[d.poz as string] : (d.rakip as string[]);
         const r = equityAraliga(d.el as string, rakip);
         if (Math.abs(r - (d.yaklasik as number)) > 1.5) hata(`${d.el} equity'si yaklaşık %${r.toFixed(1)}, metinde %${d.yaklasik}`);
+        if (a.tip === "secmeli") tekCevap((i) => Math.abs(trSayi(sec[i]) - r) <= 1.5, `${d.el} equity'si %${r.toFixed(1)}`);
+        break;
+      }
+      case "gerekliPay": {
+        // Call'un kârlı olması için ham equity'nin ne kadarı kullanılmalı: gereken equity / ham equity.
+        // Bu bir aritmetik oranıdır; elin gerçekte ne kadar gerçekleştirdiği (realization) iddiası değildir.
+        const gereken = ((d.call as number) / ((d.pot as number) + (d.call as number))) * 100;
+        const ham = equityAraliga(d.el as string, RANGES.cash[d.poz as string]);
+        const r = (gereken / ham) * 100;
+        if (a.tip === "sayi") {
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (Math.abs((dogru as number) - r) > tol || tol > 3) hata(`gerekli pay %${r.toFixed(1)}, veride ${dogru} (tolerans ${tol})`);
+        } else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 4, `gerekli pay %${r.toFixed(1)}`);
         break;
       }
       default:
