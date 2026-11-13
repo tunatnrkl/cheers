@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 53 ders, 585 alıştırma.
+**Dolu:** 61 ders, 680 alıştırma.
 
 ## Cash pisti
 
@@ -270,14 +270,14 @@ BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t2-d1` Stack kaç BB | ders | Chip sayısını BB'ye çevirir; derin, orta ve kısa stack bölgelerini tanır. | o3-k, o3-d5 |
-| `t2-d2` M oranı | ders | M'yi hesaplar (stack / bir turun maliyeti) ve BB ölçüsüyle ilişkisini açıklar. | t2-d1, t1-d4 |
-| `t2-d3` Efektif stack turnuvada | ders | Farklı stack'ler karşılaştığında riskteki miktarı bulur. | t2-d2 |
-| `t2-d4` Ortalama stack ve aşamalar | ders | Erken, orta ve geç aşamayı blind ve ortalama stack ile tanımlar. | t2-d3 |
-| `t2-d5` Chip'in değeri sabit değil | ders | Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar. | t2-d4, t1-d5 |
-| `t2-k` Kontrol: Stack'i ölçmek | kontrol | "Stack'i ölçmek" ünitesinin kazanımlarını karışık sorularda uygular. | t2-d5 |
-| `t2-r` Tekrar: Stack'i ölçmek | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t2-k |
-| `t2-t` Turnuva seviye 1-2 testi | test | bu pistte seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t2-k |
+| `t2-d1` Stack kaç BB (11 alıştırma) | ders | Chip sayısını BB'ye çevirir; derin, orta ve kısa stack bölgelerini tanır. | o3-k, o3-d5 |
+| `t2-d2` M oranı (11 alıştırma) | ders | M'yi hesaplar (stack / bir turun maliyeti) ve BB ölçüsüyle ilişkisini açıklar. | t2-d1, t1-d4 |
+| `t2-d3` Efektif stack turnuvada (11 alıştırma) | ders | Farklı stack'ler karşılaştığında riskteki miktarı bulur. | t2-d2 |
+| `t2-d4` Ortalama stack ve aşamalar (11 alıştırma) | ders | Erken, orta ve geç aşamayı blind ve ortalama stack ile tanımlar. | t2-d3 |
+| `t2-d5` Chip'in değeri sabit değil (11 alıştırma) | ders | Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar. | t2-d4, t1-d5 |
+| `t2-k` Kontrol: Stack'i ölçmek (12 alıştırma) | kontrol | "Stack'i ölçmek" ünitesinin kazanımlarını karışık sorularda uygular. | t2-d5 |
+| `t2-r` Tekrar: Stack'i ölçmek (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t2-k |
+| `t2-t` Turnuva seviye 1-2 testi (20 alıştırma) | test | bu pistte seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t2-k |
 
 ### t3 · Derin stack oyunu (seviye 3)
 

@@ -13968,15 +13968,242 @@
       "Chip sayısını BB'ye çevirir; derin, orta ve kısa stack bölgelerini tanır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "o3'te stack'i BB'ye çevirmeyi öğrendin: stack (BB) = stack (chip) / büyük blind. Turnuvada chip sayısı tek başına bir şey söylemez: 20.000 chip, büyük blind 100 iken 200 BB, büyük blind 1.000 iken 20 BB'dir. Kararların çoğu BB cinsinden derinliğe göre değişir.",
+      "Bu müfredat turnuva stack'lerini üç bölgeye ayırır: derin stack 40 BB ve üstü, orta stack 20 BB ve üstü ama 40 BB'nin altı, kısa stack 20 BB'nin altı. Sınırlar kaynağa göre değişir; bunlar çalışma için seçilmiş yaklaşık sınırlardır.",
+      "Bölgeler ileride göreceğin oyun planlarına karşılık gelir: derin stack'te el oynamaya daha çok yer vardır (t3), orta stack'te seçenekler daralır (t4), kısa stack'te kararlar çoğunlukla all-in ya da fold'a iner (t5). All-in, önündeki bütün chip'leri ortaya koymaktır.",
+      "Ante'li masada da stack'i büyük blind'e bölerek BB'ye çevirirsin; ante bu hesaba girmez. Ante'nin etkisini bir sonraki derste M oranıyla göreceksin."
+     ],
+     "terimler": [
+      "Stack",
+      "BB (Big Blind)",
+      "Derin stack",
+      "Kısa stack",
+      "All-in"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Büyük blind 400. Stack'in 20.000 chip. Stack'in kaç BB?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "20.000 / 400 = 50 BB.",
+       "yanilgi": "Küçük blind'e bölüp 100 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         20000,
+         400
+        ]
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Büyük blind 1.000. Stack'in 50.000 chip (50 BB). Müfredatın sınırlarıyla bu stack hangi bölgededir?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 0,
+       "neden": "50 BB, 40 BB'nin üstündedir: derin stack.",
+       "yanilgi": "Chip sayısının büyüklüğünden ya da küçüklüğünden bölge çıkarmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "50.000",
+        "bb": 1000
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Ante'li masada stack'i BB'ye çevirirken ante'yi de büyük blind'e eklersin.",
+       "dogru": false,
+       "neden": "BB cinsinden stack = chip / büyük blind. Ante bu hesaba girmez; onu M oranı hesaba katar.",
+       "yanilgi": "BB sayısını M oranıyla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Blind'ler 500 / 1.000, BB ante 1.000. Stack'in 14.000 chip. Stack'in kaç BB?",
+       "dogru": 14,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "14.000 / 1.000 = 14 BB. Ante bölmeye girmez.",
+       "yanilgi": "Büyük blind ile ante'yi toplayıp 7 BB bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         14000,
+         1000
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Büyük blind 600. Chip miktarını BB karşılığıyla eşleştir.",
+       "secenekler": [
+        [
+         "3.000 chip",
+         "5 BB"
+        ],
+        [
+         "9.000 chip",
+         "15 BB"
+        ],
+        [
+         "15.000 chip",
+         "25 BB"
+        ],
+        [
+         "27.000 chip",
+         "45 BB"
+        ]
+       ],
+       "neden": "Her miktarı büyük blind'e, yani 600'e böl.",
+       "yanilgi": "Binlik ayırıcıyı ondalık sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolumEsleme",
+        "bb": 600
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Büyük blind 800. Stack'in 12.000 chip. Hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 2,
+       "neden": "12.000 / 800 = 15 BB; 20 BB'nin altı kısa stack'tir.",
+       "yanilgi": "12.000 chip'i büyük bir sayı diye derin sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "12.000",
+        "bb": 800
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 300. Stack'in 6.600 chip. Stack'in kaç BB?",
+       "dogru": 22,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "6.600 / 300 = 22 BB.",
+       "yanilgi": "Bölmeyi bir basamak kaydırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         6600,
+         300
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "İki farklı turnuvada iki oyuncunun da 30.000 chip'i var; birinde büyük blind 500, ötekinde 1.500. İkisinin stack'i BB cinsinden aynıdır.",
+       "dogru": false,
+       "neden": "30.000 / 500 = 60 BB (derin), 30.000 / 1.500 = 20 BB (orta). Aynı chip, farklı derinlik.",
+       "yanilgi": "Stack'i chip sayısıyla karşılaştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bbErime",
+        "stack": "30.000",
+        "eskiBb": 500,
+        "yeniBb": 1500,
+        "sonuc": "kayip",
+        "iddia": 0
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Büyük blind 1.200. Stack'in 24.000 chip. Hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 1,
+       "neden": "24.000 / 1.200 = 20 BB. Müfredatın sınırında 20 BB orta stack'e dahildir; kısa stack 20 BB'nin altıdır.",
+       "yanilgi": "Tam 20 BB'yi kısa stack saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "24.000",
+        "bb": 1200
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Stack'in 18.000 chip, blind'ler 300 / 600. Bir sonraki seviyede büyük blind 1.000 olacak. Hiç chip kaybetmezsen o seviyede kaç BB'n olur?",
+       "dogru": 18,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "18.000 / 1.000 = 18 BB. Şu an 30 BB (orta) iken kısa stack bölgesine geçersin.",
+       "yanilgi": "Eski büyük blind'e bölüp 30 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bbErime",
+        "stack": "18.000",
+        "eskiBb": 600,
+        "yeniBb": 1000,
+        "sonuc": "yeni"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Stack'in 25.000 chip; büyük blind 600'den 800'e çıkıyor. Hiç chip kaybetmezsen yeni seviyede hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 1,
+       "neden": "Önce 25.000 / 600 ≈ 41,7 BB (derin); sonra 25.000 / 800 = 31,25 BB (orta). Hiç el kaybetmeden bölge değişti.",
+       "yanilgi": "Eski büyük blind'le hesaplayıp derin stack'te kaldığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "25.000",
+        "bb": 800
+       }
+      }
+     ]
     },
     {
      "kimlik": "t2-d2",
@@ -13990,15 +14217,214 @@
       "M'yi hesaplar (stack / bir turun maliyeti) ve BB ölçüsüyle ilişkisini açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "M oranı, stack'ini bir masa turunun maliyetine böler. Masa turu, butonun masayı bir kez dolaşmasıdır; bu sürede her oyuncu küçük blind'i ve büyük blind'i birer kez öder. Bir turun maliyeti, el başındaki pota eşittir: M = stack / (küçük blind + büyük blind + o eldeki toplam ante).",
+      "Örnek: blind'ler 100 / 200, BB ante 200, stack'in 10.000 chip. Bir turun maliyeti 100 + 200 + 200 = 500 chip; M = 10.000 / 500 = 20. Yani hiç el oynamasan ve blind'ler değişmese 20 tur dayanırsın. Klasik ante'de toplam ante, oyuncu sayısı × ante'dir.",
+      "M, Dan Harrington'ın turnuva kitaplarıyla yaygınlaşan bir ölçüdür. Bugün birçok oyuncu ve kaynak stack'i doğrudan BB ile ölçer; iki ölçü birbirine çevrilebilir. BB ante 1 BB iken bir tur 0,5 + 1 + 1 = 2,5 BB tutar, bu yüzden M = BB sayısı / 2,5: 25 BB'lik stack'in M'si 10'dur. Ante'siz masada tur 1,5 BB tutar ve M = BB sayısı / 1,5 olur.",
+      "M'nin yararı ante'yi de göstermesidir: aynı BB'li stack, ante büyüdükçe daha az tur dayanır. Bu müfredat kararları çoğunlukla BB ile anlatır; M'yi bir kontrol ölçüsü olarak kullanır."
+     ],
+     "terimler": [
+      "M oranı",
+      "Stack",
+      "Ante",
+      "BB ante"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "M oranı, stack'ini bir masa turunun maliyetine böler.",
+       "dogru": true,
+       "neden": "M = stack / (küçük blind + büyük blind + toplam ante).",
+       "yanilgi": "M'yi BB sayısıyla aynı şey sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Blind'ler 100 / 200, BB ante 200. Stack'in 15.000 chip. M kaçtır?",
+       "dogru": 30,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Tur maliyeti 100 + 200 + 200 = 500; 15.000 / 500 = 30.",
+       "yanilgi": "Ante'yi unutup 15.000 / 300 = 50 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "15.000",
+        "sb": 100,
+        "bb": 200,
+        "ante": 200
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Blind'ler 200 / 400, BB ante 400. Bir masa turunun maliyeti kaç chip?",
+       "secenekler": [
+        "600",
+        "800",
+        "1.000",
+        "4.000"
+       ],
+       "dogru": 2,
+       "neden": "200 + 400 + 400 = 1.000 chip.",
+       "yanilgi": "Ante'yi unutmak ya da BB ante'yi oyuncu sayısıyla çarpmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 200,
+        "bb": 400,
+        "ante": 400
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Aynı blind'lerde (200 / 400, BB ante 400) stack'in 12.000 chip. M kaçtır?",
+       "secenekler": [
+        "M = 6",
+        "M = 12",
+        "M = 20",
+        "M = 30"
+       ],
+       "dogru": 1,
+       "neden": "12.000 / 1.000 = 12. 30 BB sayısıdır; 20 ise ante'siz hesaptır.",
+       "yanilgi": "BB sayısını (30) M sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "12.000",
+        "sb": 200,
+        "bb": 400,
+        "ante": 400
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Ante'siz masada M, BB sayısının 1,5'e bölümüdür.",
+       "dogru": true,
+       "neden": "Ante yoksa bir tur 0,5 + 1 = 1,5 BB tutar; M = BB / 1,5.",
+       "yanilgi": "Ante'siz masada da 2,5'e bölmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Stack'in 25 BB. M kaçtır?",
+       "dogru": 10,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Bir tur 0,5 + 1 + 1 = 2,5 BB; 25 / 2,5 = 10.",
+       "yanilgi": "M'yi BB sayısıyla aynı sanıp 25 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 25,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Klasik ante: 9 oyuncu, blind'ler 100 / 200, ante 25. Stack'in 10.500 chip. M kaçtır?",
+       "dogru": 20,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Tur maliyeti 100 + 200 + 9 × 25 = 525; 10.500 / 525 = 20.",
+       "yanilgi": "Klasik ante'yi tek kez sayıp 10.500 / 325 ≈ 32,3 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "10.500",
+        "sb": 100,
+        "bb": 200,
+        "ante": 25,
+        "anteTuru": "klasik",
+        "oyuncu": 9
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "M ile BB ölçüsü arasındaki fark nedir?",
+       "secenekler": [
+        "M ante'yi de hesaba katar; aynı BB'li stack'in M'si ante büyüdükçe küçülür",
+        "M yalnızca büyük blind'e bakar",
+        "M ile BB sayısı her masada aynıdır",
+        "M chip sayısının kendisidir"
+       ],
+       "dogru": 0,
+       "neden": "BB ölçüsü yalnızca büyük blind'e böler; M bir turun bütün maliyetine böler.",
+       "yanilgi": "İki ölçünün her zaman aynı sayıyı verdiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Blind'ler 1.000 / 2.000, BB ante 2.000. Stack'in 32.000 chip. M kaçtır? (bir ondalık basamak)",
+       "dogru": 6.4,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Tur maliyeti 1.000 + 2.000 + 2.000 = 5.000; 32.000 / 5.000 = 6,4.",
+       "yanilgi": "Ante'yi unutup 32.000 / 3.000 ≈ 10,7 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "32.000",
+        "sb": 1000,
+        "bb": 2000,
+        "ante": 2000
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack'in 40 BB. BB ante 1 BB'li masada M'n, ante'siz masadakinden küçüktür.",
+       "dogru": true,
+       "neden": "BB ante 1 BB ile M = 40 / 2,5 = 16; ante'siz M = 40 / 1,5 ≈ 26,7.",
+       "yanilgi": "Ante'nin yalnızca potu büyüttüğünü, stack'in dayanma süresini etkilemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Blind'ler 300 / 600, BB ante 600 iken stack'in 18.000 chip. Sonraki seviyede blind'ler 400 / 800, BB ante 800 olacak. Hiç chip kaybetmezsen o seviyede M kaç olur?",
+       "dogru": 9,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Yeni tur maliyeti 400 + 800 + 800 = 2.000; 18.000 / 2.000 = 9. Şu an M 18.000 / 1.500 = 12'dir.",
+       "yanilgi": "Eski blind'lerle hesaplayıp 12 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "18.000",
+        "sb": 400,
+        "bb": 800,
+        "ante": 800
+       }
+      }
+     ]
     },
     {
      "kimlik": "t2-d3",
@@ -14011,15 +14437,207 @@
       "Farklı stack'ler karşılaştığında riskteki miktarı bulur."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "o3'te gördüğün gibi iki oyuncu arasında oynanabilecek en fazla miktar küçük stack'tir: efektif stack. Turnuvada bunun ikinci bir anlamı var: bütün chip'lerini kaybedersen elenirsin. Stack'i seninkine eşit ya da ondan büyük olan rakip seni kapsar (cover); ona karşı bütün chip'lerini kaybedebilirsin, yani o elde turnuvan da risktedir.",
+      "Senden kısa stack'li rakip seni eleyemez: ona karşı en fazla onun stack'i kadar kaybedersin. Örnek: büyük blind 500; sen 20.000 chip (40 BB), rakibin 7.500 chip (15 BB). Efektif stack 15 BB'dir. İkiniz de all-in olsanız ve kaybetsen 25 BB ile oyunda kalırsın; rakip kaybederse elenir.",
+      "Elde birden fazla rakip varsa, en fazla kaybedebileceğin miktar senin stack'in ile en büyük rakip stack'inden küçük olanıdır. Her rakip yalnızca kendi stack'i kadarını karşılayabilir; bahsinin kimsenin karşılamadığı kısmı sana geri döner. Bu yüzden tek elde ancak seni kapsayan bir rakip varsa elenebilirsin.",
+      "Turnuvada yalnızca efektif stack'e değil, kimin kimi kapsadığına da bakılır: seni kapsayan rakibe karşı kaybettiğin bir all-in turnuvanı bitirir, senden kısa olana karşı kaybettiğin bitirmez."
+     ],
+     "terimler": [
+      "Efektif stack",
+      "Kapsamak (cover)",
+      "All-in",
+      "Stack"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Efektif stack, iki stack'ten küçük olanıdır.",
+       "dogru": true,
+       "neden": "Kimse önündekinden fazlasını koyamaz; oynanabilecek miktarı küçük stack sınırlar.",
+       "yanilgi": "Büyük stack'i efektif stack sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Sen 45 BB, rakibin 18 BB. Efektif stack kaç BB?",
+       "dogru": 18,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük olan stack: 18 BB.",
+       "yanilgi": "Büyük stack'i ya da toplamı almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         45,
+         18
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Sen 20 BB, rakibin 35 BB. Kim kimi kapsar?",
+       "secenekler": [
+        "Rakibin seni kapsar",
+        "Sen rakibini kapsarsın",
+        "İkiniz de birbirinizi kapsarsınız"
+       ],
+       "dogru": 0,
+       "neden": "Rakibin stack'i seninkinden büyük; ona bütün chip'lerini kaybedebilirsin.",
+       "yanilgi": "Kapsamayı kısa stack'ten büyüğe doğru okumak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Büyük blind 400. Sen 16.000 chip, rakibin 9.200 chip. Efektif stack kaç BB?",
+       "dogru": 23,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 9.200; 9.200 / 400 = 23 BB.",
+       "yanilgi": "Büyük stack'i BB'ye çevirip 40 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "16.000",
+         "9.200"
+        ],
+        "bb": 400
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Senden kısa stack'li bir rakibe karşı tek bir elde elenebilirsin.",
+       "dogru": false,
+       "neden": "Kısa stack'li rakip en fazla kendi stack'i kadar kazanabilir; geri kalan chip'lerin sende kalır.",
+       "yanilgi": "Her all-in'in iki taraf için de turnuvayı bitirdiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Sen 40 BB, rakibin 15 BB. İkiniz de all-in oldunuz ve kaybettin. Kaç BB'n kalır?",
+       "dogru": 25,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Rakip yalnızca 15 BB'ni karşılayabilir: 40 − 15 = 25 BB.",
+       "yanilgi": "Bütün stack'ini kaybettiğini sanıp 0 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         40,
+         -15
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "İki oyuncunun stack'i eşit: ikisi de 30 BB. Hangisi doğru?",
+       "secenekler": [
+        "İkisi de birbirini kapsar; all-in olurlarsa kaybedenin turnuvası biter",
+        "Kimse kimseyi kapsamaz",
+        "Yalnızca büyük blind'deki oyuncu risktedir"
+       ],
+       "dogru": 0,
+       "neden": "Kapsamak, eşit ya da büyük stack'e sahip olmaktır; eşit stack'lerde ikisi de birbirini kapsar.",
+       "yanilgi": "Kapsamak için kesin olarak büyük stack gerektiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Üç oyuncu all-in: sen 50 BB, Ali 30 BB, Berk 20 BB. Bu elde en fazla kaç BB kaybedebilirsin?",
+       "dogru": 30,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Senin stack'in (50) ile en büyük rakip stack'inden (30) küçük olanı: 30 BB. Kalan 20 BB'n kimse karşılayamadığı için sana döner.",
+       "yanilgi": "Rakiplerin stack'lerini toplayıp 50 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         50,
+         30
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Aynı elde (sen 50, Ali 30, Berk 20 BB) potu kaybetsen bile elenmezsin.",
+       "dogru": true,
+       "neden": "En fazla 30 BB kaybedersin; 50 − 30 = 20 BB ile oyunda kalırsın.",
+       "yanilgi": "Çok oyunculu all-in'de rakip stack'lerinin toplanıp seni kapsayabileceğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         50,
+         -30
+        ],
+        "iddia": 20
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Sen 22 BB'sin. Elde 60 BB'lik ve 12 BB'lik iki rakip var. Hangisine karşı kaybettiğin bir all-in turnuvanı bitirebilir?",
+       "secenekler": [
+        "Yalnızca 60 BB'lik rakibe karşı",
+        "Yalnızca 12 BB'lik rakibe karşı",
+        "İkisine karşı da",
+        "Hiçbirine karşı"
+       ],
+       "dogru": 0,
+       "neden": "Yalnızca 60 BB'lik rakip seni kapsar. 12 BB'lik rakibe karşı en fazla 12 BB kaybedersin.",
+       "yanilgi": "Kısa stack'li rakibin de seni eleyebileceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Büyük blind 1.000. Sen 26.000 chip; elde 15.000 ve 9.000 chip'lik iki rakip var. Üçünüz de all-in olursanız en fazla kaç BB kaybedebilirsin?",
+       "dogru": 15,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "En büyük rakip stack'i 15.000 chip; seninki daha büyük. 15.000 / 1.000 = 15 BB. Kaybetsen de 11 BB ile kalırsın.",
+       "yanilgi": "Rakip stack'lerini toplayıp 24 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "26.000",
+         "15.000"
+        ],
+        "bb": 1000
+       }
+      }
+     ]
     },
     {
      "kimlik": "t2-d4",
@@ -14032,15 +14650,239 @@
       "Erken, orta ve geç aşamayı blind ve ortalama stack ile tanımlar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Ortalama stack, turnuvada kalan toplam chip'in kalan oyuncu sayısına bölümüdür. Chip'ler turnuvadan çıkmadığı için toplam chip = başlangıç stack'i × giriş sayısıdır; re-entry'ler de birer giriştir (rebuy ile alınan chip varsa o da eklenir). Örnek: 200 giriş ve 20.000 chip'lik başlangıç stack'i: toplam 4.000.000 chip. 50 oyuncu kaldıysa ortalama 80.000 chip'tir; büyük blind 2.000 ise 40 BB.",
+      "Ortalama stack, kendi stack'ini sahayla karşılaştırmanı sağlar. Ama tek başına yeterli değildir: kararların için asıl önemli olan senin kaç BB'n olduğu ve turnuvanın hangi aşamada olduğudur.",
+      "Aşamaların kesin sınırı yoktur; yaygın bir ayrım şöyledir. Erken aşama: ilk seviyeler, çoğunlukla geç kayıt sürerken; blind'ler stack'lere göre küçüktür. Orta aşama: geç kayıt bitmiştir, blind'ler ve ante stack'lere göre büyümüştür, ödül sıralarına daha vardır. Geç aşama: bubble yaklaşır ya da geçilmiştir; ödül sıçramaları önem kazanır ve final masasına doğru gidilir.",
+      "Turnuva ilerledikçe ortalama stack BB cinsinden genellikle azalır: başta stack'ler çok derindir, geç aşamada ortalama çoğu zaman birkaç düzine BB'ye iner. Kesin değerler turnuvanın yapısına göre değişir."
+     ],
+     "terimler": [
+      "Ortalama stack",
+      "Geç kayıt",
+      "Bubble",
+      "Ödül sıçraması",
+      "Final masası"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Ortalama stack, kalan toplam chip'in kalan oyuncu sayısına bölümüdür.",
+       "dogru": true,
+       "neden": "Tanım budur: kalan chip / kalan oyuncu.",
+       "yanilgi": "Başlangıç stack'ini ortalama stack sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Kalan toplam chip 600.000, kalan oyuncu 30. Ortalama stack kaç chip?",
+       "secenekler": [
+        "2.000",
+        "18.000",
+        "20.000",
+        "200.000"
+       ],
+       "dogru": 2,
+       "neden": "600.000 / 30 = 20.000 chip.",
+       "yanilgi": "Bölmede bir basamak kaydırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         600000,
+         30
+        ],
+        "degerler": [
+         2000,
+         18000,
+         20000,
+         200000
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "100 giriş, başlangıç stack'i 10.000 chip. Turnuvadaki toplam chip kaçtır?",
+       "secenekler": [
+        "100.000",
+        "1.000.000",
+        "10.000.000",
+        "110.000"
+       ],
+       "dogru": 1,
+       "neden": "100 × 10.000 = 1.000.000 chip.",
+       "yanilgi": "Giriş sayısı ile stack'i toplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "carpim",
+        "terimler": [
+         100,
+         10000
+        ],
+        "degerler": [
+         100000,
+         1000000,
+         10000000,
+         110000
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Aynı turnuvada (100 giriş, 10.000 chip) 25 oyuncu kaldı. Ortalama stack kaç chip?",
+       "secenekler": [
+        "4.000",
+        "25.000",
+        "40.000",
+        "100.000"
+       ],
+       "dogru": 2,
+       "neden": "1.000.000 / 25 = 40.000 chip.",
+       "yanilgi": "Başlangıç stack'ini ortalama sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "10.000",
+        "giris": 100,
+        "kalan": 25
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Re-entry turnuvası: 150 farklı oyuncu ve 50 yeniden giriş; başlangıç stack'i 20.000 chip. 40 oyuncu kaldı. Ortalama stack kaç chip?",
+       "secenekler": [
+        "75.000",
+        "100.000",
+        "50.000",
+        "20.000"
+       ],
+       "dogru": 1,
+       "neden": "Giriş 150 + 50 = 200; toplam 200 × 20.000 = 4.000.000; 4.000.000 / 40 = 100.000 chip.",
+       "yanilgi": "Yeniden girişleri saymayıp 75.000 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "20.000",
+        "giris": 200,
+        "kalan": 40
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Re-entry turnuvasında ortalama stack hesaplanırken yalnızca farklı oyuncu sayısı kullanılır; yeniden girişler sayılmaz.",
+       "dogru": false,
+       "neden": "Her yeniden giriş turnuvaya başlangıç stack'i kadar chip ekler; toplam chip giriş sayısıyla hesaplanır.",
+       "yanilgi": "Yeniden girişlerin chip eklemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Ortalama stack 60.000 chip, büyük blind 2.000. Ortalama stack kaç BB?",
+       "dogru": 30,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "60.000 / 2.000 = 30 BB.",
+       "yanilgi": "Chip sayısını küçük blind'e bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         60000,
+         2000
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Aşamayı tipik görünümüyle eşleştir.",
+       "secenekler": [
+        [
+         "Erken aşama",
+         "Geç kayıt sürüyor, blind'ler stack'lere göre küçük"
+        ],
+        [
+         "Orta aşama",
+         "Geç kayıt bitti, ödül sıralarına daha var"
+        ],
+        [
+         "Geç aşama",
+         "Bubble yakın ya da geçildi, final masasına gidiliyor"
+        ]
+       ],
+       "neden": "Aşamaların kesin sınırı yoktur; bu eşleştirme yaygın ayrımı izler.",
+       "yanilgi": "Aşamayı yalnızca geçen süreyle tanımlamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "200 giriş, başlangıç stack'i 15.000 chip; 60 oyuncu kaldı; büyük blind 2.500. Ortalama stack kaç BB?",
+       "dogru": 20,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Toplam 200 × 15.000 = 3.000.000; ortalama 3.000.000 / 60 = 50.000 chip; 50.000 / 2.500 = 20 BB.",
+       "yanilgi": "Ortalamayı bulduktan sonra BB'ye çevirmeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "15.000",
+        "giris": 200,
+        "kalan": 60,
+        "bb": 2500
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "100 giriş, başlangıç stack'i 10.000 chip; 20 oyuncu kaldı. Stack'in 45.000 chip. Stack'in, ortalama stack'in yüzde kaçıdır?",
+       "dogru": 90,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "Ortalama 1.000.000 / 20 = 50.000; 45.000 / 50.000 = %90. Ortalamanın biraz altındasın.",
+       "yanilgi": "Başlangıç stack'ine göre oranlayıp %450 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "10.000",
+        "giris": 100,
+        "kalan": 20,
+        "stack": "45.000"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Ortalama stack'in BB cinsinden azalması, turnuvanın ilerlediğini gösteren işaretlerden biridir.",
+       "dogru": true,
+       "neden": "Blind'ler kalan oyuncu sayısının azalmasından daha hızlı büyüdükçe ortalama stack BB cinsinden genellikle azalır.",
+       "yanilgi": "Ortalama stack chip olarak arttığı için turnuvanın derinleştiğini sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t2-d5",
@@ -14054,15 +14896,195 @@
       "Kaybedilen chip'in kazanılandan neden daha değerli olabildiğini sezgisel olarak açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Cash game'de kazandığın her chip ile kaybettiğin her chip aynı değerdedir. Turnuvada öyle değildir, çünkü ödül chip sayına göre değil, bitirdiğin sıraya göre dağıtılır. Chip'lerin, sıranı yükseltmeye yardım ettikleri ölçüde değerlidir.",
+      "Örnek: final masasında üç kişi kaldınız, ödül payları %50, %30 ve %20. Üçünüz de en az %20'yi garantilediniz ve bütün chip'leri toplayan oyuncu bile %50'den fazlasını alamaz. Yani chip'lerini iki katına çıkarmak ödül payını iki katına çıkarmaz; ama bütün chip'lerini kaybedersen %20 ile kalırsın.",
+      "Bu yüzden turnuvada kaybedilen chip, çoğu zaman kazanılan aynı sayıda chip'ten daha değerlidir: kaybetmek seni elenmeye ve sonraki bütün fırsatları kaçırmaya yaklaştırır, kazanmak ise ödül payını aynı oranda büyütmez. Bu etki turnuvanın başında genellikle küçüktür; ödül sıralarına yaklaştıkça, özellikle bubble'da ve final masasında büyür. İki kişi kaldığında ortadan kalkar.",
+      "Bunun hesabı t7'de yapılacak. Şimdilik sezgi yeter: aynı sayıda chip'i kazanma ve kaybetme ihtimalin eşitse, bu risk turnuvada ödül payın açısından çoğu zaman kötü bir anlaşmadır."
+     ],
+     "terimler": [
+      "Cash game",
+      "Bubble",
+      "Final masası"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Turnuvada ödül, bitirdiğin sıraya göre dağıtılır; elindeki chip sayısına göre değil.",
+       "dogru": true,
+       "neden": "Chip'ler yalnızca sıranı yükseltmeye yardım ettiği ölçüde değerlidir.",
+       "yanilgi": "Chip'leri doğrudan ödül payı gibi düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Cash game'de kazanılan bir chip ile kaybedilen bir chip için hangisi doğru?",
+       "secenekler": [
+        "Aynı değerdedir",
+        "Kaybedilen daha değerlidir",
+        "Kazanılan daha değerlidir"
+       ],
+       "dogru": 0,
+       "neden": "Cash game'de chip'in değeri sabittir; turnuvadaki fark ödülün sıraya göre dağıtılmasından gelir.",
+       "yanilgi": "Turnuvadaki etkiyi cash game'e taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Final masasında üç kişi kaldı, paylar %50, %30, %20. Bütün chip'leri toplayan oyuncu bile %50'den fazlasını alamaz.",
+       "dogru": true,
+       "neden": "En büyük pay birincinin payıdır: %50.",
+       "yanilgi": "Bütün chip'lerin bütün ödüle denk geldiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "odul",
+        "paylar": [
+         50,
+         30,
+         20
+        ],
+        "soru": "pay",
+        "sira": 1,
+        "iddia": 50
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı masada kalan üç oyuncunun her biri en az yüzde kaç ödül payını garantilemiştir?",
+       "dogru": 20,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "Üçüncü sıranın payı %20'dir; kalan herkes en az onu alır.",
+       "yanilgi": "Garantiyi sıfır sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "odul",
+        "paylar": [
+         50,
+         30,
+         20
+        ],
+        "soru": "pay",
+        "sira": 3
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Aynı masada chip'lerini iki katına çıkarırsan beklediğin ödül payı ne olur?",
+       "secenekler": [
+        "Büyür ama iki katına çıkmaz; birincilik payı %50 ile sınırlıdır",
+        "Tam iki katına çıkar",
+        "Hiç değişmez",
+        "Yarıya iner"
+       ],
+       "dogru": 0,
+       "neden": "Daha çok chip üst sıralara çıkma ihtimalini artırır, ama paylar sabit olduğu için payın chip'inle aynı oranda büyümez.",
+       "yanilgi": "Chip ile ödül payının birebir orantılı olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Turnuvada kaybedilen chip, kazanılan aynı sayıda chip'ten çoğu zaman daha değerlidir.",
+       "dogru": true,
+       "neden": "Kaybetmek elenmeye yaklaştırır; kazanmak ödül payını aynı oranda büyütmez.",
+       "yanilgi": "Turnuvada da her chip'in aynı değerde olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Bu etki ne zaman genellikle en küçüktür?",
+       "secenekler": [
+        "Turnuvanın başında, ödül sıraları henüz uzaktayken",
+        "Bubble'da",
+        "Final masasında üç kişi kalmışken"
+       ],
+       "dogru": 0,
+       "neden": "Ödül sıralarına yaklaştıkça etki büyür; başta genellikle küçüktür.",
+       "yanilgi": "Etkinin turnuva boyunca aynı kaldığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Bir elde %50 ihtimalle 20 BB kazanacak, %50 ihtimalle 20 BB kaybedeceksin. Bu durum çok kez tekrarlansa ortalama chip kazancın kaç BB olur?",
+       "dogru": 0,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "0,5 × 20 − 0,5 × 20 = 0 BB. Chip olarak artı da eksi de değildir.",
+       "yanilgi": "Kazanma ihtimali yarı yarıya diye ortalamayı 10 BB sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         10,
+         -10
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Bubble'da 20 BB'n var. Bir elde bütün chip'lerini koyup kazanırsan 40 BB'ye çıkacaksın, kaybedersen eleneceksin; ihtimaller eşit. Hangisi doğru?",
+       "secenekler": [
+        "Chip olarak ortalaman sıfırdır, ama ödül payın açısından bu risk genellikle zararlıdır",
+        "Chip ortalaması sıfır olduğu için ödül payına etkisi de sıfırdır",
+        "Kazanırsan ödül payın tam iki katına çıkar",
+        "Bubble'da elenmenin ödül payına etkisi yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Kaybedersen ödül sıralarına giremeden elenirsin; kazanırsan payın iki katına çıkmaz. Bu yüzden chip olarak eşit bir risk, ödül payı açısından genellikle eksidir.",
+       "yanilgi": "Chip hesabını doğrudan ödül hesabı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "İki kişi kaldığında, kaybedilen chip ile kazanılan chip'in değeri arasındaki fark ortadan kalkar.",
+       "dogru": true,
+       "neden": "İkisi de en az ikinciliğin payını almıştır; kalan tek fark birinciliktir ve her chip ona aynı ölçüde katkı yapar.",
+       "yanilgi": "Etkinin turnuvanın sonuna kadar büyüdüğünü sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Final masasında 4 kişi kaldı; paylar %40, %30, %20, %10. Sen en kısa stack'sin. Hangi ifade doğrudur?",
+       "secenekler": [
+        "Senden önce biri elenirse garanti payın 10 puan büyür; bütün chip'lerini riske atmanın bedeli chip sayısının gösterdiğinden büyüktür",
+        "Elenme sırası ödül payını etkilemez",
+        "Ödül sıçraması yalnızca birincilikte olur",
+        "Kısa stack olduğun için chip kaybetmenin bir bedeli yoktur"
+       ],
+       "dogru": 0,
+       "neden": "4.'lükten 3.'lüğe sıçrama 20 − 10 = 10 puandır. Elenirsen bu sıçramayı kaçırırsın.",
+       "yanilgi": "Kısa stack'in kaybedecek bir şeyi olmadığını sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t2-k",
@@ -14075,15 +15097,225 @@
       "\"Stack'i ölçmek\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin beş dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB'dir. Stack bölgeleri müfredat varsayımıdır: derin 40 BB ve üstü, orta 20–40 BB, kısa 20 BB'nin altı."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Büyük blind 500. Stack'in 17.500 chip. Stack'in kaç BB?",
+       "dogru": 35,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "17.500 / 500 = 35 BB.",
+       "yanilgi": "Küçük blind'e bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         17500,
+         500
+        ]
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Aynı stack (17.500 chip, büyük blind 500) hangi bölgededir?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 1,
+       "neden": "35 BB: 20 BB ve üstü, 40 BB'nin altı; orta stack.",
+       "yanilgi": "35 BB'yi derin sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "17.500",
+        "bb": 500
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "M oranı hesaplanırken ante de bir masa turunun maliyetine eklenir.",
+       "dogru": true,
+       "neden": "M = stack / (küçük blind + büyük blind + toplam ante).",
+       "yanilgi": "M'yi yalnızca blind'lerle hesaplamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Blind'ler 250 / 500, BB ante 500. Stack'in 25.000 chip. M kaçtır?",
+       "dogru": 20,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Tur maliyeti 250 + 500 + 500 = 1.250; 25.000 / 1.250 = 20.",
+       "yanilgi": "BB sayısını (50) M sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "25.000",
+        "sb": 250,
+        "bb": 500,
+        "ante": 500
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. 35 BB'lik stack'in M'si kaçtır?",
+       "dogru": 14,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "35 / 2,5 = 14.",
+       "yanilgi": "Ante'siz formülle 35 / 1,5 ≈ 23,3 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 35,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 600. Sen 21.000 chip, rakibin 33.000 chip. Efektif stack kaç BB?",
+       "dogru": 35,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 21.000; 21.000 / 600 = 35 BB.",
+       "yanilgi": "Büyük stack'i alıp 55 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "21.000",
+         "33.000"
+        ],
+        "bb": 600
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Aynı elde (sen 21.000, rakibin 33.000 chip) kim kimi kapsar?",
+       "secenekler": [
+        "Rakibin seni kapsar",
+        "Sen rakibini kapsarsın",
+        "Kimse kimseyi kapsamaz"
+       ],
+       "dogru": 0,
+       "neden": "Rakibin stack'i büyük; ona bütün chip'lerini kaybedebilirsin.",
+       "yanilgi": "Kapsamanın yönünü ters okumak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "250 giriş, başlangıç stack'i 20.000 chip; 100 oyuncu kaldı; büyük blind 1.000. Ortalama stack kaç BB?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Toplam 250 × 20.000 = 5.000.000; ortalama 50.000 chip; 50.000 / 1.000 = 50 BB.",
+       "yanilgi": "Başlangıç stack'ini BB'ye çevirip 20 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "20.000",
+        "giris": 250,
+        "kalan": 100,
+        "bb": 1000
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Klasik ante'de M hesaplanırken yalnızca senin koyduğun ante sayılır.",
+       "dogru": false,
+       "neden": "M'de bir eldeki toplam ante (oyuncu sayısı × ante) kullanılır; bir masa turunda ante'yi her elde ödersin.",
+       "yanilgi": "Klasik ante'yi tek kez saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Klasik ante: 8 oyuncu, blind'ler 200 / 400, ante 50. Stack'in 16.000 chip. M kaçtır?",
+       "dogru": 16,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Tur maliyeti 200 + 400 + 8 × 50 = 1.000; 16.000 / 1.000 = 16.",
+       "yanilgi": "Ante'yi tek kez sayıp 16.000 / 650 ≈ 24,6 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "16.000",
+        "sb": 200,
+        "bb": 400,
+        "ante": 50,
+        "anteTuru": "klasik",
+        "oyuncu": 8
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi turnuvada chip'in değeri için doğrudur?",
+       "secenekler": [
+        "Bubble'da ve final masasında kaybedilen chip, kazanılandan genellikle daha değerlidir",
+        "Chip'in değeri turnuva boyunca sabittir",
+        "Chip'lerini iki katına çıkaran oyuncunun ödül payı da iki katına çıkar",
+        "Etki en çok iki kişi kaldığında büyür"
+       ],
+       "dogru": 0,
+       "neden": "Etki ödül sıralarına yaklaştıkça büyür, iki kişi kaldığında ortadan kalkar.",
+       "yanilgi": "Chip ile ödül payını orantılı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Üç oyuncu all-in: sen 28 BB, rakiplerin 22 BB ve 12 BB. Kaybedersen kaç BB'n kalır?",
+       "dogru": 6,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "En fazla en büyük rakip stack'i kadar, yani 22 BB kaybedersin: 28 − 22 = 6 BB.",
+       "yanilgi": "Rakip stack'lerini toplayıp elendiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         28,
+         -22
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "t2-r",
@@ -14097,15 +15329,151 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Stack'i BB'ye çevirirken ante'yi de büyük blind'e eklersin.",
+       "dogru": false,
+       "neden": "BB cinsinden stack yalnızca büyük blind'e bölünür; ante'yi M oranı hesaba katar.",
+       "yanilgi": "BB sayısı ile M'yi karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. 20 BB'lik stack'in M'si kaçtır?",
+       "dogru": 8,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "20 / 2,5 = 8.",
+       "yanilgi": "M'yi BB sayısıyla aynı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 20,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Blind'ler 400 / 800, BB ante 800. Stack'in 24.000 chip. M kaçtır?",
+       "secenekler": [
+        "M = 12",
+        "M = 15",
+        "M = 20",
+        "M = 30"
+       ],
+       "dogru": 0,
+       "neden": "Tur maliyeti 2.000; 24.000 / 2.000 = 12. 30 BB sayısıdır, 20 ise ante'siz hesaptır.",
+       "yanilgi": "Ante'yi unutmak ya da BB sayısını M sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "24.000",
+        "sb": 400,
+        "bb": 800,
+        "ante": 800
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Senden kısa stack'li bir rakibe karşı kaybettiğin all-in turnuvanı bitirir.",
+       "dogru": false,
+       "neden": "Kısa stack'li rakip seni kapsamaz; ona en fazla onun stack'i kadar kaybedersin.",
+       "yanilgi": "Her kaybedilen all-in'in eleme olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Re-entry turnuvası: 80 farklı oyuncu ve 20 yeniden giriş; başlangıç stack'i 25.000 chip. 50 oyuncu kaldı. Ortalama stack kaç chip?",
+       "secenekler": [
+        "40.000",
+        "50.000",
+        "25.000",
+        "62.500"
+       ],
+       "dogru": 1,
+       "neden": "Giriş 100; toplam 2.500.000; 2.500.000 / 50 = 50.000 chip.",
+       "yanilgi": "Yeniden girişleri saymayıp 40.000 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "25.000",
+        "giris": 100,
+        "kalan": 50
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Büyük blind 2.000. Stack'in 38.000 chip. Hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 2,
+       "neden": "38.000 / 2.000 = 19 BB: 20 BB'nin altı, kısa stack.",
+       "yanilgi": "Chip sayısına bakıp orta stack sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "38.000",
+        "bb": 2000
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Üç oyuncu all-in: sen 60 BB, rakiplerin 25 BB ve 35 BB. En fazla kaç BB kaybedebilirsin?",
+       "dogru": 35,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Senin stack'in ile en büyük rakip stack'inden küçük olanı: 35 BB.",
+       "yanilgi": "Rakip stack'lerini toplayıp 60 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         60,
+         35
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Paylar %50, %30, %20 olan bir final masasında chip'lerini iki katına çıkarmak, ödül payını da iki katına çıkarır.",
+       "dogru": false,
+       "neden": "Ödül payları sabittir; birincilik bile %50'yle sınırlıdır. Chip ile ödül payı orantılı değildir.",
+       "yanilgi": "Chip'i doğrudan ödül payı gibi düşünmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t2-t",
@@ -14120,15 +15488,403 @@
       "bu pistte seviye 2 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
      ],
      "sureDk": 10,
-     "anlatim": [],
+     "anlatim": [
+      "Bu test, turnuva pistinde buraya kadar olan bütün üniteleri birlikte yoklar: kartlar ve eller, masa ve el akışı, turnuva nedir, pozisyon ve stack'i ölçmek. 20 soru. Aksi yazılmadıkça BB ante 1 BB'dir."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 20,
       "oran": 0.85
      },
      "hedefAlistirma": 20,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Şu beş kart hangi el çeşidini oluşturur: K♠ K♦ 9♣ 9♥ 2♠",
+       "secenekler": [
+        "Per",
+        "İki per",
+        "Üçlü",
+        "Full house"
+       ],
+       "dogru": 1,
+       "neden": "İki papaz ve iki dokuz: iki per.",
+       "yanilgi": "İki ayrı çifti full house sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kategori",
+        "kartlar": "K♠ K♦ 9♣ 9♥ 2♠"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Preflop'ta ilk konuşan, büyük blind'in solundaki oyuncudur.",
+       "dogru": true,
+       "neden": "Preflop'ta blind'ler zaten konmuştur; konuşma büyük blind'in solundan başlar ve büyük blind'de biter.",
+       "yanilgi": "Preflop'ta da postflop gibi küçük blind'den başlamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "ilk",
+        "iddia": "UTG"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Blind'ler 200 / 400, BB ante 400. El başında potta kaç chip vardır?",
+       "secenekler": [
+        "600",
+        "1.000",
+        "1.400",
+        "4.200"
+       ],
+       "dogru": 1,
+       "neden": "200 + 400 + 400 = 1.000 chip.",
+       "yanilgi": "Ante'yi unutmak ya da BB ante'yi oyuncu sayısıyla çarpmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 200,
+        "bb": 400,
+        "ante": 400
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Hangi formatta elendikten sonra yeniden kayıt olup başlangıç stack'iyle tekrar girebilirsin?",
+       "secenekler": [
+        "Re-entry",
+        "Freezeout",
+        "Rebuy",
+        "Sit & go"
+       ],
+       "dogru": 0,
+       "neden": "Re-entry elendikten sonraki yeni giriştir. Rebuy oyundayken chip almaktır; sit & go bir başlama biçimidir.",
+       "yanilgi": "Rebuy ile re-entry'yi karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "6 kişilik masada butonun hemen solundaki koltuk hangisidir?",
+       "secenekler": [
+        "BTN",
+        "SB",
+        "BB",
+        "UTG"
+       ],
+       "dogru": 1,
+       "neden": "Butondan sola: SB, BB, UTG, HJ, CO.",
+       "yanilgi": "Butonun solundakini BB sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "koltuk",
+        "butondanSola": 1
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Büyük blind 300. Stack'in 13.500 chip. Stack'in kaç BB?",
+       "dogru": 45,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "13.500 / 300 = 45 BB.",
+       "yanilgi": "Küçük blind'e bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         13500,
+         300
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB ante'de büyük blind'i koyan oyuncu ante'yi masanın tamamı için tek başına öder.",
+       "dogru": true,
+       "neden": "BB ante'de her elde tek bir ante vardır ve onu büyük blind öder.",
+       "yanilgi": "BB ante ile klasik ante'yi karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Ante'siz masada buton 3 BB'ye raise yaptı, küçük blind fold etti, büyük blind call etti. Pot kaç BB?",
+       "dogru": 6.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "0,5 (küçük blind) + 3 (buton) + 3 (büyük blind'in toplamı) = 6,5 BB.",
+       "yanilgi": "Fold eden küçük blind'in 0,5 BB'sini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         0.5,
+         3,
+         3
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: K♣ 9♦ 6♠ 4♥ 2♣. Ali: K♠ Q♥. Berk: K♦ J♣. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisinde de papaz per var; kicker'da Ali'nin kızı Berk'in valesini yener.",
+       "yanilgi": "Aynı per görünce beraberlik demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "board": "K♣ 9♦ 6♠ 4♥ 2♣",
+        "eller": {
+         "Ali": "K♠ Q♥",
+         "Berk": "K♦ J♣"
+        }
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Blind'ler 500 / 1.000, BB ante 1.000. Stack'in 22.500 chip. M kaçtır?",
+       "dogru": 9,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Tur maliyeti 2.500; 22.500 / 2.500 = 9.",
+       "yanilgi": "BB sayısını (22,5) M sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": "22.500",
+        "sb": 500,
+        "bb": 1000,
+        "ante": 1000
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Flop'ta elde BTN, BB ve CO kaldı. İlk kim konuşur?",
+       "secenekler": [
+        "BB",
+        "CO",
+        "BTN"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta konuşma butonun solundan başlar; elde kalanlar arasında ilk BB konuşur.",
+       "yanilgi": "Preflop sırasını postflop'a taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "BTN",
+         "BB",
+         "CO"
+        ],
+        "soru": "ilk"
+       }
+      },
+      {
+       "kimlik": "a12",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Stack'in 24.000 chip. Büyük blind 400'den 600'e çıkıyor. Hiç chip kaybetmezsen kaç BB'n olur?",
+       "dogru": 40,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "24.000 / 600 = 40 BB (önceden 60 BB).",
+       "yanilgi": "Eski büyük blind'e bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bbErime",
+        "stack": "24.000",
+        "eskiBb": 400,
+        "yeniBb": 600,
+        "sonuc": "yeni"
+       }
+      },
+      {
+       "kimlik": "a13",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Sen 30 BB, rakibin 50 BB. Bu elde ikiniz all-in olursanız turnuvan risktedir.",
+       "dogru": true,
+       "neden": "Rakibin seni kapsar; kaybedersen bütün chip'lerini kaybeder ve elenirsin.",
+       "yanilgi": "Efektif stack 30 BB diye riskin sınırlı olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a14",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Ödül payları %35, %22, %15, %11, %9, %8. 6.'lıktan 3.'lüğe çıkmak kaç puan fark eder?",
+       "dogru": 7,
+       "tolerans": 0,
+       "birim": "puan",
+       "neden": "15 − 8 = 7 puan.",
+       "yanilgi": "Yalnızca bir basamağın farkını almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "odul",
+        "paylar": [
+         35,
+         22,
+         15,
+         11,
+         9,
+         8
+        ],
+        "soru": "fark",
+        "siralar": [
+         3,
+         6
+        ]
+       }
+      },
+      {
+       "kimlik": "a15",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "300 giriş, başlangıç stack'i 20.000 chip; 75 oyuncu kaldı; büyük blind 1.600. Ortalama stack kaç BB?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Toplam 6.000.000; ortalama 80.000 chip; 80.000 / 1.600 = 50 BB.",
+       "yanilgi": "Ortalamayı BB'ye çevirmeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "20.000",
+        "giris": 300,
+        "kalan": 75,
+        "bb": 1600
+       }
+      },
+      {
+       "kimlik": "a16",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Büyük blind 200. Sen 9.000 chip, rakibin 14.000 chip. Efektif stack kaç BB?",
+       "secenekler": [
+        "25 BB",
+        "45 BB",
+        "70 BB",
+        "115 BB"
+       ],
+       "dogru": 1,
+       "neden": "Küçük stack 9.000; 9.000 / 200 = 45 BB.",
+       "yanilgi": "Büyük stack'i ya da toplamı almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "9.000",
+         "14.000"
+        ],
+        "bb": 200
+       }
+      },
+      {
+       "kimlik": "a17",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. Biri 2,2 BB'ye raise yaptı, küçük blind fold etti, büyük blind call etti. Pot kaç BB?",
+       "dogru": 5.9,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 (küçük blind) + 1 (ante) + 2,2 (raise) + 2,2 (büyük blind'in toplamı) = 5,9 BB.",
+       "yanilgi": "Ante'yi unutup 4,9 BB bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         1.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a18",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB'li bir masada stack'in 30 BB. M'n kaçtır?",
+       "secenekler": [
+        "M = 12",
+        "M = 20",
+        "M = 30",
+        "M = 75"
+       ],
+       "dogru": 0,
+       "neden": "Bir tur 2,5 BB tutar: 30 / 2,5 = 12. 20, ante'siz masadaki M'dir (30 / 1,5); 30 BB sayısıdır.",
+       "yanilgi": "Ante'siz formülü kullanmak ya da BB sayısını M sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 30,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a19",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Bubble'da chip olarak ortalaması sıfır olan bir all-in, ödül payı açısından da genellikle sıfırdır.",
+       "dogru": false,
+       "neden": "Kaybedersen ödül sıralarına giremeden elenirsin, kazanırsan payın aynı oranda büyümez. Bu yüzden ödül payı açısından genellikle eksidir.",
+       "yanilgi": "Chip hesabını ödül hesabı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a20",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Büyük blind 500. Üç oyuncu all-in: sen 15.000 chip, Ali 6.000 chip, Berk 11.000 chip. En fazla kaç BB kaybedebilirsin?",
+       "dogru": 22,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "En büyük rakip stack'i 11.000 chip; seninki daha büyük. 11.000 / 500 = 22 BB.",
+       "yanilgi": "Rakip stack'lerini toplayıp 34 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "15.000",
+         "11.000"
+        ],
+        "bb": 500
+       }
+      }
+     ]
     }
    ]
   },

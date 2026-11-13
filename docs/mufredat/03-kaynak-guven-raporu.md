@@ -133,3 +133,44 @@ Bu iki ünitede strateji iddiaları başlıyor. Kaynaklar: `src/data/ranges.json
 - **Testle sabitlenen:** spot alıştırmalarının seçenek ve cevabının sitedeki spotla aynı olması.
 - Kalan 69 alıştırma kavram ve ilke sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
 
+
+## t1 · Turnuva nedir, t2 · Stack'i ölçmek
+
+Bütün alıştırmalar `dogrulamaGerekli: false`. Uydurma istatistik, solver sonucu ya da kaynak yoktur; ödül tabloları ve stack'ler açıkça "örnek" senaryodur. Para birimi, tutar, giriş bedeli yoktur; ödül yalnızca yüzde ve puan farkıyla anlatılır.
+
+### Kesin kural, tanım ya da aritmetik
+
+- Turnuvada chip'ler yalnızca o turnuvada geçer; chip'i biten oyuncu elenir; sıralama elenme sırasına göredir (ilk elenen son sırada); blind'ler seviyelerle yükselir.
+- Freezeout (tek giriş), re-entry (elendikten sonra yeniden kayıt, başlangıç stack'iyle), rebuy (turnuvadan çıkmadan chip alma), sit & go (oyuncu sayısı dolunca başlar), MTT (birçok masada başlar, masalar birleşir, final masası). Başlama biçimi ile giriş kuralı bağımsızdır.
+- Ante ölü paradır, bahse sayılmaz; klasik ante'de herkes öder, BB ante'de büyük blind'deki oyuncu masa için tek ante öder.
+- Stack (BB) = chip / büyük blind (ante girmez). M = stack / (SB + BB + bir eldeki toplam ante); bir masa turunda her blind bir kez, ante (klasik ya da BB) toplamı bir el kadar ödenir. BB ante 1 BB'de M = BB / 2,5; ante'siz M = BB / 1,5.
+- Efektif stack = küçük stack. Kapsamak: eşit ya da büyük stack. Çok oyunculu all-in'de en fazla kaybedilebilecek miktar = min(kendi stack'in, en büyük rakip stack'i); karşılanmayan kısım geri döner. Bu yüzden tek elde ancak seni kapsayan bir rakip varsa elenebilirsin.
+- Ortalama stack = başlangıç stack'i × giriş sayısı / kalan oyuncu (re-entry'ler giriştir; rebuy chip'leri eklenir).
+- Ödül payları toplamı %100; kademeli yapıda sıra büyüdükçe pay artmaz.
+
+### Yaklaşık ya da varsayım ("genellikle", "çoğunlukla" diliyle)
+
+- **BB ante 1 BB** müfredat varsayımıdır; anlatımda "bugün birçok turnuvada BB ante kullanılır", "miktarı çoğunlukla büyük blind kadar" diye yazıldı.
+- **Ödül alan oranı:** "genellikle katılımcıların yaklaşık %10–20'si; turnuvaya göre değişir". Tek masalık turnuvalarda oranın genellikle daha yüksek olduğu (9 kişide 3 sıra = %33,3) örnekle gösterildi.
+- **Stack bölgeleri** (derin ≥ 40, orta 20–40, kısa < 20 BB) çalışma için seçilmiş yaklaşık sınırlardır; t3–t5 ünite özetleri ve sözlükteki "Kısa stack" tanımıyla uyumlu.
+- **M oranı** "Dan Harrington'ın turnuva kitaplarıyla yaygınlaşan bir ölçü"; "bugün birçok oyuncu ve kaynak stack'i doğrudan BB ile ölçer". Harrington'ın renkli M bölgeleri bilinçli olarak verilmedi.
+- **Aşamalar** (erken / orta / geç) kesin sınırsız, yaygın bir ayrım olarak; "geç aşamada ortalama çoğu zaman birkaç düzine BB'ye iner" yön bildirir.
+- **Seviye süresi** "birkaç dakikadan bir saate kadar"; yeniden giriş süresinin "çoğunlukla" geç kayıtla bittiği, rebuy süresinin ilk seviyelerle sınırlı olduğu.
+- **Chip'in değeri (t2-d5):** ICM hesaplanmadan sezgiyle: kaybedilen chip "çoğu zaman" daha değerli; etki başta "genellikle" küçük, bubble ve final masasında büyük; iki kişi kalınca ortadan kalkar (iki kişide ödül payı chip payıyla doğrusal olduğu için bu kesin). Eşit ihtimalli chip-nötr riskin ödül payı açısından "genellikle" zararlı olduğu söylendi; kesin yüzde verilmedi.
+
+### Bilinçli basitleştirmeler
+
+- Aynı elde iki oyuncu birlikte elenince sıralama kuralı, ante'nin blind'den önce mi sonra mı alındığı, kısa stack'in ante ve blind'i tam ödeyemediği durumlar, add-on, anlaşmalar (deal), bounty ve satellite anlatılmadı.
+- Masa dengeleme (oyuncuların masalar arasında taşınması) yalnızca "masalar birleştirilir" diye anlatıldı.
+- Heads-up blind düzeni t10'a bırakıldı; t2-d5 yalnızca "iki kişi kaldığında" der.
+
+### Emin olunmayan noktalar
+
+- "Bugün birçok turnuvada BB ante kullanılır" ve "M yerine BB ölçüsü daha yaygın" ifadeleri genel gözleme dayanır; sayısal bir kaynakla doğrulanmadı, bu yüzden "birçok" ve "bugün yaygın" dışında iddia yok.
+- "Re-entry ile yeniden giren oyuncu genellikle başlangıç stack'ini alır" (t1-d2/a7): bazı turnuvalar farklı stack verebilir; "genellikle" ile yazıldı.
+
+### Doğrulama (t1–t2)
+
+- 170 alıştırmadan 101'i `denetle.mts` ile denetlenir (t1 39, t2 62). Yeni denetim türleri: `antePot`, `mOrani`, `bbErime`, `ortalamaStack`, `odul`, `bolge`; her birinin bozuk cevabı yakaladığı `src/lib/mufredat/denetle.test.ts`'te gösterilir (BB ante'yi oyuncu sayısıyla çarpmak, klasik ante'yi tek saymak, M'de ante'yi unutmak, aşırı tolerans, toplamı 100 olmayan ya da artan ödül tablosu, ödül almayan sıra, tam 20 BB'nin bölgesi).
+- Bu türlerin hepsinde girdiler (stack, blind, ante, giriş sayısı, paylar) senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.** Ante kuralı (BB ante tek, klasik ante oyuncu başına) ve bölge sınırları betikte sabittir; betik bu kurallara uyumu doğrular, kuralların doğruluğunu değil.
+- Kalan 69 alıştırma kavram ve kural sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
