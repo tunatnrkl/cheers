@@ -64,7 +64,11 @@ export default async function Page({ params }: Props) {
         <p className="font-medium">Okuduğunu dene</p>
         <div className="flex flex-wrap gap-2">
           <Link href="/alistirma" className="btn btn-primary">Alıştırma yap</Link>
-          <Link href="/yapay-zeka" className="btn">Yapay zekaya sor</Link>
+          {process.env.NEXT_PUBLIC_STATIC === "1" ? (
+            <Link href="/ogren" className="btn">Öğrenme yolu</Link>
+          ) : (
+            <Link href="/yapay-zeka" className="btn">Yapay zekaya sor</Link>
+          )}
         </div>
       </div>
     </article>

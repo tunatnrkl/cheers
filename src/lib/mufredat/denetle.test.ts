@@ -61,6 +61,11 @@ describe("müfredat olgu denetimi (scripts/mufredat/denetle.mts)", () => {
     expect(alistirmaDenetle({ ...a, dogru: 1 }).join()).toMatch(/hesaplanan 5.5/);
     const n: Al = { ...temel, tip: "sayi", soru: "Pot?", dogru: 34, denetim: { tur: "toplam", terimler: [6, 12, 12] } };
     expect(alistirmaDenetle(n).join()).toMatch(/hesaplanan 30/);
+    // Bölüm yuvarlaması: 17,8 / 2,2 = 8,09… → 8,1 (tolerans 0,1) kabul; tolerans 0 ya da 1 reddedilir.
+    const b: Al = { ...temel, tip: "sayi", soru: "", dogru: 8.1, tolerans: 0.1, denetim: { tur: "bolum", terimler: [17.8, 2.2] } } as Al;
+    expect(alistirmaDenetle(b)).toEqual([]);
+    expect(alistirmaDenetle({ ...b, tolerans: 0 } as Al).join()).toMatch(/hesaplanan 8.09/);
+    expect(alistirmaDenetle({ ...b, dogru: 9, tolerans: 1 } as Al).join()).toMatch(/tolerans 1/);
   });
 
   it("aynı kartın iki kez kullanılmasını ve soruda görünmeyen kartı yakalar", () => {
@@ -211,5 +216,34 @@ describe("turnuva hesapları (ante'li pot, M oranı, BB erimesi, ortalama stack,
     expect(alistirmaDenetle(n(15, { tur: "odul", paylar: [40, 25, 20, 15], soru: "pay", sira: 5 })).join()).toMatch(/ödül almıyor/);
     expect(alistirmaDenetle(n(33.3, { tur: "odul", paylar: [50, 30, 20], soru: "itmOrani", katilimci: 18 }, 0.1)).join()).toMatch(/hesaplanan 16.6/);
     expect(alistirmaDenetle(n(33.3, { tur: "odul", paylar: [50, 30, 20], soru: "itmOrani", katilimci: 9 }, 0.1))).toEqual([]);
+  });
+});
+
+describe("turnuva strateji hesapları (başabaş fold, oran, SPR, flop'ta set)", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  const n = (dogru: number, denetim: Al["denetim"], tolerans = 0): Al => ({ ...temel, tip: "sayi", dogru, tolerans, denetim }) as Al;
+
+  it("başabaş fold oranı = risk / (risk + pot)", () => {
+    expect(alistirmaDenetle(n(45.7, { tur: "basabasFold", risk: 2.1, pot: 2.5 }, 0.1))).toEqual([]);
+    // Ante'siz pot (1,5 BB) ile hesaplanan %58,3 yakalanır.
+    expect(alistirmaDenetle(n(58.3, { tur: "basabasFold", risk: 2.1, pot: 2.5 }, 0.1)).join()).toMatch(/başabaş fold oranı: hesaplanan 45.6/);
+  });
+
+  it("SPR = kalan efektif stack / flop'taki pot", () => {
+    expect(alistirmaDenetle(n(2.6, { tur: "spr", stackler: [17.8, 40], pot: 6.9 }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(5.8, { tur: "spr", stackler: [17.8, 40], pot: 6.9 }, 0.1)).join()).toMatch(/SPR: hesaplanan 2.57/);
+  });
+
+  it("oran yüzdesi", () => {
+    expect(alistirmaDenetle(n(8.8, { tur: "oranYuzde", terimler: [2.2, 25] }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(11.4, { tur: "oranYuzde", terimler: [2.2, 25] }, 0.1)).join()).toMatch(/hesaplanan 8.8/);
+  });
+
+  it("cep çifti flop'ta yaklaşık %11,8 set ya da daha iyisini yapar (19.600 flop sayılır)", () => {
+    expect(alistirmaDenetle(n(11.8, { tur: "flopTutma", cep: "77" }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(7.5, { tur: "flopTutma", cep: "77", sonuc: "oran" }, 0.1))).toEqual([]);
+    // Yanlış bir yüzde (%8) yakalanır.
+    expect(alistirmaDenetle(n(8, { tur: "flopTutma", cep: "77" }, 0.1)).join()).toMatch(/flop'ta tutma yüzdesi: hesaplanan 11.7/);
+    expect(alistirmaDenetle(n(11.8, { tur: "flopTutma", cep: "A7" }, 0.1)).join()).toMatch(/cep çifti/);
   });
 });

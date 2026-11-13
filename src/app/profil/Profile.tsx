@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { HAND_BY_ID, TOPICS } from "@/data/hands";
+import { STATIC_SITE } from "@/lib/client/env";
 import {
   clearLocal,
   deleteAccount,
@@ -231,9 +232,15 @@ export function Profile() {
                   ) : (
                     <p className="mt-1 text-sm">Belirgin bir zayıf konu yok. Daha fazla soru çözdükçe tablo netleşir.</p>
                   )}
-                  <Link href="/yapay-zeka" className="link mt-2 inline-flex min-h-11 items-center text-sm">
-                    Yapay zekadan ayrıntılı analiz iste →
-                  </Link>
+                  {STATIC_SITE ? (
+                    <Link href="/ogren" className="link mt-2 inline-flex min-h-11 items-center text-sm">
+                      Konuyu öğrenme yolunda tekrar et →
+                    </Link>
+                  ) : (
+                    <Link href="/yapay-zeka" className="link mt-2 inline-flex min-h-11 items-center text-sm">
+                      Yapay zekadan ayrıntılı analiz iste →
+                    </Link>
+                  )}
                 </div>
               </>
             )}

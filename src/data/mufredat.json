@@ -15897,15 +15897,194 @@
       "Derin stack'te pozisyon ve el seçiminin önceliğini açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Turnuvanın erken aşamasında stack'ler derindir: blind'ler stack'lere göre küçüktür ve çoğu oyuncunun önünde çok sayıda BB vardır. Ödül sıraları uzakta olduğu için chip'in değeri cash game'deki değerine yakındır (t2-d5). Bu yüzden erken aşamada oyun cash game'e benzer; öncelik, iyi seçilmiş ellerle ve mümkünse pozisyonda oynamaktır.",
+      "Derin stack'te bir el bitmeden çok chip el değiştirebilir. Pozisyon dışında, zayıf ya da domine olmaya yatkın bir elle büyük pota girmek pahalıdır. Erken pozisyonda sıkı, geç pozisyonda daha geniş oynamak (o3, o4) burada da temel ilkedir.",
+      "Derin stack'te küçük çiftler ve suited connector'lar gibi spekülatif eller (çoğu zaman tutmayan ama tuttuğunda güçlü el yapan eller) genellikle değer kazanır. Cep çifti flop'ta yaklaşık %11,8 ihtimalle set yapar (cep çiftinle board'daki bir kartın üçlüsü) ya da daha iyisini; yani yaklaşık 7,5 kez tutmaz, 1 kez tutar. Bu eller, tuttuğunda rakipten çok chip alabileceğin derin stack'te karşılığını bulur. Elin tutarsa sonraki sokaklarda kazanmayı beklediğin bu ek chip'lere implied odds denir.",
+      "Elenmemek için yalnızca en güçlü ellerle oynamak da bir çözüm değildir: blind'ler büyüdükçe stack'in BB cinsinden erir (t1-d3). Dengeli plan: pozisyona saygı, marjinal ellerle pozisyon dışında büyük potlardan kaçınmak ve iyi fiyatlı spekülatif oyunlar."
+     ],
+     "terimler": [
+      "Derin stack",
+      "Set",
+      "Implied odds",
+      "Cep çifti",
+      "Pozisyon"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Turnuvanın erken aşamasında stack'ler genellikle derindir; blind'ler stack'lere göre küçüktür.",
+       "dogru": true,
+       "neden": "İlk seviyelerde blind'ler küçüktür; stack'ler BB cinsinden derindir.",
+       "yanilgi": "Turnuvanın her aşamasını kısa stack oyunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Erken aşamada chip'in değeri için hangisi doğrudur?",
+       "secenekler": [
+        "Ödül sıraları uzakta olduğu için cash game'deki değerine yakındır",
+        "Bubble'daki kadar korunması gerekir",
+        "Hiçbir değeri yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Kaybedilen chip'in daha değerli olması etkisi ödül sıralarına yaklaştıkça büyür; başta genellikle küçüktür.",
+       "yanilgi": "Bubble'daki dikkati turnuvanın başına taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Cep çiftiyle flop'ta set ya da daha iyisini yapma ihtimali yaklaşık yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 11.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Kalan 50 karttan açılabilecek 19.600 flop'un 2.304'ünde elindeki değerden en az bir kart gelir: yaklaşık %11,8.",
+       "yanilgi": "Kabaca tahminle %25 ya da %33 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "77"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Derin stack'te spekülatif eller (küçük çiftler, suited connector'lar) genellikle sığ stack'tekinden daha değerlidir.",
+       "dogru": true,
+       "neden": "Tuttuklarında rakipten çok chip alabilirler; bu ancak arkada çok chip varken mümkündür.",
+       "yanilgi": "Bir elin değerinin stack derinliğinden bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı hesapla, cep çifti flop'ta kaç kez tutmamaya karşı bir kez tutar? (bir ondalık basamak)",
+       "dogru": 7.5,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Tutmayan flop'lar 17.296, tutanlar 2.304: 17.296 / 2.304 ≈ 7,5.",
+       "yanilgi": "Yüzdeyi orana çevirirken 1'e 8,5 ya da 1'e 12 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "77",
+        "sonuc": "oran"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Sen 100 BB, rakibin 100 BB. Rakip açtı, sen 66 ile call etmeyi düşünüyorsun. Set yaparsan bu elde rakipten en fazla kaç BB kazanabilirsin?",
+       "secenekler": [
+        "2,5 BB",
+        "40 BB",
+        "100 BB",
+        "200 BB"
+       ],
+       "dogru": 2,
+       "neden": "Rakipten en fazla onun stack'i kadar, yani efektif stack kadar kazanabilirsin: 100 BB.",
+       "yanilgi": "İki stack'i toplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         100,
+         100
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Terimi tanımıyla eşleştir.",
+       "secenekler": [
+        [
+         "Set",
+         "Cep çiftinle board'daki bir kartın üçlüsü"
+        ],
+        [
+         "Implied odds",
+         "Elin tutarsa sonraki sokaklarda kazanmayı beklediğin ek chip'ler"
+        ],
+        [
+         "Spekülatif el",
+         "Çoğu zaman tutmayan ama tuttuğunda güçlü el yapan el"
+        ],
+        [
+         "Derin stack",
+         "Turnuvada kabaca 40 BB ve üstü"
+        ]
+       ],
+       "neden": "Set ve spekülatif el el türleridir; implied odds ise tuttuğunda kazanılacak ek chip'tir.",
+       "yanilgi": "Implied odds'u şu anki pot ile karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Erken aşamada hangisi çoğunlukla pahalı bir hatadır?",
+       "secenekler": [
+        "Pozisyon dışında, domine olmaya yatkın bir elle büyük pota girmek",
+        "Geç pozisyonda oynanabilir bir elle açmak",
+        "Güçlü bir elle açılış yapmak"
+       ],
+       "dogru": 0,
+       "neden": "Derin stack'te büyük potlar çok chip'e mal olur; zayıf elle pozisyon dışında bunları oynamak zordur.",
+       "yanilgi": "Derin stack'te her elin oynanabileceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Erken aşamada elenmemek için yalnızca en güçlü ellerle oynamak, blind'ler büyüdükçe bir maliyet doğurur.",
+       "dogru": true,
+       "neden": "Hiç oynamasan da blind ve ante ödersin; blind'ler büyüdükçe stack'in BB cinsinden erir.",
+       "yanilgi": "Fold etmenin bedava olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Diğer her şey aynıyken, hangi durumda 55 ile bir açılışa call etmek daha cazip olur?",
+       "secenekler": [
+        "Sen ve rakibin 100'er BB'yken",
+        "Sen ve rakibin 15'er BB'yken"
+       ],
+       "dogru": 0,
+       "neden": "55 çoğu zaman set yapmaya güvenir; set yaptığında kazanabileceği miktar arkadaki chip'lerle sınırlıdır. 100 BB'de implied odds çok daha büyüktür.",
+       "yanilgi": "Elin değerinin stack derinliğiyle değişmediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Rakibin 20 BB'si varken 3 BB'lik bir açılışa yalnızca set yapma umuduyla call etmek, 100 BB'lik bir rakibe karşı aynı call kadar cazip değildir.",
+       "dogru": true,
+       "neden": "Set tutunca kazanabileceğin en fazla yaklaşık 22,5 BB (rakibin 20 BB'si ile blind'ler ve ante, 2,5 BB), call'unun 7,5 katı; bu ancak başabaş. Set her zaman kazanmaz, rakip her zaman stack'ini vermez; bu yüzden pratikte kârsızdır. 100 BB'de pay çok daha büyüktür.",
+       "yanilgi": "Kazanılabilecek miktarın rakibin stack'iyle sınırlı olduğunu unutmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t3-d2",
@@ -15920,15 +16099,247 @@
       "Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu müfredat sitenin Range aracındaki yaklaşık çalışma aralıklarını kullanır. Bu aralıklar 6 kişilik masa ve derin stack için kendi hesabımızla üretildi; solver (oyunun dengeli stratejisini hesaplayan bilgisayar programı) çıktısı değildir. Bu aralıklarda UTG ellerin yaklaşık %15'iyle, HJ %19'uyla, CO %27'siyle, BTN %43'üyle, SB %38'iyle açar.",
+      "Aralıklar cash game için hazırlandı; turnuvada derin stack'te kabaca benzer biçimde kullanılabilir. Ante potu büyüttüğü için (t1-d4) özellikle geç pozisyonda biraz daha geniş açmak yaygındır. Turnuva masaları çoğunlukla 8–9 kişiliktir ve fazladan erken koltuklardan daha da sıkı açılır; bu ünitede masa 6 kişilik varsayılır.",
+      "UTG aralığı kabaca 44 ve üstü çiftlerden, suited asların çoğundan, güçlü suited broadway'lerden ve AKo, AQo gibi en güçlü offsuit ellerden oluşur. Geç pozisyonda aralık genişler, çünkü arkada daha az oyuncu kalır ve postflop'ta çoğunlukla pozisyonda oynarsın: BTN aralığı küçük çiftleri, offsuit asların hepsini ve K9o, Q9o, T9o gibi elleri de içerir.",
+      "Aralığın kenarındaki eller masaya ve rakiplere göre açılabilir ya da fold edilebilir; kenardaki eller için tek doğru cevap yoktur. Bu ünitenin sorularında kenardaki eller kullanılmaz. Range sorularında elleri range matrisinde (o4-d2) işaretlersin. Aralıktaki el limp ile değil açılışla oynanır (o4-d5)."
+     ],
+     "terimler": [
+      "Range (aralık)",
+      "Range matrisi",
+      "Solver",
+      "Erken pozisyon",
+      "Geç pozisyon",
+      "Ante"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Bu müfredatın açılış aralıkları solver çıktısıdır.",
+       "dogru": false,
+       "neden": "Aralıklar kendi hesabımızla üretilmiş yaklaşık çalışma aralıklarıdır.",
+       "yanilgi": "Sitedeki aralıkları kesin doğru sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Bu müfredatın çalışma aralıklarında UTG ellerin yaklaşık yüzde kaçıyla açar? (bir ondalık basamak)",
+       "dogru": 15.2,
+       "tolerans": 0.5,
+       "birim": "%",
+       "neden": "UTG aralığı 202 kombinasyondur: 202 / 1.326 ≈ %15,2.",
+       "yanilgi": "BTN'nin yüzdesiyle karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "aralikYuzde",
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Hangisi BTN'de açılır ama UTG'de fold edilir?",
+       "secenekler": [
+        "KK",
+        "A2o",
+        "72o",
+        "AKs"
+       ],
+       "dogru": 1,
+       "neden": "KK ve AKs iki koltukta da açılır; 72o ikisinde de fold. A2o yalnızca BTN aralığındadır.",
+       "yanilgi": "Bir elin her koltukta aynı kararı gerektirdiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kosulluSec",
+        "kosul": [
+         [
+          "BTN",
+          "ac"
+         ],
+         [
+          "UTG",
+          "fold"
+         ]
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Ante'li potta, özellikle geç pozisyonda, aralığı biraz genişletmek yaygındır.",
+       "dogru": true,
+       "neden": "Ante potu büyütür; çalma girişimi daha az fold'la kâra geçer (t3-d4).",
+       "yanilgi": "Ante'nin açılış kararını etkilemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "range",
+       "zorluk": 3,
+       "soru": "Bu ellerden BTN'nin çalışma aralığında olanları işaretle.",
+       "secenekler": [
+        "K9o",
+        "Q9o",
+        "A2o",
+        "22",
+        "T9o",
+        "72o",
+        "J4o",
+        "83o"
+       ],
+       "dogru": [
+        "K9o",
+        "Q9o",
+        "A2o",
+        "22",
+        "T9o"
+       ],
+       "neden": "BTN aralığı küçük çiftleri, offsuit asların hepsini ve K9o, Q9o, T9o gibi elleri içerir. 72o, J4o ve 83o butondan da fold.",
+       "yanilgi": "Butonda her elin açılabildiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilisAraligi",
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "BTN aralığı neden UTG aralığından geniştir?",
+       "secenekler": [
+        "Arkada yalnızca blind'ler kalır ve postflop'ta çoğunlukla pozisyonda oynarsın",
+        "BTN'ye daha iyi kartlar gelir",
+        "BTN'de açılış daha ucuzdur",
+        "UTG ante öder, BTN ödemez"
+       ],
+       "dogru": 0,
+       "neden": "Arkadaki oyuncu sayısı ve pozisyon aralığın genişliğini belirler.",
+       "yanilgi": "Koltukların kart dağıtımını etkilediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "UTG'desin, 60 BB, herkes sana kadar fold etti. Elin K8o. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Limp (1 BB)",
+        "2,2 BB aç"
+       ],
+       "dogru": 0,
+       "neden": "K8o offsuit ve domine olmaya yatkın; UTG aralığının dışında. Arkanda beş oyuncu var.",
+       "yanilgi": "Papazlı her eli açılabilir sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilis",
+        "poz": "UTG",
+        "el": "K8o"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "range",
+       "zorluk": 4,
+       "soru": "Bu ellerden UTG'nin çalışma aralığında olanları işaretle.",
+       "secenekler": [
+        "AA",
+        "99",
+        "AQs",
+        "KQs",
+        "A5s",
+        "AQo",
+        "Q8o",
+        "T9o",
+        "K8o",
+        "Q6s"
+       ],
+       "dogru": [
+        "AA",
+        "99",
+        "AQs",
+        "KQs",
+        "A5s",
+        "AQo"
+       ],
+       "neden": "Orta ve yüksek çiftler, güçlü suited eller ve AQo aralıkta. Q8o, T9o, K8o ve Q6s UTG için fazla zayıf.",
+       "yanilgi": "Erken pozisyonda zayıf offsuit elleri de açmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilisAraligi",
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Aralığın kenarındaki bir el için her masada geçerli tek doğru cevap vardır.",
+       "dogru": false,
+       "neden": "Kenardaki eller rakiplere ve masaya göre açılabilir ya da fold edilebilir.",
+       "yanilgi": "Yaklaşık bir aralığı kesin kural sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "CO'dasın, 50 BB, herkes sana kadar fold etti. Elin A9o. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Limp (1 BB)",
+        "2,2 BB aç"
+       ],
+       "dogru": 2,
+       "neden": "A9o UTG'de fold edilir ama CO'da arkada üç oyuncu kalır; çalışma aralığımızda açılır.",
+       "yanilgi": "Bir elin her koltukta aynı kararı gerektirdiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilis",
+        "poz": "CO",
+        "el": "A9o"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi UTG'nin çalışma aralığındadır?",
+       "secenekler": [
+        "K9o",
+        "AQo",
+        "K8o",
+        "T9o"
+       ],
+       "dogru": 1,
+       "neden": "AQo en güçlü offsuit ellerdendir ve UTG'de açılır. Diğerleri UTG için fazla zayıf.",
+       "yanilgi": "Bağlantılı ya da papazlı offsuit elleri erken pozisyonda açmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kosulluSec",
+        "kosul": [
+         [
+          "UTG",
+          "ac"
+         ]
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "t3-d3",
@@ -15941,15 +16352,199 @@
       "2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Turnuvada açılışlar cash game'deki 2,5–3 BB'den genellikle daha küçüktür: 2 ile 2,3 BB arası yaygındır. Kimse pota girmemişken en küçük açılış (min-raise) büyük blind'in iki katı, yani 2 BB'dir.",
+      "Neden küçük? Ante'li potta el başında 2,5 BB vardır ve çalma girişiminin amacı bu potu almaktır. Kimse call etmezse 2,2 BB'lik açılışla da 3 BB'lik açılışla da aynı potu alırsın, ama 2,2 BB ile daha az chip riske atarsın. Stack'ler sığlaştıkça her açılış stack'in daha büyük bir payıdır: 25 BB ile 2,2 BB'lik açılış stack'in %8,8'i, 3 BB'lik açılış %12'sidir.",
+      "Küçük açılışın bir bedeli de vardır: blind'lere daha iyi fiyat verir, onlar daha sık call eder ve flop'u daha sık görürsün. Bu yüzden boyut bir denge seçimidir; çoğu oyuncu turnuvada küçük açılışı tercih eder.",
+      "Bu müfredat aksi yazılmadıkça turnuvada 2,2 BB açılış varsayar. Hangi elle açarsan aç boyutu aynı tutmak elini saklar."
+     ],
+     "terimler": [
+      "Min-raise",
+      "Open (açılış)",
+      "Ante",
+      "Stack"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Turnuvada açılışlar genellikle cash game'dekinden küçüktür.",
+       "dogru": true,
+       "neden": "2 ile 2,3 BB arası yaygındır; cash game'de 2,5–3 BB daha yaygındır.",
+       "yanilgi": "Cash game boyutunu turnuvaya taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Kimse pota girmemişken en küçük açılış (min-raise) kaç BB'dir?",
+       "dogru": 2,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "En küçük raise, büyük blind'in iki katına yapılır: 2 BB.",
+       "yanilgi": "1 BB'yi de açılış sanmak; o limp'tir.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "25 BB'lik stack'le 2,2 BB'lik açılış stack'in yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 8.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / 25 × 100 = %8,8.",
+       "yanilgi": "Açılışı BB değil chip sanıp oranı yanlış kurmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2.2,
+         25
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "25 BB'lik stack'le 3 BB'lik açılış stack'in yüzde kaçıdır?",
+       "dogru": 12,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "3 / 25 × 100 = %12.",
+       "yanilgi": "Farkı küçümsemek; sığ stack'te her BB önemlidir.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         3,
+         25
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2,2 BB'ye açtı, blind'ler henüz konuşmadı. Potta kaç BB var?",
+       "dogru": 4.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 (ante) + 2,2 = 4,7 BB.",
+       "yanilgi": "Ante'yi unutup 3,7 BB bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Açılışın 2,2 BB ya da 3 BB olması, herkes fold ettiğinde kazandığın potu nasıl değiştirir?",
+       "secenekler": [
+        "Değiştirmez; ikisinde de el başındaki 2,5 BB'yi alırsın",
+        "3 BB ile daha çok kazanırsın",
+        "2,2 BB ile daha çok kazanırsın"
+       ],
+       "dogru": 0,
+       "neden": "Herkes fold edince kendi açılışın sana geri döner; kazandığın blind'ler ve ante'dir.",
+       "yanilgi": "Kendi açılışını kazanç sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Küçük açılışın bir bedeli vardır: blind'lere daha iyi fiyat verir.",
+       "dogru": true,
+       "neden": "Daha küçük açılışa karşı call etmek daha ucuzdur; blind'ler daha sık devam eder.",
+       "yanilgi": "Küçük açılışın hiçbir sakıncası olmadığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi elle açtığına göre açılış boyutunu değiştirmenin sakıncası nedir?",
+       "secenekler": [
+        "Boyut elini ele verir; dikkatli rakipler bunu okuyabilir",
+        "Sakıncası yoktur",
+        "Kurallara aykırıdır"
+       ],
+       "dogru": 0,
+       "neden": "Aynı boyut bütün açılış aralığını saklar.",
+       "yanilgi": "Güçlü elde büyük, zayıf elde küçük açmanın fark edilmeyeceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "3 BB yerine 2,2 BB ile açarsan, her açılışta kaç BB daha az riske atarsın? (bir ondalık basamak)",
+       "dogru": 0.8,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "3 − 2,2 = 0,8 BB.",
+       "yanilgi": "Blind'leri de farka katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         3,
+         -2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack sığlaştıkça aynı BB'lik açılış, stack'in daha büyük bir payı olur.",
+       "dogru": true,
+       "neden": "100 BB'de 2,2 BB stack'in %2,2'si, 25 BB'de %8,8'idir.",
+       "yanilgi": "Açılışın maliyetini stack'ten bağımsız düşünmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2.2,
+         25
+        ],
+        "iddia": 8.8
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi turnuvada 2–2,3 BB'lik açılışın yaygın olmasının bir nedeni DEĞİLDİR?",
+       "secenekler": [
+        "Kuralların turnuvada daha büyük açılışa izin vermemesi",
+        "Ante'li potu daha az riskle almaya çalışmak",
+        "Stack'lerin cash game'e göre sığ olması"
+       ],
+       "dogru": 0,
+       "neden": "Daha büyük açılış kurallara uygundur; küçük boyut bir strateji tercihidir.",
+       "yanilgi": "Bir strateji tercihini kural sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t3-d4",
@@ -15963,15 +16558,202 @@
       "Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Steal (blind çalma), geç pozisyondan, asıl amacı blind'leri fold ettirmek olan açılıştır. Kimse call etmezse el başında potta ne varsa alırsın: ante'siz masada 1,5 BB, BB ante 1 BB ile 2,5 BB.",
+      "Çalmanın kâra geçmesi için rakiplerin ne sıklıkla fold etmesi gerektiğini hesaplayabilirsin. En kötü durumu varsay: call edildiğinde hiç kazanmıyorsun. O zaman başabaş fold oranı = risk / (risk + pot). 2,2 BB ile açarken ante'siz potta 2,2 / (2,2 + 1,5) ≈ %59,5, ante'li potta 2,2 / (2,2 + 2,5) ≈ %46,8 gerekir. Ante, aynı çalma için gereken fold oranını belirgin biçimde düşürür.",
+      "Gerçekte call edildiğinde de bazen kazanırsın; bu yüzden gereken fold oranı genellikle bundan da düşüktür. Bu hesap, çalmanın neden ante'li potta daha cazip olduğunu gösterir; hangi ellerle çalınacağını göstermez.",
+      "Blind'ler sıkı oynuyorsa çalma girişimleri daha sık işe yarar; blind'ler sık savunuyorsa daha az. Bu, aralığın kenarındaki elleri etkiler."
+     ],
+     "terimler": [
+      "Steal (blind çalma)",
+      "Başabaş noktası",
+      "Ante",
+      "Geç pozisyon"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Steal, geç pozisyondan asıl amacı blind'leri fold ettirmek olan açılıştır.",
+       "dogru": true,
+       "neden": "Çalma girişimi el başındaki potu hemen almayı hedefler.",
+       "yanilgi": "Her açılışı çalma sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "BB ante 1 BB. Herkes fold ederse çalan oyuncu kaç BB'lik pot kazanır?",
+       "dogru": 2.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 = 2,5 BB.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Ante'siz masada herkes fold ederse çalan oyuncu kaç BB'lik pot kazanır?",
+       "dogru": 1.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "0,5 + 1 = 1,5 BB.",
+       "yanilgi": "Kendi açılışını kazanca katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         0.5,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. 2,2 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 46.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / (2,2 + 2,5) = 2,2 / 4,7 ≈ %46,8.",
+       "yanilgi": "Paydaya yalnızca potu koyup %88 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.2,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Ante'siz masada aynı 2,2 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 59.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / (2,2 + 1,5) = 2,2 / 3,7 ≈ %59,5.",
+       "yanilgi": "Ante'li potla hesaplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.2,
+        "pot": 1.5
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Ante çalmayı nasıl etkiler?",
+       "secenekler": [
+        "Pot büyüdüğü için aynı çalma daha az fold'la kâra geçer",
+        "Etkilemez",
+        "Ante bahse sayıldığı için çalmayı zorlaştırır"
+       ],
+       "dogru": 0,
+       "neden": "Kazanılacak pot büyür, risk aynı kalır; başabaş fold oranı düşer.",
+       "yanilgi": "Ante'yi bahse saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "Butondasın, 35 BB, herkes sana kadar fold etti. Blind'lerdeki oyuncular sıkı oynuyor (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
+       "secenekler": [
+        "Fold",
+        "2,1 BB'ye aç",
+        "All-in"
+       ],
+       "dogru": 1,
+       "neden": "J8s butonun çalışma aralığında; ante'li pot ve sıkı blind'ler çalmayı cazip yapar. All-in, 2,5 BB'lik pot için 35 BB'yi gereksiz yere riske atar.",
+       "yanilgi": "Ante'li potu küçümseyip fold etmek ya da çalmayı all-in ile yapmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilis",
+        "poz": "BTN",
+        "el": "J8s"
+       },
+       "spotKimlik": "t24"
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. 2,1 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 45.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,1 / (2,1 + 2,5) = 2,1 / 4,6 ≈ %45,7.",
+       "yanilgi": "Risk ile potu yer değiştirmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.1,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Başabaş fold oranı hesabı, call edildiğinde hiç kazanmadığını varsayar; bu yüzden gerçekte gereken fold oranı genellikle daha düşüktür.",
+       "dogru": true,
+       "neden": "Call edildiğinde de bazen en iyi eli yaparsın; bu kazanç fold'a olan ihtiyacı azaltır.",
+       "yanilgi": "Hesabı her durumda kesin eşik sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. 3 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 54.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "3 / (3 + 2,5) = 3 / 5,5 ≈ %54,5. 2,2 BB'lik çalmadan (≈ %46,8) yüksektir.",
+       "yanilgi": "Büyük açılışın daha az fold gerektirdiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 3,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Blind'lerdeki oyuncular çok sık call ediyor. Butondan çalma girişimleri için hangisi doğrudur?",
+       "secenekler": [
+        "Çalma girişimleri daha az işe yarar; aralığın kenarındaki zayıf eller daha az cazip olur",
+        "Daha çok elle çalmalısın",
+        "Rakiplerin savunma sıklığı çalmayı etkilemez"
+       ],
+       "dogru": 0,
+       "neden": "Başabaş hesabı fold'a dayanır; fold azaldıkça zayıf ellerle çalmanın değeri azalır.",
+       "yanilgi": "Rakibe bakmadan hep aynı aralıkla çalmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t3-d5",
@@ -15984,15 +16766,212 @@
       "Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Equity, elinin potu kazanma payıdır: kartlar sonuna kadar açılsaydı potun ne kadarını alacağını yüzdeyle söyler. %40 equity, aynı durum çok kez tekrarlansa potun ortalama %40'ını alacağın anlamına gelir; bölünen potlar yarım sayılır.",
+      "Bir bahsi call ederken gereken equity = ödeyeceğin miktar / (call öncesi pot + ödeyeceğin miktar). Bu orana pot odds da denir. Koyduğun blind ve ante artık potun parçasıdır; karar yalnızca ödeyeceğin ek miktara göre verilir. Bu eşik, sonrasında bahis olmayacağını varsayar.",
+      "Örnek: BB ante 1 BB. BTN 2,2 BB açtı, SB fold etti, BB'desin. Pot 2,2 + 0,5 + 1 + 1 = 4,7 BB; call için 1,2 BB ödersin: 1,2 / 5,9 ≈ %20,3. Ante'siz bir masada 2,5 BB'lik açılışa karşı aynı hesap %27,3'tür. Küçük açılış ve ante BB'ye çok iyi fiyat verir; bu yüzden turnuvada BB genellikle geniş savunur. Blind'deyken bir açılışa karşı elde kalmaya blind savunması denir.",
+      "Fiyat tek başına yetmez: BB postflop'ta çoğunlukla pozisyon dışındadır (OOP) ve equity'sinin bir kısmını kullanamaz. Ama eşik düşükken bu kayıp çoğu zaman tolere edilir: K4o, butonun çalışma aralığına karşı yaklaşık %41 equity taşır. Bu equity'ler projenin el değerlendiricisiyle çok sayıda rastgele dağıtım yapılarak (Monte Carlo yöntemi) hesaplandı; yaklaşıktır."
+     ],
+     "terimler": [
+      "Equity",
+      "Pot odds",
+      "Blind savunması",
+      "OOP (pozisyon dışı)",
+      "Monte Carlo"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Equity, elinin kartlar sonuna kadar açılsaydı potu kazanma payıdır.",
+       "dogru": true,
+       "neden": "Equity yüzdeyle söylenir: uzun vadede potun ne kadarını alacağını gösterir.",
+       "yanilgi": "Equity'yi tek bir eli kesin kazanma ihtimali sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, SB fold etti. BB'desin. Potta kaç BB var?",
+       "dogru": 4.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "2,2 + 0,5 + 1 + 1 (ante) = 4,7 BB.",
+       "yanilgi": "Ante'yi ya da fold eden SB'nin 0,5 BB'sini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı durumda call etmek için kaç BB daha koyarsın?",
+       "dogru": 1.2,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "2,2 − 1 = 1,2 BB. Ante bahse sayılmaz.",
+       "yanilgi": "Ante'yi de düşüp 0,2 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         2.2,
+         -1
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı durumda call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 20.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "1,2 / (4,7 + 1,2) = 1,2 / 5,9 ≈ %20,3.",
+       "yanilgi": "1,2'yi 4,7'ye bölüp %25,5 bulmak; paydaya ödeyeceğin miktar da girer.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1.2,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Call için gereken equity'nin formülü hangisidir?",
+       "secenekler": [
+        "ödenecek / (call öncesi pot + ödenecek)",
+        "ödenecek / call öncesi pot",
+        "call öncesi pot / ödenecek",
+        "(call öncesi pot + ödenecek) / ödenecek"
+       ],
+       "dogru": 0,
+       "neden": "Ödediğin miktarın, call sonrası oluşacak pota oranıdır.",
+       "yanilgi": "Paydaya yalnızca call öncesi potu koymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. CO 2 BB'ye açtı (min-raise), diğerleri fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 18.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 2 + 0,5 + 1 + 1 = 4,5 BB; 1 BB ödersin: 1 / 5,5 ≈ %18,2.",
+       "yanilgi": "Ante'yi pota katmamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1,
+        "pot": 4.5
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB'de call ederken koyduğun blind'i ve ante'yi de ödediğin bedele katmalısın.",
+       "dogru": false,
+       "neden": "Blind ve ante artık potun parçasıdır; karar yalnızca ödeyeceğin ek miktara göre verilir.",
+       "yanilgi": "\"Zaten koydum\" diye fiyatı yanlış hesaplamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "K4o'nun butonun çalışma aralığına karşı ham equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%21",
+        "%31",
+        "%41",
+        "%51"
+       ],
+       "dogru": 2,
+       "neden": "Monte Carlo hesabıyla yaklaşık %41.",
+       "yanilgi": "Zayıf kicker'lı elin geniş aralığa karşı çok geride olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "K4o",
+        "poz": "BTN",
+        "yaklasik": 41
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Buton 2,2 BB açtı (geniş açan bir oyuncu), SB fold etti. BB'desin, 30 BB (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (1,2 BB daha)",
+        "All-in (30 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity %20,3; K4o butonun geniş aralığına karşı yaklaşık %41. Pozisyon dışında equity'nin bir kısmını kaybetsen de eşik rahatça geçilir. All-in ise 4,7 BB'lik pot için 30 BB'yi riske atar.",
+       "yanilgi": "Offsuit ve zayıf kicker'lı diye iyi fiyatta fold etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "K4o",
+        "poz": "BTN",
+        "yaklasik": 41
+       },
+       "spotKimlik": "t25"
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Ante'siz masada 2,5 BB'lik açılışa karşı BB'nin gereken equity'si %27,3; ante'li turnuvada 2,2 BB'lik açılışa karşı %20,3. Bu farkın BB savunmasına etkisi nedir?",
+       "secenekler": [
+        "Turnuvada BB, aynı açana karşı genellikle daha geniş savunabilir",
+        "Turnuvada BB daha dar savunmalıdır",
+        "Fiyatın savunmaya etkisi yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Eşik düştükçe daha çok el eşiği geçer.",
+       "yanilgi": "Fiyatın savunma aralığını etkilemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "96s'in CO'nun çalışma aralığına karşı yaklaşık %36 equity'si, CO'nun 2 BB'lik açılışına karşı ante'li fiyatın gerektirdiği %18,2'yi rahatça geçer.",
+       "dogru": true,
+       "neden": "Monte Carlo hesabıyla 96s CO aralığına karşı yaklaşık %36 equity taşır; eşik %18,2.",
+       "yanilgi": "Pozisyon dışında equity kaybını eşiği aşan farktan büyük sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "96s",
+        "poz": "CO",
+        "yaklasik": 36
+       }
+      }
+     ]
     },
     {
      "kimlik": "t3-d6",
@@ -16005,15 +16984,203 @@
       "3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "3-bet, preflop'ta açılışın üzerine yapılan yeniden raise'dir. Adı sayımdan gelir: büyük blind birinci bahis, açılış ikinci, onun üstündeki raise üçüncü bahistir. 3-bet'in üstüne yapılan raise'e 4-bet denir.",
+      "3-bet iki amaçla yapılır. Value 3-bet'te elin, rakibin devam edeceği ellerin çoğundan güçlüdür ve potu büyütmek istersin; AA, KK, QQ ve AK en açık örneklerdir. Blöf 3-bet'te elin call için zayıf kalır ama rakibin daha iyi ellerini fold ettirerek potu almayı umarsın; çoğu oyuncu bunun için, call edildiğinde de oynayabilen elleri (ör. suited bir as) seçer.",
+      "Derin stack'te 3-bet boyutu genellikle açılışın birkaç katıdır ve pozisyon dışındayken daha büyük tutulur. Örnek: BB ante 1 BB, CO 2 BB'ye açtı, SB fold etti, BB 7 BB'ye 3-bet yaptı. Pot artık 0,5 + 1 (ante) + 2 + 7 = 10,5 BB'dir; CO call etmek için 5 BB ekler.",
+      "3-bet'e karşı rakip fold, call ya da 4-bet ile cevap verebilir. Stack kısaldıkça bu seçenekler değişir; bunu t4'te göreceksin. Bu derste amaç iki 3-bet türünü ayırt etmektir."
+     ],
+     "terimler": [
+      "3-bet",
+      "4-bet",
+      "Blöf"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "3-bet, preflop'ta açılışın üzerine yapılan yeniden raise'dir.",
+       "dogru": true,
+       "neden": "Büyük blind 1., açılış 2., onun üstündeki raise 3. bahistir.",
+       "yanilgi": "3-bet'i üçüncü raise sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "3-bet'in üstüne yapılan raise'in adı nedir?",
+       "secenekler": [
+        "4-bet",
+        "3-bet",
+        "Limp",
+        "Open (açılış)"
+       ],
+       "dogru": 0,
+       "neden": "Sayım bir artar: 3-bet'in üstü 4-bet'tir.",
+       "yanilgi": "Her yeniden raise'e 3-bet demek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. CO 2 BB'ye açtı, SB fold etti, BB 7 BB'ye 3-bet yaptı. Potta kaç BB var?",
+       "dogru": 10.5,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 (SB) + 1 (ante) + 2 (CO) + 7 (BB'nin toplamı) = 10,5 BB. BB'nin blind'i 7 BB'nin içindedir.",
+       "yanilgi": "BB'nin 1 BB'lik blind'ini 7'ye ek olarak saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2,
+         6
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı elde CO, 3-bet'i call etmek için kaç BB ekler?",
+       "dogru": 5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "7 − 2 = 5 BB.",
+       "yanilgi": "7 BB'nin tamamını eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         7,
+         -2
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangisi value 3-bet'in en açık örneğidir?",
+       "secenekler": [
+        "AA",
+        "72o",
+        "J4o",
+        "T3o"
+       ],
+       "dogru": 0,
+       "neden": "AA, rakibin devam edeceği her elden güçlüdür; pot büyüsün istersin.",
+       "yanilgi": "Value ile blöfü karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Blöf 3-bet'te amaç, rakibin daha iyi ellerini fold ettirerek potu almaktır.",
+       "dogru": true,
+       "neden": "Blöf 3-bet'te elin call için zayıftır; kazanmanın ana yolu rakibin fold etmesidir.",
+       "yanilgi": "Blöf 3-bet'in daha kötü ellerden call almak için yapıldığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Eşleştir.",
+       "secenekler": [
+        [
+         "Value 3-bet",
+         "Elin rakibin devam edeceği ellerin çoğundan güçlü; pot büyüsün istersin"
+        ],
+        [
+         "Blöf 3-bet",
+         "Elin call için zayıf; rakip fold etsin istersin"
+        ],
+        [
+         "4-bet",
+         "3-bet'in üstüne yapılan raise"
+        ]
+       ],
+       "neden": "Value ve blöf 3-bet amaçlarıyla ayrılır; 4-bet bir sonraki yeniden raise'dir.",
+       "yanilgi": "Value ile blöfü karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 2 BB'ye açtı, diğerleri fold etti. BB'desin, 40 BB. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (1 BB daha)",
+        "3-bet 7 BB"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity yaklaşık %18,2; 96s CO aralığına karşı yaklaşık %36 equity taşır ve oynanabilir bir eldir: call. 3-bet bu eli pozisyon dışında büyük bir potta oynatır.",
+       "yanilgi": "İyi fiyatı görmeyip fold etmek ya da her savunmayı 3-bet'le yapmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "96s",
+        "poz": "CO",
+        "yaklasik": 36
+       },
+       "spotKimlik": "t20"
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Derin stack'te 3-bet'e karşı rakibin seçenekleri nelerdir?",
+       "secenekler": [
+        "Fold, call ya da 4-bet",
+        "Yalnızca fold",
+        "Yalnızca call"
+       ],
+       "dogru": 0,
+       "neden": "Derin stack'te üç seçenek de mümkündür.",
+       "yanilgi": "3-bet'e karşı yalnızca fold edilebileceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Pozisyon dışında yapılan 3-bet genellikle pozisyondakinden daha büyük tutulur.",
+       "dogru": true,
+       "neden": "Pozisyon dışında rakibe iyi bir fiyat vermemek için 3-bet genellikle büyütülür.",
+       "yanilgi": "Boyutun pozisyondan bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Blöf 3-bet için oyuncular çoğunlukla hangi tür elleri seçer?",
+       "secenekler": [
+        "Call edildiğinde de oynayabilen elleri (ör. suited bir as)",
+        "Hiç oynanamayan en zayıf elleri",
+        "Yalnızca AA ve KK'yı"
+       ],
+       "dogru": 0,
+       "neden": "Blöf 3-bet call edilirse elin oynanabilir olması işine yarar. AA ve KK value 3-bet'tir.",
+       "yanilgi": "Blöf için en zayıf eli seçmek ya da value ile blöfü karıştırmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t3-k",
@@ -16026,15 +17193,233 @@
       "\"Derin stack oyunu\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin altı dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB, açılış 2,2 BB ve masa 6 kişiliktir. Açılış aralıkları sitenin yaklaşık çalışma aralıklarıdır; solver çıktısı değildir. Equity değerleri Monte Carlo ile hesaplandı ve yaklaşıktır."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Turnuvada 2 ile 2,3 BB arası açılış yaygındır.",
+       "dogru": true,
+       "neden": "Ante'li potu daha az riskle almak için küçük açılış tercih edilir.",
+       "yanilgi": "Cash game boyutunu turnuvaya taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BTN 2,3 BB'ye açtı, blind'ler henüz konuşmadı. Potta kaç BB var?",
+       "dogru": 4.8,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 + 2,3 = 4,8 BB.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.3
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "2,3 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 47.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,3 / (2,3 + 2,5) = 2,3 / 4,8 ≈ %47,9.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.3,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Hangisi BTN'de açılır ama UTG'de fold edilir?",
+       "secenekler": [
+        "KK",
+        "K9o",
+        "72o",
+        "AKs"
+       ],
+       "dogru": 1,
+       "neden": "K9o yalnızca BTN aralığında; KK ve AKs iki koltukta da açılır, 72o ikisinde de fold.",
+       "yanilgi": "Bir elin her koltukta aynı kararı gerektirdiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kosulluSec",
+        "kosul": [
+         [
+          "BTN",
+          "ac"
+         ],
+         [
+          "UTG",
+          "fold"
+         ]
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BTN 2,3 BB açtı, SB fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 21.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,8 BB; 1,3 BB ödersin: 1,3 / 6,1 ≈ %21,3.",
+       "yanilgi": "Blind'i düşmeyip 2,3 BB ödediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1.3,
+        "pot": 4.8
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "Butondasın, 25 BB, herkes sana kadar fold etti. Elin KTs (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hangi boyutu seçersin?",
+       "secenekler": [
+        "2,2 BB'ye aç",
+        "3,5 BB'ye aç",
+        "All-in (25 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Küçük açılış aynı çalma işini daha az chip'le yapar. All-in, 2,5 BB'lik pot için 25 BB'yi riske atar ve çoğunlukla yalnızca seni yenen eller görür.",
+       "yanilgi": "Stack sığ diye her açılışı all-in yapmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilis",
+        "poz": "BTN",
+        "el": "KTs"
+       },
+       "spotKimlik": "t12"
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB'de call ederken blind'ini ve ante'yi ödediğin bedele katmazsın.",
+       "dogru": true,
+       "neden": "Koyduğun chip'ler potun parçasıdır; yalnızca ek miktara bakılır.",
+       "yanilgi": "Koyduğun blind'i fiyata katmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Cep çifti flop'ta set ya da daha iyisini yaklaşık ne sıklıkla yapar?",
+       "secenekler": [
+        "%5,9",
+        "%11,8",
+        "%23,5",
+        "%33,3"
+       ],
+       "dogru": 1,
+       "neden": "19.600 flop'un 2.304'ü: yaklaşık %11,8.",
+       "yanilgi": "Set ihtimalini olduğundan büyük sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "66"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "Turnuvanın ilk seviyesi, stack'ler 150 BB, ante yok. UTG 2,5 BB açtı, sana kadar herkes fold etti. Butondasın, elin 66. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call",
+        "3-bet 8 BB"
+       ],
+       "dogru": 1,
+       "neden": "Stack'ler çok derin; pozisyonda call, set yaptığında büyük pot kazanma şansı verir (implied odds). 3-bet ise UTG'nin güçlü aralığına karşı elini blöfe çevirir.",
+       "yanilgi": "Küçük çifti derin stack'te fold etmek ya da 3-bet'le büyük pota sokmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t14"
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, SB fold etti, BB 8 BB'ye 3-bet yaptı. Potta kaç BB var?",
+       "dogru": 11.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 (ante) + 2,2 + 8 = 11,7 BB.",
+       "yanilgi": "BB'nin blind'ini 8'e ek olarak saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         7
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "UTG 2,2 BB açtı, herkes fold etti. BB'de K4o var; fiyat butona karşıyla aynı (%20,3). K4o'nun UTG aralığına karşı equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%22",
+        "%32",
+        "%41",
+        "%51"
+       ],
+       "dogru": 1,
+       "neden": "Monte Carlo hesabıyla yaklaşık %32: aynı el, güçlü UTG aralığına karşı butona karşı olduğundan (≈ %41) belirgin biçimde zayıftır.",
+       "yanilgi": "Equity'nin açanın pozisyonundan bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "K4o",
+        "poz": "UTG",
+        "yaklasik": 32
+       }
+      },
+      {
+       "kimlik": "a12",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Value 3-bet ile blöf 3-bet'i ayıran, elin rakibin devam edeceği ellere karşı gücüdür.",
+       "dogru": true,
+       "neden": "Value'da elin bu ellerin çoğundan güçlüdür; blöfte zayıftır ve fold beklersin.",
+       "yanilgi": "Ayrımı yalnızca boyuta göre yapmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t3-r",
@@ -16048,15 +17433,134 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Ante'li potta çalmanın başabaş fold oranı, ante'siz pottakinden yüksektir.",
+       "dogru": false,
+       "neden": "Ante potu büyütür; aynı risk için gereken fold oranı düşer.",
+       "yanilgi": "Ante'yi çalanın ek maliyeti sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. 2 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 44.4,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2 / (2 + 2,5) = 2 / 4,5 ≈ %44,4.",
+       "yanilgi": "Ante'siz potla hesaplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "UTG'desin, 50 BB, herkes fold etti. Elin Q8o. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Limp (1 BB)",
+        "2,2 BB aç"
+       ],
+       "dogru": 0,
+       "neden": "Q8o UTG aralığının dışındadır; arkanda beş oyuncu var.",
+       "yanilgi": "Turnuvada her elin açılabildiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilis",
+        "poz": "UTG",
+        "el": "Q8o"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2,5 BB açtı, SB fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 23.1,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 2,5 + 0,5 + 1 + 1 = 5 BB; 1,5 BB ödersin: 1,5 / 6,5 ≈ %23,1.",
+       "yanilgi": "Ante'yi pota katmamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1.5,
+        "pot": 5
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Blöf 3-bet'in amacı, daha kötü ellerin call etmesidir.",
+       "dogru": false,
+       "neden": "Daha kötü ellerin call etmesini istediğin 3-bet value 3-bet'tir; blöfte fold istersin.",
+       "yanilgi": "Value ile blöfü karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Cep çifti flop'ta kaç kez tutmamaya karşı bir kez set ya da daha iyisini yapar? (bir ondalık basamak)",
+       "dogru": 7.5,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "17.296 / 2.304 ≈ 7,5.",
+       "yanilgi": "Yüzdeyle oranı karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "88",
+        "sonuc": "oran"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangisi blind savunmasıdır?",
+       "secenekler": [
+        "BB'de bir açılışa call etmek",
+        "BTN'den açmak",
+        "UTG'den limp etmek"
+       ],
+       "dogru": 0,
+       "neden": "Blind savunması, blind'deyken bir açılışa karşı elde kalmaktır.",
+       "yanilgi": "Çalma ile savunmayı karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Turnuvada BB'nin geniş savunmasının bir nedeni, ante ve küçük açılışın fiyatı iyileştirmesidir.",
+       "dogru": true,
+       "neden": "Ante'li ve 2,2 BB'lik açılışa karşı gereken equity yaklaşık %20; ante'siz 2,5 BB'ye karşı %27,3.",
+       "yanilgi": "Fiyatı hesaba katmadan savunma aralığını belirlemek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     }
    ]
   },
@@ -16080,15 +17584,202 @@
       "Açılış aralığının stack kısaldıkça nasıl değiştiğini; spekülatif ellerin değer kaybını, yüksek kartların değer kazanmasını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "20 BB ve üstü ama 40 BB'nin altı orta stack'tir (t2-d1). Stack kısaldıkça el bitmeden oynanabilecek chip azalır ve bu, ellerin değerini değiştirir.",
+      "Spekülatif eller değer kaybeder: set ya da floş yaptıklarında kazanabilecekleri miktar arkadaki stack'le sınırlıdır. 20 BB'lik bir rakibin 2,2 BB'lik açılışına blind'de değilken call edersen, set yaptığında kazanabileceğin en fazla 17,8 BB'dir: call'unun yaklaşık 8 katı. Set yaklaşık 7,5'e 1 aleyhine tuttuğu ve her tuttuğunda bütün stack'i alamayacağın için bu pay incedir. 100 BB'lik rakibe karşı aynı call'un karşılığı çok daha büyüktür.",
+      "Yüksek kartlı eller (as'lı eller, broadway'ler) değer kazanır: orta stack'te potlar all-in'e daha çabuk döner ve böyle potlarda elin ham gücü (equity'si) ve yüksek bir per yapabilmesi öne çıkar. Bu yüzden orta stack'te değişen çoğunlukla aralığın içeriğidir: küçük çiftler ve suited connector'lar, özellikle erken pozisyonda, aralıkta daha az yer alır; yüksek kartlı eller daha çok.",
+      "Bu bir yöndür, kesin bir el listesi değildir; kenardaki eller rakiplere ve masaya göre değişir. Kısa stack için ayrı aralıkları t5'te göreceksin."
+     ],
+     "terimler": [
+      "Implied odds",
+      "Set",
+      "Connector",
+      "Broadway",
+      "Equity"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Stack kısaldıkça spekülatif eller genellikle değer kaybeder.",
+       "dogru": true,
+       "neden": "Tuttuklarında kazanabilecekleri miktar arkadaki stack'le sınırlıdır.",
+       "yanilgi": "Bir elin değerinin stack derinliğinden bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Büyük blind 1.000, stack'in 28.000 chip. Müfredatın sınırlarıyla hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 1,
+       "neden": "28.000 / 1.000 = 28 BB: orta stack.",
+       "yanilgi": "Chip sayısından bölge çıkarmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "28.000",
+        "bb": 1000
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "20 BB'lik bir rakip 2,2 BB açtı, sen blind'de değilken call ettin. Set yaparsan bu elde ondan en fazla kaç BB daha kazanabilirsin?",
+       "dogru": 17.8,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "Rakibin kalan stack'i: 20 − 2,2 = 17,8 BB.",
+       "yanilgi": "Rakibin bütün stack'ini (20 BB) kalan miktar sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         20,
+         -2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Bu 17,8 BB, 2,2 BB'lik call'unun kaç katıdır? (bir ondalık basamak)",
+       "dogru": 8.1,
+       "tolerans": 0.1,
+       "birim": "kat",
+       "neden": "17,8 / 2,2 ≈ 8,1. Set ise yaklaşık 7,5'e 1 aleyhine tutar; pay incedir.",
+       "yanilgi": "Call'u değil açılışın tamamını hesaba katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         17.8,
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangi el orta stack'te, derin stack'e göre değer kazanır?",
+       "secenekler": [
+        "AJo",
+        "54s",
+        "22"
+       ],
+       "dogru": 0,
+       "neden": "Yüksek kartlı eller, all-in'e çabuk dönen potlarda ham güçleriyle öne çıkar. 54s ve 22 ise tuttuklarında kazanabilecekleri miktar azaldığı için değer kaybeder.",
+       "yanilgi": "Küçük çiftlerin her derinlikte aynı değerde olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Orta stack'te değişen çoğunlukla aralığın içeriğidir: spekülatif eller azalır, yüksek kartlı eller artar.",
+       "dogru": true,
+       "neden": "Değer, stack derinliğiyle ellerin arasında yer değiştirir.",
+       "yanilgi": "Yalnızca aralığın genişliğinin değiştiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "100 BB'lik bir rakibin 2,2 BB'lik açılışına call ettin. Set yaparsan en fazla 97,8 BB daha kazanabilirsin. Bu, call'unun kaç katıdır? (bir ondalık basamak)",
+       "dogru": 44.5,
+       "tolerans": 0.1,
+       "birim": "kat",
+       "neden": "97,8 / 2,2 ≈ 44,5. 20 BB'deki 8 katla karşılaştır: derin stack'te implied odds çok daha büyüktür.",
+       "yanilgi": "Kazanılabilecek miktarı stack'ten bağımsız sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         97.8,
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Yüksek kartlı eller orta stack'te neden değer kazanır?",
+       "secenekler": [
+        "Potlar all-in'e çabuk döner; elin ham gücü ve yüksek per yapabilmesi öne çıkar",
+        "Yüksek kartlar daha sık dağıtılır",
+        "Orta stack'te kicker önemsizleşir"
+       ],
+       "dogru": 0,
+       "neden": "Az chip kaldığında elin gücü, ileride kazanılacak chip'ten daha önemlidir.",
+       "yanilgi": "Kart dağıtımının stack'e göre değiştiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Durumu sonucuyla eşleştir.",
+       "secenekler": [
+        [
+         "Küçük çift, 100 BB'lik rakibe karşı",
+         "Set yaptığında büyük pot kazanabilir"
+        ],
+        [
+         "Küçük çift, 20 BB'lik rakibe karşı",
+         "Set yaptığında kazanabileceği miktar sınırlı"
+        ],
+        [
+         "AQo, 20 BB'de",
+         "All-in'e dönen potta ham gücüyle öne çıkar"
+        ]
+       ],
+       "neden": "Aynı el farklı derinliklerde farklı değer taşır.",
+       "yanilgi": "Derinliği hesaba katmamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Orta stack'te her küçük çift ve her suited connector fold edilmelidir.",
+       "dogru": false,
+       "neden": "Bu bir yöndür; geç pozisyonda ve uygun masada bu eller hâlâ açılabilir.",
+       "yanilgi": "Yön bildiren bir ilkeyi kesin kural sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi bu dersi doğru özetler?",
+       "secenekler": [
+        "Stack kısaldıkça spekülatif eller değer kaybeder, yüksek kartlı eller kazanır; kesin liste masaya göre değişir",
+        "Orta stack'te açılış aralığı her koltukta yarıya iner",
+        "Stack derinliği açılış kararını etkilemez"
+       ],
+       "dogru": 0,
+       "neden": "Ders bir yön verir, el listesi vermez.",
+       "yanilgi": "Yönü sayısal bir kurala çevirmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-d2",
@@ -16102,15 +17793,202 @@
       "Call etmenin neden zorlaştığını ve 3-bet/fold oyununu açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Orta stack'te bir açılışa call etmek derin stack'e göre zorlaşır. Call ettiğinde stack'inin önemli bir kısmı pota girmiştir ama el bitmemiştir: flop'ta kalan stack pota göre küçüktür ve zor kararlar sık gelir. Arkanda oyuncu varsa onlardan biri de yeniden raise yapabilir. Pozisyon dışındaysan (OOP) bu sorunlar büyür.",
+      "Bu yüzden blind'ler dışındaki koltuklarda, orta stack'te bir açılışa karşı birçok oyuncu call yerine sık sık 3-bet ya da fold seçer. 3-bet/fold, 3-bet yapıp rakip 4-bet ya da all-in ile karşılık verirse fold etmek demektir. 3-bet potu hemen alma şansı verir ve son bahsi yapan sen olursun.",
+      "3-bet/fold'un bir bedeli vardır: 25 BB'lik stack'le 6 BB'ye 3-bet yapıp fold edersen stack'inin %24'ünü kaybedersin. Stack kısaldıkça 3-bet'ten sonra fold etmek pahalılaşır; daha kısa stack'te 3-bet çoğunlukla doğrudan all-in olarak yapılır (t4-d3).",
+      "BB bir istisnadır: iyi fiyat aldığı için açılışa call etmek orta stack'te de çoğu zaman mantıklıdır (t3-d5). Hangi ellerin 3-bet'e uygun olduğu rakiplere ve masaya göre değişir; bu derste ilkeyi öğreniyorsun."
+     ],
+     "terimler": [
+      "3-bet",
+      "4-bet",
+      "OOP (pozisyon dışı)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "3-bet/fold, 3-bet yapıp rakip yeniden raise ederse fold etmektir.",
+       "dogru": true,
+       "neden": "Rakip 4-bet ya da all-in ile karşılık verirse fold edersin.",
+       "yanilgi": "3-bet/fold'u 3-bet yerine fold etmek sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "25 BB'lik stack'le 6 BB'ye 3-bet yapıp fold edersen stack'inin yüzde kaçını kaybedersin?",
+       "dogru": 24,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "6 / 25 × 100 = %24.",
+       "yanilgi": "Yalnızca açılış farkını kayıp saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         6,
+         25
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Orta stack'te bir açılışa call etmeyi zorlaştıran nedir?",
+       "secenekler": [
+        "Flop'ta kalan stack pota göre küçüktür ve zor kararlar sık gelir",
+        "Call kurallara aykırıdır",
+        "Call her durumda 3-bet'ten pahalıdır"
+       ],
+       "dogru": 0,
+       "neden": "Stack'in önemli kısmı pota girmişken el bitmemiştir; kararlar zorlaşır.",
+       "yanilgi": "Call'un her zaman en güvenli seçenek olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, BTN 6 BB'ye 3-bet yaptı, blind'ler fold etti. Potta kaç BB var?",
+       "dogru": 10.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 (ante) + 2,2 + 6 = 10,7 BB.",
+       "yanilgi": "Fold eden blind'lerin chip'lerini ya da ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         6
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB, iyi fiyat aldığı için orta stack'te de açılışa sık sık call eder.",
+       "dogru": true,
+       "neden": "Ante ve küçük açılış BB'ye iyi fiyat verir; bu ilke orta stack'te de geçerlidir.",
+       "yanilgi": "3-bet/fold ilkesini BB'ye de aynen uygulamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "20 BB'lik stack'le 5,5 BB'ye 3-bet yapıp fold edersen stack'inin yüzde kaçını kaybedersin? (bir ondalık basamak)",
+       "dogru": 27.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "5,5 / 20 × 100 = %27,5.",
+       "yanilgi": "Stack küçüldükçe aynı 3-bet'in payının da küçüldüğünü sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         5.5,
+         20
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Orta stack'te pozisyon dışında call etmenin ek sorunu nedir?",
+       "secenekler": [
+        "Postflop'ta önce konuşursun; zaten küçük olan stack'le zor kararlar daha sık gelir",
+        "Pozisyon dışında pot daha küçük olur",
+        "Hiçbir ek sorunu yoktur"
+       ],
+       "dogru": 0,
+       "neden": "OOP oyuncu rakibin hamlesini görmeden karar verir.",
+       "yanilgi": "Pozisyonun sığ stack'te önemsizleştiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Aynı elde (CO 2,2, BTN 6) CO call ederse pot kaç BB olur?",
+       "dogru": 14.5,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "10,7 + (6 − 2,2) = 10,7 + 3,8 = 14,5 BB.",
+       "yanilgi": "CO'nun 6 BB'nin tamamını eklediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         6,
+         3.8
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "CO'nun stack'i 25 BB'ydi. 3-bet'i call ettikten sonra kaç BB'si kalır?",
+       "dogru": 19,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "25 − 6 = 19 BB.",
+       "yanilgi": "Yalnızca call için eklediği 3,8 BB'yi düşmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         25,
+         -6
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack kısaldıkça 3-bet'ten sonra fold etmek pahalılaşır; daha kısa stack'te 3-bet çoğunlukla doğrudan all-in olur.",
+       "dogru": true,
+       "neden": "3-bet stack'in büyük bir payı olunca, sonra fold etmek yerine bütün stack'i koymak daha doğal hâle gelir.",
+       "yanilgi": "3-bet boyutunu stack'ten bağımsız düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi 3-bet/fold'un call'a göre avantajıdır?",
+       "secenekler": [
+        "Potu preflop'ta hemen alma şansı verir ve son bahsi yapan sen olursun",
+        "Hiç chip kaybetmezsin",
+        "Rakip her zaman fold eder"
+       ],
+       "dogru": 0,
+       "neden": "3-bet iki yoldan kazanır: hemen fold ya da daha iyi elle sonraki sokaklar.",
+       "yanilgi": "3-bet'in risksiz olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-d3",
@@ -16123,15 +18001,187 @@
       "15 ile 25 BB arasında geç pozisyon açılışına all-in adaylarını seçer."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Resteal, çalma girişimi olduğunu düşündüğün bir açılışa 3-bet ya da all-in ile karşılık vermektir. 15 ile 25 BB arasında bu çoğunlukla doğrudan all-in olur: küçük bir 3-bet zaten stack'inin büyük bir kısmıdır ve sonra fold etmek pahalıdır.",
+      "Neden işe yarar? Geç pozisyondan açan oyuncu genellikle geniş açar ve bu ellerin çoğu bütün stack'ini koymaya değmez. Örnek: BB ante 1 BB, BTN 2,2 BB açtı, SB'desin ve 18 BB'n var. Potta 4,7 BB var: stack'inin dörtte birinden fazlası. All-in için 17,5 BB daha koyarsın. Call edildiğinde hiç kazanmadığını varsaysan, başabaş fold oranı 17,5 / (17,5 + 4,7) ≈ %78,8 olur; call edildiğinde de bazen kazandığın için gerçekte daha az fold yeter.",
+      "İyi all-in adayları genellikle call edildiğinde de makul equity'si olan ellerdir: as'lı eller, orta çiftler, güçlü broadway'ler; özellikle call etmek için fazla zayıf, fold etmek için fazla iyi olanlar. Çok zayıf eller (ör. 72o) call edildiğinde çok geride kalır. Hangi ellerin tam olarak aralıkta olduğu rakibin açılış ve call sıklığına bağlıdır; bu müfredat burada kesin bir aralık vermez.",
+      "Resteal, açan oyuncu geniş açıyorsa ve all-in'lere az call ediyorsa en iyi çalışır. Sıkı bir oyuncunun erken pozisyon açılışına karşı aynı all-in çok daha risklidir."
+     ],
+     "terimler": [
+      "Resteal",
+      "Steal (blind çalma)",
+      "All-in",
+      "Başabaş noktası",
+      "Equity"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Resteal, çalma girişimi olduğunu düşündüğün bir açılışa 3-bet ya da all-in ile karşılık vermektir.",
+       "dogru": true,
+       "neden": "Çalmaya karşı yapılan yeniden çalmadır.",
+       "yanilgi": "Resteal'i ilk açılış sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, SB'desin ve sıra sende. Potta kaç BB var?",
+       "dogru": 4.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 (ante) + 2,2 = 4,7 BB.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı durumda 18 BB ile all-in yaparsın (17,5 BB daha koyarsın). Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 78.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "17,5 / (17,5 + 4,7) = 17,5 / 22,2 ≈ %78,8.",
+       "yanilgi": "Riski 18 BB alıp SB'de koyduğun 0,5 BB'yi iki kez saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 17.5,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Resteal hangi açılışa karşı genellikle en iyi çalışır?",
+       "secenekler": [
+        "Geniş açan bir oyuncunun geç pozisyon açılışına",
+        "Sıkı bir oyuncunun UTG açılışına",
+        "Arka arkaya gelen iki limp'e"
+       ],
+       "dogru": 0,
+       "neden": "Geniş aralığın büyük kısmı all-in'e devam edemez.",
+       "yanilgi": "Rakibin aralığına bakmadan resteal yapmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, SB fold etti. BB'desin, 22 BB; all-in için 21 BB daha koyarsın. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 81.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,7 BB; 21 / (21 + 4,7) = 21 / 25,7 ≈ %81,7.",
+       "yanilgi": "BB'de koyduğun 1 BB'yi riske katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 21,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Çok zayıf eller (ör. 72o) call edildiğinde çok geride kaldığı için genellikle iyi resteal adayı değildir.",
+       "dogru": true,
+       "neden": "Resteal yalnızca fold'a değil, call edildiğindeki equity'ye de dayanır.",
+       "yanilgi": "Resteal'de elin önemsiz olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "20 BB'de, geniş açan bir butonun açılışına karşı hangisi daha iyi bir resteal adayıdır?",
+       "secenekler": [
+        "A9s",
+        "72o"
+       ],
+       "dogru": 0,
+       "neden": "A9s call edildiğinde de makul equity taşır; 72o çok geride kalır.",
+       "yanilgi": "Her iki eli de yalnızca fold'a güvenerek aynı saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Sık açan bir buton 2,2 BB açtı. SB'desin, 18 BB. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call",
+        "All-in (18 BB)"
+       ],
+       "dogru": 2,
+       "neden": "Sık açan butonun aralığı geniştir; 18 BB'lik all-in'e bunun büyük kısmını fold eder. Pot stack'inin dörtte birinden fazla. A9s görüldüğünde de tamamen geride değildir. Call ise seni pozisyon dışında, kısa stack'le flop oynamaya bırakır.",
+       "yanilgi": "SB'den call edip pozisyon dışında oynamak ya da iyi bir resteal elini fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t11"
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "15–25 BB'de resteal neden çoğunlukla doğrudan all-in olarak yapılır?",
+       "secenekler": [
+        "Küçük bir 3-bet zaten stack'in büyük kısmıdır; sonra fold etmek pahalıdır",
+        "Kurallar küçük 3-bet'e izin vermez",
+        "All-in her zaman kazanır"
+       ],
+       "dogru": 0,
+       "neden": "3-bet/fold'un bedeli stack kısaldıkça büyür (t4-d2).",
+       "yanilgi": "Strateji tercihini kural sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Başabaş fold oranı %79 çıktıysa, all-in ancak rakip %79'dan sık fold ederse kârlıdır.",
+       "dogru": false,
+       "neden": "Bu hesap call edildiğinde hiç kazanmadığını varsayar. Call edildiğinde de bir equity payın olduğu için gerçekte daha az fold yeter.",
+       "yanilgi": "En kötü durum varsayımını kesin eşik sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Açan oyuncu all-in'lere bile çok sık call ediyor. Resteal için ne değişir?",
+       "secenekler": [
+        "Fold'a dayanan zayıf adaylar değer kaybeder; call edildiğinde iyi duran eller öne çıkar",
+        "Daha çok zayıf elle all-in yapmalısın",
+        "Hiçbir şey değişmez"
+       ],
+       "dogru": 0,
+       "neden": "Fold azaldıkça kazanç daha çok call edildiğindeki equity'den gelir.",
+       "yanilgi": "Rakibe bakmadan hep aynı aralıkla resteal yapmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-d4",
@@ -16144,15 +18194,203 @@
       "Stack derinliği ve pozisyona göre iki seçeneği karşılaştırır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Orta stack'te bir açılışa karşı fold dışında iki ana seçenek vardır: call ya da all-in. Call potu küçük tutar ve flop'u görmeni sağlar; all-in kararı rakibe bırakır ve call edilirse sonraki sokaklarda karar kalmaz.",
+      "Stack derinliği önemlidir. 30–40 BB'de all-in, küçük bir potu almak için çok chip'i riske atar ve çoğunlukla yalnızca daha iyi eller tarafından görülür; call ya da küçük bir 3-bet daha sık tercih edilir. 20 BB'nin altına indikçe call edip flop'ta oynamak zorlaşır ve all-in daha sık doğal seçenek olur.",
+      "Pozisyon da önemlidir. Pozisyonda (IP), örneğin CO'nun açılışına BTN'den call etmek daha rahattır: flop'tan sonra son konuşursun. SB'den call etmek ise arkadaki BB'ye yeniden raise kapısı açar ve seni postflop'ta pozisyon dışında bırakır; bu yüzden SB'de call daha seyrek seçilir, çoğunlukla 3-bet ya da fold tercih edilir; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
+      "Örnek: BB ante 1 BB. CO 2,2 BB açtı, 20 BB ile BTN'desin ve call ettin; blind'ler fold etti. Flop'ta pot 2,2 + 2,2 + 0,5 + 1 + 1 = 6,9 BB, kalan stack'in 17,8 BB: stack potun yaklaşık 2,6 katıdır. Bu oranın adı SPR'dir; bir sonraki derste göreceksin."
+     ],
+     "terimler": [
+      "All-in",
+      "IP (pozisyonda)",
+      "OOP (pozisyon dışı)",
+      "Efektif stack"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "All-in call edilirse sonraki sokaklarda başka karar kalmaz.",
+       "dogru": true,
+       "neden": "Bütün chip'ler ortadadır; kartlar açılır.",
+       "yanilgi": "All-in'den sonra da bahis turları olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Bir açılışa call etmenin all-in'e göre avantajı nedir?",
+       "secenekler": [
+        "Potu küçük tutar ve flop'u görmeni sağlar",
+        "Rakibi her zaman fold ettirir",
+        "Rakibin elini görmeni sağlar"
+       ],
+       "dogru": 0,
+       "neden": "Call daha az chip'i riske atar ve kararı sonraki sokaklara bırakır.",
+       "yanilgi": "Call'un rakibi fold ettirebildiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, BTN call etti, blind'ler fold etti. Flop'ta pot kaç BB?",
+       "dogru": 6.9,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "2,2 + 2,2 + 0,5 + 1 + 1 (ante) = 6,9 BB.",
+       "yanilgi": "Fold eden blind'lerin chip'lerini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı elde BTN 20 BB ile başladı. Flop'ta kaç BB'si kaldı?",
+       "dogru": 17.8,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "20 − 2,2 = 17,8 BB.",
+       "yanilgi": "Pota konanı düşmeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         20,
+         -2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı elde (CO da 40 BB ile başladı) kalan efektif stack potun kaç katıdır? (bir ondalık basamak)",
+       "dogru": 2.6,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Efektif stack 17,8 BB (küçük olan); 17,8 / 6,9 ≈ 2,6.",
+       "yanilgi": "Büyük stack'i ya da başlangıç stack'ini kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         17.8,
+         37.8
+        ],
+        "pot": 6.9
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Orta stack'le bir açılışa call etmek hangi koltukta genellikle daha rahattır?",
+       "secenekler": [
+        "BTN (açana karşı pozisyonda)",
+        "SB (açana karşı pozisyon dışında)"
+       ],
+       "dogru": 0,
+       "neden": "Pozisyonda flop'tan sonra son konuşursun.",
+       "yanilgi": "Pozisyonun orta stack'te önemsiz olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "SB'den call etmek, arkadaki BB'nin yeniden raise yapmasına kapı açar.",
+       "dogru": true,
+       "neden": "SB'den sonra BB konuşur; iki oyunculu potu görünce yeniden raise yapabilir.",
+       "yanilgi": "SB'de call edince elin hemen flop'a gittiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "40 BB'de, butonun açılışına BB'den all-in genellikle neden pahalıdır?",
+       "secenekler": [
+        "Küçük bir potu almak için çok chip'i riske atar; çoğunlukla yalnızca daha iyi eller call eder",
+        "Kurallara aykırıdır",
+        "BB'de all-in her zaman kazanır"
+       ],
+       "dogru": 0,
+       "neden": "Derinlik arttıkça all-in'in riski ile kazancı arasındaki fark büyür.",
+       "yanilgi": "Her derinlikte all-in'i en güvenli hamle sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Geniş açan bir buton 2,2 BB açtı, SB fold etti. BB'desin, 30 BB. Call mı, all-in mi, fold mu?",
+       "secenekler": [
+        "Fold",
+        "Call (1,2 BB daha)",
+        "All-in (30 BB)"
+       ],
+       "dogru": 1,
+       "neden": "30 BB'de all-in, 4,7 BB'lik pot için bütün stack'i riske atar ve çoğunlukla daha iyi eller tarafından görülür. Gereken equity %20,3; K4o butonun aralığına karşı yaklaşık %41: call.",
+       "yanilgi": "Orta stack'te her savunmayı all-in ile yapmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "K4o",
+        "poz": "BTN",
+        "yaklasik": 41
+       },
+       "spotKimlik": "t25"
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack 20 BB'nin altına indikçe, bir açılışa call etmek yerine all-in genellikle daha sık doğal seçenek olur.",
+       "dogru": true,
+       "neden": "Call ettikten sonra kalan stack pota göre küçülür; flop'ta oynamak zorlaşır.",
+       "yanilgi": "Derin stack'teki call alışkanlığını kısa stack'e taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, BTN'den 30 BB ile call ettin (CO'nun da 30 BB'si vardı), blind'ler fold etti. Flop'ta kalan efektif stack potun kaç katıdır? (bir ondalık basamak)",
+       "dogru": 4,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Pot 6,9 BB; kalan stack 27,8 BB; 27,8 / 6,9 ≈ 4,0.",
+       "yanilgi": "Başlangıç stack'ini kullanıp 4,3 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         27.8,
+         27.8
+        ],
+        "pot": 6.9
+       }
+      }
+     ]
     },
     {
      "kimlik": "t4-d5",
@@ -16165,15 +18403,200 @@
       "SPR'yi hesaplar; top pair ile stack'i koymanın ne zaman doğal olduğunu açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "SPR (stack-to-pot ratio), flop'ta efektif stack'in pota oranıdır: SPR = efektif stack / flop'taki pot. Buradaki efektif stack, preflop'ta pota konan chip'ler düşüldükten sonra kalan miktardır.",
+      "Örnek: 20'şer BB'lik iki oyuncu. BB ante 1 BB; CO 2,2 BB açtı, BB call etti, diğerleri fold etti. Pot 2,2 + 2,2 + 0,5 + 1 = 5,9 BB; kalan stack 17,8 BB; SPR = 17,8 / 5,9 ≈ 3.",
+      "SPR düşükse (kabaca 3 ve altı), top pair (board'daki en yüksek kartla yapılan per) gibi iyi bir elle bütün stack'i koymak çoğunlukla doğaldır: pota göre kalan chip azdır ve rakip daha zayıf ellerle de devam eder. SPR yüksekse (ör. 10 ve üstü), aynı elle bütün stack'i koymak daha risklidir; rakibin bu kadar chip'le devam ettiği eller seni sık sık yener.",
+      "Düşük SPR'de karar çoğunlukla bir pot odds hesabına döner: rakip all-in yaparsa gereken equity'yi hesaplar ve elini rakibin all-in aralığıyla karşılaştırırsın."
+     ],
+     "terimler": [
+      "SPR",
+      "Top pair",
+      "Efektif stack",
+      "Pot odds"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "SPR, flop'ta efektif stack'in pota oranıdır.",
+       "dogru": true,
+       "neden": "SPR = efektif stack / flop'taki pot.",
+       "yanilgi": "SPR'yi stack'in BB sayısıyla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Flop'ta pot 6 BB; sende 18 BB, rakipte 30 BB kaldı. SPR kaçtır?",
+       "dogru": 3,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Efektif stack 18 BB; 18 / 6 = 3.",
+       "yanilgi": "Büyük stack'i kullanıp 5 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         18,
+         30
+        ],
+        "pot": 6
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, BB call etti, diğerleri fold etti. Flop'ta pot kaç BB?",
+       "dogru": 5.9,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "2,2 + 2,2 + 0,5 + 1 (ante) = 5,9 BB. BB'nin blind'i 2,2'nin içindedir.",
+       "yanilgi": "BB'nin 1 BB'lik blind'ini ayrıca eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2,
+         1.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı elde iki oyuncu 20'şer BB ile başladı. SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 3,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Kalan stack 17,8 BB; 17,8 / 5,9 ≈ 3,0.",
+       "yanilgi": "Başlangıç stack'ini kullanıp 3,4 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         17.8,
+         17.8
+        ],
+        "pot": 5.9
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Düşük SPR'de top pair ile bütün stack'i koymak için hangisi doğrudur?",
+       "secenekler": [
+        "Çoğunlukla doğaldır; pota göre kalan chip azdır",
+        "Hiçbir zaman doğru değildir",
+        "Yalnızca nuts ile yapılır"
+       ],
+       "dogru": 0,
+       "neden": "Düşük SPR'de iyi bir el, kalan küçük stack'i rahatça koyabilir.",
+       "yanilgi": "Derin stack'teki temkini düşük SPR'ye taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı preflop (BB ante 1 BB, CO 2,2 açtı, BB call etti), ama iki oyuncu 100'er BB ile başladı. SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 16.6,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Kalan stack 97,8 BB; 97,8 / 5,9 ≈ 16,6.",
+       "yanilgi": "SPR'nin stack derinliğinden bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         97.8,
+         97.8
+        ],
+        "pot": 5.9
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Yüksek SPR'de top pair ile bütün stack'i koymak, düşük SPR'dekinden daha risklidir.",
+       "dogru": true,
+       "neden": "Çok chip kaldığında rakibin devam ettiği eller seni sık sık yener.",
+       "yanilgi": "Top pair'i her derinlikte aynı güçte sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Flop'ta pot 5,5 BB. Rakip 10 BB all-in yaptı; sende de tam 10 BB kaldı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 39.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Call öncesi pot 5,5 + 10 = 15,5 BB; 10 BB ödersin: 10 / 25,5 ≈ %39,2.",
+       "yanilgi": "Rakibin all-in'ini pota katmayı unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 10,
+        "pot": 15.5
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 2 BB açtı, BB'den 12 BB ile call ettin. Flop'ta top pair yaptın. Check ettin, agresif bir oyuncu olan CO all-in yaptı. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "SPR yaklaşık 1,8. Gereken equity yaklaşık %39. Spotun notunda yazan geniş all-in aralığına karşı top pair'in eşiğin üzerinde kaldığı spotun gerekçesidir: call. Düşük SPR'de karar neredeyse tamamen bir pot odds hesabıdır.",
+       "yanilgi": "Düşük SPR'de top pair'i büyük pot korkusuyla fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t26"
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "SPR'nin yaklaşık 1,8 olduğu bir flop'ta rakip all-in yaptı. Kararın en çok neye dayanır?",
+       "secenekler": [
+        "Pot odds'a ve elinin rakibin all-in aralığına karşı equity'sine",
+        "Elinin preflop'taki gücüne",
+        "Stack'indeki chip sayısına"
+       ],
+       "dogru": 0,
+       "neden": "Düşük SPR'de karar bir fiyat ve aralık karşılaştırmasıdır.",
+       "yanilgi": "Postflop'u preflop gücüyle karar vermek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Aynı top pair, SPR 1,8'de ve SPR 16'da aynı kararla oynanmalıdır.",
+       "dogru": false,
+       "neden": "SPR değiştikçe bütün stack'i koymanın riski değişir; düşük SPR'de doğal olan, yüksek SPR'de riskli olabilir.",
+       "yanilgi": "Elin gücünü stack derinliğinden bağımsız değerlendirmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-k",
@@ -16186,15 +18609,251 @@
       "\"Orta stack oyunu\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin beş dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB ve açılış 2,2 BB'dir. Resteal ve 3-bet/fold için kesin aralık verilmez; sorular ilkeleri ve hesapları yoklar."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Orta stack'te spekülatif eller genellikle derin stack'tekinden daha az değerlidir.",
+       "dogru": true,
+       "neden": "Tuttuklarında kazanabilecekleri miktar sınırlıdır.",
+       "yanilgi": "Değerin derinlikten bağımsız olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "30 BB'lik stack'le 6 BB'ye 3-bet yapıp fold edersen stack'inin yüzde kaçını kaybedersin?",
+       "dogru": 20,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "6 / 30 × 100 = %20.",
+       "yanilgi": "Kaybı açılışla sınırlı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         6,
+         30
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Büyük blind 1.000, stack'in 33.000 chip. Hangi bölgedesin?",
+       "secenekler": [
+        "Derin stack",
+        "Orta stack",
+        "Kısa stack"
+       ],
+       "dogru": 1,
+       "neden": "33 BB: orta stack.",
+       "yanilgi": "Chip sayısından bölge çıkarmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolge",
+        "stack": "33.000",
+        "bb": 1000
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. HJ 2,3 BB açtı, CO 6,5 BB'ye 3-bet yaptı, diğerleri fold etti, HJ call etti. Potta kaç BB var?",
+       "dogru": 15.5,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 (ante) + 6,5 + 6,5 = 15,5 BB.",
+       "yanilgi": "HJ'nin ilk 2,3 BB'sini ayrıca saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.3,
+         6.5,
+         4.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2 BB açtı. SB'desin, 16 BB; all-in için 15,5 BB daha koyarsın. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 77.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 2 + 0,5 + 1 + 1 = 4,5 BB; 15,5 / (15,5 + 4,5) = %77,5.",
+       "yanilgi": "SB'de koyduğun 0,5 BB'yi riske katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 15.5,
+        "pot": 4.5
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Resteal'in başabaş fold oranı hesabı, call edildiğinde hiç kazanmadığını varsayar.",
+       "dogru": true,
+       "neden": "Bu en kötü durum varsayımıdır; gerçekte daha az fold yeter.",
+       "yanilgi": "Hesabı kesin eşik sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "İki oyuncu 24'er BB ile başladı. CO 2,2 BB açtı, BTN call etti, blind'ler fold etti (BB ante 1 BB). Flop'ta SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 3.2,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Pot 6,9 BB; kalan stack 21,8 BB; 21,8 / 6,9 ≈ 3,2.",
+       "yanilgi": "Başlangıç stack'ini kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         21.8,
+         21.8
+        ],
+        "pot": 6.9
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Orta stack'le bir açılışa karşı hangi koltukta call yerine çoğunlukla 3-bet ya da fold tercih edilir?",
+       "secenekler": [
+        "SB",
+        "BTN"
+       ],
+       "dogru": 0,
+       "neden": "SB'den call etmek seni pozisyon dışında bırakır ve BB'ye yeniden raise kapısı açar; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
+       "yanilgi": "SB'de de BTN'deki gibi rahatça call etmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. HJ'den 25 BB ile 2,2 BB açtın; SB 14 BB ile all-in yaptı, BB fold etti. Potta 18,2 BB var ve call için 11,8 BB ödersin. Gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 39.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "11,8 / (18,2 + 11,8) = 11,8 / 30 ≈ %39,3.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 11.8,
+        "pot": 18.2
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "Aynı el: HJ'den 25 BB ile 88 açtın, SB 14 BB all-in yaptı, BB fold etti. Spotun notunda SB'nin varsayılan resteal aralığı yazıyor. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (11,8 BB daha)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity yaklaşık %39,3. Notta yazan resteal aralığına karşı 88'in equity'si yaklaşık %55: call. Kaybetsen de oyunda kalırsın.",
+       "yanilgi": "Açılışına all-in gelince fiyata bakmadan fold etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "88",
+        "rakip": [
+         "AA",
+         "KK",
+         "QQ",
+         "JJ",
+         "TT",
+         "99",
+         "88",
+         "77",
+         "66",
+         "55",
+         "44",
+         "33",
+         "22",
+         "AKs",
+         "AQs",
+         "AJs",
+         "ATs",
+         "A9s",
+         "A8s",
+         "A7s",
+         "A6s",
+         "A5s",
+         "A4s",
+         "A3s",
+         "A2s",
+         "AKo",
+         "AQo",
+         "AJo",
+         "ATo",
+         "A9o",
+         "A8o",
+         "KQs",
+         "KJs",
+         "KTs",
+         "KQo",
+         "QJs"
+        ],
+        "yaklasik": 55
+       },
+       "spotKimlik": "t13"
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi düşük SPR'nin bir sonucudur?",
+       "secenekler": [
+        "Top pair gibi iyi bir elle bütün stack'i koymak doğallaşır",
+        "Blöf yapmak zorunlu olur",
+        "Pot odds hesabı önemini yitirir"
+       ],
+       "dogru": 0,
+       "neden": "Pota göre kalan chip azsa iyi eller kolayca stack'i koyar; karar pot odds'a dayanır.",
+       "yanilgi": "Düşük SPR'de hesabın önemsizleştiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack kısaldıkça 3-bet/fold'un bedeli artar; bu yüzden daha kısa stack'te 3-bet çoğunlukla all-in olarak yapılır.",
+       "dogru": true,
+       "neden": "3-bet stack'in büyük bir payı olunca sonra fold etmek pahalılaşır.",
+       "yanilgi": "3-bet boyutunu stack'ten bağımsız düşünmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-r",
@@ -16208,15 +18867,133 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Orta stack'te bir açılışa call etmek, derin stack'e göre genellikle daha kolaydır.",
+       "dogru": false,
+       "neden": "Kalan stack pota göre küçük olduğu için zor kararlar daha sık gelir.",
+       "yanilgi": "Derin stack alışkanlığını orta stack'e taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Flop'ta pot 5 BB; sende 15 BB, rakipte 20 BB kaldı. SPR kaçtır?",
+       "dogru": 3,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Efektif stack 15 BB; 15 / 5 = 3.",
+       "yanilgi": "Büyük stack'i kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         15,
+         20
+        ],
+        "pot": 5
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Resteal için genellikle en iyi hedef hangisidir?",
+       "secenekler": [
+        "Geniş açan geç pozisyon oyuncusu",
+        "Sıkı bir UTG oyuncusu"
+       ],
+       "dogru": 0,
+       "neden": "Geniş aralığın çoğu all-in'e devam edemez.",
+       "yanilgi": "Her açılışa aynı resteal'i yapmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, SB fold etti. BB'desin, 20 BB; all-in için 19 BB daha koyarsın. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 80.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,7 BB; 19 / (19 + 4,7) = 19 / 23,7 ≈ %80,2.",
+       "yanilgi": "BB'de koyduğun 1 BB'yi riske katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 19,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "SPR hesaplanırken kullanılan efektif stack, preflop'tan sonra kalan miktardır.",
+       "dogru": true,
+       "neden": "Preflop'ta pota konanlar düşülür.",
+       "yanilgi": "Başlangıç stack'ini kullanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "20 BB'lik bir rakibin 2,2 BB'lik açılışına call edip set yaparsan ondan en fazla 17,8 BB daha kazanabilirsin. Bu, call'unun kaç katıdır? (bir ondalık basamak)",
+       "dogru": 8.1,
+       "tolerans": 0.1,
+       "birim": "kat",
+       "neden": "17,8 / 2,2 ≈ 8,1.",
+       "yanilgi": "Bu oranı 100 BB'deki implied odds ile aynı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         17.8,
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi el orta stack'te, derin stack'e göre değer kaybeder?",
+       "secenekler": [
+        "54s",
+        "AKo",
+        "AQo"
+       ],
+       "dogru": 0,
+       "neden": "Spekülatif eller tuttuklarında kazanabilecekleri miktar azaldığı için değer kaybeder; yüksek kartlı eller kazanır.",
+       "yanilgi": "Suited connector'ları her derinlikte aynı değerde sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Düşük SPR'de bile top pair ile bütün stack'i koymak her zaman doğrudur.",
+       "dogru": false,
+       "neden": "Çoğunlukla doğaldır ama karar rakibin aralığına ve fiyata bağlıdır.",
+       "yanilgi": "Yön bildiren bir ilkeyi kesin kural sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t4-t",
@@ -16231,15 +19008,378 @@
       "bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
      ],
      "sureDk": 10,
-     "anlatim": [],
+     "anlatim": [
+      "Bu test, turnuva pistinde buraya kadar olan bütün üniteleri birlikte yoklar: temel üniteler (o1–o4), turnuva nedir, stack'i ölçmek, derin stack ve orta stack oyunu. 20 soru. Aksi yazılmadıkça BB ante 1 BB ve açılış 2,2 BB'dir. Açılış aralıkları sitenin yaklaşık çalışma aralıklarıdır; equity değerleri Monte Carlo ile hesaplandı ve yaklaşıktır."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 20,
       "oran": 0.85
      },
      "hedefAlistirma": 20,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "A♠ K♦ hangi el adıyla yazılır?",
+       "secenekler": [
+        "AKs",
+        "AKo",
+        "KAo"
+       ],
+       "dogru": 1,
+       "neden": "Farklı renk: offsuit, büyük değer önce yazılır: AKo.",
+       "yanilgi": "Renkleri karıştırmak ya da küçük değeri önce yazmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazim",
+        "kartlar": "A♠ K♦"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "3-bet, preflop'ta açılışın üzerine yapılan yeniden raise'dir.",
+       "dogru": true,
+       "neden": "Büyük blind 1., açılış 2., 3-bet 3. bahistir.",
+       "yanilgi": "3-bet'i üçüncü raise sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "AKo kaç kombinasyondan oluşur?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "4 × 4 = 16 renk eşleşmesinden 4'ü suited: 16 − 4 = 12.",
+       "yanilgi": "Suited kombinasyonları da sayıp 16 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, blind'ler henüz konuşmadı. Potta kaç BB var?",
+       "dogru": 4.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 + 2,2 = 4,7 BB.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB'li masada stack'in 30 BB. M'n kaçtır?",
+       "secenekler": [
+        "M = 12",
+        "M = 20",
+        "M = 30"
+       ],
+       "dogru": 0,
+       "neden": "Bir masa turu 2,5 BB tutar: 30 / 2,5 = 12.",
+       "yanilgi": "Ante'siz formülle 20 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 30,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "6 kişilik masada UTG'de oturan oyuncu, buton bir koltuk sola kayınca sonraki elde hangi koltukta olur?",
+       "secenekler": [
+        "UTG",
+        "BB",
+        "HJ",
+        "SB"
+       ],
+       "dogru": 1,
+       "neden": "Butondan sola sıra BTN, SB, BB, UTG'dir; buton kayınca herkes bir adım geriye düşer: UTG → BB.",
+       "yanilgi": "Koltuk adının saat yönünde ilerlediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "sonrakiEl",
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, SB fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 20.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,7 BB; 1,2 BB ödersin: 1,2 / 5,9 ≈ %20,3.",
+       "yanilgi": "Paydaya ödeyeceğin miktarı koymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1.2,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "range",
+       "zorluk": 3,
+       "soru": "Bu ellerden BTN'nin çalışma aralığında olanları işaretle.",
+       "secenekler": [
+        "A5o",
+        "K9o",
+        "22",
+        "T9o",
+        "72o",
+        "83o",
+        "J4o"
+       ],
+       "dogru": [
+        "A5o",
+        "K9o",
+        "22",
+        "T9o"
+       ],
+       "neden": "BTN aralığı offsuit asları, küçük çiftleri ve K9o, T9o gibi elleri içerir; 72o, 83o ve J4o dışarıda.",
+       "yanilgi": "Butonda her elin açılabildiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "acilisAraligi",
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: Q♣ 8♦ 5♠ 3♥ 2♦. Ali: A♠ Q♥. Berk: Q♦ J♣. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisinde de kız per var; kicker'da Ali'nin ası Berk'in valesini yener.",
+       "yanilgi": "Aynı per görünce beraberlik demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "board": "Q♣ 8♦ 5♠ 3♥ 2♦",
+        "eller": {
+         "Ali": "A♠ Q♥",
+         "Berk": "Q♦ J♣"
+        }
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. 2,2 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 46.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / (2,2 + 2,5) ≈ %46,8.",
+       "yanilgi": "Ante'siz potla hesaplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.2,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "AQ ile AJ karşılaştığında AJ domine durumdadır.",
+       "dogru": true,
+       "neden": "İki el bir kartı (as) paylaşır; ikinci kartı düşük olan AJ domine durumdadır.",
+       "yanilgi": "Domine olmayı yalnızca çiftlere özgü sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 400. Sen 12.000 chip, rakibin 8.800 chip. Efektif stack kaç BB?",
+       "dogru": 22,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 8.800; 8.800 / 400 = 22 BB.",
+       "yanilgi": "Büyük stack'i kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "12.000",
+         "8.800"
+        ],
+        "bb": 400
+       }
+      },
+      {
+       "kimlik": "a13",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, BB call etti (ikisi de 25 BB ile başladı), diğerleri fold etti. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 3.9,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Pot 5,9 BB; kalan stack 22,8 BB; 22,8 / 5,9 ≈ 3,9.",
+       "yanilgi": "Başlangıç stack'ini kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         22.8,
+         22.8
+        ],
+        "pot": 5.9
+       }
+      },
+      {
+       "kimlik": "a14",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "15–25 BB'de geç pozisyon açılışına resteal çoğunlukla nasıl yapılır?",
+       "secenekler": [
+        "All-in",
+        "Min-raise ile küçük bir 3-bet",
+        "Limp"
+       ],
+       "dogru": 0,
+       "neden": "Küçük bir 3-bet zaten stack'in büyük kısmıdır; sonra fold etmek pahalıdır.",
+       "yanilgi": "Derin stack'teki küçük 3-bet'i kısa stack'e taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a15",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Sık açan bir buton 2,2 BB açtı. SB'desin, 18 BB. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call",
+        "All-in (18 BB)"
+       ],
+       "dogru": 2,
+       "neden": "Sık açan butonun geniş aralığı all-in'e çoğunlukla fold eder; pot stack'inin dörtte birinden fazla ve A9s görüldüğünde de tamamen geride değildir.",
+       "yanilgi": "SB'den call edip pozisyon dışında kısa stack'le oynamak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t11"
+      },
+      {
+       "kimlik": "a16",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "150 giriş, başlangıç stack'i 20.000 chip; 60 oyuncu kaldı; büyük blind 1.000. Ortalama stack kaç BB?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Toplam 3.000.000; ortalama 50.000 chip; 50.000 / 1.000 = 50 BB.",
+       "yanilgi": "Ortalamayı BB'ye çevirmeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "ortalamaStack",
+        "baslangic": "20.000",
+        "giris": 150,
+        "kalan": 60,
+        "bb": 1000
+       }
+      },
+      {
+       "kimlik": "a17",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "T8s'in butonun çalışma aralığına karşı ham equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%21",
+        "%31",
+        "%41",
+        "%51"
+       ],
+       "dogru": 2,
+       "neden": "Monte Carlo hesabıyla yaklaşık %41.",
+       "yanilgi": "Suited bağlantılı elin geniş aralığa karşı çok geride olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "T8s",
+        "poz": "BTN",
+        "yaklasik": 41
+       }
+      },
+      {
+       "kimlik": "a18",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Cep çiftiyle flop'ta set ya da daha iyisini yapma ihtimali yaklaşık yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 11.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "19.600 flop'un 2.304'ü: yaklaşık %11,8.",
+       "yanilgi": "İhtimali büyük tahmin etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "99"
+       }
+      },
+      {
+       "kimlik": "a19",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Bubble'da chip'lerini iki katına çıkarmak ödül payını da iki katına çıkarır.",
+       "dogru": false,
+       "neden": "Ödül sıraya göre dağıtılır; chip ile ödül payı orantılı değildir (t2-d5).",
+       "yanilgi": "Chip'i doğrudan ödül payı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a20",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. CO 2,2 BB açtı, SB fold etti. BB'desin, 22 BB; all-in için 21 BB daha koyarsın. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 81.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,7 BB; 21 / 25,7 ≈ %81,7.",
+       "yanilgi": "BB'de koyduğun 1 BB'yi riske katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 21,
+        "pot": 4.7
+       }
+      }
+     ]
     }
    ]
   },

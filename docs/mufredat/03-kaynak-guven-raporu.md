@@ -174,3 +174,45 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Uydurma istatistik, solver so
 - 170 alıştırmadan 101'i `denetle.mts` ile denetlenir (t1 39, t2 62). Yeni denetim türleri: `antePot`, `mOrani`, `bbErime`, `ortalamaStack`, `odul`, `bolge`; her birinin bozuk cevabı yakaladığı `src/lib/mufredat/denetle.test.ts`'te gösterilir (BB ante'yi oyuncu sayısıyla çarpmak, klasik ante'yi tek saymak, M'de ante'yi unutmak, aşırı tolerans, toplamı 100 olmayan ya da artan ödül tablosu, ödül almayan sıra, tam 20 BB'nin bölgesi).
 - Bu türlerin hepsinde girdiler (stack, blind, ante, giriş sayısı, paylar) senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.** Ante kuralı (BB ante tek, klasik ante oyuncu başına) ve bölge sınırları betikte sabittir; betik bu kurallara uyumu doğrular, kuralların doğruluğunu değil.
 - Kalan 69 alıştırma kavram ve kural sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+
+## t3 · Derin stack oyunu, t4 · Orta stack oyunu
+
+Bütün alıştırmalar `dogrulamaGerekli: false`. Strateji iddiaları bu ünitelerde başlıyor; sayısal olanlar betikle, ilkeler "genellikle / çoğunlukla" diliyle yazıldı.
+
+### Kesin olan (kural ya da aritmetik)
+
+- Min-raise preflop'ta 2 BB; 3-bet / 4-bet sayımı; ante bahse sayılmaz.
+- Ante'li pot ve call bedeli; gereken equity = ödenecek / (pot + ödenecek): ante'li 2,2 BB'ye karşı %20,3, ante'li min-raise'e karşı %18,2, ante'li 2,5 BB'ye karşı %23,1, ante'siz 2,5 BB'ye karşı %27,3; t13'te %39,3, t26'da %39,2.
+- Başabaş fold oranı = risk / (risk + pot), call edildiğinde hiç kazanmama varsayımıyla: 2,2 BB çalma ante'li %46,8, ante'siz %59,5; 3 BB %54,5; 18 BB'lik SB resteal %78,8.
+- SPR = kalan efektif stack / flop'taki pot (ör. 17,8 / 5,9 ≈ 3,0; 97,8 / 5,9 ≈ 16,6).
+- Cep çiftiyle flop'ta set ya da daha iyisi: 2.304 / 19.600 ≈ %11,8 (betik sayar).
+
+### Yaklaşık (kendi hesabımız)
+
+- **Açılış aralıkları:** ranges.json'daki cash 6-max çalışma aralıkları (UTG %15,2, HJ %19,3, CO %27,3, BTN %43,3, SB %38,2); solver çıktısı değil. Turnuvaya aktarımı **varsayımdır**: "derin stack'te kabaca benzer; ante ile geç pozisyonda biraz genişletmek yaygın; 8–9 kişilik masada erken koltuklar daha sıkı". Yalnızca betiğin kesin "aç" ya da "fold" dediği eller soruldu.
+- **Aralığa karşı equity:** Monte Carlo, 40.000 deneme, sabit tohum, ±1,5 puan (K4o 41,0 / 32,0; 96s 36,2; T8s 40,8; 88 resteal aralığına karşı 54,9).
+
+### Genel kabul görmüş ilkeler (yumuşatılmış)
+
+- Erken aşamada oyunun cash game'e benzemesi; spekülatif ellerin derin stack'te değer kazanıp orta stack'te kaybetmesi; yüksek kartlı ellerin orta stack'te öne çıkması (yön, el listesi yok).
+- Turnuvada 2–2,3 BB açılışın yaygın olması ve küçük açılışın blind'lere iyi fiyat vermesi.
+- BB'nin ante'li potta geniş savunması; OOP equity kaybı (oran verilmedi).
+- Value ve blöf 3-bet'in ayrımı; OOP 3-bet'in genellikle daha büyük tutulması.
+- Orta stack'te blind'ler dışında call'un zorlaşması ve 3-bet/fold; SB'de call'un daha seyrek olması, çoğunlukla 3-bet ya da fold (20–25 BB'ye inildikçe bu 3-bet çoğunlukla all-in); 15–25 BB'de resteal'in çoğunlukla all-in olması; düşük SPR'de (kabaca 3 ve altı) top pair ile stack koymanın çoğunlukla doğal olması.
+
+### Bilinçli basitleştirmeler
+
+- Resteal ve 3-bet/fold için aralık verilmedi; ICM (t7), fold equity (t5) ve squeeze anlatılmadı.
+- 6 kişilik masa varsayıldı; 8–9 kişilik masa koltuk adları verilmedi.
+
+### Emin olunmayan noktalar
+
+- Cash açılış aralıklarının turnuvada derin stack'e "kabaca" aktarılması doğrulanmış bir turnuva aralığına dayanmıyor; bu yüzden kenardaki ve tartışmalı eller (UTG'de A9o, 22; BTN'de T7o, J5o) soru olarak kullanılmadı.
+- t26'nın cevabı (düşük SPR'de top pair ile call) spotun notundaki aralığa ve gerekçesine dayanır; board'lu aralık equity'si betikte hesaplanmadı.
+- "Pozisyon dışında 3-bet genellikle daha büyük tutulur" ve "orta stack'te değişen çoğunlukla aralığın içeriğidir" yaygın öğretim ilkeleridir; solver çıktısıyla doğrulanmadı.
+
+### Doğrulama (t3–t4)
+
+- 181 alıştırmadan 91'i `denetle.mts` ile denetlenir (t3 44, t4 47). Yeni türler: `basabasFold`, `oranYuzde`, `spr`, `flopTutma`; her biri için bozuk cevap testi `denetle.test.ts`'te. Ayrıca `toplam/carpim/bolum` sayı sorularına yuvarlama toleransı (en fazla 0,1) eklendi ve testle sabitlendi.
+- Girdiler (risk, pot, kalan stack'ler) senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.**
+- Kalan 90 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.

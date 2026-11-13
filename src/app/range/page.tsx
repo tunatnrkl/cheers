@@ -4,7 +4,9 @@ import { RangeTool } from "./RangeTool";
 export const metadata: Metadata = {
   title: "Range Matrisi",
   description:
-    "13x13 el matrisi ile pozisyona göre açılış aralıkları ve kısa stack push/fold aralıkları. Kendi range'ini işaretle, yapay zekadan değerlendirme iste.",
+    process.env.NEXT_PUBLIC_STATIC === "1"
+      ? "13x13 el matrisi ile pozisyona göre açılış aralıkları ve kısa stack push/fold aralıkları. Kendi range'ini işaretle, referans aralıkla karşılaştır."
+      : "13x13 el matrisi ile pozisyona göre açılış aralıkları ve kısa stack push/fold aralıkları. Kendi range'ini işaretle, yapay zekadan değerlendirme iste.",
 };
 
 export default function Page() {
