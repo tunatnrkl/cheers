@@ -98,3 +98,13 @@ Ajan betiksiz bütün sayı sorularını ve 16 betikli soruyu kendisi çözdü, 
 ## 2026-11-13 · Kapı F: turnuva t1–t2 · DÜZELT → düzeltildi (ONAY sayılır)
 
 Ajan betiksiz soruların hepsini okudu ve 20'den fazla betikli soruyu kendisi hesapladı; olgu ve aritmetik hatası yok (format ayrımları, BB ante ve klasik ante, M oranı, çok oyunculu all-in'de risk, ICM formülsüz sezgi). Düzeltilenler: kısa stack ile push/fold sınırı sözlükle uyumlu hâle getirildi; "Rebuy / re-entry" tanımı tutarlı yazıldı; "puan" (yüzde puanı) tanımlandı; bağlamsız bir soru ve eksik gerekçeli bir seçenek düzeltildi; denetim betiğinin sayı okuyucusu Türkçe binlik yazımını doğru okuyor. Stack bölgeleri (40/20 BB) müfredat varsayımı olarak yazılı.
+
+## 2026-11-13 · Kapı C: alıştırma ekranı ve koç penceresi · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan derlenmiş sitede 7 ekran boyutunda kurulumu ve masayı ölçtü (kayma yok, taşma yok, aksiyon butonları ve hero kartları görünür); 11 spotu kendisi oynadı (6'sında bet/raise) ve her karar anında metin, öznitelikler, depolar, window globalleri ve React durumunda rakip kartı aradı: el bitmeden yok. Animasyon sırası, hız ayarı ve "Atla", koç penceresinin küçült/geri aç davranışı, kural tabanlı pot odds yanıtı (4 durum elle hesaplandı), klavye ve odak, eski bağlantılar ve ara kartı doğrulandı.
+
+Düzeltilenler: spotun seçeneklerine eşleşmeyen ilk hamle artık ilerleme kaydına doğru yazılmıyor (c17'de Raise 10 → correct:false, testli); "Hata" sonrası son rakip aksiyonu satırda görünüyor; tahmini kararlar görünür "Tahmini" rozetiyle; boyut kısayolları ve oturum özeti butonu ≥ 44 px; spotun kendi boyutu kısayolla seçilince yuvarlanmıyor. Koordinatör statik derlemede 7 boyutu yeniden ölçtü: kayma 0, butonlar görünür, konsol hatası 0; diğer sayfalar kayıyor.
+
+Uygulayıcı kararları kabul edildi; **brif sapması:** kurulum ekranına brifte olmayan "Açılış" filtresi eklendi (119 spot ilk giriş kararı, başka seçeneğe girmiyor). "Limp" filtresi veride karşılığı olmadığı için 0 sayısıyla devre dışı.
+
+Açık kalan (engellemeyen): 360x640'ta koç açıkken pencere hero kartlarını ve board'u örtüyor (aksiyon butonlarını örtmüyor); 18+ satırı dar ekranda koç açıkken pencerenin altında kalıyor. "Şerefe!" kutlaması henüz bağlı değil (ayrı iş kolu).
