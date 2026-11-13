@@ -28,7 +28,7 @@ export type SpotTanimi = {
  * kosulluSec, acilisCoklu, acilisEsleme, aralikKapsar, aralikYuzde, gerekenEquity, equityAraliga, gerekliPay,
  * antePot, mOrani, bbErime, ortalamaStack, odul, bolge (turnuva; ante türü "bb" ya da "klasik"),
  * basabasFold, oranYuzde, spr, flopTutma; cash c7–c8: blokerKombo, outs, kazandiranKart (öğretim örneği), tutma,
- * tutmaKart, equityEle (öğretim örneği), impliedBasabas, spotFiyat.
+ * tutmaKart, equityEle (öğretim örneği), impliedBasabas, spotFiyat; cash c9: boardDoku, boardSec, boardDokuEsleme, boyutEsleme.
  */
 export type Denetim = { tur: string; [alan: string]: unknown };
 

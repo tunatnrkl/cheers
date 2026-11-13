@@ -8,6 +8,8 @@
 // M oranı, blind artışında BB erimesi, ortalama stack, ödül payları) girdileri senaryodan elle girilerek yeniden yapılır.
 // Cash c7–c8: bloker kombinasyonları, outs ve kazandıran kartlar (kartlar tek tek denenir), 2 ve 4 kuralı ile kesin
 // tutma olasılığı, el ele equity (öğretim örneği), implied odds başabaşı ve o-… spotlarının fiyatı.
+// Cash c9: board dokusu (monoton, çiftli, floş ve kent çekişi; c9-d1'deki tanımlarla) ve bahis boyutunun pota oranından
+// başabaş fold oranı ile gereken equity eşleştirmeleri.
 // Alıştırmadaki `denetim` alanı neyin hesaplanacağını söyler; cevap `dogru` ile karşılaştırılır.
 //
 // Çalıştırma: node scripts/mufredat/denetle.mts   (hata varsa 1 ile çıkar)
@@ -247,6 +249,50 @@ export function equityAraliga(el: string, rakip: string[], deneme = 40000, tohum
     puan += x > y ? 1 : x === y ? 0.5 : 0;
   }
   return (puan / deneme) * 100;
+}
+
+// ── Board dokusu (cash c9). Tanımlar c9-d1 anlatımıyla aynıdır; yalnızca flop (3 kart) sınıflanır. ──
+// Monoton: üç kart aynı renk. Çiftli: iki kart aynı değerde. Floş çekişi: tam iki kart aynı renk.
+// Kent çekişi: bazı iki kartlık eller bu board'da kent ya da en az 8 out'luk kent çekişi yapabiliyor
+// (değerler üzerinden tek tek denenir; yalnızca turn + river ile oluşan backdoor çekişler sayılmaz).
+// Sınıf: Monoton > Çiftli > Kuru (gökkuşağı ve kent çekişi yok) / Islak (floş çekişi ve kent çekişi var) / Ara (ikisi arası).
+const KENT_PENCERE = Array.from({ length: 10 }, (_, i) => Array.from({ length: 5 }, (_, k) => (i - 1 + k + 13) % 13));
+// i = 0 → A-2-3-4-5 (A = 12, 2 = 0); i = 9 → T-J-Q-K-A
+const kentVar = (s: Set<number>) => KENT_PENCERE.some((w) => w.every((r) => s.has(r)));
+export type BoardDokusu = { monoton: boolean; ciftli: boolean; floşCekisi: boolean; kentCekisi: boolean; kural: boolean; sinif: "Monoton" | "Çiftli" | "Kuru" | "Islak" | "Ara" };
+export function boardDokusu(metin: string): BoardDokusu {
+  const k = kartlar(metin);
+  benzersiz(k, "board");
+  if (k.length !== 3) throw new Error("board dokusu yalnızca flop (3 kart) için sınıflanır");
+  const deg = k.map((c) => c >> 2), renk = k.map((c) => c & 3);
+  const renkSayisi = new Set(renk).size;
+  const monoton = renkSayisi === 1, ciftli = new Set(deg).size < 3, floşCekisi = renkSayisi === 2;
+  let kentCekisi = false;
+  for (let a = 0; a < 13 && !kentCekisi; a++)
+    for (let b = a; b < 13 && !kentCekisi; b++) {
+      const s = new Set([...deg, a, b]);
+      if (kentVar(s)) kentCekisi = true;
+      else if (Array.from({ length: 13 }, (_, x) => x).filter((x) => kentVar(new Set([...s, x]))).length >= 2) kentCekisi = true;
+    }
+  // Derste verilen pratik kural: as dışındaki iki farklı değer arasında en fazla 3 fark.
+  const asDisi = [...new Set(deg.filter((d) => d !== 12))];
+  const kural = asDisi.some((x, i) => asDisi.some((y, j) => j > i && Math.abs(x - y) <= 3));
+  const sinif = monoton ? "Monoton" : ciftli ? "Çiftli" : renkSayisi === 3 && !kentCekisi ? "Kuru" : floşCekisi && kentCekisi ? "Islak" : "Ara";
+  return { monoton, ciftli, floşCekisi, kentCekisi, kural, sinif };
+}
+/** Soruda kullanılacak board: kent çekişi değerlerle tek tek bulunur ve dersteki pratik kuralla aynı çıkmalıdır. */
+function netBoard(metin: string): BoardDokusu {
+  const b = boardDokusu(metin);
+  if (b.kural !== b.kentCekisi) throw new Error(`${metin}: pratik kural (${b.kural}) ile sayım (${b.kentCekisi}) farklı; bu board tanımla net ayrılmıyor`);
+  return b;
+}
+const BOARD_OZELLIK = ["sinif", "monoton", "ciftli", "floşCekisi", "kentCekisi"] as const;
+/** "1/3 pot" → 1/3, "Pot kadar" → 1 */
+function potKesri(s: string): number {
+  if (/^pot kadar/i.test(s.trim())) return 1;
+  const m = s.match(/^(\d+)\/(\d+) pot/);
+  if (!m) throw new Error(`boyut okunamadı: "${s}"`);
+  return Number(m[1]) / Number(m[2]);
 }
 
 /**
@@ -863,6 +909,47 @@ export function alistirmaDenetle(a: Al): string[] {
         const r = (call / (h.potBB + call)) * 100;
         if (Math.abs(r - Number(d.gereken)) > 0.06) hata(`${d.spot}: gereken equity %${r.toFixed(1)}, metinde %${d.gereken}`);
         if (a.tip === "spot" && a.secenekler && JSON.stringify(a.secenekler) !== JSON.stringify(h.options)) hata(`${d.spot}: seçenekler spotla aynı değil`);
+        break;
+      }
+      // ── Cash c9: board dokusu ve bahis boyutu ──
+      case "boardDoku": {
+        // ozellik: sinif | monoton | ciftli | floşCekisi | kentCekisi. Seçmeli: seçenek metni sınıf adıyla başlar.
+        // Doğru/yanlış: iddia (sınıf adı ya da true/false) hesaplananla aynıysa ifade doğrudur.
+        const oz = (d.ozellik as string | undefined) ?? "sinif";
+        if (!(BOARD_OZELLIK as readonly string[]).includes(oz)) throw new Error(`bilinmeyen board özelliği "${oz}"`);
+        gorunurMu(a, [d.board as string]);
+        const b = netBoard(d.board as string);
+        const r = b[oz as keyof BoardDokusu];
+        if (oz === "sinif" && r === "Ara" && !("iddia" in d)) throw new Error(`${d.board} kuru ya da ıslak diye net ayrılmıyor (ara)`);
+        if ("iddia" in d) iddiaDY(r === d.iddia);
+        else tekCevap((i) => String(sec[i]).startsWith(String(r)), `${d.board}: ${oz} = ${r}`);
+        break;
+      }
+      case "boardSec": {
+        // Seçenekler board; ozellik değeri `deger` olan TEK board doğru cevaptır.
+        const oz = (d.ozellik as string | undefined) ?? "sinif";
+        if (!(BOARD_OZELLIK as readonly string[]).includes(oz)) throw new Error(`bilinmeyen board özelliği "${oz}"`);
+        const dokular = sec.map((x) => netBoard(String(x)));
+        tekCevap((i) => dokular[i][oz as keyof BoardDokusu] === d.deger, `${oz} = ${d.deger}`);
+        break;
+      }
+      case "boardDokuEsleme": {
+        for (const [board, ad] of sec as [string, string][]) {
+          const b = netBoard(board);
+          if (b.sinif === "Ara") hata(`${board} net bir sınıfa girmiyor (ara)`);
+          else if (b.sinif !== ad) hata(`${board}: hesaplanan ${b.sinif}, veride ${ad}`);
+        }
+        break;
+      }
+      case "boyutEsleme": {
+        // Eşleştirme: sol "1/3 pot" gibi boyut, sağ yüzde. formul "basabas": b / (1 + b) (blöfün başabaş fold oranı);
+        // "gereken": b / (1 + 2b) (call edenin gereken equity'si). Sağdaki değer en fazla 0,06 puan sapabilir.
+        for (const [sol, sag] of sec as [string, string][]) {
+          const b = potKesri(sol);
+          const r = (d.formul === "basabas" ? b / (1 + b) : d.formul === "gereken" ? b / (1 + 2 * b) : NaN) * 100;
+          if (Number.isNaN(r)) throw new Error(`boyutEsleme formülü "basabas" ya da "gereken" olmalı`);
+          if (Math.abs(trSayi(sag) - r) > 0.06) hata(`${sol}: hesaplanan %${r.toFixed(2)}, veride ${sag}`);
+        }
         break;
       }
       default:

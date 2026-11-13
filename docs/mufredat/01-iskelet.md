@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 96 ders, 1075 alıştırma.
+**Dolu:** 104 ders, 1161 alıştırma.
 
 ## Cash pisti
 
@@ -180,14 +180,14 @@ Board dokusu, range avantajı ve c-bet kararları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c9-d1` Board dokusu | ders | Kuru, ıslak, paired ve monotone board'ları tanır. | c8-k, o1-d5 |
-| `c9-d2` Range avantajı ve nut avantajı | ders | Verilen board'un açana mı savunana mı daha çok yaradığını değerlendirir. | c9-d1, c5-d3, c6-d2 |
-| `c9-d3` C-bet: ne zaman | ders | Range avantajı ve board dokusuna göre c-bet ya da check seçer. | c9-d2 |
-| `c9-d4` C-bet boyutu | ders | Kuru board'da küçük, ıslak board'da daha büyük boyutun gerekçesini açıklar. | c9-d3 |
-| `c9-d5` C-bet'e karşı savunma | ders | Fiyat ve el gücüne göre fold, call ya da raise seçer. | c9-d4, c8-d4 |
-| `c9-d6` Pozisyonun postflop değeri | ders | Aynı elin IP ve OOP oynanışındaki farkı açıklar. | c9-d5, o3-d3 |
-| `c9-k` Kontrol: Flop: board ve c-bet | kontrol | "Flop: board ve c-bet" ünitesinin kazanımlarını karışık sorularda uygular. | c9-d6 |
-| `c9-r` Tekrar: Flop: board ve c-bet | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c9-k |
+| `c9-d1` Board dokusu (11 alıştırma) | ders | Kuru, ıslak, paired ve monotone board'ları tanır. | c8-k, o1-d5 |
+| `c9-d2` Range avantajı ve nut avantajı (11 alıştırma) | ders | Verilen board'un açana mı savunana mı daha çok yaradığını değerlendirir. | c9-d1, c5-d3, c6-d2 |
+| `c9-d3` C-bet: ne zaman (11 alıştırma) | ders | Range avantajı ve board dokusuna göre c-bet ya da check seçer. | c9-d2 |
+| `c9-d4` C-bet boyutu (11 alıştırma) | ders | Kuru board'da küçük, ıslak board'da daha büyük boyutun gerekçesini açıklar. | c9-d3 |
+| `c9-d5` C-bet'e karşı savunma (11 alıştırma) | ders | Fiyat ve el gücüne göre fold, call ya da raise seçer. | c9-d4, c8-d4 |
+| `c9-d6` Pozisyonun postflop değeri (11 alıştırma) | ders | Aynı elin IP ve OOP oynanışındaki farkı açıklar. | c9-d5, o3-d3 |
+| `c9-k` Kontrol: Flop: board ve c-bet (12 alıştırma) | kontrol | "Flop: board ve c-bet" ünitesinin kazanımlarını karışık sorularda uygular. | c9-d6 |
+| `c9-r` Tekrar: Flop: board ve c-bet (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c9-k |
 
 ### c10 · Value ve blöf (seviye 7)
 

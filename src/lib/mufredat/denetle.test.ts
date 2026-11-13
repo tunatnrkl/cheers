@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import veri from "@/data/mufredat.json";
 import { HANDS } from "@/data/hands";
-import { acilisDurumu, alistirmaDenetle, denetle, sayiOku } from "../../../scripts/mufredat/denetle.mts";
+import { acilisDurumu, alistirmaDenetle, boardDokusu, denetle, sayiOku } from "../../../scripts/mufredat/denetle.mts";
 
 type Al = Parameters<typeof alistirmaDenetle>[0];
 const m = veri as unknown as Parameters<typeof denetle>[0];
@@ -317,5 +317,62 @@ describe("cash c7–c8 hesapları (bloker, outs, 2 ve 4 kuralı, equity, implied
     expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45.6 } }).join()).toMatch(/gereken equity %45\.4/);
     expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45 } }).join()).toMatch(/gereken equity %45\.4/);
     expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, spot: "o-yok" } }).join()).toMatch(/spot yok/);
+  });
+});
+
+describe("cash c9 hesapları (board dokusu, bahis boyutu)", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  const s = (soru: string, secenekler: string[], dogru: number, denetim: Al["denetim"]): Al => ({ ...temel, tip: "secmeli", soru, secenekler, dogru, denetim });
+  const AILE = ["Kuru", "Islak", "Çiftli", "Monoton"];
+
+  it("board dokusu c9-d1'deki tanımlarla sınıflanır", () => {
+    expect(boardDokusu("K♠ 7♦ 2♣").sinif).toBe("Kuru");
+    expect(boardDokusu("J♥ T♥ 8♣").sinif).toBe("Islak");
+    expect(boardDokusu("Q♦ Q♣ 5♥").sinif).toBe("Çiftli");
+    expect(boardDokusu("9♠ 6♠ 2♠").sinif).toBe("Monoton");
+    // Yalnızca floş çekişi ya da yalnızca kent çekişi olan board ara sınıfta kalır.
+    expect(boardDokusu("K♥ 9♥ 3♣").sinif).toBe("Ara");
+    expect(boardDokusu("T♦ 6♠ 3♥").sinif).toBe("Ara");
+    // Kent çekişi değerler tek tek denenerek bulunur: 5-4-2'de (A-3 ya da 6-3 ile) var, K-7-2'de yok.
+    expect(boardDokusu("5♠ 4♦ 2♣").kentCekisi).toBe(true);
+    expect(boardDokusu("K♠ 7♦ 2♣").kentCekisi).toBe(false);
+    // A-K-x'te yalnızca gutshot (T) mümkün: 8 out'luk kent çekişi yok.
+    expect(boardDokusu("A♠ K♦ 4♣").kentCekisi).toBe(false);
+    expect(() => boardDokusu("K♠ 7♦ 2♣ 3♥")).toThrow(/flop/);
+  });
+
+  it("yanlış sınıfı, ara board'u ve pratik kurala uymayan board'u yakalar", () => {
+    const a = s("Board: K♠ 7♦ 2♣.", AILE, 0, { tur: "boardDoku", board: "K♠ 7♦ 2♣" });
+    expect(alistirmaDenetle(a)).toEqual([]);
+    expect(alistirmaDenetle({ ...a, dogru: 1 }).join()).toMatch(/sinif = Kuru/);
+    // Ara board kuru/ıslak diye sorulamaz.
+    expect(alistirmaDenetle(s("Board: K♥ 9♥ 3♣.", AILE, 1, { tur: "boardDoku", board: "K♥ 9♥ 3♣" })).join()).toMatch(/net ayrılmıyor/);
+    // A-3-7: pratik kural "yok" der, sayım "var" der; böyle board sorulmaz.
+    expect(alistirmaDenetle(s("Board: A♣ 7♦ 3♠.", AILE, 0, { tur: "boardDoku", board: "A♣ 7♦ 3♠" })).join()).toMatch(/pratik kural/);
+    // Kart soruda görünmeli.
+    expect(alistirmaDenetle(s("Bu board?", AILE, 0, { tur: "boardDoku", board: "K♠ 7♦ 2♣" })).join()).toMatch(/görünmüyor/);
+    const dy: Al = { ...temel, tip: "dogruYanlis", soru: "Board: T♦ 6♠ 3♥ kurudur.", dogru: true, denetim: { tur: "boardDoku", board: "T♦ 6♠ 3♥", iddia: "Kuru" } } as Al;
+    expect(alistirmaDenetle(dy).join()).toMatch(/hesaplanan cevap false/);
+    const f: Al = { ...temel, tip: "dogruYanlis", soru: "Board: K♥ 9♥ 3♣", dogru: true, denetim: { tur: "boardDoku", board: "K♥ 9♥ 3♣", ozellik: "floşCekisi", iddia: true } } as Al;
+    expect(alistirmaDenetle(f)).toEqual([]);
+    expect(alistirmaDenetle({ ...f, denetim: { ...f.denetim!, ozellik: "kentCekisi" } }).join()).toMatch(/hesaplanan cevap false/);
+  });
+
+  it("board seçme ve eşleştirme sorularında tek doğru cevap aranır", () => {
+    const b = s("Hangisi kuru?", ["K♠ 7♦ 2♣", "J♥ T♥ 8♣", "8♠ 7♠ 6♦"], 0, { tur: "boardSec", ozellik: "sinif", deger: "Kuru" });
+    expect(alistirmaDenetle(b)).toEqual([]);
+    expect(alistirmaDenetle({ ...b, dogru: 1 }).join()).toMatch(/hesaplanan doğru seçenek \[0\]/);
+    // İki kuru seçenek: tek cevap yok.
+    expect(alistirmaDenetle({ ...b, secenekler: ["K♠ 7♦ 2♣", "Q♠ 8♦ 3♣", "8♠ 7♠ 6♦"] }).join()).toMatch(/\[0,1\]/);
+    const e: Al = { ...temel, tip: "eslestirme", secenekler: [["Q♠ 8♦ 3♣", "Kuru"], ["9♥ 8♥ 7♣", "Islak"], ["7♦ 7♠ 2♣", "Monoton"]], denetim: { tur: "boardDokuEsleme" } } as Al;
+    expect(alistirmaDenetle(e).join()).toMatch(/7♦ 7♠ 2♣: hesaplanan Çiftli/);
+  });
+
+  it("boyut eşleştirmesi: başabaş fold B / (P + B), gereken equity B / (P + 2B)", () => {
+    const e: Al = { ...temel, tip: "eslestirme", secenekler: [["1/3 pot", "%25"], ["1/2 pot", "%33,3"], ["2/3 pot", "%40"], ["Pot kadar", "%50"]], denetim: { tur: "boyutEsleme", formul: "basabas" } } as Al;
+    expect(alistirmaDenetle(e)).toEqual([]);
+    // Aynı değerler gereken equity formülüyle tutmaz (1/3 pot → %20).
+    expect(alistirmaDenetle({ ...e, denetim: { tur: "boyutEsleme", formul: "gereken" } }).join()).toMatch(/1\/3 pot: hesaplanan %20/);
+    expect(alistirmaDenetle({ ...e, secenekler: [["1/2 pot", "%33"]] } as Al).join()).toMatch(/hesaplanan %33\.33/);
   });
 });

@@ -82,6 +82,7 @@ export const GLOSSARY: Term[] = [
   t("aksiyon", "cold-call", "Cold call", "Pota henüz para koymamışken bir raise'i görmek.", ["cold-call"]),
   t("aksiyon", "isolate", "İzolasyon", "Limp eden zayıf oyuncuyla baş başa kalmak için yapılan raise.", ["isolate", "iso-raise", "izole"]),
   t("aksiyon", "c-bet", "C-bet (continuation bet)", "Preflop'ta raise yapan oyuncunun flop'ta bahse devam etmesi.", ["cbet", "continuation bet", "devam bahsi"]),
+  t("aksiyon", "agresor", "Agresör", "Bir sokakta son bet ya da raise'i yapan oyuncu. Preflop agresörü, preflop'ta son raise'i yapandır.", ["aggressor"]),
   t("aksiyon", "donk-bet", "Donk bet", "Önceki turda agresör olmayan oyuncunun, agresöre sıra gelmeden öne bahis yapması.", ["donk"]),
   t("aksiyon", "check-raise", "Check-raise", "Önce check deyip rakip bahis yapınca raise etmek. Güç gösterir; value ve blöf için kullanılır."),
   t("aksiyon", "check-call", "Check-call", "Check deyip rakibin bahsini görmek."),
@@ -130,8 +131,10 @@ export const GLOSSARY: Term[] = [
   t("el", "islak-board", "Islak board", "Kent ve floş çekişlerine açık, bağlantılı board (ör. J-T-8 iki aynı renk).", ["wet board"]),
   t("el", "paired-board", "Çiftli board", "Üzerinde aynı değerden iki kart bulunan board.", ["paired board"]),
   t("el", "monoton", "Monoton board", "Üç kartı da aynı renkten olan flop.", ["monotone"]),
+  t("el", "board-dokusu", "Board dokusu", "Flop kartlarının birbiriyle ilişkisi: aynı değerde kart olup olmadığı, renklerin dağılımı ve kartların kent çekişine ne kadar açık olduğu. Kuru, ıslak, çiftli ve monoton diye sınıflanır.", ["board texture"]),
+  t("el", "gokkusagi-board", "Gökkuşağı board", "Üç kartı da farklı renkten olan flop. Flop'ta floş çekişi mümkün değildir; yalnızca turn ve river'ın birlikte gelmesiyle (backdoor) floş olabilir.", ["rainbow"]),
   t("el", "blocker", "Blocker", "Elindeki kartın, rakibin belirli elleri tutma olasılığını azaltması. Ör. A♠ sende ise rakipte nut floş olamaz."),
-  t("el", "showdown-value", "Showdown değeri", "Bahse gerek kalmadan, açılışta kazanabilecek kadar güçlü ama büyük pot oynamak istemeyen el.", ["showdown value"]),
+  t("el", "showdown-value", "Showdown değeri", "Bahis yapmadan showdown'a gidildiğinde kazanabilecek kadar güçlü, ama büyük bir pot oynamak istemeyeceğin orta güçte el.", ["showdown value"]),
 
   // Matematik
   t("matematik", "equity", "Equity", "Elin, kartlar sonuna kadar açılsa potu kazanma payı (yüzde olarak)."),
@@ -157,6 +160,7 @@ export const GLOSSARY: Term[] = [
   t("strateji", "thin-value", "İnce value", "Az farkla önde olduğun ellerle, daha kötüsünden küçük bir call almak için yapılan bahis.", ["thin value"]),
   t("strateji", "blof", "Blöf", "Daha iyi elleri fold ettirmek için zayıf elle yapılan bahis.", ["bluff"]),
   t("strateji", "semi-blof", "Semi-blöf", "Şu an geride ama gelişebilecek bir çekişle yapılan blöf. İki yoldan kazanır: fold ya da tutma.", ["semi-bluff", "yarı blöf"]),
+  t("strateji", "saf-blof", "Saf blöf", "Görülürse neredeyse hiç kazanamayacak, sonraki kartlarda gelişme şansı da çok az olan elle yapılan blöf. Yalnızca rakip fold ettiğinde kazanır.", ["pure bluff"]),
   t("strateji", "bluff-catcher", "Bluff catcher", "Yalnızca rakibin blöflerini yenebilen orta güçte el."),
   t("strateji", "polarize", "Polarize aralık", "Çok güçlü eller ve blöflerden oluşan, ortası boş aralık. Büyük bahislerle temsil edilir.", ["polarize", "polarized"]),
   t("strateji", "lineer", "Lineer aralık", "En iyi ellerden başlayıp aşağı doğru kesintisiz inen aralık (blöf içermez).", ["linear", "merged"]),
