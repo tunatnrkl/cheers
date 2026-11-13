@@ -25,9 +25,9 @@ export function KaldiginYer({ mufredat }: { mufredat: Mufredat }) {
     <section
       aria-labelledby="kaldigin-yer"
       aria-busy={!o}
-      className="grid gap-3 rounded-[18px] border border-line bg-surface px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-5"
+      className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 rounded-[18px] border border-line bg-surface px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:gap-x-5"
     >
-      <div className="flex min-w-0 items-center gap-3">
+      <div className="col-span-2 flex min-w-0 items-center gap-3 sm:col-span-1">
         <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-soft text-accent-text">
           <Simge ad="bayrak" boyut={20} />
         </span>
@@ -36,7 +36,7 @@ export function KaldiginYer({ mufredat }: { mufredat: Mufredat }) {
             {ust}
           </p>
           <p className="truncate font-bold text-ink">{baslik}</p>
-          {o?.ders?.unite && <p className="truncate text-sm text-muted">{o.ders.unite}</p>}
+          {o?.ders?.unite && !o.ders.baslik.includes(o.ders.unite) && <p className="truncate text-sm text-muted">{o.ders.unite}</p>}
         </div>
       </div>
 
@@ -53,12 +53,12 @@ export function KaldiginYer({ mufredat }: { mufredat: Mufredat }) {
       </p>
 
       {o ? (
-        <Link href={o.adres} className="btn justify-self-start sm:justify-self-end">
+        <Link href={o.adres} className="btn justify-self-end">
           {dugme}
           <Simge ad="ok" boyut={18} />
         </Link>
       ) : (
-        <span className="block min-h-11 w-36" aria-hidden="true" />
+        <span className="block min-h-11 w-36 justify-self-end" aria-hidden="true" />
       )}
     </section>
   );
