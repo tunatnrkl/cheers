@@ -79,3 +79,7 @@ Uygulayıcı kararları kabul edildi: seçeneklerde olmayan preflop hamlesi "hat
 Engellemeyen notlar: bölünen potta artan kuruş butonun solundaki ilk oyuncuya gitmeli (şu an SEATS sırası); heroNet BB ante'yi düşmüyor (replay.ts ile aynı model).
 
 Arayüz (C) için kabul ölçütleri: olaylar sırayla oynatılır, son rakip aksiyonu son `aksiyon` olayından türetilir, miktarlar sokakta toplamdır; arayüz ve koç isteği yalnızca `state` ve `olaylar` kullanır, `gizliDagitim`/`araliklar.ts` import edilmez; "Bu eli tekrar oyna" aynı kartları getirdiği için arayüz bunu açıkça söyler; tahmini kararlar "Tahmini değerlendirme" etiketiyle, özet ekranında "solver değildir" notu; hero fold edince çok oyunculu potta "el oynatılmadı" denir.
+
+## 2026-11-13 · Kapı D2: müfredat o3–o4 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan betiksiz soruların hepsini okudu, 13 betikli soruyu kendisi çözdü; cevap hatası yok. Düzeltilenler: "ante" ve "cash oyunları" ilk geçtikleri yerde tanımlandı; "erken pozisyondan girersen çoğunlukla pozisyon dışında kalırsın" yanılgısı düzeltildi (arkadaki HJ/CO/BTN'ye karşı OOP, blind'lere karşı IP; aynı iddianın o4-d5'teki eşi de); HJ'nin bazı kaynaklarda MP sayıldığı nota eklendi; domine tanımı daraltıldı ve iki cevaba açık soru (o4-d3/a4) düzeltildi; "multiway" metinde tanıtıldı. Testler yeşil; kapı koşuluna göre ONAY sayılır.
