@@ -4,7 +4,8 @@ import { HANDS, TOPICS, type Game, type Hand, type Street, type Topic } from "@/
 import { replay } from "@/lib/poker/replay";
 
 export type OyunFiltresi = "" | Game;
-export type SokakFiltresi = "" | Street;
+/** "postflop": flop, turn ya da river kararı (preflop dışındaki bütün spotlar). */
+export type SokakFiltresi = "" | Street | "postflop";
 /** Preflop aksiyon türü. "acilis": hero'dan önce herkes fold etti (ilk açılış). */
 export type PreflopTuru = "acilis" | "srp" | "3bet" | "4bet" | "squeeze" | "limp" | "iso" | "pushfold" | "callshove";
 export type PfFiltresi = "" | PreflopTuru;
@@ -39,6 +40,7 @@ export const PF_TURNUVA: PreflopTuru[] = ["pushfold", "callshove"];
 
 export const SOKAKLAR: { v: SokakFiltresi; l: string }[] = [
   { v: "preflop", l: "Preflop" },
+  { v: "postflop", l: "Postflop" },
   { v: "flop", l: "Flop" },
   { v: "turn", l: "Turn" },
   { v: "river", l: "River" },
@@ -102,7 +104,7 @@ export function pfOf(h: Hand): PreflopTuru {
 export function eslesir(h: Hand, f: Filtre): boolean {
   return (
     (!f.oyun || h.game === f.oyun) &&
-    (!f.sokak || h.street === f.sokak) &&
+    (!f.sokak || (f.sokak === "postflop" ? h.street !== "preflop" : h.street === f.sokak)) &&
     (!f.pf || pfOf(h) === f.pf) &&
     (!f.konu || h.topic === f.konu)
   );
@@ -134,7 +136,7 @@ export function filtreOku(p: { get(k: string): string | null }): Filtre {
   const konu = p.get("konu");
   return {
     oyun: oyun === "cash" || oyun === "turnuva" ? oyun : "",
-    sokak: sokak === "preflop" || sokak === "flop" || sokak === "turn" || sokak === "river" ? sokak : "",
+    sokak: sokak === "preflop" || sokak === "postflop" || sokak === "flop" || sokak === "turn" || sokak === "river" ? sokak : "",
     pf: pf && pf in PF_ETIKET ? (pf as PreflopTuru) : "",
     konu: konu && konu in TOPICS ? (konu as Topic) : "",
   };

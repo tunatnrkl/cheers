@@ -25,7 +25,10 @@ const GROUPS = [
     items: [
       ["/araclar", "Hesap makineleri", "Pot odds, outs, SPR ve ICM"],
       ["/range", "Range matrisi", "Pozisyona göre açılış ve push aralıkları"],
-      ["/yapay-zeka", "Kendi elini sor", "Oynadığın bir eli anlat, yapay zekadan değerlendirme al"],
+      // Statik sürümde yapay zeka yok: koç alıştırmada hazır sorularla açıklar
+      process.env.NEXT_PUBLIC_STATIC === "1"
+        ? ["/alistirma", "Masada koça sor", "Alıştırmada “Neden?”e dokun; koç kararın gerekçesini kısaca anlatır"]
+        : ["/yapay-zeka", "Kendi elini sor", "Oynadığın bir eli anlat, yapay zekadan değerlendirme al"],
     ],
   },
   {
