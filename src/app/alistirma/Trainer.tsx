@@ -114,6 +114,32 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
     return () => ro.disconnect();
   }, [mod, hand]);
 
+  // Dar ekranda koç penceresi açıkken masa yukarı kayar: masa alanının altında pencere kadar boşluk bırakılır
+  const [kocBosluk, setKocBosluk] = useState(0);
+  const masaKolonRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const pencere = kokRef.current?.querySelector<HTMLElement>(".koc-pencere");
+    if (!pencere) return;
+    const olc = () => {
+      const dar = matchMedia("(max-width: 1023px)").matches;
+      const h = pencere.hidden ? 0 : pencere.getBoundingClientRect().height;
+      // Masaya en az ~150 px kalır (çok kısa ekranda pencere masanın altını örtebilir)
+      const alan = masaKolonRef.current?.getBoundingClientRect().height ?? 0;
+      setKocBosluk(dar && h ? Math.max(0, Math.min(Math.round(h) + 8, Math.round(alan) - 150)) : 0);
+    };
+    olc();
+    const ro = new ResizeObserver(olc);
+    ro.observe(pencere);
+    const mo = new MutationObserver(olc);
+    mo.observe(pencere, { attributes: true, attributeFilter: ["hidden"] });
+    addEventListener("resize", olc);
+    return () => {
+      ro.disconnect();
+      mo.disconnect();
+      removeEventListener("resize", olc);
+    };
+  }, [mod, hand]);
+
   const pool = useMemo(() => havuz(filtre), [filtre]);
 
   const pickNext = useCallback(
@@ -329,7 +355,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
         </button>
       </>
     );
-  } else if (geri && (bitti || !sonRakip || geri.karar.kademe === "hata")) {
+  } else if (geri && (bitti || !sonRakip)) {
     const k = geri.karar;
     bilgi = (
       <>
@@ -349,11 +375,20 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
   } else if (sonRakip) {
     bilgi = (
       <>
-        <p className="min-w-0 flex-1 truncate font-semibold text-t-ink" aria-live="polite">
+        <p className="min-w-0 flex-1 truncate font-semibold text-t-ink" aria-live="polite" title={geri && hand ? geriBildirimCumlesi(geri.karar, hand, geri.ilk) : undefined}>
           {geri && (
-            <span className={`mr-2 font-extrabold ${KADEME_RENK[geri.karar.kademe]}`} title={geriBildirimCumlesi(geri.karar, hand!, geri.ilk)}>
-              {KADEME_IKON[geri.karar.kademe]} {KADEME_ETIKET[geri.karar.kademe]}
-              {geri.karar.tahmini ? "*" : ""}
+            <span className="mr-2">
+              <span className={`font-extrabold ${KADEME_RENK[geri.karar.kademe]}`}>
+                <span aria-hidden="true">{KADEME_IKON[geri.karar.kademe]} </span>
+                {KADEME_ETIKET[geri.karar.kademe]}
+              </span>
+              {geri.karar.tahmini && <span className="ml-1 rounded bg-t-panel-2 px-1.5 py-0.5 text-[11px] font-semibold text-t-muted">Tahmini</span>}
+              {geri.karar.kademe === "hata" && hand && (
+                <span className="ml-1.5 hidden font-normal text-t-ink/80 md:inline">{geriBildirimCumlesi(geri.karar, hand, geri.ilk)}</span>
+              )}
+              <span aria-hidden="true" className="ml-2 text-t-muted">
+                ·
+              </span>
             </span>
           )}
           {aksiyonCumlesi(sonRakip.koltuk, sonRakip.son)}
@@ -433,7 +468,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
               onClick={() => setPanel((p) => (p === "ozet" ? null : "ozet"))}
               disabled={!answers.length}
               aria-label={`Oturum özeti: ${answers.length} karar, doğruluk ${dogruluk ?? 0} yüzde`}
-              className="flex min-h-11 shrink-0 flex-col items-end justify-center rounded-xl px-2 leading-none tabular-nums hover:bg-t-panel-2 disabled:hover:bg-transparent"
+              className="flex min-h-11 min-w-11 shrink-0 flex-col items-end justify-center rounded-xl px-2 leading-none tabular-nums hover:bg-t-panel-2 disabled:hover:bg-transparent"
             >
               <span className="text-[15px] font-extrabold text-t-ink">{dogruluk === null ? "—" : `%${dogruluk}`}</span>
               <span className="text-[11px] font-semibold text-t-muted">
@@ -488,7 +523,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
 
           {/* ── Masa alanı ── */}
           <div className="relative grid min-h-0 grid-cols-1 grid-rows-[minmax(0,1fr)] overflow-hidden lg:grid-cols-[minmax(0,1fr)_auto]">
-            <div className="relative flex min-h-0 min-w-0 flex-col" inert={showBreak || panel === "ozet"}>
+            <div ref={masaKolonRef} className="relative flex min-h-0 min-w-0 flex-col" style={kocBosluk ? { paddingBottom: kocBosluk } : undefined} inert={showBreak || panel === "ozet"}>
               <div className="masa-alan flex-1">
               {hand && gorunum && engine ? (
                 <Masa

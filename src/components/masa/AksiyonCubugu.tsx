@@ -50,8 +50,9 @@ export function AksiyonCubugu({ legal, aktif, ekKisayollar = [], onAksiyon, bilg
     setYazi(fmt(varsayilan));
   }, [varsayilan]);
 
-  function boyutSec(m: number) {
-    const v = boyutSikistir(m, legal);
+  /** Kaydırıcı ve elle giriş 0,5 BB'ye yuvarlanır; kısayoldan gelen değer olduğu gibi kalır. */
+  function boyutSec(m: number, kisayol = false) {
+    const v = kisayol && aralik ? Math.min(aralik.max, Math.max(aralik.min, m)) : boyutSikistir(m, legal);
     setBoyut(v);
     setYazi(fmt(v));
   }
@@ -91,7 +92,7 @@ export function AksiyonCubugu({ legal, aktif, ekKisayollar = [], onAksiyon, bilg
         artir();
       } else if (/^[1-9]$/.test(k) && kisayollar[Number(k) - 1]) {
         e.preventDefault();
-        boyutSec(kisayollar[Number(k) - 1].miktar);
+        boyutSec(kisayollar[Number(k) - 1].miktar, true);
       }
     }
     addEventListener("keydown", onKey);
@@ -120,9 +121,9 @@ export function AksiyonCubugu({ legal, aktif, ekKisayollar = [], onAksiyon, bilg
                       type="button"
                       disabled={!aktif}
                       aria-pressed={on}
-                      onClick={() => boyutSec(k.miktar)}
+                      onClick={() => boyutSec(k.miktar, true)}
                       title={`${k.etiket}: ${fmt(k.miktar)} BB${i < 9 ? ` (kısayol ${i + 1})` : ""}`}
-                      className={`relative flex min-h-11 shrink-0 flex-col items-center justify-center rounded-lg border px-2 text-[12px] leading-tight font-bold transition ${
+                      className={`relative flex min-h-11 min-w-11 shrink-0 flex-col items-center justify-center rounded-lg border px-2 text-[12px] leading-tight font-bold transition ${
                         on ? "border-t-accent bg-t-accent/15 text-t-ink" : "border-t-line bg-t-panel-2 text-t-muted hover:text-t-ink"
                       }`}
                     >
