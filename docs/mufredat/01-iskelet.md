@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 61 ders, 680 alıştırma.
+**Dolu:** 69 ders, 766 alıştırma.
 
 ## Cash pisti
 
@@ -285,14 +285,14 @@ BB cinsinden stack, M oranı, efektif stack ve turnuva aşamaları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t3-d1` Erken aşama planı | ders | Derin stack'te pozisyon ve el seçiminin önceliğini açıklar. | o4-k, t2-k, t1-k, o4-d4 |
-| `t3-d2` Turnuvada açılış aralıkları | ders | Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar. | t3-d1, o4-d2, o3-d4 |
-| `t3-d3` Turnuvada açılış boyutu | ders | 2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar. | t3-d2 |
-| `t3-d4` Ante'li potta çalma | ders | Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar. | t3-d3, t1-d4 |
-| `t3-d5` Ante ile BB savunması | ders | Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir. | t3-d4 |
-| `t3-d6` 3-bet'e kısa giriş | ders | 3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır. | t3-d5 |
-| `t3-k` Kontrol: Derin stack oyunu | kontrol | "Derin stack oyunu" ünitesinin kazanımlarını karışık sorularda uygular. | t3-d6 |
-| `t3-r` Tekrar: Derin stack oyunu | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t3-k |
+| `t3-d1` Erken aşama planı (11 alıştırma) | ders | Derin stack'te pozisyon ve el seçiminin önceliğini açıklar. | o4-k, t2-k, t1-k, o4-d4 |
+| `t3-d2` Turnuvada açılış aralıkları (11 alıştırma) | ders | Herkes fold ettiğinde pozisyona göre açılış aralığını matriste işaretler; geç pozisyonda aralığın genişlediğini açıklar. | t3-d1, o4-d2, o3-d4 |
+| `t3-d3` Turnuvada açılış boyutu (11 alıştırma) | ders | 2 ile 2,3 BB arası açılışın neden yaygın olduğunu açıklar. | t3-d2 |
+| `t3-d4` Ante'li potta çalma (11 alıştırma) | ders | Ante'nin çalma girişimini neden daha kârlı yaptığını hesaplar. | t3-d3, t1-d4 |
+| `t3-d5` Ante ile BB savunması (11 alıştırma) | ders | Equity'yi potun uzun vadedeki payı olarak tanır; küçük açılış ve ante karşısında call için gereken equity'yi hesaplar ve geniş savunmayı gerekçelendirir. | t3-d4 |
+| `t3-d6` 3-bet'e kısa giriş (11 alıştırma) | ders | 3-bet'i tanımlar; derin stack'te value ve blöf 3-bet'i ayırır. | t3-d5 |
+| `t3-k` Kontrol: Derin stack oyunu (12 alıştırma) | kontrol | "Derin stack oyunu" ünitesinin kazanımlarını karışık sorularda uygular. | t3-d6 |
+| `t3-r` Tekrar: Derin stack oyunu (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t3-k |
 
 ### t4 · Orta stack oyunu (seviye 4)
 

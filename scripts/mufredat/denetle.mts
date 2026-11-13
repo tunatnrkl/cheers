@@ -690,6 +690,42 @@ export function alistirmaDenetle(a: Al): string[] {
         sayiKarsila(r, "ödül", d.soru === "itmOrani" ? 0.05 : 0);
         break;
       }
+      // ── Turnuva strateji hesapları (t3–t4). Girdiler senaryodan elle girilir. ──
+      case "basabasFold": {
+        // Çalma ya da all-in'in, call edildiğinde hiç kazanmadığı varsayımıyla kâra geçmesi için rakiplerin
+        // fold etmesi gereken en az oran: risk / (risk + mevcut pot) × 100
+        const risk = Number(d.risk), pot = Number(d.pot);
+        sayiKarsila((risk / (risk + pot)) * 100, "başabaş fold oranı", 0.6);
+        break;
+      }
+      case "oranYuzde": {
+        // a / b × 100 (ör. açılışın stack'e oranı)
+        const [x, y] = (d.terimler as unknown[]).map(trSayi);
+        sayiKarsila((x / y) * 100, "oran", 0.06);
+        break;
+      }
+      case "spr": {
+        // SPR = efektif stack (preflop'tan sonra kalan) / flop'taki pot
+        const st = (d.stackler as unknown[]).map(trSayi);
+        sayiKarsila(Math.min(...st) / Number(d.pot), "SPR", 0.06);
+        break;
+      }
+      case "flopTutma": {
+        // Cep çiftiyle flop'ta en az bir aynı değerli kart (set ya da daha iyisi) gelme ihtimali:
+        // kalan 50 karttan bütün üçlü flop'lar tek tek sayılır.
+        const cep = d.cep as string;
+        if (!/^([2-9TJQKA])\1$/.test(cep)) throw new Error(`cep çifti "AA" biçiminde olmalı: ${cep}`);
+        const deger = "23456789TJQKA".indexOf(cep[0]);
+        const kalan = DESTE.filter((c) => c >> 2 !== deger || (c & 3) >= 2); // iki kart elde: aynı değerden 2 kart kalır
+        let tutan = 0, toplam = 0;
+        for (const f of kombinasyon(kalan, 3)) {
+          toplam++;
+          if (f.some((c) => c >> 2 === deger)) tutan++;
+        }
+        const r = d.sonuc === "oran" ? (toplam - tutan) / tutan : (tutan / toplam) * 100;
+        sayiKarsila(r, d.sonuc === "oran" ? "tutmama/tutma oranı" : "flop'ta tutma yüzdesi", 0.06);
+        break;
+      }
       default:
         hata(`bilinmeyen denetim türü "${d.tur}"`);
     }
