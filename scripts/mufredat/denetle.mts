@@ -430,7 +430,9 @@ export function alistirmaDenetle(a: Al): string[] {
         const r = d.tur === "toplam" ? t.reduce((x, y) => x + y, 0) : d.tur === "carpim" ? t.reduce((x, y) => x * y, 1) : t[0] / t[1];
         if ("iddia" in d) iddiaDY(esit(r, d.iddia as number));
         else if (a.tip === "sayi") {
-          if (!esit(r, dogru as number)) hata(`hesaplanan ${r}, veride ${dogru}`);
+          // Yuvarlanmış cevap (ör. "bir ondalık basamak") yalnızca tolerans ≤ 0,1 ile kabul edilir.
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (tol > 0.1 || Math.abs(r - (dogru as number)) > tol + 1e-9) hata(`hesaplanan ${r}, veride ${dogru} (tolerans ${tol})`);
         } else {
           const degerler = (d.degerler as number[] | undefined) ?? sec.map(sayiOku);
           tekCevap((i) => esit(degerler[i], r), `hesaplanan ${r}`);

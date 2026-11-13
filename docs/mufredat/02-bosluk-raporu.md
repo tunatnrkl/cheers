@@ -51,3 +51,20 @@ t1–t2'de spot kullanılmadı. Sitedeki turnuva spotları (t01–t26) push/fold
 ### Öğren ekranı: Türkçe binlik ayırıcı · Uygulandı (d81bfc5)
 
 `src/lib/ogren/alistirma.ts` içindeki `sayiCoz` artık "20.000" girdisini 20.000 okuyor (nokta yalnızca ve gruplar üçer haneliyse binlik; virgül ondalık). `denetle.mts`'teki `sayiOku` da aynı kurala getirildi ve testle sabitlendi; açık not kalmadı. t1–t2'de 1.000 ve üstü chip cevapları seçmeli yazılmıştı; bu hâliyle kalıyor.
+
+## t3 ve t4 (2026-11-13)
+
+### Sözlük
+
+Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistinde c5/c6 olmadığı için equity, pot odds, blind savunması, solver ve Monte Carlo t3'te yeniden tanımlandı ve bağlandı.
+
+### Tanım notları (uygulanmadı)
+
+- **İnisiyatif** (c-bet'e atıf) t4-d2'de de bağlanmadı; önceki öneri geçerli.
+- **Steal (blind çalma)** ve **Resteal** tanımları t3-d4 ve t4-d3 anlatımıyla uyumlu.
+
+### Spot ihtiyaçları
+
+- t3–t4'te 10 spot bağlantısı kullanıldı (t11, t12, t13, t14, t20, t24, t25, t26). Turnuvada **herkes fold ettiğinde açılış** spotu yalnızca iki tane (t12 boyut, t24 çalma); r-… açılış spotları cash ve 100 BB olduğu için turnuva pistine bağlanmadı. Derin stack'te pozisyona göre açılış (ör. UTG'de AQo, HJ'de KQo, CO'da A9o; seçenekler "Fold / 2,2 BB aç", BB ante 1 BB) için turnuva spotları faydalı olur.
+- **Turnuvaya özgü açılış aralığı yok:** ranges.json yalnızca cash açılış ve push (6/10/15 BB) aralıkları içeriyor. Ante'li ve 20–40 BB için ayrı aralıklar üretilirse t3-d2 ve t4-d1 sayısal hâle getirilebilir.
+- **Resteal / 3-bet all-in spotları:** yalnızca t11 var. 20–25 BB'de BB'den ve CO'dan resteal spotları (rakip açılış aralığı yazılı, rakip eli yok) t4-d3 için faydalı olur.

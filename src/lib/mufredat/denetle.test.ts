@@ -61,6 +61,11 @@ describe("müfredat olgu denetimi (scripts/mufredat/denetle.mts)", () => {
     expect(alistirmaDenetle({ ...a, dogru: 1 }).join()).toMatch(/hesaplanan 5.5/);
     const n: Al = { ...temel, tip: "sayi", soru: "Pot?", dogru: 34, denetim: { tur: "toplam", terimler: [6, 12, 12] } };
     expect(alistirmaDenetle(n).join()).toMatch(/hesaplanan 30/);
+    // Bölüm yuvarlaması: 17,8 / 2,2 = 8,09… → 8,1 (tolerans 0,1) kabul; tolerans 0 ya da 1 reddedilir.
+    const b: Al = { ...temel, tip: "sayi", soru: "", dogru: 8.1, tolerans: 0.1, denetim: { tur: "bolum", terimler: [17.8, 2.2] } } as Al;
+    expect(alistirmaDenetle(b)).toEqual([]);
+    expect(alistirmaDenetle({ ...b, tolerans: 0 } as Al).join()).toMatch(/hesaplanan 8.09/);
+    expect(alistirmaDenetle({ ...b, dogru: 9, tolerans: 1 } as Al).join()).toMatch(/tolerans 1/);
   });
 
   it("aynı kartın iki kez kullanılmasını ve soruda görünmeyen kartı yakalar", () => {
