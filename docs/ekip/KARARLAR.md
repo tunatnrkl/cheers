@@ -94,3 +94,7 @@ Ajan 737/737 test, typecheck ve statik derlemeyi kendisi çalıştırdı; derlen
 ## 2026-11-13 · Kapı D3: sözlük eklemeleri, c5 ve c6 · DÜZELT → düzeltildi (ONAY sayılır)
 
 Ajan betiksiz bütün sayı sorularını ve 16 betikli soruyu kendisi çözdü, ranges.json kombinasyonlarını saydı (UTG 202, HJ 256, CO 362, BTN 574, SB 506); aritmetik hatası yok. c34 (72o, BTN 3 BB) ve c35 (J4o, UTG) için tek cevap (fold) yerinde bulundu. Düzeltilenler: UTG offsuit aralığı anlatımı ranges.json ile uyumlu hâle getirildi; "solver" ve "Monte Carlo" ilk geçtikleri yerde tanımlandı ve sözlüğe eklendi (155 → 157); min-raise, equity eşiği ve "en ucuz savunma" genellemeleri yumuşatıldı; SB'de limp sorusunda (c04) limp "kabul edilebilir" ve "doğrulama gerekli" oldu; 3-bet öğretilmeden "Blind savunması" terimine bağlanılmadı.
+
+## 2026-11-13 · Kapı F: turnuva t1–t2 · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan betiksiz soruların hepsini okudu ve 20'den fazla betikli soruyu kendisi hesapladı; olgu ve aritmetik hatası yok (format ayrımları, BB ante ve klasik ante, M oranı, çok oyunculu all-in'de risk, ICM formülsüz sezgi). Düzeltilenler: kısa stack ile push/fold sınırı sözlükle uyumlu hâle getirildi; "Rebuy / re-entry" tanımı tutarlı yazıldı; "puan" (yüzde puanı) tanımlandı; bağlamsız bir soru ve eksik gerekçeli bir seçenek düzeltildi; denetim betiğinin sayı okuyucusu Türkçe binlik yazımını doğru okuyor. Stack bölgeleri (40/20 BB) müfredat varsayımı olarak yazılı.
