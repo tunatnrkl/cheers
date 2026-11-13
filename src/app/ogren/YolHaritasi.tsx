@@ -264,7 +264,7 @@ function Dugum({ k, d, pist, kay, durumu, simdiki, testle, acik, ac, eksik, test
           data-simdiki={simdiki || undefined}
           aria-expanded={acik}
           aria-controls={`balon-${d.kimlik}`}
-          aria-label={`${TUR_YAZI[d.tur]}: ${d.baslik}. ${yazi}${simdiki ? ", şu anki ders" : ""}`}
+          aria-label={`${d.baslik.startsWith(TUR_YAZI[d.tur]) ? "" : `${TUR_YAZI[d.tur]}: `}${d.baslik}. ${yazi}${simdiki ? ", şu anki ders" : ""}`}
           onClick={() => ac(!acik)}
         >
           <Simge ad={dugumSimgesi(durumu, d.tur)} boyut={d.tur === "tekrar" ? 22 : 28} />

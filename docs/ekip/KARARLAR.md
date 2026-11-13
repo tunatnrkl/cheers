@@ -83,3 +83,10 @@ Arayüz (C) için kabul ölçütleri: olaylar sırayla oynatılır, son rakip ak
 ## 2026-11-13 · Kapı D2: müfredat o3–o4 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
 
 Ajan betiksiz soruların hepsini okudu, 13 betikli soruyu kendisi çözdü; cevap hatası yok. Düzeltilenler: "ante" ve "cash oyunları" ilk geçtikleri yerde tanımlandı; "erken pozisyondan girersen çoğunlukla pozisyon dışında kalırsın" yanılgısı düzeltildi (arkadaki HJ/CO/BTN'ye karşı OOP, blind'lere karşı IP; aynı iddianın o4-d5'teki eşi de); HJ'nin bazı kaynaklarda MP sayıldığı nota eklendi; domine tanımı daraltıldı ve iki cevaba açık soru (o4-d3/a4) düzeltildi; "multiway" metinde tanıtıldı. Testler yeşil; kapı koşuluna göre ONAY sayılır.
+
+## 2026-11-13 · Kapı E: Öğren bölümü · ONAY
+
+Ajan 737/737 test, typecheck ve statik derlemeyi kendisi çalıştırdı; derlenmiş sitede gerçek veriyle o1-d1'i yalnız klavyeyle bitirdi (eşleştirme ve sıralama dahil). Yanlışlar sonda yeniden soruluyor; XP sabit (9 doğru × 10 + 20 = 110); ilerleme yenilemede duruyor; kilitli derse adresle girilemiyor. Eski `pd-…` anahtarlarına yazılmıyor; altı farklı bozuk kayıtta çökme yok (yedeklenip nötr not); içe aktarma geçersiz dosyaları reddediyor. Koyu temada kontrast ihlali yok; odak görünür; durumlar simge ve yazıyla da bildiriliyor; hareket azaltma ayarına uyuyor. Yasak ödül mekaniği ya da suçlayıcı dil yok.
+
+- Range matrisi hücreleri 390px'te 26,5px: WCAG 2.2 AA hedef boyutu (24px) karşılanıyor, ok tuşlarıyla gezilebiliyor; kabul edildi.
+- Engellemeyen notlar: kontrol/tekrar düğümünün erişilebilir adında tür adı iki kez okunuyordu (düzeltildi); site menüsündeki bazı bağlantılar 44px genişliğin altında (Öğren kapsamı dışı, 24px'i geçiyor); yarıda bırakılan dersin cevapları kaydedilmiyor (çıkışta onay soruluyor); açık tema kontrastı ve gerçek ekran okuyucu denenmedi.
