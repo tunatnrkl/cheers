@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 87 ders, 968 alıştırma.
+**Dolu:** 96 ders, 1075 alıştırma.
 
 ## Cash pisti
 
@@ -164,15 +164,15 @@ Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c8-d1` Equity nedir | ders | Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k, c6-d1 |
-| `c8-d2` Outs saymak | ders | Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar. | c8-d1, o1-d5 |
-| `c8-d3` 2 ve 4 kuralı | ders | Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir. | c8-d2 |
-| `c8-d4` Pot odds | ders | Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır. | c8-d3, c6-d1 |
-| `c8-d5` Implied ve reverse implied odds | ders | Sonradan kazanılacak ya da kaybedilecek chip'lerin kararı nasıl değiştirdiğini açıklar. | c8-d4 |
-| `c8-d6` SPR | ders | SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar. | c8-d5, o3-d5 |
-| `c8-k` Kontrol: Postflop matematiği | kontrol | "Postflop matematiği" ünitesinin kazanımlarını karışık sorularda uygular. | c8-d6 |
-| `c8-r` Tekrar: Postflop matematiği | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c8-k |
-| `c8-t` Seviye 5 testi | test | bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c8-k |
+| `c8-d1` Equity nedir (11 alıştırma) | ders | Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k, c6-d1 |
+| `c8-d2` Outs saymak (11 alıştırma) | ders | Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar. | c8-d1, o1-d5 |
+| `c8-d3` 2 ve 4 kuralı (11 alıştırma) | ders | Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir. | c8-d2 |
+| `c8-d4` Pot odds (11 alıştırma) | ders | Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır. | c8-d3, c6-d1 |
+| `c8-d5` Implied ve reverse implied odds (12 alıştırma) | ders | Sonradan kazanılacak ya da kaybedilecek chip'lerin kararı nasıl değiştirdiğini açıklar. | c8-d4 |
+| `c8-d6` SPR (11 alıştırma) | ders | SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar. | c8-d5, o3-d5 |
+| `c8-k` Kontrol: Postflop matematiği (12 alıştırma) | kontrol | "Postflop matematiği" ünitesinin kazanımlarını karışık sorularda uygular. | c8-d6 |
+| `c8-r` Tekrar: Postflop matematiği (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c8-k |
+| `c8-t` Seviye 5 testi (20 alıştırma) | test | bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c8-k |
 
 ### c9 · Flop: board ve c-bet (seviye 6)
 

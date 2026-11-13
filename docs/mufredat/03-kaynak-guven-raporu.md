@@ -216,3 +216,52 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Strateji iddiaları bu ünite
 - 181 alıştırmadan 91'i `denetle.mts` ile denetlenir (t3 44, t4 47). Yeni türler: `basabasFold`, `oranYuzde`, `spr`, `flopTutma`; her biri için bozuk cevap testi `denetle.test.ts`'te. Ayrıca `toplam/carpim/bolum` sayı sorularına yuvarlama toleransı (en fazla 0,1) eklendi ve testle sabitlendi.
 - Girdiler (risk, pot, kalan stack'ler) senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.**
 - Kalan 90 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+
+## c7 · 3-bet ve ötesi, c8 · Postflop matematiği
+
+Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; strateji iddiaları "genellikle / çoğunlukla / yaygın" diliyle yazıldı.
+
+### Kesin olan (kural ya da aritmetik)
+
+- 3-bet / 4-bet / 5-bet sayımı; squeeze tanımı (açılış + en az bir call + 3-bet); limp tanımı.
+- Bloker sayımı: elinde A varken AA 3, AK 12; A ve K varken AK 9, AA 3, KK 3 (desteden sayılır).
+- Gereken equity = call / (call öncesi pot + call); başabaş fold oranı = risk / (risk + pot) ("görülürse hiç kazanmama" varsayımıyla; kesin eşik olmadığı ayrıca soruldu).
+- Görülmeyen kart flop'ta 47, turn'de 46; kesin tutma ihtimali 1 − C(47 − outs, 2) / C(47, 2) (9 out %35,0; 15 out %54,1) ve outs / görülmeyen (9 / 46 ≈ %19,6; 9 / 47 ≈ %19,1).
+- Implied odds başabaşı X = call × (1 / eq − 1) − pot (tutunca hep kazanma, tutmayınca eli bırakma varsayımıyla türetilir).
+- SPR = kalan efektif stack / flop'taki pot (17,7; 5,3; 1,9; 1,7 örnekleri).
+
+### Yaklaşık (kendi hesabımız)
+
+- Preflop el ele equity'ler (öğretim örneği; Monte Carlo, 40.000 deneme, sabit tohum, ±1,5 puan): AA–KK ≈ %81, QQ–AKo ≈ %58, AKo–AJo ≈ %74, 88–AKo ≈ %56. Bilinen tablolarla uyumlu.
+- Aralığa karşı equity (Monte Carlo): J4o BTN'ye ≈ %35, T8s BTN'ye ≈ %41, QQ "AA, KK, AK" aralığına ≈ %40.
+- o-… spotlarının aralığa karşı equity'leri (%11, %27, %46, %51, %58, %62) spotların kendi gerekçelerinden (Kapı B) alındı; bu iş kolunda yeniden hesaplanmadı. Fiyatları betikle yeniden hesaplandı.
+
+### Genel kabul görmüş ilkeler (yumuşatılmış)
+
+- 3-bet'in iki amacı (value, fold equity); value/blöf dengesinin gerekçesi (oran verilmedi).
+- Lineer aralığın sık call eden rakiplere karşı ve call seçeneğinin zayıf olduğu yerde (SB) "sık öğretilen" biçim olması; polarize aralığın pozisyonda, call iyi bir seçenekken kullanılması.
+- Blöf 3-bet adayının özellikleri (oynanabilirlik, bloker, call için yetersizlik); A5s gibi suited küçük asların "sık seçildiği".
+- Boyutlar yaygın başlangıç noktası olarak: 3-bet IP ~3x, OOP ~4x; 4-bet 3-bet'in kabaca 2–2,5 katı; squeeze'de call eden başına bir açılış; iso-raise "basit bir başlangıç kuralı" olarak ~3 BB + limp başına 1 BB.
+- 3-bet'e karşı offsuit, domine olmaya yatkın ellerin genellikle fold edilmesi; QQ+ ve AK'nın çoğunlukla 4-bet ile devam etmesi.
+- 100 BB'de 4-bet/5-bet aralıklarının dar olması; 5-bet'in çoğunlukla all-in olması; stack derinleşince aralıkların genişleyebilmesi.
+- Call edenin aralığının çoğunlukla sınırlı olması (squeeze'in fazladan fold equity'si); limp aralığının çoğu zaman zayıf olması (istisnası yazılı).
+- Implied odds'u artıran/azaltan durumlar; ters implied odds'un domine eden ellerde görülmesi; SPR eşikleri (kabaca 3 ve altı, ör. 10 ve üstü).
+
+### Bilinçli basitleştirmeler
+
+- 3-bet, 4-bet ve squeeze aralıkları verilmedi (ranges.json'da yok). c7-d2'deki "AA, KK, QQ, AK + A5s–A2s" yalnızca kombinasyon saymak için bir öğretim örneğidir ve öyle yazıldı.
+- Implied odds başabaşında rakibin ne ödeyeceğine dair sayı verilmedi; set örneklerinde set'in her zaman kazandığı varsayımı açıkça yazıldı.
+- "Out" sayımı "floş ya da kent yapan kart" anlamında yapıldı; kirli outs yalnızca öğretim örneğinde (rakip eli açık) sayıldı.
+- Rake yok.
+
+### Emin olunmayan noktalar
+
+- Lineer 3-bet aralığının SB'de "sık öğretilen" biçim olduğu ve 4-bet boyutunun "kabaca 2–2,5 kat" olduğu yaygın öğretim ilkeleridir; solver çıktısıyla doğrulanmadı.
+- c11'in gerekçesindeki boyut kuralı ("normal açılışa limp başına yaklaşık 1 BB" → 3,5 BB) ile c7-d8'deki basit kural (3 BB + limp başına 1 BB → 4 BB) birebir aynı değil; spot boyutu (4 BB) ikincisiyle uyumlu. Bkz. 02.
+- Spot cevapları (c07–c13, c17, c18, c24, c38) spotların kendi gerekçelerine dayanır; board'lu aralık equity'si betikte hesaplanmadı.
+
+### Doğrulama (c7–c8)
+
+- 214 alıştırmadan 121'i `denetle.mts` ile denetlenir (c7 50, c8 71). Yeni türler: `blokerKombo`, `outs`, `kazandiranKart`, `tutma`, `tutmaKart`, `equityEle`, `impliedBasabas`, `spotFiyat`; her biri için bozuk cevap testi `denetle.test.ts`'te (bloker etkisini unutmak, çifte sayılan outs, kirli out'u saymak, turn'de 47'ye bölmek, 4 kuralını kesin sanmak, implied hesabında potu düşmemek, preflop Monte Carlo'yu sayı sorusunda kullanmak, spotla uyuşmayan fiyat).
+- Pot, boyut ve risk girdileri senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.** Outs, bloker ve el ele equity'de ise girdi yalnızca kartlardır; sayım betikte yapılır.
+- Kalan 93 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.

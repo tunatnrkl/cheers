@@ -140,6 +140,7 @@ export const GLOSSARY: Term[] = [
   t("matematik", "implied-odds", "Implied odds", "Elin tutarsa sonraki sokaklarda kazanmayı beklediğin ek chip'ler. Pot odds yetmediğinde call'u haklı çıkarabilir."),
   t("matematik", "reverse-implied-odds", "Ters implied odds", "Elin tutsa bile daha iyi bir ele karşı kaybedeceğin ek chip'ler. Domine edilen ellerde yüksektir.", ["reverse implied odds"]),
   t("matematik", "outs", "Outs", "Elini kazanan ele çevirecek, destede kalan kart sayısı.", ["out"]),
+  t("matematik", "kirli-out", "Kirli out", "Elini tamamlayan ama aynı anda rakibe daha iyi bir el verebilecek kart (ör. kentini tamamlayıp board'a üçüncü aynı renkli kartı getiren kart). Outs sayılırken düşülür ya da daha az değerli sayılır.", ["kirli outs", "dirty outs"]),
   t("matematik", "2-4-kurali", "2 ve 4 kuralı", "Hızlı hesap: flop'ta out × 4 (river'a kadar), turn'de out × 2 yaklaşık tutma yüzdesini verir.", ["4 ve 2 kuralı"]),
   t("matematik", "ev", "EV (beklenen değer)", "Bir kararın uzun vadedeki ortalama sonucu. Artı EV kararlar zamanla kazandırır, eksi EV kararlar kaybettirir.", ["beklenen değer", "+EV", "-EV"]),
   t("matematik", "spr", "SPR", "Stack-to-pot ratio: efektif stack'in flop'taki pota oranı. Düşük SPR'de top pair ile all-in rahatlaşır; yüksek SPR'de daha güçlü el gerekir.", ["stack-to-pot ratio"]),
