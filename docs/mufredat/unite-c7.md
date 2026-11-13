@@ -1,6 +1,6 @@
 # Ünite c7 · 3-bet ve ötesi: öz denetim
 
-Kaynak: `scripts/mufredat/icerik/c7.json`. 10 ders (8 normal + kontrol + tekrar), 107 alıştırma; hepsi `dogrulamaGerekli: false`. Cash varsayımları: 6-max, 100 BB, 2,5 BB açılış (SB'den 3 BB), rake yok.
+Kaynak: `scripts/mufredat/icerik/c7.json`. 10 ders (8 normal + kontrol + tekrar), 107 alıştırma; ikisi (c09 spotu: c7-d6/a11, c7-r/a7) `kabulEdilebilir` [Call] ve `dogrulamaGerekli: true`, geri kalanı `dogrulamaGerekli: false`. Cash varsayımları: 6-max, 100 BB, 2,5 BB açılış (SB'den 3 BB), rake yok.
 
 | Ders | Tür | Paragraf | Alıştırma | Tipler | Zorluk | Denetimli | Spot | Sözlük terimleri |
 |---|---|---|---|---|---|---|---|---|
@@ -49,3 +49,7 @@ Value, blöf ve fold equity c7-d1'de; cold call, lineer ve polarize aralık c7-d
 - c7-d2/a9: soru tek anlama indirildi ("Rakiplerinin senin 3-bet'lerine…").
 - c7-d2 anlatımı: SB örneği lineer aralığın tanımından çıkarıldı; "SB'de 3-bet aralığı geniştir ve lineere yakındır; yine de A5s gibi blöf adaylarını içerebilir" (c7-d3/a11 ve c7-k/a8 ile uyumlu).
 - c7-r/a8: BTN'nin fold ettiği yazıldı.
+
+## Tutarlılık düzeltmesi (2026-11-13, c9–c10 kapısı)
+
+- c7-d6/a11 ve c7-r/a7 (c09, QQ'da 4-bet ya da call): docs/ekip/2026-11-11/01-spot-denetimi.md, B-1 gereği call `kabulEdilebilir`, alıştırma `dogrulamaGerekli: true`; nedenlere "call da savunulabilir" eklendi. c10'da aynı türden spotlar (c23, c24, c26) böyle işaretli.

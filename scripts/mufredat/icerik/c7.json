@@ -1200,10 +1200,13 @@
           "4-bet 20 BB"
         ],
         "dogru": 2,
-        "neden": "Butonun CO'ya karşı 3-bet aralığı JJ, TT, AQ gibi elleri ve blöfleri de içerir; QQ bu aralığa karşı genellikle öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir rakibe karşı call daha güvenli olurdu.",
+        "neden": "Butonun CO'ya karşı 3-bet aralığı JJ, TT, AQ gibi elleri ve blöfleri de içerir; QQ bu aralığa karşı genellikle öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir rakibe karşı call daha güvenli olurdu. Call da savunulabilir bir seçenektir (özellikle sıkı 3-bet yapan rakibe karşı); karar kesin değildir.",
         "yanilgi": "Büyük potta QQ'nun her zaman geride olduğunu varsaymak.",
         "spotKimlik": "c09",
-        "dogrulamaGerekli": false
+        "kabulEdilebilir": [
+          1
+        ],
+        "dogrulamaGerekli": true
       }
     ]
   },
@@ -1919,10 +1922,13 @@
           "4-bet 20 BB"
         ],
         "dogru": 2,
-        "neden": "QQ, butonun 3-bet aralığına karşı genellikle önde; 4-bet ile value alırsın.",
+        "neden": "QQ, butonun 3-bet aralığına karşı genellikle önde; 4-bet ile value alırsın. Call da savunulabilir.",
         "yanilgi": "QQ'yu 3-bet'e karşı fold etmek.",
         "spotKimlik": "c09",
-        "dogrulamaGerekli": false
+        "kabulEdilebilir": [
+          1
+        ],
+        "dogrulamaGerekli": true
       },
       {
         "kimlik": "a8",

@@ -51,3 +51,11 @@ Board dokusu ve dört aile c9-d1'de; range/nut avantajı ve overpair c9-d2'de; c
 
 - **c26** (combo draw, check-raise): spot gerekçesi "Call da kârlıdır" diyor; karışık strateji olduğu için call `kabulEdilebilir`, alıştırma `dogrulamaGerekli: true`.
 - c27 (turn barrel) ve c25 (turn raise) c11'e; c21, c22, c33 (river bluff catch, ince value) c12'ye bırakıldı.
+
+## Onay Ajanı düzeltmeleri (2026-11-13)
+
+- c9-d1/a7, a11, c9-r/a1, a2 ve anlatım: değer farkları açıkça yazıldı ("Q-8 arasında 4", "K-9 arasında 4, 9-3 arasında 6"; "5 değer fark").
+- c9-d1 anlatımına not: gerçek oyunda J♠ T♦ 9♣ gibi çok bağlantılı gökkuşağı board'lar da çoğunlukla ıslak sayılır; dört aile öğretim için sadeleştirilmiş tanımdır.
+- c9-d6: "Showdown değeri" anlatımda tanımlandı ve terimlere eklendi.
+- c9-k/a3: "BB AA, KK ve AK'nın çoğunu 3-bet eder".
+- c9-d5/a9 (c26) nedeni, spotun düzeltilen gerekçesiyle uyumlu (iki kartı görürsen ≈ %54; set'e karşı geride).

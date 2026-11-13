@@ -1247,10 +1247,13 @@
           "All-in (78 BB)"
         ],
         "dogru": 2,
-        "neden": "Flop'ta SPR ≈ 1,7: pot kalan stack'e göre çok büyük. Bu kadar düşük SPR'de overpair ile eli bırakmak neredeyse hiç doğru olmaz; rakibin aralığında geride olan çok el var. All-in, bu ellerin equity'sini bedava görmesini de engeller.",
+        "neden": "Flop'ta SPR ≈ 1,7: pot kalan stack'e göre çok büyük. Bu kadar düşük SPR'de overpair ile eli bırakmak neredeyse hiç doğru olmaz; rakibin aralığında geride olan çok el var. All-in, bu ellerin equity'sini bedava görmesini de engeller. Call da savunulabilir (kalan stack turn'de çoğunlukla ortaya girer); karar kesin değildir.",
         "yanilgi": "Büyük bahis gördü diye overpair'i bırakmak.",
         "spotKimlik": "c24",
-        "dogrulamaGerekli": false
+        "kabulEdilebilir": [
+          1
+        ],
+        "dogrulamaGerekli": true
       }
     ]
   },

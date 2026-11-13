@@ -12335,10 +12335,13 @@
         "4-bet 20 BB"
        ],
        "dogru": 2,
-       "neden": "Butonun CO'ya karşı 3-bet aralığı JJ, TT, AQ gibi elleri ve blöfleri de içerir; QQ bu aralığa karşı genellikle öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir rakibe karşı call daha güvenli olurdu.",
+       "neden": "Butonun CO'ya karşı 3-bet aralığı JJ, TT, AQ gibi elleri ve blöfleri de içerir; QQ bu aralığa karşı genellikle öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir rakibe karşı call daha güvenli olurdu. Call da savunulabilir bir seçenektir (özellikle sıkı 3-bet yapan rakibe karşı); karar kesin değildir.",
        "yanilgi": "Büyük potta QQ'nun her zaman geride olduğunu varsaymak.",
        "spotKimlik": "c09",
-       "dogrulamaGerekli": false
+       "kabulEdilebilir": [
+        1
+       ],
+       "dogrulamaGerekli": true
       }
      ]
     },
@@ -13120,10 +13123,13 @@
         "4-bet 20 BB"
        ],
        "dogru": 2,
-       "neden": "QQ, butonun 3-bet aralığına karşı genellikle önde; 4-bet ile value alırsın.",
+       "neden": "QQ, butonun 3-bet aralığına karşı genellikle önde; 4-bet ile value alırsın. Call da savunulabilir.",
        "yanilgi": "QQ'yu 3-bet'e karşı fold etmek.",
        "spotKimlik": "c09",
-       "dogrulamaGerekli": false
+       "kabulEdilebilir": [
+        1
+       ],
+       "dogrulamaGerekli": true
       },
       {
        "kimlik": "a8",
@@ -14501,10 +14507,13 @@
         "All-in (78 BB)"
        ],
        "dogru": 2,
-       "neden": "Flop'ta SPR ≈ 1,7: pot kalan stack'e göre çok büyük. Bu kadar düşük SPR'de overpair ile eli bırakmak neredeyse hiç doğru olmaz; rakibin aralığında geride olan çok el var. All-in, bu ellerin equity'sini bedava görmesini de engeller.",
+       "neden": "Flop'ta SPR ≈ 1,7: pot kalan stack'e göre çok büyük. Bu kadar düşük SPR'de overpair ile eli bırakmak neredeyse hiç doğru olmaz; rakibin aralığında geride olan çok el var. All-in, bu ellerin equity'sini bedava görmesini de engeller. Call da savunulabilir (kalan stack turn'de çoğunlukla ortaya girer); karar kesin değildir.",
        "yanilgi": "Büyük bahis gördü diye overpair'i bırakmak.",
        "spotKimlik": "c24",
-       "dogrulamaGerekli": false
+       "kabulEdilebilir": [
+        1
+       ],
+       "dogrulamaGerekli": true
       }
      ]
     },
@@ -15324,8 +15333,8 @@
      "anlatim": [
       "Board dokusu, flop'taki üç kartın birbiriyle ilişkisidir: aynı değerde iki kart var mı, renkler nasıl dağılmış, kartlar birbirine yakın mı? Doku, hangi ellerin güçlü olduğunu ve sonraki kartların sıralamayı ne kadar değiştireceğini belirler. Bu ünitedeki bütün c-bet kararları dokuyu okumakla başlar.",
       "Bu müfredatta dört aileyi şu tanımlarla ayırıyoruz. Monoton board (monotone): üç kart da aynı renk; floş zaten mümkündür. Çiftli board (paired): iki kart aynı değerde (ör. 7♦ 7♠ 2♣). Kuru board: çift yok, üç kart üç farklı renkten (gökkuşağı board) ve kent çekişi yok (ör. K♠ 7♦ 2♣). Islak board: çift yok, tam iki kart aynı renkten (floş çekişi mümkün) ve kent çekişi de var (ör. J♥ T♥ 8♣).",
-      "\"Kent çekişi var\" şu demektir: bazı iki kartlık eller bu board'da kent ya da en az 8 out'luk bir kent çekişi (ör. çift uçlu kent çekişi) yapabilir. Pratik kural: asın dışındaki iki board kartı arasında en fazla 3 değer farkı varsa (ör. J-8, T-7, 6-3) kent çekişi vardır. K♠ 7♦ 2♣'te en yakın iki kart arasında 5 değer var; kent çekişi yok. Asın karıştığı birkaç kenar durum bu kurala uymaz; o board'ları bu derste sormuyoruz. Yalnızca turn ve river'ın birlikte gelmesiyle oluşabilecek çekişler (backdoor) bu tanımda sayılmaz.",
-      "Bazı board'lar iki ailenin arasında kalır: K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok; T♦ 6♠ 3♥'te kent çekişi var ama floş çekişi yok. Bu tür board'lara bu derste kuru ya da ıslak demiyoruz. Islak board'da turn ve river kartları sıralamayı sık değiştirir; kuru board'da ise flop'ta önde olan el çoğunlukla turn'de de öndedir."
+      "\"Kent çekişi var\" şu demektir: bazı iki kartlık eller bu board'da kent ya da en az 8 out'luk bir kent çekişi (ör. çift uçlu kent çekişi) yapabilir. Pratik kural: asın dışındaki iki board kartı arasında en fazla 3 değer farkı varsa (ör. J-8, T-7, 6-3) kent çekişi vardır. K♠ 7♦ 2♣'te en yakın iki kart arasında 5 değer fark var; kent çekişi yok. Asın karıştığı birkaç kenar durum bu kurala uymaz; o board'ları bu derste sormuyoruz. Yalnızca turn ve river'ın birlikte gelmesiyle oluşabilecek çekişler (backdoor) bu tanımda sayılmaz.",
+      "Bazı board'lar iki ailenin arasında kalır: K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok; T♦ 6♠ 3♥'te kent çekişi var ama floş çekişi yok. Bu tür board'lara bu derste kuru ya da ıslak demiyoruz. Islak board'da turn ve river kartları sıralamayı sık değiştirir; kuru board'da ise flop'ta önde olan el çoğunlukla turn'de de öndedir. Gerçek oyunda J♠ T♦ 9♣ gibi çok bağlantılı gökkuşağı board'lar da çoğunlukla ıslak sayılır; buradaki dört aile öğretim için sadeleştirilmiş tanımlardır."
      ],
      "terimler": [
       "Board dokusu",
@@ -15359,7 +15368,7 @@
         "Monoton"
        ],
        "dogru": 0,
-       "neden": "Çift yok, üç kart üç farklı renkten, en yakın iki kart (7 ve 2) arasında 5 değer var: kent çekişi yok. Tanıma göre kuru.",
+       "neden": "Çift yok, üç kart üç farklı renkten, en yakın iki kart (7 ve 2) arasında 5 değer fark var: kent çekişi yok. Tanıma göre kuru.",
        "yanilgi": "Papazı görüp board'u \"tehlikeli\" saymak; doku kartın büyüklüğüne değil, kartların ilişkisine bakar.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -15480,7 +15489,7 @@
         "A♠ 8♦ 3♣"
        ],
        "dogru": 2,
-       "neden": "T ile 7 arasında 3 değer farkı var: elinde 9-8 olan oyuncunun çift uçlu kent çekişi olur (J ya da 6). Diğerlerinde asın dışındaki en yakın iki kart 4'ten fazla uzakta.",
+       "neden": "T ile 7 arasında 3 değer farkı var: elinde 9-8 olan oyuncunun çift uçlu kent çekişi olur (J ya da 6). Diğerlerinde asın dışındaki hiçbir iki kart arasında 3'ten az ya da 3 değer fark yok (Q-8 arasında 4, K-7 ve 7-2 arasında 5 ve üstü).",
        "yanilgi": "A ile 3'ü yakın sayıp A-8-3'te kent çekişi aramak; bu derste asın karıştığı yakınlık sayılmıyor ve bu board'da 8 out'luk kent çekişi yok.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -15550,7 +15559,7 @@
         "9♠ 6♠ 2♠"
        ],
        "dogru": 2,
-       "neden": "K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok (K-9 ve 9-3 arasında 4'ten fazla değer). Kuru için gökkuşağı, ıslak için kent çekişi de gerekir.",
+       "neden": "K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok: K-9 arasında 4, 9-3 arasında 6 değer fark var; hiçbiri 3 ya da daha az değil. Kuru için gökkuşağı, ıslak için kent çekişi de gerekir.",
        "yanilgi": "İki aynı renk gördüğü her board'u ıslak saymak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -16396,7 +16405,7 @@
         "Check-raise 8 BB"
        ],
        "dogru": 2,
-       "neden": "15 out'lu combo draw river'a kadar yapılmış ellerin çoğuna karşı geride sayılmaz. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlı bir seçenektir ama fold equity'yi kullanmaz.",
+       "neden": "15 out'lu combo draw, iki kartı da görürsen river'a kadar yaklaşık %54 tutar; tek per'e karşı kabaca yarı yarıya ya da biraz öndedir, set gibi ellere karşı geridedir. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlı bir seçenektir ama fold equity'yi kullanmaz.",
        "yanilgi": "Güçlü çekişle yalnızca pasif oynamak.",
        "kabulEdilebilir": [
         1
@@ -16453,13 +16462,14 @@
      "sureDk": 5,
      "anlatim": [
       "Pozisyonda (IP) olan oyuncu her postflop sokağında rakibinden sonra konuşur (o3-d2, o3-d3). Bu, aynı eli daha kolay oynatır: rakibin check mi bahis mi yaptığını gördükten sonra karar verirsin.",
-      "IP oyuncunun üç somut avantajı vardır. Rakip check ederse sen de check ederek sonraki kartı bahis ödemeden görebilirsin (bedava kart): turn'de 8 out'lu bir çekişle river'ı bedava görmek, 46 karttan 8'ini, yani yaklaşık %17'lik bir şansı ücretsiz verir. Orta güçte elle potu küçük tutabilirsin. Blöflerini de rakibin zayıflık gösterdiği anlara göre seçebilirsin.",
+      "IP oyuncunun üç somut avantajı vardır. Rakip check ederse sen de check ederek sonraki kartı bahis ödemeden görebilirsin (bedava kart): turn'de 8 out'lu bir çekişle river'ı bedava görmek, 46 karttan 8'ini, yani yaklaşık %17'lik bir şansı ücretsiz verir. Orta güçte elle (showdown değeri olan, yani bahis yapmadan showdown'a gidildiğinde kazanabilecek el) potu küçük tutabilirsin. Blöflerini de rakibin zayıflık gösterdiği anlara göre seçebilirsin.",
       "Pozisyon dışında (OOP) önce konuşursun: check edersen rakibe bahis ya da bedava kart fırsatı verirsin, bahis yaparsan raise yiyebilirsin. Bu yüzden aynı ham equity'ye sahip bir el, OOP'de genellikle equity'sinin daha azını kullanabilir (c6-d3). OOP'de ıslak bir board'da per'siz ve çekişsiz bir elle check, çoğu zaman en az chip kaybettiren yoldur."
      ],
      "terimler": [
       "IP (pozisyonda)",
       "OOP (pozisyon dışı)",
       "Bedava kart",
+      "Showdown değeri",
       "Equity",
       "Outs",
       "Islak board"
@@ -16731,7 +16741,7 @@
         "İkisine eşit"
        ],
        "dogru": 0,
-       "neden": "Yüksek kartlı, kuru board: BTN'nin aralığında AK, AA, KK, AQ gibi eller daha çok; BB bunların çoğunu 3-bet eder.",
+       "neden": "Yüksek kartlı, kuru board: BTN'nin aralığında AK, AA, KK, AQ gibi eller daha çok; BB AA, KK ve AK'nın çoğunu 3-bet eder.",
        "yanilgi": "Kendi elinin board'u tutup tutmadığına bakarak aralık avantajını değerlendirmek.",
        "dogrulamaGerekli": false
       },
@@ -16929,7 +16939,7 @@
         "Monoton"
        ],
        "dogru": 0,
-       "neden": "Gökkuşağı, çift yok, en yakın iki kart (8 ve 3) arasında 5 değer: kent çekişi yok. Kuru.",
+       "neden": "Gökkuşağı, çift yok; en yakın iki kart Q ile 8 arasında 4 değer fark var (3'ten fazla): kent çekişi yok. Kuru.",
        "yanilgi": "Damı görüp board'u ıslak saymak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -16943,7 +16953,7 @@
        "zorluk": 2,
        "soru": "Board: K♥ 9♥ 3♣ bu derste verilen tanımla ıslak bir board'dur.",
        "dogru": false,
-       "neden": "Floş çekişi var ama kent çekişi yok (K-9 ve 9-3 arasında 4'ten fazla değer). Bu board kuru ile ıslak arasında kalır.",
+       "neden": "Floş çekişi var ama kent çekişi yok: K-9 arasında 4, 9-3 arasında 6 değer fark var; hiçbiri 3 ya da daha az değil. Bu board kuru ile ıslak arasında kalır.",
        "yanilgi": "İki aynı renkli kart gördüğü her board'u ıslak saymak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -17071,7 +17081,7 @@
      "sureDk": 5,
      "anlatim": [
       "Value bet: daha kötü ellerin görmesini umarak güçlü elle yapılan bahis (c7-d1). Bir bahsin value bet olup olmadığını tek bir soru belirler: bu bahsi daha zayıf hangi eller görür? Yeterince daha kötü el görecekse bahis value'dur; bahsi yalnızca daha iyi eller görecek, daha kötüler fold edecekse bahis value getirmez.",
-      "Soruyu somut ellerle sor. River'da board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥ (top pair, en iyi kicker). Rakibin görebileceği daha kötü eller: KQ, KJ, KT gibi daha zayıf kicker'lı papazlar ve bazı 8'li per'ler. Seni yenenler: set'ler ve iki per'ler. Kombinasyonları da sayabilirsin: board'da K♦, elinde K♥ olduğu için rakipte kalan papaz yalnızca K♠ ve K♣'tır; KQ 2 × 4 = 8 kombinasyondur.",
+      "Soruyu somut ellerle sor. River'da board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥ (top pair, en iyi kicker). Rakibin görebileceği daha kötü eller: KQ, KJ, KT gibi daha zayıf kicker'lı papazlar ve bazı 8'li per'ler. Seni yenenler: set'ler, iki per'ler ve river'daki 6 ile tamamlanan kentler (75, 53). Kombinasyonları da sayabilirsin: board'da K♦, elinde K♥ olduğu için rakipte kalan papaz yalnızca K♠ ve K♣'tır; KQ 2 × 4 = 8 kombinasyondur.",
       "River'da kabaca şu ölçü kullanılır: rakibin raise etmeyeceğini varsayarsan, bahsin görüldüğünde %50'den sık önde olmalısın. Öğretim örneği: rakibin göreceği eller 12 kombinasyon daha kötü, 4 kombinasyon daha iyi ise görüldüğünde 12 / 16 = %75 öndesin. Raise ve sonraki sokaklar hesaba katılınca hesap karmaşıklaşır, ama soru aynı kalır."
      ],
      "terimler": [
@@ -17292,7 +17302,7 @@
      "anlatim": [
       "Value bet'in boyutunu rakibin görecek aralığı belirler. Bahis büyüdükçe rakibin call için gereken equity'si artar (c9-d4): river'da 20 BB'lik pota 10 BB bahis %25, 20 BB bahis yaklaşık %33 ister. Büyük bahis görüldüğünde daha çok kazandırır ama daha az el görür.",
       "İki etkiyi birlikte tart. Öğretim örneği: rakibin aralığı, hepsi senden zayıf 20 kombinasyon. 10 BB'lik bahsi 12'si görür, 20 BB'lik bahsi 5'i görür. Ortalama kazanç küçük bahiste 12 / 20 × 10 = 6 BB, büyük bahiste 5 / 20 × 20 = 5 BB'dir: bu varsayımlarla küçük bahis daha çok kazandırır. Rakip her bahsi gören bir oyuncuysa (calling station) büyük bahis öne geçer.",
-      "Genel eğilim: rakibin görecek aralığı geniş ve zayıfsa küçük ya da orta boyut; rakip çok call ediyorsa ya da senden zayıf ama güçlü ellerle devam ediyorsa daha büyük boyut. River'da kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek ellere göre seç. Bu bir başlangıç noktasıdır, kesin kural değildir."
+      "Genel eğilim: rakibin görecek aralığı geniş ve zayıfsa küçük ya da orta boyut; rakip çok call ediyorsa ya da senden zayıf ama güçlü ellerle devam ediyorsa daha büyük boyut. Calling station'ın aralığı da zayıftır ama büyük bahsi de görür; fark buradadır. River'da kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek ellere göre seç. Bu bir başlangıç noktasıdır, kesin kural değildir."
      ],
      "terimler": [
       "Value bet",
@@ -17457,7 +17467,7 @@
        "soru": "Durumu genel boyut eğilimiyle eşleştir.",
        "secenekler": [
         [
-         "Rakibin görecek aralığı geniş ve zayıf",
+         "Rakibin aralığı geniş ve zayıf; büyük bahse çoğunlukla fold eder",
          "Küçük ya da orta boyut"
         ],
         [
@@ -18148,7 +18158,7 @@
      "sureDk": 5,
      "anlatim": [
       "Pot kontrolü: orta güçte elle potu küçük tutmak için check ya da küçük bahis tercih etmek. Orta güçte bir el (ör. board'daki en yüksek karttan küçük bir cep çifti) şu sorunu yaşar: bahis yaparsan daha kötü eller çoğunlukla fold eder, daha iyiler görür ya da raise eder. Bu tür eller büyük pottan çok, showdown'a ucuza gitmekten kazanır; bunlara showdown değeri olan eller denir.",
-      "SPR (c8-d6) bunun neden önemli olduğunu gösterir. Her sokakta yarım pot bahis ve call potu ikiye katlar: 10 BB'lik pot flop'tan sonra 20, turn'den sonra 40, river'dan sonra 80 BB olur. Yani yüksek SPR'de bile birkaç bahis stack'lerin çoğunu ortaya getirebilir. Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar; check ile potu küçük tutmak bu riski azaltır.",
+      "SPR (c8-d6) bunun neden önemli olduğunu gösterir. Her sokakta yarım pot bahis ve call potu ikiye katlar: 10 BB'lik pot flop'tan sonra 20, turn'den sonra 40, river'dan sonra 80 BB olur. Yani yüksek SPR'de bile birkaç bahis stack'lerin önemli bir kısmını ortaya getirebilir (80 BB'lik stack'te üç yarım pot bahis 35 BB eder). Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar; check ile potu küçük tutmak bu riski azaltır.",
       "Düşük SPR'de durum değişir: pot kalan stack'e göre zaten büyükse (kabaca 3 ve altı), top pair ya da overpair ile stack koymak çoğunlukla doğaldır ve pot kontrolüne pek yer kalmaz. Pozisyon da yardım eder: IP oyuncu turn'de check ederek potu küçük tutar ve river'da rakibin blöflerini ucuza yakalayabilir."
      ],
      "terimler": [
@@ -18568,7 +18578,7 @@
        "kimlik": "a12",
        "tip": "secmeli",
        "zorluk": 5,
-       "soru": "Rakibin görecek aralığı geniş ve zayıf (çok sayıda orta ve zayıf per). Value için genel boyut eğilimi hangisidir?",
+       "soru": "Rakibin aralığı geniş ve zayıf (çok sayıda orta ve zayıf per); büyük bahse çoğunlukla fold eder. Value için genel boyut eğilimi hangisidir?",
        "secenekler": [
         "Küçük ya da orta boyut",
         "All-in",

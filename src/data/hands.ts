@@ -186,7 +186,7 @@ const CURATED: Hand[] = [
     hero: "AcKh", board: "Kd8s4c2h6d", potBB: 22, seq: ["BTN r2.5", "SB f", "BB c", "F Kd8s4c", "BB x", "BTN b2.75", "BB c", "T 2h", "BB x", "BTN b5.5", "BB c", "R 6d", "BB x"],
     note: "BB her bahsi gören, pasif bir oyuncu.",
     options: ["Check", "2/3 pot bahis (≈15 BB)", "All-in (≈89 BB)"], correct: 1, topic: "value", level: 1,
-    reasoning: "Floş çekişi olmayan, kent çekişi de az olan bu board'da rakibin iki bahsi gören aralığı çoğunlukla KQ, KJ, KT gibi daha kötü per'lerden oluşur. Calling station'a karşı blöf yapılmaz ama value bet kaçırılmaz: orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
+    reasoning: "Bu board'da floş yok; river'daki 6 yalnızca 75 ve 53 gibi az sayıda eli kent yaptı. Rakibin iki bahsi gören aralığı çoğunlukla KQ, KJ, KT gibi daha kötü per'lerden oluşur. Her bahsi gören bir oyuncuya karşı blöf nadiren işe yarar, value bet ise daha çok kazandırır: orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
   },
   {
     id: "c21", title: "River'da üçüncü per: bluff catch?", game: "cash", street: "river", heroPos: "BB", stackBB: 100,
@@ -205,7 +205,7 @@ const CURATED: Hand[] = [
     id: "c23", title: "Islak board'da set", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
     hero: "8s8d", board: "Jh8h7c", potBB: 9.2, seq: ["BTN r2.5", "SB f", "BB c", "F Jh8h7c", "BB x", "BTN b3.7"],
     options: ["Call (slow play)", "Check-raise 13 BB", "Fold"], correct: 1, topic: "value", level: 2,
-    reasoning: "Elin çok güçlü ama board floş ve kent çekişleriyle dolu; turn'de gelecek kartların yarısına yakını ya aksiyonu öldürür ya seni geçer. Raise ile hem çekişlere kötü fiyat verirsin hem de J'li ellerden ve çekişlerden şimdi value alırsın. Slow play kuru board'lar içindir.",
+    reasoning: "Elin çok güçlü ama board floş ve kent çekişleriyle dolu; turn'de gelecek kartların yarısına yakını ya aksiyonu öldürür ya seni geçer. Raise ile hem çekişlere kötü fiyat verirsin hem de J'li ellerden ve çekişlerden şimdi value alırsın. Slow play daha çok kuru board'larda düşünülür; bu kadar ıslak bir board'da bedava kart vermek çoğunlukla pahalıya patlar.",
   },
   {
     id: "c24", title: "Düşük SPR'de overpair", game: "cash", street: "flop", heroPos: "SB", stackBB: 100,
@@ -224,7 +224,7 @@ const CURATED: Hand[] = [
     id: "c26", title: "Combo draw ile semi-blöf", game: "cash", street: "flop", heroPos: "BB", stackBB: 100,
     hero: "9h8h", board: "Th7h2c", potBB: 7.3, seq: ["CO r2.5", "BTN f", "SB f", "BB c", "F Th7h2c", "BB x", "CO b1.8"],
     options: ["Fold", "Call", "Check-raise 8 BB"], correct: 2, topic: "blof", level: 3,
-    reasoning: "Floş çekişi ve çift uçlu kent çekişi birlikte 15 out eder; river'a kadar equity'n %50'nin üzerindedir, yani çoğu yapılmış ele karşı bile geride sayılmazsın. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlıdır ama fold equity'yi kullanmaz.",
+    reasoning: "Floş çekişi ve çift uçlu kent çekişi birlikte 15 out eder; iki kartı da görürsen river'a kadar en az bir out gelme ihtimali yaklaşık %54'tür. Tek per'e karşı equity'n kabaca yarı yarıya ya da biraz üstündedir; set gibi ellere karşı ise geridesin. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlıdır ama fold equity'yi kullanmaz.",
   },
   {
     id: "c27", title: "Turn'de korkutucu kart: ikinci barrel", game: "cash", street: "turn", heroPos: "CO", stackBB: 100,
@@ -237,7 +237,7 @@ const CURATED: Hand[] = [
     hero: "AcQd", board: "Jh9h6s8d", potBB: 9, seq: ["BTN r2.5", "SB f", "BB c", "F Jh9h6s", "BB x", "BTN b1.75", "BB c", "T 8d", "BB x"],
     note: "BB neredeyse hiç fold etmeyen bir oyuncu.",
     options: ["Check", "2/3 pot bahis", "Pot kadar bahis"], correct: 0, topic: "blof", level: 2,
-    reasoning: "Turn kartı rakibin aralığındaki pek çok eli (T'li eller, iki per'ler, çekişler) güçlendirdi; senin elin ise hâlâ as yüksek. Fold etmeyen bir oyuncuya blöf yapmak chip yakmaktır. Check ile bedava kart alırsın; on'lu gelirse kent yaparsın, as ya da dam gelirse per'in iyi olabilir.",
+    reasoning: "Turn kartı rakibin aralığındaki pek çok eli (T'li eller, iki per'ler, çekişler) güçlendirdi; senin elin ise hâlâ as yüksek. Neredeyse hiç fold etmeyen bir oyuncuya karşı blöf çoğunlukla chip kaybettirir. Check ile bedava kart alırsın; on'lu gelirse kent yaparsın, as ya da dam gelirse per'in iyi olabilir.",
   },
   {
     id: "c29", title: "Üç kişilik potta ıska", game: "cash", street: "flop", heroPos: "UTG", stackBB: 100,
@@ -255,7 +255,7 @@ const CURATED: Hand[] = [
     id: "c32", title: "River'da showdown değeri olmayan el", game: "cash", street: "river", heroPos: "BTN", stackBB: 100,
     hero: "7c6c", board: "Kd8s5h2d2s", potBB: 12, seq: ["CO r2.5", "BTN c", "SB f", "BB f", "F Kd8s5h", "CO b2.75", "BTN c", "T 2d", "CO x", "BTN x", "R 2s", "CO x"],
     options: ["Check (kartları aç)", "2/3 pot bahis (8 BB)", "Minimum bahis (1 BB)"], correct: 1, topic: "blof", level: 3,
-    reasoning: "7 yüksek ile showdown'da neredeyse hiçbir eli yenemezsin; check etmek potu vermek demek. Rakip turn ve river'da check diyerek zayıflık gösterdi: aralığı çoğunlukla 8'li per, küçük çiftler ve as yüksek. 2/3 pot blöfün başabaş noktası %40 fold; bu ellerin önemli kısmı bırakır. Her bahsi gören bir rakibe karşı ise check daha iyidir.",
+    reasoning: "Elin yalnızca board'daki 2'li per'le oynar (en iyi beşli 2-2-K-8-7); showdown'da neredeyse hiçbir eli yenemezsin, check etmek çoğunlukla potu vermek demek. Rakip turn ve river'da check diyerek zayıflık gösterdi: aralığı çoğunlukla 8'li per, küçük çiftler ve as yüksek. 2/3 pot blöfün başabaş noktası %40 fold; bu ellerin önemli kısmı bırakır. Her bahsi gören bir rakibe karşı ise check daha iyidir.",
   },
   {
     id: "c33", title: "Küçük river bahsine orta per", game: "cash", street: "river", heroPos: "BB", stackBB: 100,

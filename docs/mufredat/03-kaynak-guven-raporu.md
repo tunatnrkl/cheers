@@ -219,7 +219,7 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Strateji iddiaları bu ünite
 
 ## c7 · 3-bet ve ötesi, c8 · Postflop matematiği
 
-Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; strateji iddiaları "genellikle / çoğunlukla / yaygın" diliyle yazıldı.
+214 alıştırmadan 211'i `dogrulamaGerekli: false`. Üç spot alıştırması (c09: c7-d6/a11, c7-r/a7; c24: c8-d6/a11) docs/ekip/2026-11-11/01-spot-denetimi.md, B-1 gereği `kabulEdilebilir` (call) ve `dogrulamaGerekli: true` taşır (c9–c10 kapısında tutarlılık için eklendi). Sayısal iddialar betikle; strateji iddiaları "genellikle / çoğunlukla / yaygın" diliyle yazıldı.
 
 ### Kesin olan (kural ya da aritmetik)
 
@@ -268,7 +268,7 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; st
 
 ## c9 · Flop: board ve c-bet, c10 · Value ve blöf
 
-172 alıştırmadan 168'i `dogrulamaGerekli: false`. Dört spot alıştırması `kabulEdilebilir` ve `dogrulamaGerekli: true` taşır: c26 (c9-d5 ve c10-d4), c23 (c10-d4), c24 (c10-d6); hepsinde ikinci seçenek savunulabilir, solver yok (KARARLAR B-1 notu ve spot gerekçeleri).
+172 alıştırmadan 168'i `dogrulamaGerekli: false`. Dört spot alıştırması `kabulEdilebilir` ve `dogrulamaGerekli: true` taşır: c26 (c9-d5 ve c10-d4), c23 (c10-d4), c24 (c10-d6); hepsinde ikinci seçenek savunulabilir, solver yok (docs/ekip/2026-11-11/01-spot-denetimi.md, B-1, ve spot gerekçeleri).
 
 ### Kesin olan (tanım, kural ya da aritmetik)
 
@@ -301,7 +301,7 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; st
 - "UTG'ye karşı 6♥ 5♥ 4♣'te nut avantajı savunana kayabilir" yaygın öğretim ilkesi; BB'nin call aralığı ranges.json'da olmadığı için sayılmadı ("kayabilir" diye yazıldı).
 - Check-raise boyutu ("3–4 katı civarı") ve kuru board'da küçük c-bet boyutunun "1/3 pot" örneği yaygın başlangıç noktalarıdır; solver çıktısıyla doğrulanmadı.
 - c9-d5/a6'da 9♥ 4♥'ün K♠ 7♦ 2♣'te 1/3 pot c-bet'e karşı "fold için en doğal" el olduğu: diğer seçenekler (top pair, orta per, as yüksek + backdoor floş) açıkça daha iyi devam adayları; ama BB'nin 94s'yi hiç savunmadığı iddia edilmedi.
-- Spot cevapları (c15–c17, c20, c23, c24, c26, c28–c30, c32) spotların kendi gerekçelerine dayanır; board'lu aralık equity'si betikte hesaplanmadı. Gerekçelerde görülen kesin dil ve küçük ifade sorunları 02'de listelendi.
+- Spot cevapları (c15–c17, c20, c23, c24, c26, c28–c30, c32) spotların kendi gerekçelerine dayanır; board'lu aralık equity'si betikte hesaplanmadı. Gerekçelerde görülen kesin dil ve küçük ifade sorunları (c20, c23, c26, c28, c32) Onay Ajanı'nın metinleriyle hands.ts'te düzeltildi (yalnızca `reasoning`; seçenek ve cevaplar aynı).
 
 ### Doğrulama (c9–c10)
 

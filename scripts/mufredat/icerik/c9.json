@@ -3,8 +3,8 @@
     "anlatim": [
       "Board dokusu, flop'taki üç kartın birbiriyle ilişkisidir: aynı değerde iki kart var mı, renkler nasıl dağılmış, kartlar birbirine yakın mı? Doku, hangi ellerin güçlü olduğunu ve sonraki kartların sıralamayı ne kadar değiştireceğini belirler. Bu ünitedeki bütün c-bet kararları dokuyu okumakla başlar.",
       "Bu müfredatta dört aileyi şu tanımlarla ayırıyoruz. Monoton board (monotone): üç kart da aynı renk; floş zaten mümkündür. Çiftli board (paired): iki kart aynı değerde (ör. 7♦ 7♠ 2♣). Kuru board: çift yok, üç kart üç farklı renkten (gökkuşağı board) ve kent çekişi yok (ör. K♠ 7♦ 2♣). Islak board: çift yok, tam iki kart aynı renkten (floş çekişi mümkün) ve kent çekişi de var (ör. J♥ T♥ 8♣).",
-      "\"Kent çekişi var\" şu demektir: bazı iki kartlık eller bu board'da kent ya da en az 8 out'luk bir kent çekişi (ör. çift uçlu kent çekişi) yapabilir. Pratik kural: asın dışındaki iki board kartı arasında en fazla 3 değer farkı varsa (ör. J-8, T-7, 6-3) kent çekişi vardır. K♠ 7♦ 2♣'te en yakın iki kart arasında 5 değer var; kent çekişi yok. Asın karıştığı birkaç kenar durum bu kurala uymaz; o board'ları bu derste sormuyoruz. Yalnızca turn ve river'ın birlikte gelmesiyle oluşabilecek çekişler (backdoor) bu tanımda sayılmaz.",
-      "Bazı board'lar iki ailenin arasında kalır: K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok; T♦ 6♠ 3♥'te kent çekişi var ama floş çekişi yok. Bu tür board'lara bu derste kuru ya da ıslak demiyoruz. Islak board'da turn ve river kartları sıralamayı sık değiştirir; kuru board'da ise flop'ta önde olan el çoğunlukla turn'de de öndedir."
+      "\"Kent çekişi var\" şu demektir: bazı iki kartlık eller bu board'da kent ya da en az 8 out'luk bir kent çekişi (ör. çift uçlu kent çekişi) yapabilir. Pratik kural: asın dışındaki iki board kartı arasında en fazla 3 değer farkı varsa (ör. J-8, T-7, 6-3) kent çekişi vardır. K♠ 7♦ 2♣'te en yakın iki kart arasında 5 değer fark var; kent çekişi yok. Asın karıştığı birkaç kenar durum bu kurala uymaz; o board'ları bu derste sormuyoruz. Yalnızca turn ve river'ın birlikte gelmesiyle oluşabilecek çekişler (backdoor) bu tanımda sayılmaz.",
+      "Bazı board'lar iki ailenin arasında kalır: K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok; T♦ 6♠ 3♥'te kent çekişi var ama floş çekişi yok. Bu tür board'lara bu derste kuru ya da ıslak demiyoruz. Islak board'da turn ve river kartları sıralamayı sık değiştirir; kuru board'da ise flop'ta önde olan el çoğunlukla turn'de de öndedir. Gerçek oyunda J♠ T♦ 9♣ gibi çok bağlantılı gökkuşağı board'lar da çoğunlukla ıslak sayılır; buradaki dört aile öğretim için sadeleştirilmiş tanımlardır."
     ],
     "terimler": [
       "Board dokusu",
@@ -32,7 +32,7 @@
           "Monoton"
         ],
         "dogru": 0,
-        "neden": "Çift yok, üç kart üç farklı renkten, en yakın iki kart (7 ve 2) arasında 5 değer var: kent çekişi yok. Tanıma göre kuru.",
+        "neden": "Çift yok, üç kart üç farklı renkten, en yakın iki kart (7 ve 2) arasında 5 değer fark var: kent çekişi yok. Tanıma göre kuru.",
         "yanilgi": "Papazı görüp board'u \"tehlikeli\" saymak; doku kartın büyüklüğüne değil, kartların ilişkisine bakar.",
         "dogrulamaGerekli": false,
         "denetim": {
@@ -153,7 +153,7 @@
           "A♠ 8♦ 3♣"
         ],
         "dogru": 2,
-        "neden": "T ile 7 arasında 3 değer farkı var: elinde 9-8 olan oyuncunun çift uçlu kent çekişi olur (J ya da 6). Diğerlerinde asın dışındaki en yakın iki kart 4'ten fazla uzakta.",
+        "neden": "T ile 7 arasında 3 değer farkı var: elinde 9-8 olan oyuncunun çift uçlu kent çekişi olur (J ya da 6). Diğerlerinde asın dışındaki hiçbir iki kart arasında 3'ten az ya da 3 değer fark yok (Q-8 arasında 4, K-7 ve 7-2 arasında 5 ve üstü).",
         "yanilgi": "A ile 3'ü yakın sayıp A-8-3'te kent çekişi aramak; bu derste asın karıştığı yakınlık sayılmıyor ve bu board'da 8 out'luk kent çekişi yok.",
         "dogrulamaGerekli": false,
         "denetim": {
@@ -223,7 +223,7 @@
           "9♠ 6♠ 2♠"
         ],
         "dogru": 2,
-        "neden": "K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok (K-9 ve 9-3 arasında 4'ten fazla değer). Kuru için gökkuşağı, ıslak için kent çekişi de gerekir.",
+        "neden": "K♥ 9♥ 3♣'te floş çekişi var ama kent çekişi yok: K-9 arasında 4, 9-3 arasında 6 değer fark var; hiçbiri 3 ya da daha az değil. Kuru için gökkuşağı, ıslak için kent çekişi de gerekir.",
         "yanilgi": "İki aynı renk gördüğü her board'u ıslak saymak.",
         "dogrulamaGerekli": false,
         "denetim": {
@@ -1002,7 +1002,7 @@
           "Check-raise 8 BB"
         ],
         "dogru": 2,
-        "neden": "15 out'lu combo draw river'a kadar yapılmış ellerin çoğuna karşı geride sayılmaz. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlı bir seçenektir ama fold equity'yi kullanmaz.",
+        "neden": "15 out'lu combo draw, iki kartı da görürsen river'a kadar yaklaşık %54 tutar; tek per'e karşı kabaca yarı yarıya ya da biraz öndedir, set gibi ellere karşı geridedir. Raise iki yoldan kazanır: rakip hemen fold eder ya da görür ve sen tutarsın. Call da kârlı bir seçenektir ama fold equity'yi kullanmaz.",
         "yanilgi": "Güçlü çekişle yalnızca pasif oynamak.",
         "kabulEdilebilir": [
           1
@@ -1048,13 +1048,14 @@
   "c9-d6": {
     "anlatim": [
       "Pozisyonda (IP) olan oyuncu her postflop sokağında rakibinden sonra konuşur (o3-d2, o3-d3). Bu, aynı eli daha kolay oynatır: rakibin check mi bahis mi yaptığını gördükten sonra karar verirsin.",
-      "IP oyuncunun üç somut avantajı vardır. Rakip check ederse sen de check ederek sonraki kartı bahis ödemeden görebilirsin (bedava kart): turn'de 8 out'lu bir çekişle river'ı bedava görmek, 46 karttan 8'ini, yani yaklaşık %17'lik bir şansı ücretsiz verir. Orta güçte elle potu küçük tutabilirsin. Blöflerini de rakibin zayıflık gösterdiği anlara göre seçebilirsin.",
+      "IP oyuncunun üç somut avantajı vardır. Rakip check ederse sen de check ederek sonraki kartı bahis ödemeden görebilirsin (bedava kart): turn'de 8 out'lu bir çekişle river'ı bedava görmek, 46 karttan 8'ini, yani yaklaşık %17'lik bir şansı ücretsiz verir. Orta güçte elle (showdown değeri olan, yani bahis yapmadan showdown'a gidildiğinde kazanabilecek el) potu küçük tutabilirsin. Blöflerini de rakibin zayıflık gösterdiği anlara göre seçebilirsin.",
       "Pozisyon dışında (OOP) önce konuşursun: check edersen rakibe bahis ya da bedava kart fırsatı verirsin, bahis yaparsan raise yiyebilirsin. Bu yüzden aynı ham equity'ye sahip bir el, OOP'de genellikle equity'sinin daha azını kullanabilir (c6-d3). OOP'de ıslak bir board'da per'siz ve çekişsiz bir elle check, çoğu zaman en az chip kaybettiren yoldur."
     ],
     "terimler": [
       "IP (pozisyonda)",
       "OOP (pozisyon dışı)",
       "Bedava kart",
+      "Showdown değeri",
       "Equity",
       "Outs",
       "Islak board"
@@ -1304,7 +1305,7 @@
           "İkisine eşit"
         ],
         "dogru": 0,
-        "neden": "Yüksek kartlı, kuru board: BTN'nin aralığında AK, AA, KK, AQ gibi eller daha çok; BB bunların çoğunu 3-bet eder.",
+        "neden": "Yüksek kartlı, kuru board: BTN'nin aralığında AK, AA, KK, AQ gibi eller daha çok; BB AA, KK ve AK'nın çoğunu 3-bet eder.",
         "yanilgi": "Kendi elinin board'u tutup tutmadığına bakarak aralık avantajını değerlendirmek.",
         "dogrulamaGerekli": false
       },
@@ -1485,7 +1486,7 @@
           "Monoton"
         ],
         "dogru": 0,
-        "neden": "Gökkuşağı, çift yok, en yakın iki kart (8 ve 3) arasında 5 değer: kent çekişi yok. Kuru.",
+        "neden": "Gökkuşağı, çift yok; en yakın iki kart Q ile 8 arasında 4 değer fark var (3'ten fazla): kent çekişi yok. Kuru.",
         "yanilgi": "Damı görüp board'u ıslak saymak.",
         "dogrulamaGerekli": false,
         "denetim": {
@@ -1499,7 +1500,7 @@
         "zorluk": 2,
         "soru": "Board: K♥ 9♥ 3♣ bu derste verilen tanımla ıslak bir board'dur.",
         "dogru": false,
-        "neden": "Floş çekişi var ama kent çekişi yok (K-9 ve 9-3 arasında 4'ten fazla değer). Bu board kuru ile ıslak arasında kalır.",
+        "neden": "Floş çekişi var ama kent çekişi yok: K-9 arasında 4, 9-3 arasında 6 değer fark var; hiçbiri 3 ya da daha az değil. Bu board kuru ile ıslak arasında kalır.",
         "yanilgi": "İki aynı renkli kart gördüğü her board'u ıslak saymak.",
         "dogrulamaGerekli": false,
         "denetim": {

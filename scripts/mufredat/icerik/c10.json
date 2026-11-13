@@ -2,7 +2,7 @@
   "c10-d1": {
     "anlatim": [
       "Value bet: daha kötü ellerin görmesini umarak güçlü elle yapılan bahis (c7-d1). Bir bahsin value bet olup olmadığını tek bir soru belirler: bu bahsi daha zayıf hangi eller görür? Yeterince daha kötü el görecekse bahis value'dur; bahsi yalnızca daha iyi eller görecek, daha kötüler fold edecekse bahis value getirmez.",
-      "Soruyu somut ellerle sor. River'da board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥ (top pair, en iyi kicker). Rakibin görebileceği daha kötü eller: KQ, KJ, KT gibi daha zayıf kicker'lı papazlar ve bazı 8'li per'ler. Seni yenenler: set'ler ve iki per'ler. Kombinasyonları da sayabilirsin: board'da K♦, elinde K♥ olduğu için rakipte kalan papaz yalnızca K♠ ve K♣'tır; KQ 2 × 4 = 8 kombinasyondur.",
+      "Soruyu somut ellerle sor. River'da board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥ (top pair, en iyi kicker). Rakibin görebileceği daha kötü eller: KQ, KJ, KT gibi daha zayıf kicker'lı papazlar ve bazı 8'li per'ler. Seni yenenler: set'ler, iki per'ler ve river'daki 6 ile tamamlanan kentler (75, 53). Kombinasyonları da sayabilirsin: board'da K♦, elinde K♥ olduğu için rakipte kalan papaz yalnızca K♠ ve K♣'tır; KQ 2 × 4 = 8 kombinasyondur.",
       "River'da kabaca şu ölçü kullanılır: rakibin raise etmeyeceğini varsayarsan, bahsin görüldüğünde %50'den sık önde olmalısın. Öğretim örneği: rakibin göreceği eller 12 kombinasyon daha kötü, 4 kombinasyon daha iyi ise görüldüğünde 12 / 16 = %75 öndesin. Raise ve sonraki sokaklar hesaba katılınca hesap karmaşıklaşır, ama soru aynı kalır."
     ],
     "terimler": [
@@ -206,7 +206,7 @@
     "anlatim": [
       "Value bet'in boyutunu rakibin görecek aralığı belirler. Bahis büyüdükçe rakibin call için gereken equity'si artar (c9-d4): river'da 20 BB'lik pota 10 BB bahis %25, 20 BB bahis yaklaşık %33 ister. Büyük bahis görüldüğünde daha çok kazandırır ama daha az el görür.",
       "İki etkiyi birlikte tart. Öğretim örneği: rakibin aralığı, hepsi senden zayıf 20 kombinasyon. 10 BB'lik bahsi 12'si görür, 20 BB'lik bahsi 5'i görür. Ortalama kazanç küçük bahiste 12 / 20 × 10 = 6 BB, büyük bahiste 5 / 20 × 20 = 5 BB'dir: bu varsayımlarla küçük bahis daha çok kazandırır. Rakip her bahsi gören bir oyuncuysa (calling station) büyük bahis öne geçer.",
-      "Genel eğilim: rakibin görecek aralığı geniş ve zayıfsa küçük ya da orta boyut; rakip çok call ediyorsa ya da senden zayıf ama güçlü ellerle devam ediyorsa daha büyük boyut. River'da kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek ellere göre seç. Bu bir başlangıç noktasıdır, kesin kural değildir."
+      "Genel eğilim: rakibin görecek aralığı geniş ve zayıfsa küçük ya da orta boyut; rakip çok call ediyorsa ya da senden zayıf ama güçlü ellerle devam ediyorsa daha büyük boyut. Calling station'ın aralığı da zayıftır ama büyük bahsi de görür; fark buradadır. River'da kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek ellere göre seç. Bu bir başlangıç noktasıdır, kesin kural değildir."
     ],
     "terimler": [
       "Value bet",
@@ -365,7 +365,7 @@
         "soru": "Durumu genel boyut eğilimiyle eşleştir.",
         "secenekler": [
           [
-            "Rakibin görecek aralığı geniş ve zayıf",
+            "Rakibin aralığı geniş ve zayıf; büyük bahse çoğunlukla fold eder",
             "Küçük ya da orta boyut"
           ],
           [
@@ -993,7 +993,7 @@
   "c10-d6": {
     "anlatim": [
       "Pot kontrolü: orta güçte elle potu küçük tutmak için check ya da küçük bahis tercih etmek. Orta güçte bir el (ör. board'daki en yüksek karttan küçük bir cep çifti) şu sorunu yaşar: bahis yaparsan daha kötü eller çoğunlukla fold eder, daha iyiler görür ya da raise eder. Bu tür eller büyük pottan çok, showdown'a ucuza gitmekten kazanır; bunlara showdown değeri olan eller denir.",
-      "SPR (c8-d6) bunun neden önemli olduğunu gösterir. Her sokakta yarım pot bahis ve call potu ikiye katlar: 10 BB'lik pot flop'tan sonra 20, turn'den sonra 40, river'dan sonra 80 BB olur. Yani yüksek SPR'de bile birkaç bahis stack'lerin çoğunu ortaya getirebilir. Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar; check ile potu küçük tutmak bu riski azaltır.",
+      "SPR (c8-d6) bunun neden önemli olduğunu gösterir. Her sokakta yarım pot bahis ve call potu ikiye katlar: 10 BB'lik pot flop'tan sonra 20, turn'den sonra 40, river'dan sonra 80 BB olur. Yani yüksek SPR'de bile birkaç bahis stack'lerin önemli bir kısmını ortaya getirebilir (80 BB'lik stack'te üç yarım pot bahis 35 BB eder). Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar; check ile potu küçük tutmak bu riski azaltır.",
       "Düşük SPR'de durum değişir: pot kalan stack'e göre zaten büyükse (kabaca 3 ve altı), top pair ya da overpair ile stack koymak çoğunlukla doğaldır ve pot kontrolüne pek yer kalmaz. Pozisyon da yardım eder: IP oyuncu turn'de check ederek potu küçük tutar ve river'da rakibin blöflerini ucuza yakalayabilir."
     ],
     "terimler": [
@@ -1391,7 +1391,7 @@
         "kimlik": "a12",
         "tip": "secmeli",
         "zorluk": 5,
-        "soru": "Rakibin görecek aralığı geniş ve zayıf (çok sayıda orta ve zayıf per). Value için genel boyut eğilimi hangisidir?",
+        "soru": "Rakibin aralığı geniş ve zayıf (çok sayıda orta ve zayıf per); büyük bahse çoğunlukla fold eder. Value için genel boyut eğilimi hangisidir?",
         "secenekler": [
           "Küçük ya da orta boyut",
           "All-in",

@@ -35,8 +35,15 @@ Kaynak: `scripts/mufredat/icerik/c10.json`. 8 ders (6 normal + kontrol + tekrar;
 
 ## Spot seçimi ve karışık stratejiler
 
-- **c23** (ıslak board'da set): KARARLAR B-1 notu; slow play call `kabulEdilebilir`.
-- **c24** (düşük SPR'de AA): B-1 notu; call `kabulEdilebilir`.
+- **c23** (ıslak board'da set): docs/ekip/2026-11-11/01-spot-denetimi.md, B-1; slow play call `kabulEdilebilir`.
+- **c24** (düşük SPR'de AA): docs/ekip/2026-11-11/01-spot-denetimi.md, B-1; call `kabulEdilebilir`. c8-d6/a11'deki aynı spot da artık böyle işaretli; c09 (c7) de.
 - **c26** (combo draw): spot gerekçesi "Call da kârlıdır" diyor; call `kabulEdilebilir`.
 - Hepsi `dogrulamaGerekli: true`; neden metinleri "savunulabilir bir seçenek, karar kesin değil" der.
 - c21, c22, c33 (river bluff catch ve ince value) c12'ye, c25 ve c27 c11'e bırakıldı. Donk bet için uygun spot yok (bkz. 02).
+
+## Onay Ajanı düzeltmeleri (2026-11-13)
+
+- c10-d1 anlatımı: seni yenen eller arasına river'daki 6 ile tamamlanan kentler (75, 53) eklendi.
+- c10-d2/a10 ve c10-k/a12: iki cevaba açık durum metni "rakibin aralığı geniş ve zayıf; büyük bahse çoğunlukla fold eder" diye daraltıldı; anlatıma calling station ile farkı eklendi.
+- c10-d6 anlatımı: "stack'lerin önemli bir kısmı (80 BB'lik stack'te üç yarım pot bahis 35 BB)".
+- hands.ts gerekçeleri (c20, c23, c26, c28, c32) Onay Ajanı'nın metinleriyle düzeltildi; c7 ve c8'deki c09 ve c24 alıştırmaları `kabulEdilebilir` ile işaretlendi.

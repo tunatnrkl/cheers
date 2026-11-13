@@ -116,11 +116,17 @@ Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistin
 - **Donk bet** için hiç spot yok. UTG'ye karşı BB'de küçük bağlantılı board (ör. 6♥ 5♥ 4♣, elde iki per) spotu c10-d5'e uygun olur; doğru cevabın karışık olacağı açık, `kabulEdilebilir` ile kurulmalı.
 - **River value boyutu** için c20 ve c22 var; ikisi de check / orta / büyük seçenekli. Küçük ve büyük value boyutunu karşılaştıran bir spot (rakip aralığı notta) c10-d2'ye uyar.
 
-### Spot gerekçelerinde fark edilenler (hands.ts'e dokunulmadı)
+### Spot gerekçelerinde fark edilenler · Düzeltildi (Onay Ajanı metinleriyle; yalnızca `reasoning`)
 
-- **c23:** gerekçe "Slow play kuru board'lar içindir" diyor; kesin dil. c10-d4 "kuru board'da bazen call (slow play) tercih edilir" diye yumuşak yazdı. Öneri: "Slow play çoğunlukla kuru board'larda düşünülür."
-- **c26:** "river'a kadar equity'n %50'nin üzerindedir" iddiası 15 out'un river'a kadar tutma ihtimaline (≈ %54,1) dayanıyor ve iki kartı da göreceğini, outs'ların temiz olduğunu varsayıyor; set gibi ellere karşı doğru değil. Gerekçe "çoğu yapılmış ele karşı" diyerek bunu kısmen sınırlıyor. Öneri: "15 out river'a kadar yaklaşık %54 tutar (iki kartı da görürsen)".
-- **c20:** "Calling station'a karşı blöf yapılmaz" kesin dil; öneri "genellikle blöf yapılmaz".
-- **c28:** "blöf yapmak chip yakmaktır" kesin dil; öneri "çoğunlukla chip yakmaktır".
-- **c32:** "7 yüksek ile" deniyor; board'da 2'li çift olduğu için elin en iyi beşlisi aslında "2'li per, K-8-7 kicker". Karar ve başabaş hesabı (8 / 20 = %40) doğru; ifade "showdown'da neredeyse hiçbir eli yenemezsin" kısmıyla birlikte yanıltıcı değil, yine de "board'daki çift dışında hiçbir şeyin yok" daha doğru olur.
-- **B-1 tutarlılığı:** c9–c10'da c23, c24 ve c26 `kabulEdilebilir` ile kullanıldı. Daha önce c8-d6/a11 c24'ü ve c7-d6/a11, c7-r/a7 c09'u `kabulEdilebilir` olmadan kullanıyor; bu iş kolunda o ünitelere dokunulmadı. Aynı spotun bir derste "yanlış", diğerinde "kabul edilebilir" sayılmaması için c7 ve c8'deki bu üç alıştırmaya da `kabulEdilebilir` (c09: call; c24: call) ve `dogrulamaGerekli: true` eklenmesi önerilir.
+- **c20:** kesin dil ("blöf yapılmaz") ve "kent çekişi de az" ifadesi düzeltildi; river'daki 6'nın 75 ve 53'ü kent yaptığı yazıldı.
+- **c23:** "Slow play kuru board'lar içindir" → "daha çok kuru board'larda düşünülür; bu kadar ıslak bir board'da bedava kart vermek çoğunlukla pahalıya patlar".
+- **c26:** %54'ün iki kartı görme varsayımına dayandığı ve set'e karşı geride olunduğu yazıldı.
+- **c28:** "chip yakmaktır" → "çoğunlukla chip kaybettirir".
+- **c32:** "7 yüksek" → "elin yalnızca board'daki 2'li per'le oynar (en iyi beşli 2-2-K-8-7)".
+- **B-1 tutarlılığı:** c7-d6/a11, c7-r/a7 (c09) ve c8-d6/a11 (c24) artık `kabulEdilebilir` [Call] ve `dogrulamaGerekli: true`; c9–c10'daki c23, c24, c26 ile tutarlı.
+
+### Sözlük düzeltmeleri (Onay Ajanı)
+
+- **Calling station:** "Blöf yapılmaz; bol value bet yapılır." → "Ona karşı blöf nadiren işe yarar; value bet'ler daha çok kazandırır."
+- **Slow play:** "işe yarar" → "daha çok düşünülür".
+- **Kuru board:** sona "Müfredattaki tanım: çift yok, üç farklı renk, kent çekişi yok." eklendi.

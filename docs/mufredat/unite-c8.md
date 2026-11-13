@@ -1,6 +1,6 @@
 # Ünite c8 · Postflop matematiği: öz denetim
 
-Kaynak: `scripts/mufredat/icerik/c8.json`. 9 ders (6 normal + kontrol + tekrar + `c8-t` Seviye 5 testi, kapsam "pist": cash pistinde o1–o4, c5–c8), 107 alıştırma; hepsi `dogrulamaGerekli: false`.
+Kaynak: `scripts/mufredat/icerik/c8.json`. 9 ders (6 normal + kontrol + tekrar + `c8-t` Seviye 5 testi, kapsam "pist": cash pistinde o1–o4, c5–c8), 107 alıştırma; biri (c8-d6/a11, c24) `kabulEdilebilir` [Call] ve `dogrulamaGerekli: true`, geri kalanı `dogrulamaGerekli: false`.
 
 | Ders | Tür | Paragraf | Alıştırma | Tipler | Zorluk | Denetimli | Spot | Sözlük terimleri |
 |---|---|---|---|---|---|---|---|---|
@@ -49,3 +49,7 @@ Spot alıştırmalarında rakip eli yok; o-… spotlarında soru "kartlarını g
 - `spotFiyat` payı 0,6 → 0,06; gevşek ya da yuvarlanmış değeri yakalayan test eklendi.
 - Sözlükte "2 ve 4 kuralı" tanımına koşul eklendi (iki kartı da ödeme yapmadan göreceksen × 4).
 - c8-t/a13–a14: HJ/CO ve BTN'nin fold ettiği yazıldı.
+
+## Tutarlılık düzeltmesi (2026-11-13, c9–c10 kapısı)
+
+- c8-d6/a11 (c24, düşük SPR'de AA): docs/ekip/2026-11-11/01-spot-denetimi.md, B-1 gereği call `kabulEdilebilir`, alıştırma `dogrulamaGerekli: true`; nedene "call da savunulabilir (kalan stack turn'de çoğunlukla ortaya girer)" eklendi. c10-d6'daki aynı spotla tutarlı.
