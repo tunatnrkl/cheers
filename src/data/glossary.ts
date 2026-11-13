@@ -77,6 +77,7 @@ export const GLOSSARY: Term[] = [
   t("aksiyon", "limp", "Limp", "Preflop'ta raise yapmadan yalnızca büyük blind'ı görerek girmek. Genelde zayıf bir oyundur; inisiyatifi vermiş olursun."),
   t("aksiyon", "3-bet", "3-bet", "Preflop'ta açılışın üzerine yapılan yeniden artırma (blind 1., açılış 2., bu 3. bahis).", ["3bet", "three-bet"]),
   t("aksiyon", "4-bet", "4-bet", "3-bet'in üzerine yapılan yeniden artırma. Genelde çok güçlü eller ya da seçilmiş blöflerle yapılır.", ["4bet"]),
+  t("aksiyon", "5-bet", "5-bet", "4-bet'in üzerine yapılan yeniden artırma. 100 BB'lik stack'lerle çoğunlukla all-in olur ve dar bir aralıkla yapılır.", ["5bet"]),
   t("aksiyon", "squeeze", "Squeeze", "Bir açılış ve en az bir call'dan sonra yapılan büyük 3-bet. Arada kalan oyuncuları sıkıştırır."),
   t("aksiyon", "cold-call", "Cold call", "Pota henüz para koymamışken bir raise'i görmek.", ["cold-call"]),
   t("aksiyon", "isolate", "İzolasyon", "Limp eden zayıf oyuncuyla baş başa kalmak için yapılan raise.", ["isolate", "iso-raise", "izole"]),

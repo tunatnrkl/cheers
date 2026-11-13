@@ -1,0 +1,1946 @@
+{
+  "c7-d1": {
+    "anlatim": [
+      "3-bet'i c6-d4'te tanıdın: preflop'ta bir açılışın üstüne yapılan yeniden raise. Bu ünite, ne zaman ve neden 3-bet yapıldığını çalışır. Bir 3-bet'in iki amacı vardır ve her 3-bet bunlardan en az birine hizmet eder.",
+      "Birinci amaç value'dur: elin rakibin devam edeceği ellerin çoğundan güçlüyse potu büyütüp daha kötü ellerden chip almak istersin. Postflop'taki value bet'in (daha kötü bir elin görmesini umarak güçlü elle yapılan bahis) preflop karşılığıdır. AA ve KK gibi eller bu yüzden çoğunlukla 3-bet edilir.",
+      "İkinci amaç fold equity'dir: bahis ya da raise'inin rakibi fold ettirerek kazandırdığı pay. Rakip fold ederse potu kartlara bakmadan hemen alırsın. Elin zayıfken bu amaçla yapılan 3-bet'e blöf 3-bet denir; blöf, daha iyi elleri fold ettirmek için zayıf elle yapılan bahistir.",
+      "Fold equity basit bir hesapla ölçülür. CO 2,5 BB açtı, BTN'desin ve toplamı 7,5 BB'ye çıkarıyorsun. Potta 0,5 + 1 + 2,5 = 4 BB var. Görülürse hiç kazanamayacağını varsayarsan 3-bet'in kâra geçmesi için rakiplerin en az 7,5 / (7,5 + 4) ≈ %65,2 oranında fold etmesi gerekir. Görüldüğünde de bazen kazandığın için gerçek eşik bunun altındadır."
+    ],
+    "terimler": [
+      "3-bet",
+      "Value bet",
+      "Fold equity",
+      "Blöf"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Bir 3-bet'in iki temel amacı hangisidir?",
+        "secenekler": [
+          "Value (daha kötü ellerden chip almak) ve fold equity (rakibi fold ettirmek)",
+          "Pozisyon kazanmak ve blind'leri korumak",
+          "Potu küçük tutmak ve bedava flop görmek",
+          "Rakibin elini öğrenmek ve süre kazanmak"
+        ],
+        "dogru": 0,
+        "neden": "Her 3-bet ya güçlü elle daha kötü ellerden chip almayı (value) ya rakibi fold ettirmeyi (fold equity) ya da ikisini birden hedefler.",
+        "yanilgi": "3-bet'i rakibin elini öğrenmenin bir yolu sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "UTG 2,5 BB açtı, HJ toplamı 7,5 BB'ye çıkardı. HJ'nin hamlesi bir 3-bet'tir.",
+        "dogru": true,
+        "neden": "Blind birinci, açılış ikinci, açılışın üstündeki raise üçüncü bahistir.",
+        "yanilgi": "3-bet'i 3 BB'lik bir açılış sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Fold equity nedir?",
+        "secenekler": [
+          "Bahis ya da raise'inin rakibi fold ettirerek kazandırdığı pay",
+          "Elin kartlar sonuna kadar açılsa potu kazanma payı",
+          "Fold ettiğinde kurtardığın chip'ler",
+          "Potun call'a oranı"
+        ],
+        "dogru": 0,
+        "neden": "Rakip fold ederse potu kartlara bakmadan alırsın; bu kazancın payı fold equity'dir.",
+        "yanilgi": "Fold equity'yi equity ile karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a4",
+        "tip": "eslestirme",
+        "zorluk": 2,
+        "soru": "Eşleştir.",
+        "secenekler": [
+          [
+            "Value 3-bet",
+            "Güçlü elle, daha kötü ellerden chip almak için"
+          ],
+          [
+            "Blöf 3-bet",
+            "Zayıf elle, daha iyi elleri fold ettirmek için"
+          ],
+          [
+            "Call",
+            "Potu büyütmeden elde kalmak için"
+          ]
+        ],
+        "neden": "Value güçlü elden, blöf fold ettirmekten kazanır; call ise potu büyütmeden devam eder.",
+        "yanilgi": "Blöf 3-bet'in de daha kötü ellerden chip aldığını sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "CO 2,5 BB açtı, sıra BTN'de; SB ve BB'de blind'ler duruyor. BTN konuşmadan önce potta kaç BB var?",
+        "dogru": 4,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 2,5 = 4 BB.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı durumda BTN'desin ve 3-bet ile toplamı 7,5 BB'ye çıkarıyorsun. Görülürse hiç kazanamayacağını varsayarsan, 3-bet'in kâra geçmesi için rakiplerin en az yüzde kaç fold etmesi gerekir? (bir ondalık basamak)",
+        "dogru": 65.2,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Risk / (risk + pot) = 7,5 / (7,5 + 4) ≈ %65,2.",
+        "yanilgi": "Riski pota eklemeyi unutup 7,5 / 4 ile hesaplamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 7.5,
+          "pot": 4
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "AA ile 3-bet yapmanın asıl amacı rakibi fold ettirmektir.",
+        "dogru": false,
+        "neden": "AA ile asıl amaç value'dur: rakibin devam ettiği daha kötü ellerden chip almak.",
+        "yanilgi": "Her 3-bet'i blöf sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "3-bet yaptın ve herkes fold etti. Bu elde kaç BB kazandın? (CO 2,5 BB açmıştı; sen BTN'den 7,5 BB'ye 3-bet yaptın.)",
+        "secenekler": [
+          "4 BB",
+          "7,5 BB",
+          "11,5 BB",
+          "2,5 BB"
+        ],
+        "dogru": 0,
+        "neden": "Kendi 3-bet'in geri döner; kazandığın, senden önce potta olan 0,5 + 1 + 2,5 = 4 BB'dir.",
+        "yanilgi": "Kendi koyduğun chip'leri kazanç saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Bir eli 3-bet için düşünürken hangi soru VALUE amacına aittir?",
+        "secenekler": [
+          "Rakip devam ederse, elim onun devam ettiği ellerin çoğundan güçlü mü?",
+          "Rakip ne sıklıkla fold eder?",
+          "Görülürse elim kolay oynanır mı?",
+          "Elimdeki kart rakibin güçlü ellerini azaltıyor mu?"
+        ],
+        "dogru": 0,
+        "neden": "Value, rakibin devam ettiği ellere karşı önde olmaktan gelir. Diğer sorular blöf 3-bet seçimine aittir.",
+        "yanilgi": "Value ve blöf gerekçelerini karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "HJ 2,5 BB açtı, diğerleri fold etti. BB'desin ve 3-bet ile toplamı 11 BB'ye çıkarıyorsun (1 BB'n zaten pottaydı). Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 71.4,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Ek risk 11 − 1 = 10 BB, pot 0,5 + 1 + 2,5 = 4 BB: 10 / 14 ≈ %71,4.",
+        "yanilgi": "BB'de zaten konmuş 1 BB'yi riske katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 10,
+          "pot": 4
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "dogruYanlis",
+        "zorluk": 5,
+        "soru": "Görüldüğünde de bir miktar equity taşıyan bir elle yapılan 3-bet'in kâra geçmesi için, risk / (risk + pot) oranından daha az fold yeterli olabilir.",
+        "dogru": true,
+        "neden": "Bu oran, görüldüğünde hiç kazanmama varsayımıyla bulunur. Görüldüğünde de bazen kazanan bir el için gerçek eşik daha düşüktür.",
+        "yanilgi": "Başabaş oranını her durumda kesin eşik sanmak.",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d2": {
+    "anlatim": [
+      "Bir açılışa karşı eller kabaca üç gruba ayrılır. En güçlü eller (AA, KK gibi) value için 3-bet edilir. Açılışa karşı iyi oynayan ama 3-bet'e devam edecek ellere karşı zayıf kalan orta eller çoğunlukla call edilir; pota henüz para koymamışken bir raise'i görmeye cold call denir. Kalan ellerin bir kısmı blöf 3-bet adayıdır, çoğu ise fold edilir.",
+      "Blöf 3-bet için genellikle şu özellikler aranır: görülürse oynanabilir olmak (suited, bağlantılı), rakibin güçlü ellerini azaltan bir kart taşımak (c7-d3) ve call için yeterince iyi olmamak. A5s gibi suited küçük aslar bu yüzden sık seçilir. Hangi ellerin seçileceği pozisyona, rakibe ve stack'e göre değişir; burada bir liste vermiyoruz.",
+      "3-bet aralığı iki biçimde kurulabilir. Lineer aralık en iyi ellerden aşağı doğru kesintisiz iner; sık call eden rakiplere karşı ve call seçeneğinin zayıf olduğu yerlerde (ör. SB'de çoğunlukla 3-bet ya da fold) sık öğretilen biçimdir. Polarize aralık çok güçlü eller ve blöflerden oluşur, ortadaki eller call'a ayrılır; genellikle pozisyondayken, call iyi bir seçenekken kullanılır.",
+      "Value ve blöf 3-bet'lerin birbirine oranı önemlidir. Yalnızca value ile 3-bet yaparsan rakipler bunu okur, en güçlü elleri dışında fold eder ve AA bile az kazanır. Çok fazla blöf yaparsan rakipler daha geniş call ya da 4-bet eder ve blöfler chip kaybettirir. Dengeli bir oran, rakibin hem fold'unun hem devamının bir bedeli olmasını sağlar. Kesin oran duruma göre değişir; ilkeyi bilmek yeter."
+    ],
+    "terimler": [
+      "3-bet",
+      "Value bet",
+      "Blöf",
+      "Lineer aralık",
+      "Polarize aralık",
+      "Cold call"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Hangisi tipik bir value 3-bet elidir?",
+        "secenekler": [
+          "KK",
+          "K4o",
+          "J7o",
+          "92s"
+        ],
+        "dogru": 0,
+        "neden": "KK, rakibin devam edeceği ellerin çok büyük kısmından güçlüdür.",
+        "yanilgi": "Her papazlı eli güçlü sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Polarize bir 3-bet aralığı çok güçlü ellerden ve blöflerden oluşur; ortadaki eller çoğunlukla call edilir.",
+        "dogru": true,
+        "neden": "Polarize aralığın ortası boştur; orta güçteki eller call'a ayrılır.",
+        "yanilgi": "Polarize ile lineer aralığı karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "eslestirme",
+        "zorluk": 2,
+        "soru": "Eşleştir.",
+        "secenekler": [
+          [
+            "Lineer aralık",
+            "En iyi ellerden aşağı doğru kesintisiz iner"
+          ],
+          [
+            "Polarize aralık",
+            "Çok güçlü eller ve blöfler; ortadaki eller call'a ayrılır"
+          ],
+          [
+            "Cold call",
+            "Pota henüz para koymamışken bir raise'i görmek"
+          ]
+        ],
+        "neden": "Lineer aralık kesintisiz iner; polarize aralığın ortası boştur; cold call pota para koymadan raise'i görmektir.",
+        "yanilgi": "Lineer aralığın blöf içerdiğini sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a4",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Blöf 3-bet adayı seçerken genellikle hangi özellik aranır?",
+        "secenekler": [
+          "Görülürse oynanabilir olması (suited, bağlantılı) ve call için yeterince güçlü olmaması",
+          "Elindeki en zayıf offsuit el olması",
+          "Rakibin açılış aralığının çoğunu yenmesi",
+          "Cep çifti olması"
+        ],
+        "dogru": 0,
+        "neden": "Blöf 3-bet, görülürse de bir şansı olan ama call için iyi olmayan ellerle yapılır. Rakibin aralığının çoğunu yenen el value'dur.",
+        "yanilgi": "Blöf için en çöp eli seçmek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a5",
+        "tip": "dogruYanlis",
+        "zorluk": 2,
+        "soru": "Yalnızca AA ve KK ile 3-bet yapan bir oyuncunun 3-bet'ine karşı rakipler çoğunlukla en güçlü elleri dışında fold eder.",
+        "dogru": true,
+        "neden": "Böyle bir 3-bet'in ne anlama geldiği kolayca okunur; rakipler zayıf ellerle devam etmez, AA ve KK az kazanır.",
+        "yanilgi": "Blöfsüz oynamanın value'yu artırdığını sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Öğretim örneği: bir oyuncunun 3-bet'lerinin yalnızca AA, KK, QQ ve AK (suited ve offsuit) olduğunu varsay. Bu value kısmında kaç kombinasyon var?",
+        "dogru": 34,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Üç çift × 6 = 18; AK 4 + 12 = 16; toplam 34.",
+        "yanilgi": "AK'yı yalnızca 12 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kombo",
+          "eller": [
+            "AA",
+            "KK",
+            "QQ",
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı oyuncu blöf olarak A5s, A4s, A3s ve A2s'yi ekliyor. Kaç blöf kombinasyonu eklenir?",
+        "dogru": 16,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Her suited el 4 kombinasyon: 4 × 4 = 16.",
+        "yanilgi": "Suited eli 12 kombinasyon saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kombo",
+          "eller": [
+            "A5s",
+            "A4s",
+            "A3s",
+            "A2s"
+          ]
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Bu öğretim örneğinde value kombinasyonlarının blöf kombinasyonlarına oranı yaklaşık kaçtır? (Bu bir örnektir; önerilen bir aralık değildir.)",
+        "secenekler": [
+          "Yaklaşık 2,1'e 1",
+          "1'e 1",
+          "3,5'e 1",
+          "1'e 2"
+        ],
+        "dogru": 0,
+        "neden": "34 / 16 = 2,125; yani her blöf kombinasyonuna yaklaşık iki value kombinasyonu düşer.",
+        "yanilgi": "Kombinasyon yerine el adı saymak (5 el / 4 el).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "bolum",
+          "terimler": [
+            34,
+            16
+          ],
+          "degerler": [
+            2.125,
+            1,
+            3.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Rakiplerinin 3-bet'lerine çok sık fold ettiğini fark ettin. Hangisi genellikle mantıklı bir ayardır?",
+        "secenekler": [
+          "Blöf 3-bet'leri biraz artırmak",
+          "3-bet'i tamamen bırakmak",
+          "Yalnızca AA ile 3-bet yapmak",
+          "Daha çok limp etmek"
+        ],
+        "dogru": 0,
+        "neden": "Rakip sık fold ediyorsa blöf 3-bet'ler daha sık kazanır; aralığa biraz daha blöf eklemek genellikle mantıklıdır.",
+        "yanilgi": "Rakibin hatasına göre ayar yapmamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Blöf 3-bet'lerin oranı ne kadar artarsa 3-bet aralığı o kadar kârlı olur.",
+        "dogru": false,
+        "neden": "Çok fazla blöf yapılırsa rakipler daha geniş call ya da 4-bet eder ve blöfler chip kaybettirir. Oranın dengeli olması önemlidir.",
+        "yanilgi": "Daha fazla agresifliği her zaman daha iyi sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "BTN 2,5 BB açtı, SB fold etti. BB'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (1,5 BB daha)",
+          "3-bet 11 BB"
+        ],
+        "dogru": 1,
+        "neden": "Gereken equity 1,5 / 5,5 ≈ %27,3; T8s butonun geniş aralığına karşı yaklaşık %41 equity taşır. Call için yeterince iyi ama 3-bet'e devam edecek ellere karşı zayıf: ortadaki eller grubunda, call. Rakip aralıkları sitenin yaklaşık çalışma aralıklarıdır (UTG %15, CO %27, BTN %43); solver çıktısı değildir.",
+        "yanilgi": "Oynanabilir her eli 3-bet'e çevirmek.",
+        "spotKimlik": "c05",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityAraliga",
+          "el": "T8s",
+          "poz": "BTN",
+          "yaklasik": 41
+        }
+      }
+    ]
+  },
+  "c7-d3": {
+    "anlatim": [
+      "o4-d1'de kombinasyon saymayı öğrendin: bir cep çifti 6, suited bir el 4, offsuit bir el 12 kombinasyondur. Bu sayılar bütün desteye göredir. Senin elindeki kart rakibin elinde olamaz; bu yüzden elindeki kartlar rakibin bazı ellerinin kombinasyonlarını azaltır. Buna bloker (blocker) etkisi denir.",
+      "Örnek: elinde A♠ var. Rakibin AA yapabilmesi için kalan üç astan ikisi gerekir: 3 kombinasyon (6 yerine). AK için 3 as × 4 papaz = 12 kombinasyon kalır (16 yerine). Elinde hem as hem papaz varsa (A♠ K♦), AK 3 × 3 = 9 kombinasyona, AA ve KK 3'er kombinasyona iner.",
+      "Blokerler en çok blöf 3-bet seçiminde işe yarar. A5s gibi bir el, rakibin 3-bet'e en güçlü cevapları olan AA ve AK'nın bir kısmını elinden alır; rakibin devam edeceği eller azalır. Etki gerçektir ama sınırlıdır: bloker tek başına bir eli 3-bet adayı yapmaz, elin oynanabilirliğiyle birlikte düşünülür."
+    ],
+    "terimler": [
+      "Blocker",
+      "Kombinasyon (combo)",
+      "3-bet"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Senin elindeki bir kart rakibin elinde olamaz.",
+        "dogru": true,
+        "neden": "Destede her karttan bir tane vardır.",
+        "yanilgi": "Rakibin elini desteden bağımsız düşünmek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Elinde hiç as yokken (bir as da board'da değilken) rakibin kaç AA kombinasyonu olabilir?",
+        "secenekler": [
+          "4",
+          "6",
+          "12",
+          "16"
+        ],
+        "dogru": 1,
+        "neden": "Dört astan ikisi: 6 kombinasyon (o4-d1).",
+        "yanilgi": "AA'yı 4 kombinasyon saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kombo",
+          "eller": [
+            "AA"
+          ]
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Elinde A♠ 7♣ var. Rakibin kaç AA kombinasyonu olabilir?",
+        "dogru": 3,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Kalan üç astan ikisi: A♥A♦, A♥A♣, A♦A♣; 3 kombinasyon.",
+        "yanilgi": "Bloker etkisini unutup 6 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 7♣",
+          "eller": [
+            "AA"
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Elinde A♠ 5♠ var. Rakibin kaç AK kombinasyonu (suited ve offsuit birlikte) olabilir?",
+        "dogru": 12,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Kalan 3 as × 4 papaz = 12 (3 suited, 9 offsuit); 16 yerine.",
+        "yanilgi": "Hâlâ 16 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 5♠",
+          "eller": [
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Elinde A♠ K♦ var. Rakibin kaç AK kombinasyonu olabilir?",
+        "dogru": 9,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Kalan 3 as × kalan 3 papaz = 9.",
+        "yanilgi": "Yalnızca bir kartın etkisini hesaba katmak (12).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ K♦",
+          "eller": [
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Elinde A♠ K♦ var. Rakibin AA ve KK kombinasyonlarının toplamı kaçtır?",
+        "dogru": 6,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "AA 3, KK 3; toplam 6 (bloker yokken 12).",
+        "yanilgi": "Bloker etkisini yalnızca AA'ya uygulamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ K♦",
+          "eller": [
+            "AA",
+            "KK"
+          ]
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Elinde A♠ 5♠ var. Rakibin AA, KK ve AK kombinasyonlarının toplamı kaçtır? (Elinde as yokken 6 + 6 + 16 = 28.)",
+        "secenekler": [
+          "28",
+          "21",
+          "25",
+          "15"
+        ],
+        "dogru": 1,
+        "neden": "AA 3 + KK 6 + AK 12 = 21. Tek bir as, bu güçlü ellerin dörtte birini elinden alır.",
+        "yanilgi": "KK'yı da azaltmak (as, papazları bloke etmez).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 5♠",
+          "eller": [
+            "AA",
+            "KK",
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Elinde K♥ Q♥ varken rakibin 12 AK kombinasyonu olabilir.",
+        "dogru": true,
+        "neden": "4 as × kalan 3 papaz = 12.",
+        "yanilgi": "Papazın AK'yı etkilemediğini sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "K♥ Q♥",
+          "eller": [
+            "AKs",
+            "AKo"
+          ],
+          "iddia": 12
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Blöf 3-bet seçerken bir asın bloker etkisi neden işe yarar?",
+        "secenekler": [
+          "Rakibin 3-bet'e en güçlü devamları olan AA ve AK kombinasyonlarını azaltır",
+          "Rakibin bütün ellerini aynı oranda azaltır",
+          "Görüldüğünde elini en güçlü el yapar",
+          "Rakibin fold etmesini garanti eder"
+        ],
+        "dogru": 0,
+        "neden": "AA ve AK, 3-bet'e çoğunlukla 4-bet ya da call ile devam eden ellerdir; bunlar azaldıkça rakibin fold etme ihtimali artar. Etki gerçek ama sınırlıdır; hiçbir şeyi garanti etmez.",
+        "yanilgi": "Blokeri fold garantisi sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Bloker etkisi tek başına bir eli iyi bir blöf 3-bet adayı yapar.",
+        "dogru": false,
+        "neden": "Bloker yalnızca bir etkendir; elin görüldüğünde oynanabilirliği, pozisyon ve rakip de hesaba katılır.",
+        "yanilgi": "Elinde as olan her eli blöf 3-bet adayı sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "BTN 2,5 BB açtı. SB'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "3-bet 11 BB"
+        ],
+        "dogru": 2,
+        "neden": "SB'de call seni pozisyon dışında ve arkanda BB varken bırakır; çoğu el ya 3-bet ya fold olur. A5s iyi bir blöf 3-bet adayı: as, rakibin AA'sını 3'e, AK'sını 12'ye indirir; görülürse floş ve küçük kent yapabilir. Pozisyon dışında olduğun için boyut biraz büyük.",
+        "yanilgi": "A5s'i yalnızca 'zayıf as' diye fold etmek.",
+        "spotKimlik": "c08",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d4": {
+    "anlatim": [
+      "3-bet boyutu genellikle açılışın katı olarak düşünülür. Yaygın başlangıç noktaları: pozisyondayken (postflop'ta açan oyuncudan sonra konuşacaksan) açılışın yaklaşık 3 katı, pozisyon dışındayken (blind'lerden) yaklaşık 4 katı. 2,5 BB'lik açılışa IP yaklaşık 7,5 BB, OOP yaklaşık 10 BB; sitedeki spotlarda SB'den 11 BB de kullanılır.",
+      "Neden fark var? Pozisyon dışında oynamak zordur (o3-d2): postflop'ta önce konuşursun. Büyük 3-bet rakibe call için daha kötü fiyat verir, onu daha sık fold'a iter ve görülürse geriye kalan, pozisyonsuz oynanacak chip'leri azaltır. Pozisyondayken küçük boyut yeter; aynı fold equity'yi daha az riskle ararsın ve görülmekten çekinmezsin.",
+      "Rakibin fiyatı nasıl değişir: CO 2,5 BB açtı, BTN 7,5 BB'ye 3-bet yaptı, blind'ler fold etti. CO call için 5 BB öder; pot 0,5 + 1 + 2,5 + 7,5 = 11,5 BB'dir; gereken equity 5 / 16,5 ≈ %30,3. BTN 10 BB'ye 3-bet yapsaydı 7,5 / 21,5 ≈ %34,9 gerekirdi.",
+      "Bunlar kural değil, yaygın başlangıç noktalarıdır. Açılış büyürse 3-bet de büyür; araya call eden oyuncu varsa boyut büyür (c7-d7). Büyük boyutun bir bedeli de vardır: blöf 3-bet'te daha çok chip riske atarsın."
+    ],
+    "terimler": [
+      "3-bet",
+      "IP (pozisyonda)",
+      "OOP (pozisyon dışı)",
+      "Bahis boyutu (sizing)"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Yaygın başlangıç noktasına göre pozisyonda (IP) yapılan 3-bet, açılışın yaklaşık kaç katıdır?",
+        "secenekler": [
+          "2 katı",
+          "3 katı",
+          "5 katı",
+          "10 katı"
+        ],
+        "dogru": 1,
+        "neden": "IP 3-bet için yaygın başlangıç noktası açılışın yaklaşık 3 katıdır.",
+        "yanilgi": "3-bet'in her zaman sabit bir miktar olduğunu sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Yaygın başlangıç noktalarına göre pozisyon dışında (OOP) yapılan 3-bet, pozisyonda yapılandan daha büyüktür.",
+        "dogru": true,
+        "neden": "OOP yaklaşık 4 kat, IP yaklaşık 3 kat yaygın başlangıç noktalarıdır.",
+        "yanilgi": "Boyutun pozisyona göre değişmediğini sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "CO 2,5 BB açtı. BTN'desin; açılışın 3 katı bir 3-bet toplam kaç BB'dir?",
+        "dogru": 7.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "2,5 × 3 = 7,5 BB.",
+        "yanilgi": "Açılışın üstüne 3 BB eklemek (5,5 BB).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "carpim",
+          "terimler": [
+            2.5,
+            3
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "UTG 2,5 BB açtı, diğerleri fold etti. BB'desin; açılışın 4 katı bir 3-bet toplam kaç BB'dir?",
+        "dogru": 10,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "2,5 × 4 = 10 BB.",
+        "yanilgi": "Pozisyon dışında da 3 kat kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "carpim",
+          "terimler": [
+            2.5,
+            4
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Pozisyon dışında 3-bet'i büyük tutmanın gerekçesi hangisidir?",
+        "secenekler": [
+          "Rakibe call için daha kötü fiyat verir ve postflop'ta pozisyonsuz oynanacak chip'leri azaltır",
+          "Rakibi her zaman fold ettirir",
+          "Pozisyon dışında kartlar daha iyi gelir",
+          "Küçük 3-bet kurallara aykırıdır"
+        ],
+        "dogru": 0,
+        "neden": "Pozisyonsuz oynamak zordur (o3-d2). Büyük boyut rakibin fiyatını kötüleştirir, onu daha sık fold'a iter ve görülürse geriye kalan, pozisyonsuz oynanacak chip'leri azaltır.",
+        "yanilgi": "Boyutu kural sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtı, BTN 7,5 BB'ye 3-bet yaptı, SB ve BB fold etti, CO call etti. Flop'a kaç BB'lik potla gidilir?",
+        "dogru": 16.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 7,5 + 7,5 = 16,5 BB.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            7.5,
+            7.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı elde CO call etmeden önce: call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 30.3,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Pot 0,5 + 1 + 2,5 + 7,5 = 11,5 BB, call 5 BB: 5 / 16,5 ≈ %30,3.",
+        "yanilgi": "Call miktarını 7,5 BB almak (CO'nun 2,5 BB'si zaten potta).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 5,
+          "pot": 11.5
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "BTN 7,5 yerine 10 BB'ye 3-bet yapsaydı CO'nun call için gereken equity'si yüzde kaç olurdu? (bir ondalık basamak)",
+        "dogru": 34.9,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Pot 0,5 + 1 + 2,5 + 10 = 14 BB, call 7,5 BB: 7,5 / 21,5 ≈ %34,9. Büyük boyut rakibin fiyatını kötüleştirir.",
+        "yanilgi": "Boyut büyüyünce fiyatın iyileştiğini sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 7.5,
+          "pot": 14
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "3-bet boyutu büyüdükçe genellikle ne olur?",
+        "secenekler": [
+          "Rakibin call fiyatı kötüleşir, ama sen de her 3-bet'te daha çok chip riske atarsın",
+          "Rakip daha sık call eder",
+          "Blöf 3-bet'in başabaş fold oranı düşer",
+          "Hiçbir şey değişmez"
+        ],
+        "dogru": 0,
+        "neden": "Büyük boyut rakibin fiyatını kötüleştirir, ama risk büyüdüğü için blöfün başabaş fold oranı yükselir. Bu bir dengedir.",
+        "yanilgi": "Büyük boyutu bedava sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "BTN 2,5 BB açtı. SB'desin (0,5 BB'n potta) ve 11 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 72.4,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Ek risk 11 − 0,5 = 10,5 BB, pot 4 BB: 10,5 / 14,5 ≈ %72,4.",
+        "yanilgi": "SB'nin 0,5 BB'sini riske katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 10.5,
+          "pot": 4
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "CO 2,5 BB açtı. BTN'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "3-bet 7,5 BB"
+        ],
+        "dogru": 2,
+        "neden": "AQs, CO'nun açılış aralığının çoğundan öndedir; 3-bet ile value alır ve blind'leri elden çıkarırsın. Pozisyonda olduğun için açılışın yaklaşık 3 katı (7,5 BB) yeterli. Call da kötü değil ama blind'lere squeeze fırsatı verir.",
+        "yanilgi": "Pozisyonda da büyük 3-bet gerektiğini sanmak.",
+        "spotKimlik": "c07",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d5": {
+    "anlatim": [
+      "Açtın ve 3-bet yedin. Üç seçeneğin var: fold, call ya da 4-bet (3-bet'in üstüne yapılan yeniden raise). Önce fiyata bak: CO'dan 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, blind'ler fold etti. Pot 0,5 + 1 + 2,5 + 8 = 12 BB, call 5,5 BB; gereken equity 5,5 / 17,5 ≈ %31,4.",
+      "Fiyat tek başına yetmez. 3-bet aralığı açılış aralığından çok daha güçlüdür ve çoğu zaman pozisyon dışında oynarsın. Açılışta rahat olan offsuit ve domine olmaya yatkın eller (AJo, KQo gibi) 3-bet'in value kısmına (AK, AQ, büyük çiftler) karşı sık sık domine durumdadır; bu eller 3-bet'e karşı genellikle fold edilir. Açılış aralığının bir kısmını 3-bet'e bırakmak normaldir.",
+      "Call için genellikle iyi oynanan eller seçilir: orta çiftler, bazı suited broadway'ler ve suited connector'lar, özellikle pozisyondaysan. En güçlü eller (QQ ve üstü, AK gibi) çoğunlukla 4-bet ile devam eder (c7-d6). Rakibe göre ayar yap: çok sıkı 3-bet yapan birine karşı daha sık fold, çok sık 3-bet yapan birine karşı daha sık devam edilir."
+    ],
+    "terimler": [
+      "3-bet",
+      "4-bet",
+      "Dominasyon",
+      "OOP (pozisyon dışı)"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Açtığın ele 3-bet geldi. Seçeneklerin nelerdir?",
+        "secenekler": [
+          "Fold, call ya da 4-bet",
+          "Yalnızca call ya da fold",
+          "Check ya da bet",
+          "Yalnızca 4-bet"
+        ],
+        "dogru": 0,
+        "neden": "3-bet'e karşı fold, call ya da yeniden raise (4-bet) yapılabilir.",
+        "yanilgi": "Bahis varken check edilebileceğini sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "CO'dan 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti. Potta kaç BB var?",
+        "dogru": 12,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 2,5 + 8 = 12 BB.",
+        "yanilgi": "Kendi açılışını pota katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            2.5,
+            8
+          ]
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Aynı durumda call etmek için kaç BB daha ödersin?",
+        "dogru": 5.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "8 − 2,5 = 5,5 BB.",
+        "yanilgi": "Açılışta koyduğun 2,5 BB'yi unutup 8 BB ödeyeceğini sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            8,
+            -2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı durumda call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 31.4,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "5,5 / (12 + 5,5) = 5,5 / 17,5 ≈ %31,4.",
+        "yanilgi": "Payda olarak call öncesi potu almak (5,5 / 12).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 5.5,
+          "pot": 12
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Aynı durumda call edersen postflop'ta BTN'ye karşı pozisyon dışında kalırsın.",
+        "dogru": true,
+        "neden": "Postflop'ta CO, BTN'den önce konuşur.",
+        "yanilgi": "Preflop'ta açan oyuncunun postflop'ta pozisyonda olduğunu sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "konusmaSirasi",
+          "sokak": "postflop",
+          "oyuncular": [
+            "CO",
+            "BTN"
+          ],
+          "soru": "son",
+          "iddia": "BTN"
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "3-bet aralığı genellikle açılış aralığından daha güçlüdür.",
+        "dogru": true,
+        "neden": "Oyuncular açtıkları ellerin yalnızca bir kısmıyla 3-bet yapar; bu kısım ağırlıkla güçlü ellerdir.",
+        "yanilgi": "3-bet'i açılış kadar geniş sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Açılışta rahat olan hangi el tipi 3-bet'e karşı genellikle en sorunludur?",
+        "secenekler": [
+          "AJo, KQo gibi offsuit ve domine olmaya yatkın eller",
+          "AA ve KK",
+          "Orta cep çiftleri, pozisyondayken",
+          "Suited broadway'ler, pozisyondayken"
+        ],
+        "dogru": 0,
+        "neden": "Bu eller 3-bet'in value kısmına (AK, AQ, büyük çiftler) karşı sık sık domine durumdadır ve pozisyon dışında zor oynanır; genellikle fold edilir.",
+        "yanilgi": "Açılışta iyi olan her eli 3-bet'e karşı da iyi sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Rakip, yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir oyuncu. Ona karşı genellikle ne değişir?",
+        "secenekler": [
+          "Daha sık fold edersin; yalnızca en güçlü ellerle devam edersin",
+          "Daha sık 4-bet blöfü yaparsın",
+          "Her ele call edersin",
+          "Hiçbir şey değişmez"
+        ],
+        "dogru": 0,
+        "neden": "Sıkı bir 3-bet aralığına karşı orta eller çok geride kalır; devam aralığın daralır.",
+        "yanilgi": "Rakip tipine göre ayar yapmamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "eslestirme",
+        "zorluk": 4,
+        "soru": "Genel eğilimleri eşleştir (CO'dan açtın, BTN 3-bet yaptı).",
+        "secenekler": [
+          [
+            "QQ ve üstü, AK",
+            "Çoğunlukla 4-bet"
+          ],
+          [
+            "Orta çiftler ve bazı suited broadway'ler",
+            "Sık sık call"
+          ],
+          [
+            "AJo, KQo gibi offsuit eller",
+            "Çoğunlukla fold"
+          ]
+        ],
+        "neden": "En güçlü eller 4-bet ile devam eder, iyi oynanan orta eller call'a, domine olmaya yatkın offsuit eller fold'a gider. Ayrıntılar rakibe ve stack'e göre değişir.",
+        "yanilgi": "Bütün eller için tek bir cevap aramak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "HJ'den 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (5,5 BB daha)",
+          "4-bet 20 BB"
+        ],
+        "dogru": 0,
+        "neden": "Gereken equity 5,5 / 17,5 ≈ %31,4. Fiyat makul görünse de HJ açılışına gelen 3-bet aralığı genellikle güçlüdür; AJo onun value kısmına (AQ, AK, büyük çiftler) karşı domine durumda ve pozisyon dışında oynanacak. Açılış aralığının bir kısmını 3-bet'e bırakmak normaldir: fold.",
+        "yanilgi": "Yalnızca fiyata bakıp call etmek.",
+        "spotKimlik": "c10",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d6": {
+    "anlatim": [
+      "4-bet, 3-bet'in üstüne yapılan raise; 5-bet de 4-bet'in üstüne. Sayım aynı mantıkla sürer. 100 BB'de bu bahisler stack'in büyük kısmını ortaya koyar: CO 2,5 BB açtı, BTN 8 BB'ye 3-bet, CO 20 BB'ye 4-bet yaptı. CO stack'inin %20'sini koymuştur; bir sonraki raise (5-bet) çoğunlukla all-in olur, yani bütün chip'ler ortaya konur.",
+      "Bu yüzden 100 BB'de 4-bet ve 5-bet aralıkları dardır: neredeyse bütün stack'i preflop'ta riske atmak için elin, rakibin devam edeceği dar ve güçlü aralığa karşı iyi durumda olması gerekir. 4-bet'in value kısmı çoğunlukla en güçlü çiftler ve AK gibi ellerden oluşur; buna az sayıda blöf eklenir. Blöfler genellikle bloker taşıyan, ör. bir as içeren ellerdir. Böyle bir aralık polarizedir.",
+      "4-bet boyutu yaygın olarak 3-bet'in kabaca 2–2,5 katıdır; pozisyon dışında genellikle biraz daha büyük. 20 BB'lik bir 4-bet call edilirse flop'a 41,5 BB'lik potla ve 80 BB'lik stack'lerle gidilir. Stack'ler daha derinse (ör. 200 BB) bu aralıklar genişleyebilir; bu ünite 100 BB varsayar."
+    ],
+    "terimler": [
+      "4-bet",
+      "5-bet",
+      "All-in",
+      "Polarize aralık",
+      "Blocker"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "4-bet nedir?",
+        "secenekler": [
+          "3-bet'in üstüne yapılan yeniden raise",
+          "Dört oyuncunun call ettiği pot",
+          "4 BB'lik açılış",
+          "Flop'taki dördüncü bahis"
+        ],
+        "dogru": 0,
+        "neden": "Sayım devam eder: blind 1., açılış 2., 3-bet 3., 4-bet 4. bahistir.",
+        "yanilgi": "4-bet'i 4 BB'lik açılış sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "5-bet, bir 4-bet'in üstüne yapılan raise'dir.",
+        "dogru": true,
+        "neden": "Sayım aynı mantıkla sürer.",
+        "yanilgi": "Sayımı karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "siralama",
+        "zorluk": 2,
+        "soru": "Preflop bahisleri sıraya koy (ilk bahisten son bahse).",
+        "secenekler": [
+          "Blind",
+          "Açılış",
+          "3-bet",
+          "4-bet",
+          "5-bet"
+        ],
+        "neden": "Blind birinci, açılış ikinci bahistir; her yeniden raise sayıyı bir artırır.",
+        "yanilgi": "Açılışı birinci bahis saymak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "BTN 8 BB'ye 3-bet yaptı. CO, 3-bet'in 2,5 katı bir 4-bet yapıyor. 4-bet toplam kaç BB'dir?",
+        "dogru": 20,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "8 × 2,5 = 20 BB.",
+        "yanilgi": "3-bet'in üstüne 2,5 BB eklemek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "carpim",
+          "terimler": [
+            8,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtı, BTN 8 BB'ye 3-bet, CO 20 BB'ye 4-bet yaptı; SB ve BB fold etmişti. BTN call ederse flop'a kaç BB'lik potla gidilir?",
+        "dogru": 41.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 20 + 20 = 41,5 BB.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            20,
+            20
+          ]
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı elde stack'ler 100 BB idi. 4-bet call edildikten sonra her oyuncunun önünde kaç BB kalır?",
+        "dogru": 80,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "100 − 20 = 80 BB.",
+        "yanilgi": "Potu stack'ten düşmek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            100,
+            -20
+          ]
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO, 20 BB'lik 4-bet ile 100 BB'lik stack'inin yüzde kaçını ortaya koydu?",
+        "dogru": 20,
+        "tolerans": 0,
+        "birim": "%",
+        "neden": "20 / 100 = %20.",
+        "yanilgi": "4-bet'i küçük bir bahis sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "oranYuzde",
+          "terimler": [
+            20,
+            100
+          ]
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "100 BB'de bir 5-bet çoğunlukla all-in'dir.",
+        "dogru": true,
+        "neden": "4-bet sonrası stack'in büyük kısmı ortadadır; bir sonraki raise için anlamlı bir ara boyut kalmaz.",
+        "yanilgi": "5-bet'i normal bir raise boyutuyla düşünmek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "100 BB'de 4-bet ve 5-bet aralıklarının dar olmasının temel nedeni nedir?",
+        "secenekler": [
+          "Bu bahisler stack'in büyük kısmını ortaya koyar ve karşıdaki devam aralığı çok güçlüdür",
+          "Kurallar 4-bet sayısını sınırlar",
+          "Blind'ler çok küçüktür",
+          "Flop'ta pozisyon önemsizdir"
+        ],
+        "dogru": 0,
+        "neden": "Stack'in büyük kısmını riske atmak için elin, rakibin dar ve güçlü devam aralığına karşı iyi durumda olması gerekir.",
+        "yanilgi": "Darlığı bir kural sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Elinde A♠ 5♠ var ve 4-bet blöfü düşünüyorsun. Rakibin AA ve AK kombinasyonlarının toplamı kaçtır? (Elinde as yokken 6 + 16 = 22.)",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "AA 3 + AK 12 = 15. Bu yüzden 4-bet blöfleri genellikle as içeren ellerle seçilir.",
+        "yanilgi": "Bloker etkisini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 5♠",
+          "eller": [
+            "AA",
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "CO'dan 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "4-bet 20 BB"
+        ],
+        "dogru": 2,
+        "neden": "Butonun CO'ya karşı 3-bet aralığı JJ, TT, AQ gibi elleri ve blöfleri de içerir; QQ bu aralığa karşı genellikle öndedir. 4-bet ile daha kötü ellerden value alır, AK gibi ellerin equity'sini ucuza görmesini engellersin. Yalnızca en güçlü ellerle 3-bet yapan çok sıkı bir rakibe karşı call daha güvenli olurdu.",
+        "yanilgi": "Büyük potta QQ'nun her zaman geride olduğunu varsaymak.",
+        "spotKimlik": "c09",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d7": {
+    "anlatim": [
+      "Squeeze, bir açılış ve en az bir call'dan sonra yapılan 3-bet'tir. CO açtı, BTN call etti ve sıra sende: bu noktadaki 3-bet bir squeeze'dir.",
+      "Squeeze'in fazladan fold equity'si iki yerden gelir. Pot daha büyüktür; call eden oyuncunun chip'leri de ortadadır. Call eden oyuncunun aralığı ise çoğunlukla sınırlıdır: en güçlü ellerinin çoğunu genellikle 3-bet ile oynardı, bu yüzden büyük bir 3-bet'e sık fold eder. Açan oyuncu da arkasında hâlâ konuşacak biri olduğu için daha dikkatli devam eder.",
+      "Squeeze boyutu normal 3-bet'ten büyüktür, çünkü birden çok rakibe karşı oynarsın ve küçük boyut herkese iyi fiyat verir. Yaygın bir başlangıç kuralı: normal 3-bet boyutuna, call eden her oyuncu için bir açılış boyutu ekle. CO 2,5 BB açtı, BTN call etti: BB'den 4 × 2,5 + 2,5 = 12,5 BB, yani 12–13 BB civarı. Fold equity hesabı: pot 6,5 BB; 13 BB'lik squeeze'de ek risk 12 BB ve başabaş 12 / 18,5 ≈ %64,9. Bu oran, iki rakibin birlikte fold etmesi içindir."
+    ],
+    "terimler": [
+      "Squeeze",
+      "3-bet",
+      "Fold equity",
+      "OOP (pozisyon dışı)"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Squeeze nedir?",
+        "secenekler": [
+          "Bir açılış ve en az bir call'dan sonra yapılan 3-bet",
+          "Blind'lerden yapılan her 3-bet",
+          "4-bet'e yapılan call",
+          "Flop'ta küçük bahis"
+        ],
+        "dogru": 0,
+        "neden": "Squeeze, açılış ve call'un arasına sıkışan oyuncuları baskılayan 3-bet'tir.",
+        "yanilgi": "Her 3-bet'i squeeze sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "UTG açtı, herkes fold etti, BB 3-bet yaptı. Bu bir squeeze'dir.",
+        "dogru": false,
+        "neden": "Araya call eden oyuncu yok; bu normal bir 3-bet'tir.",
+        "yanilgi": "Blind'den yapılan her 3-bet'i squeeze sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "CO 2,5 BB açtı, BTN call etti, SB fold etti. BB'desin. Squeeze'den önce potta kaç BB var?",
+        "dogru": 6.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 2,5 + 2,5 = 6,5 BB.",
+        "yanilgi": "Call eden oyuncunun chip'lerini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            2.5,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Aynı durumda yaygın başlangıç kuralıyla squeeze boyutu: OOP 3-bet (açılışın 4 katı) + call eden her oyuncu için bir açılış boyutu. Toplam kaç BB?",
+        "dogru": 12.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "4 × 2,5 = 10; bir call eden için + 2,5 = 12,5 BB (spotlarda 13 BB'ye yuvarlanır).",
+        "yanilgi": "Squeeze'i normal 3-bet boyutunda bırakmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            10,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Call eden oyuncunun aralığı neden çoğunlukla sınırlıdır?",
+        "secenekler": [
+          "En güçlü ellerinin çoğunu genellikle 3-bet ile oynardı",
+          "Call eden oyuncular hep zayıf oynar",
+          "Call kurallara göre zayıf ellerle yapılır",
+          "Blind'ler onun elini görür"
+        ],
+        "dogru": 0,
+        "neden": "AA, KK gibi eller çoğunlukla 3-bet edilir; call aralığında daha az bulunur. Bu yüzden büyük bir squeeze'e sık fold eder.",
+        "yanilgi": "Call aralığını açılış aralığıyla aynı sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtı, BTN call etti, SB fold etti. BB'den 13 BB'ye squeeze yapıyorsun (1 BB'n potta). Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 64.9,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Ek risk 12 BB, pot 6,5 BB: 12 / 18,5 ≈ %64,9.",
+        "yanilgi": "Potu yalnızca açılış ve blind'ler (4 BB) saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 12,
+          "pot": 6.5
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Squeeze'in potu hemen alması için açan oyuncu ve call eden oyuncu, ikisinin de fold etmesi gerekir.",
+        "dogru": true,
+        "neden": "Biri bile devam ederse pot preflop'ta bitmez.",
+        "yanilgi": "Tek bir rakibin fold'unu yeterli sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "UTG 2,5 BB açtı, HJ ve CO call etti, BTN fold etti. SB'desin. Aynı kuralla (OOP 4 kat + call eden başına bir açılış) squeeze kaç BB olur?",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "4 × 2,5 = 10; iki call eden için + 5 = 15 BB.",
+        "yanilgi": "Call eden sayısını hesaba katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            10,
+            2.5,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Aynı durumda squeeze öncesi pot 0,5 + 1 + 3 × 2,5 = 9 BB. SB'den 15 BB'ye squeeze'in (0,5 BB'n potta) başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 61.7,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Ek risk 14,5 BB: 14,5 / (14,5 + 9) ≈ %61,7. Bu oran, üç rakibin birlikte fold etmesi içindir.",
+        "yanilgi": "SB'deki 0,5 BB'yi riske katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 14.5,
+          "pot": 9
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Squeeze boyutunun normal 3-bet'ten büyük olması neden yaygındır?",
+        "secenekler": [
+          "Birden çok rakibe karşı oynarsın; küçük boyut call'lara iyi fiyat verir",
+          "Küçük squeeze kurallara aykırıdır",
+          "Büyük boyut rakipleri her zaman fold ettirir",
+          "Pot küçük olduğu için"
+        ],
+        "dogru": 0,
+        "neden": "Pottaki chip'ler arttıkça küçük bir 3-bet herkese ucuz devam imkânı verir; boyut büyütülür.",
+        "yanilgi": "Büyük boyutu garanti sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "CO 2,5 BB açtı, BTN call etti, SB fold etti. BB'desin. Hamlen?",
+        "secenekler": [
+          "Call",
+          "3-bet 9 BB",
+          "3-bet 13 BB (squeeze)"
+        ],
+        "dogru": 2,
+        "neden": "JJ iki rakibin aralığına karşı da genellikle öndedir ama üç kişilik potta pozisyon dışında oynamak zordur. Büyük squeeze, call eden butonun çoğunlukla sınırlı aralığını cezalandırır ve potu sık sık hemen kazandırır. 9 BB herkese iyi fiyat verir; boyut 13 BB.",
+        "yanilgi": "Pozisyon dışında iki rakibe karşı küçük 3-bet ya da yalnızca call.",
+        "spotKimlik": "c12",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-d8": {
+    "anlatim": [
+      "Önündeki bir oyuncu limp etti (o4-d5: raise yapmadan yalnızca BB'yi görmek). Raise yaparak onu izole edebilirsin: diğerlerini, özellikle blind'leri fold ettirip limp eden oyuncuyla, çoğunlukla pozisyonda, baş başa kalmak. Buna izolasyon raise'i (iso-raise) denir.",
+      "Amaç şudur: limp aralığı çoğu zaman zayıftır, çünkü çoğu oyuncu güçlü elleriyle raise yapar. Elin bu aralığa karşı iyi durumdaysa potu büyütüp pozisyonda oynamak genellikle kârlıdır; limp eden fold ederse de pottaki chip'leri alırsın. Pasif ve çok el oynayan oyunculara karşı izolasyon daha değerlidir.",
+      "Boyut: limp ile pota giren her chip rakiplere call için daha iyi fiyat verir; bu yüzden iso-raise normal açılıştan büyüktür. Basit bir başlangıç kuralı: yaklaşık 3 BB'lik bir tabana her limp için 1 BB ekle; pozisyon dışındaysan (ör. SB'den) biraz daha büyük aç. Bir limp'e 4 BB, iki limp'e 5 BB. Bu kesin bir değer değil, bir başlangıç noktasıdır."
+    ],
+    "terimler": [
+      "İzolasyon",
+      "Limp",
+      "IP (pozisyonda)"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "İzolasyon raise'inin (iso-raise) amacı nedir?",
+        "secenekler": [
+          "Limp eden oyuncuyla, çoğunlukla pozisyonda, baş başa kalmak",
+          "Blind'leri pota sokmak",
+          "Potu küçük tutmak",
+          "Limp eden oyuncuyu kurallara uymaya zorlamak"
+        ],
+        "dogru": 0,
+        "neden": "Raise ile diğer oyuncuları ve blind'leri fold ettirip limp eden oyuncuyla tek başına oynamayı hedeflersin.",
+        "yanilgi": "İzolasyonu çok oyunculu pot kurmak sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Limp, preflop'ta raise yapmadan yalnızca BB'yi görerek pota girmektir.",
+        "dogru": true,
+        "neden": "o4-d5'te gördüğün tanım.",
+        "yanilgi": "Limp'i küçük bir raise sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "UTG limp etti. Basit başlangıç kuralıyla (yaklaşık 3 BB + her limp için 1 BB) BTN'den iso-raise kaç BB olur?",
+        "dogru": 4,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "3 + 1 = 4 BB.",
+        "yanilgi": "Normal açılış boyutunda kalmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "UTG ve HJ limp etti. Aynı kuralla BTN'den iso-raise kaç BB olur?",
+        "dogru": 5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "3 + 2 × 1 = 5 BB.",
+        "yanilgi": "Limp sayısını hesaba katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            3,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "UTG limp etti, sana kadar herkes fold etti. BTN'desin. Raise yapmadan önce potta kaç BB var?",
+        "dogru": 2.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 1 = 2,5 BB.",
+        "yanilgi": "Limp'i pota katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "BTN'den 4 BB'ye iso-raise yaptın; blind'ler fold etti, UTG call etti. Flop'a kaç BB'lik potla gidilir?",
+        "dogru": 9.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 4 + 4 = 9,5 BB.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            4,
+            4
+          ]
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Limp aralığı neden çoğu zaman zayıftır?",
+        "secenekler": [
+          "Çoğu oyuncu güçlü ellerle raise yapar",
+          "Limp yalnızca zayıf ellerle yapılabilir",
+          "Limp eden oyuncu hep blind'dedir",
+          "Limp edenler kartlarına bakmaz"
+        ],
+        "dogru": 0,
+        "neden": "Güçlü eller genellikle raise ile oynanır; limp edenlerin aralığında bunlar azdır. İstisnalar vardır (ör. tuzak kurmak isteyen oyuncular).",
+        "yanilgi": "Limp'i kural gereği zayıf sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "İzolasyon, pasif ve çok el oynayan oyunculara karşı genellikle daha değerlidir.",
+        "dogru": true,
+        "neden": "Bu oyuncuların aralığı geniş ve zayıftır; postflop'ta da az baskı kurarlar.",
+        "yanilgi": "Her limp edene aynı biçimde davranmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "UTG limp etti; BTN'den 4 BB'ye iso-raise yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan herkesin fold etmesi için başabaş oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 61.5,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Risk 4 BB, pot 2,5 BB: 4 / 6,5 ≈ %61,5. İzolasyon çoğunlukla value elleriyle yapıldığı için görüldüğünde de kazanma şansın vardır.",
+        "yanilgi": "Potu yalnızca blind'ler saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 4,
+          "pot": 2.5
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Limp eden sayısı arttıkça iso-raise neden büyür?",
+        "secenekler": [
+          "Pottaki her limp, rakiplere call için daha iyi fiyat verir",
+          "Kurallar bunu ister",
+          "Limp edenler daha güçlü olur",
+          "Blind'ler büyür"
+        ],
+        "dogru": 0,
+        "neden": "Pot büyüdükçe aynı raise daha ucuz görünür; fiyatı korumak için boyut büyütülür.",
+        "yanilgi": "Boyutu sabit tutmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "UTG limp etti, sana kadar herkes fold etti. UTG çok el oynayan, pasif bir oyuncu. BTN'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Limp (arkadan gir)",
+          "4 BB'ye raise"
+        ],
+        "dogru": 2,
+        "neden": "Pasif ve gevşek bir oyuncunun limp aralığı zayıftır; ATs ona karşı güçlü bir value elidir. Raise ile blind'leri eleyip bu oyuncuyla pozisyonda baş başa kalırsın. Boyut basit kuralla: 3 + 1 = 4 BB.",
+        "yanilgi": "Arkadan limp edip blind'lere ucuz flop vermek.",
+        "spotKimlik": "c11",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c7-k": {
+    "anlatim": [
+      "Bu kontrol, ünitenin sekiz dersinden karışık sorular içerir. Boyutlar (IP yaklaşık 3 kat, OOP yaklaşık 4 kat, squeeze'de call eden başına bir açılış, iso-raise'de 3 BB + limp başına 1 BB) kesin kural değil, yaygın başlangıç noktalarıdır."
+    ],
+    "terimler": [],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "3-bet'in iki temel amacı value ve fold equity'dir.",
+        "dogru": true,
+        "neden": "Güçlü elle daha kötü ellerden chip almak ve rakibi fold ettirmek.",
+        "yanilgi": "3-bet'i yalnızca güçlü ellerin hamlesi sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Hangisi bir squeeze'dir?",
+        "secenekler": [
+          "HJ açtı, CO call etti, BTN 3-bet yaptı",
+          "UTG açtı, BB 3-bet yaptı",
+          "BTN açtı, BB call etti",
+          "CO açtı, BTN 3-bet yaptı, CO 4-bet yaptı"
+        ],
+        "dogru": 0,
+        "neden": "Squeeze, bir açılış ve en az bir call'dan sonra yapılan 3-bet'tir.",
+        "yanilgi": "Her 3-bet'i squeeze sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Elinde A♥ Q♣ var. Rakibin kaç AA kombinasyonu olabilir?",
+        "dogru": 3,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "Kalan üç astan ikisi: 3.",
+        "yanilgi": "6 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♥ Q♣",
+          "eller": [
+            "AA"
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "UTG 2,5 BB açtı, diğerleri fold etti. SB'desin; açılışın 4 katı bir 3-bet toplam kaç BB'dir?",
+        "dogru": 10,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "2,5 × 4 = 10 BB.",
+        "yanilgi": "Pozisyon dışında 3 kat kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "carpim",
+          "terimler": [
+            2.5,
+            4
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Polarize 3-bet aralığı nedir?",
+        "secenekler": [
+          "Çok güçlü eller ve blöflerden oluşan, ortası call'a ayrılan aralık",
+          "En iyi ellerden aşağı kesintisiz inen aralık",
+          "Yalnızca blöflerden oluşan aralık",
+          "Yalnızca çiftlerden oluşan aralık"
+        ],
+        "dogru": 0,
+        "neden": "Polarize aralığın ortası boştur.",
+        "yanilgi": "Lineer ile polarizeyi karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "HJ'den 2,5 BB açtın, CO 9 BB'ye 3-bet yaptı, BTN, SB ve BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 33.3,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Pot 0,5 + 1 + 2,5 + 9 = 13 BB, call 6,5 BB: 6,5 / 19,5 ≈ %33,3.",
+        "yanilgi": "Call miktarını 9 BB almak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 6.5,
+          "pot": 13
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtı. BTN'den 8 BB'ye 3-bet blöfü yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 66.7,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "8 / (8 + 4) ≈ %66,7.",
+        "yanilgi": "Payda olarak yalnızca potu almak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 8,
+          "pot": 4
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "BTN 2,5 BB açtı. SB'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "3-bet 11 BB"
+        ],
+        "dogru": 2,
+        "neden": "SB'de çoğunlukla 3-bet ya da fold. A5s'teki as rakibin AA'sını 3'e, AK'sını 12'ye indirir; görülürse floş ve küçük kent yapabilir. İyi bir blöf 3-bet adayı.",
+        "yanilgi": "Zayıf as diye fold etmek ya da SB'den call etmek.",
+        "spotKimlik": "c08",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "100 BB'de 5-bet genellikle nasıl yapılır?",
+        "secenekler": [
+          "All-in",
+          "Min-raise",
+          "Açılışın 3 katı",
+          "Call ile"
+        ],
+        "dogru": 0,
+        "neden": "4-bet sonrası stack'in büyük kısmı ortada olduğu için 5-bet çoğunlukla all-in'dir.",
+        "yanilgi": "5-bet'i küçük bir raise sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "UTG, HJ ve CO limp etti. Basit başlangıç kuralıyla (yaklaşık 3 BB + her limp için 1 BB) BTN'den iso-raise kaç BB olur?",
+        "dogru": 6,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "3 + 3 × 1 = 6 BB.",
+        "yanilgi": "Limp sayısını hesaba katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            3,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "CO 2,5 BB açtı, BTN call etti, SB fold etti. BB'desin. Hamlen?",
+        "secenekler": [
+          "Call",
+          "3-bet 9 BB",
+          "3-bet 13 BB (squeeze)"
+        ],
+        "dogru": 2,
+        "neden": "JJ önde ama pozisyon dışında ve iki rakibe karşı. Büyük squeeze (13 BB) call eden butonun sınırlı aralığını cezalandırır; 9 BB herkese iyi fiyat verir.",
+        "yanilgi": "Squeeze'i küçük tutmak.",
+        "spotKimlik": "c12",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a12",
+        "tip": "dogruYanlis",
+        "zorluk": 5,
+        "soru": "Elinde A♠ K♦ varken rakibin 9 AK kombinasyonu olabilir.",
+        "dogru": true,
+        "neden": "3 as × 3 papaz = 9.",
+        "yanilgi": "16 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ K♦",
+          "eller": [
+            "AKs",
+            "AKo"
+          ],
+          "iddia": 9
+        }
+      }
+    ]
+  },
+  "c7-r": {
+    "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer: boyutun pozisyonla ilişkisi, bloker sayımı, call bedeli ve başabaş fold oranı."
+    ],
+    "terimler": [],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 2,
+        "soru": "Yaygın başlangıç noktalarına göre pozisyonda yapılan 3-bet, pozisyon dışındakinden büyüktür.",
+        "dogru": false,
+        "neden": "Tersi: IP yaklaşık 3 kat, OOP yaklaşık 4 kat.",
+        "yanilgi": "Pozisyon ile boyut ilişkisini ters kurmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Elinde A♠ 9♦ var. Rakibin kaç AA kombinasyonu olabilir?",
+        "secenekler": [
+          "6",
+          "3",
+          "4",
+          "1"
+        ],
+        "dogru": 1,
+        "neden": "Kalan üç astan ikisi: 3.",
+        "yanilgi": "Bloker etkisini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 9♦",
+          "eller": [
+            "AA"
+          ]
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "HJ 2,5 BB açtı, CO call etti. BTN'desin; IP squeeze: açılışın 3 katı + call eden için bir açılış boyutu. Toplam kaç BB?",
+        "dogru": 10,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "3 × 2,5 = 7,5; + 2,5 = 10 BB.",
+        "yanilgi": "Call edeni hesaba katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            7.5,
+            2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtın, BTN 7,5 BB'ye 3-bet yaptı. Call için kaç BB daha ödersin?",
+        "dogru": 5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "7,5 − 2,5 = 5 BB.",
+        "yanilgi": "Açılışta koyduğunu unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            7.5,
+            -2.5
+          ]
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Value 3-bet'leri hiç blöfle dengelememek, rakiplerin 3-bet'lerine kolayca fold etmesine yol açar.",
+        "dogru": true,
+        "neden": "Yalnızca güçlü ellerle 3-bet yapan oyuncunun 3-bet'i kolay okunur.",
+        "yanilgi": "Blöfsüz oynamanın value'yu artırdığını sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "HJ'den 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (5,5 BB daha)",
+          "4-bet 20 BB"
+        ],
+        "dogru": 0,
+        "neden": "Gereken %31,4; ama AJo 3-bet'in value kısmına karşı sık sık domine ve pozisyon dışında. Fold.",
+        "yanilgi": "Yalnızca fiyata bakmak.",
+        "spotKimlik": "c10",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "CO'dan 2,5 BB açtın, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "4-bet 20 BB"
+        ],
+        "dogru": 2,
+        "neden": "QQ, butonun 3-bet aralığına karşı genellikle önde; 4-bet ile value alırsın.",
+        "yanilgi": "QQ'yu 3-bet'e karşı fold etmek.",
+        "spotKimlik": "c09",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "CO 2,5 BB açtı. SB'desin (0,5 BB'n potta) ve 12 BB'ye 3-bet yapıyorsun. Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 74.2,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Ek risk 11,5 BB, pot 4 BB: 11,5 / 15,5 ≈ %74,2.",
+        "yanilgi": "SB'deki 0,5 BB'yi riske katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 11.5,
+          "pot": 4
+        }
+      }
+    ]
+  }
+}
