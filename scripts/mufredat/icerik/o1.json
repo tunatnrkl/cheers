@@ -6,7 +6,9 @@
    "On üç değer küçükten büyüğe şöyle dizilir: 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q, K, A. T onluyu gösterir (İngilizce \"ten\"). J vale, Q kız, K papaz, A astır. As en yüksek karttır; tek bir istisnası var, onu kent dersinde göreceksin.",
    "Kartları kısa yazarız: önce değer, sonra renk. A♠ maça ası, T♦ karo onlusu, 7♣ sinek yedilisi demektir. Bazı yerlerde simge yerine harf görürsün: s maça, h kupa, d karo, c sinek. Yani Kh ile K♥ aynı karttır."
   ],
-  "terimler": [],
+  "terimler": [
+   "Renk"
+  ],
   "alistirmalar": [
    {
     "kimlik": "a1",
@@ -220,13 +222,17 @@
  },
  "o1-d2": {
   "anlatim": [
-   "Pokerde bir \"el\" her zaman beş karttan oluşur. Eller güçlerine göre sıralanır ve bu sıralama hiç değişmez. On el çeşidi vardır; bu derste en alttaki dördünü, bir sonrakinde üstteki altısını öğreneceksin.",
+   "Pokerde bir \"el\" her zaman beş karttan oluşur. Eller güçlerine göre sıralanır; buna el sıralaması denir ve bu sıralama hiç değişmez. On el çeşidi vardır; bu derste en alttaki dördünü, bir sonrakinde üstteki altısını öğreneceksin.",
    "En zayıf el yüksek karttır: beş kart arasında hiçbir eşleşme yoktur ve elin gücünü en yüksek kart belirler. Bir üstü perdir: aynı değerden iki kart (örneğin iki sekizli). Sonra iki per gelir: iki ayrı çift (örneğin iki vale ve iki dörtlü). Bu dördünün en güçlüsü üçlüdür: aynı değerden üç kart.",
    "Sıra şöyle: yüksek kart < per < iki per < üçlü. Aynı çeşit iki el karşılaşırsa değeri yüksek olan kazanır: as peri papaz perini yener. İki perde önce yüksek çifte bakılır: as ve ikili iki peri, papaz ve kız iki perini yener. Yüksek kartta en yüksek kartlar eşitse sıradaki karta bakılır.",
    "Sıralamanın mantığı basittir: bir el ne kadar seyrek geliyorsa o kadar güçlüdür. Üçlü, iki perden daha seyrek geldiği için onun üstündedir."
   ],
   "terimler": [
-   "İki per"
+   "El sıralaması",
+   "Yüksek kart",
+   "Per",
+   "İki per",
+   "Üçlü"
   ],
   "alistirmalar": [
    {
@@ -468,9 +474,17 @@
    "Üçlünün üstünde altı el daha var. Kent: değerleri art arda gelen beş kart; renkleri karışık olabilir (örneğin 5-6-7-8-9). Floş: aynı renkten beş kart; değerlerinin sıralı olması gerekmez. Floş kenti yener.",
    "Full house bir üçlü ile bir çiftin birleşimidir (örneğin üç papaz ve iki dörtlü). Kare aynı değerden dört karttır. Sıralı floş hem kent hem floştur: aynı renkten, art arda beş kart. Bunların en yükseği olan T-J-Q-K-A aynı renktense royal floş adını alır ve oyunun en güçlü elidir.",
    "As kentte iki uçta da durabilir: T-J-Q-K-A en yüksek kenttir; A-2-3-4-5 ise en düşük kenttir ve burada as 1 gibi sayılır. Kent astan \"dönemez\": Q-K-A-2-3 kent değildir.",
-   "Tam sıra, zayıftan güçlüye: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş. Aynı çeşit iki elde yine değerler konuşur: yüksek biten kent düşük biteni, en yüksek kartı büyük olan floş diğerini, üçlüsü büyük olan full house diğerini yener."
+   "El sıralamasının tamamı, zayıftan güçlüye: yüksek kart, per, iki per, üçlü, kent, floş, full house, kare, sıralı floş, royal floş. Aynı çeşit iki elde yine değerler konuşur: yüksek biten kent düşük biteni, en yüksek kartı büyük olan floş diğerini, üçlüsü büyük olan full house diğerini yener."
   ],
-  "terimler": [],
+  "terimler": [
+   "Kent",
+   "Floş",
+   "Full house",
+   "Kare",
+   "Sıralı floş",
+   "Royal floş",
+   "El sıralaması"
+  ],
   "alistirmalar": [
    {
     "kimlik": "a1",
@@ -752,7 +766,8 @@
   "terimler": [
    "Kapalı kartlar",
    "Board",
-   "Kicker"
+   "Kicker",
+   "Board'u oynamak"
   ],
   "alistirmalar": [
    {

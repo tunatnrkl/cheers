@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 30 ders, 339 alıştırma.
+**Dolu:** 46 ders, 510 alıştırma.
 
 ## Cash pisti
 
@@ -117,14 +117,14 @@ Herkes fold ettiğinde hangi pozisyondan hangi ellerle açılır.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c5-d1` Açılış boyutu | ders | Varsayılan 2,5 BB açılışın gerekçesini ve boyutun eli ele vermemesi gerektiğini açıklar. | o4-k |
-| `c5-d2` UTG ve HJ açılışları | ders | Erken pozisyonların sıkı açılış aralığını matriste işaretler. | c5-d1, o4-d2 |
-| `c5-d3` CO ve BTN açılışları | ders | Geç pozisyonda aralığın neden genişlediğini açıklar ve örnek elleri sınıflar. | c5-d2 |
-| `c5-d4` SB'den açılış | ders | SB'nin pozisyonsuz kalacağını hesaba katarak açılış ya da fold kararını verir. | c5-d3 |
-| `c5-d5` Sınırdaki eller | ders | Aralığın kenarındaki ellerde kararın yakın olduğunu ve masaya göre değişebildiğini bilir. | c5-d4 |
-| `c5-d6` Rakibe göre küçük ayar | ders | Blind'lerdeki oyuncular sıkı ya da gevşekse açılışı hangi yönde ayarlayacağını söyler. | c5-d5 |
-| `c5-k` Kontrol: Açılış aralıkları | kontrol | "Açılış aralıkları" ünitesinin kazanımlarını karışık sorularda uygular. | c5-d6 |
-| `c5-r` Tekrar: Açılış aralıkları | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c5-k |
+| `c5-d1` Açılış boyutu (10 alıştırma) | ders | Varsayılan 2,5 BB açılışın gerekçesini ve boyutun eli ele vermemesi gerektiğini açıklar. | o4-k |
+| `c5-d2` UTG ve HJ açılışları (11 alıştırma) | ders | Erken pozisyonların sıkı açılış aralığını matriste işaretler. | c5-d1, o4-d2 |
+| `c5-d3` CO ve BTN açılışları (10 alıştırma) | ders | Geç pozisyonda aralığın neden genişlediğini açıklar ve örnek elleri sınıflar. | c5-d2 |
+| `c5-d4` SB'den açılış (10 alıştırma) | ders | SB'nin pozisyonsuz kalacağını hesaba katarak açılış ya da fold kararını verir. | c5-d3 |
+| `c5-d5` Sınırdaki eller (10 alıştırma) | ders | Aralığın kenarındaki ellerde kararın yakın olduğunu ve masaya göre değişebildiğini bilir. | c5-d4 |
+| `c5-d6` Rakibe göre küçük ayar (10 alıştırma) | ders | Blind'lerdeki oyuncular sıkı ya da gevşekse açılışı hangi yönde ayarlayacağını söyler. | c5-d5 |
+| `c5-k` Kontrol: Açılış aralıkları (12 alıştırma) | kontrol | "Açılış aralıkları" ünitesinin kazanımlarını karışık sorularda uygular. | c5-d6 |
+| `c5-r` Tekrar: Açılış aralıkları (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c5-k |
 
 ### c6 · Blind savunması (seviye 4)
 
@@ -132,14 +132,14 @@ Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c6-d1` Fiyat: gereken equity | ders | Equity'yi potun uzun vadedeki payı olarak tanır; açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot). | c5-k, o2-d5 |
-| `c6-d2` BB savunması ve açanın pozisyonu | ders | Aynı fiyatta UTG'ye karşı dar, BTN'ye karşı geniş savunmanın nedenini açıklar. | c6-d1, c5-d3 |
-| `c6-d3` Equity realization | ders | Ham equity'nin tamamının neden kullanılamadığını; suited ve bağlantılı ellerin avantajını açıklar. | c6-d2 |
-| `c6-d4` SB stratejisi | ders | SB'de açılışa karşı call yerine çoğunlukla yeniden raise (3-bet) ya da fold oynamanın gerekçesini pozisyonsuzluk ve arkadaki BB ile açıklar. | c6-d3 |
-| `c6-d5` Çok oyunculu potta BB | ders | Açılış ve call sonrası iyi fiyatla hangi el tiplerinin savunulduğunu seçer. | c6-d4 |
-| `c6-k` Kontrol: Blind savunması | kontrol | "Blind savunması" ünitesinin kazanımlarını karışık sorularda uygular. | c6-d5 |
-| `c6-r` Tekrar: Blind savunması | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c6-k |
-| `c6-t` Seviye 4 testi | test | bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c6-k |
+| `c6-d1` Fiyat: gereken equity (10 alıştırma) | ders | Equity'yi potun uzun vadedeki payı olarak tanır; açılışa call için gereken equity'yi hesaplar (ödenecek / call sonrası pot). | c5-k, o2-d5 |
+| `c6-d2` BB savunması ve açanın pozisyonu (10 alıştırma) | ders | Aynı fiyatta UTG'ye karşı dar, BTN'ye karşı geniş savunmanın nedenini açıklar. | c6-d1, c5-d3 |
+| `c6-d3` Equity realization (10 alıştırma) | ders | Ham equity'nin tamamının neden kullanılamadığını; suited ve bağlantılı ellerin avantajını açıklar. | c6-d2 |
+| `c6-d4` SB stratejisi (10 alıştırma) | ders | SB'de açılışa karşı call yerine çoğunlukla yeniden raise (3-bet) ya da fold oynamanın gerekçesini pozisyonsuzluk ve arkadaki BB ile açıklar. | c6-d3 |
+| `c6-d5` Çok oyunculu potta BB (10 alıştırma) | ders | Açılış ve call sonrası iyi fiyatla hangi el tiplerinin savunulduğunu seçer. | c6-d4 |
+| `c6-k` Kontrol: Blind savunması (12 alıştırma) | kontrol | "Blind savunması" ünitesinin kazanımlarını karışık sorularda uygular. | c6-d5 |
+| `c6-r` Tekrar: Blind savunması (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c6-k |
+| `c6-t` Seviye 4 testi (20 alıştırma) | test | bu pistte seviye 4 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c6-k |
 
 ### c7 · 3-bet ve ötesi (seviye 5)
 

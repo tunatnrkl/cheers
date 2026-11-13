@@ -1,0 +1,1650 @@
+{
+ "c5-d1": {
+  "anlatim": [
+   "Herkes sana kadar fold ettiğinde pota ilk giren raise'e açılış dendiğini o4'te gördün. Bu pistte varsayılan açılış boyutu 2,5 BB'dir: pota toplam 2,5 BB koyarsın. Potta blind'lerden gelen 1,5 BB zaten vardır; herkes fold ederse bu 1,5 BB'yi kazanırsın.",
+   "Neden daha büyük değil? Açılış büyüdükçe her başarısız denemede daha çok chip riske atarsın, ama herkes fold ettiğinde kazancın yine 1,5 BB'dir. Neden en küçük raise (min-raise, 2 BB) değil? Blind'lere daha ucuz bir fiyat verir; yine de bazı oyuncular geç pozisyonda 2 BB'yi tercih eder. Uygulamada 2 ile 3 BB arasındaki boyutlar yaygındır; bu müfredat 2,5 BB'yi varsayar. SB'den açılış biraz daha büyüktür (3 BB); nedenini c5-d4'te göreceksin.",
+   "Açılışın bahis boyutu, elinin gücünden bağımsız olmalıdır. Güçlü ellerle büyük, zayıf ellerle küçük açarsan dikkatli rakipler boyuta bakarak elini tahmin eder. Aynı koltuktan bütün açılışlarını aynı boyutla yapmak bu bilgiyi saklar."
+  ],
+  "terimler": [
+   "Open (açılış)",
+   "Min-raise",
+   "Bahis boyutu (sizing)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Bu müfredatın cash varsayımlarında varsayılan açılış boyutu 2,5 BB'dir.",
+    "dogru": true,
+    "neden": "Cash pistinin varsayımları: 6-max, 100 BB, 2,5 BB açılış, rake yok.",
+    "yanilgi": "Açılış boyutunun her elde serbestçe değiştiğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Blind'ler kondu, herkes sana kadar fold etti ve sen 2,5 BB açtın. Herkes fold etti. Aldığın pot (kendi koyduğun dahil) kaç BB?",
+    "dogru": 4,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 (SB) + 1 (BB) + 2,5 (senin açılışın) = 4 BB.",
+    "yanilgi": "Blind'leri saymamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1,
+      2.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Aynı durumda net kazancın kaç BB'dir?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Kendi 2,5 BB'n geri gelir; kazancın blind'lerin koyduğu 0,5 + 1 = 1,5 BB'dir.",
+    "yanilgi": "Potun tamamını kazanç saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Açılış boyutunu elinin gücüne göre değiştirmenin (güçlüyle büyük, zayıfla küçük) başlıca sakıncası nedir?",
+    "secenekler": [
+     "Rakipler boyuta bakarak elini tahmin edebilir",
+     "Kurallara aykırıdır",
+     "Blind'ler büyür",
+     "Pozisyonunu kaybedersin"
+    ],
+    "dogru": 0,
+    "neden": "Boyut elden bağımsız olduğunda rakip yalnızca açtığını bilir, ne kadar güçlü olduğunu bilmez.",
+    "yanilgi": "Güçlü elle büyük açmanın her zaman daha çok kazandıracağını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Kavramı açıklamasıyla eşleştir.",
+    "secenekler": [
+     [
+      "Min-raise",
+      "Preflop'ta 2 BB'ye açmak"
+     ],
+     [
+      "Standart açılış (bu müfredat)",
+      "2,5 BB"
+     ],
+     [
+      "SB'den açılış (bu müfredat)",
+      "3 BB"
+     ],
+     [
+      "Limp",
+      "Raise yapmadan 1 BB koyup girmek"
+     ]
+    ],
+    "neden": "Bu müfredat koltuklardan 2,5 BB, SB'den 3 BB açılış varsayar.",
+    "yanilgi": "Limp'i küçük bir açılış sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Güçlü ellerle 4 BB, zayıf ellerle 2 BB açmak iyi bir alışkanlıktır.",
+    "dogru": false,
+    "neden": "Böyle bir düzen elini rakiplere söyler. Aynı koltuktan aynı boyutla açmak bu bilgiyi saklar.",
+    "yanilgi": "Boyutu yalnızca kendi elin için düşünmek, rakibin gözünden bakmamak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "BB'desin ve 1 BB koydun. CO 2,5 BB açtı, BTN ve SB fold etti. Call etmek için kaç BB daha koyarsın?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "2,5 − 1 = 1,5 BB.",
+    "yanilgi": "Blind'ini hesaptan düşmemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2.5,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Açılışı çok büyütmek (örneğin 6 BB) neden genellikle gereksizdir?",
+    "secenekler": [
+     "Herkes fold ettiğinde yine 1,5 BB kazanırsın ama her denemede daha çok chip riske atarsın",
+     "Kurallar 3 BB'den büyük açılışı yasaklar",
+     "Büyük açılış blind'leri büyütür",
+     "Büyük açılışta pozisyonunu kaybedersin"
+    ],
+    "dogru": 0,
+    "neden": "Kazanç (blind'ler) sabit kalırken risk büyür. 2,5 BB genellikle yeterli baskıyı kurar.",
+    "yanilgi": "Daha büyük bahsin her zaman daha çok kazandıracağını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "UTG 2,5 BB açtı, BTN call etti, SB ve BB fold etti. Flop'a kaç BB'lik potla gidilir?",
+    "dogru": 6.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 + 1 + 2,5 + 2,5 = 6,5 BB.",
+    "yanilgi": "Fold eden blind'lerin chip'lerini pottan düşmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1,
+      2.5,
+      2.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Açılış 2 BB yerine 3 BB olursa, BB'nin call için ödeyeceği ek miktar nasıl değişir?",
+    "secenekler": [
+     "1 BB'den 2 BB'ye çıkar",
+     "2 BB'den 3 BB'ye çıkar",
+     "Değişmez",
+     "1 BB'den 3 BB'ye çıkar"
+    ],
+    "dogru": 0,
+    "neden": "BB 1 BB'yi zaten koymuştur: 2 − 1 = 1 BB, 3 − 1 = 2 BB.",
+    "yanilgi": "BB'nin koyduğu blind'i unutmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "c5-d2": {
+  "anlatim": [
+   "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver (oyunun dengeli stratejisini hesaplayan bilgisayar programı) çıktısı değildir. Bu aralıklarda erken pozisyonlardan UTG ellerin yaklaşık %15'iyle, HJ yaklaşık %19'uyla açar.",
+   "UTG aralığı kabaca şunlardan oluşur: yüksek ve orta çiftler, suited asların çoğu, güçlü suited broadway'ler (KQs, KJs, QJs, JTs gibi) ve en güçlü offsuit eller (AKo, AQo; kenarda KQo ve AJo). Offsuit eller azdır: domine edilmeye yatkındırlar ve her biri 12 kombinasyon eklediği için aralığı hızla büyütürler.",
+   "HJ, UTG'nin açtığı her eli açar ve birkaç el ekler: küçük bir çift, KJo ve ATo gibi offsuit broadway'ler, birkaç suited el. Arkada bir oyuncu daha az kaldığı için aralık biraz genişler.",
+   "Bu aralıklarda limp yoktur: aralıktaki el 2,5 BB'lik bir açılışla oynanır, aralığın dışındaki el fold edilir."
+  ],
+  "terimler": [
+   "Range (aralık)",
+   "Erken pozisyon",
+   "Open (açılış)",
+   "Solver"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bu müfredatın çalışma aralıklarında UTG ellerin yaklaşık yüzde kaçıyla açar?",
+    "secenekler": [
+     "%5",
+     "%15",
+     "%30",
+     "%50"
+    ],
+    "dogru": 1,
+    "neden": "UTG aralığı 1326 kombinasyonun yaklaşık %15'idir.",
+    "yanilgi": "Erken pozisyonda da ellerin yarısının oynandığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "UTG"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Bu ünitedeki açılış aralıkları solver çıktısıdır.",
+    "dogru": false,
+    "neden": "Aralıklar kendi hesabımızla üretilmiş yaklaşık çalışma aralıklarıdır; solver çıktısı değildir.",
+    "yanilgi": "Her aralık tablosunu kesin doğru sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "spot",
+    "zorluk": 2,
+    "soru": "UTG'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "77 orta bir çifttir ve UTG'nin çalışma aralığındadır. Aralıktaki el limp ile değil, 2,5 BB açılışla oynanır.",
+    "yanilgi": "Orta çiftleri erken pozisyonda fazla zayıf sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-UTG-77",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "77"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Hangisi UTG'nin çalışma aralığındadır?",
+    "secenekler": [
+     "AJs",
+     "K9o",
+     "A5o",
+     "98o"
+    ],
+    "dogru": 0,
+    "neden": "AJs güçlü bir suited as olarak UTG aralığında. K9o, A5o ve 98o offsuit ve domine edilmeye yatkın; UTG'den fold edilir.",
+    "yanilgi": "İçinde as olan her eli erken pozisyonda açılabilir sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kosulluSec",
+     "kosul": [
+      [
+       "UTG",
+       "ac"
+      ]
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "range",
+    "zorluk": 3,
+    "soru": "Bu ellerden UTG'nin çalışma aralığında olanları işaretle.",
+    "secenekler": [
+     "AA",
+     "QQ",
+     "99",
+     "AKo",
+     "AQs",
+     "KQs",
+     "A5s",
+     "K9o",
+     "A9o",
+     "JTo",
+     "22",
+     "Q6s"
+    ],
+    "dogru": [
+     "AA",
+     "QQ",
+     "99",
+     "AKo",
+     "AQs",
+     "KQs",
+     "A5s"
+    ],
+    "neden": "Çiftler (99 ve üstü burada), güçlü suited eller ve AKo aralıkta. K9o, A9o, JTo, 22 ve Q6s UTG için fazla zayıf.",
+    "yanilgi": "Küçük çiftleri ve offsuit asları da erken pozisyonda açmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisAraligi",
+     "poz": "UTG"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "UTG aralığında offsuit eller neden azdır?",
+    "secenekler": [
+     "Domine edilmeye yatkındırlar ve her biri 12 kombinasyonla aralığı hızla büyütür",
+     "Offsuit eller kurallara göre açılamaz",
+     "Offsuit eller hiç per yapmaz",
+     "UTG'ye offsuit el gelmez"
+    ],
+    "dogru": 0,
+    "neden": "ATo, KJo gibi eller daha iyi kicker'lara karşı geride kalır; ayrıca bir offsuit el, bir suited elin üç katı kombinasyon ekler.",
+    "yanilgi": "Suited ve offsuit hâlleri aynı güçte sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "UTG çalışma aralığında 202 kombinasyon var. Bu, bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+    "dogru": 15.2,
+    "tolerans": 0,
+    "birim": "%",
+    "neden": "202 / 1326 × 100 ≈ %15,2.",
+    "yanilgi": "169 el adına bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "UTG"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "spot",
+    "zorluk": 4,
+    "soru": "HJ'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "ATs suited bir as ve HJ'nin çalışma aralığında rahatça yer alıyor.",
+    "yanilgi": "Onlu kicker'ı fazla zayıf bulup fold etmek.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-HJ-ATs",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "HJ",
+     "el": "ATs"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Bu müfredatın aralıklarında UTG'nin açtığı her el HJ'den de açılır.",
+    "dogru": true,
+    "neden": "HJ'nin arkasında bir oyuncu daha az vardır; aralığı UTG'ninkini kapsar ve birkaç el ekler.",
+    "yanilgi": "Her koltuğun tamamen farklı bir el listesi olduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikKapsar",
+     "dar": "UTG",
+     "genis": "HJ"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "spot",
+    "zorluk": 5,
+    "soru": "UTG'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "K9o offsuit ve kopuk bir el; arkada beş oyuncu varken gördüğünde çoğu zaman daha iyi bir papaz ya da as eline karşı oynarsın. UTG aralığının dışında.",
+    "yanilgi": "Suited hâli (K9s) kenarda diye offsuit hâlini de açılabilir sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-UTG-K9o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "K9o"
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "Bu müfredatın aralıklarında UTG'den A5s açılır ama A5o açılmaz.",
+    "dogru": true,
+    "neden": "A5s floş ve A-2-3-4-5 kenti yapabildiği için aralıkta; A5o offsuit ve zayıf kicker'lı, erken pozisyonda fold.",
+    "yanilgi": "Suited ve offsuit hâlleri aynı sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisCoklu",
+     "kontroller": [
+      [
+       "UTG",
+       "A5s",
+       "ac"
+      ],
+      [
+       "UTG",
+       "A5o",
+       "fold"
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "c5-d3": {
+  "anlatim": [
+   "Geç pozisyonda arkanda daha az oyuncu kalır: CO'da üç (BTN, SB, BB), BTN'de iki. İçlerinden birinin güçlü el tutma ihtimali azalır; pota girdiğinde de blind'lere karşı postflop'ta pozisyonda olursun. Bu yüzden aralık genişler: çalışma aralıklarımızda CO ellerin yaklaşık %27'siyle, BTN yaklaşık %43'üyle açar.",
+   "Eklenen eller: küçük çiftler, daha zayıf suited aslar ve papazlar, suited connector'lar (98s, 87s gibi), offsuit broadway'ler ve BTN'de en zayıf offsuit aslara kadar (A2o) eller.",
+   "Geç pozisyondan yapılan ve asıl amacı blind'leri almak olan açılışa blind çalma (steal) denir. Blind'ler fold ederse 1,5 BB'yi alırsın; call ederlerse postflop'ta pozisyonda oynarsın.",
+   "Geniş aralık \"her eli aç\" demek değildir: BTN'den bile 72o, J4o, K4o gibi eller fold edilir. Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir."
+  ],
+  "terimler": [
+   "Geç pozisyon",
+   "Steal (blind çalma)",
+   "Range (aralık)",
+   "Connector"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bu müfredatın çalışma aralıklarında BTN ellerin yaklaşık yüzde kaçıyla açar?",
+    "secenekler": [
+     "%15",
+     "%27",
+     "%43",
+     "%80"
+    ],
+    "dogru": 2,
+    "neden": "BTN aralığı yaklaşık %43'tür; arkasında yalnızca blind'ler kalır.",
+    "yanilgi": "BTN'den her elin açıldığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "BTN"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Geç pozisyonda aralık genişler, çünkü arkada daha az oyuncu kalır.",
+    "dogru": true,
+    "neden": "Arkadaki oyuncu sayısı azaldıkça güçlü bir elle karşılaşma ihtimali düşer; pozisyon da senden yana olur.",
+    "yanilgi": "Aralığın her koltukta aynı olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "spot",
+    "zorluk": 2,
+    "soru": "BTN'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "KJo, BTN'nin çalışma aralığında rahatça yer alır: yalnızca iki blind'i geçmen gerekir ve postflop'ta pozisyondasın.",
+    "yanilgi": "Offsuit broadway'leri her koltukta zayıf sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-BTN-KJo",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "BTN",
+     "el": "KJo"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Bu müfredatın çalışma aralıklarında CO ellerin yaklaşık yüzde kaçıyla açar?",
+    "secenekler": [
+     "%15",
+     "%19",
+     "%27",
+     "%43"
+    ],
+    "dogru": 2,
+    "neden": "CO aralığı yaklaşık %27'dir; UTG'den geniş, BTN'den dar.",
+    "yanilgi": "CO ile BTN'yi aynı saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "CO"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "range",
+    "zorluk": 3,
+    "soru": "Bu ellerden BTN'nin çalışma aralığında olanları işaretle.",
+    "secenekler": [
+     "K9o",
+     "Q9o",
+     "A2o",
+     "22",
+     "T9o",
+     "72o",
+     "J4o",
+     "83o",
+     "K4o"
+    ],
+    "dogru": [
+     "K9o",
+     "Q9o",
+     "A2o",
+     "22",
+     "T9o"
+    ],
+    "neden": "BTN aralığı küçük çiftleri, offsuit asların hepsini ve K9o, Q9o, T9o gibi bağlantılı ya da yüksek offsuit elleri içerir. 72o, J4o, 83o ve K4o butondan da fold.",
+    "yanilgi": "Butonda her elin açılabildiğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisAraligi",
+     "poz": "BTN"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Blind çalma (steal) nedir?",
+    "secenekler": [
+     "Geç pozisyondan, asıl amacı blind'leri almak olan açılış",
+     "Blind'deyken açılışa call etmek",
+     "Kartları göstermeden potu almak için yapılan her bahis",
+     "Preflop'ta limp yapmak"
+    ],
+    "dogru": 0,
+    "neden": "Steal, blind'leri fold ettirmeyi hedefleyen geç pozisyon açılışıdır.",
+    "yanilgi": "Steal'i bir kural ihlali ya da yalnızca blöf sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "spot",
+    "zorluk": 3,
+    "soru": "CO'dasın, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "A9o erken pozisyonda fold edilir ama CO'da arkada üç oyuncu kalır; çalışma aralığımızda açılır.",
+    "yanilgi": "Bir elin her koltukta aynı kararı gerektirdiğini sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-CO-A9o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "CO",
+     "el": "A9o"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Bu müfredatın aralıklarında Q9o BTN'den açılır ama UTG'den açılmaz.",
+    "dogru": true,
+    "neden": "Q9o, BTN aralığında; UTG'de ise fazla zayıf.",
+    "yanilgi": "Koltuk değişse de el kararının değişmediğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisCoklu",
+     "kontroller": [
+      [
+       "BTN",
+       "Q9o",
+       "ac"
+      ],
+      [
+       "UTG",
+       "Q9o",
+       "fold"
+      ]
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "spot",
+    "zorluk": 4,
+    "soru": "BTN'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "J4o butondan da fold edilir: offsuit, kopuk ve düşük kicker'lı. Blind'ler görürse çoğu zaman geride kalırsın.",
+    "yanilgi": "Butonda her eli blind çalmak için açmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-BTN-J4o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "BTN",
+     "el": "J4o"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Hangi el CO'dan açılır ama UTG'den açılmaz?",
+    "secenekler": [
+     "A9o",
+     "AA",
+     "72o",
+     "K4o"
+    ],
+    "dogru": 0,
+    "neden": "A9o UTG'de fold, CO'da açılır. AA her koltukta açılır; 72o ve K4o ikisinde de fold.",
+    "yanilgi": "Koltuğa bakmadan yalnızca elin gücüne göre karar vermek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kosulluSec",
+     "kosul": [
+      [
+       "CO",
+       "ac"
+      ],
+      [
+       "UTG",
+       "fold"
+      ]
+     ]
+    }
+   }
+  ]
+ },
+ "c5-d4": {
+  "anlatim": [
+   "Herkes SB'ye kadar fold ettiyse karşında yalnızca BB vardır. Tek rakip olduğu için aralık geniştir: çalışma aralıklarımızda SB ellerin yaklaşık %38'iyle açar. Yine de BTN'den (%43) biraz dardır, çünkü SB el boyunca BB'ye karşı pozisyon dışında oynar.",
+   "Bu müfredatta SB açılışı 3 BB varsayılır. SB pota zaten 0,5 BB koymuştur; açmak için 2,5 BB daha ekler. Pozisyon dışında oynayacağı için BB'ye ucuz bir fiyat vermemek amacıyla diğer koltuklardan biraz büyük açılır: 3 BB'lik açılışa BB call için 2 BB öder.",
+   "Bazı oyuncular SB'de limp de kullanır (eksik 0,5 BB'yi tamamlamak). Bu ünitede yalnızca aç ya da fold öğretiyoruz. Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir."
+  ],
+  "terimler": [
+   "SB (Small Blind)",
+   "OOP (pozisyon dışı)",
+   "Open (açılış)",
+   "Limp"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "SB'den açıp BB call ederse, postflop'ta SB pozisyon dışında kalır.",
+    "dogru": true,
+    "neden": "Postflop'ta SB, BB'den önce konuşur.",
+    "yanilgi": "Preflop'ta BB'den önce konuşan SB'nin pozisyon avantajı olduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "konusmaSirasi",
+     "sokak": "postflop",
+     "oyuncular": [
+      "SB",
+      "BB"
+     ],
+     "soru": "ilk",
+     "iddia": "SB"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bu müfredatın çalışma aralıklarında SB, herkes fold ettiğinde ellerin yaklaşık yüzde kaçıyla açar?",
+    "secenekler": [
+     "%15",
+     "%27",
+     "%38",
+     "%80"
+    ],
+    "dogru": 2,
+    "neden": "SB aralığı yaklaşık %38'dir: tek rakip var ama pozisyon dışında oynanacak.",
+    "yanilgi": "Tek rakip var diye her elin açılabileceğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "SB"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Herkes SB'ye kadar fold etti. SB 3 BB'ye açıyor. Pota kaç BB daha ekler?",
+    "dogru": 2.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "SB 0,5 BB'yi zaten koymuştur: 3 − 0,5 = 2,5 BB.",
+    "yanilgi": "SB'nin koyduğu blind'i hesaba katmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      -0.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "SB 3 BB'ye açtı. BB call etmek için kaç BB daha koyar?",
+    "dogru": 2,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "3 − 1 = 2 BB.",
+    "yanilgi": "BB'nin blind'ini unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "spot",
+    "zorluk": 3,
+    "soru": "Herkes sana kadar fold etti, SB'desin. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (tamamla)",
+     "3 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "Tek rakibe karşı as içeren eller genellikle önde başlar; A5o SB'nin çalışma aralığında. Pozisyon dışında oynayacağın için 3 BB açılır. Bu müfredat SB'de aç ya da fold varsayar; limp de bazı stratejilerde kullanılır.",
+    "yanilgi": "Pozisyon dışında olduğu için SB'de bütün zayıf asları fold etmek.",
+    "dogrulamaGerekli": true,
+    "spotKimlik": "c04",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "SB",
+     "el": "A5o"
+    },
+    "kabulEdilebilir": [
+     1
+    ]
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "SB'nin açılış aralığı neden BTN'ninkinden biraz dardır?",
+    "secenekler": [
+     "SB el boyunca BB'ye karşı pozisyon dışında oynar",
+     "SB'ye daha kötü kart gelir",
+     "SB'nin arkasında daha çok oyuncu vardır",
+     "SB'nin açması kurallarla sınırlıdır"
+    ],
+    "dogru": 0,
+    "neden": "SB'nin arkasında yalnızca BB kalır, ama postflop'ta her sokakta önce konuşur. Bu dezavantaj aralığı biraz daraltır.",
+    "yanilgi": "Arkadaki oyuncu sayısını tek ölçüt sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "spot",
+    "zorluk": 3,
+    "soru": "Herkes sana kadar fold etti, SB'desin. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "3 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "K9o tek rakibe karşı yeterince güçlü; SB'nin çalışma aralığında.",
+    "yanilgi": "UTG'deki kararı SB'ye taşımak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-SB-K9o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "SB",
+     "el": "K9o"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "SB 3 BB'ye açtı, BB call etti. Flop'a kaç BB'lik potla gidilir?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "İkisi de toplam 3'er BB koydu: 3 + 3 = 6 BB.",
+    "yanilgi": "Blind'leri 3 BB'nin üstüne ayrıca eklemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "spot",
+    "zorluk": 4,
+    "soru": "Herkes sana kadar fold etti, SB'desin. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "3 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "T3o offsuit, kopuk ve düşük kartlı; tek rakibe karşı bile pozisyon dışında oynamaya değmez.",
+    "yanilgi": "Tek rakip var diye her eli açmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-SB-T3o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "SB",
+     "el": "T3o"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "Bu müfredatın aralıklarında SB'nin açılış aralığı BTN'ninkinden geniştir, çünkü SB'nin arkasında yalnızca bir oyuncu vardır.",
+    "dogru": false,
+    "neden": "SB yaklaşık %38, BTN yaklaşık %43 ile açar. Arkada tek oyuncu kalsa da pozisyon dışında oynamak aralığı daraltır.",
+    "yanilgi": "Pozisyonu hesaba katmamak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "c5-d5": {
+  "anlatim": [
+   "Her aralığın bir kenarı vardır. Aralığa en son giren eller ile hemen dışında kalanlar arasındaki fark küçüktür; bu ellerde açmak da fold etmek de çoğu zaman yakın kararlardır. Çalışma aralığımız da yaklaşık olduğu için bu ellere \"kesin aç\" ya da \"kesin fold\" demeyiz.",
+   "Bu müfredatın aralıklarında kenara yakın örnekler: UTG'de AJo, KQo ve 44; HJ'de ATo ve KJo; CO'da 22 ve 87s; BTN'de 65s ve 54s. Bu ellerde karar masaya göre değişir: arkadaki oyuncular sık sık yeniden raise yapıyorsa fold, blind'ler çok sıkıysa açmak genellikle daha kârlıdır (c5-d6).",
+   "Kenardaki eller arasında suited ve bağlantılı olanlar genellikle offsuit ve kopuk olanlardan daha kolay oynanır. Bu dersin alıştırmalarında sınırdaki ellerde iki cevabı da kabul ediyoruz. Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir."
+  ],
+  "terimler": [
+   "Range (aralık)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Aralığın kenarındaki bir elde açmak ile fold etmek arasındaki fark genellikle küçüktür.",
+    "dogru": true,
+    "neden": "Kenardaki eller aralığa son girenler ve hemen dışında kalanlardır; değerleri birbirine yakındır.",
+    "yanilgi": "Aralığın keskin bir doğru/yanlış çizgisi olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bu müfredatın açılış aralıkları için en doğru ifade hangisidir?",
+    "secenekler": [
+     "Yaklaşık çalışma aralıklarıdır; kenardaki ellerde karar masaya göre değişebilir",
+     "Solver çıktısıdır ve her masada aynen uygulanır",
+     "Yalnızca turnuvada geçerlidir",
+     "Rakiplerden bağımsız kesin kurallardır"
+    ],
+    "dogru": 0,
+    "neden": "Aralıklar kendi hesabımızla üretilmiş yaklaşık aralıklardır; kenarda masaya göre ayar yapılır.",
+    "yanilgi": "Bir aralık tablosunu oyun kuralı gibi görmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "UTG'desin, herkes sana kadar fold etti. Elin AJo. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "AJo, UTG'nin çalışma aralığına son giren ellerden. Açmak aralıkla uyumlu; arkada agresif oyuncular varsa fold da savunulabilir.",
+    "yanilgi": "Kenardaki bir eli kesin açılış ya da kesin fold sanmak.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "AJo",
+     "sinir": true
+    },
+    "kabulEdilebilir": [
+     0
+    ]
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Hangisi UTG'nin çalışma aralığının kenarında sayılır?",
+    "secenekler": [
+     "44",
+     "AA",
+     "72o",
+     "AKo"
+    ],
+    "dogru": 0,
+    "neden": "44, UTG aralığına son giren çiftlerden. AA ve AKo rahatça açılır; 72o rahatça fold edilir.",
+    "yanilgi": "Küçük çiftleri ya her zaman açılır ya her zaman fold sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kosulluSec",
+     "kosul": [
+      [
+       "UTG",
+       "sinir"
+      ]
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "CO'dasın, herkes sana kadar fold etti. Elin 22. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "22, CO'nun çalışma aralığının en kenarındadır. Açmak aralıkla uyumlu; masa çok agresifse fold da savunulabilir.",
+    "yanilgi": "En küçük çiftin hiçbir koltuktan açılmadığını sanmak.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "CO",
+     "el": "22",
+     "sinir": true
+    },
+    "kabulEdilebilir": [
+     0
+    ]
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Aralığın kenarındaki bir elde fold etmek büyük bir hatadır.",
+    "dogru": false,
+    "neden": "Kenarda iki karar da yakındır; fold küçük bir farkla daha az kârlı olabilir ya da masaya göre daha iyi olabilir.",
+    "yanilgi": "Her kararı ya mükemmel ya felaket diye görmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Arkandaki oyuncular açılışlara sık sık yeniden raise yapıyor. Kenardaki ellerde hangi yöne kayarsın?",
+    "secenekler": [
+     "Daha çok fold'a",
+     "Daha çok açılışa",
+     "Kenardaki elleri limp ile oynamaya",
+     "Hiçbir değişiklik yapmamaya"
+    ],
+    "dogru": 0,
+    "neden": "Açılışın sık sık yeniden raise ile karşılanıyorsa kenardaki eller ya fold etmek zorunda kalır ya da zor durumda oynar; bu yüzden onları bırakmak genellikle daha iyidir.",
+    "yanilgi": "Agresif rakiplere karşı daha çok el oynamayı cesaret sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "eslestirme",
+    "zorluk": 4,
+    "soru": "Elleri, bu müfredatın çalışma aralığındaki yerleriyle eşleştir.",
+    "secenekler": [
+     [
+      "UTG AA",
+      "Aralığın içinde, kenardan uzak"
+     ],
+     [
+      "UTG 44",
+      "Aralığın kenarında"
+     ],
+     [
+      "UTG 72o",
+      "Aralığın dışında, kenardan uzak"
+     ]
+    ],
+    "neden": "AA rahat açılış, 72o rahat fold; 44 ise UTG aralığına son giren ellerden.",
+    "yanilgi": "Bütün çiftleri aynı kefeye koymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisEsleme",
+     "etiketler": {
+      "Aralığın içinde, kenardan uzak": "ac",
+      "Aralığın kenarında": "sinir",
+      "Aralığın dışında, kenardan uzak": "fold"
+     }
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "BTN'de iki el: 65s ve J4o. Hangisi açılışa daha yakındır?",
+    "secenekler": [
+     "65s",
+     "J4o"
+    ],
+    "dogru": 0,
+    "neden": "65s BTN aralığının kenarında; suited ve bağlantılı. J4o ise kenardan uzak bir fold.",
+    "yanilgi": "Yüksek kartı olan eli her zaman daha iyi sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kosulluSec",
+     "kosul": [
+      [
+       "BTN",
+       "sinir"
+      ]
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "HJ'desin, herkes sana kadar fold etti. Blind'lerdeki iki oyuncu çok sıkı oynuyor. Elin ATo. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "ATo, HJ aralığının kenarında. Blind'ler sıkıysa açılış daha sık hemen kazanır; bu durumda açmak genellikle daha iyidir. Fold da büyük bir hata değildir.",
+    "yanilgi": "Kenardaki eli masadan bağımsız düşünmek.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "HJ",
+     "el": "ATo",
+     "sinir": true
+    },
+    "kabulEdilebilir": [
+     0
+    ]
+   }
+  ]
+ },
+ "c5-d6": {
+  "anlatim": [
+   "Çalışma aralıkları ortalama rakipler için bir başlangıç noktasıdır. Masada gözlem yaptıkça küçük ayarlar yaparsın; bu ayarlar en çok aralığın kenarındaki elleri etkiler.",
+   "Blind'lerdeki oyuncular sıkıysa (açılışların çoğuna fold ediyorlarsa) açılışın daha sık hemen kazanır; aralığı biraz genişletmek genellikle kârlıdır. Blind'ler gevşekse ve sık sık savunuyor ya da yeniden raise yapıyorlarsa aralığı biraz daraltır, kenardaki zayıf elleri bırakırsın.",
+   "Ayar küçük olmalı ve kanıta dayanmalıdır: tek bir elden sonuç çıkarma; birçok elde görülen eğilime göre değiştir. Aralığın tepesindeki eller (AA, AK) her durumda açılır, en alttakiler (72o) her durumda fold edilir."
+  ],
+  "terimler": [
+   "Tight",
+   "Loose",
+   "Range (aralık)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Blind'lerdeki oyuncular çok sıkı oynuyor. Geç pozisyondan açılış aralığını hangi yöne ayarlarsın?",
+    "secenekler": [
+     "Biraz genişletirim",
+     "Biraz daraltırım",
+     "Hiç değiştirmem",
+     "Bütün elleri limp ile oynarım"
+    ],
+    "dogru": 0,
+    "neden": "Sıkı blind'ler sık fold eder; açılışların daha sık hemen kazanır.",
+    "yanilgi": "Sıkı rakiplere karşı da sıkı oynamak gerektiğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Blind'lerdeki oyuncular açılışlara çok sık yeniden raise yapıyor. Aralığını hangi yöne ayarlarsın?",
+    "secenekler": [
+     "Biraz daraltırım",
+     "Biraz genişletirim",
+     "Hiç değiştirmem",
+     "Her eli açarım"
+    ],
+    "dogru": 0,
+    "neden": "Sık yeniden raise, kenardaki ellerin zor durumda kalması demektir; onları bırakmak genellikle daha iyidir.",
+    "yanilgi": "Agresif rakiplere inat daha çok el açmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Rakiplere göre yapılan ayar en çok aralığın kenarındaki elleri etkiler.",
+    "dogru": true,
+    "neden": "Tepedeki eller her durumda açılır, en alttakiler her durumda fold edilir; değişen kenardır.",
+    "yanilgi": "Ayarın bütün aralığı değiştirdiğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Blind'ler çok gevşek diye UTG'de AA'yı fold etmek mantıklıdır.",
+    "dogru": false,
+    "neden": "AA her koltuktan, her masada açılır. Ayar yalnızca kenardaki elleri ilgilendirir.",
+    "yanilgi": "Ayarı aralığın tepesine de uygulamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "AA",
+     "iddia": "fold"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Bir elde BB'nin çok zayıf bir elle savunduğunu gördün. En iyi yaklaşım hangisi?",
+    "secenekler": [
+     "Birçok elde eğilim görmeden büyük bir ayar yapmamak",
+     "Hemen bütün aralığını iki katına çıkarmak",
+     "BB'ye karşı hiç açmamak",
+     "Bundan sonra her eli limp ile oynamak"
+    ],
+    "dogru": 0,
+    "neden": "Tek el, bir eğilim göstermez. Ayarı birçok elde gördüğün davranışa göre yap.",
+    "yanilgi": "Tek bir elden kesin sonuç çıkarmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Blind'ler sıkı oynuyor; BTN 2,5 BB açtı, herkes fold etti. BTN'nin net kazancı kaç BB?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Kendi 2,5 BB'si geri gelir; kazancı blind'ler: 0,5 + 1 = 1,5 BB.",
+    "yanilgi": "Potun tamamını kazanç saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "BTN'desin, herkes sana kadar fold etti. Blind'ler çok sıkı oynuyor. Elin 65s (BTN aralığının kenarında). Hangi karar bu masaya daha uygun?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "Kenardaki bir el ve sıkı blind'ler: açılış sık sık hemen kazanır ve görülürse pozisyondasın. Bu masada açmak genellikle daha iyidir.",
+    "yanilgi": "Kenardaki eli masadan bağımsız düşünmek.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "BTN",
+     "el": "65s",
+     "sinir": true
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "eslestirme",
+    "zorluk": 4,
+    "soru": "Masa durumunu uygun ayarla eşleştir.",
+    "secenekler": [
+     [
+      "Blind'ler çok sıkı",
+      "Kenardaki ellerle daha sık aç"
+     ],
+     [
+      "Blind'ler sık yeniden raise yapıyor",
+      "Kenardaki ellerin bir kısmını bırak"
+     ],
+     [
+      "Masayı henüz tanımıyorsun",
+      "Çalışma aralığına yakın oyna"
+     ]
+    ],
+    "neden": "Ayar gözleme dayanır; gözlem yoksa çalışma aralığı iyi bir başlangıçtır.",
+    "yanilgi": "Masayı tanımadan büyük ayar yapmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "CO'dasın, herkes sana kadar fold etti. Blind'ler çok gevşek ve açılışlara sık sık yeniden raise yapıyor. Elin 22 (CO aralığının kenarında). Hangi karar bu masaya daha uygun?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "Sık yeniden raise gelirse 22 ile ya fold etmek zorunda kalırsın ya da büyük bir potta pozisyon kaybıyla oynarsın. Bu masada fold genellikle daha iyidir.",
+    "yanilgi": "Kenardaki eli agresif masada da açmak.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "CO",
+     "el": "22",
+     "sinir": true
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "Rakiplere göre ayar yaparken AA'nın ve 72o'nun kararları da değişir.",
+    "dogru": false,
+    "neden": "Tepedeki ve en alttaki eller her masada aynı kalır: AA açılır, 72o fold edilir.",
+    "yanilgi": "Ayarın bütün elleri etkilediğini sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "c5-k": {
+  "anlatim": [
+   "Bu kontrol, ünitenin altı dersinden karışık sorular içerir. Aralıklar sitenin yaklaşık çalışma aralıklarıdır; solver çıktısı değildir."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bu müfredatın çalışma aralıklarında HJ ellerin yaklaşık yüzde kaçıyla açar?",
+    "secenekler": [
+     "%10",
+     "%19",
+     "%38",
+     "%60"
+    ],
+    "dogru": 1,
+    "neden": "HJ aralığı yaklaşık %19'dur; UTG'den biraz geniş.",
+    "yanilgi": "HJ'yi geç pozisyon sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "HJ"
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Bu müfredatta SB'den açılış 3 BB varsayılır.",
+    "dogru": true,
+    "neden": "SB pozisyon dışında oynayacağı için diğer koltuklardan biraz büyük açılır.",
+    "yanilgi": "SB'de de 2,5 BB açıldığını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "spot",
+    "zorluk": 2,
+    "soru": "HJ'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 2,
+    "neden": "A5s, HJ'nin çalışma aralığında: floş ve A-2-3-4-5 kenti yapabilir.",
+    "yanilgi": "Düşük kicker'lı suited asları fold etmek.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-HJ-A5s",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "HJ",
+     "el": "A5s"
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "spot",
+    "zorluk": 2,
+    "soru": "CO'dasın, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "Q4o offsuit ve kopuk; CO aralığının dışında.",
+    "yanilgi": "Kız içeren eli geç pozisyonda açılabilir sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-CO-Q4o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "CO",
+     "el": "Q4o"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "SB 3 BB'ye açtı, BB call etti. Flop'a kaç BB'lik potla gidilir?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "3 + 3 = 6 BB.",
+    "yanilgi": "Blind'leri ayrıca eklemek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Hangi el BTN'den açılır ama CO'dan açılmaz?",
+    "secenekler": [
+     "Q9o",
+     "AA",
+     "72o",
+     "AJo"
+    ],
+    "dogru": 0,
+    "neden": "Q9o, CO'da fold, BTN'de açılır. AA ve AJo ikisinde de açılır; 72o ikisinde de fold.",
+    "yanilgi": "Koltuğu hesaba katmamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "kosulluSec",
+     "kosul": [
+      [
+       "BTN",
+       "ac"
+      ],
+      [
+       "CO",
+       "fold"
+      ]
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "range",
+    "zorluk": 3,
+    "soru": "Bu ellerden CO'nun çalışma aralığında olanları işaretle.",
+    "secenekler": [
+     "AA",
+     "A9o",
+     "KTo",
+     "T9s",
+     "77",
+     "Q9o",
+     "J4o",
+     "72o"
+    ],
+    "dogru": [
+     "AA",
+     "A9o",
+     "KTo",
+     "T9s",
+     "77"
+    ],
+    "neden": "CO aralığı A9o, KTo, T9s gibi elleri içerir; Q9o, J4o ve 72o dışarıda kalır.",
+    "yanilgi": "Geç pozisyonda her eli açılabilir sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilisAraligi",
+     "poz": "CO"
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "spot",
+    "zorluk": 3,
+    "soru": "Herkes sana kadar fold etti, SB'desin. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "3 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "Tek rakibe karşı A6o SB'nin çalışma aralığında.",
+    "yanilgi": "Pozisyon dışında diye bütün zayıf asları bırakmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-SB-A6o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "SB",
+     "el": "A6o"
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "UTG'desin, herkes sana kadar fold etti. Elin KQo. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "2,5 BB aç"
+    ],
+    "dogru": 1,
+    "neden": "KQo, UTG aralığının kenarında; açmak aralıkla uyumlu, agresif bir masada fold da savunulabilir.",
+    "yanilgi": "Kenardaki eli kesin karar sanmak.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "KQo",
+     "sinir": true
+    },
+    "kabulEdilebilir": [
+     0
+    ]
+   },
+   {
+    "kimlik": "a10",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Blind çalmanın (steal) asıl amacı blind'leri fold ettirip potu hemen almaktır.",
+    "dogru": true,
+    "neden": "Steal, geç pozisyondan blind'leri hedefleyen açılıştır.",
+    "yanilgi": "Steal'i yalnızca güçlü ellerle yapılan açılış sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a11",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Bu müfredatın çalışma aralığında CO 362 kombinasyonla açar. Bu, bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+    "dogru": 27.3,
+    "tolerans": 0,
+    "birim": "%",
+    "neden": "362 / 1326 × 100 ≈ %27,3.",
+    "yanilgi": "169'a bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "aralikYuzde",
+     "poz": "CO"
+    }
+   },
+   {
+    "kimlik": "a12",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Blind'ler çok sıkı. Hangi değişiklik en mantıklıdır?",
+    "secenekler": [
+     "Geç pozisyonda kenardaki ellerle daha sık açmak",
+     "UTG'de 72o açmak",
+     "AA'yı limp ile oynamak",
+     "Bütün açılışları 6 BB yapmak"
+    ],
+    "dogru": 0,
+    "neden": "Sıkı blind'lere karşı ayar kenarda yapılır: geç pozisyonda biraz daha geniş açılır.",
+    "yanilgi": "Ayarı aralığın en altına ya da boyuta uygulamak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "c5-r": {
+  "anlatim": [
+   "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Bu ünitedeki açılış aralıkları her masada aynen uygulanması gereken kesin kurallardır.",
+    "dogru": false,
+    "neden": "Yaklaşık çalışma aralıklarıdır; kenarda masaya göre ayar yapılır.",
+    "yanilgi": "Aralık tablosunu oyun kuralı gibi görmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "spot",
+    "zorluk": 2,
+    "soru": "UTG'desin, herkes sana kadar fold etti. Hamlen?",
+    "secenekler": [
+     "Fold",
+     "Limp (1 BB)",
+     "2,5 BB aç"
+    ],
+    "dogru": 0,
+    "neden": "J9o offsuit; UTG aralığının dışında. Suited hâli kenarda olsa da offsuit hâli açılmaz.",
+    "yanilgi": "Suited ve offsuit hâlleri aynı sanmak.",
+    "dogrulamaGerekli": false,
+    "spotKimlik": "r-UTG-J9o",
+    "denetim": {
+     "tur": "acilis",
+     "poz": "UTG",
+     "el": "J9o"
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Aralığındaki bir elle herkes sana kadar fold ettiğinde bu müfredat hangi oyunu önerir?",
+    "secenekler": [
+     "2,5 BB ile açmak",
+     "Limp yapmak",
+     "Elin gücüne göre 2 ile 6 BB arasında açmak",
+     "Check etmek"
+    ],
+    "dogru": 0,
+    "neden": "Aralıktaki el sabit boyutla açılır; limp ve elle değişen boyut önerilmez.",
+    "yanilgi": "Güçlü elleri limp ile saklamaya çalışmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Butonda her el açılır.",
+    "dogru": false,
+    "neden": "BTN yaklaşık %43 ile açar; 72o gibi eller butondan da fold edilir.",
+    "yanilgi": "Geç pozisyonu \"her el oynanır\" diye anlamak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "BTN",
+     "el": "72o",
+     "iddia": "ac"
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "SB'den açtın ve BB call etti. Postflop'ta kim pozisyonda?",
+    "secenekler": [
+     "BB",
+     "SB"
+    ],
+    "dogru": 0,
+    "neden": "Postflop'ta SB önce konuşur; BB pozisyondadır.",
+    "yanilgi": "Açılış yapanın pozisyonu kazandığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "konusmaSirasi",
+     "sokak": "postflop",
+     "oyuncular": [
+      "SB",
+      "BB"
+     ],
+     "soru": "son"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Bir aralıkta yalnızca AA ve AKo var. Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+    "dogru": 1.4,
+    "tolerans": 0,
+    "birim": "%",
+    "neden": "AA 6 + AKo 12 = 18 kombinasyon; 18 / 1326 × 100 ≈ %1,4.",
+    "yanilgi": "İki hücreyi 169'a bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "yuzde",
+     "eller": [
+      "AA",
+      "AKo"
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "CO'dasın, herkes sana kadar fold etti. Elin 87s. Hangi ifade en doğrudur?",
+    "secenekler": [
+     "Kenarda bir eldir; açmak da fold etmek de masaya göre savunulabilir",
+     "Kesin açılış",
+     "Kesin fold",
+     "Limp en iyisidir"
+    ],
+    "dogru": 0,
+    "neden": "87s, CO aralığının kenarında. Kesin bir karar yerine masaya göre küçük bir ayar düşünülür.",
+    "yanilgi": "Kenardaki ellere kesin cevap aramak.",
+    "dogrulamaGerekli": true,
+    "denetim": {
+     "tur": "acilis",
+     "poz": "CO",
+     "el": "87s",
+     "sinir": true
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Açılış boyutunu elinin gücüne göre değiştiren bir oyuncuya karşı hangisi olur?",
+    "secenekler": [
+     "Boyutuna bakarak elinin gücünü tahmin edebilirsin",
+     "Hiçbir şey öğrenemezsin",
+     "Daha sık fold etmen gerekir",
+     "Pozisyon kazanırsın"
+    ],
+    "dogru": 0,
+    "neden": "Elle değişen boyut, eli rakibe söyler. Bu yüzden sabit boyut önerilir.",
+    "yanilgi": "Boyutun bilgi taşımadığını sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ }
+}

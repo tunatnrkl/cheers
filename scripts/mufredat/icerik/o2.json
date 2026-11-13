@@ -198,7 +198,7 @@
   "anlatim": [
    "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak). Bir elde birkaç bahis turu oynanır: kartlar dağıtıldıktan sonraki ilk tura preflop, ortaya kart açıldıktan sonraki turlara (flop, turn, river) postflop denir; ayrıntısı bir sonraki derste.",
    "Önünde bahis varsa üç seçeneğin var: fold (eli bırakmak; pota koydukların geri gelmez), call (bahsi aynı miktarla görmek) ya da raise (bahsi artırmak). Bahis varken check diyemezsin; elde kalmak için en az call etmen gerekir.",
-   "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır.",
+   "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır. Aynı turda önce check deyip rakip bahis yapınca raise yapmak da kurallara uygundur; buna check-raise denir.",
    "Bir bahis turu, biri dışında herkes fold ettiğinde ya da elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa biter. Kimse bahis yapmadan herkes check derse de tur biter; bu durumda herkesin koyduğu miktar sıfırdır. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
   ],
   "terimler": [
@@ -397,7 +397,7 @@
  },
  "o2-d3": {
   "anlatim": [
-   "Bir el en fazla dört bahis turundan oluşur; her tura \"sokak\" da denir. Preflop: herkese iki kapalı kart dağıtılır, ortada henüz kart yoktur. Flop: ortaya üç kart birden açılır. Turn: dördüncü kart açılır. River: beşinci ve son kart açılır. Toplam 3 + 1 + 1 = 5 ortak kart.",
+   "Bir el en fazla dört bahis turundan oluşur; her tura \"sokak\" da denir. Preflop: herkese iki kapalı kart dağıtılır, ortada henüz kart yoktur. Flop: ortaya üç kart birden açılır. Turn: dördüncü kart açılır. River: beşinci ve son kart açılır. Toplam 3 + 1 + 1 = 5 ortak kart; bunların tümüne board denir.",
    "Her kart açılışından sonra bir bahis turu oynanır. Flop, turn ve river'ın ortak adı postflop'tur. El her zaman river'a kadar sürmez: bir bahis turunda biri dışında herkes fold ederse el orada biter ve kalan oyuncu potu alır.",
    "Kim önce konuşur? Preflop'ta ilk söz büyük blind'in solundaki oyuncudadır; sıra saat yönünde ilerler ve en son büyük blind konuşur. Postflop'ta ilk söz, butonun solunda elde kalan ilk oyuncudadır: küçük blind hâlâ eldeyse o başlar. Buton eldeyse postflop'ta her turda en son konuşur."
   ],
@@ -407,7 +407,8 @@
    "Turn",
    "River",
    "Postflop",
-   "Board"
+   "Board",
+   "Sokak"
   ],
   "alistirmalar": [
    {
@@ -598,14 +599,15 @@
   "anlatim": [
    "River'daki bahis turu da bittiğinde elde hâlâ birden fazla oyuncu varsa showdown yapılır: kalan oyuncular kartlarını açar ve en iyi beş kartlık ele sahip olan potu alır. Kimin ne söylediği değil, masadaki kartlar belirler.",
    "Showdown'a gelmeden de kazanılabilir. Bir bahis turunda senin dışındaki herkes fold ederse pot senindir ve kartlarını göstermen gerekmez.",
-   "İki oyuncunun en iyi beş kartı tam olarak eşitse beraberlik olur ve pot eşit bölünür. Renkler eşitliği bozmaz; altıncı ve yedinci kartlar da bozmaz. En sık görülen örnek: en iyi beş kart board'un kendisiyse eldeki herkes potu paylaşır.",
+   "İki oyuncunun en iyi beş kartı tam olarak eşitse beraberlik olur ve pot eşit bölünür; buna bölünen pot denir. Renkler eşitliği bozmaz; altıncı ve yedinci kartlar da bozmaz. En sık görülen örnek: en iyi beş kart board'un kendisiyse eldeki herkes potu paylaşır.",
    "Kazananı bulmanın yolu hep aynıdır: her oyuncu için yedi karttan en iyi beşliyi kur, önce el çeşidini karşılaştır, çeşit aynıysa değerlere ve kicker'a bak."
   ],
   "terimler": [
    "Showdown",
    "Pot",
    "Kicker",
-   "Board"
+   "Board",
+   "Bölünen pot"
   ],
   "alistirmalar": [
    {

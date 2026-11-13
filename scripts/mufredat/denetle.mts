@@ -2,7 +2,9 @@
 // El sıralaması, kazanan, en iyi beş kart ve nuts soruları projedeki el değerlendiriciyle
 // (src/lib/poker/evaluator.ts), pot ve sayı soruları yeniden toplamayla denetlenir. Pozisyon soruları
 // 6-max koltuk modeliyle, başlangıç eli soruları (yazım, kombinasyon, matris, aralık yüzdesi) 52 kartlık
-// destenin bütün iki kartlık ellerini sayarak denetlenir.
+// destenin bütün iki kartlık ellerini sayarak denetlenir. Açılış soruları src/data/ranges.json'daki yaklaşık
+// çalışma aralıklarına göre (solver çıktısı değil), kenar payı bırakılarak denetlenir; gereken equity
+// formülle, aralığa karşı equity sabit tohumlu Monte Carlo ile yeniden hesaplanır.
 // Alıştırmadaki `denetim` alanı neyin hesaplanacağını söyler; cevap `dogru` ile karşılaştırılır.
 //
 // Çalıştırma: node scripts/mufredat/denetle.mts   (hata varsa 1 ile çıkar)
@@ -146,6 +148,96 @@ const trSayi = (s: unknown) => {
   if (!m) throw new Error(`sayı okunamadı: "${s}"`);
   return Number(m[0].replace(/\./g, "").replace(",", "."));
 };
+
+// ── Açılış aralıkları (src/data/ranges.json) ──
+type Ranges = { equity: Record<string, number>; cash: Record<string, string[]> };
+const RANGES: Ranges = JSON.parse(readFileSync(new URL("../../src/data/ranges.json", import.meta.url), "utf8"));
+/** Kenar payı: aralığın son ~%4'ü (53 kombinasyon) "sınırda" sayılır. */
+const PAY = 53;
+const listeKombo = (l: string[]) => l.reduce((t, e) => t + kombo(e), 0);
+/** Sınırdaki eller karışık oynanabilir: suited connector/tek boşluklu, suited A, suited K (geç pozisyonda), SB'de her suited el. */
+function karisik(el: string, poz: string): boolean {
+  if (el.length === 2 || el[2] !== "s") return false;
+  if (poz === "SB") return true;
+  const sira = (c: string) => "23456789TJQKA".indexOf(c);
+  if (sira(el[0]) - sira(el[1]) - 1 <= 1) return true;
+  if (el[0] === "A") return true;
+  return el[0] === "K" && poz !== "UTG" && poz !== "HJ";
+}
+/**
+ * 169 elin açılış sıralaması: ranges.json'ın yöntem notundaki kural (rastgele ele karşı equity +
+ * oynanabilirlik düzeltmesi; scripts/generate-ranges.mts openScore) burada yeniden kurulur. Aralığın
+ * dışındaki ellerin aralık sınırına ne kadar uzak olduğunu ölçmek için kullanılır.
+ */
+function acilisPuani(el: string): number {
+  const sira = (c: string) => "23456789TJQKA".indexOf(c);
+  let p = RANGES.equity[el];
+  if (el.length === 2) return p + 0.06;
+  const y = sira(el[0]), d = sira(el[1]), bosluk = y - d - 1;
+  p += el.endsWith("s") ? 0.045 : -0.015;
+  if (bosluk === 0) p += 0.035;
+  else if (bosluk === 1) p += 0.022;
+  else if (bosluk === 2) p += 0.01;
+  else if (bosluk >= 4 && y !== 12) p -= 0.03;
+  if (y === 12 && el.endsWith("s") && d <= 3) p += 0.012;
+  return p;
+}
+const SIRALI = [...KOMBO.keys()].sort((x, y) => acilisPuani(y) - acilisPuani(x));
+const BASLANGIC = new Map<string, number>();
+{
+  let n = 0;
+  for (const e of SIRALI) {
+    BASLANGIC.set(e, n);
+    n += kombo(e);
+  }
+}
+/** Herkes fold ettiğinde bu koltuktan bu el: aç, fold ya da sınırda (kenar payı içinde ya da karışık oynanan el). */
+export function acilisDurumu(poz: string, el: string): "ac" | "fold" | "sinir" {
+  const liste = RANGES.cash[poz];
+  if (!liste) throw new Error(`açılış aralığı yok: ${poz}`);
+  kombo(el);
+  const toplam = listeKombo(liste);
+  const i = liste.indexOf(el);
+  if (i >= 0) return listeKombo(liste.slice(0, i + 1)) <= toplam - PAY ? "ac" : "sinir";
+  if (karisik(el, poz)) return "sinir";
+  return BASLANGIC.get(el)! >= toplam + PAY ? "fold" : "sinir";
+}
+export const aralikYuzdesi = (poz: string) => (listeKombo(RANGES.cash[poz]) / IKILILER.length) * 100;
+
+// ── Aralığa karşı equity: sabit tohumlu Monte Carlo ──
+function tohumlu(t: number) {
+  return () => {
+    t = (t + 0x6d2b79f5) | 0;
+    let x = Math.imul(t ^ (t >>> 15), 1 | t);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const etiketIkilileri = (ad: string) => IKILILER.filter(([a, b]) => elAdi(a, b) === ad);
+/** Bir el adının (bütün kombinasyonları eşit ağırlıkla) bir el listesine karşı yaklaşık equity'si, yüzde. */
+export function equityAraliga(el: string, rakip: string[], deneme = 40000, tohum = 20261113): number {
+  const rnd = tohumlu(tohum);
+  const benim = etiketIkilileri(el);
+  const onun = rakip.flatMap(etiketIkilileri);
+  let puan = 0;
+  const deste: number[] = [];
+  for (let t = 0; t < deneme; t++) {
+    const h = benim[Math.floor(rnd() * benim.length)];
+    let v: [number, number];
+    do v = onun[Math.floor(rnd() * onun.length)];
+    while (v[0] === h[0] || v[0] === h[1] || v[1] === h[0] || v[1] === h[1]);
+    deste.length = 0;
+    for (let c = 0; c < 52; c++) if (c !== h[0] && c !== h[1] && c !== v[0] && c !== v[1]) deste.push(c);
+    for (let i = 0; i < 5; i++) {
+      const j = i + Math.floor(rnd() * (deste.length - i));
+      [deste[i], deste[j]] = [deste[j], deste[i]];
+    }
+    const b = deste.slice(0, 5);
+    const x = evaluate7([h[0], h[1], ...b]), y = evaluate7([v[0], v[1], ...b]);
+    puan += x > y ? 1 : x === y ? 0.5 : 0;
+  }
+  return (puan / deneme) * 100;
+}
 
 /** Bir alıştırmanın denetimi; hata yoksa boş dizi. */
 export function alistirmaDenetle(a: Al): string[] {
@@ -415,6 +507,101 @@ export function alistirmaDenetle(a: Al): string[] {
       case "enCokKombo": {
         const n = sec.map((x) => elListesi(String(x)).reduce((t, e) => t + kombo(e), 0));
         tekCevap((i) => n[i] === Math.max(...n), `en çok kombinasyon (${n.join("/")})`);
+        break;
+      }
+      case "acilis": {
+        const durum = acilisDurumu(d.poz as string, d.el as string);
+        const yumusak = (a as { dogrulamaGerekli?: boolean }).dogrulamaGerekli === true || ((a as { kabulEdilebilir?: number[] }).kabulEdilebilir ?? []).length > 0;
+        if (durum === "sinir") {
+          if (!d.sinir) hata(`${d.poz} ${d.el} aralığın kenarında; soruda sınır: true, dogrulamaGerekli ya da kabulEdilebilir gerekli`);
+          else if (!yumusak) hata(`${d.poz} ${d.el} sınırda; dogrulamaGerekli: true ya da kabulEdilebilir kullanılmalı`);
+          break;
+        }
+        if (d.sinir) hata(`${d.poz} ${d.el} sınırda değil (${durum}); sınır işareti kaldırılmalı`);
+        if ("iddia" in d) iddiaDY(durum === d.iddia);
+        else if (a.tip === "secmeli" || a.tip === "spot") {
+          const fold = String(sec[dogru as number] ?? "").startsWith("Fold");
+          if (fold !== (durum === "fold")) hata(`${d.poz} ${d.el}: aralığa göre ${durum === "ac" ? "aç" : "fold"}, veride "${sec[dogru as number]}"`);
+        } else hata("açılış denetimi seçmeli, spot ya da doğru/yanlış sorusunda kullanılır");
+        break;
+      }
+      case "kosulluSec": {
+        // Seçenekler el adı; koşulların hepsini sağlayan tek seçenek doğru cevaptır. kosul: [[koltuk, durum], ...]
+        const kosul = d.kosul as [string, string][];
+        tekCevap((i) => kosul.every(([poz, durum]) => acilisDurumu(poz, String(sec[i])) === durum), `koşul ${JSON.stringify(kosul)}`);
+        break;
+      }
+      case "acilisCoklu": {
+        // Doğru/yanlış: kontroller [[koltuk, el, durum], ...] hepsi tutuyorsa ifade doğrudur. Sınırdaki el kullanılamaz.
+        const k = d.kontroller as [string, string, string][];
+        const durumlar = k.map(([poz, el]) => acilisDurumu(poz, el));
+        if (durumlar.includes("sinir")) hata(`sınırdaki el kullanılmış: ${k.filter((_, i) => durumlar[i] === "sinir").map((x) => x.slice(0, 2).join(" ")).join(", ")}`);
+        else iddiaDY(k.every(([, , durum], i) => durumlar[i] === durum));
+        break;
+      }
+      case "acilisEsleme": {
+        // Eşleştirme: sol "KOLTUK EL", sağ etiket; etiketler {metin: durum}
+        const et = d.etiketler as Record<string, string>;
+        for (const [sol, sag] of sec as [string, string][]) {
+          const [poz, el] = sol.replace(/'(de|da|te|ta)\b/, "").split(/[\s:]+/);
+          const r = acilisDurumu(poz, el);
+          if (et[sag] !== r) hata(`${sol}: hesaplanan ${r}, veride "${sag}"`);
+        }
+        break;
+      }
+      case "aralikKapsar": {
+        const dar = RANGES.cash[d.dar as string], genis = new Set(RANGES.cash[d.genis as string]);
+        iddiaDY(dar.every((e) => genis.has(e)));
+        break;
+      }
+      case "acilisAraligi": {
+        if (a.tip !== "range") throw new Error("acilisAraligi yalnızca range sorusunda");
+        const veri = new Set(dogru as string[]);
+        for (const el of sec as string[]) {
+          const durum = acilisDurumu(d.poz as string, el);
+          if (durum === "sinir") hata(`${d.poz} ${el} sınırda; range sorusunun seçeneklerinde olmamalı`);
+          else if ((durum === "ac") !== veri.has(el)) hata(`${d.poz} ${el}: aralığa göre ${durum === "ac" ? "işaretli" : "işaretsiz"} olmalı`);
+        }
+        for (const el of veri) if (!(sec as string[]).includes(el)) hata(`${el} seçeneklerde yok`);
+        break;
+      }
+      case "aralikYuzde": {
+        const r = aralikYuzdesi(d.poz as string);
+        if (a.tip === "sayi") {
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (Math.abs((dogru as number) - r) > Math.max(tol, 0.05) || tol > 1) hata(`${d.poz} aralığı %${r.toFixed(2)}, veride ${dogru} (tolerans ${tol})`);
+        } else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 0.6, `${d.poz} aralığı %${r.toFixed(1)}`);
+        break;
+      }
+      case "gerekenEquity": {
+        // gereken equity = ödenecek / (call öncesi pot + ödenecek)
+        const call = d.call as number, pot = d.pot as number;
+        const r = (call / (pot + call)) * 100;
+        if ("iddia" in d) iddiaDY(Math.abs(r - (d.iddia as number)) < 0.6);
+        else if (a.tip === "sayi") {
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (Math.abs((dogru as number) - r) > Math.max(tol, 0.05) || tol > 1) hata(`gereken equity %${r.toFixed(2)}, veride ${dogru}`);
+        } else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 0.6, `gereken equity %${r.toFixed(1)}`);
+        break;
+      }
+      case "equityAraliga": {
+        // Monte Carlo (40.000 deneme, sabit tohum); metindeki "yaklaşık" değer en fazla 1,5 puan sapabilir.
+        const rakip = d.poz ? RANGES.cash[d.poz as string] : (d.rakip as string[]);
+        const r = equityAraliga(d.el as string, rakip);
+        if (Math.abs(r - (d.yaklasik as number)) > 1.5) hata(`${d.el} equity'si yaklaşık %${r.toFixed(1)}, metinde %${d.yaklasik}`);
+        if (a.tip === "secmeli") tekCevap((i) => Math.abs(trSayi(sec[i]) - r) <= 1.5, `${d.el} equity'si %${r.toFixed(1)}`);
+        break;
+      }
+      case "gerekliPay": {
+        // Call'un kârlı olması için ham equity'nin ne kadarı kullanılmalı: gereken equity / ham equity.
+        // Bu bir aritmetik oranıdır; elin gerçekte ne kadar gerçekleştirdiği (realization) iddiası değildir.
+        const gereken = ((d.call as number) / ((d.pot as number) + (d.call as number))) * 100;
+        const ham = equityAraliga(d.el as string, RANGES.cash[d.poz as string]);
+        const r = (gereken / ham) * 100;
+        if (a.tip === "sayi") {
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (Math.abs((dogru as number) - r) > tol || tol > 3) hata(`gerekli pay %${r.toFixed(1)}, veride ${dogru} (tolerans ${tol})`);
+        } else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 4, `gerekli pay %${r.toFixed(1)}`);
         break;
       }
       default:

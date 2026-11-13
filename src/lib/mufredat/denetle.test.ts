@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import veri from "@/data/mufredat.json";
-import { alistirmaDenetle, denetle } from "../../../scripts/mufredat/denetle.mts";
+import { HANDS } from "@/data/hands";
+import { acilisDurumu, alistirmaDenetle, denetle } from "../../../scripts/mufredat/denetle.mts";
 
 type Al = Parameters<typeof alistirmaDenetle>[0];
 const m = veri as unknown as Parameters<typeof denetle>[0];
@@ -95,5 +96,46 @@ describe("müfredat olgu denetimi (scripts/mufredat/denetle.mts)", () => {
     const r: Al = { ...temel, tip: "range", soru: "", dogru: ["AKs", "KQs", "QJs", "JTs", "T9s", "98s", "87s", "76s", "65s", "54s", "43s", "32s"], denetim: { tur: "rangeKume", kurallar: [{ tip: "suited", bosluk: 1 }] } };
     expect(alistirmaDenetle(r)).toEqual([]);
     expect(alistirmaDenetle({ ...r, dogru: [...(r.dogru as string[]).slice(1), "A2s"] }).join()).toMatch(/eksik: AKs, fazla: A2s/);
+  });
+});
+
+describe("strateji denetimleri (ranges.json, gereken equity, spot bağları)", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  it("sitedeki 115 açılış spotunun cevabı betiğin aralık okumasıyla aynı", () => {
+    const acilis = HANDS.filter((h) => h.id.startsWith("r-"));
+    expect(acilis.length).toBeGreaterThan(100);
+    const farkli = acilis.filter((h) => acilisDurumu(h.heroPos, h.id.split("-")[2]) !== (h.correct ? "ac" : "fold")).map((h) => h.id);
+    expect(farkli).toEqual([]);
+  });
+
+  it("müfredattaki her spot alıştırması bağlandığı elin seçenek ve cevabıyla birebir aynı", () => {
+    const byId = new Map(HANDS.map((h) => [h.id, h]));
+    const hatali: string[] = [];
+    for (const u of m.uniteler)
+      for (const d of u.dersler)
+        for (const a of d.alistirmalar as Al[] & { spotKimlik?: string }[]) {
+          const k = (a as { spotKimlik?: string }).spotKimlik;
+          if (!k) continue;
+          const h = byId.get(k);
+          if (!h || JSON.stringify(h.options) !== JSON.stringify(a.secenekler) || h.correct !== a.dogru) hatali.push(`${d.kimlik}/${a.kimlik} → ${k}`);
+        }
+    expect(hatali).toEqual([]);
+  });
+
+  it("açılış: kenardaki el işaretsizse ve yanlış karar verilmişse yakalar", () => {
+    const s = (el: string, poz: string, dogru: number, ek: Record<string, unknown> = {}): Al =>
+      ({ ...temel, tip: "secmeli", secenekler: ["Fold", "2,5 BB aç"], dogru, dogrulamaGerekli: false, denetim: { tur: "acilis", poz, el, ...ek } }) as Al;
+    expect(alistirmaDenetle(s("AA", "UTG", 1))).toEqual([]);
+    expect(alistirmaDenetle(s("72o", "BTN", 1)).join()).toMatch(/aralığa göre fold/);
+    expect(alistirmaDenetle(s("AJo", "UTG", 1)).join()).toMatch(/kenarında/);
+    expect(alistirmaDenetle(s("AJo", "UTG", 1, { sinir: true })).join()).toMatch(/dogrulamaGerekli/);
+    expect(alistirmaDenetle({ ...s("AJo", "UTG", 1, { sinir: true }), dogrulamaGerekli: true } as Al)).toEqual([]);
+    expect(alistirmaDenetle(s("AA", "UTG", 1, { sinir: true })).join()).toMatch(/sınırda değil/);
+  });
+
+  it("gereken equity = ödenecek / (pot + ödenecek)", () => {
+    const n: Al = { ...temel, tip: "sayi", soru: "", dogru: 27.3, tolerans: 0.1, denetim: { tur: "gerekenEquity", call: 1.5, pot: 4 } } as Al;
+    expect(alistirmaDenetle(n)).toEqual([]);
+    expect(alistirmaDenetle({ ...n, dogru: 37.5 }).join()).toMatch(/27\.27/);
   });
 });
