@@ -112,3 +112,11 @@ Açık kalan (engellemeyen): 360x640'ta koç açıkken pencere hero kartlarını
 ## 2026-11-13 · Kapı F2: turnuva t3–t4 · DÜZELT → düzeltildi (ONAY sayılır)
 
 Ajan betiksiz bütün sayı sorularını ve 30'dan fazla betikli soruyu kendisi hesapladı (ante'li pot, gereken equity, başabaş fold, SPR, flop tutma); t26'yı tam sayımla doğruladı (%62,5–64,2; spot ~%63). 0,1 yuvarlama toleransı hata gizlemiyor. Düzeltilenler: set çekme sorusunun gerekçesi pottaki chip'leri hesaba katıyor (22,5 BB = call'un 7,5 katı, ancak başabaş); "SB'de orta stack'le çoğunlukla all-in ya da fold" genellemesi düzeltildi; derin stack ünitesinde kullanılan 25–35 BB'lik spotlara "orta stack derinliği" notu eklendi; ante'siz yazılmış soruya ante eklendi; başabaş fold denetim payı 0,6 → 0,06. Belirsizlik: cash açılış aralıklarının turnuvaya aktarılması nitelikli varsayım olarak raporda.
+
+## 2026-11-13 · Kapı G: "Şerefe!" kutlaması ve ana sayfa · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan derlenmiş sitede 10'luk seriyi gerçekten oynadı (390x844 normal, 360x640 hareket azaltma): kutlama yalnızca 5 ve 10'da, oturumda eşik başına bir kez; ~1,8 sn; tıklamayı ve odağı engellemiyor; aria-live duyurusu nötr; hareket azaltmada yalnız solma; kalıcı sayaç yok. Ana sayfanın "kaldığın yer" alanı üç durumda doğru, seri dili nötr, tam müfredat ana sayfa JS'ine girmiyor, kontrast AA, yatay taşma ve konsol hatası yok, footer'daki 18+ metni aynen.
+
+Düzeltilenler: Pages sürümünde yapay zeka vaat eden metinler nötr metne çevrildi (ana sayfa, site açıklaması, Öğren, Range, blog, profil; sunuculu kurulumda eski metin kalır). Spot kartlarının sayıları artık bağlantılarının filtresinden üretiliyor (Cash preflop 120, kısa stack 222, BB call 122, Cash postflop 88); kuruluma "Postflop" başlangıç noktası eklendi (`?sokak=postflop`). El sonu paneli dar ekranda tam genişlik. Kullanılmayan CSS silindi. Koordinatör statik derlemede ana sayfa, Öğren ve profilde "yapay zeka" geçmediğini doğruladı (Range'de kalan tek ifade, AiPanel'in "bu sürümde kapalı" bilgilendirmesi).
+
+Açık kalan (engellemeyen): /gizlilik yapay zekanın veriyi nasıl işlediğini anlatıyor ve /yapay-zeka sayfası statik derlemede duruyor (sayfa "bu sürümde kapalı" der); kutlama el sonu ekranında 1,7 sn başlığı örtüyor; aksiyon butonu pasifleşince klavye odağı BODY'ye düşüyor.
