@@ -697,7 +697,7 @@ export function alistirmaDenetle(a: Al): string[] {
         // Çalma ya da all-in'in, call edildiğinde hiç kazanmadığı varsayımıyla kâra geçmesi için rakiplerin
         // fold etmesi gereken en az oran: risk / (risk + mevcut pot) × 100
         const risk = Number(d.risk), pot = Number(d.pot);
-        sayiKarsila((risk / (risk + pot)) * 100, "başabaş fold oranı", 0.6);
+        sayiKarsila((risk / (risk + pot)) * 100, "başabaş fold oranı", 0.06);
         break;
       }
       case "oranYuzde": {

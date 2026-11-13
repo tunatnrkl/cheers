@@ -108,3 +108,7 @@ Düzeltilenler: spotun seçeneklerine eşleşmeyen ilk hamle artık ilerleme kay
 Uygulayıcı kararları kabul edildi; **brif sapması:** kurulum ekranına brifte olmayan "Açılış" filtresi eklendi (119 spot ilk giriş kararı, başka seçeneğe girmiyor). "Limp" filtresi veride karşılığı olmadığı için 0 sayısıyla devre dışı.
 
 Açık kalan (engellemeyen): 360x640'ta koç açıkken pencere hero kartlarını ve board'u örtüyor (aksiyon butonlarını örtmüyor); 18+ satırı dar ekranda koç açıkken pencerenin altında kalıyor. "Şerefe!" kutlaması henüz bağlı değil (ayrı iş kolu).
+
+## 2026-11-13 · Kapı F2: turnuva t3–t4 · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan betiksiz bütün sayı sorularını ve 30'dan fazla betikli soruyu kendisi hesapladı (ante'li pot, gereken equity, başabaş fold, SPR, flop tutma); t26'yı tam sayımla doğruladı (%62,5–64,2; spot ~%63). 0,1 yuvarlama toleransı hata gizlemiyor. Düzeltilenler: set çekme sorusunun gerekçesi pottaki chip'leri hesaba katıyor (22,5 BB = call'un 7,5 katı, ancak başabaş); "SB'de orta stack'le çoğunlukla all-in ya da fold" genellemesi düzeltildi; derin stack ünitesinde kullanılan 25–35 BB'lik spotlara "orta stack derinliği" notu eklendi; ante'siz yazılmış soruya ante eklendi; başabaş fold denetim payı 0,6 → 0,06. Belirsizlik: cash açılış aralıklarının turnuvaya aktarılması nitelikli varsayım olarak raporda.

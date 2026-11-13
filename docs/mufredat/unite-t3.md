@@ -33,5 +33,5 @@ Kaynak: `scripts/mufredat/icerik/t3.json`. 8 ders (6 normal + kontrol + tekrar),
 ## Tasarım
 
 - Turnuva pistinde c5/c6 yok; bu yüzden equity, pot odds, blind savunması, solver ve Monte Carlo t3'te yeniden tanımlandı (t3-d2, t3-d5). 3-bet t3-d6'da tanımlanır; seçeneklerinde "3-bet" geçen t20, t12 ve t14 spotları yalnızca t3-d6'da ve sonrasında kullanıldı.
-- t12 (25 BB), t24 (35 BB) ve t25 (30 BB) orta stack derinliğindedir; derin stack ünitesinde açılış boyutu, çalma ve savunma ilkelerini göstermek için kullanıldı; sorularda stack yazılıdır.
+- t12 (25 BB), t24 (35 BB) ve t25 (30 BB) orta stack derinliğindedir; derin stack ünitesinde açılış boyutu, çalma ve savunma ilkelerini göstermek için kullanıldı. Soru metinleri bunu açıkça söyler: "(orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te)". t3-d1/a11'in nedeni pottaki chip'leri de sayar: set tutunca en fazla ≈ 22,5 BB, 3 BB call'un 7,5 katı, yani ancak başabaş.
 - Tipik yanılgılar çeldirici olarak: ante'yi call bedeline katmak, ante'yi pottan unutmak, başabaş paydasına yalnızca potu koymak, BB'nin blind'ini 3-bet toplamına ayrıca eklemek, value ile blöfü karıştırmak, kendi açılışını kazanç saymak.

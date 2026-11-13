@@ -27,7 +27,7 @@ Kaynak: `scripts/mufredat/icerik/t4.json`. 8 ders (5 normal + kontrol + tekrar +
 
 ## Betikle denetlenmeyenler
 
-48 alıştırma ilke sorusudur: spekülatif ellerin orta stack'te değer kaybı, call'un zorlaşması, 3-bet/fold, SB'de çoğunlukla all-in ya da fold, düşük SPR'de top pair. **Resteal ve 3-bet/fold için hiçbir aralık verilmedi**; yalnızca uç karşılaştırmalar (A9s / 72o, AJo / 54s / 22) ve "genellikle / çoğunlukla" ile ilkeler.
+48 alıştırma ilke sorusudur: spekülatif ellerin orta stack'te değer kaybı, call'un zorlaşması, 3-bet/fold, SB'de call yerine çoğunlukla 3-bet ya da fold (20–25 BB'de çoğunlukla all-in), düşük SPR'de top pair. **Resteal ve 3-bet/fold için hiçbir aralık verilmedi**; yalnızca uç karşılaştırmalar (A9s / 72o, AJo / 54s / 22) ve "genellikle / çoğunlukla" ile ilkeler.
 
 ## Tasarım
 

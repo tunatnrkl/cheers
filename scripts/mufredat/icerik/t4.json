@@ -564,7 +564,7 @@
   "anlatim": [
    "Orta stack'te bir açılışa karşı fold dışında iki ana seçenek vardır: call ya da all-in. Call potu küçük tutar ve flop'u görmeni sağlar; all-in kararı rakibe bırakır ve call edilirse sonraki sokaklarda karar kalmaz.",
    "Stack derinliği önemlidir. 30–40 BB'de all-in, küçük bir potu almak için çok chip'i riske atar ve çoğunlukla yalnızca daha iyi eller tarafından görülür; call ya da küçük bir 3-bet daha sık tercih edilir. 20 BB'nin altına indikçe call edip flop'ta oynamak zorlaşır ve all-in daha sık doğal seçenek olur.",
-   "Pozisyon da önemlidir. Pozisyonda (IP), örneğin CO'nun açılışına BTN'den call etmek daha rahattır: flop'tan sonra son konuşursun. SB'den call etmek ise arkadaki BB'ye yeniden raise kapısı açar ve seni postflop'ta pozisyon dışında bırakır; bu yüzden SB'de orta stack'le çoğunlukla all-in ya da fold tercih edilir.",
+   "Pozisyon da önemlidir. Pozisyonda (IP), örneğin CO'nun açılışına BTN'den call etmek daha rahattır: flop'tan sonra son konuşursun. SB'den call etmek ise arkadaki BB'ye yeniden raise kapısı açar ve seni postflop'ta pozisyon dışında bırakır; bu yüzden SB'de call daha seyrek seçilir, çoğunlukla 3-bet ya da fold tercih edilir; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
    "Örnek: BB ante 1 BB. CO 2,2 BB açtı, 20 BB ile BTN'desin ve call ettin; blind'ler fold etti. Flop'ta pot 2,2 + 2,2 + 0,5 + 1 + 1 = 6,9 BB, kalan stack'in 17,8 BB: stack potun yaklaşık 2,6 katıdır. Bu oranın adı SPR'dir; bir sonraki derste göreceksin."
   ],
   "terimler": [
@@ -1072,13 +1072,13 @@
     "kimlik": "a8",
     "tip": "secmeli",
     "zorluk": 4,
-    "soru": "Orta stack'le bir açılışa karşı hangi koltukta çoğunlukla all-in ya da fold tercih edilir?",
+    "soru": "Orta stack'le bir açılışa karşı hangi koltukta call yerine çoğunlukla 3-bet ya da fold tercih edilir?",
     "secenekler": [
      "SB",
      "BTN"
     ],
     "dogru": 0,
-    "neden": "SB'den call etmek seni pozisyon dışında bırakır ve BB'ye yeniden raise kapısı açar.",
+    "neden": "SB'den call etmek seni pozisyon dışında bırakır ve BB'ye yeniden raise kapısı açar; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
     "yanilgi": "SB'de de BTN'deki gibi rahatça call etmek.",
     "dogrulamaGerekli": false
    },

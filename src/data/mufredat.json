@@ -16080,7 +16080,7 @@
        "zorluk": 5,
        "soru": "Rakibin 20 BB'si varken 3 BB'lik bir açılışa yalnızca set yapma umuduyla call etmek, 100 BB'lik bir rakibe karşı aynı call kadar cazip değildir.",
        "dogru": true,
-       "neden": "Set yaklaşık 7,5'e 1 aleyhine tutar. 20 BB'lik rakipten en fazla kalan 17 BB'yi kazanabilirsin: call'unun yaklaşık 5,7 katı. Bu, set her seferinde kazansa ve rakip her seferinde bütün stack'ini verse bile yetmez.",
+       "neden": "Set tutunca kazanabileceğin en fazla yaklaşık 22,5 BB (rakibin 20 BB'si ile blind'ler ve ante, 2,5 BB), call'unun 7,5 katı; bu ancak başabaş. Set her zaman kazanmaz, rakip her zaman stack'ini vermez; bu yüzden pratikte kârsızdır. 100 BB'de pay çok daha büyüktür.",
        "yanilgi": "Kazanılabilecek miktarın rakibin stack'iyle sınırlı olduğunu unutmak.",
        "dogrulamaGerekli": false
       }
@@ -16456,7 +16456,7 @@
        "kimlik": "a6",
        "tip": "secmeli",
        "zorluk": 3,
-       "soru": "Açılışın 2,2 BB ya da 3 BB olması, herkes fold ettiğinde kazandığın potu nasıl değiştirir?",
+       "soru": "BB ante 1 BB. Açılışın 2,2 BB ya da 3 BB olması, herkes fold ettiğinde kazandığın potu nasıl değiştirir?",
        "secenekler": [
         "Değiştirmez; ikisinde de el başındaki 2,5 BB'yi alırsın",
         "3 BB ile daha çok kazanırsın",
@@ -16677,7 +16677,7 @@
        "kimlik": "a7",
        "tip": "spot",
        "zorluk": 3,
-       "soru": "Butondasın, 35 BB, herkes sana kadar fold etti. Blind'lerdeki oyuncular sıkı oynuyor. Hamlen?",
+       "soru": "Butondasın, 35 BB, herkes sana kadar fold etti. Blind'lerdeki oyuncular sıkı oynuyor (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
        "secenekler": [
         "Fold",
         "2,1 BB'ye aç",
@@ -16922,7 +16922,7 @@
        "kimlik": "a9",
        "tip": "spot",
        "zorluk": 4,
-       "soru": "BB ante 1 BB. Buton 2,2 BB açtı (geniş açan bir oyuncu), SB fold etti. BB'desin, 30 BB. Hamlen?",
+       "soru": "BB ante 1 BB. Buton 2,2 BB açtı (geniş açan bir oyuncu), SB fold etti. BB'desin, 30 BB (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
        "secenekler": [
         "Fold",
         "Call (1,2 BB daha)",
@@ -17302,7 +17302,7 @@
        "kimlik": "a6",
        "tip": "spot",
        "zorluk": 3,
-       "soru": "Butondasın, 25 BB, herkes sana kadar fold etti. Elin KTs. Hangi boyutu seçersin?",
+       "soru": "Butondasın, 25 BB, herkes sana kadar fold etti. Elin KTs (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hangi boyutu seçersin?",
        "secenekler": [
         "2,2 BB'ye aç",
         "3,5 BB'ye aç",
@@ -18197,7 +18197,7 @@
      "anlatim": [
       "Orta stack'te bir açılışa karşı fold dışında iki ana seçenek vardır: call ya da all-in. Call potu küçük tutar ve flop'u görmeni sağlar; all-in kararı rakibe bırakır ve call edilirse sonraki sokaklarda karar kalmaz.",
       "Stack derinliği önemlidir. 30–40 BB'de all-in, küçük bir potu almak için çok chip'i riske atar ve çoğunlukla yalnızca daha iyi eller tarafından görülür; call ya da küçük bir 3-bet daha sık tercih edilir. 20 BB'nin altına indikçe call edip flop'ta oynamak zorlaşır ve all-in daha sık doğal seçenek olur.",
-      "Pozisyon da önemlidir. Pozisyonda (IP), örneğin CO'nun açılışına BTN'den call etmek daha rahattır: flop'tan sonra son konuşursun. SB'den call etmek ise arkadaki BB'ye yeniden raise kapısı açar ve seni postflop'ta pozisyon dışında bırakır; bu yüzden SB'de orta stack'le çoğunlukla all-in ya da fold tercih edilir.",
+      "Pozisyon da önemlidir. Pozisyonda (IP), örneğin CO'nun açılışına BTN'den call etmek daha rahattır: flop'tan sonra son konuşursun. SB'den call etmek ise arkadaki BB'ye yeniden raise kapısı açar ve seni postflop'ta pozisyon dışında bırakır; bu yüzden SB'de call daha seyrek seçilir, çoğunlukla 3-bet ya da fold tercih edilir; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
       "Örnek: BB ante 1 BB. CO 2,2 BB açtı, 20 BB ile BTN'desin ve call ettin; blind'ler fold etti. Flop'ta pot 2,2 + 2,2 + 0,5 + 1 + 1 = 6,9 BB, kalan stack'in 17,8 BB: stack potun yaklaşık 2,6 katıdır. Bu oranın adı SPR'dir; bir sonraki derste göreceksin."
      ],
      "terimler": [
@@ -18743,13 +18743,13 @@
        "kimlik": "a8",
        "tip": "secmeli",
        "zorluk": 4,
-       "soru": "Orta stack'le bir açılışa karşı hangi koltukta çoğunlukla all-in ya da fold tercih edilir?",
+       "soru": "Orta stack'le bir açılışa karşı hangi koltukta call yerine çoğunlukla 3-bet ya da fold tercih edilir?",
        "secenekler": [
         "SB",
         "BTN"
        ],
        "dogru": 0,
-       "neden": "SB'den call etmek seni pozisyon dışında bırakır ve BB'ye yeniden raise kapısı açar.",
+       "neden": "SB'den call etmek seni pozisyon dışında bırakır ve BB'ye yeniden raise kapısı açar; stack 20–25 BB'ye indikçe bu 3-bet çoğunlukla all-in olur.",
        "yanilgi": "SB'de de BTN'deki gibi rahatça call etmek.",
        "dogrulamaGerekli": false
       },

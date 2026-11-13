@@ -198,7 +198,7 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Strateji iddiaları bu ünite
 - Turnuvada 2–2,3 BB açılışın yaygın olması ve küçük açılışın blind'lere iyi fiyat vermesi.
 - BB'nin ante'li potta geniş savunması; OOP equity kaybı (oran verilmedi).
 - Value ve blöf 3-bet'in ayrımı; OOP 3-bet'in genellikle daha büyük tutulması.
-- Orta stack'te blind'ler dışında call'un zorlaşması ve 3-bet/fold; SB'de çoğunlukla all-in ya da fold; 15–25 BB'de resteal'in çoğunlukla all-in olması; düşük SPR'de (kabaca 3 ve altı) top pair ile stack koymanın çoğunlukla doğal olması.
+- Orta stack'te blind'ler dışında call'un zorlaşması ve 3-bet/fold; SB'de call'un daha seyrek olması, çoğunlukla 3-bet ya da fold (20–25 BB'ye inildikçe bu 3-bet çoğunlukla all-in); 15–25 BB'de resteal'in çoğunlukla all-in olması; düşük SPR'de (kabaca 3 ve altı) top pair ile stack koymanın çoğunlukla doğal olması.
 
 ### Bilinçli basitleştirmeler
 

@@ -177,7 +177,7 @@
     "zorluk": 5,
     "soru": "Rakibin 20 BB'si varken 3 BB'lik bir açılışa yalnızca set yapma umuduyla call etmek, 100 BB'lik bir rakibe karşı aynı call kadar cazip değildir.",
     "dogru": true,
-    "neden": "Set yaklaşık 7,5'e 1 aleyhine tutar. 20 BB'lik rakipten en fazla kalan 17 BB'yi kazanabilirsin: call'unun yaklaşık 5,7 katı. Bu, set her seferinde kazansa ve rakip her seferinde bütün stack'ini verse bile yetmez.",
+    "neden": "Set tutunca kazanabileceğin en fazla yaklaşık 22,5 BB (rakibin 20 BB'si ile blind'ler ve ante, 2,5 BB), call'unun 7,5 katı; bu ancak başabaş. Set her zaman kazanmaz, rakip her zaman stack'ini vermez; bu yüzden pratikte kârsızdır. 100 BB'de pay çok daha büyüktür.",
     "yanilgi": "Kazanılabilecek miktarın rakibin stack'iyle sınırlı olduğunu unutmak.",
     "dogrulamaGerekli": false
    }
@@ -519,7 +519,7 @@
     "kimlik": "a6",
     "tip": "secmeli",
     "zorluk": 3,
-    "soru": "Açılışın 2,2 BB ya da 3 BB olması, herkes fold ettiğinde kazandığın potu nasıl değiştirir?",
+    "soru": "BB ante 1 BB. Açılışın 2,2 BB ya da 3 BB olması, herkes fold ettiğinde kazandığın potu nasıl değiştirir?",
     "secenekler": [
      "Değiştirmez; ikisinde de el başındaki 2,5 BB'yi alırsın",
      "3 BB ile daha çok kazanırsın",
@@ -723,7 +723,7 @@
     "kimlik": "a7",
     "tip": "spot",
     "zorluk": 3,
-    "soru": "Butondasın, 35 BB, herkes sana kadar fold etti. Blind'lerdeki oyuncular sıkı oynuyor. Hamlen?",
+    "soru": "Butondasın, 35 BB, herkes sana kadar fold etti. Blind'lerdeki oyuncular sıkı oynuyor (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
     "secenekler": [
      "Fold",
      "2,1 BB'ye aç",
@@ -952,7 +952,7 @@
     "kimlik": "a9",
     "tip": "spot",
     "zorluk": 4,
-    "soru": "BB ante 1 BB. Buton 2,2 BB açtı (geniş açan bir oyuncu), SB fold etti. BB'desin, 30 BB. Hamlen?",
+    "soru": "BB ante 1 BB. Buton 2,2 BB açtı (geniş açan bir oyuncu), SB fold etti. BB'desin, 30 BB (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hamlen?",
     "secenekler": [
      "Fold",
      "Call (1,2 BB daha)",
@@ -1300,7 +1300,7 @@
     "kimlik": "a6",
     "tip": "spot",
     "zorluk": 3,
-    "soru": "Butondasın, 25 BB, herkes sana kadar fold etti. Elin KTs. Hangi boyutu seçersin?",
+    "soru": "Butondasın, 25 BB, herkes sana kadar fold etti. Elin KTs (orta stack derinliği; açılış boyutu / çalma / fiyat ilkesi burada da geçerli, orta stack t4'te). Hangi boyutu seçersin?",
     "secenekler": [
      "2,2 BB'ye aç",
      "3,5 BB'ye aç",
