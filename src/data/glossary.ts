@@ -192,9 +192,17 @@ export const GLOSSARY: Term[] = [
   t("turnuva", "pay-jump", "Ödül sıçraması", "Bir oyuncu elendiğinde bir üst sıranın ödülüne geçiş farkı.", ["pay jump"]),
   t("turnuva", "bounty", "Bounty", "Bir oyuncuyu eleyene verilen ek ödül. Call aralıklarını genişletir.", ["knockout", "PKO"]),
   t("turnuva", "satellite", "Satellite", "Ödülü para değil, daha büyük bir turnuvaya bilet olan turnuva. ICM en uç haliyle geçerlidir."),
-  t("turnuva", "rebuy", "Rebuy / re-entry", "Chip'i biten oyuncunun yeniden giriş yapabilmesi.", ["re-entry", "reentry"]),
+  t("turnuva", "rebuy", "Rebuy / re-entry", "Turnuvada ek chip alma (rebuy) ya da elendikten sonra yeniden girme (re-entry) hakkı. Rebuy'da oyuncu turnuvadan çıkmadan yeniden chip alır (çoğunlukla chip'i bittiğinde ya da kurala göre azaldığında); re-entry'de elendikten sonra yeniden kayıt olup başlangıç stack'iyle tekrar girer. İkisi de her turnuvada yoktur ve belirli bir süreyle sınırlıdır.", ["re-entry", "reentry"]),
   t("turnuva", "late-reg", "Geç kayıt", "Turnuva başladıktan sonra belirli bir seviyeye kadar kayıt olabilme süresi.", ["late registration", "late reg"]),
   t("turnuva", "chip-ev", "Chip EV (cEV)", "Kararı yalnızca kazanılan/kaybedilen chip'e göre değerlendirmek. Turnuvanın başında ICM'e yakındır, sonlarda ayrışır.", ["cEV", "$EV"]),
+  t("turnuva", "freezeout", "Freezeout", "Her oyuncunun yalnızca bir kez girebildiği turnuva: chip'i biten oyuncu elenir, yeniden giriş ya da chip alma yoktur."),
+  t("turnuva", "sit-and-go", "Sit & go", "Belirli bir saatte değil, kayıtlı oyuncu sayısı dolunca başlayan turnuva. Çoğunlukla tek masadır (ör. 6 ya da 9 kişi).", ["sit and go", "SNG"]),
+  t("turnuva", "mtt", "MTT (çok masalı turnuva)", "Birden çok masada başlayan turnuva. Oyuncular elendikçe masalar birleştirilir ve sonunda tek masa (final masası) kalır.", ["MTT", "çok masalı turnuva", "multi-table tournament"]),
+  t("turnuva", "bb-ante", "BB ante", "Ante'yi masadaki herkesin ayrı ayrı ödemesi yerine, büyük blind'ı koyan oyuncunun masanın tamamı için tek seferde ödemesi. Bugün turnuvalarda yaygındır; miktarı çoğunlukla büyük blind kadardır.", ["big blind ante"]),
+  t("turnuva", "ortalama-stack", "Ortalama stack", "Turnuvada kalan toplam chip'in kalan oyuncu sayısına bölümü. Kendi stack'ini sahayla karşılaştırmak için kullanılır.", ["average stack"]),
+  t("turnuva", "kapsamak", "Kapsamak (cover)", "Bir oyuncunun stack'inin rakibininkine eşit ya da ondan büyük olması. Seni kapsayan rakibe bütün chip'lerini kaybedersen elenirsin.", ["cover"]),
+  t("turnuva", "odul-yapisi", "Ödül yapısı", "Turnuvada ödülün hangi sıralara ve hangi paylarla dağıtılacağını gösteren tablo. Genellikle katılımcıların küçük bir kısmı ödül alır ve paylar üst sıralara doğru büyür; oranlar turnuvaya göre değişir.", ["payout structure"]),
+  t("turnuva", "derin-stack", "Derin stack", "BB cinsinden çok chip'i olan stack. Turnuvada kabaca 40 BB ve üstü sayılır; sınır kaynağa göre değişir.", ["deep stack"]),
   t("turnuva", "stall", "Risk primi", "ICM yüzünden bir all-in'i görmek için chip EV'nin gerektirdiğinden fazla equity'ye ihtiyaç duyman.", ["risk premium"]),
 ];
 

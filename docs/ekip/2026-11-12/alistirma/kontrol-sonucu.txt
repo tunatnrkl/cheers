@@ -1,0 +1,94 @@
+
+(a)
+  GEÇTİ 1440x900 kurulum: scrollHeight 900 / clientHeight 900, başla butonu görünür: true
+  GEÇTİ 1440x900 masa: scrollHeight 900 / clientHeight 900, 2 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 1440x900 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 460px (ekranın yarısından az: false)
+  GEÇTİ 1280x720 kurulum: scrollHeight 720 / clientHeight 720, başla butonu görünür: true
+  GEÇTİ 1280x720 masa: scrollHeight 720 / clientHeight 720, 2 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 1280x720 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 458px (ekranın yarısından az: false)
+  GEÇTİ 1024x768 kurulum: scrollHeight 768 / clientHeight 768, başla butonu görünür: true
+  GEÇTİ 1024x768 masa: scrollHeight 768 / clientHeight 768, 4 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 1024x768 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 460px (ekranın yarısından az: false)
+  GEÇTİ 768x1024 kurulum: scrollHeight 1024 / clientHeight 1024, başla butonu görünür: true
+  GEÇTİ 768x1024 masa: scrollHeight 1024 / clientHeight 1024, 4 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 768x1024 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 460px (ekranın yarısından az: true)
+  GEÇTİ 390x844 kurulum: scrollHeight 844 / clientHeight 844, başla butonu görünür: true
+  GEÇTİ 390x844 masa: scrollHeight 844 / clientHeight 844, 4 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 390x844 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 380px (ekranın yarısından az: true)
+  GEÇTİ 360x640 kurulum: scrollHeight 640 / clientHeight 640, başla butonu görünür: true
+  GEÇTİ 360x640 masa: scrollHeight 640 / clientHeight 640, 4 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 360x640 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 288px (ekranın yarısından az: true)
+  GEÇTİ 844x390 kurulum: scrollHeight 390 / clientHeight 390, başla butonu görünür: true
+  GEÇTİ 844x390 masa: scrollHeight 390 / clientHeight 390, 2 aksiyon butonu görünür: true, hero kartları görünür: true
+  GEÇTİ 844x390 koç açık: kayma yok true, aksiyon çubuğunu örtmüyor true, butonlar görünür true, yükseklik 150px (ekranın yarısından az: true)
+
+(b)
+  GEÇTİ c26: 5 karar, sonuç: Showdown: CO per ile kazandı; senin elin yüksek kart (net -26,3 BB).; konsol hatası: 0
+  GEÇTİ c19: 2 karar, sonuç: Showdown: BB iki per ile kazandı; senin elin per (net -27,75 BB).; konsol hatası: 0
+  GEÇTİ c24: 4 karar, sonuç: Showdown: iki per ile 201 BB'lik potu aldın (net +101 BB).; konsol hatası: 0
+  GEÇTİ c29: 5 karar, sonuç: Showdown: BTN floş ile kazandı; senin elin yüksek kart (net -61,5 BB).; konsol hatası: 0
+  GEÇTİ c33: 1 karar, sonuç: Showdown: BTN per ile kazandı; senin elin per (net -9,75 BB).; konsol hatası: 0
+  GEÇTİ c36: 4 karar, sonuç: Showdown: kent ile 8 BB'lik potu aldın (net +5,5 BB).; konsol hatası: 0
+  GEÇTİ c10: 5 karar, sonuç: Showdown: per ile 40,5 BB'lik potu aldın (net +21 BB).; konsol hatası: 0
+  GEÇTİ c11: 4 karar, sonuç: Showdown: UTG iki per ile kazandı; senin elin per (net -3,5 BB).; konsol hatası: 0
+  GEÇTİ c01: 5 karar, sonuç: Showdown: pot bölündü; per ile 4,5 BB aldın (net +0,5 BB).; konsol hatası: 0
+  GEÇTİ t13: 1 karar, sonuç: Showdown: SB iki per ile kazandı; senin elin iki per (net -14 BB).; konsol hatası: 0
+  GEÇTİ t23: 2 karar, sonuç: Showdown: per ile 17,9 BB'lik potu aldın (net +9,7 BB).; konsol hatası: 0
+  GEÇTİ t25: 4 karar, sonuç: Showdown: per ile 5,9 BB'lik potu aldın (net +3,7 BB).; konsol hatası: 0
+  GEÇTİ t26: 1 karar, sonuç: Showdown: pot bölündü; per ile 12,75 BB aldın (net +0,75 BB).; konsol hatası: 0
+  GEÇTİ o-Qc4c-3cTh7h8c: 1 karar, sonuç: Showdown: BTN per ile kazandı; senin elin yüksek kart (net -60 BB).; konsol hatası: 0
+  GEÇTİ o-3s8c-Jc7c5hJs: 1 karar, sonuç: Showdown: BB iki per ile kazandı; senin elin per (net -60 BB).; konsol hatası: 0
+  GEÇTİ o-5c7h-Ts3hThQh: 1 karar, sonuç: Showdown: BB per ile kazandı; senin elin per (net -60 BB).; konsol hatası: 0
+  GEÇTİ o-7hAc-QsTc9c8d: 1 karar, sonuç: Showdown: BTN kent ile kazandı; senin elin yüksek kart (net -25 BB).; konsol hatası: 0
+  GEÇTİ o-3hAd-8dTs8sKd: 1 karar, sonuç: Showdown: pot bölündü; per ile 20,25 BB aldın (net +0,25 BB).; konsol hatası: 0
+  GEÇTİ o-QhKc-6cAh7hJc: 1 karar, sonuç: Showdown: per ile 80,5 BB'lik potu aldın (net +40,5 BB).; konsol hatası: 0
+  GEÇTİ o-6d9h-3d4d2c3c: 1 karar, sonuç: Showdown: BTN per ile kazandı; senin elin per (net -40 BB).; konsol hatası: 0
+  GEÇTİ c29 fold: El oynatılmadı: fold ettin ve elde birden çok rakip kaldı; pot dağıtılmadı, rakip kartları açılmadı.; "Kartlar nasıl gelecekti?" var, kalan board 5 kart, rakip kartı açılmadı true
+  GEÇTİ c26 fold: Fold ettin; rakip kartları açılmadı (elin başından net -2,5 BB).; "Kartlar nasıl gelecekti?" var, kalan board 5 kart, rakip kartı açılmadı true
+
+(c)
+  GEÇTİ c26: showdown'da açılan rakip kartı 2 (karo 10, kupa papaz); el bitmeden 9 anlık görüntüde bulunan: yok
+  GEÇTİ c19: showdown'da açılan rakip kartı 2 (maça 10, sinek 10); el bitmeden 3 anlık görüntüde bulunan: yok
+  GEÇTİ c24: showdown'da açılan rakip kartı 2 (kupa papaz, karo papaz); el bitmeden 7 anlık görüntüde bulunan: yok
+  GEÇTİ c29: showdown'da açılan rakip kartı 2 (maça as, maça 4); el bitmeden 9 anlık görüntüde bulunan: yok
+  GEÇTİ c33: showdown'da açılan rakip kartı 2 (karo 6, karo kız); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ c36: showdown'da açılan rakip kartı 4 (maça as, karo vale, karo as, maça kız); el bitmeden 7 anlık görüntüde bulunan: yok
+  GEÇTİ c10: showdown'da açılan rakip kartı 2 (sinek as, sinek 4); el bitmeden 9 anlık görüntüde bulunan: yok
+  GEÇTİ c11: showdown'da açılan rakip kartı 2 (karo 9, maça 7); el bitmeden 7 anlık görüntüde bulunan: yok
+  GEÇTİ c01: showdown'da açılan rakip kartı 2 (kupa as, sinek 5); el bitmeden 9 anlık görüntüde bulunan: yok
+  GEÇTİ t13: showdown'da açılan rakip kartı 2 (maça papaz, sinek as); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ t23: showdown'da açılan rakip kartı 2 (kupa kız, kupa as); el bitmeden 3 anlık görüntüde bulunan: yok
+  GEÇTİ t25: showdown'da açılan rakip kartı 2 (kupa 10, kupa 7); el bitmeden 7 anlık görüntüde bulunan: yok
+  GEÇTİ t26: showdown'da açılan rakip kartı 2 (maça vale, kupa papaz); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-Qc4c-3cTh7h8c: showdown'da açılan rakip kartı 2 (kupa 3, kupa kız); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-3s8c-Jc7c5hJs: showdown'da açılan rakip kartı 2 (kupa papaz, kupa 7); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-5c7h-Ts3hThQh: showdown'da açılan rakip kartı 2 (sinek as, maça 9); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-7hAc-QsTc9c8d: showdown'da açılan rakip kartı 2 (kupa vale, sinek papaz); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-3hAd-8dTs8sKd: showdown'da açılan rakip kartı 2 (maça 4, maça as); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-QhKc-6cAh7hJc: showdown'da açılan rakip kartı 2 (kupa 4, karo papaz); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ o-6d9h-3d4d2c3c: showdown'da açılan rakip kartı 2 (sinek vale, sinek 6); el bitmeden 1 anlık görüntüde bulunan: yok
+  GEÇTİ c29 (Normal hız, C tuşuyla): oynatma boyunca 48 anlık görüntü (showdown öncesi); rakip kartları (maça as, maça 4) bulunmadı: true; konsol hatası 0
+  GEÇTİ c24 (Normal hız, C tuşuyla): oynatma boyunca 22 anlık görüntü (showdown öncesi); rakip kartları (kupa papaz, karo papaz) bulunmadı: true; konsol hatası 0
+  GEÇTİ c10 (Normal hız, C tuşuyla): oynatma boyunca 32 anlık görüntü (showdown öncesi); rakip kartları (sinek as, sinek 4) bulunmadı: true; konsol hatası 0
+  GEÇTİ o-7hAc-QsTc9c8d (Normal hız, C tuşuyla): oynatma boyunca 9 anlık görüntü (showdown öncesi); rakip kartları (kupa vale, sinek papaz) bulunmadı: true; konsol hatası 0
+  GEÇTİ t25 (Normal hız, C tuşuyla): oynatma boyunca 34 anlık görüntü (showdown öncesi); rakip kartları (kupa 10, kupa 7) bulunmadı: true; konsol hatası 0
+
+(d)
+  GEÇTİ 1440x900: küçültünce gizlendi true; mesaj 6→6; yazı korunuyor "yarım kalan soru"; kaydırma 40→40; aksiyon çubuğunu örtmüyor true
+  GEÇTİ 1440x900: serbest soruya "hazır sorularla çalışır" yanıtı; pencerede "yapay zeka" geçmiyor
+  GEÇTİ 1440x900: Esc pencereyi küçültür
+  GEÇTİ 1440x900: yenilemeden sonra pencere açık ve 8 mesaj korunuyor (sessionStorage)
+  GEÇTİ 390x844: küçültünce gizlendi true; mesaj 6→6; yazı korunuyor "yarım kalan soru"; kaydırma 40→40; aksiyon çubuğunu örtmüyor true
+  GEÇTİ 390x844: serbest soruya "hazır sorularla çalışır" yanıtı; pencerede "yapay zeka" geçmiyor
+  GEÇTİ 390x844: Esc pencereyi küçültür
+  GEÇTİ 390x844: yenilemeden sonra pencere açık ve 8 mesaj korunuyor (sessionStorage)
+
+(e)
+  GEÇTİ 1440x900 /: scrollHeight 2030 > clientHeight 900, tekerlekle kaydı (scrollY 600)
+  GEÇTİ 1440x900 /range: scrollHeight 1360 > clientHeight 900, tekerlekle kaydı (scrollY 460)
+  GEÇTİ 1440x900 /alistirma → /range (istemci geçişi): kilit kaldırıldı (html "", body "", footer block), scrollY 460
+  GEÇTİ 390x844 /: scrollHeight 3754 > clientHeight 844, tekerlekle kaydı (scrollY 600)
+  GEÇTİ 390x844 /range: scrollHeight 1633 > clientHeight 844, tekerlekle kaydı (scrollY 600)
+  GEÇTİ 390x844 /alistirma → /range (istemci geçişi): kilit kaldırıldı (html "", body "", footer block), scrollY 600
+
+Toplam başarısız: 0

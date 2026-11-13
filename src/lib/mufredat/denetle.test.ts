@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import veri from "@/data/mufredat.json";
 import { HANDS } from "@/data/hands";
-import { acilisDurumu, alistirmaDenetle, denetle } from "../../../scripts/mufredat/denetle.mts";
+import { acilisDurumu, alistirmaDenetle, denetle, sayiOku } from "../../../scripts/mufredat/denetle.mts";
 
 type Al = Parameters<typeof alistirmaDenetle>[0];
 const m = veri as unknown as Parameters<typeof denetle>[0];
@@ -24,6 +24,18 @@ describe("müfredat olgu denetimi (scripts/mufredat/denetle.mts)", () => {
 
   const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
   const s = (soru: string, secenekler: string[], dogru: number, denetim: Al["denetim"]): Al => ({ ...temel, tip: "secmeli", soru, secenekler, dogru, denetim });
+
+  it("seçenek sayılarını Türkçe yazımla okur (nokta binlik, virgül ondalık)", () => {
+    expect(sayiOku("20.000")).toBe(20000);
+    expect(sayiOku("1.000.000 chip")).toBe(1000000);
+    expect(sayiOku("%27,3")).toBe(27.3);
+    expect(sayiOku("1.250,5 BB")).toBe(1250.5);
+    expect(sayiOku("5,5 BB")).toBe(5.5);
+    // Eski okuma "20.000"i 20 sanıyordu: bölüm sorusunda yanlış seçeneği kabul etmemeli.
+    const a = s("600.000 / 30?", ["2.000", "20", "20.000"], 2, { tur: "bolum", terimler: [600000, 30] });
+    expect(alistirmaDenetle(a)).toEqual([]);
+    expect(alistirmaDenetle({ ...a, dogru: 1 }).join()).toMatch(/hesaplanan 20000/);
+  });
 
   it("yanlış kazananı yakalar (kicker)", () => {
     const a = s("Board: A♣ 8♦ 5♠ 3♥ 2♦. Ali: A♠ K♥. Berk: A♦ J♣.", ["Ali", "Berk", "Beraberlik"], 0,
@@ -137,5 +149,67 @@ describe("strateji denetimleri (ranges.json, gereken equity, spot bağları)", (
     const n: Al = { ...temel, tip: "sayi", soru: "", dogru: 27.3, tolerans: 0.1, denetim: { tur: "gerekenEquity", call: 1.5, pot: 4 } } as Al;
     expect(alistirmaDenetle(n)).toEqual([]);
     expect(alistirmaDenetle({ ...n, dogru: 37.5 }).join()).toMatch(/27\.27/);
+  });
+});
+
+describe("turnuva hesapları (ante'li pot, M oranı, BB erimesi, ortalama stack, ödül payları)", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  const n = (dogru: number, denetim: Al["denetim"], tolerans = 0): Al => ({ ...temel, tip: "sayi", dogru, tolerans, denetim }) as Al;
+
+  it("ante'li pot: BB ante tek ante, klasik ante oyuncu başına", () => {
+    expect(alistirmaDenetle(n(2.5, { tur: "antePot", sb: 0.5, bb: 1, ante: 1 }))).toEqual([]);
+    // BB ante'yi oyuncu başına saymak (9 × 1) yakalanır.
+    expect(alistirmaDenetle(n(10.5, { tur: "antePot", sb: 0.5, bb: 1, ante: 1 })).join()).toMatch(/hesaplanan 2.5/);
+    expect(alistirmaDenetle(n(525, { tur: "antePot", sb: 100, bb: 200, ante: 25, anteTuru: "klasik", oyuncu: 9 }))).toEqual([]);
+    expect(alistirmaDenetle(n(325, { tur: "antePot", sb: 100, bb: 200, ante: 25, anteTuru: "klasik", oyuncu: 9 })).join()).toMatch(/hesaplanan 525/);
+    expect(alistirmaDenetle(n(525, { tur: "antePot", sb: 100, bb: 200, ante: 25, anteTuru: "klasik" })).join()).toMatch(/oyuncu sayısı/);
+    expect(alistirmaDenetle(n(5, { tur: "antePot", sb: 0.5, bb: 1, ante: 1, ekler: [2.5] }))).toEqual([]);
+  });
+
+  it("M oranı = stack / (SB + BB + toplam ante); ante'yi unutan cevap yakalanır", () => {
+    const m = n(20, { tur: "mOrani", stack: "10.000", sb: 100, bb: 200, ante: 200 });
+    expect(alistirmaDenetle(m)).toEqual([]);
+    expect(alistirmaDenetle({ ...m, dogru: 33.3, tolerans: 0.1 } as Al).join()).toMatch(/M: hesaplanan 20/);
+    // Yuvarlama: 13,33… → 13,3 (tolerans 0,1) kabul; tolerans 1 reddedilir.
+    expect(alistirmaDenetle(n(13.3, { tur: "mOrani", stack: 4000, sb: 100, bb: 200 }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(13, { tur: "mOrani", stack: 4000, sb: 100, bb: 200 }, 1)).join()).toMatch(/tolerans 1/);
+    const sec: Al = { ...temel, tip: "secmeli", secenekler: ["M = 8", "M = 10", "M = 25"], dogru: 2, denetim: { tur: "mOrani", stack: 25, sb: 0.5, bb: 1, ante: 1 } };
+    expect(alistirmaDenetle(sec).join()).toMatch(/M 10/);
+    const dy: Al = { ...temel, tip: "dogruYanlis", dogru: true, denetim: { tur: "mOrani", stack: 25, sb: 0.5, bb: 1, ante: 1, iddia: 25 } };
+    expect(alistirmaDenetle(dy).join()).toMatch(/hesaplanan cevap false/);
+  });
+
+  it("blind artışı: stack aynıyken BB cinsinden erime", () => {
+    const y = n(25, { tur: "bbErime", stack: "10.000", eskiBb: 200, yeniBb: 400, sonuc: "yeni" });
+    expect(alistirmaDenetle(y)).toEqual([]);
+    expect(alistirmaDenetle({ ...y, dogru: 50 } as Al).join()).toMatch(/hesaplanan 25/);
+    expect(alistirmaDenetle(n(25, { tur: "bbErime", stack: 10000, eskiBb: 200, yeniBb: 400, sonuc: "kayip" }))).toEqual([]);
+  });
+
+  it("ortalama stack = başlangıç × giriş / kalan", () => {
+    const o = n(40, { tur: "ortalamaStack", baslangic: "20.000", giris: 200, kalan: 50, bb: 2000 });
+    expect(alistirmaDenetle(o)).toEqual([]);
+    expect(alistirmaDenetle({ ...o, dogru: 10 } as Al).join()).toMatch(/hesaplanan 40/);
+    // Stack'in ortalamaya oranı (%): 45.000 / 50.000
+    expect(alistirmaDenetle(n(90, { tur: "ortalamaStack", baslangic: 10000, giris: 100, kalan: 20, stack: "45.000" }))).toEqual([]);
+    expect(alistirmaDenetle(n(45, { tur: "ortalamaStack", baslangic: 10000, giris: 100, kalan: 20, stack: "45.000" })).join()).toMatch(/hesaplanan 90/);
+  });
+
+  it("stack bölgesi: 40 BB ve üstü derin, 20–40 orta, 20'nin altı kısa", () => {
+    const b = (stack: number, bb: number, dogru: number): Al => ({ ...temel, tip: "secmeli", secenekler: ["Derin stack", "Orta stack", "Kısa stack"], dogru, denetim: { tur: "bolge", stack, bb } });
+    expect(alistirmaDenetle(b(24000, 1200, 1))).toEqual([]); // tam 20 BB: orta
+    expect(alistirmaDenetle(b(24000, 1200, 2)).join()).toMatch(/20 BB: Orta/);
+    expect(alistirmaDenetle(b(38000, 2000, 2))).toEqual([]);
+    expect(alistirmaDenetle(b(20000, 500, 1)).join()).toMatch(/40 BB: Derin/);
+  });
+
+  it("ödül payları: toplamı 100 olmayan ya da artan tablo reddedilir", () => {
+    expect(alistirmaDenetle(n(20, { tur: "odul", paylar: [50, 30, 20], soru: "fark", siralar: [1, 2] }))).toEqual([]);
+    expect(alistirmaDenetle(n(30, { tur: "odul", paylar: [50, 30, 20], soru: "fark", siralar: [1, 2] })).join()).toMatch(/hesaplanan 20/);
+    expect(alistirmaDenetle(n(3, { tur: "odul", paylar: [50, 30, 25], soru: "itm" })).join()).toMatch(/toplamı 100 değil/);
+    expect(alistirmaDenetle(n(3, { tur: "odul", paylar: [50, 20, 30], soru: "itm" })).join()).toMatch(/artıyor/);
+    expect(alistirmaDenetle(n(15, { tur: "odul", paylar: [40, 25, 20, 15], soru: "pay", sira: 5 })).join()).toMatch(/ödül almıyor/);
+    expect(alistirmaDenetle(n(33.3, { tur: "odul", paylar: [50, 30, 20], soru: "itmOrani", katilimci: 18 }, 0.1)).join()).toMatch(/hesaplanan 16.6/);
+    expect(alistirmaDenetle(n(33.3, { tur: "odul", paylar: [50, 30, 20], soru: "itmOrani", katilimci: 9 }, 0.1))).toEqual([]);
   });
 });

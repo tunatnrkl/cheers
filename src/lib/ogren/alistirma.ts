@@ -19,7 +19,10 @@ export type Cevap =
 /** "12,5", "12.5", "%25", "25 %", "1.250,5" → sayı. Anlaşılmazsa null. */
 export function sayiCoz(metin: string): number | null {
   let s = metin.trim().replace(/\s+/g, "").replace(/^%/, "").replace(/%$/, "").replace(/[−–]/g, "-");
+  // Türkçe yazım: nokta binlik, virgül ondalık ayırıcıdır ("12.000", "1.250,5").
+  // Yalnızca nokta varsa ve gruplar tam üçer haneliyse binlik sayılır; "2.5" gibi yazımlar ondalık kalır.
   if (s.includes(",") && s.includes(".")) s = s.replace(/\./g, "");
+  else if (/^-?\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, "");
   s = s.replace(",", ".");
   if (!/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return null;
   const n = Number(s);

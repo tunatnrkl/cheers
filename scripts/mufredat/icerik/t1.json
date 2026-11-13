@@ -1,0 +1,1432 @@
+{
+ "t1-d1": {
+  "anlatim": [
+   "Poker iki ana biçimde oynanır. Cash oyununda (cash game) blind'ler sabittir, masaya istediğin zaman oturup kalkabilirsin ve chip'in azalırsa masa kurallarına göre ekleyebilirsin. Turnuvada ise herkes aynı koşulla ve aynı sayıda chip'le başlar; amaç olabildiğince uzun süre oyunda kalıp üst sıralarda bitirmektir.",
+   "Turnuva chip'leri yalnızca o turnuvada geçer: masadan kalkarken alıp götüremezsin, oyun sırasında da dilediğin gibi ekleyemezsin. Önündeki chip'lerin toplamına stack denir. Stack'in sıfıra inerse elenirsin. Bazı turnuvalar belirli bir süre yeniden girişe izin verir; bunu bir sonraki derste göreceksin.",
+   "Turnuvada blind'ler sabit kalmaz, belirli aralıklarla (ör. her 20 dakikada) yükselir. Hiç el oynamasan da blind sırası sana geldikçe ödersin ve blind'ler büyüdükçe bu bedel artar. Bu yüzden turnuvada beklemenin de bir maliyeti vardır.",
+   "Sıralama, oyuncuların elendiği sıraya göre belirlenir: ilk elenen en son sırayı alır, bütün chip'leri toplayan son oyuncu birinci olur. Ödüller bu sıralamaya göre dağıtılır."
+  ],
+  "terimler": [
+   "Cash game",
+   "Turnuva",
+   "Stack",
+   "Blind"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Turnuvada blind'ler oyun boyunca aynı kalır.",
+    "dogru": false,
+    "neden": "Turnuvada blind'ler belirli aralıklarla yükselir. Blind'lerin sabit kaldığı oyun cash game'dir.",
+    "yanilgi": "Cash game'deki sabit blind düzenini turnuvaya taşımak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Turnuvada stack'in sıfıra inerse ne olur?",
+    "secenekler": [
+     "Elenirsin ve turnuvadaki sıran belirlenir",
+     "Masa kurallarına göre chip ekleyip devam edersin",
+     "Bir sonraki blind seviyesine kadar beklersin",
+     "Blind ödemeden oyunda kalırsın"
+    ],
+    "dogru": 0,
+    "neden": "Turnuvada chip'i biten oyuncu elenir; sırası, elendiği ana göre belirlenir.",
+    "yanilgi": "Cash game'deki gibi chip ekleyip devam edilebileceğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Turnuva chip'lerini istediğin zaman masadan alıp götürebilirsin.",
+    "dogru": false,
+    "neden": "Turnuva chip'leri yalnızca o turnuvada geçer; masadan alınıp götürülmez.",
+    "yanilgi": "Turnuva chip'lerini cash game chip'leri gibi düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "eslestirme",
+    "zorluk": 2,
+    "soru": "Terimi tanımıyla eşleştir.",
+    "secenekler": [
+     [
+      "Stack",
+      "Önündeki chip'lerin toplamı"
+     ],
+     [
+      "Blind",
+      "Kartlar dağıtılmadan önce konan zorunlu bahis"
+     ],
+     [
+      "Turnuva",
+      "Herkesin aynı sayıda chip'le başladığı, chip'i biten oyuncunun elendiği oyun"
+     ],
+     [
+      "Cash game",
+      "Blind'lerin sabit olduğu, istediğin zaman oturup kalkabildiğin oyun"
+     ]
+    ],
+    "neden": "Stack chip toplamıdır; blind zorunlu bahistir. Turnuva ile cash game, chip'lerin ve blind'lerin işleyişiyle ayrılır.",
+    "yanilgi": "Turnuva ile cash game'in tanımlarını karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Turnuvada sıralamayı ne belirler?",
+    "secenekler": [
+     "Oyuncuların elendiği sıra",
+     "Kimin en çok el kazandığı",
+     "Belirli bir saatteki chip sayısı",
+     "En büyük potu kimin kazandığı"
+    ],
+    "dogru": 0,
+    "neden": "İlk elenen en son sırayı alır; son kalan oyuncu birinci olur.",
+    "yanilgi": "Kazanılan el sayısının ya da tek bir büyük potun sıralamayı belirlediğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Turnuvada ilk elenen oyuncu en son sırayı alır.",
+    "dogru": true,
+    "neden": "Sıralama elenme sırasına göredir: ilk elenen, katılımcı sayısı kadar kişi arasında sonuncudur.",
+    "yanilgi": "Erken elenmenin sıralamada bir farkı olmadığını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "9 kişilik bir turnuvada üç oyuncu elendi. Dördüncü elenen oyuncu kaçıncı sırayı alır?",
+    "dogru": 6,
+    "tolerans": 0,
+    "birim": "",
+    "neden": "İlk elenen 9., ikinci 8., üçüncü 7., dördüncü 6. olur: 9 − 4 + 1 = 6.",
+    "yanilgi": "Elenme sırasını doğrudan sıra sanıp 4 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      9,
+      -4,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Turnuvada blind'lerin yükselmesi, hiç el oynamayan bir oyuncuyu nasıl etkiler?",
+    "secenekler": [
+     "Ödediği blind'ler büyür; stack'i blind'lere oranla daha hızlı küçülür",
+     "Etkilemez; blind'leri yalnızca el oynayanlar öder",
+     "Stack'i kendiliğinden büyür",
+     "Blind'ler yükselince blind ödemekten muaf olur"
+    ],
+    "dogru": 0,
+    "neden": "Blind sırası herkese gelir. Blind'ler büyüdükçe hiç oynamayan oyuncunun ödediği bedel de büyür.",
+    "yanilgi": "Fold ederek blind artışından kaçılabileceğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Cash game'de olduğu gibi turnuvada da chip'in azalınca istediğin an chip ekleyebilirsin.",
+    "dogru": false,
+    "neden": "Turnuvada chip başlangıçta verilir. Bazı turnuvalarda belirli bir süre ek chip alma ya da yeniden giriş vardır, ama bu kurala ve süreye bağlıdır; istediğin an chip eklenmez.",
+    "yanilgi": "Cash game kuralını turnuvaya taşımak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a10",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "10 kişilik bir turnuvada sen elendiğinde, senden başka 3 oyuncu oyunda kaldı. Kaçıncı oldun?",
+    "dogru": 4,
+    "tolerans": 0,
+    "birim": "",
+    "neden": "Senden sonra elenecek 3 oyuncu 1., 2. ve 3. sıraları alır; sen 4. olursun: 3 + 1 = 4.",
+    "yanilgi": "Elenen oyuncu sayısını sayıp 7 demek; sıra, senden sonra kalanlara göre belirlenir.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      3,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Turnuvanın başında 10.000 chip'in vardı ve blind'ler 50 / 100'dü. İki saat sonra yine 10.000 chip'in var ama blind'ler 400 / 800. Hangisi doğru?",
+    "secenekler": [
+     "Chip sayın aynı ama stack'in blind'lere oranla çok küçüldü",
+     "Chip sayın değişmediği için durumun da değişmedi",
+     "Stack'in blind'lere oranla büyüdü",
+     "Blind'ler herkes için arttığı için stack'ine bir etkisi yok"
+    ],
+    "dogru": 0,
+    "neden": "Aynı 10.000 chip, büyük blind 100 iken 100 büyük blind'e, 800 iken 12,5 büyük blind'e yeter. Bunu bir sonraki derslerde BB cinsinden hesaplayacaksın.",
+    "yanilgi": "Stack'i blind'lerden bağımsız, yalnızca chip sayısıyla değerlendirmek.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "t1-d2": {
+  "anlatim": [
+   "Freezeout'ta her oyuncu yalnızca bir kez girer: chip'in biterse turnuvan biter. Re-entry (yeniden giriş) turnuvasında elendikten sonra, belirli bir süre içinde yeniden kayıt olup başlangıç stack'iyle tekrar girebilirsin; çoğunlukla yeni bir masaya ya da koltuğa oturursun. Rebuy'da ise turnuvadan çıkmadan, belirli bir süre içinde ek chip alırsın; kural genellikle chip'in bittiğinde ya da azaldığında buna izin verir.",
+   "Yeniden giriş süresi çoğunlukla geç kayıt (turnuva başladıktan sonra da kayıt olunabilen dönem) ile birlikte biter; rebuy süresi de turnuvanın ilk seviyeleriyle sınırlıdır. Bu süreler bitince turnuva freezeout gibi oynanır: elenen oyuncu geri dönemez.",
+   "Turnuvalar başlama biçimine göre de ayrılır. Sit & go belirli bir saatte değil, yeterli oyuncu kayıt olunca başlar; çoğunlukla tek masadır (ör. 6 ya da 9 kişi). Çok masalı turnuva (MTT) belirli bir saatte birçok masada başlar. Oyuncular elendikçe masalar birleştirilir ve sonunda tek masa, yani final masası kalır.",
+   "Bu iki ayrım birbirinden bağımsızdır: bir MTT freezeout da olabilir, re-entry de. Bu müfredat aksi yazılmadıkça freezeout varsayar: chip'in biterse elenirsin."
+  ],
+  "terimler": [
+   "Freezeout",
+   "Rebuy / re-entry",
+   "Geç kayıt",
+   "Sit & go",
+   "MTT (çok masalı turnuva)",
+   "Final masası"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "eslestirme",
+    "zorluk": 1,
+    "soru": "Formatı tanımıyla eşleştir.",
+    "secenekler": [
+     [
+      "Freezeout",
+      "Tek giriş; chip'in biterse turnuvan biter"
+     ],
+     [
+      "Re-entry",
+      "Elendikten sonra yeniden kayıt olup başlangıç stack'iyle tekrar girersin"
+     ],
+     [
+      "Rebuy",
+      "Turnuvadan çıkmadan ek chip alırsın"
+     ],
+     [
+      "Sit & go",
+      "Belirli bir saatte değil, yeterli oyuncu kayıt olunca başlar"
+     ]
+    ],
+    "neden": "Freezeout, re-entry ve rebuy giriş kurallarını; sit & go ise başlama biçimini anlatır.",
+    "yanilgi": "Rebuy ile re-entry'yi karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Freezeout turnuvasında elendikten sonra yeniden kayıt olup tekrar girebilirsin.",
+    "dogru": false,
+    "neden": "Freezeout'ta tek giriş vardır; elenen oyuncunun turnuvası biter.",
+    "yanilgi": "Her turnuvada yeniden giriş olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Bir turnuva belirli bir saatte değil, 9 oyuncu kayıt olunca başlıyor. Başlama biçimine göre bu hangi formattır?",
+    "secenekler": [
+     "Sit & go",
+     "Belirli saatte başlayan çok masalı turnuva (MTT)",
+     "Cash game"
+    ],
+    "dogru": 0,
+    "neden": "Oyuncu sayısı dolunca başlayan turnuva sit & go'dur.",
+    "yanilgi": "Oyuncu sayısıyla başlayan turnuvayı MTT sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Bir MTT aynı zamanda re-entry turnuvası olabilir.",
+    "dogru": true,
+    "neden": "Başlama biçimi (MTT, sit & go) ile giriş kuralı (freezeout, re-entry, rebuy) birbirinden bağımsızdır.",
+    "yanilgi": "MTT'nin her zaman freezeout olduğunu sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Rebuy ile re-entry arasındaki fark nedir?",
+    "secenekler": [
+     "Rebuy'da turnuvadan çıkmadan chip alırsın; re-entry'de elendikten sonra yeniden kayıt olursun",
+     "İkisi aynı şeydir",
+     "Rebuy yalnızca sit & go'larda, re-entry yalnızca MTT'lerde olur",
+     "Re-entry'de kaldığın stack'le devam edersin, rebuy'da baştan başlarsın"
+    ],
+    "dogru": 0,
+    "neden": "Rebuy oyunda kalırken yapılır; re-entry ise elendikten sonra yeni bir giriştir.",
+    "yanilgi": "İki terimi eş anlamlı sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Çok masalı turnuvada (MTT) oyuncular elendikçe ne olur?",
+    "secenekler": [
+     "Masalar birleştirilir; sonunda tek masa (final masası) kalır",
+     "Her masa kendi birincisini çıkarır ve ayrı ödül dağıtır",
+     "Masalar ayrı kalır; turnuva belirlenen saatte en çok chip'i olan oyuncuyla biter"
+    ],
+    "dogru": 0,
+    "neden": "Boşalan koltuklar diğer masalardan gelen oyuncularla doldurulur, masalar azalır ve son masa final masasıdır.",
+    "yanilgi": "Her masayı ayrı bir turnuva gibi düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Re-entry ile yeniden giren oyuncu genellikle başlangıç stack'ini alır.",
+    "dogru": true,
+    "neden": "Re-entry yeni bir giriştir; oyuncu turnuvanın başlangıç stack'iyle yeniden başlar.",
+    "yanilgi": "Yeniden girişte elenmeden önceki chip'lerin geri verildiğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Bu turnuvada yeniden giriş geç kayıt sonuna kadar açık. Geç kayıt bittikten sonra elendin. Ne olur?",
+    "secenekler": [
+     "Turnuvan biter; yeniden giriş süresi geçmiştir",
+     "Başlangıç stack'iyle yeniden girersin",
+     "Rebuy ile kaldığın yerden devam edersin",
+     "Bir sonraki blind seviyesinde oyuna geri dönersin"
+    ],
+    "dogru": 0,
+    "neden": "Yeniden giriş süresi bitince turnuva freezeout gibi oynanır; elenen oyuncu geri dönemez.",
+    "yanilgi": "Yeniden giriş hakkının turnuva boyunca sürdüğünü sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Bir re-entry turnuvasına 120 farklı oyuncu katıldı; bunların 30'u birer kez yeniden girdi. Toplam giriş sayısı kaçtır?",
+    "dogru": 150,
+    "tolerans": 0,
+    "birim": "giriş",
+    "neden": "Her yeniden giriş ayrı bir giriştir: 120 + 30 = 150.",
+    "yanilgi": "Yalnızca farklı oyuncu sayısını sayıp 120 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      120,
+      30
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Bir arkadaşın şöyle diyor: \"Bu turnuvada elenirsem geç kayıt bitene kadar yeniden kayıt olabilirim, ama elenmeden ek chip alamam.\" Giriş kuralına göre bu turnuva hangi türdedir?",
+    "secenekler": [
+     "Re-entry",
+     "Rebuy",
+     "Freezeout",
+     "Sit & go"
+    ],
+    "dogru": 0,
+    "neden": "Elendikten sonra yeniden kayıt re-entry'dir. Oyundayken ek chip alma (rebuy) yok, ama yeniden giriş olduğu için freezeout da değil. Sit & go bir giriş kuralı değil, başlama biçimidir.",
+    "yanilgi": "Yeniden girişi rebuy sanmak ya da sit & go'yu giriş kuralı sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a11",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "Yeniden giriş süresi bittikten sonra re-entry turnuvası da freezeout gibi oynanır.",
+    "dogru": true,
+    "neden": "Süre bitince elenen oyuncu geri dönemez; bu, freezeout'un kuralıdır.",
+    "yanilgi": "Re-entry turnuvasında elenmenin hiçbir zaman kalıcı olmadığını sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "t1-d3": {
+  "anlatim": [
+   "Turnuvada blind'ler blind seviyesi denen basamaklarla yükselir. Her seviye belirli bir süre sürer; süre dolunca yeni seviyenin blind'leri sonraki elden itibaren geçerli olur. Seviye süresi turnuvaya göre değişir: birkaç dakikadan bir saate kadar olabilir. Kısa seviyeler oyunu hızlandırır.",
+   "Örnek bir yapı (küçük blind / büyük blind): 1. seviye 50 / 100, 2. seviye 75 / 150, 3. seviye 100 / 200, 4. seviye 150 / 300. Seviyeler 20 dakika ise 4. seviye, 3 seviye geçtikten sonra, yani 3 × 20 = 60. dakikada başlar. Ante'yi bir sonraki derste ekleyeceğiz.",
+   "Stack'i BB cinsinden ölçeriz: stack (BB) = stack (chip) / büyük blind. 10.000 chip, büyük blind 100 iken 100 BB eder; büyük blind 200 olunca aynı 10.000 chip 50 BB'dir. Hiç chip kaybetmesen bile blind'ler büyüdükçe stack'in BB cinsinden erir.",
+   "Bu yüzden turnuvada stack'ini chip sayısıyla değil BB ile düşün ve bir sonraki seviyede kaç BB'n kalacağını hesaba kat."
+  ],
+  "terimler": [
+   "Blind seviyesi",
+   "Stack",
+   "BB (Big Blind)",
+   "Blind"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Büyük blind 100. Stack'in 6.000 chip. Stack'in kaç BB?",
+    "dogru": 60,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "6.000 / 100 = 60 BB.",
+    "yanilgi": "Chip sayısını küçük blind'e bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      6000,
+      100
+     ]
+    }
+   },
+   {
+    "kimlik": "a2",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Blind seviyesi yükselince, chip sayın değişmese bile stack'in BB cinsinden küçülür.",
+    "dogru": true,
+    "neden": "BB cinsinden stack = chip / büyük blind. Büyük blind büyürse aynı chip daha az BB eder.",
+    "yanilgi": "Chip sayısı aynı kaldıkça durumun da aynı kaldığını sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Seviyeler 15 dakika. 5. seviye turnuvanın kaçıncı dakikasında başlar?",
+    "dogru": 60,
+    "tolerans": 0,
+    "birim": "dakika",
+    "neden": "5. seviyeden önce 4 seviye oynanır: 4 × 15 = 60. dakika.",
+    "yanilgi": "5 × 15 = 75 bulmak; 5. seviye, 4 seviye bittiğinde başlar.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      4,
+      15
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Büyük blind 300. Stack'in 9.000 chip. Stack'in kaç BB?",
+    "secenekler": [
+     "3 BB",
+     "30 BB",
+     "33 BB",
+     "300 BB"
+    ],
+    "dogru": 1,
+    "neden": "9.000 / 300 = 30 BB.",
+    "yanilgi": "Bir basamak kaydırıp 3 ya da 300 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      9000,
+      300
+     ]
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Stack'in 12.000 chip, büyük blind 200. Sonraki seviyede büyük blind 300 oluyor. Hiç chip kaybetmezsen o seviyede kaç BB'n olur?",
+    "dogru": 40,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "12.000 / 300 = 40 BB.",
+    "yanilgi": "Eski büyük blind'e bölüp 60 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bbErime",
+     "stack": "12.000",
+     "eskiBb": 200,
+     "yeniBb": 300,
+     "sonuc": "yeni"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Aynı durumda (12.000 chip, büyük blind 200'den 300'e) stack'in kaç BB küçüldü?",
+    "dogru": 20,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Önce 12.000 / 200 = 60 BB, sonra 12.000 / 300 = 40 BB: 60 − 40 = 20 BB.",
+    "yanilgi": "Büyük blind farkını (100) stack'ten düşmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bbErime",
+     "stack": "12.000",
+     "eskiBb": 200,
+     "yeniBb": 300,
+     "sonuc": "kayip"
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "eslestirme",
+    "zorluk": 3,
+    "soru": "Büyük blind 400. Chip miktarını BB karşılığıyla eşleştir.",
+    "secenekler": [
+     [
+      "2.000 chip",
+      "5 BB"
+     ],
+     [
+      "6.000 chip",
+      "15 BB"
+     ],
+     [
+      "10.000 chip",
+      "25 BB"
+     ],
+     [
+      "16.000 chip",
+      "40 BB"
+     ]
+    ],
+    "neden": "Her miktarı büyük blind'e, yani 400'e böl.",
+    "yanilgi": "Binlik ayırıcıyı ondalık sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolumEsleme",
+     "bb": 400
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Seviyeler 20 dakika. 3. seviye turnuvanın kaçıncı dakikasında biter?",
+    "secenekler": [
+     "40. dakika",
+     "60. dakika",
+     "80. dakika",
+     "20. dakika"
+    ],
+    "dogru": 1,
+    "neden": "3. seviye bittiğinde 3 seviye tamamlanmıştır: 3 × 20 = 60. dakika.",
+    "yanilgi": "Seviyenin başladığı dakikayı (40) bitişle karıştırmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      3,
+      20
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "Stack'in 10.000 chip ve büyük blind 100. Büyük blind 400 olduğunda, hiç chip kaybetmemiş olsan bile stack'in 25 BB'dir.",
+    "dogru": true,
+    "neden": "10.000 / 400 = 25 BB. Büyük blind dört katına çıkınca BB cinsinden stack dörtte birine iner.",
+    "yanilgi": "Stack'in 100 BB olarak kaldığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bbErime",
+     "stack": "10.000",
+     "eskiBb": 100,
+     "yeniBb": 400,
+     "sonuc": "yeni",
+     "iddia": 25
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "3. seviyede (100 / 200) stack'in 15.000 chip. Seviye boyunca 3.000 chip kaybettin. 4. seviyede büyük blind 300. 4. seviyenin başında kaç BB'n var?",
+    "dogru": 40,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "Kalan chip 15.000 − 3.000 = 12.000; 12.000 / 300 = 40 BB.",
+    "yanilgi": "Kaybı unutup 15.000 / 300 = 50 BB demek ya da eski büyük blind'e bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      12000,
+      300
+     ]
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Hangisi blind artışının etkisini en iyi anlatır?",
+    "secenekler": [
+     "Chip sayın aynı kalsa bile her seviyede stack'in BB cinsinden azalır; bu yüzden zamanın da bir maliyeti vardır",
+     "Blind'ler herkes için aynı arttığı için stack'ine bir etkisi yoktur",
+     "Blind artışı yalnızca az chip'i olan oyuncuları etkiler",
+     "Blind'ler arttıkça stack'in BB cinsinden büyür"
+    ],
+    "dogru": 0,
+    "neden": "Her oyuncunun stack'i BB cinsinden erir; bu, beklemenin bedelini artırır.",
+    "yanilgi": "Artışın herkese eşit gelmesini etkisiz olmasıyla karıştırmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "t1-d4": {
+  "anlatim": [
+   "Ante, blind'lere ek olarak her elde pota konan küçük zorunlu bahistir; turnuvaya göre ilk seviyeden ya da birkaç seviye sonra başlar. Ante ölü paradır: potu büyütür ama kimsenin bahsine sayılmaz. Büyük blind'in 1 BB'si bahsine sayılır; ante sayılmaz.",
+   "Klasik ante'de masadaki her oyuncu el başlamadan aynı miktarı koyar: 9 kişilik masada 25 chip'lik ante, pota 9 × 25 = 225 chip ekler. BB ante'de ise büyük blind'i koyan oyuncu masanın tamamı için tek bir ante öder. Bugün birçok turnuvada BB ante kullanılır; her elde ante'yi tek kişi koyduğu için toplamak daha hızlıdır.",
+   "Müfredat varsayımı: aksi yazılmadıkça BB ante 1 BB'dir. O zaman el başında potta 0,5 (küçük blind) + 1 (büyük blind) + 1 (ante) = 2,5 BB vardır; ante'siz masada bu 1,5 BB'dir.",
+   "Ante bahse sayılmadığı için call hesabı değişmez: biri 2,5 BB'ye raise yaptığında büyük blind call etmek için yine 2,5 − 1 = 1,5 BB ekler. Pot ise ante kadar büyüktür: küçük blind fold eder, büyük blind call ederse pot 0,5 (küçük blind) + 1 (ante) + 2,5 (raise) + 2,5 (büyük blind'in toplamı) = 6,5 BB olur."
+  ],
+  "terimler": [
+   "Ante",
+   "BB ante",
+   "Pot",
+   "BB (Big Blind)"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "BB ante'de masadaki her oyuncu ayrı ayrı ante koyar.",
+    "dogru": false,
+    "neden": "BB ante'de büyük blind'i koyan oyuncu masanın tamamı için tek bir ante öder. Herkesin koyduğu, klasik ante'dir.",
+    "yanilgi": "BB ante ile klasik ante'yi karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "sayi",
+    "zorluk": 1,
+    "soru": "Müfredat varsayımıyla (BB ante 1 BB) el başlarken, kimse bir şey yapmadan potta kaç BB vardır?",
+    "dogru": 2.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 (küçük blind) + 1 (büyük blind) + 1 (ante) = 2,5 BB.",
+    "yanilgi": "Ante'yi unutup 1,5 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 0.5,
+     "bb": 1,
+     "ante": 1
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 2,
+    "soru": "Klasik ante: 9 kişilik masada her oyuncu 25 chip ante koyuyor. Ante'ler pota toplam kaç chip ekler?",
+    "secenekler": [
+     "25",
+     "200",
+     "225",
+     "250"
+    ],
+    "dogru": 2,
+    "neden": "9 × 25 = 225 chip.",
+    "yanilgi": "Ante'yi tek kişinin ödediğini sanıp 25 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      9,
+      25
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Klasik ante: 9 oyuncu, blind'ler 100 / 200, ante 25. El başında potta kaç chip vardır?",
+    "dogru": 525,
+    "tolerans": 0,
+    "birim": "chip",
+    "neden": "100 + 200 + 9 × 25 = 525 chip.",
+    "yanilgi": "Ante'yi yalnızca bir kez sayıp 325 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 100,
+     "bb": 200,
+     "ante": 25,
+     "anteTuru": "klasik",
+     "oyuncu": 9
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Blind'ler 100 / 200, BB ante 200. El başında potta kaç chip vardır?",
+    "dogru": 500,
+    "tolerans": 0,
+    "birim": "chip",
+    "neden": "100 + 200 + 200 = 500 chip. BB ante tek ante'dir.",
+    "yanilgi": "BB ante'yi oyuncu sayısıyla çarpmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 100,
+     "bb": 200,
+     "ante": 200
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Ante büyük blind'in bahsine sayılır; bu yüzden BB ante ödeyen oyuncu bir raise'i görmek için daha az ekler.",
+    "dogru": false,
+    "neden": "Ante ölü paradır, kimsenin bahsine sayılmaz. Büyük blind yalnızca 1 BB'lik blind'ini düşer.",
+    "yanilgi": "Ante'yi bahse saymak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a7",
+    "tip": "eslestirme",
+    "zorluk": 3,
+    "soru": "Eşleştir.",
+    "secenekler": [
+     [
+      "Klasik ante",
+      "Masadaki her oyuncu ante koyar"
+     ],
+     [
+      "BB ante",
+      "Büyük blind'i koyan oyuncu tek ante öder"
+     ],
+     [
+      "Ante'siz masa",
+      "El başında pot 1,5 BB"
+     ],
+     [
+      "BB ante 1 BB olan masa",
+      "El başında pot 2,5 BB"
+     ]
+    ],
+    "neden": "Klasik ante'de herkes öder, BB ante'de tek kişi. El başındaki pot ante'siz 0,5 + 1 = 1,5 BB, BB ante 1 BB ile 2,5 BB'dir.",
+    "yanilgi": "BB ante'li potu 1,5 BB sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "BB ante 1 BB. Biri 2,5 BB'ye raise yaptı, küçük blind fold etti, büyük blind call etti. Pot kaç BB?",
+    "dogru": 6.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 (küçük blind) + 1 (ante) + 2,5 (raise) + 2,5 (büyük blind'in toplamı) = 6,5 BB.",
+    "yanilgi": "Ante'yi ya da fold eden küçük blind'in 0,5 BB'sini unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 0.5,
+     "bb": 1,
+     "ante": 1,
+     "ekler": [
+      2.5,
+      1.5
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Aynı elde büyük blind call etmek için kaç BB ekledi?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "2,5 − 1 = 1,5 BB. Ante bahse sayılmaz, düşülmez.",
+    "yanilgi": "Ante'yi de düşüp 0,5 BB demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2.5,
+      -1
+     ]
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Blind'ler 200 / 400, BB ante 400. Biri 1.000'e raise yaptı, küçük blind fold etti; büyük blind henüz konuşmadı. Potta kaç chip var?",
+    "secenekler": [
+     "1.600",
+     "2.000",
+     "2.400",
+     "1.000"
+    ],
+    "dogru": 1,
+    "neden": "200 (küçük blind) + 400 (büyük blind) + 400 (ante) + 1.000 (raise) = 2.000 chip.",
+    "yanilgi": "Fold eden küçük blind'in chip'ini ya da ante'yi unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 200,
+     "bb": 400,
+     "ante": 400,
+     "ekler": [
+      1000
+     ]
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "BB ante 1 BB'li masada el başındaki pot, ante'siz masadakinden 1 BB büyüktür; ama büyük blind'in bir raise'i görmek için eklemesi gereken miktar değişmez.",
+    "dogru": true,
+    "neden": "El başı pot 2,5 BB'ye karşı 1,5 BB. Ante bahse sayılmadığı için call miktarı aynıdır.",
+    "yanilgi": "Ante'nin call miktarını da değiştirdiğini sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "t1-d5": {
+  "anlatim": [
+   "Turnuvada ödülü üst sıralar alır. Hangi sıraların ödül alacağını ve her sıranın payını gösteren tabloya ödül yapısı denir. Genellikle katılımcıların yaklaşık %10–20'si ödül alır; oran turnuvaya göre değişir ve turnuva başlamadan duyurulur.",
+   "Ödül alan sıralara girmeye ITM (in the money) denir. Ödül sıralarına girmeden hemen önceki aşamaya bubble (balon) denir: bir oyuncu daha elenince kalan herkes ödül alacaktır.",
+   "Ödül kademelidir: paylar üst sıralara doğru büyür ve toplamları %100'dür. Örnek: 9 kişilik bir sit & go'da ilk üç sıra ödül alıyor, paylar %50, %30 ve %20. Bir sıra yukarı çıkmanın getirdiği fark ödül sıçraması diye anılır: 3.'lükten 2.'liğe 30 − 20 = 10 yüzde puanı (kısaca puan).",
+   "Büyük çok masalı turnuvalarda en alt ödül sıralarının payları genellikle küçüktür ve birbirine yakındır; büyük sıçramalar çoğunlukla final masasındadır. Bu müfredat ödülleri yalnızca yüzde ya da pay olarak anlatır."
+  ],
+  "terimler": [
+   "Ödül yapısı",
+   "ITM (in the money)",
+   "Bubble",
+   "Ödül sıçraması",
+   "Final masası"
+  ],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Ödül yapısı, ödülün hangi sıralara ve hangi paylarla dağıtılacağını gösterir.",
+    "dogru": true,
+    "neden": "Ödül yapısı sıraları ve payları gösteren tablodur.",
+    "yanilgi": "Ödül yapısını blind yapısıyla karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Ödül alan sıralara girmeye ne denir?",
+    "secenekler": [
+     "ITM (in the money)",
+     "Bubble",
+     "Freezeout",
+     "Final masası"
+    ],
+    "dogru": 0,
+    "neden": "ITM, ödül sıralarına girmiş olmaktır.",
+    "yanilgi": "Bubble'ı ödül sıralarına girmek sanmak; bubble, girmeden hemen önceki aşamadır.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Ödül payları %50, %30, %20. 1. ile 2. sıranın payları arasındaki fark kaç puan?",
+    "dogru": 20,
+    "tolerans": 0,
+    "birim": "puan",
+    "neden": "50 − 30 = 20 puan.",
+    "yanilgi": "Farkı oranla karıştırıp başka bir sayı bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      50,
+      30,
+      20
+     ],
+     "soru": "fark",
+     "siralar": [
+      1,
+      2
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Bubble, ödül sıralarına girmeden hemen önceki aşamadır.",
+    "dogru": true,
+    "neden": "Bubble'da bir oyuncu daha elenince kalan herkes ödül alır.",
+    "yanilgi": "Bubble'ı final masasıyla karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Ödül payları %50, %30, %20. Kaç oyuncu ödül alır?",
+    "dogru": 3,
+    "tolerans": 0,
+    "birim": "oyuncu",
+    "neden": "Üç pay var: ilk üç sıra ödül alır.",
+    "yanilgi": "Payları toplamak ya da katılımcı sayısını vermek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      50,
+      30,
+      20
+     ],
+     "soru": "itm"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "180 kişilik bir turnuvada katılımcıların %15'i ödül alıyor. Kaç oyuncu ödül alır?",
+    "secenekler": [
+     "15",
+     "18",
+     "27",
+     "36"
+    ],
+    "dogru": 2,
+    "neden": "180 × 0,15 = 27 oyuncu.",
+    "yanilgi": "Yüzdeyi doğrudan oyuncu sayısı sanıp 15 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      180,
+      0.15
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Ödül payları %40, %25, %15, %12, %8. 5.'likten 4.'lüğe çıkmak kaç puanlık ödül sıçramasıdır?",
+    "dogru": 4,
+    "tolerans": 0,
+    "birim": "puan",
+    "neden": "12 − 8 = 4 puan.",
+    "yanilgi": "5. sıranın payını sıçrama sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      40,
+      25,
+      15,
+      12,
+      8
+     ],
+     "soru": "fark",
+     "siralar": [
+      4,
+      5
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "Aynı yapıda (%40, %25, %15, %12, %8) en büyük ödül sıçraması hangisidir?",
+    "secenekler": [
+     "5.'likten 4.'lüğe",
+     "4.'lükten 3.'lüğe",
+     "3.'lükten 2.'liğe",
+     "2.'likten 1.'liğe"
+    ],
+    "dogru": 3,
+    "neden": "Sıçramalar: 4, 3, 10 ve 15 puan. En büyüğü 2.'likten 1.'liğe: 40 − 25 = 15 puan.",
+    "yanilgi": "En alt sıradaki sıçramaların en büyük olduğunu sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      40,
+      25,
+      15,
+      12,
+      8
+     ],
+     "soru": "fark",
+     "siralar": [
+      1,
+      2
+     ],
+     "degerler": [
+      4,
+      3,
+      10,
+      15
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "İlk 12 sıranın ödül aldığı bir turnuvada 13 oyuncu kaldı. Bir oyuncu daha elenince kalan herkes ITM olur.",
+    "dogru": true,
+    "neden": "13 − 1 = 12 oyuncu kalır; hepsi ödül sırasındadır. 13 oyuncunun kaldığı an bubble'dır.",
+    "yanilgi": "Bubble'ın ödül sıralarına girildikten sonra geldiğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      13,
+      -1
+     ],
+     "iddia": 12
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "9 kişilik bir sit & go'da paylar %50, %30, %20. Katılımcıların yüzde kaçı ödül alır? (bir ondalık basamak)",
+    "dogru": 33.3,
+    "tolerans": 0.1,
+    "birim": "%",
+    "neden": "3 / 9 × 100 ≈ %33,3. Tek masalık turnuvalarda bu oran, büyük turnuvalardaki yaklaşık %10–20'den genellikle yüksektir.",
+    "yanilgi": "Birincinin payını (%50) ödül alanların oranı sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      50,
+      30,
+      20
+     ],
+     "soru": "itmOrani",
+     "katilimci": 9
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "Hangisi ödül yapısı için doğrudur?",
+    "secenekler": [
+     "Paylar üst sıralara doğru büyür, toplamları %100'dür ve oranlar turnuvaya göre değişir",
+     "Her turnuvada tam olarak katılımcıların %15'i ödül alır",
+     "En alt ödül sırası ile birincinin payı aynıdır",
+     "Ödül payları, turnuva bittiğinde elindeki chip sayısına göre belirlenir"
+    ],
+    "dogru": 0,
+    "neden": "Ödül kademelidir ve turnuva başlamadan duyurulur. Ödül alan oranı turnuvaya göre değişir; ödül sıraya göre dağıtılır.",
+    "yanilgi": "Yaklaşık bir oranı her turnuva için kesin kural sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ },
+ "t1-k": {
+  "anlatim": [
+   "Bu kontrol, ünitenin beş dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB'dir; ödüller yüzde olarak verilir."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 1,
+    "soru": "Turnuvada blind'ler belirli aralıklarla yükselir.",
+    "dogru": true,
+    "neden": "Blind'ler blind seviyeleriyle yükselir; cash game'de sabittir.",
+    "yanilgi": "Turnuvayı cash game gibi düşünmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "secmeli",
+    "zorluk": 1,
+    "soru": "Bir turnuva belirli bir saatte değil, 6 oyuncu kayıt olunca başlıyor. Başlama biçimine göre bu nedir?",
+    "secenekler": [
+     "Sit & go",
+     "Belirli saatte başlayan çok masalı turnuva (MTT)",
+     "Cash game"
+    ],
+    "dogru": 0,
+    "neden": "Oyuncu sayısı dolunca başlayan turnuva sit & go'dur.",
+    "yanilgi": "MTT ile sit & go'yu karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a3",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Büyük blind 250. Stack'in 7.500 chip. Stack'in kaç BB?",
+    "dogru": 30,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "7.500 / 250 = 30 BB.",
+    "yanilgi": "Küçük blind'e bölmek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bolum",
+     "terimler": [
+      7500,
+      250
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Blind'ler 150 / 300, BB ante 300. El başında potta kaç chip vardır?",
+    "dogru": 750,
+    "tolerans": 0,
+    "birim": "chip",
+    "neden": "150 + 300 + 300 = 750 chip.",
+    "yanilgi": "Ante'yi unutup 450 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 150,
+     "bb": 300,
+     "ante": 300
+    }
+   },
+   {
+    "kimlik": "a5",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Re-entry'de turnuvadan çıkmadan ek chip alırsın.",
+    "dogru": false,
+    "neden": "Turnuvadan çıkmadan chip almak rebuy'dır. Re-entry, elendikten sonra yeniden kayıt olmaktır.",
+    "yanilgi": "Rebuy ile re-entry'yi karıştırmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a6",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Seviyeler 12 dakika. 6. seviye turnuvanın kaçıncı dakikasında başlar?",
+    "dogru": 60,
+    "tolerans": 0,
+    "birim": "dakika",
+    "neden": "Önce 5 seviye oynanır: 5 × 12 = 60. dakika.",
+    "yanilgi": "6 × 12 = 72 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      5,
+      12
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Klasik ante: 8 oyuncu, blind'ler 50 / 100, ante 10. El başında potta kaç chip vardır?",
+    "secenekler": [
+     "160",
+     "180",
+     "230",
+     "250"
+    ],
+    "dogru": 2,
+    "neden": "50 + 100 + 8 × 10 = 230 chip.",
+    "yanilgi": "Ante'yi tek kez sayıp 160 bulmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 50,
+     "bb": 100,
+     "ante": 10,
+     "anteTuru": "klasik",
+     "oyuncu": 8
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Ödül payları %45, %30, %25. 3.'lükten 1.'liğe çıkmak kaç puan fark eder?",
+    "dogru": 20,
+    "tolerans": 0,
+    "birim": "puan",
+    "neden": "45 − 25 = 20 puan.",
+    "yanilgi": "Yalnızca bir basamaklık farkı (5 ya da 15) almak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      45,
+      30,
+      25
+     ],
+     "soru": "fark",
+     "siralar": [
+      1,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a9",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Stack'in 18.000 chip. Büyük blind 300'den 600'e çıkıyor. Hiç chip kaybetmezsen kaç BB'n kalır?",
+    "dogru": 30,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "18.000 / 600 = 30 BB (önceden 60 BB'ydi).",
+    "yanilgi": "Eski büyük blind'e bölüp 60 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bbErime",
+     "stack": "18.000",
+     "eskiBb": 300,
+     "yeniBb": 600,
+     "sonuc": "yeni"
+    }
+   },
+   {
+    "kimlik": "a10",
+    "tip": "dogruYanlis",
+    "zorluk": 4,
+    "soru": "BB ante 1 BB. Biri 2 BB'ye raise yaptı; büyük blind call etmek için 1 BB ekler.",
+    "dogru": true,
+    "neden": "2 − 1 = 1 BB. Ante bahse sayılmaz.",
+    "yanilgi": "Ante'yi de düşüp 0 demek ya da blind'i düşmeyip 2 demek.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      2,
+      -1
+     ],
+     "iddia": 1
+    }
+   },
+   {
+    "kimlik": "a11",
+    "tip": "secmeli",
+    "zorluk": 5,
+    "soru": "İlk 30 sıranın ödül aldığı bir turnuvada 31 oyuncu kaldı. Bu aşamaya ne denir?",
+    "secenekler": [
+     "Bubble; bir eleme daha olunca kalan herkes ITM olur",
+     "Final masası; turnuva bitmek üzeredir",
+     "Geç kayıt; yeni oyuncular girebilir",
+     "ITM; kalan herkes ödülü garantiledi"
+    ],
+    "dogru": 0,
+    "neden": "31 − 1 = 30: bir eleme daha olunca kalan herkes ödül sırasındadır. Bu, bubble'dır.",
+    "yanilgi": "Bubble'da herkesin ödülü garantilediğini sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a12",
+    "tip": "sayi",
+    "zorluk": 5,
+    "soru": "BB ante 1 BB. Biri 2,5 BB'ye raise yaptı, küçük blind call etti, büyük blind fold etti. Pot kaç BB?",
+    "dogru": 7,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "2,5 (raise) + 2,5 (küçük blind'in toplamı) + 1 (fold eden büyük blind'in blind'i) + 1 (ante) = 7 BB.",
+    "yanilgi": "Fold eden büyük blind'in 1 BB'sini ya da ante'yi unutmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "antePot",
+     "sb": 0.5,
+     "bb": 1,
+     "ante": 1,
+     "ekler": [
+      2.5,
+      2
+     ]
+    }
+   }
+  ]
+ },
+ "t1-r": {
+  "anlatim": [
+   "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+  ],
+  "terimler": [],
+  "alistirmalar": [
+   {
+    "kimlik": "a1",
+    "tip": "dogruYanlis",
+    "zorluk": 2,
+    "soru": "Ante, büyük blind'in bahsine sayılır.",
+    "dogru": false,
+    "neden": "Ante ölü paradır; yalnızca blind bahse sayılır.",
+    "yanilgi": "Ante'yi call hesabında düşmek.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a2",
+    "tip": "sayi",
+    "zorluk": 2,
+    "soru": "Ante'siz masada el başında potta kaç BB vardır?",
+    "dogru": 1.5,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "0,5 + 1 = 1,5 BB.",
+    "yanilgi": "BB ante'li potu (2,5 BB) ante'siz masaya taşımak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      0.5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a3",
+    "tip": "secmeli",
+    "zorluk": 3,
+    "soru": "Klasik ante: 9 oyuncu, her biri 50 chip ante koyuyor. Ante'ler pota toplam kaç chip ekler?",
+    "secenekler": [
+     "50",
+     "400",
+     "450",
+     "500"
+    ],
+    "dogru": 2,
+    "neden": "9 × 50 = 450 chip.",
+    "yanilgi": "Ante'yi tek bir oyuncunun ödediğini sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "carpim",
+     "terimler": [
+      9,
+      50
+     ]
+    }
+   },
+   {
+    "kimlik": "a4",
+    "tip": "dogruYanlis",
+    "zorluk": 3,
+    "soru": "Rebuy ve re-entry aynı şeydir.",
+    "dogru": false,
+    "neden": "Rebuy oyundayken chip almaktır; re-entry elendikten sonra yeniden kayıt olmaktır.",
+    "yanilgi": "İki terimi eş anlamlı sanmak.",
+    "dogrulamaGerekli": false
+   },
+   {
+    "kimlik": "a5",
+    "tip": "sayi",
+    "zorluk": 3,
+    "soru": "Stack'in 10.000 chip. Büyük blind 250'den 500'e çıkıyor. Hiç chip kaybetmezsen stack'in kaç BB küçülür?",
+    "dogru": 20,
+    "tolerans": 0,
+    "birim": "BB",
+    "neden": "10.000 / 250 = 40 BB; 10.000 / 500 = 20 BB; fark 20 BB.",
+    "yanilgi": "Chip sayısı aynı diye küçülme olmadığını sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "bbErime",
+     "stack": "10.000",
+     "eskiBb": 250,
+     "yeniBb": 500,
+     "sonuc": "kayip"
+    }
+   },
+   {
+    "kimlik": "a6",
+    "tip": "secmeli",
+    "zorluk": 4,
+    "soru": "10 kişilik bir sit & go'da sen elendiğinde senden başka 5 oyuncu oyunda kaldı. Kaçıncı oldun?",
+    "secenekler": [
+     "4.",
+     "5.",
+     "6.",
+     "7."
+    ],
+    "dogru": 2,
+    "neden": "Kalan 5 oyuncu ilk beş sırayı alır; sen 6. olursun.",
+    "yanilgi": "Kalan oyuncu sayısını kendi sıran sanmak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "toplam",
+     "terimler": [
+      5,
+      1
+     ]
+    }
+   },
+   {
+    "kimlik": "a7",
+    "tip": "sayi",
+    "zorluk": 4,
+    "soru": "Ödül payları %50, %30, %20. 3.'lükten 1.'liğe çıkmak kaç puan fark eder?",
+    "dogru": 30,
+    "tolerans": 0,
+    "birim": "puan",
+    "neden": "50 − 20 = 30 puan.",
+    "yanilgi": "Yalnızca bir basamağı (10 puan) saymak.",
+    "dogrulamaGerekli": false,
+    "denetim": {
+     "tur": "odul",
+     "paylar": [
+      50,
+      30,
+      20
+     ],
+     "soru": "fark",
+     "siralar": [
+      1,
+      3
+     ]
+    }
+   },
+   {
+    "kimlik": "a8",
+    "tip": "dogruYanlis",
+    "zorluk": 5,
+    "soru": "BB ante'li masada büyük blind'i koyan oyuncu o elde iki zorunlu ödeme yapar: büyük blind ve masanın ante'si.",
+    "dogru": true,
+    "neden": "BB ante'yi büyük blind'deki oyuncu öder; bu yüzden o elde blind'iyle birlikte iki ödeme yapar.",
+    "yanilgi": "BB ante'yi küçük blind'in ya da herkesin ödediğini sanmak.",
+    "dogrulamaGerekli": false
+   }
+  ]
+ }
+}
