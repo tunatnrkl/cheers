@@ -43,7 +43,7 @@ const GROUPS = [
 export default function Page() {
   return (
     <div className="og flex flex-col gap-12">
-      <Suspense fallback={<div className="h-[60vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />}>
+      <Suspense fallback={<div className="h-[100vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />}>
         <OgrenYol />
       </Suspense>
 

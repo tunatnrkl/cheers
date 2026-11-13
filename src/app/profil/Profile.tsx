@@ -170,7 +170,7 @@ export function Profile() {
 
   if (!p.ready)
     return (
-      <div className="flex min-h-[120vh] flex-col gap-6">
+      <div className="flex min-h-[100vh] flex-col gap-6">
         {baslik}
         <p className="card text-muted" role="status">
           Yükleniyor…
@@ -185,7 +185,7 @@ export function Profile() {
   const weak = weakTopics(stats);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-h-[100vh] flex-col gap-6">
       {baslik}
 
       {params.get("hata") === "google" && (

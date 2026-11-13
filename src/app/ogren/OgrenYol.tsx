@@ -22,7 +22,7 @@ export function OgrenYol() {
   const pist = pistGetir(k.dz, q.get("pist"))?.kimlik ?? null;
   const ders = q.get("ders");
 
-  if (!depo.hazir) return <div className="h-[60vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />;
+  if (!depo.hazir) return <div className="h-[100vh] animate-pulse rounded-[22px] bg-surface" aria-hidden="true" />;
   if (ders) {
     const mod = q.get("mod") === "tekrar" ? "tekrar" : "ders";
     return <DersEkrani key={`${ders}/${mod}/${k.anahtar}`} k={k} depo={depo} kimlik={ders} pist={pist} mod={mod} />;
