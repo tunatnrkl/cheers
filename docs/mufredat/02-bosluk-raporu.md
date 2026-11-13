@@ -89,3 +89,38 @@ Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistin
 - c8 için **flop'ta çekişle karar** spotu az (c17, c26); o-… spotlarının hepsi turn all-in'i. Flop'ta yarım pot bahse karşı OESD/gutshot spotları (rakip aralığı notta, rakip eli yok) c8-d3/d4'ü güçlendirir.
 - `c19` gerekçesindeki "8 / 44" → 8 / 46 (%17,4): **düzeltildi (31593ed).**
 - `c11` gerekçesi iso-raise boyutunu "normal açılışa limp başına yaklaşık 1 BB" diye anlatıyor (2,5 + 1 = 3,5), spotun boyutu 4 BB. c7-d8 "yaklaşık 3 BB + limp başına 1 BB" diye anlatır (= 4 BB). **Düzeltildi (31593ed):** c11 gerekçesi c7-d8'deki kuralla aynı.
+
+## c9 ve c10 (2026-11-13)
+
+### Sözlüğe eklenenler (167 → 171)
+
+- **Board dokusu** (el; takma ad "board texture"): flop kartlarının birbiriyle ilişkisi; kuru, ıslak, çiftli ve monoton diye sınıflanır. c9-d1'e bağlandı.
+- **Gökkuşağı board** (el; "rainbow"): üç farklı renk; flop'ta floş çekişi yok. c9-d1'e bağlandı (kuru board tanımının parçası).
+- **Agresör** (aksiyon; "aggressor"): bir sokakta son bet ya da raise'i yapan oyuncu. c9-d3 (c-bet) ve c10-d5'e (donk bet tanımı) bağlandı.
+- **Saf blöf** (strateji; "pure bluff"): görülürse neredeyse hiç kazanamayan, gelişme şansı da çok az olan elle blöf. c10-d3'e bağlandı. "Yarı blöf" zaten "Semi-blöf" teriminin takma adıydı.
+
+### Tanım düzeltmesi (uygulandı)
+
+- **Showdown değeri:** "Bahse gerek kalmadan, açılışta kazanabilecek kadar güçlü…" cümlesindeki "açılış" preflop açılışıyla karışıyordu. Yeni tanım: "Bahis yapmadan showdown'a gidildiğinde kazanabilecek kadar güçlü, ama büyük bir pot oynamak istemeyeceğin orta güçte el." c10-d3 ve c10-d6'ya bağlandı.
+
+### Tanım notları (uygulanmadı)
+
+- **İnisiyatif** c-bet'e atıf yapıyor; c9-d3'te c-bet önce tanımlandığı için bağlandı. o4-d4 için önceki öneri geçerli.
+- **Kuru board / Islak board** sözlük tanımları gevşek ("çekiş ihtimali az", "kent ve floş çekişlerine açık"); c9-d1'deki kesin tanımlarla çelişmiyor (örnekler aynı: K-7-2 farklı renk, J-T-8 iki aynı renk). Müfredatın tanımı daha dar; iki ailenin arasında kalan board'lar derste ayrıca anlatılıyor.
+- **MDF** sözlükte var; c9–c10'da anılmadı (iskelette c12-d3).
+- **Equity realization** hâlâ sözlükte yok (c6-d3 önerisi); c9-d6 "equity'sinin daha azını kullanabilir (c6-d3)" diye anlattı.
+
+### Spot ihtiyaçları
+
+- c9'da 10, c10'da 10 spot bağlantısı (c15, c16, c17, c20, c23, c24, c26, c28, c29, c30, c32). Cash pistinde flop c-bet spotu 4 tane (c15, c16, c23 dışında c29; c23 savunma). **Islak board'da value c-bet boyutu** (ör. BTN'de set ya da iki per, J♥ T♥ 8♣; seçenekler "Check / 1/3 pot / 2/3 pot") ve **c-bet'e karşı orta per ile call / fold** spotları c9-d4 ve c9-d5'i güçlendirir.
+- **Donk bet** için hiç spot yok. UTG'ye karşı BB'de küçük bağlantılı board (ör. 6♥ 5♥ 4♣, elde iki per) spotu c10-d5'e uygun olur; doğru cevabın karışık olacağı açık, `kabulEdilebilir` ile kurulmalı.
+- **River value boyutu** için c20 ve c22 var; ikisi de check / orta / büyük seçenekli. Küçük ve büyük value boyutunu karşılaştıran bir spot (rakip aralığı notta) c10-d2'ye uyar.
+
+### Spot gerekçelerinde fark edilenler (hands.ts'e dokunulmadı)
+
+- **c23:** gerekçe "Slow play kuru board'lar içindir" diyor; kesin dil. c10-d4 "kuru board'da bazen call (slow play) tercih edilir" diye yumuşak yazdı. Öneri: "Slow play çoğunlukla kuru board'larda düşünülür."
+- **c26:** "river'a kadar equity'n %50'nin üzerindedir" iddiası 15 out'un river'a kadar tutma ihtimaline (≈ %54,1) dayanıyor ve iki kartı da göreceğini, outs'ların temiz olduğunu varsayıyor; set gibi ellere karşı doğru değil. Gerekçe "çoğu yapılmış ele karşı" diyerek bunu kısmen sınırlıyor. Öneri: "15 out river'a kadar yaklaşık %54 tutar (iki kartı da görürsen)".
+- **c20:** "Calling station'a karşı blöf yapılmaz" kesin dil; öneri "genellikle blöf yapılmaz".
+- **c28:** "blöf yapmak chip yakmaktır" kesin dil; öneri "çoğunlukla chip yakmaktır".
+- **c32:** "7 yüksek ile" deniyor; board'da 2'li çift olduğu için elin en iyi beşlisi aslında "2'li per, K-8-7 kicker". Karar ve başabaş hesabı (8 / 20 = %40) doğru; ifade "showdown'da neredeyse hiçbir eli yenemezsin" kısmıyla birlikte yanıltıcı değil, yine de "board'daki çift dışında hiçbir şeyin yok" daha doğru olur.
+- **B-1 tutarlılığı:** c9–c10'da c23, c24 ve c26 `kabulEdilebilir` ile kullanıldı. Daha önce c8-d6/a11 c24'ü ve c7-d6/a11, c7-r/a7 c09'u `kabulEdilebilir` olmadan kullanıyor; bu iş kolunda o ünitelere dokunulmadı. Aynı spotun bir derste "yanlış", diğerinde "kabul edilebilir" sayılmaması için c7 ve c8'deki bu üç alıştırmaya da `kabulEdilebilir` (c09: call; c24: call) ve `dogrulamaGerekli: true` eklenmesi önerilir.

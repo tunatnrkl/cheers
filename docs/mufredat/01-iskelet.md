@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 104 ders, 1161 alıştırma.
+**Dolu:** 112 ders, 1247 alıştırma.
 
 ## Cash pisti
 
@@ -195,14 +195,14 @@ Value bet, boyut, blöf seçimi, check-raise, donk bet ve pot kontrolü.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c10-d1` Value bet | ders | "Daha zayıf hangi eller görür?" sorusuyla value bet kararını verir. | c9-k |
-| `c10-d2` Value boyutlandırma | ders | Rakibin görecek aralığına göre boyut seçer. | c10-d1, c9-d4 |
-| `c10-d3` Blöf seçimi | ders | Yarı blöfü saf blöften ayırır; equity ve bloker taşıyan elleri blöf adayı seçer. | c10-d2, c8-d1, c7-d3 |
-| `c10-d4` Check-raise | ders | Value ve yarı blöf amaçlı check-raise adaylarını seçer. | c10-d3, c9-d5 |
-| `c10-d5` Donk bet | ders | Donk bet'i tanımlar; neden seyrek kullanıldığını ve hangi board'larda anlam kazandığını açıklar. | c10-d4, c9-d2 |
-| `c10-d6` Pot kontrolü | ders | Orta güçteki elle potu küçük tutmanın gerekçesini SPR ile ilişkilendirir. | c10-d5, c8-d6 |
-| `c10-k` Kontrol: Value ve blöf | kontrol | "Value ve blöf" ünitesinin kazanımlarını karışık sorularda uygular. | c10-d6 |
-| `c10-r` Tekrar: Value ve blöf | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c10-k |
+| `c10-d1` Value bet (11 alıştırma) | ders | "Daha zayıf hangi eller görür?" sorusuyla value bet kararını verir. | c9-k |
+| `c10-d2` Value boyutlandırma (11 alıştırma) | ders | Rakibin görecek aralığına göre boyut seçer. | c10-d1, c9-d4 |
+| `c10-d3` Blöf seçimi (11 alıştırma) | ders | Yarı blöfü saf blöften ayırır; equity ve bloker taşıyan elleri blöf adayı seçer. | c10-d2, c8-d1, c7-d3 |
+| `c10-d4` Check-raise (11 alıştırma) | ders | Value ve yarı blöf amaçlı check-raise adaylarını seçer. | c10-d3, c9-d5 |
+| `c10-d5` Donk bet (11 alıştırma) | ders | Donk bet'i tanımlar; neden seyrek kullanıldığını ve hangi board'larda anlam kazandığını açıklar. | c10-d4, c9-d2 |
+| `c10-d6` Pot kontrolü (11 alıştırma) | ders | Orta güçteki elle potu küçük tutmanın gerekçesini SPR ile ilişkilendirir. | c10-d5, c8-d6 |
+| `c10-k` Kontrol: Value ve blöf (12 alıştırma) | kontrol | "Value ve blöf" ünitesinin kazanımlarını karışık sorularda uygular. | c10-d6 |
+| `c10-r` Tekrar: Value ve blöf (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c10-k |
 
 ### c11 · Turn ve 3-bet potları (seviye 8)
 

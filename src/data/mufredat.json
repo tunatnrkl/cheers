@@ -17069,15 +17069,213 @@
       "\"Daha zayıf hangi eller görür?\" sorusuyla value bet kararını verir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Value bet: daha kötü ellerin görmesini umarak güçlü elle yapılan bahis (c7-d1). Bir bahsin value bet olup olmadığını tek bir soru belirler: bu bahsi daha zayıf hangi eller görür? Yeterince daha kötü el görecekse bahis value'dur; bahsi yalnızca daha iyi eller görecek, daha kötüler fold edecekse bahis value getirmez.",
+      "Soruyu somut ellerle sor. River'da board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥ (top pair, en iyi kicker). Rakibin görebileceği daha kötü eller: KQ, KJ, KT gibi daha zayıf kicker'lı papazlar ve bazı 8'li per'ler. Seni yenenler: set'ler ve iki per'ler. Kombinasyonları da sayabilirsin: board'da K♦, elinde K♥ olduğu için rakipte kalan papaz yalnızca K♠ ve K♣'tır; KQ 2 × 4 = 8 kombinasyondur.",
+      "River'da kabaca şu ölçü kullanılır: rakibin raise etmeyeceğini varsayarsan, bahsin görüldüğünde %50'den sık önde olmalısın. Öğretim örneği: rakibin göreceği eller 12 kombinasyon daha kötü, 4 kombinasyon daha iyi ise görüldüğünde 12 / 16 = %75 öndesin. Raise ve sonraki sokaklar hesaba katılınca hesap karmaşıklaşır, ama soru aynı kalır."
+     ],
+     "terimler": [
+      "Value bet",
+      "Top pair",
+      "Kicker",
+      "Set",
+      "İki per",
+      "Kombinasyon (combo)",
+      "Calling station"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Value bet nedir?",
+       "secenekler": [
+        "Daha kötü ellerin görmesini umarak güçlü elle yapılan bahis",
+        "Daha iyi elleri fold ettirmek için yapılan bahis",
+        "Potu küçük tutmak için yapılan check",
+        "Her zaman pot kadar yapılan bahis"
+       ],
+       "dogru": 0,
+       "neden": "Value bet'in amacı, görüldüğünde daha kötü ellerden chip almaktır.",
+       "yanilgi": "Value bet'i blöfle karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Bir bahsin value bet sayılması için, görüldüğünde çoğunlukla daha kötü ellerin görmesi gerekir.",
+       "dogru": true,
+       "neden": "Bahsi yalnızca daha iyi eller görüyorsa bahis value getirmez.",
+       "yanilgi": "Güçlü bir elle yapılan her bahsi value saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Value bet kararında sorulacak ana soru hangisidir?",
+       "secenekler": [
+        "Bu bahsi daha zayıf hangi eller görür?",
+        "Elim güçlü mü?",
+        "Rakip fold eder mi?",
+        "Pot büyük mü?"
+       ],
+       "dogru": 0,
+       "neden": "Elinin mutlak gücü değil, rakibin görecek ellerine göre durumu önemlidir.",
+       "yanilgi": "\"Elim iyi, o hâlde bahis yaparım\" diye düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Board (river): K♦ 8♠ 4♣ 2♥ 6♦. Elin A♣ K♥. Rakibin aralığında KQs ve KQo varsa, kaç KQ kombinasyonu kalır?",
+       "dogru": 8,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Kalan papazlar K♠ ve K♣, damlar 4: 2 × 4 = 8 kombinasyon (2'si suited, 6'sı offsuit).",
+       "yanilgi": "Board'daki ve elindeki papazı unutup 16 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "blokerKombo",
+        "kartlar": "A♣ K♥ K♦ 8♠ 4♣ 2♥ 6♦",
+        "eller": [
+         "KQs",
+         "KQo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Board (river): K♦ 8♠ 4♣ 2♥ 6♦. Elin A♣ K♥. Rakibin aralığında K8s ve K8o varsa, seni yenen K8 (iki per) kaç kombinasyon kalır?",
+       "dogru": 6,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Kalan papazlar K♠ ve K♣, sekizler 8♥ 8♦ 8♣: 2 × 3 = 6 kombinasyon.",
+       "yanilgi": "Board'daki 8♠'yi unutup 8 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "blokerKombo",
+        "kartlar": "A♣ K♥ K♦ 8♠ 4♣ 2♥ 6♦",
+        "eller": [
+         "K8s",
+         "K8o"
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Aynı river'da (board K♦ 8♠ 4♣ 2♥ 6♦, elin A♣ K♥) rakibin bahsini görebilecek DAHA KÖTÜ eller hangileridir?",
+       "secenekler": [
+        "KQ, KJ, KT gibi daha zayıf kicker'lı papazlar",
+        "88 ve 44 gibi set'ler",
+        "K8 ve K6 gibi iki per'ler",
+        "Hiçbiri"
+       ],
+       "dogru": 0,
+       "neden": "Zayıf kicker'lı papazlar senden kötüdür ve top pair ile çoğunlukla bahsi görür. Set'ler ve iki per'ler seni yener.",
+       "yanilgi": "Value için yalnızca rakibin fold edip etmeyeceğine bakmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Rakip yalnızca daha iyi ellerle görüp daha kötü ellerin hepsiyle fold ediyorsa, bahsin value bet olarak işe yaramaz.",
+       "dogru": true,
+       "neden": "Daha kötü eller fold ederse ek chip almazsın; daha iyiler görünce chip kaybedersin. Böyle durumda check çoğunlukla daha iyidir.",
+       "yanilgi": "Güçlü elle bahsin hep kazandıracağını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi durumda value bet genellikle en çok anlam kazanır?",
+       "secenekler": [
+        "Rakip çok call eden bir oyuncu (calling station) ve elin onun görecek ellerinin çoğundan güçlü",
+        "Rakip çok sıkı ve yalnızca nuts ile görüyor",
+        "Elin board'u oynuyor ve rakip de board'u oynuyor",
+        "Rakip her bahse raise ediyor ve elin orta güçte"
+       ],
+       "dogru": 0,
+       "neden": "Value, daha kötü ellerin görmesinden gelir; çok call eden rakip daha kötü ellerle daha sık görür.",
+       "yanilgi": "Sıkı bir rakibe karşı orta güçte elle value aramak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Eşleştir.",
+       "secenekler": [
+        [
+         "Value bet",
+         "Daha kötü eller görsün diye bahis"
+        ],
+        [
+         "Blöf",
+         "Daha iyi eller fold etsin diye bahis"
+        ],
+        [
+         "Check",
+         "Bahsi yalnızca daha iyi eller görecekse"
+        ]
+       ],
+       "neden": "Bahsin amacı, rakibin hangi ellerle göreceğine ya da fold edeceğine göre belirlenir.",
+       "yanilgi": "Value ile blöfün amaçlarını karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Öğretim örneği: rakibin bahsini görecek eller 12 kombinasyon senden daha kötü, 4 kombinasyon daha iyi. Bahsin görüldüğünde yüzde kaç öndesin?",
+       "dogru": 75,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "12 / (12 + 4) = %75; %50'nin üstünde: bu varsayımlarla value bet.",
+       "yanilgi": "12 / 4 = 3 bulup oranı yanlış kurmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         12,
+         16
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Öğretim örneği: rakibin bahsini görecek eller 6 kombinasyon senden daha kötü, 8 kombinasyon daha iyi. Bahsin görüldüğünde yüzde kaç öndesin? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "6 / 14 ≈ %42,9; %50'nin altında. Bu varsayımlarla bahis value getirmez; check çoğunlukla daha iyidir.",
+       "yanilgi": "Yalnızca daha kötü ellerin sayısına bakıp bahis yapmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         6,
+         14
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "c10-d2",
@@ -17091,15 +17289,207 @@
       "Rakibin görecek aralığına göre boyut seçer."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Value bet'in boyutunu rakibin görecek aralığı belirler. Bahis büyüdükçe rakibin call için gereken equity'si artar (c9-d4): river'da 20 BB'lik pota 10 BB bahis %25, 20 BB bahis yaklaşık %33 ister. Büyük bahis görüldüğünde daha çok kazandırır ama daha az el görür.",
+      "İki etkiyi birlikte tart. Öğretim örneği: rakibin aralığı, hepsi senden zayıf 20 kombinasyon. 10 BB'lik bahsi 12'si görür, 20 BB'lik bahsi 5'i görür. Ortalama kazanç küçük bahiste 12 / 20 × 10 = 6 BB, büyük bahiste 5 / 20 × 20 = 5 BB'dir: bu varsayımlarla küçük bahis daha çok kazandırır. Rakip her bahsi gören bir oyuncuysa (calling station) büyük bahis öne geçer.",
+      "Genel eğilim: rakibin görecek aralığı geniş ve zayıfsa küçük ya da orta boyut; rakip çok call ediyorsa ya da senden zayıf ama güçlü ellerle devam ediyorsa daha büyük boyut. River'da kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek ellere göre seç. Bu bir başlangıç noktasıdır, kesin kural değildir."
+     ],
+     "terimler": [
+      "Value bet",
+      "Bahis boyutu (sizing)",
+      "Calling station",
+      "Equity",
+      "Range (aralık)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Value bet'in boyutunu seçerken temel soru hangisidir?",
+       "secenekler": [
+        "Rakibin görecek aralığı bu boyutu ne sıklıkla görür?",
+        "Pot kaç BB?",
+        "Ben hangi pozisyondayım?",
+        "Önceki elde ne oldu?"
+       ],
+       "dogru": 0,
+       "neden": "Boyut, rakibin görme sıklığı ile görüldüğünde kazanılan miktarın dengesidir.",
+       "yanilgi": "Boyutu yalnızca elin gücüne göre seçmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Bahis büyüdükçe rakibin call için gereken equity'si de büyür.",
+       "dogru": true,
+       "neden": "Gereken equity = bahis / (pot + 2 × bahis); bahis büyüdükçe artar.",
+       "yanilgi": "Boyutun rakibin fiyatını değiştirmediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "River'da potta 20 BB var, 10 BB bahis yaptın. Rakibin call için gereken equity'si yüzde kaçtır?",
+       "dogru": 25,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "10 / (30 + 10) = %25.",
+       "yanilgi": "10 / 30 ≈ %33 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 10,
+        "pot": 30
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "River'da potta 20 BB var, 20 BB (pot kadar) bahis yaptın. Rakibin call için gereken equity'si yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 33.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "20 / (40 + 20) ≈ %33,3.",
+       "yanilgi": "20 / 40 = %50 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 20,
+        "pot": 40
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Rakip neredeyse her bahsi gören bir oyuncu (calling station) ve elin çok güçlü. Hangi boyut genellikle daha çok kazandırır?",
+       "secenekler": [
+        "Daha büyük boyut",
+        "En küçük boyut",
+        "Check",
+        "Boyutun önemi yok"
+       ],
+       "dogru": 0,
+       "neden": "Rakip büyük bahsi de daha kötü ellerle sık görüyorsa, görüldüğünde kazanılan miktar belirleyici olur.",
+       "yanilgi": "Calling station'a karşı da küçük boyutla \"call almaya\" çalışmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BTN'den 2,5 BB açtın, BB call etti. Flop'ta ve turn'de bahis yaptın, BB ikisini de call etti. River'da BB check etti. BB her bahsi gören, pasif bir oyuncu. Elinde top pair var. Hamlen?",
+       "secenekler": [
+        "Check",
+        "2/3 pot bahis (≈15 BB)",
+        "All-in (≈89 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Bu board'da rakibin iki bahsi gören aralığı çoğunlukla daha kötü per'lerden oluşur. Her bahsi gören bir oyuncuya karşı orta-büyük bir bahis daha kötü ellerden ödeme alır. All-in ise yalnızca seni yenen ellerin göreceği bir boyut olur.",
+       "yanilgi": "Value'yu kaçırıp check etmek ya da boyutu o kadar büyütmek ki yalnızca daha iyi eller görsün.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c20"
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Öğretim örneği: rakibin aralığı, hepsi senden zayıf 20 kombinasyon. 10 BB'lik bahsi 12'si görür. Bahsin ortalama kaç BB kazandırır? (12 / 20 × 10)",
+       "dogru": 6,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "12 / 20 × 10 = 6 BB.",
+       "yanilgi": "Görme sıklığını hesaba katmayıp 10 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "carpim",
+        "terimler": [
+         12,
+         10,
+         0.05
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Aynı örnekte 20 BB'lik bahsi yalnızca 5 kombinasyon görür. Bahsin ortalama kaç BB kazandırır? (5 / 20 × 20)",
+       "dogru": 5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "5 / 20 × 20 = 5 BB; küçük bahis (6 BB) bu varsayımlarla daha çok kazandırır.",
+       "yanilgi": "Büyük bahsin her zaman daha çok kazandırdığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "carpim",
+        "terimler": [
+         5,
+         20,
+         0.05
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Bu öğretim örneğinde (10 BB'yi 12 kombinasyon, 20 BB'yi 5 kombinasyon görür; hepsi senden zayıf) büyük bahis daha çok kazandırır.",
+       "dogru": false,
+       "neden": "Küçük bahis 6 BB, büyük bahis 5 BB kazandırır. Hangi boyutun iyi olduğu rakibin görme sıklığına bağlıdır.",
+       "yanilgi": "Boyutu büyütmenin kazancı her zaman artırdığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Durumu genel boyut eğilimiyle eşleştir.",
+       "secenekler": [
+        [
+         "Rakibin görecek aralığı geniş ve zayıf",
+         "Küçük ya da orta boyut"
+        ],
+        [
+         "Rakip calling station, elin çok güçlü",
+         "Büyük boyut"
+        ],
+        [
+         "Bahsi yalnızca daha iyi eller görecek",
+         "Check (value yok)"
+        ]
+       ],
+       "neden": "Boyut rakibin görecek ellerine göre seçilir; bunlar başlangıç noktalarıdır.",
+       "yanilgi": "Her durumda aynı boyutu kullanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Islak bir board'da river'a geldin; floş ve kent tamamlanmadı, elin set. Rakibin aralığında kaçmış çekişler ve per'ler var. Hangisi doğrudur?",
+       "secenekler": [
+        "Kaçmış çekişler çoğunlukla hiçbir boyutu görmez; boyutu, görebilecek per'lere göre seç",
+        "Kaçmış çekişler büyük bahsi görür",
+        "Set ile check her zaman doğrudur",
+        "Boyutu kaçmış çekişlerin sayısına göre büyüt"
+       ],
+       "dogru": 0,
+       "neden": "Value, görebilecek ellerden gelir; kaçmış çekişler bahsi görmediği için boyut hesabında sayılmaz.",
+       "yanilgi": "Rakibin aralığındaki her eli bahsi görecekmiş gibi saymak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "c10-d3",
@@ -17114,15 +17504,207 @@
       "Yarı blöfü saf blöften ayırır; equity ve bloker taşıyan elleri blöf adayı seçer."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Blöf: daha iyi elleri fold ettirmek için zayıf elle yapılan bahis. İki türü vardır. Saf blöf: görülürse neredeyse hiç kazanamayan, sonraki kartlarda gelişme şansı da çok az olan elle yapılır; yalnızca fold equity'den kazanır. Yarı blöf (semi-blöf): şu an geride ama çekişi olan elle yapılır; rakip fold etmezse de sonraki kartlarda tutarak kazanabilir. Flop ve turn'de yarı blöfler bu yüzden en doğal blöf adaylarıdır.",
+      "Bir blöf adayında üç şeye bak. Equity (c8-d1): görüldüğünde ne kadar şansın var? Showdown değeri: check edersen kazanabiliyor musun? Kazanabiliyorsan o eli blöfe çevirmek çoğunlukla gereksizdir; en iyi saf blöf adayları showdown değeri olmayan ellerdir. Blokerler (c7-d3): elindeki kart rakibin bahsi görecek güçlü ellerini azaltıyor mu? Ör. elinde bir as varken rakibin AK kombinasyonu 16'dan 12'ye iner.",
+      "Blöfün maliyeti boyuta bağlıdır: görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı bahis / (pot + bahis); 12 BB'lik pota 8 BB blöf için %40. Neredeyse hiç fold etmeyen bir rakibe (calling station) karşı bu orana ulaşmak zordur; ona karşı blöf genellikle azaltılır."
+     ],
+     "terimler": [
+      "Blöf",
+      "Saf blöf",
+      "Semi-blöf",
+      "Fold equity",
+      "Equity",
+      "Showdown değeri",
+      "Blocker",
+      "Calling station"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Saf blöf ile yarı blöf arasındaki fark nedir?",
+       "secenekler": [
+        "Yarı blöfün çekişi vardır, görülse de tutarak kazanabilir; saf blöf yalnızca rakip fold ederse kazanır",
+        "Saf blöf daha büyük yapılır",
+        "Yarı blöf yalnızca river'da yapılır",
+        "Fark yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Fark, görüldüğünde elin taşıdığı equity'dir.",
+       "yanilgi": "Yarı blöfü \"yarım boyutlu blöf\" sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Yarı blöf, görülse bile sonraki kartlarda tutarak kazanabilir.",
+       "dogru": true,
+       "neden": "Çekişi olan el iki yoldan kazanır: fold ya da tutma.",
+       "yanilgi": "Görülen her blöfün kaybettiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "River'da potta 12 BB var, 8 BB'lik bir blöf yapıyorsun; görülürse hiç kazanamayacağını varsay. Rakip en az yüzde kaç fold etmeli?",
+       "dogru": 40,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "8 / (12 + 8) = %40.",
+       "yanilgi": "8 / 12 ≈ %67 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 8,
+        "pot": 12
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Flop T♥ 7♥ 2♣. Rakip check etti. Hangi el yarı blöf için en iyi adaydır?",
+       "secenekler": [
+        "9♥ 8♥",
+        "K♠ K♦",
+        "A♣ T♣",
+        "5♦ 4♠"
+       ],
+       "dogru": 0,
+       "neden": "9♥ 8♥ floş çekişi ve çift uçlu kent çekişi taşır: hem fold ettirebilir hem tutabilir. KK ve AT value elleridir; 5♦ 4♠'nin çekişi yok denecek kadar azdır.",
+       "yanilgi": "Value ellerini blöf adayı saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Board: T♥ 7♥ 2♣. Elin 9♥ 8♥. Kent ya da floş yapmak için kaç out'un var?",
+       "dogru": 15,
+       "tolerans": 0,
+       "birim": "out",
+       "neden": "9 kupa + 3 tane J + 3 tane 6 (kupaları zaten saydın) = 15.",
+       "yanilgi": "9 + 8 = 17 diyerek kupa J ve 6'yı iki kez saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "outs",
+        "el": "9♥ 8♥",
+        "board": "T♥ 7♥ 2♣",
+        "hedef": "Kent"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Board (river): K♠ Q♦ 7♣ 4♥ 2♠. Elin A♣ 5♣. Rakibin aralığında AKs ve AKo varsa, kaç AK kombinasyonu kalır?",
+       "dogru": 9,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Kalan aslar A♠ A♥ A♦, papazlar K♥ K♦ K♣: 3 × 3 = 9. Elindeki as, rakibin bahsi görecek AK'larını azaltır.",
+       "yanilgi": "Bloker etkisini unutup 16 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "blokerKombo",
+        "kartlar": "A♣ 5♣ K♠ Q♦ 7♣ 4♥ 2♠",
+        "eller": [
+         "AKs",
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "CO 2,5 BB açtı, BTN'den call ettin. Flop'ta CO bahis yaptı, call ettin; turn'de ikiniz de check ettiniz. River'da CO check etti. Kent çekişin kaçtı; showdown'da neredeyse hiçbir eli yenemezsin. Hamlen?",
+       "secenekler": [
+        "Check (kartları aç)",
+        "2/3 pot bahis (8 BB)",
+        "Minimum bahis (1 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Check edersen potu büyük ihtimalle kaybedersin: showdown değerin yok. Rakip iki kez check ederek zayıflık gösterdi. 2/3 pot blöfün başabaş noktası %40 fold (8 / 20); bu varsayımlarla rakibin zayıf ellerinin önemli kısmı bırakır.",
+       "yanilgi": "Kaçmış çekişle her zaman pes etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c32"
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BTN'den açtın, BB call etti. Flop'ta 1,75 BB bahis yaptın, BB call etti. Turn'de BB check etti. BB neredeyse hiç fold etmeyen bir oyuncu. Elinde per yok; gutshot ve as yüksek var. Hamlen?",
+       "secenekler": [
+        "Check",
+        "2/3 pot bahis",
+        "Pot kadar bahis"
+       ],
+       "dogru": 0,
+       "neden": "Fold etmeyen bir oyuncuya blöfün başabaş oranına ulaşmak zordur. Check ile bedava kart alırsın: on'lu gelirse kent yaparsın, as ya da dam gelirse per'in iyi olabilir.",
+       "yanilgi": "Rakibin tipine bakmadan her turn'de blöfe devam etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c28"
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "River'da blöf için en iyi adaylar çoğunlukla showdown değeri en yüksek ellerdir.",
+       "dogru": false,
+       "neden": "Showdown değeri olan eller check ederek de kazanabilir. En iyi saf blöf adayları showdown değeri olmayan ellerdir.",
+       "yanilgi": "Orta güçteki eli blöfe çevirip daha kötülerin fold, daha iyilerin call ettiği bir bahis yapmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Eli rolüyle eşleştir.",
+       "secenekler": [
+        [
+         "Flop'ta floş + kent çekişi",
+         "Yarı blöf adayı: görülse de tutabilir"
+        ],
+        [
+         "River'da kaçmış çekiş",
+         "Saf blöf adayı: check edersen nadiren kazanır"
+        ],
+        [
+         "Orta güçte per",
+         "Showdown değeri var: çoğunlukla check"
+        ]
+       ],
+       "neden": "Blöf seçimi equity ve showdown değeriyle yapılır.",
+       "yanilgi": "Her zayıf eli aynı şekilde oynamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "River'da blöf düşünüyorsun. Hangi kart genellikle iyi bir bloker sayılır?",
+       "secenekler": [
+        "Rakibin bahsi görecek güçlü ellerini azaltan kart",
+        "Rakibin fold edeceği zayıf ellerini azaltan kart",
+        "Board'daki en küçük kartla aynı değerdeki kart",
+        "Bloker blöf kararını etkilemez"
+       ],
+       "dogru": 0,
+       "neden": "İyi bir blöf, rakibin call edeceği elleri azaltan; fold edeceği elleri azaltmayan kartlarla yapılır.",
+       "yanilgi": "Rakibin fold edeceği elleri bloke etmeyi avantaj sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "c10-d4",
@@ -17136,15 +17718,215 @@
       "Value ve yarı blöf amaçlı check-raise adaylarını seçer."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Check-raise: önce check deyip rakip bahis yapınca raise etmek; kurallara uygundur. Postflop'ta çoğunlukla pozisyon dışındaki oyuncu, örneğin BB, rakibin c-bet'ine karşı kullanır. Check-raise genellikle aralığın küçük bir kısmıyla yapılır; çoğu el check-call ya da check-fold ile oynanır.",
+      "İki aday grubu vardır. Value: set, iki per gibi çok güçlü eller; özellikle ıslak board'da hem daha kötü ellerden chip alır hem de çekişlere ucuz kart vermez. Yarı blöf: floş + kent çekişi gibi güçlü çekişler; rakip fold ederse potu hemen alır, görürse tutma şansı vardır (15 out'lu bir combo draw flop'tan river'a yaklaşık %54 tutar). Kuru board'da çok güçlü bir elle bazen call (slow play) tercih edilir: turn'de seni geçecek kart azdır ve rakibin zayıf elleri bahse devam edebilir.",
+      "Boyut yaygın olarak rakibin bahsinin 3–4 katı civarıdır; kesin bir kural değildir. Check-raise blöfünün başabaş fold oranı da aynı formülle bulunur: 6 BB'lik pota rakip 2 BB c-bet yaptı, sen 8 BB'ye raise ediyorsun. Risk 8, pot 6 + 2 = 8: 8 / 16 = %50."
+     ],
+     "terimler": [
+      "Check-raise",
+      "Value bet",
+      "Semi-blöf",
+      "Set",
+      "İki per",
+      "Combo draw",
+      "Slow play",
+      "Islak board",
+      "Kuru board"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Check-raise nedir?",
+       "secenekler": [
+        "Önce check deyip rakip bahis yapınca raise etmek",
+        "Rakibin bahsini görmek",
+        "İki kez üst üste check etmek",
+        "Preflop'ta limp edip raise'e call etmek"
+       ],
+       "dogru": 0,
+       "neden": "Check-raise iki adımlıdır: check, ardından rakibin bahsine raise.",
+       "yanilgi": "Check-raise'i check-call ile karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Check-raise kurallara uygun bir hamledir.",
+       "dogru": true,
+       "neden": "Bahis turunda check eden oyuncu, sonra gelen bahse raise edebilir.",
+       "yanilgi": "Check-raise'i kural dışı ya da \"centilmenlik dışı\" sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Potta 6 BB vardı, rakip 2 BB c-bet yaptı, sen 8 BB'ye check-raise yaptın. Rakip henüz konuşmadı. Potta kaç BB var?",
+       "dogru": 16,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "6 + 2 + 8 = 16 BB.",
+       "yanilgi": "Rakibin bahsini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         6,
+         2,
+         8
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Check-raise için genellikle hangi iki el grubu adaydır?",
+       "secenekler": [
+        "Çok güçlü eller (value) ve güçlü çekişler (yarı blöf)",
+        "Orta güçte per'ler ve as yüksek eller",
+        "Yalnızca nuts",
+        "Elinde hiçbir şey olmayan bütün eller"
+       ],
+       "dogru": 0,
+       "neden": "Value elleri daha kötülerden chip alır; güçlü çekişler fold ettirebilir ya da tutabilir.",
+       "yanilgi": "Orta güçte per'le check-raise yapmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Potta 6 BB vardı, rakip 2 BB c-bet yaptı. Elinde hiçbir şey yokken 8 BB'ye check-raise yapıyorsun; görülürse hiç kazanamayacağını varsay. Rakip en az yüzde kaç fold etmeli?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "Risk 8, pot 6 + 2 = 8: 8 / 16 = %50.",
+       "yanilgi": "Rakibin bahsini pota katmamak (8 / 14).",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 8,
+        "pot": 8
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BTN 2,5 BB açtı, SB fold etti, BB'den call ettin. Flop'ta check ettin, BTN 3,7 BB c-bet yaptı. Elinde set var; board floş ve kent çekişlerine açık. Hamlen?",
+       "secenekler": [
+        "Call (slow play)",
+        "Check-raise 13 BB",
+        "Fold"
+       ],
+       "dogru": 1,
+       "neden": "Elin çok güçlü ama board ıslak; turn'de gelecek birçok kart aksiyonu öldürebilir ya da seni geçebilir. Raise ile çekişlere kötü fiyat verirsin ve şimdi value alırsın. Call (slow play) da savunulabilir bir seçenek; karar kesin değildir.",
+       "yanilgi": "Islak board'da set'i her zaman yavaş oynamak.",
+       "kabulEdilebilir": [
+        0
+       ],
+       "dogrulamaGerekli": true,
+       "spotKimlik": "c23"
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Check-raise genellikle aralığın küçük bir kısmıyla yapılır; çoğu el check-call ya da check-fold ile oynanır.",
+       "dogru": true,
+       "neden": "Check-raise güçlü eller ve güçlü çekişler için ayrılır; orta eller çoğunlukla call ya da fold eder.",
+       "yanilgi": "Her güçlü görünen eli check-raise etmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "CO 2,5 BB açtı, BB'den call ettin. Flop'ta check ettin, CO 1,8 BB c-bet yaptı. Elinde floş çekişi ve çift uçlu kent çekişi birlikte var. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call",
+        "Check-raise 8 BB"
+       ],
+       "dogru": 2,
+       "neden": "15 out'lu combo draw yarı blöf check-raise için tipik adaydır: rakip fold edebilir, görürse de tutma şansın yüksek. Call da kârlı bir seçenektir ama fold equity'yi kullanmaz.",
+       "yanilgi": "Güçlü çekişle yalnızca pasif oynamak.",
+       "kabulEdilebilir": [
+        1
+       ],
+       "dogrulamaGerekli": true,
+       "spotKimlik": "c26"
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Flop'ta 15 out'lu bir combo draw'ın var ve turn ile river'ı ödeme yapmadan göreceksin (ör. all-in). River'a kadar en az bir out gelme ihtimali yüzde kaçtır? (kesin hesap, bir ondalık basamak)",
+       "dogru": 54.1,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "1 − C(32, 2) / C(47, 2) = 1 − 496 / 1081 ≈ %54,1. 4 kuralı %60 verir; 15 out'ta kural fazla tahmin eder.",
+       "yanilgi": "4 kuralının sonucunu (%60) kesin sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "tutma",
+        "outs": 15,
+        "sokak": "flop",
+        "kart": 2,
+        "sonuc": "gercek"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Eli c-bet'e karşı genel planla eşleştir.",
+       "secenekler": [
+        [
+         "Set, ıslak board",
+         "Value check-raise adayı"
+        ],
+        [
+         "Floş + çift uçlu kent çekişi",
+         "Yarı blöf check-raise adayı"
+        ],
+        [
+         "Orta per, çekiş yok",
+         "Çoğunlukla check-call ya da check-fold"
+        ]
+       ],
+       "neden": "Check-raise uçlardaki ellerle (çok güçlü ve güçlü çekiş) yapılır.",
+       "yanilgi": "Orta güçteki elleri check-raise ile şişirmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Kuru bir board'da (K♠ 7♦ 2♣) set ile check-raise yerine bazen call (slow play) neden tercih edilir?",
+       "secenekler": [
+        "Rakibin çekişi az, turn'de seni geçecek kart az; call ile rakibin zayıf elleri bahse devam edebilir",
+        "Kuru board'da raise kurallara aykırıdır",
+        "Set kuru board'da zayıftır",
+        "Call her zaman daha çok kazandırır"
+       ],
+       "dogru": 0,
+       "neden": "Koruma ihtiyacı düşükken yavaş oynamak, rakibin bahse devam etmesine izin verir. Islak board'da ise bedava kart pahalıya patlayabilir.",
+       "yanilgi": "Board dokusuna bakmadan set'i hep aynı oynamak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "c10-d5",
@@ -17158,15 +17940,199 @@
       "Donk bet'i tanımlar; neden seyrek kullanıldığını ve hangi board'larda anlam kazandığını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Agresör, bir sokakta son bet ya da raise'i yapan oyuncudur. Donk bet: önceki sokakta agresör olmayan oyuncunun, agresöre sıra gelmeden öne bahis yapması. Örnek: BTN açtı, BB call etti; flop'ta BB check etmeden bahis yaparsa bu bir donk bet'tir. Kurallara uygun bir hamledir; adı yalnızca alışılmadık olmasından gelir.",
+      "Donk bet genellikle seyrek kullanılır. Agresörün çoğu board'da range avantajı vardır (c9-d2) ve sık c-bet yapar; savunan oyuncu check edip onun bahsine call, check-raise ya da fold ile tepki vererek çoğu zaman yeterince iyi oynar. Bütün aralığını check'te tutmak, hangi ellerle bahis yapıp hangileriyle check edeceğini ayrı ayrı dengelemekten de kolaydır.",
+      "Donk bet, board savunanın aralığına çok uyduğunda anlam kazanabilir: ör. UTG açtı, BB call etti, flop 6♥ 5♥ 4♣ gibi küçük ve bağlantılı bir board'da nut avantajı savunana kayabilir. Turn'de board'u savunanın lehine değiştiren bir kart geldiğinde de benzer bir mantık vardır. Bunlar istisnadır; temel plan çoğunlukla check'tir."
+     ],
+     "terimler": [
+      "Agresör",
+      "Donk bet",
+      "C-bet (continuation bet)",
+      "Range avantajı",
+      "Nut avantajı",
+      "Check-raise"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Donk bet nedir?",
+       "secenekler": [
+        "Önceki sokakta agresör olmayan oyuncunun, agresöre sıra gelmeden öne bahis yapması",
+        "Preflop agresörünün flop'taki devam bahsi",
+        "Check'ten sonra gelen raise",
+        "River'daki en küçük bahis"
+       ],
+       "dogru": 0,
+       "neden": "Donk bet, inisiyatifi olmayan oyuncunun öne yaptığı bahistir.",
+       "yanilgi": "Donk bet'i c-bet ile karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "BTN açtı, BB call etti. Flop'ta BB, check etmeden bahis yaptı: bu bir donk bet'tir.",
+       "dogru": true,
+       "neden": "Preflop agresörü BTN; BB onun önünde bahis yaptı.",
+       "yanilgi": "Flop'taki her ilk bahsi c-bet saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "BTN açtı, BB call etti. Flop'ta BB check etti, BTN bahis yaptı: BTN'nin bahsi bir donk bet'tir.",
+       "dogru": false,
+       "neden": "BTN preflop agresörüdür; onun bahsi bir c-bet'tir.",
+       "yanilgi": "Kimin agresör olduğuna bakmadan adlandırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Donk bet neden genellikle seyrek kullanılır?",
+       "secenekler": [
+        "Agresörün çoğu board'da range avantajı var; savunan check edip onun bahsine tepki vererek çoğu zaman yeterince iyi oynar",
+        "Donk bet kurallara aykırıdır",
+        "Donk bet her zaman kaybettirir",
+        "Savunanın aralığında güçlü el hiç olmaz"
+       ],
+       "dogru": 0,
+       "neden": "Seyreklik bir strateji eğilimidir, kural değildir.",
+       "yanilgi": "Donk bet'in yasak ya da \"her zaman hata\" olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "UTG açtı, BB call etti. Hangi flop'ta BB'nin donk bet'i genellikle daha çok anlam kazanabilir?",
+       "secenekler": [
+        "K♠ 7♦ 2♣",
+        "A♠ K♦ 3♣",
+        "6♥ 5♥ 4♣",
+        "Q♠ Q♦ 8♣"
+       ],
+       "dogru": 2,
+       "neden": "Küçük, bağlantılı ve ıslak board savunanın call aralığına (küçük çiftler, bağlantılı eller) daha çok uyar; nut avantajı savunana kayabilir. Yüksek kuru board'lar açana yarar.",
+       "yanilgi": "Donk bet'i yüksek kartlı board'larda düşünmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "boardSec",
+        "ozellik": "sinif",
+        "deger": "Islak"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "BB flop'ta check-call yaptı. Turn'de hangi tür kart BB'nin öne bahis yapmasını daha anlamlı kılabilir?",
+       "secenekler": [
+        "Board'u savunanın aralığına daha çok uyduran bir kart",
+        "Agresörün aralığına çok uyan yüksek bir kart",
+        "Hiçbir kartın etkisi yoktur",
+        "Yalnızca as"
+       ],
+       "dogru": 0,
+       "neden": "Turn kartı aralıkların dengesini değiştirebilir; savunanın lehine dönen kart öne bahsi anlamlı kılabilir.",
+       "yanilgi": "Turn kartının aralıkları etkilemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Flop'ta potta 5,5 BB var. BB 2,5 BB donk bet yaptı. BTN'nin call için gereken equity'si yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 23.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,5 / (8 + 2,5) ≈ %23,8.",
+       "yanilgi": "2,5 / 8 ≈ %31 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 2.5,
+        "pot": 8
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Donk bet kurallara aykırı bir hamledir.",
+       "dogru": false,
+       "neden": "Önünde bahis yokken her oyuncu bahis yapabilir; donk bet yalnızca alışılmadık bir stratejidir.",
+       "yanilgi": "Strateji eğilimini kural sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Eşleştir.",
+       "secenekler": [
+        [
+         "C-bet",
+         "Preflop'ta son raise'i yapanın flop'ta bahse devam etmesi"
+        ],
+        [
+         "Donk bet",
+         "Agresör olmayanın, agresöre sıra gelmeden öne bahis yapması"
+        ],
+        [
+         "Check-raise",
+         "Önce check, rakip bahis yapınca raise"
+        ]
+       ],
+       "neden": "Üç hamle, kimin agresör olduğuna ve sıraya göre ayrılır.",
+       "yanilgi": "Hamleleri yalnızca bahis miktarına göre adlandırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Potta 6 BB var, 3 BB'lik bir donk bet blöfü yapıyorsun; görülürse hiç kazanamayacağını varsay. Rakip en az yüzde kaç fold etmeli? (bir ondalık basamak)",
+       "dogru": 33.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "3 / (6 + 3) ≈ %33,3.",
+       "yanilgi": "3 / 6 = %50 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 3,
+        "pot": 6
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Donk bet'i neredeyse hiç kullanmayan bir oyuncu için hangisi genellikle doğrudur?",
+       "secenekler": [
+        "Aralığını check'te tutar; c-bet'e call, check-raise ya da fold ile tepki verir; bu basit plan çoğu board'da makul bir başlangıçtır",
+        "Her zaman kaybeder",
+        "Hiç check-raise yapamaz",
+        "Agresöre her zaman bedava kart vermiş olur"
+       ],
+       "dogru": 0,
+       "neden": "Check ile başlayan plan, agresörün c-bet'ine tepki verme imkânı bırakır.",
+       "yanilgi": "Donk bet yapmamayı pasiflik ya da hata sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "c10-d6",
@@ -17180,15 +18146,217 @@
       "Orta güçteki elle potu küçük tutmanın gerekçesini SPR ile ilişkilendirir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Pot kontrolü: orta güçte elle potu küçük tutmak için check ya da küçük bahis tercih etmek. Orta güçte bir el (ör. board'daki en yüksek karttan küçük bir cep çifti) şu sorunu yaşar: bahis yaparsan daha kötü eller çoğunlukla fold eder, daha iyiler görür ya da raise eder. Bu tür eller büyük pottan çok, showdown'a ucuza gitmekten kazanır; bunlara showdown değeri olan eller denir.",
+      "SPR (c8-d6) bunun neden önemli olduğunu gösterir. Her sokakta yarım pot bahis ve call potu ikiye katlar: 10 BB'lik pot flop'tan sonra 20, turn'den sonra 40, river'dan sonra 80 BB olur. Yani yüksek SPR'de bile birkaç bahis stack'lerin çoğunu ortaya getirebilir. Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar; check ile potu küçük tutmak bu riski azaltır.",
+      "Düşük SPR'de durum değişir: pot kalan stack'e göre zaten büyükse (kabaca 3 ve altı), top pair ya da overpair ile stack koymak çoğunlukla doğaldır ve pot kontrolüne pek yer kalmaz. Pozisyon da yardım eder: IP oyuncu turn'de check ederek potu küçük tutar ve river'da rakibin blöflerini ucuza yakalayabilir."
+     ],
+     "terimler": [
+      "Pot kontrolü",
+      "SPR",
+      "Showdown değeri",
+      "Cep çifti",
+      "Top pair",
+      "Overpair",
+      "IP (pozisyonda)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Pot kontrolü nedir?",
+       "secenekler": [
+        "Orta güçte elle potu küçük tutmak için check ya da küçük bahis tercih etmek",
+        "Her sokakta pot kadar bahis yapmak",
+        "Potu bölmek",
+        "Rakibin bahsini her zaman görmek"
+       ],
+       "dogru": 0,
+       "neden": "Amaç, orta güçteki elle büyük bir pota gitmemektir.",
+       "yanilgi": "Pot kontrolünü pasiflikle aynı şey sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Pot kontrolünün amacı, orta güçteki elle büyük bir pota gitmemektir.",
+       "dogru": true,
+       "neden": "Orta güçteki el büyük potlarda çoğunlukla daha iyi ellere karşı kalır.",
+       "yanilgi": "Her elle potu büyütmeye çalışmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Flop'ta pot 10 BB. Flop, turn ve river'da her seferinde yarım pot bahis yapıldı ve call edildi. River sonunda pot kaç BB olur?",
+       "dogru": 80,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "10 + 5 + 5 = 20; 20 + 10 + 10 = 40; 40 + 20 + 20 = 80 BB. Her sokak potu ikiye katlar.",
+       "yanilgi": "Bahisleri yalnızca bir kez saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         10,
+         5,
+         5,
+         10,
+         10,
+         20,
+         20
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Board Q♦ 7♥ 3♠ 5♣ (turn). Hangi el pot kontrolüne en uygundur?",
+       "secenekler": [
+        "T♠ T♣ (damın altında cep çifti)",
+        "Q♠ Q♥ (set)",
+        "6♦ 4♦ (kent)"
+       ],
+       "dogru": 0,
+       "neden": "TT orta güçte: daha küçük per'leri yener, damlı ellere kaybeder. Set ve kent value için bahis yapar.",
+       "yanilgi": "Orta güçteki eli value eli gibi oynamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Pot 5,5 BB, kalan efektif stack'ler 97,5 BB. Flop'ta 3,5 BB bahis yapıldı ve call edildi. Turn başında SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 7.5,
+       "tolerans": 0.1,
+       "neden": "Pot 5,5 + 3,5 + 3,5 = 12,5; kalan 97,5 − 3,5 = 94: 94 / 12,5 ≈ 7,5.",
+       "yanilgi": "Flop'taki SPR'yi (≈ 17,7) kullanmaya devam etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         94,
+         94
+        ],
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BTN'den 2,5 BB açtın, BB call etti. Flop'ta 2 BB bahis yaptın, BB call etti. Turn'de BB check etti. Board'da senin cep çiftinden yüksek bir dam var. Hamlen?",
+       "secenekler": [
+        "Check",
+        "2/3 pot bahis",
+        "All-in"
+       ],
+       "dogru": 0,
+       "neden": "TT tipik bir showdown değeri eli. Bahis yaparsan çoğunlukla seni yenen eller görür, yendiğin eller fold eder. Check ile potu küçük tutar, river'da rakibin blöflerini ucuza yakalama şansı bulursun.",
+       "yanilgi": "Orta güçteki eli her sokakta bahisle \"korumaya\" çalışmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c30"
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Düşük SPR'de (kabaca 3 ve altı) top pair ya da overpair ile stack koymak çoğunlukla doğaldır.",
+       "dogru": true,
+       "neden": "Pot kalan stack'e göre büyükse fold etmek pahalıdır ve rakibin aralığında geride olan çok el bulunur (c8-d6).",
+       "yanilgi": "Düşük SPR'de de pot kontrolüne çalışmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "Stack'ler 100 BB. BTN 2,5 BB açtı, SB'den 11 BB'ye 3-bet yaptın, BB fold etti, BTN 22 BB'ye 4-bet yaptı, sen call ettin. Flop'ta check ettin, BTN 36 BB bahis yaptı. Elin AA. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call",
+        "All-in (78 BB)"
+       ],
+       "dogru": 2,
+       "neden": "Flop'ta SPR 2'nin altında: pot kalan stack'e göre çok büyük. Overpair ile eli bırakmak bu SPR'de çok pahalıdır. All-in, geride olan ellerin equity'sini bedava görmesini engeller; call da savunulabilir bir seçenektir, karar kesin değildir.",
+       "yanilgi": "Büyük bahis gördü diye düşük SPR'de overpair'i bırakmak.",
+       "kabulEdilebilir": [
+        1
+       ],
+       "dogrulamaGerekli": true,
+       "spotKimlik": "c24"
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "IP'de orta güçte bir elle turn'de check etmenin iki faydası hangisidir?",
+       "secenekler": [
+        "Potu küçük tutar ve river'da rakibin blöflerini ucuza yakalama fırsatı verir",
+        "Rakibi her zaman fold ettirir ve potu büyütür",
+        "Eli daha güçlü yapar",
+        "River'da rakibin check etmesini garanti eder"
+       ],
+       "dogru": 0,
+       "neden": "Check, hem kaybedeceğin büyük potları önler hem de rakibe river'da blöf yapma fırsatı bırakır.",
+       "yanilgi": "Check'in yalnızca zayıflık olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Durumu genel planla eşleştir.",
+       "secenekler": [
+        [
+         "Yüksek SPR, orta güçte per",
+         "Pot kontrolü: check ya da küçük bahis"
+        ],
+        [
+         "Düşük SPR, overpair",
+         "Stack koymak çoğunlukla doğal"
+        ],
+        [
+         "Çok güçlü el, ıslak board",
+         "Value için bahis ya da raise"
+        ]
+       ],
+       "neden": "SPR, el gücü ve board dokusu birlikte düşünülür.",
+       "yanilgi": "Her durumda aynı planla oynamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Flop'ta pot 10 BB, kalan efektif stack 80 BB. Flop, turn ve river'da yarım pot bahis yapıldı ve call edildi. River sonunda her oyuncunun önünde kaç BB kalır?",
+       "dogru": 45,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Bahisler 5, 10 ve 20 BB: 80 − 5 − 10 − 20 = 45 BB. Üç yarım pot bahis, stack'in 35 BB'sini, yani yaklaşık yarısını ortaya koydu.",
+       "yanilgi": "Her sokakta aynı miktarın (5 BB) konduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         80,
+         -5,
+         -10,
+         -20
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "c10-k",
@@ -17201,15 +18369,218 @@
       "\"Value ve blöf\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin altı dersinden karışık sorular içerir: value bet ve boyutu, blöf seçimi, check-raise, donk bet ve pot kontrolü."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Value bet kararındaki ana soru hangisidir?",
+       "secenekler": [
+        "Bu bahsi daha zayıf hangi eller görür?",
+        "Rakip fold eder mi?",
+        "Elim nuts mı?",
+        "Pot büyük mü?"
+       ],
+       "dogru": 0,
+       "neden": "Value, daha kötü ellerin görmesinden gelir.",
+       "yanilgi": "Elin mutlak gücüne bakmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Saf blöf, görüldüğünde çoğunlukla tutarak kazanır.",
+       "dogru": false,
+       "neden": "Saf blöfün gelişme şansı çok azdır; yalnızca fold equity'den kazanır. Tutarak kazanabilen blöf yarı blöftür.",
+       "yanilgi": "Saf blöf ile yarı blöfü karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "River'da potta 20 BB var, 15 BB bahis yaptın. Rakibin call için gereken equity'si yüzde kaçtır?",
+       "dogru": 30,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "15 / (35 + 15) = %30.",
+       "yanilgi": "15 / 35 ≈ %43 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 15,
+        "pot": 35
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Donk bet nedir?",
+       "secenekler": [
+        "Agresör olmayanın, agresöre sıra gelmeden öne bahis yapması",
+        "Agresörün devam bahsi",
+        "Check'ten sonraki raise",
+        "Pottan büyük bahis"
+       ],
+       "dogru": 0,
+       "neden": "Donk bet, önceki sokakta agresör olmayan oyuncunun öne bahsidir.",
+       "yanilgi": "Donk bet'i c-bet ile karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "River'da potta 20 BB var, 15 BB'lik bir blöf yapıyorsun; görülürse hiç kazanamayacağını varsay. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "15 / (20 + 15) ≈ %42,9.",
+       "yanilgi": "Gereken equity formülünü (%30) kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 15,
+        "pot": 20
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Board (river): A♦ 9♠ 6♣ 3♥ 2♦. Elin A♣ J♥. Rakibin aralığında AKs ve AKo varsa, kaç AK kombinasyonu kalır?",
+       "dogru": 8,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Kalan aslar A♠ ve A♥, papazlar 4: 2 × 4 = 8.",
+       "yanilgi": "Yalnızca elindeki ası düşüp 12 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "blokerKombo",
+        "kartlar": "A♣ J♥ A♦ 9♠ 6♣ 3♥ 2♦",
+        "eller": [
+         "AKs",
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BTN'den 2,5 BB açtın, BB call etti. Flop'ta ve turn'de bahis yaptın, BB ikisini de call etti. River'da BB check etti. BB her bahsi gören, pasif bir oyuncu. Elinde top pair var. Hamlen?",
+       "secenekler": [
+        "Check",
+        "2/3 pot bahis (≈15 BB)",
+        "All-in (≈89 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Rakibin aralığı çoğunlukla daha kötü per'lerden oluşur ve her bahsi görür: orta-büyük bahis value alır. All-in'i yalnızca seni yenen eller görür.",
+       "yanilgi": "Value'yu kaçırmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c20"
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Check-raise için en doğal adaylar orta güçteki per'lerdir.",
+       "dogru": false,
+       "neden": "Check-raise çoğunlukla çok güçlü eller (value) ve güçlü çekişlerle (yarı blöf) yapılır; orta per'ler çoğunlukla call ya da fold eder.",
+       "yanilgi": "Orta eli check-raise ile şişirmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Eli genel planla eşleştir.",
+       "secenekler": [
+        [
+         "Set, ıslak board",
+         "Value için bahis ya da check-raise"
+        ],
+        [
+         "River'da kaçmış çekiş",
+         "Saf blöf adayı"
+        ],
+        [
+         "Orta per, yüksek SPR",
+         "Pot kontrolü"
+        ],
+        [
+         "Flop'ta floş + kent çekişi",
+         "Yarı blöf adayı"
+        ]
+       ],
+       "neden": "Elin rolü, gücüne, equity'sine ve SPR'ye göre belirlenir.",
+       "yanilgi": "Her eli aynı planla oynamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "CO 2,5 BB açtı, BTN'den call ettin. Flop'ta CO bahis yaptı, call ettin; turn'de ikiniz de check ettiniz. River'da CO check etti. Kent çekişin kaçtı; showdown'da neredeyse hiçbir eli yenemezsin. Hamlen?",
+       "secenekler": [
+        "Check (kartları aç)",
+        "2/3 pot bahis (8 BB)",
+        "Minimum bahis (1 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Showdown değerin yok ve rakip iki kez check etti. 2/3 pot blöfün başabaş noktası %40 fold; bu varsayımlarla rakibin zayıf ellerinin önemli kısmı bırakır.",
+       "yanilgi": "Kaçmış çekişle hep pes etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c32"
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Öğretim örneği: rakibin bahsini görecek eller 9 kombinasyon senden daha kötü, 3 kombinasyon daha iyi. Bahsin görüldüğünde yüzde kaç öndesin?",
+       "dogru": 75,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "9 / 12 = %75; %50'nin üstünde: value.",
+       "yanilgi": "9 / 3 = 3 bulup oranı yanlış kurmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         9,
+         12
+        ]
+       }
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Rakibin görecek aralığı geniş ve zayıf (çok sayıda orta ve zayıf per). Value için genel boyut eğilimi hangisidir?",
+       "secenekler": [
+        "Küçük ya da orta boyut",
+        "All-in",
+        "Check",
+        "Pottan büyük bahis"
+       ],
+       "dogru": 0,
+       "neden": "Zayıf eller büyük bahsi çoğunlukla görmez; küçük ya da orta boyut daha çok call alır.",
+       "yanilgi": "Value elle her zaman en büyük boyutu seçmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "c10-r",
@@ -17223,15 +18594,139 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer: value bet'in sorusu, gereken equity ile başabaş fold oranını karıştırmak, donk bet'i c-bet'ten ayırmak ve pot kontrolü."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Bir bahsi value bet yapan nedir?",
+       "secenekler": [
+        "Daha kötü ellerin görmesini beklemek",
+        "Elin güçlü görünmesi",
+        "Rakibin fold etmesini beklemek",
+        "Bahsin büyük olması"
+       ],
+       "dogru": 0,
+       "neden": "Value, görüldüğünde daha kötü ellerden chip almaktır.",
+       "yanilgi": "Value'yu fold ettirmekle karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Potta 10 BB var, 5 BB bahis yaptın. Rakibin call için gereken equity'si yüzde kaçtır?",
+       "dogru": 25,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "5 / (15 + 5) = %25.",
+       "yanilgi": "Başabaş fold oranını (5 / 15 ≈ %33) gereken equity sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 5,
+        "pot": 15
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "BTN açtı, BB call etti. Flop'ta BB check etti, BTN bahis yaptı: bu bir donk bet'tir.",
+       "dogru": false,
+       "neden": "BTN preflop agresörüdür; bahsi bir c-bet'tir.",
+       "yanilgi": "Adlandırmayı sıraya göre değil, bahsin varlığına göre yapmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Potta 10 BB var, 5 BB'lik bir blöf yapıyorsun; görülürse hiç kazanamayacağını varsay. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 33.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "5 / (10 + 5) ≈ %33,3.",
+       "yanilgi": "Gereken equity formülünü (%25) kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 5,
+        "pot": 10
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BTN'den açtın, BB call etti. Flop'ta 1,75 BB bahis yaptın, BB call etti. Turn'de BB check etti. BB neredeyse hiç fold etmeyen bir oyuncu. Elinde per yok; gutshot ve as yüksek var. Hamlen?",
+       "secenekler": [
+        "Check",
+        "2/3 pot bahis",
+        "Pot kadar bahis"
+       ],
+       "dogru": 0,
+       "neden": "Fold etmeyen bir rakibe blöf genellikle azaltılır. Check ile bedava kart alırsın.",
+       "yanilgi": "Rakip tipine bakmadan blöfe devam etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "c28"
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi el pot kontrolüne en uygundur?",
+       "secenekler": [
+        "Board'daki en yüksek kartın altında bir cep çifti",
+        "Nut floş",
+        "Set",
+        "Elinde hiçbir şey olmayan el"
+       ],
+       "dogru": 0,
+       "neden": "Orta güçte, showdown değeri olan eller pot kontrolüne uygundur. Çok güçlü eller value için bahis yapar.",
+       "yanilgi": "Çok güçlü elle potu küçük tutmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Turn başında pot 30 BB, kalan efektif stack 45 BB (rakibin 80 BB'si var). SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 1.5,
+       "tolerans": 0.1,
+       "neden": "Efektif stack küçük olan: 45 / 30 = 1,5. Bu SPR'de pot kontrolüne pek yer kalmaz.",
+       "yanilgi": "Büyük stack'i kullanmak (80 / 30).",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         45,
+         80
+        ],
+        "pot": 30
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Yüksek SPR'de orta güçte elle her sokakta bahis yapmak, çoğunlukla kaybedeceğin büyük potlara yol açar.",
+       "dogru": true,
+       "neden": "Her sokaktaki bahis potu büyütür; orta güçteki el büyük potlarda çoğunlukla daha iyi ellere karşı kalır.",
+       "yanilgi": "Orta eli her sokakta \"koruma\" bahsiyle oynamak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     }
    ]
   },

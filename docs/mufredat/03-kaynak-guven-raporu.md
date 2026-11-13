@@ -265,3 +265,47 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Sayısal iddialar betikle; st
 - 214 alıştırmadan 121'i `denetle.mts` ile denetlenir (c7 50, c8 71). Yeni türler: `blokerKombo`, `outs`, `kazandiranKart`, `tutma`, `tutmaKart`, `equityEle`, `impliedBasabas`, `spotFiyat`; her biri için bozuk cevap testi `denetle.test.ts`'te (bloker etkisini unutmak, çifte sayılan outs, kirli out'u saymak, turn'de 47'ye bölmek, 4 kuralını kesin sanmak, implied hesabında potu düşmemek, preflop Monte Carlo'yu sayı sorusunda kullanmak, spotla uyuşmayan fiyat).
 - Pot, boyut ve risk girdileri senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.** Outs, bloker ve el ele equity'de ise girdi yalnızca kartlardır; sayım betikte yapılır.
 - Kalan 93 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+
+## c9 · Flop: board ve c-bet, c10 · Value ve blöf
+
+172 alıştırmadan 168'i `dogrulamaGerekli: false`. Dört spot alıştırması `kabulEdilebilir` ve `dogrulamaGerekli: true` taşır: c26 (c9-d5 ve c10-d4), c23 (c10-d4), c24 (c10-d6); hepsinde ikinci seçenek savunulabilir, solver yok (KARARLAR B-1 notu ve spot gerekçeleri).
+
+### Kesin olan (tanım, kural ya da aritmetik)
+
+- Board dokusu tanımları (müfredatın kendi tanımı, c9-d1'de açık): monoton = üç kart aynı renk; çiftli = iki kart aynı değer; floş çekişi = tam iki kart aynı renk; kent çekişi = bazı iki kartlık eller kent ya da en az 8 out'luk kent çekişi yapabiliyor (backdoor sayılmaz); kuru = gökkuşağı + çiftsiz + kent çekişi yok; ıslak = çiftsiz + floş çekişi + kent çekişi. Arada kalan board'lar sınıflanmaz.
+- C-bet, agresör, donk bet, check-raise, pot kontrolü tanımları; check-raise ve donk bet kurallara uygundur.
+- Gereken equity = bahis / (call öncesi pot + bahis) = B / (P + 2B); blöfün başabaş fold oranı = B / (P + B) (görülürse hiç kazanmama varsayımıyla); 1/3, 1/2, 2/3 ve pot kadar bahiste %20 / %25, %25 / %33,3, ≈ %28,6 / %40, ≈ %33,3 / %50.
+- Her sokakta yarım pot bahis ve call potu ikiye katlar (10 → 20 → 40 → 80); SPR = kalan efektif stack / pot.
+- Kombinasyon sayımı (KQ 8, K8 6, AK 9 ve 8, KK set 3 ve 1, QQ 1, 98 16) desteden kartlar çıkarılarak.
+- River'da, rakibin raise etmeyeceği varsayımıyla, bir bahsin value getirmesi için görüldüğünde %50'den sık önde olmak gerekir (bahis B: kazanılan B × önde olma payı, kaybedilen B × geride olma payı).
+
+### Genel kabul görmüş ilkeler (yumuşatılmış)
+
+- Yüksek kartlı kuru board'ların genellikle açana, küçük bağlantılı board'ların savunana (özellikle sıkı açılışa karşı) yaradığı; BB'nin AA/KK/AK'nın çoğunu 3-bet ettiği için call aralığında bunların az olduğu.
+- Kuru board'da range avantajıyla küçük ve sık c-bet'in, ıslak board'da daha büyük ve daha seçici c-bet'in yaygın olduğu ("çoğunlukla", "yaygın başlangıç noktası"); multiway ve OOP'de c-bet'in daha seçici olduğu.
+- Küçük bahse karşı daha geniş savunma; raise adaylarının çok güçlü eller ve güçlü çekişler olduğu; OOP'de devam aralığının biraz daha sıkı olduğu.
+- Value boyutunun rakibin görecek aralığına göre seçildiği; calling station'a karşı büyük value, az blöf.
+- Saf blöf adaylarının showdown değeri olmayan eller olduğu; iyi blokerin rakibin call edeceği elleri azaltan kart olduğu.
+- Check-raise ve donk bet'in genellikle seyrek olduğu; check-raise boyutunun "bahsin 3–4 katı civarı" olduğu (c23 ≈ 3,5x, c26 ≈ 4,4x); kuru board'da set ile bazen slow play.
+- Pot kontrolü: yüksek SPR'de orta güçteki elle potu küçük tutmak; düşük SPR'de (kabaca 3 ve altı) top pair/overpair ile stack koymanın çoğunlukla doğal olduğu (c8-d6 ile aynı).
+
+### Bilinçli basitleştirmeler
+
+- Hiçbir c-bet sıklığı, savunma yüzdesi, value/blöf oranı ya da alpha verilmedi. MDF anılmadı (c12-d3). Savunma tarafında yalnızca gereken equity ve rakibin blöfünün başabaş oranı kullanıldı.
+- c10-d1 ve c10-d2'deki kombinasyon ve görme sıklıkları (12/4, 6/8, 9/3; 20 kombinasyonun 12'si ve 5'i) öğretim örneğidir; soruda öyle yazılı ve ölçülmüş değer değildir.
+- Board dokusunda turn ve river'ın birlikte getireceği backdoor çekişler ve "dinamik / statik" ayrımı yok.
+- Rake yok.
+
+### Emin olunmayan noktalar
+
+- "UTG'ye karşı 6♥ 5♥ 4♣'te nut avantajı savunana kayabilir" yaygın öğretim ilkesi; BB'nin call aralığı ranges.json'da olmadığı için sayılmadı ("kayabilir" diye yazıldı).
+- Check-raise boyutu ("3–4 katı civarı") ve kuru board'da küçük c-bet boyutunun "1/3 pot" örneği yaygın başlangıç noktalarıdır; solver çıktısıyla doğrulanmadı.
+- c9-d5/a6'da 9♥ 4♥'ün K♠ 7♦ 2♣'te 1/3 pot c-bet'e karşı "fold için en doğal" el olduğu: diğer seçenekler (top pair, orta per, as yüksek + backdoor floş) açıkça daha iyi devam adayları; ama BB'nin 94s'yi hiç savunmadığı iddia edilmedi.
+- Spot cevapları (c15–c17, c20, c23, c24, c26, c28–c30, c32) spotların kendi gerekçelerine dayanır; board'lu aralık equity'si betikte hesaplanmadı. Gerekçelerde görülen kesin dil ve küçük ifade sorunları 02'de listelendi.
+
+### Doğrulama (c9–c10)
+
+- 172 alıştırmadan 66'sı `denetle.mts` ile denetlenir (c9 39, c10 27). Yeni türler: `boardDoku`, `boardSec`, `boardDokuEsleme`, `boyutEsleme`; bozuk cevap testleri `denetle.test.ts`'te (yanlış aile, ara board'u kuru/ıslak sormak, pratik kurala uymayan board, görünmeyen kart, iki doğru cevaplı seçim, yanlış eşleştirme, formül karıştırmak, gereksiz yuvarlama).
+- **Board sınıflandırıcısının sınırı:** betik board'un derste verilen tanıma göre hangi aileye girdiğini doğrular; o board'da hangi stratejinin doğru olduğunu doğrulamaz.
+- Pot, bahis ve stack girdileri senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.**
+- Kalan 106 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
