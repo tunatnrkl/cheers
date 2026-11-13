@@ -1,7 +1,7 @@
 {
  "o3-d1": {
   "anlatim": [
-   "Bu müfredatta cash oyunları 6-max masada oynanır: masada en fazla altı oyuncu oturur. Her koltuğun bir adı vardır ve bu ad butona göre belirlenir. Buton her elden sonra bir koltuk sola kaydığı için adlar da her elde bir koltuk kayar.",
+   "Bu müfredatta cash oyunları (turnuva olmayan, blind'ların sabit kaldığı oyunlar) 6-max masada oynanır: masada en fazla altı oyuncu oturur. Her koltuğun bir adı vardır ve bu ad butona göre belirlenir. Buton her elden sonra bir koltuk sola kaydığı için adlar da her elde bir koltuk kayar.",
    "Butondan saat yönünde (sola doğru) koltuklar şöyle dizilir: BTN (buton), SB (küçük blind), BB (büyük blind), UTG, HJ ve CO. UTG \"under the gun\" demektir: preflop'ta ilk kararı veren koltuktur. HJ (hijack) UTG'nin solunda, CO (cutoff) HJ'nin solunda ve butonun hemen sağında oturur.",
    "Konuşma sırasını o2'den biliyorsun; şimdi adlarıyla söyleyelim. Preflop: UTG, HJ, CO, BTN, SB, BB. Postflop, elde kalanlar arasında: SB, BB, UTG, HJ, CO, BTN.",
    "Dokuz ya da on kişilik masalara full ring denir; orada UTG ile HJ arasına başka koltuklar eklenir. Adların mantığı aynıdır: hepsi butona göre sayılır."
@@ -664,8 +664,8 @@
  },
  "o3-d4": {
   "anlatim": [
-   "Preflop'ta UTG ve HJ erken pozisyon, CO ve BTN geç pozisyon sayılır. Blind'ler ayrı bir gruptur: preflop'ta en son konuşurlar ama postflop'ta, elde kaldıkları sürece ilk konuşurlar.",
-   "Arkanda kaç oyuncu var? UTG'deyken senden sonra beş oyuncu daha konuşur; BTN'deyken yalnızca iki oyuncu (blind'ler) kalır. Arkanda ne kadar çok oyuncu varsa, onlardan birinin çok güçlü bir el tutma ihtimali o kadar yüksektir. Üstelik erken pozisyondan pota girersen postflop'ta büyük olasılıkla pozisyon dışında kalırsın.",
+   "Preflop'ta UTG ve HJ erken pozisyon, CO ve BTN geç pozisyon sayılır. 6-max'te HJ'ye bazı kaynaklar orta pozisyon (MP) der; bu müfredatta UTG ile birlikte erken sayılır. Blind'ler ayrı bir gruptur: preflop'ta en son konuşurlar ama postflop'ta, elde kaldıkları sürece ilk konuşurlar.",
+   "Arkanda kaç oyuncu var? UTG'deyken senden sonra beş oyuncu daha konuşur; BTN'deyken yalnızca iki oyuncu (blind'ler) kalır. Arkanda ne kadar çok oyuncu varsa, onlardan birinin çok güçlü bir el tutma ihtimali o kadar yüksektir. Üstelik erken pozisyondan pota girdiğinde arkandaki HJ, CO ya da BTN de pota girerse postflop'ta ona karşı pozisyon dışında kalırsın (blind'lere karşı ise pozisyondasın).",
    "Bu yüzden genel ilke şudur: erken pozisyonda daha az ve daha güçlü elle oynanır; pozisyon geçtikçe oynanan el sayısı artar. Hangi ellerin oynanacağı sonraki ünitelerin konusudur; burada yalnızca yönü öğreniyoruz.",
    "Blind'ler parayı zorunlu olarak koyduğu için preflop'ta pota daha ucuza girer, ama el boyunca çoğunlukla pozisyon dışında oynar."
   ],
@@ -771,13 +771,13 @@
     "zorluk": 3,
     "soru": "Erken pozisyonda neden daha seçici oynanır?",
     "secenekler": [
-     "Arkada çok oyuncu vardır ve postflop'ta çoğunlukla pozisyon dışında kalınır",
+     "Arkada çok oyuncu vardır ve arkadaki oyuncuların çoğuna karşı postflop'ta pozisyon dışında kalınır",
      "Erken pozisyona daha kötü kart gelir",
      "Kurallar erken pozisyonda raise'i yasaklar",
      "UTG her elde blind öder"
     ],
     "dogru": 0,
-    "neden": "İki neden var: arkada konuşacak çok oyuncu ve postflop'ta pozisyon dışında kalma ihtimali. Kartlar ve kurallar koltuğa göre değişmez.",
+    "neden": "İki neden var: arkada konuşacak çok oyuncu ve postflop'ta arkadaki HJ, CO ve BTN'ye karşı pozisyon dışında kalmak (blind'lere karşı pozisyondasın). Kartlar ve kurallar koltuğa göre değişmez.",
     "yanilgi": "UTG'yi blind koyan koltuk sanmak.",
     "dogrulamaGerekli": false
    },
@@ -850,7 +850,7 @@
      "Fark yoktur"
     ],
     "dogru": 1,
-    "neden": "BTN'de arkanda yalnızca iki oyuncu kalır ve postflop'ta pozisyonda olursun. UTG'de beş oyuncu daha konuşur ve çoğunlukla pozisyon dışında kalırsın.",
+    "neden": "BTN'de arkanda yalnızca iki oyuncu kalır ve postflop'ta pozisyonda olursun. UTG'de beş oyuncu daha konuşur; HJ, CO ya da BTN pota girerse postflop'ta ona karşı pozisyon dışında kalırsın.",
     "yanilgi": "El aynıysa koltuğun önemsiz olduğunu sanmak.",
     "dogrulamaGerekli": false
    },
@@ -1256,7 +1256,7 @@
      "BB"
     ],
     "dogru": 2,
-    "neden": "6-max'te erken pozisyon UTG ve HJ'dir.",
+    "neden": "Bu müfredatta 6-max'te erken pozisyon UTG ve HJ'dir. Bazı kaynaklar HJ'ye orta pozisyon (MP) der.",
     "yanilgi": "HJ'yi geç pozisyon sanmak.",
     "dogrulamaGerekli": false
    },

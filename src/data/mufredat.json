@@ -3760,7 +3760,7 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Bu müfredatta cash oyunları 6-max masada oynanır: masada en fazla altı oyuncu oturur. Her koltuğun bir adı vardır ve bu ad butona göre belirlenir. Buton her elden sonra bir koltuk sola kaydığı için adlar da her elde bir koltuk kayar.",
+      "Bu müfredatta cash oyunları (turnuva olmayan, blind'ların sabit kaldığı oyunlar) 6-max masada oynanır: masada en fazla altı oyuncu oturur. Her koltuğun bir adı vardır ve bu ad butona göre belirlenir. Buton her elden sonra bir koltuk sola kaydığı için adlar da her elde bir koltuk kayar.",
       "Butondan saat yönünde (sola doğru) koltuklar şöyle dizilir: BTN (buton), SB (küçük blind), BB (büyük blind), UTG, HJ ve CO. UTG \"under the gun\" demektir: preflop'ta ilk kararı veren koltuktur. HJ (hijack) UTG'nin solunda, CO (cutoff) HJ'nin solunda ve butonun hemen sağında oturur.",
       "Konuşma sırasını o2'den biliyorsun; şimdi adlarıyla söyleyelim. Preflop: UTG, HJ, CO, BTN, SB, BB. Postflop, elde kalanlar arasında: SB, BB, UTG, HJ, CO, BTN.",
       "Dokuz ya da on kişilik masalara full ring denir; orada UTG ile HJ arasına başka koltuklar eklenir. Adların mantığı aynıdır: hepsi butona göre sayılır."
@@ -4472,8 +4472,8 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Preflop'ta UTG ve HJ erken pozisyon, CO ve BTN geç pozisyon sayılır. Blind'ler ayrı bir gruptur: preflop'ta en son konuşurlar ama postflop'ta, elde kaldıkları sürece ilk konuşurlar.",
-      "Arkanda kaç oyuncu var? UTG'deyken senden sonra beş oyuncu daha konuşur; BTN'deyken yalnızca iki oyuncu (blind'ler) kalır. Arkanda ne kadar çok oyuncu varsa, onlardan birinin çok güçlü bir el tutma ihtimali o kadar yüksektir. Üstelik erken pozisyondan pota girersen postflop'ta büyük olasılıkla pozisyon dışında kalırsın.",
+      "Preflop'ta UTG ve HJ erken pozisyon, CO ve BTN geç pozisyon sayılır. 6-max'te HJ'ye bazı kaynaklar orta pozisyon (MP) der; bu müfredatta UTG ile birlikte erken sayılır. Blind'ler ayrı bir gruptur: preflop'ta en son konuşurlar ama postflop'ta, elde kaldıkları sürece ilk konuşurlar.",
+      "Arkanda kaç oyuncu var? UTG'deyken senden sonra beş oyuncu daha konuşur; BTN'deyken yalnızca iki oyuncu (blind'ler) kalır. Arkanda ne kadar çok oyuncu varsa, onlardan birinin çok güçlü bir el tutma ihtimali o kadar yüksektir. Üstelik erken pozisyondan pota girdiğinde arkandaki HJ, CO ya da BTN de pota girerse postflop'ta ona karşı pozisyon dışında kalırsın (blind'lere karşı ise pozisyondasın).",
       "Bu yüzden genel ilke şudur: erken pozisyonda daha az ve daha güçlü elle oynanır; pozisyon geçtikçe oynanan el sayısı artar. Hangi ellerin oynanacağı sonraki ünitelerin konusudur; burada yalnızca yönü öğreniyoruz.",
       "Blind'ler parayı zorunlu olarak koyduğu için preflop'ta pota daha ucuza girer, ama el boyunca çoğunlukla pozisyon dışında oynar."
      ],
@@ -4585,13 +4585,13 @@
        "zorluk": 3,
        "soru": "Erken pozisyonda neden daha seçici oynanır?",
        "secenekler": [
-        "Arkada çok oyuncu vardır ve postflop'ta çoğunlukla pozisyon dışında kalınır",
+        "Arkada çok oyuncu vardır ve arkadaki oyuncuların çoğuna karşı postflop'ta pozisyon dışında kalınır",
         "Erken pozisyona daha kötü kart gelir",
         "Kurallar erken pozisyonda raise'i yasaklar",
         "UTG her elde blind öder"
        ],
        "dogru": 0,
-       "neden": "İki neden var: arkada konuşacak çok oyuncu ve postflop'ta pozisyon dışında kalma ihtimali. Kartlar ve kurallar koltuğa göre değişmez.",
+       "neden": "İki neden var: arkada konuşacak çok oyuncu ve postflop'ta arkadaki HJ, CO ve BTN'ye karşı pozisyon dışında kalmak (blind'lere karşı pozisyondasın). Kartlar ve kurallar koltuğa göre değişmez.",
        "yanilgi": "UTG'yi blind koyan koltuk sanmak.",
        "dogrulamaGerekli": false
       },
@@ -4664,7 +4664,7 @@
         "Fark yoktur"
        ],
        "dogru": 1,
-       "neden": "BTN'de arkanda yalnızca iki oyuncu kalır ve postflop'ta pozisyonda olursun. UTG'de beş oyuncu daha konuşur ve çoğunlukla pozisyon dışında kalırsın.",
+       "neden": "BTN'de arkanda yalnızca iki oyuncu kalır ve postflop'ta pozisyonda olursun. UTG'de beş oyuncu daha konuşur; HJ, CO ya da BTN pota girerse postflop'ta ona karşı pozisyon dışında kalırsın.",
        "yanilgi": "El aynıysa koltuğun önemsiz olduğunu sanmak.",
        "dogrulamaGerekli": false
       },
@@ -5103,7 +5103,7 @@
         "BB"
        ],
        "dogru": 2,
-       "neden": "6-max'te erken pozisyon UTG ve HJ'dir.",
+       "neden": "Bu müfredatta 6-max'te erken pozisyon UTG ve HJ'dir. Bazı kaynaklar HJ'ye orta pozisyon (MP) der.",
        "yanilgi": "HJ'yi geç pozisyon sanmak.",
        "dogrulamaGerekli": false
       },
@@ -5891,7 +5891,7 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "İki el bir kartı paylaşıyor ve diğer kartlarından biri daha yüksekse, yüksek olan el diğerini domine eder. AK ve AJ'nin ikisinde de as var; ikinci kartı yüksek olan AK, AJ'yi domine eder. İkisi de as per yaparsa kazananı kicker belirler ve o kicker AK'dadır.",
+      "Değerleri farklı iki kartlık iki el bir kartı paylaşıyor ve diğer kartlarından biri daha yüksekse, yüksek olan el diğerini domine eder. AK ve AJ'nin ikisinde de as var; ikinci kartı yüksek olan AK, AJ'yi domine eder. İkisi de as per yaparsa kazananı kicker belirler ve o kicker AK'dadır.",
       "Bunun neden önemli olduğunu düşün: AJ ile board'da as gördüğünde güçlü bir elin varmış gibi hissedersin, ama rakipte AK ya da AQ varsa geridesin. Domine edilen el per tuttursa bile çoğu zaman geride kalır; bu yüzden zayıf kicker'lı eller kaybettiğinde büyük pot kaybettirebilir.",
       "Domine edilmek kaybetmenin kesin olduğu anlamına gelmez. Board AJ'nin ikinci kartıyla eşleşirse (örneğin bir vale gelirse) AJ iki per yapar ve kazanabilir. Board'daki kartlar her iki kicker'dan da yüksekse eller eşit de kalabilir.",
       "Ortak kartı olmayan eller arasında domine ilişkisi yoktur: AK ile QJ'de ortak kart yok."
@@ -5964,11 +5964,11 @@
        "secenekler": [
         "KJ",
         "AK",
-        "QQ",
+        "JT",
         "98"
        ],
        "dogru": 0,
-       "neden": "KJ, KQ ile papazı paylaşır ve ikinci kartı daha düşüktür. AK, KQ'yu domine eder; QQ ve 98'de bu ilişki yoktur.",
+       "neden": "KJ, KQ ile papazı paylaşır ve ikinci kartı daha düşüktür. AK ise KQ'yu domine eder; JT ve 98'in KQ ile ortak kartı yoktur.",
        "yanilgi": "Domine ilişkisinin yönünü ters kurmak.",
        "dogrulamaGerekli": false
       },
@@ -6138,7 +6138,7 @@
      "sureDk": 5,
      "anlatim": [
       "Oyun tarzını iki soruyla anlatırız. Kaç el oynuyorsun? Az ve seçilmiş elle oynayan oyuncuya tight (sıkı), çok elle oynayana loose (gevşek) denir. Oynadığın elleri nasıl oynuyorsun? Çoğunlukla bet ve raise yapan oyuncu agresif, çoğunlukla check ve call eden pasiftir. Sıkı ve agresif oyuncuya TAG, gevşek ve agresif oyuncuya LAG denir.",
-      "Neden az el? Başlangıç ellerinin büyük kısmı zayıftır. Zayıf elle pota girmek, çoğu zaman daha güçlü ya da seni domine eden bir ele karşı oynamak demektir. Ante olmayan bir masada, blind'de değilsen preflop'ta fold etmek sana hiçbir şeye mal olmaz.",
+      "Neden az el? Başlangıç ellerinin büyük kısmı zayıftır. Zayıf elle pota girmek, çoğu zaman daha güçlü ya da seni domine eden bir ele karşı oynamak demektir. Bazı masalarda ante da vardır: her elde oyunculardan ya da onlar adına BB'den alınan küçük zorunlu bahis. Ante olmayan bir masada, blind'de değilsen preflop'ta fold etmek sana hiçbir şeye mal olmaz.",
       "Neden raise? Raise yaptığında potu iki yoldan kazanabilirsin: rakiplerin fold eder ve pot hemen senin olur, ya da call ederler ve sonunda en iyi el sende olur. Yalnızca call edersen preflop'ta ilk yol kapanır. Ayrıca son bahsi yapan taraf sen olursun; buna inisiyatif denir ve sonraki sokaklarda işine yarar. Preflop'ta kimse pota girmeden yapılan ilk raise'e açılış (open) denir.",
       "Bunlar yeni başlayan için sağlam bir başlangıç ilkesidir, her masada aynen uygulanacak bir kural değildir; rakiplere ve masaya göre ayarlanır."
      ],
@@ -6187,9 +6187,9 @@
        "kimlik": "a2",
        "tip": "dogruYanlis",
        "zorluk": 1,
-       "soru": "Ante olmayan bir masada, blind'de değilken preflop'ta fold edersen hiç chip kaybetmezsin.",
+       "soru": "Blind'de değilsen ve masada başka zorunlu bahis yoksa, preflop'ta fold edersen hiç chip kaybetmezsin.",
        "dogru": true,
-       "neden": "Blind'de değilsen ve ante yoksa o elde pota henüz bir şey koymamışsındır; fold etmek bedavadır.",
+       "neden": "Blind'de değilsen ve başka zorunlu bahis yoksa o elde pota henüz bir şey koymamışsındır; fold etmek bedavadır.",
        "yanilgi": "Fold etmenin her zaman bir bedeli olduğunu sanmak.",
        "dogrulamaGerekli": false
       },
@@ -6348,7 +6348,7 @@
      "sureDk": 5,
      "anlatim": [
       "Limp, preflop'ta raise yapmadan yalnızca büyük blind kadar koyup pota girmektir. Burada, senden önce kimsenin girmediği bir pota ilk giren oyuncunun limp'inden söz ediyoruz.",
-      "Bu oyunun bazı sakıncaları var. Rakiplerine fold etme sebebi vermediğin için potu preflop'ta hemen kazanma şansın olmaz. BB ek bir şey ödemeden, SB yarım BB ekleyerek flop'u görebilir; arkandaki oyuncular da ucuza girer ve pot kalabalıklaşır. Arkandan raise gelirse ya fold edip koyduğunu bırakırsın ya da çoğu zaman pozisyon dışında call edersin. Son bahsi yapan taraf da sen olmazsın.",
+      "Bu oyunun bazı sakıncaları var. Rakiplerine fold etme sebebi vermediğin için potu preflop'ta hemen kazanma şansın olmaz. BB ek bir şey ödemeden, SB yarım BB ekleyerek flop'u görebilir; arkandaki oyuncular da ucuza girer ve pot kalabalıklaşır (üç ya da daha fazla oyunculu bu tür potlara multiway pot denir). Arkandan raise gelirse ya fold edip koyduğunu bırakırsın ya da call edersin; raise eden HJ, CO ya da BTN'deyse postflop'ta ona karşı pozisyon dışında kalırsın. Son bahsi yapan taraf da sen olmazsın.",
       "Bu yüzden ilk giren oyuncu için yaygın tavsiye şudur: ya açılış yap ya da fold et. İstisnalar vardır; bazı oyuncular belirli durumlarda, örneğin SB'den, limp'i bilerek kullanır. Bu yüzden \"limp çoğunlukla zayıftır\" deriz, \"her zaman yanlıştır\" demeyiz."
      ],
      "terimler": [
