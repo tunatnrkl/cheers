@@ -4,7 +4,7 @@ Müfredat içeriği yazılırken ortaya çıkan, sitede henüz bulunmayan terim 
 
 ## Sözlüğe eklenenler (2026-11-13)
 
-Önceki raporlardaki listeden 17 terim `src/data/glossary.ts`'e eklendi ve o1–o4 derslerinin `terimler` alanlarına bağlandı: Renk, El sıralaması, Sokak, Bölünen pot (temel); Yüksek kart, Per, Üçlü, Kent, Floş, Full house, Kare, Sıralı floş, Royal floş, Board'u oynamak (el); Agresif, Pasif, Range matrisi (strateji). "Bilgi avantajı" eklenmedi; "IP (pozisyonda)" tanımı bunu karşılıyor.
+Önceki raporlardaki listeden 17 terim `src/data/glossary.ts`'e eklendi ve o1–o4 derslerinin `terimler` alanlarına bağlandı: Renk, El sıralaması, Sokak, Bölünen pot (temel); Yüksek kart, Per, Üçlü, Kent, Floş, Full house, Kare, Sıralı floş, Royal floş, Board'u oynamak (el); Agresif, Pasif, Range matrisi (strateji). Onay Ajanı düzeltmesiyle iki terim daha eklendi: Solver (strateji) ve Monte Carlo (matematik); c5-d2 ve c6-d2'de ilk geçtikleri yerde tanımlanır. "Bilgi avantajı" eklenmedi; "IP (pozisyonda)" tanımı bunu karşılıyor.
 
 ## Sözlüğe eklenecekler
 

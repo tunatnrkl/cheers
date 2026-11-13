@@ -100,7 +100,7 @@ Bu iki ünitede strateji iddiaları başlıyor. Kaynaklar: `src/data/ranges.json
 
 ### Yaklaşık (kendi hesabımız; solver çıktısı değil)
 
-- **Açılış aralıkları.** ranges.json'ın kendi notu: "Çalışma amaçlı yaklaşık aralıklardır; solver çıktısı değildir." Bu not c5-d2, d3, d4, d5'in anlatımında, c5-k girişinde ve c6'nın ilgili derslerinde tekrarlanır. Betik bir eli aralığın son ~%4'ünde (53 kombinasyon) ya da hemen dışında kalıyorsa veya karışık oynanan bir suited el ise "sınırda" sayar. Sınırdaki eller yalnızca `dogrulamaGerekli: true` (c5'te 7 alıştırma) ve çoğunda `kabulEdilebilir` ile soruldu. Betiğin bu okuması sitedeki 115 açılış spotunun cevabıyla birebir aynı (test).
+- **Açılış aralıkları.** ranges.json'ın kendi notu: "Çalışma amaçlı yaklaşık aralıklardır; solver çıktısı değildir." Bu not c5-d2, d3, d4, d5'in anlatımında, c5-k girişinde ve c6'nın ilgili derslerinde tekrarlanır. Betik bir eli aralığın son ~%4'ünde (53 kombinasyon) ya da hemen dışında kalıyorsa veya karışık oynanan bir suited el ise "sınırda" sayar. Sınırdaki eller yalnızca `dogrulamaGerekli: true` (c5'te 7 alıştırma) ve çoğunda `kabulEdilebilir` ile soruldu. Ayrıca c5-d4/a5'te (c04, SB'de A5o) limp `kabulEdilebilir` ve `dogrulamaGerekli: true`: müfredat SB'de aç ya da fold varsayar, limp de bazı stratejilerde kullanılır. Betiğin bu okuması sitedeki 115 açılış spotunun cevabıyla birebir aynı (test).
 - **Aralığa karşı equity.** Projenin el değerlendiricisiyle Monte Carlo, 40.000 deneme, sabit tohum. Metindeki "yaklaşık" değerler en fazla 1,5 puan sapabilir; rehberdeki değerlerle 0,6 puan içinde.
 - **Açılış boyutu 2,5 BB ve SB'den 3 BB.** Bu bir varsayımdır ("uygulamada 2 ile 3 BB arası yaygındır" diye yazıldı); kural değildir.
 

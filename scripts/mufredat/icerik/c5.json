@@ -2,7 +2,7 @@
  "c5-d1": {
   "anlatim": [
    "Herkes sana kadar fold ettiğinde pota ilk giren raise'e açılış dendiğini o4'te gördün. Bu pistte varsayılan açılış boyutu 2,5 BB'dir: pota toplam 2,5 BB koyarsın. Potta blind'lerden gelen 1,5 BB zaten vardır; herkes fold ederse bu 1,5 BB'yi kazanırsın.",
-   "Neden daha büyük değil? Açılış büyüdükçe her başarısız denemede daha çok chip riske atarsın, ama herkes fold ettiğinde kazancın yine 1,5 BB'dir. Neden en küçük raise (min-raise, 2 BB) değil? Blind'lere çok ucuz bir fiyat verir. Uygulamada 2 ile 3 BB arasındaki boyutlar yaygındır; bu müfredat 2,5 BB'yi varsayar. SB'den açılış biraz daha büyüktür (3 BB); nedenini c5-d4'te göreceksin.",
+   "Neden daha büyük değil? Açılış büyüdükçe her başarısız denemede daha çok chip riske atarsın, ama herkes fold ettiğinde kazancın yine 1,5 BB'dir. Neden en küçük raise (min-raise, 2 BB) değil? Blind'lere daha ucuz bir fiyat verir; yine de bazı oyuncular geç pozisyonda 2 BB'yi tercih eder. Uygulamada 2 ile 3 BB arasındaki boyutlar yaygındır; bu müfredat 2,5 BB'yi varsayar. SB'den açılış biraz daha büyüktür (3 BB); nedenini c5-d4'te göreceksin.",
    "Açılışın bahis boyutu, elinin gücünden bağımsız olmalıdır. Güçlü ellerle büyük, zayıf ellerle küçük açarsan dikkatli rakipler boyuta bakarak elini tahmin eder. Aynı koltuktan bütün açılışlarını aynı boyutla yapmak bu bilgiyi saklar."
   ],
   "terimler": [
@@ -189,15 +189,16 @@
  },
  "c5-d2": {
   "anlatim": [
-   "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver çıktısı değildir. Bu aralıklarda erken pozisyonlardan UTG ellerin yaklaşık %15'iyle, HJ yaklaşık %19'uyla açar.",
-   "UTG aralığı kabaca şunlardan oluşur: yüksek ve orta çiftler, suited asların çoğu, güçlü suited broadway'ler (KQs, KJs, QJs, JTs gibi) ve yalnızca en güçlü offsuit eller (AKo, AQo). Offsuit eller azdır: domine edilmeye yatkındırlar ve her biri 12 kombinasyon eklediği için aralığı hızla büyütürler.",
+   "Herkes sana kadar fold ettiğinde hangi ellerle açacağın, arkanda kaç oyuncu kaldığına bağlıdır (o3-d4). Bu ünitedeki aralıklar sitenin Range aracındaki yaklaşık çalışma aralıklarıdır: kendi hesabımızla üretildi, solver (oyunun dengeli stratejisini hesaplayan bilgisayar programı) çıktısı değildir. Bu aralıklarda erken pozisyonlardan UTG ellerin yaklaşık %15'iyle, HJ yaklaşık %19'uyla açar.",
+   "UTG aralığı kabaca şunlardan oluşur: yüksek ve orta çiftler, suited asların çoğu, güçlü suited broadway'ler (KQs, KJs, QJs, JTs gibi) ve en güçlü offsuit eller (AKo, AQo; kenarda KQo ve AJo). Offsuit eller azdır: domine edilmeye yatkındırlar ve her biri 12 kombinasyon eklediği için aralığı hızla büyütürler.",
    "HJ, UTG'nin açtığı her eli açar ve birkaç el ekler: küçük bir çift, KJo ve ATo gibi offsuit broadway'ler, birkaç suited el. Arkada bir oyuncu daha az kaldığı için aralık biraz genişler.",
    "Bu aralıklarda limp yoktur: aralıktaki el 2,5 BB'lik bir açılışla oynanır, aralığın dışındaki el fold edilir."
   ],
   "terimler": [
    "Range (aralık)",
    "Erken pozisyon",
-   "Open (açılış)"
+   "Open (açılış)",
+   "Solver"
   ],
   "alistirmalar": [
    {
@@ -324,7 +325,7 @@
      "UTG'ye offsuit el gelmez"
     ],
     "dogru": 0,
-    "neden": "AJo gibi eller daha iyi kicker'lara karşı geride kalır; ayrıca bir offsuit el, bir suited elin üç katı kombinasyon ekler.",
+    "neden": "ATo, KJo gibi eller daha iyi kicker'lara karşı geride kalır; ayrıca bir offsuit el, bir suited elin üç katı kombinasyon ekler.",
     "yanilgi": "Suited ve offsuit hâlleri aynı güçte sanmak.",
     "dogrulamaGerekli": false
    },
@@ -760,15 +761,18 @@
      "3 BB aç"
     ],
     "dogru": 2,
-    "neden": "Tek rakibe karşı as içeren eller genellikle önde başlar; A5o SB'nin çalışma aralığında. Pozisyon dışında oynayacağın için 3 BB açılır.",
+    "neden": "Tek rakibe karşı as içeren eller genellikle önde başlar; A5o SB'nin çalışma aralığında. Pozisyon dışında oynayacağın için 3 BB açılır. Bu müfredat SB'de aç ya da fold varsayar; limp de bazı stratejilerde kullanılır.",
     "yanilgi": "Pozisyon dışında olduğu için SB'de bütün zayıf asları fold etmek.",
-    "dogrulamaGerekli": false,
+    "dogrulamaGerekli": true,
     "spotKimlik": "c04",
     "denetim": {
      "tur": "acilis",
      "poz": "SB",
      "el": "A5o"
-    }
+    },
+    "kabulEdilebilir": [
+     1
+    ]
    },
    {
     "kimlik": "a6",

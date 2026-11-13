@@ -2,7 +2,7 @@
  "c6-d1": {
   "anlatim": [
    "Equity, elinin potu kazanma payıdır: kartlar sonuna kadar açılsaydı potun ne kadarını alacağını yüzdeyle söyler. %30 equity, aynı durum çok kez tekrarlansa potun ortalama %30'unu alacağın anlamına gelir; bölünen potlar yarım sayılır.",
-   "Bir bahsi call ettiğinde ödediğin miktar karşılığında, call sonrası oluşacak potun bir payını almayı umarsın. Call'un uzun vadede zarar ettirmemesi için equity'n en az şu kadar olmalıdır: gereken equity = ödeyeceğin miktar / (call öncesi pot + ödeyeceğin miktar). Bu orana pot odds da denir.",
+   "Bir bahsi call ettiğinde ödediğin miktar karşılığında, call sonrası oluşacak potun bir payını almayı umarsın. Call'un uzun vadede zarar ettirmemesi için equity'n en az şu kadar olmalıdır: gereken equity = ödeyeceğin miktar / (call öncesi pot + ödeyeceğin miktar). Bu orana pot odds da denir. Bu eşik, sonrasında bahis olmayacağını varsayar; bahislerin etkisini c6-d3'te göreceksin.",
    "Örnek: BTN 2,5 BB açtı, SB fold etti, BB'desin. Potta 0,5 + 1 + 2,5 = 4 BB var. Call için 1,5 BB ödersin ve pot 5,5 BB olur: 1,5 / 5,5 ≈ %27,3.",
    "Koyduğun blind artık potun parçasıdır; karar yalnızca ödeyeceğin ek miktara göre verilir. Açılış küçüldükçe fiyat iyileşir: 2 BB'lik bir açılışa karşı 1 / 4,5 ≈ %22,2 yeter."
   ],
@@ -187,13 +187,14 @@
   "anlatim": [
    "Aynı fiyatta bile karar, açan oyuncunun kim olduğuna göre değişir. Çünkü elinin equity'si tek bir ele karşı değil, rakibin aralığına karşı hesaplanır. UTG'nin aralığı (yaklaşık %15) BTN'ninkinden (yaklaşık %43) çok daha güçlüdür.",
    "Örnek: J4o, UTG'nin aralığına karşı yaklaşık %29, BTN'nin aralığına karşı yaklaşık %35 equity taşır. İki durumda da 2,5 BB'lik açılışa gereken %27,3. UTG'ye karşı eşiğin ancak biraz üstündesin; üstelik vale ile per yaptığında rakipte sık sık daha iyi kicker olur, yani domine durumdasın.",
-   "Genel ilke: açan oyuncu ne kadar erken pozisyondaysa BB'deki savunma aralığın (blind savunmasında oynadığın eller) o kadar daralır; geç pozisyon açılışlarına karşı daha geniş savunursun. Rakip aralıkları sitenin yaklaşık çalışma aralıklarıdır (UTG %15, CO %27, BTN %43); solver çıktısı değildir. Equity değerleri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır."
+   "Genel ilke: açan oyuncu ne kadar erken pozisyondaysa BB'deki savunma aralığın (blind savunmasında oynadığın eller) o kadar daralır; geç pozisyon açılışlarına karşı daha geniş savunursun. Rakip aralıkları sitenin yaklaşık çalışma aralıklarıdır (UTG %15, CO %27, BTN %43); solver (oyunun dengeli stratejisini hesaplayan bilgisayar programı) çıktısı değildir. Equity değerleri projenin el değerlendiricisiyle Monte Carlo yöntemiyle (çok sayıda rastgele dağıtımın ortalaması) hesaplandı ve yaklaşıktır."
   ],
   "terimler": [
-   "Blind savunması",
    "Range (aralık)",
    "Equity",
-   "Dominasyon"
+   "Dominasyon",
+   "Solver",
+   "Monte Carlo"
   ],
   "alistirmalar": [
    {
@@ -725,7 +726,7 @@
  },
  "c6-d5": {
   "anlatim": [
-   "Bir oyuncu açtı, bir başkası call etti, sıra BB'de. Bu, blind savunmasının en ucuz hâlidir: fiyat çok iyidir. CO 2,5 BB açtı, BTN call etti, SB fold etti: potta 0,5 + 1 + 2,5 + 2,5 = 6,5 BB var; call için 1,5 BB ödersin ve pot 8 BB olur: 1,5 / 8 ≈ %18,8.",
+   "Bir oyuncu açtı, bir başkası call etti, sıra BB'de. Bu, blind savunmasının daha ucuz bir hâlidir: fiyat çok iyidir. CO 2,5 BB açtı, BTN call etti, SB fold etti: potta 0,5 + 1 + 2,5 + 2,5 = 6,5 BB var; call için 1,5 BB ödersin ve pot 8 BB olur: 1,5 / 8 ≈ %18,8.",
    "Ama artık iki rakibe karşı oynarsın; üç ya da daha fazla oyunculu bu potlara multiway pot denir. Rakip sayısı arttıkça içlerinden birinin daha iyi bir el yapma ihtimali artar; tek per gibi orta eller daha sık geride kalır. Üstelik ikisine karşı da pozisyon dışındasın.",
    "Bu potlarda genellikle, güçlü bir el yaptığında büyük pot kazanabilen eller iyi gelir: suited ve bağlantılı eller ile üçlü yapma şansı taşıyan çiftler. Offsuit ve domine olmaya yatkın eller (K5o gibi) iyi fiyata rağmen çoğu zaman zor durumda kalır. Yani fiyat iyi diye her eli savunmak gerekmez; el tipine bak."
   ],

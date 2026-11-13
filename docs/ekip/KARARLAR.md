@@ -90,3 +90,7 @@ Ajan 737/737 test, typecheck ve statik derlemeyi kendisi çalıştırdı; derlen
 
 - Range matrisi hücreleri 390px'te 26,5px: WCAG 2.2 AA hedef boyutu (24px) karşılanıyor, ok tuşlarıyla gezilebiliyor; kabul edildi.
 - Engellemeyen notlar: kontrol/tekrar düğümünün erişilebilir adında tür adı iki kez okunuyordu (düzeltildi); site menüsündeki bazı bağlantılar 44px genişliğin altında (Öğren kapsamı dışı, 24px'i geçiyor); yarıda bırakılan dersin cevapları kaydedilmiyor (çıkışta onay soruluyor); açık tema kontrastı ve gerçek ekran okuyucu denenmedi.
+
+## 2026-11-13 · Kapı D3: sözlük eklemeleri, c5 ve c6 · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan betiksiz bütün sayı sorularını ve 16 betikli soruyu kendisi çözdü, ranges.json kombinasyonlarını saydı (UTG 202, HJ 256, CO 362, BTN 574, SB 506); aritmetik hatası yok. c34 (72o, BTN 3 BB) ve c35 (J4o, UTG) için tek cevap (fold) yerinde bulundu. Düzeltilenler: UTG offsuit aralığı anlatımı ranges.json ile uyumlu hâle getirildi; "solver" ve "Monte Carlo" ilk geçtikleri yerde tanımlandı ve sözlüğe eklendi (155 → 157); min-raise, equity eşiği ve "en ucuz savunma" genellemeleri yumuşatıldı; SB'de limp sorusunda (c04) limp "kabul edilebilir" ve "doğrulama gerekli" oldu; 3-bet öğretilmeden "Blind savunması" terimine bağlanılmadı.

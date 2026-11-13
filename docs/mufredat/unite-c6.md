@@ -5,7 +5,7 @@ Kaynak: `scripts/mufredat/icerik/c6.json`. 8 ders (5 normal + kontrol + tekrar +
 | Ders | Tür | Paragraf | Alıştırma | Tipler | Zorluk | Denetimli | dogrulamaGerekli | Sözlük terimleri |
 |---|---|---|---|---|---|---|---|---|
 | `c6-d1` Fiyat: gereken equity | ders | 4 | 10 | dogruYanlis 2, sayi 5, secmeli 3 | 1–5 | 7 | 0 | Equity, Pot odds |
-| `c6-d2` BB savunması ve açanın pozisyonu | ders | 3 | 10 | dogruYanlis 2, sayi 1, secmeli 7 | 1–5 | 4 | 0 | Blind savunması, Range (aralık), Equity, Dominasyon |
+| `c6-d2` BB savunması ve açanın pozisyonu | ders | 3 | 10 | dogruYanlis 2, sayi 1, secmeli 7 | 1–5 | 4 | 0 | Range (aralık), Equity, Dominasyon, Solver, Monte Carlo |
 | `c6-d3` Equity realization | ders | 4 | 10 | dogruYanlis 3, eslestirme 1, sayi 1, secmeli 5 | 1–5 | 2 | 0 | Equity, OOP (pozisyon dışı), Suited, Connector |
 | `c6-d4` SB stratejisi | ders | 3 | 10 | dogruYanlis 3, eslestirme 1, sayi 2, secmeli 4 | 1–5 | 4 | 0 | 3-bet, SB (Small Blind), OOP (pozisyon dışı) |
 | `c6-d5` Çok oyunculu potta BB | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, sayi 2, secmeli 4, spot 1 | 1–5 | 4 | 0 | Multiway, Blind savunması, Dominasyon |

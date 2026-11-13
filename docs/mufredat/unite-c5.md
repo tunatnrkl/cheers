@@ -5,9 +5,9 @@ Kaynak: `scripts/mufredat/icerik/c5.json`. 8 ders (6 normal + kontrol + tekrar),
 | Ders | Tür | Paragraf | Alıştırma | Tipler | Zorluk | Denetimli | dogrulamaGerekli | Sözlük terimleri |
 |---|---|---|---|---|---|---|---|---|
 | `c5-d1` Açılış boyutu | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, sayi 4, secmeli 3 | 1–5 | 4 | 0 | Open (açılış), Min-raise, Bahis boyutu (sizing) |
-| `c5-d2` UTG ve HJ açılışları | ders | 4 | 11 | dogruYanlis 3, range 1, sayi 1, secmeli 3, spot 3 | 1–5 | 9 | 0 | Range (aralık), Erken pozisyon, Open (açılış) |
+| `c5-d2` UTG ve HJ açılışları | ders | 4 | 11 | dogruYanlis 3, range 1, sayi 1, secmeli 3, spot 3 | 1–5 | 9 | 0 | Range (aralık), Erken pozisyon, Open (açılış), Solver |
 | `c5-d3` CO ve BTN açılışları | ders | 4 | 10 | dogruYanlis 2, range 1, secmeli 4, spot 3 | 1–5 | 8 | 0 | Geç pozisyon, Steal (blind çalma), Range (aralık), Connector |
-| `c5-d4` SB'den açılış | ders | 3 | 10 | dogruYanlis 2, sayi 3, secmeli 2, spot 3 | 1–5 | 8 | 0 | SB (Small Blind), OOP (pozisyon dışı), Open (açılış), Limp |
+| `c5-d4` SB'den açılış | ders | 3 | 10 | dogruYanlis 2, sayi 3, secmeli 2, spot 3 | 1–5 | 8 | 1 | SB (Small Blind), OOP (pozisyon dışı), Open (açılış), Limp |
 | `c5-d5` Sınırdaki eller | ders | 3 | 10 | dogruYanlis 2, eslestirme 1, secmeli 7 | 1–5 | 6 | 3 | Range (aralık) |
 | `c5-d6` Rakibe göre küçük ayar | ders | 3 | 10 | dogruYanlis 3, eslestirme 1, sayi 1, secmeli 5 | 1–5 | 4 | 2 | Tight, Loose, Range (aralık) |
 | `c5-k` Kontrol | kontrol | 1 | 12 | dogruYanlis 2, range 1, sayi 2, secmeli 4, spot 3 | 1–5 | 9 | 1 | — |
@@ -27,7 +27,9 @@ Kaynak: `scripts/mufredat/icerik/c5.json`. 8 ders (6 normal + kontrol + tekrar),
 
 28 alıştırma kavram ve yön sorusudur (sabit boyutun gerekçesi, steal tanımı, sıkı/gevşek blind'lere göre ayarın yönü). Bunlar genel kabul görmüş ilkelere dayanır ve "genellikle" diliyle yazıldı; `03-kaynak-guven-raporu.md`'de listelenir.
 
-## Sınırdaki eller (dogrulamaGerekli: true, 7 alıştırma)
+## dogrulamaGerekli: true (8 alıştırma)
+
+c5-d4/a5 (c04, SB'de A5o): doğru cevap "3 BB aç"; limp `kabulEdilebilir`, çünkü bu müfredat SB'de aç ya da fold varsayar ama limp de bazı stratejilerde kullanılır. Kalan 7 alıştırma sınırdaki ellerdir:
 
 UTG AJo ve KQo, HJ ATo, CO 22 (iki soruda) ve 87s, BTN 65s. AJo, KQo, ATo ve 22 (c5-d5) sorularında iki cevap da kabul edilir. c5-d6'daki iki soru (BTN 65s, CO 22) masa bilgisi verir ve yönü sorar ("blind'ler sıkı → aç", "sık yeniden raise → fold"). c5-r'deki 87s sorusunun doğru cevabı "kenarda bir eldir".
 

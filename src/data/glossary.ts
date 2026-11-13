@@ -134,6 +134,7 @@ export const GLOSSARY: Term[] = [
 
   // Matematik
   t("matematik", "equity", "Equity", "Elin, kartlar sonuna kadar açılsa potu kazanma payı (yüzde olarak)."),
+  t("matematik", "monte-carlo", "Monte Carlo", "Bir olasılığı, çok sayıda rastgele dağıtım yapıp sonuçların ortalamasını alarak yaklaşık hesaplama yöntemi."),
   t("matematik", "pot-odds", "Pot odds", "Görmen gereken miktarın, call sonrası oluşacak pota oranı. Call için gereken minimum equity'yi verir.", ["pot oranı"]),
   t("matematik", "implied-odds", "Implied odds", "Elin tutarsa sonraki sokaklarda kazanmayı beklediğin ek chip'ler. Pot odds yetmediğinde call'u haklı çıkarabilir."),
   t("matematik", "reverse-implied-odds", "Ters implied odds", "Elin tutsa bile daha iyi bir ele karşı kaybedeceğin ek chip'ler. Domine edilen ellerde yüksektir.", ["reverse implied odds"]),
@@ -168,6 +169,7 @@ export const GLOSSARY: Term[] = [
   t("strateji", "loose", "Loose", "Çok sayıda elle oynayan oyuncu tarzı.", ["gevşek"]),
   t("strateji", "tag", "TAG", "Tight-aggressive: az el oynar ama oynadığını agresif oynar. Yeni başlayanlar için sağlam temel tarzdır.", ["tight-aggressive"]),
   t("strateji", "lag", "LAG", "Loose-aggressive: çok el oynar ve agresif oynar. Zor ama etkilidir.", ["loose-aggressive"]),
+  t("strateji", "solver", "Solver", "Oyunun dengeli (GTO) stratejisini hesaplayan bilgisayar programı. Sonuçları, verilen varsayımlara bağlıdır."),
   t("strateji", "agresif", "Agresif", "Çoğunlukla bet ve raise ile oynayan tarz.", ["aggressive"]),
   t("strateji", "pasif", "Pasif", "Çoğunlukla check ve call ile oynayan tarz.", ["passive"]),
   t("strateji", "range-matrisi", "Range matrisi", "169 el adının 13×13 tabloya yerleşimi: köşegende çiftler, üstünde suited, altında offsuit eller.", ["el matrisi", "matris"]),
