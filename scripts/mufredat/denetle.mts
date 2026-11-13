@@ -1,12 +1,15 @@
 // Müfredat alıştırmalarının olgusal cevaplarını BAĞIMSIZ olarak yeniden hesaplar.
 // El sıralaması, kazanan, en iyi beş kart ve nuts soruları projedeki el değerlendiriciyle
-// (src/lib/poker/evaluator.ts), pot ve sayı soruları yeniden toplamayla denetlenir.
+// (src/lib/poker/evaluator.ts), pot ve sayı soruları yeniden toplamayla denetlenir. Pozisyon soruları
+// 6-max koltuk modeliyle, başlangıç eli soruları (yazım, kombinasyon, matris, aralık yüzdesi) 52 kartlık
+// destenin bütün iki kartlık ellerini sayarak denetlenir.
 // Alıştırmadaki `denetim` alanı neyin hesaplanacağını söyler; cevap `dogru` ile karşılaştırılır.
 //
 // Çalıştırma: node scripts/mufredat/denetle.mts   (hata varsa 1 ile çıkar)
 // Test: src/lib/mufredat/denetle.test.ts aynı işlevi `npm test` içinde çağırır.
 import { readFileSync } from "node:fs";
 import { evaluate7, cardFromString } from "../../src/lib/poker/evaluator.ts";
+import { matrixLabel } from "../../src/lib/poker/cards.ts";
 
 type Al = {
   kimlik: string;
@@ -80,6 +83,69 @@ function gorunurMu(a: Al, kartMetinleri: string[]) {
   const tum = [a.soru, JSON.stringify(a.secenekler ?? [])].join(" ");
   for (const km of kartMetinleri) for (const j of jetonlar(km)) if (!tum.includes(j)) throw new Error(`denetimdeki ${j} kartı soruda ya da seçeneklerde görünmüyor`);
 }
+
+// ── 6-max koltuk modeli: butondan saat yönünde (sola doğru) ──
+export const KOLTUK = ["BTN", "SB", "BB", "UTG", "HJ", "CO"];
+const koltukNo = (p: string) => {
+  const i = KOLTUK.indexOf(p);
+  if (i < 0) throw new Error(`bilinmeyen koltuk "${p}"`);
+  return i;
+};
+/** Konuşma sırası: preflop BB'nin solundan (UTG) başlar, postflop butonun solundan (SB). */
+function konusmaSirasi(sokak: string, oyuncular?: string[]): string[] {
+  const bas = sokak === "preflop" ? 3 : sokak === "postflop" ? 1 : NaN;
+  if (Number.isNaN(bas)) throw new Error(`bilinmeyen sokak "${sokak}"`);
+  const tam = KOLTUK.map((_, i) => KOLTUK[(bas + i) % 6]);
+  if (oyuncular) oyuncular.forEach(koltukNo);
+  return oyuncular ? tam.filter((p) => oyuncular.includes(p)) : tam;
+}
+
+// ── Başlangıç elleri: destenin bütün 1326 iki kartlık eli sayılarak ──
+const DEGER = "AKQJT98765432";
+/** İki karttan el adı: büyük değer önce; çiftse "77", aynı renkse "s", değilse "o". */
+function elAdi(c1: number, c2: number): string {
+  const [y, d] = (c1 >> 2) >= (c2 >> 2) ? [c1, c2] : [c2, c1];
+  const r = (c: number) => "23456789TJQKA"[c >> 2];
+  if (y >> 2 === d >> 2) return r(y) + r(d);
+  return r(y) + r(d) + ((y & 3) === (d & 3) ? "s" : "o");
+}
+const IKILILER: [number, number][] = [...kombinasyon(Array.from({ length: 52 }, (_, i) => i), 2)] as [number, number][];
+const KOMBO = new Map<string, number>();
+for (const [a, b] of IKILILER) KOMBO.set(elAdi(a, b), (KOMBO.get(elAdi(a, b)) ?? 0) + 1);
+function kombo(ad: string): number {
+  const n = KOMBO.get(ad);
+  if (n === undefined) throw new Error(`geçersiz el adı "${ad}" (büyük değer önce: AKs, 77, T9o)`);
+  return n;
+}
+const elListesi = (s: string) => s.split(",").map((x) => x.trim()).filter(Boolean);
+/** Matris hücresi: satır ve sütun A'dan 2'ye; satır sütundan büyükse suited (köşegenin üstü). */
+function matrisHucre(satir: string, sutun: string): string {
+  const i = DEGER.indexOf(satir), j = DEGER.indexOf(sutun);
+  if (i < 0 || j < 0) throw new Error("matris satır/sütunu geçersiz");
+  const kendi = i === j ? satir + sutun : i < j ? satir + sutun + "s" : sutun + satir + "o";
+  // Sitenin matris bileşeniyle aynı yerleşim olmalı.
+  if (kendi !== matrixLabel(i, j)) throw new Error(`matris yerleşimi sitenin matrisinden farklı (${kendi} / ${matrixLabel(i, j)})`);
+  return kendi;
+}
+type RangeKurali = { tip: "cift" | "suited" | "offsuit"; yuksek?: string; min?: string; bosluk?: number };
+function kuralaUyan(k: RangeKurali): string[] {
+  const sira = (c: string) => "23456789TJQKA".indexOf(c);
+  return [...KOMBO.keys()].filter((ad) => {
+    const tip = ad.length === 2 ? "cift" : ad[2] === "s" ? "suited" : "offsuit";
+    if (tip !== k.tip) return false;
+    if (k.yuksek && ad[0] !== k.yuksek) return false;
+    if (k.min && Math.min(sira(ad[0]), sira(ad[1])) < sira(k.min)) return false;
+    if (k.bosluk !== undefined && sira(ad[0]) - sira(ad[1]) !== k.bosluk) return false;
+    return true;
+  });
+}
+/** "12.000 chip" → 12000, "2,5 BB" → 2.5 (Türkçe yazım: nokta binlik, virgül ondalık) */
+const trSayi = (s: unknown) => {
+  if (typeof s === "number") return s;
+  const m = String(s).match(/\d[\d.]*(,\d+)?/);
+  if (!m) throw new Error(`sayı okunamadı: "${s}"`);
+  return Number(m[0].replace(/\./g, "").replace(",", "."));
+};
 
 /** Bir alıştırmanın denetimi; hata yoksa boş dizi. */
 export function alistirmaDenetle(a: Al): string[] {
@@ -247,6 +313,110 @@ export function alistirmaDenetle(a: Al): string[] {
         }
         break;
       }
+      case "konusmaSirasi": {
+        const sira = konusmaSirasi(d.sokak as string, d.oyuncular as string[] | undefined);
+        const soru = d.soru as string | undefined;
+        if (!soru) {
+          if (a.tip !== "siralama" || JSON.stringify(sec) !== JSON.stringify(sira)) hata(`hesaplanan sıra ${sira.join(", ")}, veride ${sec.join(", ")}`);
+        } else if (soru === "ilk" || soru === "son") {
+          const r = soru === "ilk" ? sira[0] : sira[sira.length - 1];
+          if ("iddia" in d) iddiaDY(r === d.iddia);
+          else tekCevap((i) => sec[i] === r, `${soru} konuşan ${r}`);
+        } else if (soru === "sonraki" || soru === "onceki") {
+          const i = sira.indexOf(d.poz as string);
+          if (i < 0) throw new Error(`${d.poz} bu oyuncular arasında yok`);
+          const n = soru === "sonraki" ? sira.length - 1 - i : i;
+          if (a.tip !== "sayi" || dogru !== n) hata(`hesaplanan ${n}, veride ${dogru}`);
+        } else hata(`bilinmeyen konuşma sırası sorusu "${soru}"`);
+        break;
+      }
+      case "koltuk":
+      case "sonrakiEl": {
+        // koltuk: butonun n solundaki koltuk. sonrakiEl: buton bir koltuk sola kayınca aynı oyuncunun yeni koltuğu.
+        const r = d.tur === "koltuk" ? KOLTUK[(d.butondanSola as number) % 6] : KOLTUK[(koltukNo(d.poz as string) + 5) % 6];
+        tekCevap((i) => sec[i] === r, `koltuk ${r}`);
+        break;
+      }
+      case "efektif": {
+        const st = (d.stackler as number[]).map(trSayi);
+        const r = Math.min(...st) / ((d.bb as number | undefined) ?? 1);
+        if (a.tip === "sayi") {
+          if (!esit(r, dogru as number)) hata(`hesaplanan ${r}, veride ${dogru}`);
+        } else tekCevap((i) => esit(trSayi(sec[i]), r), `efektif stack ${r}`);
+        break;
+      }
+      case "bolumEsleme": {
+        for (const [sol, sag] of sec as [string, string][]) {
+          const r = trSayi(sol) / (d.bb as number);
+          if (!esit(r, trSayi(sag))) hata(`${sol} / ${d.bb} = ${r}, veride ${sag}`);
+        }
+        break;
+      }
+      case "yazim": {
+        const k = kartlar(d.kartlar as string);
+        gorunurMu(a, [d.kartlar as string]);
+        const r = elAdi(k[0], k[1]);
+        tekCevap((i) => sec[i] === r, `el adı ${r}`);
+        break;
+      }
+      case "yazimEsleme": {
+        for (const [el, ad] of sec as [string, string][]) {
+          const k = kartlar(el);
+          benzersiz(k, el);
+          if (elAdi(k[0], k[1]) !== ad) hata(`${el}: hesaplanan ${elAdi(k[0], k[1])}, veride ${ad}`);
+        }
+        break;
+      }
+      case "kombo":
+      case "yuzde": {
+        const toplam = (d.eller as string[]).reduce((x, e) => x + kombo(e), 0);
+        if (new Set(d.eller as string[]).size !== (d.eller as string[]).length) throw new Error("aynı el adı iki kez sayılmış");
+        if (d.tur === "kombo") {
+          if ("iddia" in d) iddiaDY(toplam === d.iddia);
+          else if (a.tip === "sayi") {
+            if (dogru !== toplam) hata(`hesaplanan ${toplam} kombinasyon, veride ${dogru}`);
+          } else tekCevap((i) => trSayi(sec[i]) === toplam, `${toplam} kombinasyon`);
+        } else {
+          const r = (toplam / IKILILER.length) * 100;
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (a.tip !== "sayi" || Math.abs((dogru as number) - r) > 0.05 || tol > 0.1) hata(`hesaplanan %${r.toFixed(3)}, veride ${dogru} (tolerans ${tol})`);
+        }
+        break;
+      }
+      case "toplamKombo":
+        if (a.tip !== "sayi" || dogru !== IKILILER.length) hata(`hesaplanan ${IKILILER.length}, veride ${dogru}`);
+        break;
+      case "elAdiSayisi":
+        if (a.tip !== "sayi" || dogru !== KOMBO.size) hata(`hesaplanan ${KOMBO.size}, veride ${dogru}`);
+        break;
+      case "matris": {
+        const r = matrisHucre(d.satir as string, d.sutun as string);
+        tekCevap((i) => sec[i] === r, `hücre ${r}`);
+        break;
+      }
+      case "matrisSay": {
+        let n = 0;
+        for (let i = 0; i < 13; i++) for (let j = 0; j < 13; j++) {
+          const ad = matrisHucre(DEGER[i], DEGER[j]);
+          const tip = ad.length === 2 ? "kosegen" : ad.endsWith("s") ? "ust" : "alt";
+          if (tip === d.bolge) n++;
+        }
+        if (a.tip !== "sayi" || dogru !== n) hata(`hesaplanan ${n}, veride ${dogru}`);
+        break;
+      }
+      case "rangeKume": {
+        const beklenen = new Set((d.kurallar as RangeKurali[]).flatMap(kuralaUyan));
+        const veri = new Set(dogru as string[]);
+        const eksik = [...beklenen].filter((x) => !veri.has(x)), fazla = [...veri].filter((x) => !beklenen.has(x));
+        if (a.tip !== "range" || eksik.length || fazla.length || veri.size !== (dogru as string[]).length)
+          hata(`aralık uyuşmuyor; eksik: ${eksik.join(" ") || "—"}, fazla: ${fazla.join(" ") || "—"}`);
+        break;
+      }
+      case "enCokKombo": {
+        const n = sec.map((x) => elListesi(String(x)).reduce((t, e) => t + kombo(e), 0));
+        tekCevap((i) => n[i] === Math.max(...n), `en çok kombinasyon (${n.join("/")})`);
+        break;
+      }
       default:
         hata(`bilinmeyen denetim türü "${d.tur}"`);
     }
@@ -278,7 +448,7 @@ export function denetle(m: Mufredat): Sonuc {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const yol = new URL("../../src/data/mufredat.json", import.meta.url);
   const s = denetle(JSON.parse(readFileSync(yol, "utf8")));
-  console.log(`${s.dolu} dolu ders, ${s.alistirma} alıştırma; ${s.denetlenen} tanesi betikle yeniden hesaplandı.`);
+  console.log(`${s.dolu} dolu ders, ${s.alistirma} alıştırma; ${s.denetlenen} tanesi betikle denetlendi.`);
   for (const e of s.eksik) console.log("denetimsiz kart sorusu:", e);
   for (const e of s.hatalar) console.log("HATA:", e);
   process.exit(s.hatalar.length || s.eksik.length ? 1 : 0);

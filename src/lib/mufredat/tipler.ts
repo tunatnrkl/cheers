@@ -23,7 +23,8 @@ export type SpotTanimi = {
  * ya da yeniden toplamayla bağımsız olarak hesaplanır ve `dogru` ile karşılaştırılır. Arayüz kullanmaz.
  * Kartlar "A♠ K♦" biçimindedir. Türler: kategori, kazanan, enIyiBes, cepKartSayisi, nuts, nutsKategori,
  * nutsEsleme, yenen, mumkun, kategoriSirasi, kategoriEsleme, elSirasi, enGucluKategori, royalSayisi,
- * toplam, carpim, bolum.
+ * toplam, carpim, bolum, konusmaSirasi, koltuk, sonrakiEl, efektif, bolumEsleme, yazim, yazimEsleme,
+ * kombo, yuzde, toplamKombo, elAdiSayisi, matris, matrisSay, rangeKume, enCokKombo.
  */
 export type Denetim = { tur: string; [alan: string]: unknown };
 

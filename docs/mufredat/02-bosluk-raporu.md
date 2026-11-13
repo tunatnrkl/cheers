@@ -23,8 +23,18 @@ o1 ve o2 (hiç poker bilmeyen için temel) sırasında gereken, sözlükte karş
 | Beraberlik / bölünen pot (split pot) (temel) | En iyi beş kartı eşit olan oyuncuların potu eşit paylaşması. | o2-d4 |
 | Board'u oynamak (el) | En iyi beş kartın tamamen board'dan oluşması. | o1-d4 |
 
+### o3 ve o4 sırasında eklenenler
+
+| Terim | Önerilen tanım | Geçtiği ders |
+|---|---|---|
+| Agresif / pasif (strateji) | Agresif: çoğunlukla bet ve raise ile oynamak. Pasif: çoğunlukla check ve call ile oynamak. Sözlükte TAG ve LAG var ama bu iki temel sıfat yok. | o4-d4 |
+| Range matrisi (strateji) | 169 el adının 13×13 tabloya yerleşimi: köşegende çiftler, üstte suited, altta offsuit eller. | o4-d2 |
+| Bilgi avantajı (pozisyon) | Rakibin kararını gördükten sonra konuşmanın sağladığı üstünlük. "IP" tanımında geçiyor; ayrı terim gerekmeyebilir. | o3-d3 |
+
+Sözlük tanımı düzeltme önerisi: **İnisiyatif** tanımı c-bet'e atıf yapıyor ("c-bet ile potu alma şansı verir"), c-bet ise c9'da öğretiliyor. o4-d4 inisiyatifi metinde kendi cümlesiyle açıkladı ve bu yüzden `terimler` alanına koymadı. Tanımın ilk cümlesi c-bet'siz yazılırsa (ör. "Son bahsi ya da raise'i yapan oyuncunun sonraki sokakta sahip olduğu üstünlük") o4-d4'e bağlanabilir.
+
 Not: "Dealer butonu" sözlükte "BTN (Buton)" teriminin takma adı olarak zaten var; ayrı terim gerekmez.
 
 ## Spot ihtiyaçları
 
-o1 ve o2'de spot tipi alıştırma yok (konular kural öğretimi). İleriki üniteler için not: o3 "Koltuk adları" ve "Pozisyonda ve pozisyonsuz" derslerinde, yalnızca kahramanın elini ve pozisyonları gösteren basit spotlar işe yarar; rakip eli hiçbir koşulda verilmemeli.
+o1–o4'te spot tipi alıştırma yok. o3'te konuşma sırası ve pozisyon soruları metinle kuruldu; masa çizimi gösteren basit bir "koltuk" görseli (yalnızca buton ve koltuk adları, kart yok) Öğren ekranında bu soruları kolaylaştırabilir. o4'te range tipi yalnızca tanım soruları için kullanıldı (çiftler, suited aslar, suited connector'lar vb.); pozisyona göre açılış aralığı soruları c5 ve t3'e bırakıldı. Spot kullanılacak ilk yer c5 olmalı; rakip eli hiçbir koşulda verilmemeli.

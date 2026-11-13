@@ -3,8 +3,8 @@
   "anlatim": [
    "Her elde bir oyuncunun önünde \"dealer butonu\" adlı küçük bir disk durur; kısaca buton denir. Buton, o elde kartların kimden başlanarak dağıtıldığını ve kimin hangi sırada konuşacağını belirler. Her elden sonra bir koltuk sola, yani saat yönünde kayar.",
    "Butonun hemen solundaki oyuncu küçük blind'i (SB), onun solundaki oyuncu büyük blind'i (BB) koyar. Blind, kartlar dağıtılmadan önce konan zorunlu bahistir. Küçük blind genellikle büyük blind'in yarısıdır: büyük blind 1 BB ise küçük blind 0,5 BB'dir.",
-   "Blind'ler neden var? Her elde uğruna oynanacak bir pot olsun diye. Blind olmasaydı herkes yalnızca en güçlü elleri bekleyebilirdi ve oyun dururdu. Buton her el kaydığı için blind sırası herkese eşit gelir.",
-   "Büyük blind aynı zamanda ölçü birimidir. Bahisleri ve chip yığınlarını \"BB\" cinsinden söyleriz: büyük blind'in 100 chip olduğu masada 250 chip, 2,5 BB eder."
+   "Blind'ler neden var? Her elde uğruna oynanacak bir pot (o elde ortada biriken chip'lerin toplamı) olsun diye. Blind olmasaydı herkes yalnızca en güçlü elleri bekleyebilirdi ve oyun dururdu. Buton her el kaydığı için blind sırası herkese eşit gelir.",
+   "Büyük blind aynı zamanda ölçü birimidir. Bahisleri ve chip (oyunda bahis için kullanılan pul) yığınlarını \"BB\" cinsinden söyleriz: büyük blind'in 100 chip olduğu masada 250 chip, 2,5 BB eder."
   ],
   "terimler": [
    "BTN (Buton)",
@@ -196,10 +196,10 @@
  },
  "o2-d2": {
   "anlatim": [
-   "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak).",
+   "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak). Bir elde birkaç bahis turu oynanır: kartlar dağıtıldıktan sonraki ilk tura preflop, ortaya kart açıldıktan sonraki turlara (flop, turn, river) postflop denir; ayrıntısı bir sonraki derste.",
    "Önünde bahis varsa üç seçeneğin var: fold (eli bırakmak; pota koydukların geri gelmez), call (bahsi aynı miktarla görmek) ya da raise (bahsi artırmak). Bahis varken check diyemezsin; elde kalmak için en az call etmen gerekir.",
    "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır.",
-   "Bir bahis turu, biri dışında herkes fold ettiğinde ya da kalan herkes aynı miktarı koyduğunda biter. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
+   "Bir bahis turu, biri dışında herkes fold ettiğinde ya da elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa biter. Kimse bahis yapmadan herkes check derse de tur biter; bu durumda herkesin koyduğu miktar sıfırdır. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
   ],
   "terimler": [
    "Fold",
@@ -363,7 +363,7 @@
      "Yalnızca check diyebilir"
     ],
     "dogru": 1,
-    "neden": "Büyük blind 1 BB'yi zaten koydu ve kimse artırmadı; ödeyeceği bir fark yok. Check diyerek flop'u görebilir ya da raise yapabilir.",
+    "neden": "Büyük blind 1 BB'yi zaten koydu ve kimse artırmadı; ödeyeceği bir fark yok. Check diyerek flop'u görebilir ya da raise yapabilir. Miktarlar eşit olsa da büyük blind bu turda henüz konuşmadığı için tur bitmemiştir.",
     "yanilgi": "Büyük blind'in sırası geldiğinde yeniden chip koyması gerektiğini sanmak.",
     "dogrulamaGerekli": false
    },
@@ -645,7 +645,7 @@
      "Beraberlik"
     ],
     "dogru": 1,
-    "neden": "Ali'nin papaz peri var. Berk'in cebindeki dokuzlular board'daki dokuzluyla üçlü yapıyor; üçlü peri yener.",
+    "neden": "Ali'nin papaz peri var. Berk'in elindeki dokuz çifti board'daki dokuzluyla üçlü yapıyor; üçlü peri yener.",
     "yanilgi": "Board'daki en yüksek kartla yapılan peri en iyi el sanmak.",
     "dogrulamaGerekli": false,
     "denetim": {
@@ -669,7 +669,7 @@
     ],
     "dogru": 0,
     "neden": "İkisinde de per var: Ali'de aslar, Berk'te papazlar. As peri papaz perini yener.",
-    "yanilgi": "Cepteki çifti, board'la yapılan perden her zaman güçlü sanmak.",
+    "yanilgi": "Kapalı kartlarındaki çifti, board'la yapılan perden her zaman güçlü sanmak.",
     "dogrulamaGerekli": false,
     "denetim": {
      "tur": "kazanan",
@@ -763,7 +763,7 @@
     ],
     "dogru": 0,
     "neden": "İkisinde de kupa floşu var. Floşlar en yüksek karttan karşılaştırılır: Ali'nin floşu papazla, Berk'inki kızla başlıyor (kız board'da). Ali kazanır.",
-    "yanilgi": "Floşu olan iki oyuncunun berabere kaldığını ya da cep çiftinin fark yarattığını sanmak.",
+    "yanilgi": "Floşu olan iki oyuncunun berabere kaldığını ya da elindeki çiftin fark yarattığını sanmak.",
     "dogrulamaGerekli": false,
     "denetim": {
      "tur": "kazanan",
@@ -1778,7 +1778,7 @@
     ],
     "dogru": 0,
     "neden": "İkisinde de full house var. Ali: 5-5-5-K-K. Berk'in en iyisi de üç beşlili full house'tur: 5-5-5-2-2. Üçlüler eşit olduğundan çifte bakılır; papazlar ikilileri yener.",
-    "yanilgi": "Cep çiftiyle yapılan full house'u her zaman üstün sanmak.",
+    "yanilgi": "Kapalı kartlarındaki çiftle yapılan full house'u her zaman üstün sanmak.",
     "dogrulamaGerekli": false,
     "denetim": {
      "tur": "kazanan",

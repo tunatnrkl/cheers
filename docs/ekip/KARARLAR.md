@@ -65,3 +65,28 @@ Ajan 5 spotu projenin değerlendiricisini kullanmadan kendi yazdığı hesaplay�
 - 25 call cevabı, rakibin çekişle all-in yaptığı varsayımına bağlı; gerekçeler bunu söylüyor. Dar/geniş aralık sınırı "doğrulama gerekli" olarak raporda.
 - **Ayrı iş olarak kayda alındı:** 17 spotta hero BTN'den açılış aralığı dışındaki bir elle açmış görünüyor (eski üretimden); pot odds hesabını etkilemiyor.
 - **El motoru (A) kabul ölçütüne eklendi:** showdown'da rakip eli aralıktan sabit tohumla türetilir; el bitmeden hiçbir yerde bulunmaz.
+
+## 2026-11-12 · Kapı D: müfredat o1–o2 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan 58 kural/terim sorusunun hepsini ve betikli 111 sorunun neredeyse tamamını kendisi çözdü; doğrulukta hata yok. İstenen dört metin düzeltmesi uygulandı: preflop/postflop, pot, chip ve board ilk kullanıldıkları derste tanımlanıyor; "cep çifti" yerine "kapalı kartlarındaki çift"; bahis turunun bitiş kuralı tamamlandı ("elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa"); raporlardaki betik iddiası gerçeğe indirildi (pot ve sayı sorularında terimler elle girilir, betik işlemi doğrular). Kapının koşuluna göre testler yeşil olunca yeni kapı gerekmeden ONAY sayılır. İçerik, Öğren ekranı bağlanınca görünür olacak.
+
+## 2026-11-12 · Kapı A: el motoru · ONAY
+
+Ajan 699/699 testi ve typecheck'i kendisi çalıştırdı; eksik all-in, min raise, BB preflop seçeneği, postflop ve heads-up konuşma sırası, yan pot ve iade, ante senaryolarını elle kurup doğruladı. Gizlilik: rakip eli durumda tutulmuyor, yalnızca showdown olayında görünüyor; testler bunu tüm spotlarda iki hatla kanıtlıyor. Değerlendirme: ilk karardan sonra her karar "tahmini"; gerekçelerde kesinlik dili yok; MC tohumlu, aynı durum aynı kademeyi verir. Rakip: 2082 aksiyonun yaklaşık %5'i all-in, nuts ile fold yok.
+
+Uygulayıcı kararları kabul edildi: seçeneklerde olmayan preflop hamlesi "hata"; stack'i bitiren call "call" (olayda stack 0); hero fold edince el oynatılmaz; board ve rakip elleri yalnızca spot kimliğine bağlı; küçük MC (tahmini etiketiyle); gizlilik kriptografik değil.
+
+Engellemeyen notlar: bölünen potta artan kuruş butonun solundaki ilk oyuncuya gitmeli (şu an SEATS sırası); heroNet BB ante'yi düşmüyor (replay.ts ile aynı model).
+
+Arayüz (C) için kabul ölçütleri: olaylar sırayla oynatılır, son rakip aksiyonu son `aksiyon` olayından türetilir, miktarlar sokakta toplamdır; arayüz ve koç isteği yalnızca `state` ve `olaylar` kullanır, `gizliDagitim`/`araliklar.ts` import edilmez; "Bu eli tekrar oyna" aynı kartları getirdiği için arayüz bunu açıkça söyler; tahmini kararlar "Tahmini değerlendirme" etiketiyle, özet ekranında "solver değildir" notu; hero fold edince çok oyunculu potta "el oynatılmadı" denir.
+
+## 2026-11-13 · Kapı D2: müfredat o3–o4 içeriği · DÜZELT → düzeltildi (ONAY sayılır)
+
+Ajan betiksiz soruların hepsini okudu, 13 betikli soruyu kendisi çözdü; cevap hatası yok. Düzeltilenler: "ante" ve "cash oyunları" ilk geçtikleri yerde tanımlandı; "erken pozisyondan girersen çoğunlukla pozisyon dışında kalırsın" yanılgısı düzeltildi (arkadaki HJ/CO/BTN'ye karşı OOP, blind'lere karşı IP; aynı iddianın o4-d5'teki eşi de); HJ'nin bazı kaynaklarda MP sayıldığı nota eklendi; domine tanımı daraltıldı ve iki cevaba açık soru (o4-d3/a4) düzeltildi; "multiway" metinde tanıtıldı. Testler yeşil; kapı koşuluna göre ONAY sayılır.
+
+## 2026-11-13 · Kapı E: Öğren bölümü · ONAY
+
+Ajan 737/737 test, typecheck ve statik derlemeyi kendisi çalıştırdı; derlenmiş sitede gerçek veriyle o1-d1'i yalnız klavyeyle bitirdi (eşleştirme ve sıralama dahil). Yanlışlar sonda yeniden soruluyor; XP sabit (9 doğru × 10 + 20 = 110); ilerleme yenilemede duruyor; kilitli derse adresle girilemiyor. Eski `pd-…` anahtarlarına yazılmıyor; altı farklı bozuk kayıtta çökme yok (yedeklenip nötr not); içe aktarma geçersiz dosyaları reddediyor. Koyu temada kontrast ihlali yok; odak görünür; durumlar simge ve yazıyla da bildiriliyor; hareket azaltma ayarına uyuyor. Yasak ödül mekaniği ya da suçlayıcı dil yok.
+
+- Range matrisi hücreleri 390px'te 26,5px: WCAG 2.2 AA hedef boyutu (24px) karşılanıyor, ok tuşlarıyla gezilebiliyor; kabul edildi.
+- Engellemeyen notlar: kontrol/tekrar düğümünün erişilebilir adında tür adı iki kez okunuyordu (düzeltildi); site menüsündeki bazı bağlantılar 44px genişliğin altında (Öğren kapsamı dışı, 24px'i geçiyor); yarıda bırakılan dersin cevapları kaydedilmiyor (çıkışta onay soruluyor); açık tema kontrastı ve gerçek ekran okuyucu denenmedi.

@@ -15,7 +15,7 @@ Kaynak: `scripts/mufredat/icerik/o2.json`. 8 ders (5 normal + kontrol + tekrar +
 
 **Toplam tip dağılımı:** seçmeli 41, sayı 27, doğru/yanlış 17, sıralama 5, eşleştirme 5.
 
-**Betik sonucu:** 95 alıştırmanın 49'u yeniden hesaplandı, hata 0. Türler: pot ve blind aritmetiği 27 (toplam 22, bölme 5), kazanan 14, el çeşidi 4, diğer 4. Denetimsiz 46 soru konuşma sırası, aksiyon ve terim sorusudur; `03-kaynak-guven-raporu.md` içindeki kural listesiyle elden karşılaştırıldı.
+**Betik sonucu:** 95 alıştırmanın 49'u betikle denetlendi, hata 0. Türler: pot ve blind aritmetiği 27 (toplam 22, bölme 5; terimler elle girildi, betik işlemi doğrular, senaryonun terimlere çevrilişi elle kontrol edildi), kazanan 14, el çeşidi 4, diğer 4. Denetimsiz 46 soru konuşma sırası, aksiyon ve terim sorusudur; `03-kaynak-guven-raporu.md` içindeki kural listesiyle elden karşılaştırıldı.
 
 ## Kurallar ve tasarım
 

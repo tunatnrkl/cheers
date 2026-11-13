@@ -857,7 +857,7 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Hold'em'de sana iki kapalı kart dağıtılır; ortaya da herkesin kullanabildiği beş ortak kart açılır. Böylece yedi kartın olur, ama elin yine beş karttır: yedi kartın en güçlü beşlisi. Kalan iki kart hiçbir işe yaramaz.",
+      "Hold'em'de sana iki kapalı kart dağıtılır; ortaya da herkesin kullanabildiği beş ortak kart (board) açılır. Böylece yedi kartın olur, ama elin yine beş karttır: yedi kartın en güçlü beşlisi. Kalan iki kart hiçbir işe yaramaz.",
       "En iyi beşliyi kurarken kapalı kartlarının ikisini de, yalnızca birini ya da hiçbirini kullanabilirsin. Hiçbirini kullanmadığında elin ortadaki beş karttır; buna \"board'u oynamak\" denir.",
       "Kicker, çiftin ya da üçlünün yanındaki yan karttır ve eşitliği bozar. İki oyuncuda da as peri varsa yandaki en yüksek karta bakılır: papaz kicker'ı, kız kicker'ını yener. İlk kicker eşitse ikinciye, o da eşitse üçüncüye bakılır. Per üç, üçlü iki, iki per ve kare birer kicker taşır. Kent, floş ve full house'ta beş kartın hepsi elin parçasıdır; kicker kalmaz.",
       "Dikkat: yalnızca beş kart sayılır. Altıncı kart hiçbir zaman eşitliği bozmaz. Beş kartın hepsi eşitse eller eşittir."
@@ -1650,7 +1650,7 @@
        "tolerans": 0,
        "birim": "kart",
        "neden": "El beş karttır; \"üç per\" diye bir el yoktur. En iyi beşlin A-A-K-K-7'dir: board'daki iki per ve kicker olarak yedili. Dörtlülerin dışarıda kalır.",
-       "yanilgi": "Üç çifti birden saymaya çalışmak ya da cep çiftini mutlaka elin içinde görmek.",
+       "yanilgi": "Üç çifti birden saymaya çalışmak ya da elindeki çifti mutlaka elin içinde görmek.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "cepKartSayisi",
@@ -1751,7 +1751,7 @@
        ],
        "dogru": 1,
        "neden": "Kare board'da; herkesin eli dört altılı ve bir kicker'dır. Berk'in ası, Ali'nin papazını yener. Ali'nin papaz çifti beş kartın içine sığmaz.",
-       "yanilgi": "Cep çiftinin her durumda yüksek tek karttan iyi olduğunu sanmak.",
+       "yanilgi": "Kapalı kartlarındaki çiftin her durumda yüksek tek karttan iyi olduğunu sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "kazanan",
@@ -1787,8 +1787,8 @@
      "anlatim": [
       "Her elde bir oyuncunun önünde \"dealer butonu\" adlı küçük bir disk durur; kısaca buton denir. Buton, o elde kartların kimden başlanarak dağıtıldığını ve kimin hangi sırada konuşacağını belirler. Her elden sonra bir koltuk sola, yani saat yönünde kayar.",
       "Butonun hemen solundaki oyuncu küçük blind'i (SB), onun solundaki oyuncu büyük blind'i (BB) koyar. Blind, kartlar dağıtılmadan önce konan zorunlu bahistir. Küçük blind genellikle büyük blind'in yarısıdır: büyük blind 1 BB ise küçük blind 0,5 BB'dir.",
-      "Blind'ler neden var? Her elde uğruna oynanacak bir pot olsun diye. Blind olmasaydı herkes yalnızca en güçlü elleri bekleyebilirdi ve oyun dururdu. Buton her el kaydığı için blind sırası herkese eşit gelir.",
-      "Büyük blind aynı zamanda ölçü birimidir. Bahisleri ve chip yığınlarını \"BB\" cinsinden söyleriz: büyük blind'in 100 chip olduğu masada 250 chip, 2,5 BB eder."
+      "Blind'ler neden var? Her elde uğruna oynanacak bir pot (o elde ortada biriken chip'lerin toplamı) olsun diye. Blind olmasaydı herkes yalnızca en güçlü elleri bekleyebilirdi ve oyun dururdu. Buton her el kaydığı için blind sırası herkese eşit gelir.",
+      "Büyük blind aynı zamanda ölçü birimidir. Bahisleri ve chip (oyunda bahis için kullanılan pul) yığınlarını \"BB\" cinsinden söyleriz: büyük blind'in 100 chip olduğu masada 250 chip, 2,5 BB eder."
      ],
      "terimler": [
       "BTN (Buton)",
@@ -1996,10 +1996,10 @@
      ],
      "sureDk": 5,
      "anlatim": [
-      "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak).",
+      "Sıra sana geldiğinde yapabileceklerin, o turda senden önce bahis yapılıp yapılmadığına bağlıdır. Önünde bahis yoksa iki seçeneğin var: check (bahis koymadan sırayı geçmek) ya da bet (o turun ilk bahsini koymak). Bir elde birkaç bahis turu oynanır: kartlar dağıtıldıktan sonraki ilk tura preflop, ortaya kart açıldıktan sonraki turlara (flop, turn, river) postflop denir; ayrıntısı bir sonraki derste.",
       "Önünde bahis varsa üç seçeneğin var: fold (eli bırakmak; pota koydukların geri gelmez), call (bahsi aynı miktarla görmek) ya da raise (bahsi artırmak). Bahis varken check diyemezsin; elde kalmak için en az call etmen gerekir.",
       "Check ile call en çok karıştırılan ikilidir. Check bedavadır ve yalnızca bahis yokken yapılır. Call'un bir bedeli vardır ve yalnızca bahis varken yapılır. Aynı şekilde bet turun ilk bahsidir; raise ise var olan bahsin üstüne çıkmaktır.",
-      "Bir bahis turu, biri dışında herkes fold ettiğinde ya da kalan herkes aynı miktarı koyduğunda biter. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
+      "Bir bahis turu, biri dışında herkes fold ettiğinde ya da elde kalan herkes en az bir kez konuşmuş ve aynı miktarı koymuşsa biter. Kimse bahis yapmadan herkes check derse de tur biter; bu durumda herkesin koyduğu miktar sıfırdır. Preflop'ta blind'ler zaten birer bahis sayılır; bu yüzden ilk turda kimse baştan check diyemez. Tek istisna büyük blind'dir: kimse raise yapmadıysa sıra ona geldiğinde check diyebilir."
      ],
      "terimler": [
       "Fold",
@@ -2169,7 +2169,7 @@
         "Yalnızca check diyebilir"
        ],
        "dogru": 1,
-       "neden": "Büyük blind 1 BB'yi zaten koydu ve kimse artırmadı; ödeyeceği bir fark yok. Check diyerek flop'u görebilir ya da raise yapabilir.",
+       "neden": "Büyük blind 1 BB'yi zaten koydu ve kimse artırmadı; ödeyeceği bir fark yok. Check diyerek flop'u görebilir ya da raise yapabilir. Miktarlar eşit olsa da büyük blind bu turda henüz konuşmadığı için tur bitmemiştir.",
        "yanilgi": "Büyük blind'in sırası geldiğinde yeniden chip koyması gerektiğini sanmak.",
        "dogrulamaGerekli": false
       },
@@ -2484,7 +2484,7 @@
         "Beraberlik"
        ],
        "dogru": 1,
-       "neden": "Ali'nin papaz peri var. Berk'in cebindeki dokuzlular board'daki dokuzluyla üçlü yapıyor; üçlü peri yener.",
+       "neden": "Ali'nin papaz peri var. Berk'in elindeki dokuz çifti board'daki dokuzluyla üçlü yapıyor; üçlü peri yener.",
        "yanilgi": "Board'daki en yüksek kartla yapılan peri en iyi el sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
@@ -2508,7 +2508,7 @@
        ],
        "dogru": 0,
        "neden": "İkisinde de per var: Ali'de aslar, Berk'te papazlar. As peri papaz perini yener.",
-       "yanilgi": "Cepteki çifti, board'la yapılan perden her zaman güçlü sanmak.",
+       "yanilgi": "Kapalı kartlarındaki çifti, board'la yapılan perden her zaman güçlü sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "kazanan",
@@ -2602,7 +2602,7 @@
        ],
        "dogru": 0,
        "neden": "İkisinde de kupa floşu var. Floşlar en yüksek karttan karşılaştırılır: Ali'nin floşu papazla, Berk'inki kızla başlıyor (kız board'da). Ali kazanır.",
-       "yanilgi": "Floşu olan iki oyuncunun berabere kaldığını ya da cep çiftinin fark yarattığını sanmak.",
+       "yanilgi": "Floşu olan iki oyuncunun berabere kaldığını ya da elindeki çiftin fark yarattığını sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "kazanan",
@@ -3684,7 +3684,7 @@
        ],
        "dogru": 0,
        "neden": "İkisinde de full house var. Ali: 5-5-5-K-K. Berk'in en iyisi de üç beşlili full house'tur: 5-5-5-2-2. Üçlüler eşit olduğundan çifte bakılır; papazlar ikilileri yener.",
-       "yanilgi": "Cep çiftiyle yapılan full house'u her zaman üstün sanmak.",
+       "yanilgi": "Kapalı kartlarındaki çiftle yapılan full house'u her zaman üstün sanmak.",
        "dogrulamaGerekli": false,
        "denetim": {
         "tur": "kazanan",
@@ -3759,15 +3759,252 @@
       "6 kişilik masada UTG, HJ, CO, BTN, SB ve BB'yi butona göre yerleştirir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Bu müfredatta cash oyunları (turnuva olmayan, blind'ların sabit kaldığı oyunlar) 6-max masada oynanır: masada en fazla altı oyuncu oturur. Her koltuğun bir adı vardır ve bu ad butona göre belirlenir. Buton her elden sonra bir koltuk sola kaydığı için adlar da her elde bir koltuk kayar.",
+      "Butondan saat yönünde (sola doğru) koltuklar şöyle dizilir: BTN (buton), SB (küçük blind), BB (büyük blind), UTG, HJ ve CO. UTG \"under the gun\" demektir: preflop'ta ilk kararı veren koltuktur. HJ (hijack) UTG'nin solunda, CO (cutoff) HJ'nin solunda ve butonun hemen sağında oturur.",
+      "Konuşma sırasını o2'den biliyorsun; şimdi adlarıyla söyleyelim. Preflop: UTG, HJ, CO, BTN, SB, BB. Postflop, elde kalanlar arasında: SB, BB, UTG, HJ, CO, BTN.",
+      "Dokuz ya da on kişilik masalara full ring denir; orada UTG ile HJ arasına başka koltuklar eklenir. Adların mantığı aynıdır: hepsi butona göre sayılır."
+     ],
+     "terimler": [
+      "6-max",
+      "UTG (Under the Gun)",
+      "HJ (Hijack)",
+      "CO (Cutoff)",
+      "BTN (Buton)",
+      "Full ring"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Butonun hemen solundaki koltuğun adı nedir?",
+       "secenekler": [
+        "UTG",
+        "SB",
+        "BB",
+        "CO"
+       ],
+       "dogru": 1,
+       "neden": "Butonun solunda küçük blind (SB), onun solunda büyük blind (BB) oturur.",
+       "yanilgi": "UTG'yi butonun hemen yanında sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "koltuk",
+        "butondanSola": 1
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "eslestirme",
+       "zorluk": 1,
+       "soru": "Kısaltmayı koltuğun adıyla eşleştir.",
+       "secenekler": [
+        [
+         "UTG",
+         "Under the gun"
+        ],
+        [
+         "HJ",
+         "Hijack"
+        ],
+        [
+         "CO",
+         "Cutoff"
+        ],
+        [
+         "BTN",
+         "Buton"
+        ],
+        [
+         "SB",
+         "Küçük blind"
+        ],
+        [
+         "BB",
+         "Büyük blind"
+        ]
+       ],
+       "neden": "6-max masanın altı koltuğu bunlardır.",
+       "yanilgi": "HJ ile CO'yu karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "6-max masada preflop'ta ilk konuşan koltuk UTG'dir.",
+       "dogru": true,
+       "neden": "Preflop'ta ilk söz büyük blind'in solundaki oyuncudadır; o koltuğun adı UTG'dir.",
+       "yanilgi": "Preflop'ta ilk sözün küçük blind'de olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "ilk",
+        "iddia": "UTG"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "Altı oyuncu da eldeyken preflop konuşma sırasını kur.",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB",
+        "BB"
+       ],
+       "neden": "Preflop'ta sıra UTG'den başlar, butondan ve blind'lerden geçer, BB'de biter.",
+       "yanilgi": "Blind'leri en başa koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Butonun hemen sağındaki koltuğun adı nedir?",
+       "secenekler": [
+        "HJ",
+        "CO",
+        "SB",
+        "UTG"
+       ],
+       "dogru": 1,
+       "neden": "Saat yönünde sıra UTG, HJ, CO, BTN'dir; CO butondan hemen önce, yani butonun sağında oturur.",
+       "yanilgi": "Sağ ile solu karıştırıp SB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "koltuk",
+        "butondanSola": 5
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "Butondan başlayarak saat yönünde (sola doğru) altı koltuğu sırala.",
+       "secenekler": [
+        "BTN",
+        "SB",
+        "BB",
+        "UTG",
+        "HJ",
+        "CO"
+       ],
+       "neden": "Butonun solunda iki blind, ardından UTG, HJ ve CO gelir; CO'dan sonra yeniden butona dönülür.",
+       "yanilgi": "UTG'yi blind'lerden önceye koymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Altı oyuncu da flop'u görüyorsa flop'ta ilk konuşan SB'dir.",
+       "dogru": true,
+       "neden": "Postflop'ta sıra butonun solundan başlar; elde olduğu sürece ilk konuşan SB'dir.",
+       "yanilgi": "Preflop'taki gibi UTG'nin başladığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "soru": "ilk",
+        "iddia": "SB"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Butonun üç solundaki koltuk hangisidir?",
+       "secenekler": [
+        "BB",
+        "UTG",
+        "HJ",
+        "CO"
+       ],
+       "dogru": 1,
+       "neden": "Butondan sola doğru: SB (1), BB (2), UTG (3).",
+       "yanilgi": "Sayarken butonun kendisini de bir saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "koltuk",
+        "butondanSola": 3
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "siralama",
+       "zorluk": 4,
+       "soru": "Altı oyuncu da eldeyken postflop konuşma sırasını kur.",
+       "secenekler": [
+        "SB",
+        "BB",
+        "UTG",
+        "HJ",
+        "CO",
+        "BTN"
+       ],
+       "neden": "Postflop'ta sıra butonun solundan başlar ve butonda biter: SB, BB, UTG, HJ, CO, BTN.",
+       "yanilgi": "Preflop sırasını olduğu gibi postflop'a taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Bu elde HJ'desin ve yerinden kalkmıyorsun. Bir sonraki elde hangi koltukta olursun?",
+       "secenekler": [
+        "CO",
+        "UTG",
+        "BTN",
+        "HJ"
+       ],
+       "dogru": 1,
+       "neden": "Buton bir koltuk sola kayınca herkesin koltuk adı bir adım geri gider: BB SB olur, HJ de UTG olur. Butona doğru değil, butondan uzaklaşan yönde ilerlersin.",
+       "yanilgi": "Koltuk adının butonla aynı yöne, yani HJ'den CO'ya kaydığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "sonrakiEl",
+        "poz": "HJ"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "CO'dasın ve altı oyuncu da elde. Preflop'ta senden sonra kaç oyuncu konuşacak?",
+       "dogru": 3,
+       "tolerans": 0,
+       "birim": "oyuncu",
+       "neden": "Preflop sırası UTG, HJ, CO, BTN, SB, BB. CO'dan sonra BTN, SB ve BB konuşur: 3 oyuncu.",
+       "yanilgi": "Blind'leri zaten para koydukları için saymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "sonraki",
+        "poz": "CO"
+       }
+      }
+     ]
     },
     {
      "kimlik": "o3-d2",
@@ -3781,15 +4018,249 @@
       "Postflop'ta kimin son konuştuğunu bulur; IP ve OOP terimlerini doğru kullanır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Postflop'ta konuşma sırası flop, turn ve river'da aynı kalır: butonun solunda elde kalan ilk oyuncu başlar. İki oyuncudan sonra konuşana \"pozisyonda\" (IP, in position), önce konuşana \"pozisyon dışı\" (OOP, out of position) denir.",
+      "Pozisyon iki oyuncu arasındaki bir ilişkidir. CO, BB'ye karşı pozisyondadır, çünkü postflop'ta BB'den sonra konuşur; ama BTN'ye karşı pozisyon dışıdır. Buton eldeyse herkese karşı pozisyondadır. SB eldeyse herkese karşı pozisyon dışıdır.",
+      "Preflop sırası farklıdır: blind'ler en son konuşur. IP ve OOP sözleri genellikle postflop için kullanılır; çünkü elin üç sokağı boyunca sıra değişmez ve kimin son konuşacağı baştan bellidir."
+     ],
+     "terimler": [
+      "IP (pozisyonda)",
+      "OOP (pozisyon dışı)",
+      "Pozisyon",
+      "Postflop"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Postflop'ta rakibinden sonra konuşan oyuncu pozisyondadır (IP).",
+       "dogru": true,
+       "neden": "IP, rakipten sonra konuşmak demektir. Rakibin ne yaptığını gördükten sonra karar verirsin.",
+       "yanilgi": "Önce konuşmayı avantaj sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Flop'u BTN ve BB görüyor. Kim pozisyonda?",
+       "secenekler": [
+        "BTN",
+        "BB"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta BB önce, BTN sonra konuşur. Son konuşan BTN pozisyondadır.",
+       "yanilgi": "BB preflop'ta en son konuştuğu için postflop'ta da son konuştuğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "BTN",
+         "BB"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "eslestirme",
+       "zorluk": 2,
+       "soru": "Terimi açıklamasıyla eşleştir.",
+       "secenekler": [
+        [
+         "IP",
+         "Rakipten sonra konuşur"
+        ],
+        [
+         "OOP",
+         "Rakipten önce konuşur"
+        ],
+        [
+         "Preflop sırası",
+         "Blind'ler en son konuşur"
+        ],
+        [
+         "Postflop sırası",
+         "Butonun solundan başlar, butonda biter"
+        ]
+       ],
+       "neden": "IP ve OOP postflop'taki sırayı anlatır; preflop'ta sıra farklıdır.",
+       "yanilgi": "Preflop ve postflop sırasını aynı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Flop'u CO ve BB görüyor. Pozisyon dışı (OOP) olan kim?",
+       "secenekler": [
+        "CO",
+        "BB"
+       ],
+       "dogru": 1,
+       "neden": "Postflop'ta BB, CO'dan önce konuşur; bu yüzden BB pozisyon dışıdır.",
+       "yanilgi": "Blind'lerin pozisyon avantajı olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "CO",
+         "BB"
+        ],
+        "soru": "ilk"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Bir oyuncu bir rakibine karşı pozisyonda, başka bir rakibine karşı pozisyon dışında olabilir.",
+       "dogru": true,
+       "neden": "Pozisyon iki oyuncu arasındaki ilişkidir. Örneğin CO, BB'ye karşı pozisyonda, BTN'ye karşı pozisyon dışındadır.",
+       "yanilgi": "Pozisyonu bir koltuğun sabit özelliği sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Flop'u UTG ve HJ görüyor. Kim pozisyonda?",
+       "secenekler": [
+        "UTG",
+        "HJ"
+       ],
+       "dogru": 1,
+       "neden": "Postflop'ta sıra butonun solundan döner: UTG, HJ'den önce gelir. HJ son konuşur.",
+       "yanilgi": "Koltuğun adındaki \"erken\" ya da \"geç\" sözüne bakmadan sırayı tahmin etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "HJ"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "Flop'u SB, CO ve BB görüyor. Flop'taki konuşma sırasını kur.",
+       "secenekler": [
+        "SB",
+        "BB",
+        "CO"
+       ],
+       "neden": "Postflop'ta SB, sonra BB, sonra CO konuşur.",
+       "yanilgi": "CO'yu blind'lerden önce konuşturmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "SB",
+         "BB",
+         "CO"
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB preflop'ta en son konuştuğu için flop'ta da BTN'ye karşı pozisyondadır.",
+       "dogru": false,
+       "neden": "Preflop sırası postflop'a taşınmaz. Postflop'ta BB, BTN'den önce konuşur; pozisyon BTN'dedir.",
+       "yanilgi": "Preflop'ta son konuşmayı el boyunca süren bir avantaj sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "BTN",
+         "BB"
+        ],
+        "soru": "son",
+        "iddia": "BB"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Flop'u HJ, BTN ve BB görüyor. Hangi oyuncu iki rakibine karşı da pozisyon dışıdır?",
+       "secenekler": [
+        "HJ",
+        "BTN",
+        "BB"
+       ],
+       "dogru": 2,
+       "neden": "Sıra BB, HJ, BTN'dir. İlk konuşan BB, iki rakibinden de önce konuşur.",
+       "yanilgi": "Üç kişilik potta herkesin bir rakibe karşı pozisyonda olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "HJ",
+         "BTN",
+         "BB"
+        ],
+        "soru": "ilk"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Flop'u HJ, BTN ve BB görüyor. HJ kime karşı pozisyondadır?",
+       "secenekler": [
+        "Yalnızca BB'ye",
+        "Yalnızca BTN'ye",
+        "İkisine de",
+        "Hiçbirine"
+       ],
+       "dogru": 0,
+       "neden": "Sıra BB, HJ, BTN'dir. HJ, BB'den sonra konuştuğu için ona karşı pozisyonda; BTN'den önce konuştuğu için ona karşı pozisyon dışıdır.",
+       "yanilgi": "Ortadaki oyuncunun pozisyonunun olmadığını düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Flop'u UTG, CO, BTN ve SB görüyor. CO kaç rakibine karşı pozisyondadır?",
+       "dogru": 2,
+       "tolerans": 0,
+       "birim": "oyuncu",
+       "neden": "Sıra SB, UTG, CO, BTN'dir. CO, kendisinden önce konuşan SB ve UTG'ye karşı pozisyondadır: 2 rakip.",
+       "yanilgi": "SB'yi preflop'taki yerine bakıp CO'dan sonra konuşuyor saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "CO",
+         "BTN",
+         "SB"
+        ],
+        "soru": "onceki",
+        "poz": "CO"
+       }
+      }
+     ]
     },
     {
      "kimlik": "o3-d3",
@@ -3802,15 +4273,192 @@
       "Son konuşanın bilgi ve pot kontrolü avantajını örnekle açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Son konuşan oyuncu karar vermeden önce rakiplerinin ne yaptığını görür. Rakip check dediyse bahis yapmak istememiş, bahis yaptıysa güç göstermek istemiş olabilir. Bu bilgi kesin değildir, ama her sokakta yeniden gelir ve kararı kolaylaştırır.",
+      "Son konuşan potun büyüklüğü üzerinde de daha çok söz sahibidir. Rakip check dediğinde o da check derse bahis turu biter ve bir sonraki kartı bahis ödemeden görür; buna bedava kart denir. Elin orta güçteyse potu bilerek küçük tutabilir; buna pot kontrolü denir. Potu büyütmek istediğinde de bahis yapmayı seçebilir.",
+      "Pozisyon dışındaki oyuncu bu seçimleri tam yapamaz: check derse rakibi bahis yapabilir, bahis yaparsa rakibi raise yapabilir. Bu yüzden aynı el, pozisyonda genellikle pozisyon dışından daha kolay oynanır.",
+      "Pozisyon bir avantajdır, garanti değildir. Kartları değiştirmez; zayıf bir eli güçlü yapmaz. Yalnızca aynı eli daha iyi bilgiyle oynamanı sağlar."
+     ],
+     "terimler": [
+      "IP (pozisyonda)",
+      "OOP (pozisyon dışı)",
+      "Bedava kart",
+      "Pot kontrolü"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Son konuşmanın en temel avantajı nedir?",
+       "secenekler": [
+        "Rakiplerinin kararını gördükten sonra karar vermek",
+        "Daha iyi kart almak",
+        "Daha az blind ödemek",
+        "Beraberlikte potu almak"
+       ],
+       "dogru": 0,
+       "neden": "Son konuşan, rakiplerinin check, bet ya da raise kararını görerek konuşur. Kartlar ve blind'ler pozisyondan etkilenmez.",
+       "yanilgi": "Pozisyonun kartlara ya da kurallara etki ettiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Pozisyonda olmak, daha iyi kartlar dağıtılacağı anlamına gelir.",
+       "dogru": false,
+       "neden": "Kartlar rastgele dağıtılır. Pozisyon yalnızca konuşma sırasını, yani sahip olduğun bilgiyi değiştirir.",
+       "yanilgi": "Pozisyonu elin gücüyle karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "eslestirme",
+       "zorluk": 2,
+       "soru": "Kavramı açıklamasıyla eşleştir.",
+       "secenekler": [
+        [
+         "Bilgi",
+         "Rakibin kararını gördükten sonra konuşmak"
+        ],
+        [
+         "Pot kontrolü",
+         "Potu bilerek küçük tutmak"
+        ],
+        [
+         "Bedava kart",
+         "Herkes check dediği için sonraki kartı bahis ödemeden görmek"
+        ]
+       ],
+       "neden": "Bu üçü son konuşmanın sağladığı başlıca avantajlardır.",
+       "yanilgi": "Bedava kartı, kuralların verdiği bir hak sanmak; oysa herkes check dediği için gelir.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Flop'ta son konuşansın ve rakibin check dedi. Sen de check dersen turn kartını bahis ödemeden görürsün.",
+       "dogru": true,
+       "neden": "Elde kalan herkes check dediğinde bahis turu biter ve turn açılır. Son konuşan olarak bu kararı sen verirsin.",
+       "yanilgi": "Check'ten sonra rakibin yeniden konuşacağını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Flop'ta OOP oyuncu check dedi, IP oyuncu da check dedi. Sonra ne olur?",
+       "secenekler": [
+        "Bahis turu biter ve turn açılır",
+        "OOP oyuncu yeniden konuşur",
+        "El biter ve pot bölünür",
+        "IP oyuncu bahis yapmak zorundadır"
+       ],
+       "dogru": 0,
+       "neden": "Elde kalan herkes konuştu ve kimse bahis yapmadı; tur biter, sıradaki kart açılır.",
+       "yanilgi": "İki check'ten sonra elin bittiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Flop'ta orta güçte bir elin var ve potu büyütmek istemiyorsun. Hangi durum bunu kolaylaştırır?",
+       "secenekler": [
+        "Pozisyonda olmak",
+        "Pozisyon dışında olmak",
+        "Fark etmez"
+       ],
+       "dogru": 0,
+       "neden": "Pozisyonda, rakip check dediğinde sen de check diyerek potu küçük tutabilirsin. Pozisyon dışındayken check dersen rakip bahis yapabilir.",
+       "yanilgi": "Önce konuşanın potu kontrol ettiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "OOP oyuncu check derse turn kartını bahis ödemeden göreceğinden emin olabilir.",
+       "dogru": false,
+       "neden": "OOP check dedikten sonra IP oyuncu bahis yapabilir; o zaman OOP ya call eder ya da fold eder. Bedava kartı veren IP oyuncudur.",
+       "yanilgi": "Check'in bahis turunu tek başına bitirdiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Kısa tekrar: Flop'ta pot 6 BB. OOP check dedi, IP 4 BB bet yaptı, OOP call etti. Turn'e kaç BB'lik potla gidilir?",
+       "secenekler": [
+        "10 BB",
+        "12 BB",
+        "14 BB",
+        "16 BB"
+       ],
+       "dogru": 2,
+       "neden": "6 + 4 + 4 = 14 BB.",
+       "yanilgi": "Call'u pota eklemeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         6,
+         4,
+         4
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Pozisyonun avantajı hangi sokaklarda geçerlidir?",
+       "secenekler": [
+        "Yalnızca flop'ta",
+        "Flop, turn ve river'ın her birinde",
+        "Yalnızca preflop'ta",
+        "Yalnızca river'da"
+       ],
+       "dogru": 1,
+       "neden": "Postflop sırası üç sokakta da aynıdır; son konuşan her sokakta yeniden son konuşur.",
+       "yanilgi": "Pozisyonun yalnızca bir sokakta işe yaradığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Pozisyonda olmak, zayıf bir elle de kazanmayı garanti eder.",
+       "dogru": false,
+       "neden": "Pozisyon karar vermeyi kolaylaştırır ama kartları değiştirmez. Zayıf bir el pozisyonda da zayıftır.",
+       "yanilgi": "Pozisyonu her eli kârlı yapan bir üstünlük sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Aşağıdakilerden hangisi pozisyon dışındaki oyuncunun yaşadığı bir zorluk DEĞİLDİR?",
+       "secenekler": [
+        "Rakibinin kararını görmeden konuşmak",
+        "Check dediğinde rakibinin bahis yapabilmesi",
+        "Bedava kartı rakibinin vermesine bağlı olmak",
+        "Kendisine daha az kart dağıtılması"
+       ],
+       "dogru": 3,
+       "neden": "Herkese aynı sayıda kart dağıtılır. Diğer üçü, önce konuşmanın gerçek sonuçlarıdır.",
+       "yanilgi": "Pozisyonun kart dağıtımına etkisi olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o3-d4",
@@ -3823,15 +4471,220 @@
       "Arkada kalan oyuncu sayısının el seçimini neden sıkılaştırdığını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Preflop'ta UTG ve HJ erken pozisyon, CO ve BTN geç pozisyon sayılır. 6-max'te HJ'ye bazı kaynaklar orta pozisyon (MP) der; bu müfredatta UTG ile birlikte erken sayılır. Blind'ler ayrı bir gruptur: preflop'ta en son konuşurlar ama postflop'ta, elde kaldıkları sürece ilk konuşurlar.",
+      "Arkanda kaç oyuncu var? UTG'deyken senden sonra beş oyuncu daha konuşur; BTN'deyken yalnızca iki oyuncu (blind'ler) kalır. Arkanda ne kadar çok oyuncu varsa, onlardan birinin çok güçlü bir el tutma ihtimali o kadar yüksektir. Üstelik erken pozisyondan pota girdiğinde arkandaki HJ, CO ya da BTN de pota girerse postflop'ta ona karşı pozisyon dışında kalırsın (blind'lere karşı ise pozisyondasın).",
+      "Bu yüzden genel ilke şudur: erken pozisyonda daha az ve daha güçlü elle oynanır; pozisyon geçtikçe oynanan el sayısı artar. Hangi ellerin oynanacağı sonraki ünitelerin konusudur; burada yalnızca yönü öğreniyoruz.",
+      "Blind'ler parayı zorunlu olarak koyduğu için preflop'ta pota daha ucuza girer, ama el boyunca çoğunlukla pozisyon dışında oynar."
+     ],
+     "terimler": [
+      "Erken pozisyon",
+      "Geç pozisyon",
+      "Pozisyon",
+      "Blind"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "eslestirme",
+       "zorluk": 1,
+       "soru": "Koltuğu, konuşma sırasındaki özelliğiyle eşleştir.",
+       "secenekler": [
+        [
+         "UTG",
+         "Preflop'ta ilk konuşur"
+        ],
+        [
+         "BB",
+         "Preflop'ta en son konuşur"
+        ],
+        [
+         "SB",
+         "Postflop'ta (eldeyse) ilk konuşur"
+        ],
+        [
+         "BTN",
+         "Postflop'ta (eldeyse) en son konuşur"
+        ]
+       ],
+       "neden": "Preflop sırası UTG ile başlar, BB ile biter. Postflop sırası SB ile başlar, BTN ile biter.",
+       "yanilgi": "Blind'lerin her sokakta en son konuştuğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Hangisi geç pozisyondur?",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "CO",
+        "BB"
+       ],
+       "dogru": 2,
+       "neden": "Geç pozisyon CO ve BTN'dir; arkalarında yalnızca birkaç oyuncu kalır.",
+       "yanilgi": "Preflop'ta son konuşan BB'yi geç pozisyon sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "UTG'desin ve altı oyuncu da elde. Preflop'ta arkanda kaç oyuncu konuşacak?",
+       "dogru": 5,
+       "tolerans": 0,
+       "birim": "oyuncu",
+       "neden": "Preflop sırası UTG, HJ, CO, BTN, SB, BB. UTG'den sonra beş oyuncu konuşur.",
+       "yanilgi": "Blind'leri saymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "sonraki",
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BTN'desin ve senden önce herkes fold etti. Preflop'ta arkanda kaç oyuncu konuşacak?",
+       "dogru": 2,
+       "tolerans": 0,
+       "birim": "oyuncu",
+       "neden": "BTN'den sonra yalnızca SB ve BB konuşur.",
+       "yanilgi": "Butonda arkada kimse kalmadığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "sonraki",
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Arkanda konuşacak oyuncu sayısı arttıkça, onlardan birinin çok güçlü bir el tutma ihtimali de artar.",
+       "dogru": true,
+       "neden": "Her oyuncunun güçlü el tutma ihtimali vardır; oyuncu sayısı arttıkça içlerinden en az birinin güçlü el tutma ihtimali büyür.",
+       "yanilgi": "Arkadaki oyuncu sayısının önemsiz olduğunu düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Erken pozisyonda neden daha seçici oynanır?",
+       "secenekler": [
+        "Arkada çok oyuncu vardır ve arkadaki oyuncuların çoğuna karşı postflop'ta pozisyon dışında kalınır",
+        "Erken pozisyona daha kötü kart gelir",
+        "Kurallar erken pozisyonda raise'i yasaklar",
+        "UTG her elde blind öder"
+       ],
+       "dogru": 0,
+       "neden": "İki neden var: arkada konuşacak çok oyuncu ve postflop'ta arkadaki HJ, CO ve BTN'ye karşı pozisyon dışında kalmak (blind'lere karşı pozisyondasın). Kartlar ve kurallar koltuğa göre değişmez.",
+       "yanilgi": "UTG'yi blind koyan koltuk sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "Preflop'ta arkasında kalan oyuncu sayısına göre çoktan aza doğru sırala.",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "CO",
+        "BTN"
+       ],
+       "neden": "UTG'nin arkasında 5, HJ'nin 4, CO'nun 3, BTN'nin 2 oyuncu kalır.",
+       "yanilgi": "HJ ile CO'nun yerini karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "oyuncular": [
+         "UTG",
+         "HJ",
+         "CO",
+         "BTN"
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "BB preflop'ta en son konuştuğu için el boyunca pozisyon avantajına sahiptir.",
+       "dogru": false,
+       "neden": "BB yalnızca preflop'ta son konuşur. Postflop'ta SB elde değilse ilk konuşan odur; çoğu rakibine karşı pozisyon dışıdır.",
+       "yanilgi": "Preflop sırasını el boyunca geçerli sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "UTG raise yaptı, yalnızca BB call etti. Flop'ta kim pozisyonda?",
+       "secenekler": [
+        "UTG",
+        "BB"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta BB, UTG'den önce konuşur. Erken pozisyon koltuğu da blind'lere karşı pozisyonda olur.",
+       "yanilgi": "\"Erken pozisyon\" adına bakıp UTG'nin her zaman pozisyon dışında olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "BB"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Aynı başlangıç eliyle iki durum: A) UTG'desin, herkes daha konuşmadı. B) BTN'desin, senden önce herkes fold etti. Hangi durumda bu elle oynamak genellikle daha kolaydır?",
+       "secenekler": [
+        "A",
+        "B",
+        "Fark yoktur"
+       ],
+       "dogru": 1,
+       "neden": "BTN'de arkanda yalnızca iki oyuncu kalır ve postflop'ta pozisyonda olursun. UTG'de beş oyuncu daha konuşur; HJ, CO ya da BTN pota girerse postflop'ta ona karşı pozisyon dışında kalırsın.",
+       "yanilgi": "El aynıysa koltuğun önemsiz olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BB'desin ve 1 BB koydun. CO 2,5 BB'ye raise yaptı; BTN ve SB fold etti. Hangisi doğrudur?",
+       "secenekler": [
+        "Call için 1,5 BB eklersin; call edersen flop'ta CO pozisyonda olur",
+        "Call için 1,5 BB eklersin; call edersen flop'ta sen pozisyonda olursun",
+        "Call için 2,5 BB eklersin; call edersen flop'ta CO pozisyonda olur",
+        "Call için 2,5 BB eklersin; call edersen flop'ta sen pozisyonda olursun"
+       ],
+       "dogru": 0,
+       "neden": "Ödeyeceğin 2,5 − 1 = 1,5 BB'dir. Postflop'ta BB, CO'dan önce konuşur; pozisyon CO'dadır.",
+       "yanilgi": "Blind'i hesaptan düşmemek ya da preflop'ta son konuşmayı postflop'a taşımak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o3-d5",
@@ -3845,15 +4698,234 @@
       "Stack ve bahisleri BB'ye çevirir; iki oyuncu arasındaki efektif stack'i bulur."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Stack, bir oyuncunun önündeki chip'lerin toplamıdır. Chip değerleri masadan masaya değiştiği için stack'leri ve bahisleri BB cinsinden söyleriz: stack (BB) = stack (chip) / büyük blind. Büyük blind 50 chip ise 5.000 chip 100 BB eder.",
+      "Bir oyuncu bir elde yalnızca önündeki chip'leri riske atabilir. Bu yüzden iki oyuncu arasında gerçekten oynanabilecek miktar, iki stack'ten küçük olanıdır; buna efektif stack denir. Sen 100 BB, rakibin 40 BB ise efektif stack 40 BB'dir: bu elde ona en fazla 40 BB kaybedebilir ya da ondan en fazla 40 BB kazanabilirsin.",
+      "Elde birden fazla rakip varsa efektif stack her rakip için ayrı hesaplanır: senin stack'in ile o rakibin stack'inden küçük olanı.",
+      "Kararların çoğu stack derinliğine göre değişir; bunu ileriki ünitelerde göreceksin. Bu müfredatın cash pistinde varsayılan stack 100 BB'dir."
+     ],
+     "terimler": [
+      "Stack",
+      "Efektif stack",
+      "BB (Big Blind)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Büyük blind 100 chip. Stack'in 10.000 chip. Stack'in kaç BB?",
+       "dogru": 100,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "10.000 / 100 = 100 BB.",
+       "yanilgi": "Chip sayısını küçük blind'e bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         10000,
+         100
+        ]
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Efektif stack, iki oyuncunun stack'lerinden büyük olanıdır.",
+       "dogru": false,
+       "neden": "Efektif stack küçük olandır. Bir oyuncu önündekinden fazlasını koyamayacağı için oynanabilecek miktar küçük stack ile sınırlıdır.",
+       "yanilgi": "Büyük stack'in elin büyüklüğünü belirlediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Sen 100 BB, rakibin 60 BB. Efektif stack kaç BB?",
+       "dogru": 60,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "İki stack'ten küçük olanı: 60 BB.",
+       "yanilgi": "İki stack'i toplamak ya da büyüğünü almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         100,
+         60
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Büyük blind 200 chip. 7.000 chip kaç BB eder?",
+       "secenekler": [
+        "3,5 BB",
+        "35 BB",
+        "70 BB",
+        "350 BB"
+       ],
+       "dogru": 1,
+       "neden": "7.000 / 200 = 35 BB.",
+       "yanilgi": "Bir basamak kaydırıp 3,5 ya da 350 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         7000,
+         200
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Büyük blind 50 chip. 125 chip'lik bir bahis kaç BB eder?",
+       "dogru": 2.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "125 / 50 = 2,5 BB.",
+       "yanilgi": "Sonucu tam sayıya yuvarlamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         125,
+         50
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Büyük blind 100 chip. Chip miktarını BB karşılığıyla eşleştir.",
+       "secenekler": [
+        [
+         "2.500 chip",
+         "25 BB"
+        ],
+        [
+         "4.000 chip",
+         "40 BB"
+        ],
+        [
+         "10.000 chip",
+         "100 BB"
+        ],
+        [
+         "15.000 chip",
+         "150 BB"
+        ]
+       ],
+       "neden": "Her miktarı büyük blind'e, yani 100'e böl.",
+       "yanilgi": "Binlik ayırıcıyı ondalık sanıp 2.500'ü 2,5 okumak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolumEsleme",
+        "bb": 100
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 100 chip. Sen 12.000 chip, rakibin 7.500 chip. Efektif stack kaç BB?",
+       "dogru": 75,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 7.500 chip; 7.500 / 100 = 75 BB.",
+       "yanilgi": "Önce BB'ye çevirmeyi ya da küçük olanı seçmeyi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         12000,
+         7500
+        ],
+        "bb": 100
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Bir elde tek bir rakibe efektif stack'ten fazlasını kaybedemezsin.",
+       "dogru": true,
+       "neden": "Rakibin önündekinden fazlasını koyamaz; sen de önündekinden fazlasını koyamazsın. Tek bir rakiple oynanabilecek en fazla miktar efektif stack'tir.",
+       "yanilgi": "Büyük stack'in tamamının her elde risk altında olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Elde üç oyuncu var: sen 80 BB, Ali 120 BB, Berk 35 BB. Senin ile Ali arasındaki efektif stack kaç BB?",
+       "dogru": 80,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Sen ve Ali için küçük olan stack seninkidir: 80 BB. Berk'in stack'i bu hesaba girmez.",
+       "yanilgi": "Masadaki en küçük stack'i herkes için efektif stack sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         80,
+         120
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Elde üç oyuncu var: sen 80 BB, Ali 120 BB, Berk 35 BB. Senin ile Berk arasındaki efektif stack kaç BB?",
+       "dogru": 35,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Sen ve Berk için küçük olan stack Berk'inkidir: 35 BB.",
+       "yanilgi": "Efektif stack'in masa için tek bir sayı olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         80,
+         35
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Büyük blind 25 chip. Sen 3.000 chip, rakibin 1.750 chip. Efektif stack kaç BB?",
+       "dogru": 70,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 1.750 chip; 1.750 / 25 = 70 BB.",
+       "yanilgi": "Büyük stack'i BB'ye çevirip 120 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         3000,
+         1750
+        ],
+        "bb": 25
+       }
+      }
+     ]
     },
     {
      "kimlik": "o3-k",
@@ -3866,15 +4938,236 @@
       "\"Pozisyon\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin beş dersinden karışık sorular içerir."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "CO, hangi koltuğun hemen sağında oturur?",
+       "secenekler": [
+        "BTN",
+        "UTG",
+        "SB",
+        "HJ"
+       ],
+       "dogru": 0,
+       "neden": "Saat yönünde sıra HJ, CO, BTN'dir; CO butonun hemen sağındadır.",
+       "yanilgi": "CO ile HJ'nin yerini karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "IP, rakibinden önce konuşan oyuncudur.",
+       "dogru": false,
+       "neden": "IP rakipten sonra konuşur; önce konuşan OOP'tur.",
+       "yanilgi": "IP ile OOP'u ters hatırlamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "Elde HJ, BB, BTN ve SB var. Preflop konuşma sırasını kur.",
+       "secenekler": [
+        "HJ",
+        "BTN",
+        "SB",
+        "BB"
+       ],
+       "neden": "Preflop sırası UTG, HJ, CO, BTN, SB, BB; elde olmayanlar atlanır.",
+       "yanilgi": "Blind'leri en başa koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "oyuncular": [
+         "HJ",
+         "BB",
+         "BTN",
+         "SB"
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Flop'u SB ve BTN görüyor. Kim pozisyonda?",
+       "secenekler": [
+        "SB",
+        "BTN"
+       ],
+       "dogru": 1,
+       "neden": "Postflop'ta SB önce, BTN sonra konuşur.",
+       "yanilgi": "SB'nin preflop'ta butondan sonra konuştuğunu hatırlayıp postflop'a taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "SB",
+         "BTN"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Büyük blind 100 chip. 6.500 chip kaç BB?",
+       "dogru": 65,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "6.500 / 100 = 65 BB.",
+       "yanilgi": "Bir basamak kaydırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         6500,
+         100
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Bu elde BTN'desin ve yerinden kalkmıyorsun. Bir sonraki elde hangi koltukta olursun?",
+       "secenekler": [
+        "CO",
+        "SB",
+        "BB",
+        "UTG"
+       ],
+       "dogru": 0,
+       "neden": "Buton bir koltuk sola, senin solundaki oyuncuya geçer. Sen artık butonun hemen sağındasın: CO.",
+       "yanilgi": "Butonla birlikte SB'ye geçtiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "sonrakiEl",
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Pozisyondaki oyuncu, rakibi check dediğinde check diyerek bir sonraki kartı bahis ödemeden görebilir.",
+       "dogru": true,
+       "neden": "Herkes check dediğinde bahis turu biter ve sonraki kart açılır; buna bedava kart denir.",
+       "yanilgi": "Son konuşanın bahis yapmak zorunda olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Sen 45 BB, rakibin 150 BB. Efektif stack kaç BB?",
+       "dogru": 45,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "İki stack'ten küçük olanı: 45 BB.",
+       "yanilgi": "Büyük stack'i almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         45,
+         150
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangisi erken pozisyondur?",
+       "secenekler": [
+        "CO",
+        "BTN",
+        "HJ",
+        "BB"
+       ],
+       "dogru": 2,
+       "neden": "Bu müfredatta 6-max'te erken pozisyon UTG ve HJ'dir. Bazı kaynaklar HJ'ye orta pozisyon (MP) der.",
+       "yanilgi": "HJ'yi geç pozisyon sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Flop'u UTG, HJ, BTN ve BB görüyor. Flop'ta HJ'den sonra kaç oyuncu konuşur?",
+       "dogru": 1,
+       "tolerans": 0,
+       "birim": "oyuncu",
+       "neden": "Postflop sırası BB, UTG, HJ, BTN'dir. HJ'den sonra yalnızca BTN konuşur.",
+       "yanilgi": "Preflop sırasını kullanıp BB'yi HJ'den sonraya koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "HJ",
+         "BTN",
+         "BB"
+        ],
+        "soru": "sonraki",
+        "poz": "HJ"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Büyük blind 40 chip. Sen 2.000 chip, rakibin 5.000 chip. Efektif stack kaç BB?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 2.000 chip; 2.000 / 40 = 50 BB.",
+       "yanilgi": "Büyük stack'i BB'ye çevirmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         2000,
+         5000
+        ],
+        "bb": 40
+       }
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "UTG raise yaptı, CO call etti, diğerleri fold etti. Flop'ta kim pozisyonda?",
+       "secenekler": [
+        "CO, çünkü postflop'ta UTG'den sonra konuşur",
+        "UTG, çünkü preflop'ta raise yaptı",
+        "UTG, çünkü preflop'ta önce konuştu",
+        "Hiçbiri; pozisyon yalnızca blind'ler için söylenir"
+       ],
+       "dogru": 0,
+       "neden": "Pozisyonu postflop konuşma sırası belirler. Postflop'ta UTG, CO'dan önce konuşur.",
+       "yanilgi": "Raise yapan oyuncunun pozisyonu kazandığını sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o3-r",
@@ -3888,15 +5181,157 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Preflop'ta en son konuşan BB, postflop'ta da en son konuşur.",
+       "dogru": false,
+       "neden": "Postflop'ta sıra butonun solundan başlar; BB, SB'den sonra ikinci konuşur. Buton eldeyse en son buton konuşur.",
+       "yanilgi": "Preflop sırasını postflop'a taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "soru": "son",
+        "iddia": "BB"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Bu elde UTG'desin ve yerinden kalkmıyorsun. Bir sonraki elde hangi koltukta olursun?",
+       "secenekler": [
+        "HJ",
+        "BB",
+        "CO",
+        "SB"
+       ],
+       "dogru": 1,
+       "neden": "Buton sola kayınca koltuk adın bir adım geri gider: UTG'den BB'ye. Bir el sonra SB, sonra BTN olursun.",
+       "yanilgi": "Koltuk adının UTG'den HJ'ye doğru ilerlediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "sonrakiEl",
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Showdown'da eller eşitse pozisyondaki oyuncu potu alır.",
+       "dogru": false,
+       "neden": "Eşit ellerde pot bölünür. Pozisyon konuşma sırasını belirler, kazananı değil.",
+       "yanilgi": "Pozisyonu bir eşitlik bozucu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Sen 200 BB, rakibin 50 BB. Bu elde bu rakipten en fazla kaç BB kazanabilirsin?",
+       "dogru": 50,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Rakip önündekinden fazlasını koyamaz. Efektif stack 50 BB'dir.",
+       "yanilgi": "Kendi stack'inin büyüklüğü kadar kazanabileceğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         200,
+         50
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Efektif stack'i bulurken hangisi yapılır?",
+       "secenekler": [
+        "İki stack'ten küçük olanı alınır",
+        "İki stack toplanır",
+        "İki stack'in ortalaması alınır",
+        "İki stack'ten büyük olanı alınır"
+       ],
+       "dogru": 0,
+       "neden": "Oynanabilecek miktarı küçük stack sınırlar.",
+       "yanilgi": "Stack'leri toplamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "UTG ve BB flop'u görüyor. Kim pozisyonda?",
+       "secenekler": [
+        "UTG",
+        "BB"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta BB, UTG'den önce konuşur. \"Erken pozisyon\" preflop'taki yeri anlatır; blind'lere karşı UTG pozisyondadır.",
+       "yanilgi": "UTG'nin adı yüzünden her zaman pozisyon dışı olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "BB"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Büyük blind 400 chip. Stack'in 18.000 chip. Kaç BB?",
+       "dogru": 45,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "18.000 / 400 = 45 BB.",
+       "yanilgi": "Bir sıfırı atlayıp 450 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         18000,
+         400
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "CO'dasın ve senden önce herkes fold etti. Preflop'ta arkanda kaç oyuncu konuşacak ve bunlardan hangisi postflop'ta senden sonra konuşur?",
+       "secenekler": [
+        "3; yalnızca BTN",
+        "3; BTN, SB ve BB",
+        "2; yalnızca BTN",
+        "5; hiçbiri"
+       ],
+       "dogru": 0,
+       "neden": "CO'dan sonra BTN, SB ve BB konuşur: 3 oyuncu. Postflop'ta blind'ler senden önce, BTN senden sonra konuşur.",
+       "yanilgi": "Preflop'ta arkanda olan herkesin postflop'ta da arkanda olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     }
    ]
   },
@@ -3918,15 +5353,237 @@
       "Cepte çift, suited, offsuit, connector ve broadway ellerini tanır, yazımını (AKs, 76o) okur; kombinasyon sayar (çift 6, suited 4, offsuit 12; toplam 1326)."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Başlangıç ellerini kısaca, renklerini tek tek söylemeden yazarız. İki kart aynı değerdeyse bu bir cep çiftidir: 77, AA. Değerler farklıysa büyük kart önce yazılır ve sonuna bir harf eklenir: s (suited) iki kartın aynı renkten olduğunu, o (offsuit) farklı renkten olduğunu gösterir. A♠ K♠ = AKs, A♠ K♦ = AKo.",
+      "Sık duyacağın iki ad daha: değerleri art arda gelen iki karta connector denir (98, JT); aynı renktense suited connector. T, J, Q, K ve A kartlarına broadway denir; iki kartı da broadway olan ellere (KQ, AJ, JT) broadway el denir.",
+      "Kombinasyon, bir el adının kaç farklı kart ikilisiyle gelebildiğidir. Bir değerin dört kartından iki tane seçmenin 6 yolu vardır; bu yüzden her cep çiftinin 6 kombinasyonu var. Suited bir elde iki kart aynı renkten olmalı; dört renk var, 4 kombinasyon. Offsuit elde 4 × 4 = 16 ikiliden aynı renkli 4'ü çıkar: 12 kombinasyon.",
+      "Toplamda 52 × 51 / 2 = 1326 farklı iki kartlık el vardır. Bunlar 169 el adında toplanır: 13 cep çifti, 78 suited ve 78 offsuit el."
+     ],
+     "terimler": [
+      "Cep çifti",
+      "Suited",
+      "Offsuit",
+      "Connector",
+      "Broadway",
+      "Kombinasyon (combo)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "A♠ K♠ eli kısaca nasıl yazılır?",
+       "secenekler": [
+        "AKs",
+        "AKo",
+        "KAs",
+        "AK"
+       ],
+       "dogru": 0,
+       "neden": "Büyük kart önce yazılır; iki kart da maça olduğu için sonuna s (suited) eklenir.",
+       "yanilgi": "Renk bilgisini atlayıp yalnızca AK yazmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazim",
+        "kartlar": "A♠ K♠"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "eslestirme",
+       "zorluk": 1,
+       "soru": "Kartları kısa yazımıyla eşleştir.",
+       "secenekler": [
+        [
+         "Q♥ Q♣",
+         "QQ"
+        ],
+        [
+         "9♦ 8♦",
+         "98s"
+        ],
+        [
+         "K♣ J♥",
+         "KJo"
+        ],
+        [
+         "7♠ 2♠",
+         "72s"
+        ]
+       ],
+       "neden": "Çiftte harf yoktur. Farklı değerlerde büyük kart önce, sonra s ya da o gelir.",
+       "yanilgi": "Çiftlere de s ya da o eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazimEsleme"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "T♥ 9♣ bir suited connector'dır.",
+       "dogru": false,
+       "neden": "Değerler art arda olduğu için connector'dır, ama renkler farklı: T9o. Suited connector olması için iki kartın aynı renkten olması gerekir.",
+       "yanilgi": "Connector ile suited connector'ı aynı şey sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Bir cep çiftinin (örneğin 88) kaç kombinasyonu vardır?",
+       "dogru": 6,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Dört sekizliden iki tane seçmenin yolları: ♠♥, ♠♦, ♠♣, ♥♦, ♥♣, ♦♣. Toplam 6.",
+       "yanilgi": "Dört renk var diye 4 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "88"
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "AKs'nin kaç kombinasyonu vardır?",
+       "dogru": 4,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "İki kart aynı renkten olmalı: A♠K♠, A♥K♥, A♦K♦, A♣K♣. Toplam 4.",
+       "yanilgi": "Suited elin 12 kombinasyonu olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AKs"
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "AKo'nun kaç kombinasyonu vardır?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Asın 4 ve papazın 4 rengi: 4 × 4 = 16 ikili. Bunların 4'ü aynı renkli (AKs), kalan 16 − 4 = 12 offsuit.",
+       "yanilgi": "Aynı renkli 4 ikiliyi çıkarmayı unutup 16 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangisi bir broadway elidir?",
+       "secenekler": [
+        "KJo",
+        "A5s",
+        "T9s",
+        "98o"
+       ],
+       "dogru": 0,
+       "neden": "Broadway eli iki kartı da T, J, Q, K ya da A olan eldir. KJo'da ikisi de broadway; diğerlerinde en az bir kart 9 ya da daha küçük.",
+       "yanilgi": "İçinde as olan her eli broadway sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "AK'nin suited ve offsuit hâlleri birlikte kaç kombinasyondur?",
+       "dogru": 16,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "AKs 4 + AKo 12 = 16.",
+       "yanilgi": "Yalnızca birini saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AKs",
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "52 kartlık destede kaç farklı iki kartlık başlangıç eli (kombinasyon) vardır?",
+       "dogru": 1326,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "İlk kart 52, ikinci kart 51 yoldan seçilir; sıranın önemi olmadığı için ikiye bölünür: 52 × 51 / 2 = 1326.",
+       "yanilgi": "İkiye bölmeyi unutup 2652 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplamKombo"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Kaç farklı başlangıç eli adı (AA, AKs, AKo gibi) vardır?",
+       "dogru": 169,
+       "tolerans": 0,
+       "birim": "el adı",
+       "neden": "13 cep çifti + 78 suited + 78 offsuit = 169.",
+       "yanilgi": "El adı sayısını (169) kombinasyon sayısıyla (1326) karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "elAdiSayisi"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Bütün cep çiftleri (22'den AA'ya) birlikte kaç kombinasyondur?",
+       "dogru": 78,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "13 farklı çift var, her birinin 6 kombinasyonu: 13 × 6 = 78.",
+       "yanilgi": "Çift sayısını (13) kombinasyon sayısı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ",
+         "JJ",
+         "TT",
+         "99",
+         "88",
+         "77",
+         "66",
+         "55",
+         "44",
+         "33",
+         "22"
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "o4-d2",
@@ -3939,15 +5596,287 @@
       "13x13 matriste bir elin yerini bulur; bir aralığın yaklaşık yüzdesini yorumlar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "169 el adı 13 satır ve 13 sütunluk bir tabloya, yani matrise yerleşir. Satırlar ve sütunlar A'dan 2'ye doğru dizilir. Sol üstten sağ alta inen köşegende cep çiftleri durur: AA, KK, … 22.",
+      "Köşegenin üstünde suited eller, altında offsuit eller vardır. A satırında K sütunu AKs'dir; K satırında A sütunu AKo'dur. Her el adı matriste bir kez yer alır.",
+      "Range (aralık), bir oyuncunun belirli bir durumda tutabileceği ellerin kümesidir. Matriste işaretlenen hücreler bir aralığı gösterir. Aralığın büyüklüğü yüzdeyle söylenir: işaretli ellerin kombinasyonları toplanır, 1326'ya bölünür ve 100 ile çarpılır. Hücreler eşit ağırlıkta değildir: bir offsuit hücre 12, bir çift 6, bir suited hücre 4 kombinasyondur.",
+      "Bu derste yalnızca matrisi okumayı öğreniyoruz. Hangi durumda hangi ellerin oynandığı sonraki ünitelerin konusudur."
+     ],
+     "terimler": [
+      "Range (aralık)",
+      "Kombinasyon (combo)",
+      "Suited",
+      "Offsuit",
+      "Cep çifti"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Matriste köşegende hangi eller durur?",
+       "secenekler": [
+        "Cep çiftleri",
+        "Suited eller",
+        "Offsuit eller",
+        "Broadway eller"
+       ],
+       "dogru": 0,
+       "neden": "Köşegen satır ve sütunun aynı değerde olduğu hücrelerdir: AA, KK, … 22.",
+       "yanilgi": "Köşegeni suited ellerin yeri sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Matriste AKs ve AKo aynı hücrededir.",
+       "dogru": false,
+       "neden": "AKs köşegenin üstünde (A satırı, K sütunu), AKo altında (K satırı, A sütunu) ayrı hücrelerdedir.",
+       "yanilgi": "Matriste yalnızca değerlerin yazıldığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "range",
+       "zorluk": 2,
+       "soru": "Matriste bütün cep çiftlerini işaretle.",
+       "dogru": [
+        "AA",
+        "KK",
+        "QQ",
+        "JJ",
+        "TT",
+        "99",
+        "88",
+        "77",
+        "66",
+        "55",
+        "44",
+        "33",
+        "22"
+       ],
+       "neden": "13 cep çifti köşegen boyunca dizilir: AA'dan 22'ye.",
+       "yanilgi": "Yalnızca yüksek çiftleri işaretlemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "rangeKume",
+        "kurallar": [
+         {
+          "tip": "cift"
+         }
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "A satırında, 5 sütununda (köşegenin üstünde) hangi el durur?",
+       "secenekler": [
+        "A5s",
+        "A5o",
+        "55",
+        "AA"
+       ],
+       "dogru": 0,
+       "neden": "Köşegenin üstü suited bölgedir; A satırı ile 5 sütunu A5s'yi verir.",
+       "yanilgi": "Üst ve alt üçgeni karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "matris",
+        "satir": "A",
+        "sutun": "5"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Matriste köşegenin üstünde kaç hücre vardır?",
+       "dogru": 78,
+       "tolerans": 0,
+       "birim": "hücre",
+       "neden": "169 hücreden 13'ü köşegende; kalan 156 hücre üst ve alt üçgene eşit bölünür: 156 / 2 = 78.",
+       "yanilgi": "Köşegeni de üst bölgeye katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "matrisSay",
+        "bolge": "ust"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "range",
+       "zorluk": 3,
+       "soru": "Bütün suited asları (AKs'den A2s'ye) işaretle.",
+       "dogru": [
+        "AKs",
+        "AQs",
+        "AJs",
+        "ATs",
+        "A9s",
+        "A8s",
+        "A7s",
+        "A6s",
+        "A5s",
+        "A4s",
+        "A3s",
+        "A2s"
+       ],
+       "neden": "A satırında köşegenin sağındaki 12 hücre: AKs, AQs, … A2s.",
+       "yanilgi": "A sütunundaki offsuit hücreleri işaretlemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "rangeKume",
+        "kurallar": [
+         {
+          "tip": "suited",
+          "yuksek": "A"
+         }
+        ]
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aralık: AA, KK ve QQ. Bu aralık kaç kombinasyondur?",
+       "dogru": 18,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Her çift 6 kombinasyon: 6 + 6 + 6 = 18.",
+       "yanilgi": "Hücre sayısını (3) kombinasyon sayısı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ"
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aralık: AA, KK ve QQ. Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 1.4,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "18 / 1326 × 100 ≈ %1,4.",
+       "yanilgi": "169'a bölüp %1,8 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ"
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi aralık en çok kombinasyonu içerir?",
+       "secenekler": [
+        "AA, KK",
+        "AKs, AQs, AJs, ATs",
+        "AKo",
+        "QQ, JJ"
+       ],
+       "dogru": 1,
+       "neden": "AA + KK = 12, dört suited as 4 × 4 = 16, AKo 12, QQ + JJ = 12. En büyüğü 16.",
+       "yanilgi": "Her hücreyi eşit saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "enCokKombo"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "range",
+       "zorluk": 4,
+       "soru": "Değerleri art arda gelen ve aynı renkten olan bütün elleri işaretle. Bu soruda as yalnızca yüksek kart sayılır (AKs dahil, A2s hariç).",
+       "dogru": [
+        "AKs",
+        "KQs",
+        "QJs",
+        "JTs",
+        "T9s",
+        "98s",
+        "87s",
+        "76s",
+        "65s",
+        "54s",
+        "43s",
+        "32s"
+       ],
+       "neden": "Köşegenin hemen sağındaki çapraz: AKs, KQs, QJs, JTs, T9s, 98s, 87s, 76s, 65s, 54s, 43s, 32s.",
+       "yanilgi": "Offsuit connector'ları da işaretlemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "rangeKume",
+        "kurallar": [
+         {
+          "tip": "suited",
+          "bosluk": 1
+         }
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Aralık: bütün cep çiftleri ve bütün suited aslar. Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 9.5,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "Çiftler 13 × 6 = 78, suited aslar 12 × 4 = 48; toplam 126. 126 / 1326 × 100 ≈ %9,5.",
+       "yanilgi": "25 hücreyi 169'a bölüp %14,8 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ",
+         "JJ",
+         "TT",
+         "99",
+         "88",
+         "77",
+         "66",
+         "55",
+         "44",
+         "33",
+         "22",
+         "AKs",
+         "AQs",
+         "AJs",
+         "ATs",
+         "A9s",
+         "A8s",
+         "A7s",
+         "A6s",
+         "A5s",
+         "A4s",
+         "A3s",
+         "A2s"
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "o4-d3",
@@ -3961,15 +5890,239 @@
       "AJ'nin AK'ya karşı durumunu örnek alarak domine edilen elleri tanır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Değerleri farklı iki kartlık iki el bir kartı paylaşıyor ve diğer kartlarından biri daha yüksekse, yüksek olan el diğerini domine eder. AK ve AJ'nin ikisinde de as var; ikinci kartı yüksek olan AK, AJ'yi domine eder. İkisi de as per yaparsa kazananı kicker belirler ve o kicker AK'dadır.",
+      "Bunun neden önemli olduğunu düşün: AJ ile board'da as gördüğünde güçlü bir elin varmış gibi hissedersin, ama rakipte AK ya da AQ varsa geridesin. Domine edilen el per tuttursa bile çoğu zaman geride kalır; bu yüzden zayıf kicker'lı eller kaybettiğinde büyük pot kaybettirebilir.",
+      "Domine edilmek kaybetmenin kesin olduğu anlamına gelmez. Board AJ'nin ikinci kartıyla eşleşirse (örneğin bir vale gelirse) AJ iki per yapar ve kazanabilir. Board'daki kartlar her iki kicker'dan da yüksekse eller eşit de kalabilir.",
+      "Ortak kartı olmayan eller arasında domine ilişkisi yoktur: AK ile QJ'de ortak kart yok."
+     ],
+     "terimler": [
+      "Dominasyon",
+      "Kicker",
+      "Board"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "AK ve AJ karşılaştığında hangisi diğerini domine eder?",
+       "secenekler": [
+        "AK",
+        "AJ",
+        "Hiçbiri"
+       ],
+       "dogru": 0,
+       "neden": "İkisinde de as var; ikinci kartı yüksek olan AK, AJ'yi domine eder.",
+       "yanilgi": "Domine ilişkisi için iki kartın da farklı olması gerektiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "AK ile QJ arasında domine ilişkisi vardır.",
+       "dogru": false,
+       "neden": "Domine edilme ortak bir kart gerektirir. AK ile QJ'de ortak kart yok.",
+       "yanilgi": "Daha güçlü her elin zayıfı domine ettiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Board: A♥ 9♣ 6♦ 4♠ 2♣. Ali: A♠ K♦. Berk: A♦ J♠. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de as per yaptı. Kicker belirler: Ali'nin papazı, Berk'in valesini yener. Domine eden el kazandı.",
+       "yanilgi": "Aynı per varken potun bölündüğünü sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♠ K♦",
+         "Berk": "A♦ J♠"
+        },
+        "board": "A♥ 9♣ 6♦ 4♠ 2♣"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Hangi el KQ tarafından domine edilir?",
+       "secenekler": [
+        "KJ",
+        "AK",
+        "JT",
+        "98"
+       ],
+       "dogru": 0,
+       "neden": "KJ, KQ ile papazı paylaşır ve ikinci kartı daha düşüktür. AK ise KQ'yu domine eder; JT ve 98'in KQ ile ortak kartı yoktur.",
+       "yanilgi": "Domine ilişkisinin yönünü ters kurmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Domine edilen el per tuttursa bile çoğu zaman geridedir.",
+       "dogru": true,
+       "neden": "İki el aynı peri yaptığında kazananı kicker belirler ve iyi kicker domine eden eldedir.",
+       "yanilgi": "Per tutturmanın her zaman öne geçirdiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: K♠ T♦ 7♣ 4♥ 2♠. Ali: K♦ Q♣. Berk: K♥ J♦. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de papaz per yaptı. Ali'nin kızı, Berk'in valesini yener.",
+       "yanilgi": "Vale ile kızın sırasını karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "K♦ Q♣",
+         "Berk": "K♥ J♦"
+        },
+        "board": "K♠ T♦ 7♣ 4♥ 2♠"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: A♦ J♥ 8♣ 5♠ 3♦. Ali: A♠ K♣. Berk: A♣ J♦. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 1,
+       "neden": "Berk'in valesi board'daki valeyle eşleşti: aslar ve valeler, iki per. Ali'de yalnızca as peri var. Domine edilen el bu kez kazandı.",
+       "yanilgi": "Domine eden elin her board'da kazandığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♠ K♣",
+         "Berk": "A♣ J♦"
+        },
+        "board": "A♦ J♥ 8♣ 5♠ 3♦"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Her eşleşmeyi doğru açıklamayla eşleştir.",
+       "secenekler": [
+        [
+         "AK ve AQ",
+         "Ortak kart as; AK domine eder"
+        ],
+        [
+         "KQ ve KJ",
+         "Ortak kart papaz; KQ domine eder"
+        ],
+        [
+         "QJ ve JT",
+         "Ortak kart vale; QJ domine eder"
+        ],
+        [
+         "AK ve QJ",
+         "Ortak kart yok; domine ilişkisi yok"
+        ]
+       ],
+       "neden": "Önce ortak kartı bul, sonra diğer kartları karşılaştır.",
+       "yanilgi": "Ortak kartı yalnızca yüksek kart sanmak; QJ ile JT'de ortak kart valedir.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Board: A♥ K♠ 7♦ 4♣ 2♥. Ali: A♣ Q♠. Berk: A♠ T♦. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de as per yaptı; ilk kicker board'daki papaz ve ortak. İkinci kicker belirler: Ali'nin kızı, Berk'in onlusunu yener.",
+       "yanilgi": "Board'da papaz olduğu için kicker'ın önemsiz kaldığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♣ Q♠",
+         "Berk": "A♠ T♦"
+        },
+        "board": "A♥ K♠ 7♦ 4♣ 2♥"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Board: A♣ K♦ Q♠ 7♥ 3♦. Ali: A♥ 4♣. Berk: A♦ 5♠. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 2,
+       "neden": "İkisinin de en iyi beşlisi A-A-K-Q-7'dir. Board'daki kartlar dörtlü ve beşliden yüksek olduğu için kicker'lar oyuna girmez; pot bölünür.",
+       "yanilgi": "Beşlinin dörtlüyü yendiğini düşünüp kicker'ın her zaman sayıldığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♥ 4♣",
+         "Berk": "A♦ 5♠"
+        },
+        "board": "A♣ K♦ Q♠ 7♥ 3♦"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Elin: A♠ J♦. Board: A♥ 8♣ 5♦ 2♠ 9♥. As perin var. Aşağıdaki ellerden hangisi seni yener?",
+       "secenekler": [
+        "A♣ K♥",
+        "A♦ T♣",
+        "K♦ K♣",
+        "A♣ 7♠"
+       ],
+       "dogru": 0,
+       "neden": "AK seni kicker'la yener. AT ve A7'nin kicker'ı valenden düşük; papaz çifti de as perine yenilir.",
+       "yanilgi": "Elinde çift olan rakibin her zaman önde olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yenen",
+        "el": "A♠ J♦",
+        "board": "A♥ 8♣ 5♦ 2♠ 9♥"
+       }
+      }
+     ]
     },
     {
      "kimlik": "o4-d4",
@@ -3983,15 +6136,204 @@
       "Az el oynayıp oynadığını raise ile oynamanın gerekçelerini sayar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Oyun tarzını iki soruyla anlatırız. Kaç el oynuyorsun? Az ve seçilmiş elle oynayan oyuncuya tight (sıkı), çok elle oynayana loose (gevşek) denir. Oynadığın elleri nasıl oynuyorsun? Çoğunlukla bet ve raise yapan oyuncu agresif, çoğunlukla check ve call eden pasiftir. Sıkı ve agresif oyuncuya TAG, gevşek ve agresif oyuncuya LAG denir.",
+      "Neden az el? Başlangıç ellerinin büyük kısmı zayıftır. Zayıf elle pota girmek, çoğu zaman daha güçlü ya da seni domine eden bir ele karşı oynamak demektir. Bazı masalarda ante da vardır: her elde oyunculardan ya da onlar adına BB'den alınan küçük zorunlu bahis. Ante olmayan bir masada, blind'de değilsen preflop'ta fold etmek sana hiçbir şeye mal olmaz.",
+      "Neden raise? Raise yaptığında potu iki yoldan kazanabilirsin: rakiplerin fold eder ve pot hemen senin olur, ya da call ederler ve sonunda en iyi el sende olur. Yalnızca call edersen preflop'ta ilk yol kapanır. Ayrıca son bahsi yapan taraf sen olursun; buna inisiyatif denir ve sonraki sokaklarda işine yarar. Preflop'ta kimse pota girmeden yapılan ilk raise'e açılış (open) denir.",
+      "Bunlar yeni başlayan için sağlam bir başlangıç ilkesidir, her masada aynen uygulanacak bir kural değildir; rakiplere ve masaya göre ayarlanır."
+     ],
+     "terimler": [
+      "Tight",
+      "Loose",
+      "TAG",
+      "LAG",
+      "Open (açılış)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "eslestirme",
+       "zorluk": 1,
+       "soru": "Terimi açıklamasıyla eşleştir.",
+       "secenekler": [
+        [
+         "Tight",
+         "Az ve seçilmiş elle oynar"
+        ],
+        [
+         "Loose",
+         "Çok elle oynar"
+        ],
+        [
+         "TAG",
+         "Sıkı ve agresif"
+        ],
+        [
+         "LAG",
+         "Gevşek ve agresif"
+        ]
+       ],
+       "neden": "Tight/loose kaç el oynandığını, agresif/pasif nasıl oynandığını anlatır.",
+       "yanilgi": "Tight ile pasifi aynı şey sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Blind'de değilsen ve masada başka zorunlu bahis yoksa, preflop'ta fold edersen hiç chip kaybetmezsin.",
+       "dogru": true,
+       "neden": "Blind'de değilsen ve başka zorunlu bahis yoksa o elde pota henüz bir şey koymamışsındır; fold etmek bedavadır.",
+       "yanilgi": "Fold etmenin her zaman bir bedeli olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Raise yaptığında potu kazanmanın iki yolu nedir?",
+       "secenekler": [
+        "Rakipler fold eder ya da sonunda en iyi el sende olur",
+        "Yalnızca showdown'da en iyi eli göstermek",
+        "Blind'leri geri almak ya da potu bölmek",
+        "Rakipler call eder ya da check eder"
+       ],
+       "dogru": 0,
+       "neden": "Raise rakiplere fold etme sebebi verir; call ederlerse en iyi eli göstererek de kazanabilirsin.",
+       "yanilgi": "Potun yalnızca showdown'da kazanılabildiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Agresif oyun ne demektir?",
+       "secenekler": [
+        "Çoğunlukla bet ve raise yapmak",
+        "Çok el oynamak",
+        "Her elde oynamak",
+        "Çoğunlukla check ve call etmek"
+       ],
+       "dogru": 0,
+       "neden": "Agresiflik oynanan ellerin nasıl oynandığıyla ilgilidir: bet ve raise ağırlıklı.",
+       "yanilgi": "Agresif ile loose'u aynı şey sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Sıkı (tight) oyun, hiç raise yapmamak demektir.",
+       "dogru": false,
+       "neden": "Tight az el oynamak demektir; o elleri raise ile oynamak mümkündür. TAG tam da budur.",
+       "yanilgi": "Sıkı oyunu pasif oyunla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Zayıf başlangıç elleriyle sık oynamak neden sorun çıkarır?",
+       "secenekler": [
+        "Çoğu zaman daha güçlü ya da seni domine eden bir ele karşı oynarsın",
+        "Kurallar zayıf elle raise'i yasaklar",
+        "Zayıf eller showdown'a gidemez",
+        "Blind'ler büyür"
+       ],
+       "dogru": 0,
+       "neden": "Zayıf eller güçlü ellere karşı ve domine edildikleri durumlarda geride kalır.",
+       "yanilgi": "Sorunun kurallarda olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Preflop'ta kimse pota girmeden yapılan ilk raise'in adı nedir?",
+       "secenekler": [
+        "Açılış (open)",
+        "Limp",
+        "Call",
+        "Check-raise"
+       ],
+       "dogru": 0,
+       "neden": "Pota ilk giren raise'e açılış denir.",
+       "yanilgi": "İlk girişin adının her zaman limp olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "TAG yaklaşımı, rakiplerden bağımsız olarak her masada aynen uygulanması gereken bir kuraldır.",
+       "dogru": false,
+       "neden": "TAG sağlam bir başlangıç ilkesidir; masaya ve rakiplere göre ayarlanır.",
+       "yanilgi": "Strateji ilkelerini oyun kuralı gibi görmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Kısa tekrar: Preflop: CO 2,5 BB'ye açtı, diğer herkes fold etti. CO'nun aldığı pot (kendi koyduğu dahil) kaç BB?",
+       "secenekler": [
+        "2,5 BB",
+        "3,5 BB",
+        "4 BB",
+        "5 BB"
+       ],
+       "dogru": 2,
+       "neden": "0,5 (SB) + 1 (BB) + 2,5 (CO) = 4 BB. Fold eden blind'lerin koydukları potta kalır.",
+       "yanilgi": "Blind'leri saymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         0.5,
+         1,
+         2.5
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Aynı el preflop'ta iki biçimde oynanıyor: A) yalnızca call, B) raise. Hangisinde rakiplerin fold etmesiyle potu preflop'ta hemen alma şansı vardır?",
+       "secenekler": [
+        "A",
+        "B",
+        "İkisinde de",
+        "Hiçbirinde"
+       ],
+       "dogru": 1,
+       "neden": "Yalnızca call ettiğinde rakiplere fold etme sebebi vermezsin. Raise bu yolu açar.",
+       "yanilgi": "Call ile de rakiplerin fold edebileceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Bir oyuncu çok el oynuyor; çoğunlukla call ediyor, nadiren raise yapıyor. Hangi tanım ona en yakındır?",
+       "secenekler": [
+        "Gevşek ve pasif",
+        "TAG",
+        "LAG",
+        "Sıkı ve pasif"
+       ],
+       "dogru": 0,
+       "neden": "Çok el oynamak gevşek (loose), çoğunlukla call etmek pasif oyundur.",
+       "yanilgi": "Çok el oynayan herkesi LAG sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o4-d5",
@@ -4004,15 +6346,206 @@
       "İlk giren oyuncu için limp'in sakıncalarını açıklar; istisnaların varlığını bilir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Limp, preflop'ta raise yapmadan yalnızca büyük blind kadar koyup pota girmektir. Burada, senden önce kimsenin girmediği bir pota ilk giren oyuncunun limp'inden söz ediyoruz.",
+      "Bu oyunun bazı sakıncaları var. Rakiplerine fold etme sebebi vermediğin için potu preflop'ta hemen kazanma şansın olmaz. BB ek bir şey ödemeden, SB yarım BB ekleyerek flop'u görebilir; arkandaki oyuncular da ucuza girer ve pot kalabalıklaşır (üç ya da daha fazla oyunculu bu tür potlara multiway pot denir). Arkandan raise gelirse ya fold edip koyduğunu bırakırsın ya da call edersin; raise eden HJ, CO ya da BTN'deyse postflop'ta ona karşı pozisyon dışında kalırsın. Son bahsi yapan taraf da sen olmazsın.",
+      "Bu yüzden ilk giren oyuncu için yaygın tavsiye şudur: ya açılış yap ya da fold et. İstisnalar vardır; bazı oyuncular belirli durumlarda, örneğin SB'den, limp'i bilerek kullanır. Bu yüzden \"limp çoğunlukla zayıftır\" deriz, \"her zaman yanlıştır\" demeyiz."
+     ],
+     "terimler": [
+      "Limp",
+      "Open (açılış)",
+      "Multiway"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Limp nedir?",
+       "secenekler": [
+        "Preflop'ta raise yapmadan büyük blind kadar koyup pota girmek",
+        "Preflop'ta kimse girmeden ilk raise'i yapmak",
+        "Bahis yokken sırayı geçmek",
+        "Eli bırakmak"
+       ],
+       "dogru": 0,
+       "neden": "Limp, büyük blind'i yalnızca görerek pota girmektir.",
+       "yanilgi": "Limp'i check ile karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Pota ilk giren ve limp yapan oyuncu, pota büyük blind kadar chip koyar.",
+       "dogru": true,
+       "neden": "Limp, büyük blind'i call etmektir; 1 BB koyulur.",
+       "yanilgi": "Limp'in bedava olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "UTG limp yaptı; HJ, CO, BTN ve SB fold etti; BB check dedi. Flop'a kaç BB'lik potla gidilir?",
+       "dogru": 2.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "UTG 1 + SB 0,5 + BB 1 = 2,5 BB.",
+       "yanilgi": "Fold eden SB'nin 0,5 BB'sini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         1,
+         0.5,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "UTG limp yaptı ve sıradaki herkes fold etti. Sıra BB'de. BB ne yapabilir?",
+       "secenekler": [
+        "Check ya da raise",
+        "Yalnızca call",
+        "Yalnızca fold",
+        "Yalnızca check"
+       ],
+       "dogru": 0,
+       "neden": "BB 1 BB'yi zaten koydu ve kimse artırmadı. Check diyebilir ya da raise yapabilir.",
+       "yanilgi": "BB'nin limp'e yeniden 1 BB eklemesi gerektiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Limp ile, açılış yaptığında olduğu kadar potu preflop'ta hemen kazanma şansın vardır.",
+       "dogru": false,
+       "neden": "Limp rakiplere fold etme sebebi vermez; BB check diyerek bedavaya devam edebilir. Açılış bu şansı yaratır.",
+       "yanilgi": "Limp ile açılışı yalnızca miktar farkı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangisi pota ilk giren oyuncunun limp'inin sakıncalarından biri DEĞİLDİR?",
+       "secenekler": [
+        "BB'nin ek ödeme yapmadan flop görebilmesi",
+        "Arkadakilerin ucuza girip potu kalabalıklaştırması",
+        "Arkadan raise gelirse zor bir kararla kalmak",
+        "Kuralların limp'i yasaklaması"
+       ],
+       "dogru": 3,
+       "neden": "Limp kurallara uygundur. Diğer üçü limp'in gerçek sakıncalarıdır.",
+       "yanilgi": "Zayıf bir oyunu yasak bir oyun sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "UTG ve HJ limp yaptı; CO ve BTN fold etti; SB 0,5 BB ekleyerek call etti; BB check dedi. Flop'a kaç BB'lik potla gidilir?",
+       "dogru": 4,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Dört oyuncu da 1'er BB koymuş oldu: 1 + 1 + 1 + 1 = 4 BB.",
+       "yanilgi": "SB'nin 0,5 BB'sini ayrıca eklemek ya da eksik saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         1,
+         1,
+         1,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Limp her durumda yanlış bir oyundur.",
+       "dogru": false,
+       "neden": "Limp çoğunlukla zayıftır, ama bazı durumlarda bilerek kullanılır. \"Her zaman\" ifadesi yalnızca oyun kuralları için doğrudur.",
+       "yanilgi": "Strateji tavsiyesini oyun kuralı gibi kesin sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "UTG limp yaptı (1 BB). CO 4 BB'ye raise yaptı. UTG call etmek için kaç BB daha koymalı?",
+       "dogru": 3,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Görülecek bahis 4 BB, UTG 1 BB'yi zaten koydu: 4 − 1 = 3 BB.",
+       "yanilgi": "Limp'teki 1 BB'yi hesaptan düşmemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         4,
+         -1
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "UTG limp yaptı, CO 4 BB'ye raise yaptı, diğer herkes fold etti ve UTG call etti. Flop'ta kim pozisyonda?",
+       "secenekler": [
+        "CO",
+        "UTG"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta UTG, CO'dan önce konuşur. Limp'ten sonra gelen raise'i call eden UTG pozisyon dışında kalır.",
+       "yanilgi": "Pota ilk giren oyuncunun pozisyonda olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "CO"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "UTG limp yaptı, CO 4 BB'ye raise yaptı; BTN, SB ve BB fold etti; UTG call etti. Flop'a kaç BB'lik potla gidilir?",
+       "dogru": 9.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "UTG 4 + CO 4 + SB 0,5 + BB 1 = 9,5 BB.",
+       "yanilgi": "UTG'nin limp'teki 1 BB'sini 4 BB'nin üstüne ayrıca eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         4,
+         4,
+         0.5,
+         1
+        ]
+       }
+      }
+     ]
     },
     {
      "kimlik": "o4-k",
@@ -4025,15 +6558,247 @@
       "\"Başlangıç elleri\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin beş dersinden karışık sorular içerir."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "K♦ Q♦ eli kısaca nasıl yazılır?",
+       "secenekler": [
+        "KQs",
+        "KQo",
+        "QKs",
+        "KQ"
+       ],
+       "dogru": 0,
+       "neden": "Büyük kart önce; iki kart da karo olduğu için s eklenir.",
+       "yanilgi": "Küçük kartı öne yazmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazim",
+        "kartlar": "K♦ Q♦"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Offsuit bir el adının 12 kombinasyonu vardır.",
+       "dogru": true,
+       "neden": "4 × 4 = 16 ikiliden aynı renkli 4'ü çıkar: 12.",
+       "yanilgi": "Offsuit eli 16 kombinasyon saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "KQo"
+        ],
+        "iddia": 12
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "TT ve 99 birlikte kaç kombinasyondur?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "Her cep çifti 6 kombinasyon: 6 + 6 = 12.",
+       "yanilgi": "Her çifti 4 kombinasyon saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "TT",
+         "99"
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "range",
+       "zorluk": 2,
+       "soru": "Papazla başlayan bütün suited elleri (KQs'den K2s'ye) işaretle.",
+       "dogru": [
+        "KQs",
+        "KJs",
+        "KTs",
+        "K9s",
+        "K8s",
+        "K7s",
+        "K6s",
+        "K5s",
+        "K4s",
+        "K3s",
+        "K2s"
+       ],
+       "neden": "K satırında köşegenin sağındaki 11 hücre: KQs, KJs, … K2s. AKs as satırındadır.",
+       "yanilgi": "AKs'yi de papaz eli sayıp işaretlemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "rangeKume",
+        "kurallar": [
+         {
+          "tip": "suited",
+          "yuksek": "K"
+         }
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Matriste Q satırında, A sütununda hangi el durur?",
+       "secenekler": [
+        "AQo",
+        "AQs",
+        "QQ",
+        "QAo"
+       ],
+       "dogru": 0,
+       "neden": "Q satırı A sütunu köşegenin altındadır; alt üçgen offsuit bölgedir. Büyük kart önce yazılır: AQo.",
+       "yanilgi": "Alt ve üst üçgeni karıştırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "matris",
+        "satir": "Q",
+        "sutun": "A"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Hangi el AQ'yu domine eder?",
+       "secenekler": [
+        "AK",
+        "KQ",
+        "AJ",
+        "QJ"
+       ],
+       "dogru": 0,
+       "neden": "AK, AQ ile ası paylaşır ve ikinci kartı daha yüksektir. AQ ise KQ, AJ ve QJ'yi domine eder.",
+       "yanilgi": "Domine ilişkisinin yönünü ters kurmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aralık: AA, KK ve AKs. Kaç kombinasyondur?",
+       "dogru": 16,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "6 + 6 + 4 = 16.",
+       "yanilgi": "AKs'yi 12 kombinasyon saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AA",
+         "KK",
+         "AKs"
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Açılış yapmanın, limp'e göre sağladığı şey hangisidir?",
+       "secenekler": [
+        "Rakipler fold ederse potu preflop'ta hemen almak",
+        "Daha iyi kart almak",
+        "Blind ödememek",
+        "Postflop'ta pozisyon kazanmak"
+       ],
+       "dogru": 0,
+       "neden": "Açılış rakiplere fold etme sebebi verir. Kartları ve pozisyonu değiştirmez.",
+       "yanilgi": "Raise yapanın pozisyonu da kazandığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Tight oyuncu az ve seçilmiş elle oynar.",
+       "dogru": true,
+       "neden": "Tight (sıkı), oynanan el sayısının az olduğunu anlatır.",
+       "yanilgi": "Tight'ı pasif oyunla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Aralık: AKs, AKo ve AQs. Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 1.5,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "4 + 12 + 4 = 20 kombinasyon. 20 / 1326 × 100 ≈ %1,5.",
+       "yanilgi": "Üç hücreyi 169'a bölmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AKs",
+         "AKo",
+         "AQs"
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Board: K♣ 9♦ 6♠ 3♥ 2♣. Ali: K♠ Q♦. Berk: K♦ T♣. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de papaz per yaptı; Ali'nin kızı, Berk'in onlusunu yener.",
+       "yanilgi": "Aynı perde potun bölündüğünü sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "K♠ Q♦",
+         "Berk": "K♦ T♣"
+        },
+        "board": "K♣ 9♦ 6♠ 3♥ 2♣"
+       }
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "UTG limp yaptı, BTN 4 BB'ye raise yaptı, SB ve BB fold etti, UTG call etti. Hangisi doğrudur?",
+       "secenekler": [
+        "Flop'ta BTN pozisyonda; pot 9,5 BB",
+        "Flop'ta UTG pozisyonda; pot 9,5 BB",
+        "Flop'ta BTN pozisyonda; pot 8 BB",
+        "Flop'ta UTG pozisyonda; pot 8 BB"
+       ],
+       "dogru": 0,
+       "neden": "Postflop'ta UTG, BTN'den önce konuşur. Pot: 4 + 4 + 0,5 + 1 = 9,5 BB.",
+       "yanilgi": "Fold eden blind'leri pottan düşmek ya da pota ilk giren oyuncunun pozisyonda olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o4-r",
@@ -4047,15 +6812,157 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "KQs'nin kombinasyon sayısı KQo'nunkinden fazladır.",
+       "dogru": false,
+       "neden": "KQs 4, KQo 12 kombinasyondur. Suited eller daha seyrek gelir.",
+       "yanilgi": "Suited eli daha sık gelen el sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Matriste köşegenin altında hangi eller durur?",
+       "secenekler": [
+        "Offsuit eller",
+        "Suited eller",
+        "Cep çiftleri",
+        "Yalnızca broadway eller"
+       ],
+       "dogru": 0,
+       "neden": "Köşegende çiftler, üstünde suited eller, altında offsuit eller vardır.",
+       "yanilgi": "Üst ve alt üçgeni karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aralık: AA ve AKo. Kaç kombinasyondur?",
+       "dogru": 18,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "AA 6 + AKo 12 = 18. İki hücre, ama ağırlıkları farklı.",
+       "yanilgi": "Hücre sayısını kombinasyon sayısı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AA",
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: A♦ T♠ 7♣ 5♥ 2♦. Ali: A♣ Q♥. Berk: A♥ 9♣. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de as per yaptı; Ali'nin kızı, Berk'in dokuzlusunu yener.",
+       "yanilgi": "Aynı per varken beraberlik sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♣ Q♥",
+         "Berk": "A♥ 9♣"
+        },
+        "board": "A♦ T♠ 7♣ 5♥ 2♦"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Domine edilen el hiçbir zaman kazanamaz.",
+       "dogru": false,
+       "neden": "Board domine edilen elin ikinci kartıyla eşleşirse kazanabilir; eller eşit de kalabilir. Domine edilmek çoğu zaman geride olmak demektir, her zaman değil.",
+       "yanilgi": "\"Çoğu zaman\" ile \"her zaman\"ı karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Bir aralığın yüzdesi nasıl bulunur?",
+       "secenekler": [
+        "Kombinasyonlar toplanır, 1326'ya bölünür, 100 ile çarpılır",
+        "Hücreler sayılır, 169'a bölünür, 100 ile çarpılır",
+        "Hücreler sayılır, 1326'ya bölünür",
+        "Kombinasyonlar toplanır, 169'a bölünür"
+       ],
+       "dogru": 0,
+       "neden": "Hücreler eşit ağırlıkta olmadığı için kombinasyonlarla hesaplanır.",
+       "yanilgi": "Her hücreyi eşit saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Aralık: bütün suited aslar (AKs'den A2s'ye). Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 3.6,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "12 el × 4 kombinasyon = 48. 48 / 1326 × 100 ≈ %3,6.",
+       "yanilgi": "12 hücreyi 169'a bölüp %7,1 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AKs",
+         "AQs",
+         "AJs",
+         "ATs",
+         "A9s",
+         "A8s",
+         "A7s",
+         "A6s",
+         "A5s",
+         "A4s",
+         "A3s",
+         "A2s"
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Pota ilk giren oyuncu için limp hakkında en doğru ifade hangisidir?",
+       "secenekler": [
+        "Çoğunlukla zayıftır; istisnaları vardır",
+        "Her zaman yanlıştır",
+        "Açılış kadar iyidir",
+        "Kurallara aykırıdır"
+       ],
+       "dogru": 0,
+       "neden": "Limp'in sakıncaları çoktur ama belirli durumlarda bilerek kullanılır.",
+       "yanilgi": "Bir strateji tavsiyesini kesin kural sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "o4-t",
@@ -4070,15 +6977,424 @@
       "ortak temel ünitelerin (o1'den bu üniteye kadar) kazanımlarını karışık sorularda gösterir; geçilirse yalnızca bu ortak üniteler açılır; piste özgü üniteler kendi testleriyle açılır."
      ],
      "sureDk": 10,
-     "anlatim": [],
+     "anlatim": [
+      "Bu test dört ortak üniteyi birlikte yoklar: kartlar ve eller, masa ve el akışı, pozisyon, başlangıç elleri. 20 soru; acele etmene gerek yok."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 20,
       "oran": 0.85
      },
      "hedefAlistirma": 20,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Floş, full house'u yener.",
+       "dogru": false,
+       "neden": "Full house sıralamada floşun üstündedir.",
+       "yanilgi": "Floşu daha etkileyici bulup üstün sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "floş": "A♥ K♥ Q♥ J♥ 9♥",
+         "full house": "2♠ 2♦ 2♣ 3♥ 3♠"
+        },
+        "iddia": "floş",
+        "ornek": true
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "Altı oyuncu da eldeyken preflop'ta en son kim konuşur?",
+       "secenekler": [
+        "UTG",
+        "BTN",
+        "SB",
+        "BB"
+       ],
+       "dogru": 3,
+       "neden": "Preflop sırası UTG'den başlar ve BB'de biter.",
+       "yanilgi": "Butonun her sokakta en son konuştuğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "preflop",
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "A♥ T♥ eli kısaca nasıl yazılır?",
+       "secenekler": [
+        "ATs",
+        "ATo",
+        "TAs",
+        "AT"
+       ],
+       "dogru": 0,
+       "neden": "Büyük kart önce; iki kart da kupa olduğu için s eklenir.",
+       "yanilgi": "Renk bilgisini atlamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazim",
+        "kartlar": "A♥ T♥"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "AJo'nun kaç kombinasyonu vardır?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "4 × 4 = 16 ikiliden aynı renkli 4'ü çıkar: 12.",
+       "yanilgi": "Offsuit eli 4 kombinasyon saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AJo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "El çeşitlerini en zayıftan en güçlüye doğru sırala.",
+       "secenekler": [
+        "İki per",
+        "Kent",
+        "Floş",
+        "Kare"
+       ],
+       "neden": "İki per < kent < floş < kare.",
+       "yanilgi": "Kenti floşun üstüne koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kategoriSirasi",
+        "yon": "artan"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Flop'u SB ve CO görüyor. Kim pozisyonda?",
+       "secenekler": [
+        "SB",
+        "CO"
+       ],
+       "dogru": 1,
+       "neden": "Postflop'ta SB önce, CO sonra konuşur.",
+       "yanilgi": "SB'nin preflop'ta CO'dan sonra konuştuğunu postflop'a taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "SB",
+         "CO"
+        ],
+        "soru": "son"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 50 chip. 4.000 chip kaç BB eder?",
+       "dogru": 80,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "4.000 / 50 = 80 BB.",
+       "yanilgi": "Bir basamak kaydırmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "bolum",
+        "terimler": [
+         4000,
+         50
+        ]
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "range",
+       "zorluk": 3,
+       "soru": "Matriste bütün suited broadway ellerini (iki kartı da T, J, Q, K ya da A olan suited eller) işaretle.",
+       "dogru": [
+        "AKs",
+        "AQs",
+        "AJs",
+        "ATs",
+        "KQs",
+        "KJs",
+        "KTs",
+        "QJs",
+        "QTs",
+        "JTs"
+       ],
+       "neden": "Beş broadway değerinden iki farklı değer seçmenin 10 yolu var: AKs, AQs, AJs, ATs, KQs, KJs, KTs, QJs, QTs, JTs.",
+       "yanilgi": "Broadway cep çiftlerini (AA, KK…) de suited el sanıp işaretlemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "rangeKume",
+        "kurallar": [
+         {
+          "tip": "suited",
+          "min": "T"
+         }
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Board: Q♠ 8♦ 5♣ 3♥ 2♠. Ali: Q♦ J♣. Berk: Q♣ 9♦. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 0,
+       "neden": "İkisi de kız per yaptı; Ali'nin valesi, Berk'in dokuzlusunu yener.",
+       "yanilgi": "Aynı perde potun bölündüğünü sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "Q♦ J♣",
+         "Berk": "Q♣ 9♦"
+        },
+        "board": "Q♠ 8♦ 5♣ 3♥ 2♠"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Preflop: HJ 2,5 BB'ye açtı, BTN call etti, SB call etti, BB fold etti. Flop'a kaç BB'lik potla gidilir?",
+       "dogru": 8.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "HJ 2,5 + BTN 2,5 + SB 2,5 + BB'nin bıraktığı 1 = 8,5 BB.",
+       "yanilgi": "Fold eden BB'nin 1 BB'sini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         2.5,
+         2.5,
+         2.5,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "En iyi beş kartını kurarken kapalı kartlarından hiçbirini kullanmayabilirsin.",
+       "dogru": true,
+       "neden": "En iyi beşli 0, 1 ya da 2 kapalı kart içerebilir; hiçbirini kullanmadığında board'u oynarsın.",
+       "yanilgi": "Kapalı kartların mutlaka elin içinde olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Sen 70 BB, rakibin 150 BB. Efektif stack kaç BB?",
+       "secenekler": [
+        "70 BB",
+        "80 BB",
+        "150 BB",
+        "220 BB"
+       ],
+       "dogru": 0,
+       "neden": "İki stack'ten küçük olanı: 70 BB.",
+       "yanilgi": "Stack'leri toplamak ya da farkını almak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         70,
+         150
+        ]
+       }
+      },
+      {
+       "kimlik": "a13",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Aralık: AA, KK, QQ, AKs ve AKo. Bu aralık bütün başlangıç ellerinin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 2.6,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "6 + 6 + 6 + 4 + 12 = 34 kombinasyon. 34 / 1326 × 100 ≈ %2,6.",
+       "yanilgi": "Beş hücreyi 169'a bölüp %3,0 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ",
+         "AKs",
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a14",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Board: J♣ T♣ 4♦ 4♠ 9♣. Bu board'da nuts hangi el çeşididir?",
+       "secenekler": [
+        "Kare",
+        "Full house",
+        "Floş",
+        "Sıralı floş"
+       ],
+       "dogru": 3,
+       "neden": "Board'da art arda üç sinek (9-T-J) var. K♣ Q♣ ile 9-T-J-Q-K sıralı floşu kurulur ve kareyi yener.",
+       "yanilgi": "Çifti görüp kareyi en iyi el sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "nutsKategori",
+        "board": "J♣ T♣ 4♦ 4♠ 9♣"
+       }
+      },
+      {
+       "kimlik": "a15",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Bu elde SB'desin ve yerinden kalkmıyorsun. Bir sonraki elde hangi koltukta olursun?",
+       "secenekler": [
+        "BTN",
+        "BB",
+        "CO",
+        "UTG"
+       ],
+       "dogru": 0,
+       "neden": "Buton senin koltuğuna geçer; SB bir sonraki elde BTN olur.",
+       "yanilgi": "Koltuk adının SB'den BB'ye ilerlediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "sonrakiEl",
+        "poz": "SB"
+       }
+      },
+      {
+       "kimlik": "a16",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB'desin ve 1 BB koydun. CO 2,5 BB'ye açtı, BTN 8 BB'ye yeniden raise yaptı. Call etmek için kaç BB daha koyarsın?",
+       "dogru": 7,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Görmen gereken son bahis 8 BB; 1 BB'yi zaten koydun: 8 − 1 = 7 BB.",
+       "yanilgi": "İki raise'i toplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         8,
+         -1
+        ]
+       }
+      },
+      {
+       "kimlik": "a17",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangi el KJ'yi domine eder?",
+       "secenekler": [
+        "KQ",
+        "QJ",
+        "K9",
+        "JT"
+       ],
+       "dogru": 0,
+       "neden": "KQ, KJ ile papazı paylaşır ve ikinci kartı daha yüksektir. QJ, K9 ve JT ise KJ tarafından domine edilir.",
+       "yanilgi": "Domine ilişkisinin yönünü ters kurmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a18",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "UTG açtı ve yalnızca BB call etti. Flop'ta UTG pozisyondadır.",
+       "dogru": true,
+       "neden": "Postflop'ta BB, UTG'den önce konuşur.",
+       "yanilgi": "UTG'nin her durumda pozisyon dışında olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "konusmaSirasi",
+        "sokak": "postflop",
+        "oyuncular": [
+         "UTG",
+         "BB"
+        ],
+        "soru": "son",
+        "iddia": "UTG"
+       }
+      },
+      {
+       "kimlik": "a19",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Büyük blind 20 chip. Sen 1.500 chip, rakibin 2.400 chip. Efektif stack kaç BB?",
+       "dogru": 75,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 1.500 chip; 1.500 / 20 = 75 BB.",
+       "yanilgi": "Büyük stack'i BB'ye çevirmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         1500,
+         2400
+        ],
+        "bb": 20
+       }
+      },
+      {
+       "kimlik": "a20",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Board: A♠ 7♦ 6♣ 5♥ 2♠. Ali: A♦ K♣. Berk: 4♣ 3♦. Kim kazanır?",
+       "secenekler": [
+        "Ali",
+        "Berk",
+        "Beraberlik"
+       ],
+       "dogru": 1,
+       "neden": "Berk'in kenti var: 3-4-5-6-7. Ali'de as per var. Kent peri yener.",
+       "yanilgi": "Yüksek kartları görüp Ali'yi önde sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kazanan",
+        "eller": {
+         "Ali": "A♦ K♣",
+         "Berk": "4♣ 3♦"
+        },
+        "board": "A♠ 7♦ 6♣ 5♥ 2♠"
+       }
+      }
+     ]
     }
    ]
   },
