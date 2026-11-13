@@ -400,3 +400,17 @@ describe("alıştırma değerlendirme", () => {
     }
   });
 });
+
+describe("sayı girişi: Türkçe binlik ve ondalık", () => {
+  it("noktayı binlik, virgülü ondalık okur; 2.5 gibi yazımlar ondalık kalır", async () => {
+    const { sayiCoz } = await import("./alistirma");
+    expect(sayiCoz("20.000")).toBe(20000);
+    expect(sayiCoz("1.250.000")).toBe(1250000);
+    expect(sayiCoz("1.250,5")).toBe(1250.5);
+    expect(sayiCoz("27,3")).toBe(27.3);
+    expect(sayiCoz("2.5")).toBe(2.5);
+    expect(sayiCoz("12.50")).toBe(12.5);
+    expect(sayiCoz("%45")).toBe(45);
+    expect(sayiCoz("abc")).toBeNull();
+  });
+});
