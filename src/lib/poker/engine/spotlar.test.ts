@@ -221,7 +221,7 @@ describe("gizlilik", () => {
       }
     }
     expect(bad, bad.slice(0, 20).join("; ")).toEqual([]);
-  });
+  }, 60_000); // 577 spot × iki hat: yük altında 5 sn varsayılanını aşabiliyor
 
   it("durumda villain alanı ya da spot notu taşınmaz", () => {
     const odds = HANDS.filter((x) => x.id.startsWith("o-"));
