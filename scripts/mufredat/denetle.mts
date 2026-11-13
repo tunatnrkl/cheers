@@ -157,7 +157,7 @@ const trSayi = (s: unknown) => {
 };
 
 // ── Açılış aralıkları (src/data/ranges.json) ──
-type Ranges = { equity: Record<string, number>; cash: Record<string, string[]> };
+type Ranges = { equity: Record<string, number>; cash: Record<string, string[]>; push: Record<string, Record<string, string[]>> };
 const RANGES: Ranges = JSON.parse(readFileSync(new URL("../../src/data/ranges.json", import.meta.url), "utf8"));
 /** Kenar payı: aralığın son ~%4'ü (53 kombinasyon) "sınırda" sayılır. */
 const PAY = 53;
@@ -209,8 +209,38 @@ export function acilisDurumu(poz: string, el: string): "ac" | "fold" | "sinir" {
   if (karisik(el, poz)) return "sinir";
   return BASLANGIC.get(el)! >= toplam + PAY ? "fold" : "sinir";
 }
-// drills.json'daki üretilmiş spotlar (o-… pot odds spotlarının fiyatı için)
-type DrillSpot = { id: string; potBB: number; options: string[] };
+// ── Push aralıkları (ranges.json "push": 6, 10, 15 BB; pozisyon başına) ──
+// Üretici (scripts/generate-ranges.mts) push sıralamasında oynanabilirlik düzeltmesini yarıya indirir:
+// pushScore = equity + (openScore − equity) × 0,5. Aynı sıralama burada yeniden kurulur ve açılıştaki gibi
+// aralığın son ~%4'ü (53 kombinasyon) ya da hemen dışı "sınırda" sayılır. Bu aralıklar temkinli, yaklaşık
+// çalışma aralıklarıdır; Nash tablosu ya da solver çıktısı değildir. Betik aralıkları doğrulamaz, yalnızca okur.
+const pushPuani = (el: string) => RANGES.equity[el] + (acilisPuani(el) - RANGES.equity[el]) * 0.5;
+const PUSH_BASLANGIC = new Map<string, number>();
+{
+  let n = 0;
+  for (const e of [...KOMBO.keys()].sort((x, y) => pushPuani(y) - pushPuani(x))) {
+    PUSH_BASLANGIC.set(e, n);
+    n += kombo(e);
+  }
+}
+export function pushListesi(stack: unknown, poz: string): string[] {
+  const l = RANGES.push[String(stack)]?.[poz];
+  if (!l) throw new Error(`push aralığı yok: ${stack} BB ${poz} (yalnızca 6, 10, 15 BB; UTG, HJ, CO, BTN, SB)`);
+  return l;
+}
+/** Herkes fold ettiğinde bu stack ve koltukta bu el: push, fold ya da sınırda (kenar payı içinde). */
+export function pushDurumu(stack: unknown, poz: string, el: string): "push" | "fold" | "sinir" {
+  const liste = pushListesi(stack, poz);
+  kombo(el);
+  const toplam = listeKombo(liste);
+  const i = liste.indexOf(el);
+  if (i >= 0) return listeKombo(liste.slice(0, i + 1)) <= toplam - PAY ? "push" : "sinir";
+  return PUSH_BASLANGIC.get(el)! >= toplam + PAY ? "fold" : "sinir";
+}
+export const pushYuzdesi = (stack: unknown, poz: string) => (listeKombo(pushListesi(stack, poz)) / IKILILER.length) * 100;
+
+// drills.json'daki üretilmiş spotlar (o-… pot odds spotlarının fiyatı, s-… all-in'e call spotları için)
+type DrillSpot = { id: string; potBB: number; options: string[]; hero: string; correct: number; reasoning: string; topic?: string };
 const DRILLS = new Map<string, DrillSpot>(
   (JSON.parse(readFileSync(new URL("../../src/data/drills.json", import.meta.url), "utf8")) as DrillSpot[]).map((h) => [h.id, h]),
 );
@@ -226,10 +256,11 @@ function tohumlu(t: number) {
   };
 }
 const etiketIkilileri = (ad: string) => IKILILER.filter(([a, b]) => elAdi(a, b) === ad);
-/** Bir el adının (bütün kombinasyonları eşit ağırlıkla) bir el listesine karşı yaklaşık equity'si, yüzde. */
-export function equityAraliga(el: string, rakip: string[], deneme = 40000, tohum = 20261113): number {
+/** Bir el adının (bütün kombinasyonları eşit ağırlıkla) ya da somut iki kartın ([kart, kart]) bir el listesine karşı
+ *  yaklaşık equity'si, yüzde. */
+export function equityAraliga(el: string | [number, number], rakip: string[], deneme = 40000, tohum = 20261113): number {
   const rnd = tohumlu(tohum);
-  const benim = etiketIkilileri(el);
+  const benim = typeof el === "string" ? etiketIkilileri(el) : [el];
   const onun = rakip.flatMap(etiketIkilileri);
   let puan = 0;
   const deste: number[] = [];
@@ -673,10 +704,12 @@ export function alistirmaDenetle(a: Al): string[] {
       }
       case "equityAraliga": {
         // Monte Carlo (40.000 deneme, sabit tohum); metindeki "yaklaşık" değer en fazla 1,5 puan sapabilir.
-        const rakip = d.poz ? RANGES.cash[d.poz as string] : (d.rakip as string[]);
+        // Rakip: poz (cash açılış aralığı), itme: [stack, poz] (push aralığı) ya da rakip (el listesi).
+        const rakip = d.poz ? RANGES.cash[d.poz as string] : d.itme ? pushListesi(...(d.itme as [string, string])) : (d.rakip as string[]);
         const r = equityAraliga(d.el as string, rakip);
         if (Math.abs(r - (d.yaklasik as number)) > 1.5) hata(`${d.el} equity'si yaklaşık %${r.toFixed(1)}, metinde %${d.yaklasik}`);
         if (a.tip === "secmeli") tekCevap((i) => Math.abs(trSayi(sec[i]) - r) <= 1.5, `${d.el} equity'si %${r.toFixed(1)}`);
+        else if (a.tip === "sayi") hata("Monte Carlo equity'si sayı sorusunda kullanılmaz; seçmeli yaz");
         break;
       }
       case "gerekliPay": {
@@ -950,6 +983,113 @@ export function alistirmaDenetle(a: Al): string[] {
           if (Number.isNaN(r)) throw new Error(`boyutEsleme formülü "basabas" ya da "gereken" olmalı`);
           if (Math.abs(trSayi(sag) - r) > 0.06) hata(`${sol}: hesaplanan %${r.toFixed(2)}, veride ${sag}`);
         }
+        break;
+      }
+      // ── Turnuva t5–t6: push aralıkları (ranges.json) ve all-in'e call ──
+      case "push": {
+        // Herkes fold ettiğinde: stack (6, 10, 15 BB), koltuk, el → push ya da fold. Sınırdaki el yalnızca
+        // sinir: true ile ve dogrulamaGerekli ya da kabulEdilebilir taşıyan soruda kullanılabilir.
+        const durum = pushDurumu(d.stack, d.poz as string, d.el as string);
+        const yumusak = (a as { dogrulamaGerekli?: boolean }).dogrulamaGerekli === true || ((a as { kabulEdilebilir?: number[] }).kabulEdilebilir ?? []).length > 0;
+        const ne = `${d.stack} BB ${d.poz} ${d.el}`;
+        if (durum === "sinir") {
+          if (!d.sinir) hata(`${ne} push aralığının kenarında; soruda sınır: true, dogrulamaGerekli ya da kabulEdilebilir gerekli`);
+          else if (!yumusak) hata(`${ne} sınırda; dogrulamaGerekli: true ya da kabulEdilebilir kullanılmalı`);
+          break;
+        }
+        if (d.sinir) hata(`${ne} sınırda değil (${durum}); sınır işareti kaldırılmalı`);
+        if ("iddia" in d) iddiaDY(durum === d.iddia);
+        else if (a.tip === "secmeli" || a.tip === "spot") {
+          const fold = String(sec[dogru as number] ?? "").startsWith("Fold");
+          if (fold !== (durum === "fold")) hata(`${ne}: push aralığına göre ${durum}, veride "${sec[dogru as number]}"`);
+        } else hata("push denetimi seçmeli, spot ya da doğru/yanlış sorusunda kullanılır");
+        break;
+      }
+      case "pushAraligi": {
+        // Range sorusu: seçeneklerdeki ellerden push aralığında olanlar işaretli olmalı; sınırdaki el seçeneklerde olamaz.
+        if (a.tip !== "range") throw new Error("pushAraligi yalnızca range sorusunda");
+        const veri = new Set(dogru as string[]);
+        for (const el of sec as string[]) {
+          const durum = pushDurumu(d.stack, d.poz as string, el);
+          if (durum === "sinir") hata(`${d.stack} BB ${d.poz} ${el} sınırda; range sorusunun seçeneklerinde olmamalı`);
+          else if ((durum === "push") !== veri.has(el)) hata(`${d.stack} BB ${d.poz} ${el}: aralığa göre ${durum === "push" ? "işaretli" : "işaretsiz"} olmalı`);
+        }
+        for (const el of veri) if (!(sec as string[]).includes(el)) hata(`${el} seçeneklerde yok`);
+        break;
+      }
+      case "pushKosul": {
+        // Seçenekler el adı; koşulların hepsini sağlayan TEK seçenek doğru. kosul: [[stack, koltuk, durum], ...]
+        const kosul = d.kosul as [string, string, string][];
+        tekCevap((i) => kosul.every(([st, poz, durum]) => pushDurumu(st, poz, String(sec[i])) === durum), `koşul ${JSON.stringify(kosul)}`);
+        break;
+      }
+      case "pushEsleme": {
+        // Eşleştirme: sol "KOLTUK: EL" (stack denetimde) ya da "N BB KOLTUK: EL"; sağ etiket; etiketler {metin: durum}.
+        const et = d.etiketler as Record<string, string>;
+        for (const [sol, sag] of sec as [string, string][]) {
+          const m = sol.match(/^(?:(\d+) BB )?([A-Z]+)(?:'[a-zıiüö]+)?:? (\S+)$/);
+          if (!m) throw new Error(`eşleştirme solu okunamadı: "${sol}"`);
+          const r = pushDurumu(m[1] ?? d.stack, m[2], m[3]);
+          if (et[sag] !== r) hata(`${sol}: hesaplanan ${r}, veride "${sag}"`);
+        }
+        break;
+      }
+      case "pushYuzde": {
+        // Push aralığının ellerin yüzde kaçı olduğu (kombinasyonlar / 1326).
+        const r = pushYuzdesi(d.stack, d.poz as string);
+        if (a.tip === "sayi") {
+          const tol = (a as { tolerans?: number }).tolerans ?? 0;
+          if (Math.abs((dogru as number) - r) > Math.max(tol, 0.05) || tol > 1) hata(`${d.stack} BB ${d.poz} push aralığı %${r.toFixed(2)}, veride ${dogru} (tolerans ${tol})`);
+        } else if ("iddia" in d) iddiaDY(Math.abs(r - (d.iddia as number)) < 0.6);
+        else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 0.6, `${d.stack} BB ${d.poz} push aralığı %${r.toFixed(1)}`);
+        break;
+      }
+      case "pushSirasi": {
+        // Sıralama: öğeler dardan genişe. Öğe "KOLTUK" (stack denetimde) ya da "N BB" (koltuk denetimde) ya da "N BB KOLTUK".
+        if (a.tip !== "siralama") throw new Error("pushSirasi yalnızca sıralama sorusunda");
+        const n = (sec as string[]).map((x) => {
+          const m = x.match(/^(?:(\d+) BB)?\s*([A-Z]+)?/);
+          return listeKombo(pushListesi(m?.[1] ?? d.stack, m?.[2] ?? (d.poz as string)));
+        });
+        if (n.some((v, i) => i > 0 && v <= n[i - 1])) hata(`push aralıkları dardan genişe değil (${n.join(" / ")} kombinasyon)`);
+        break;
+      }
+      case "pushKapsar": {
+        // Doğru/yanlış: dar aralığın bütün elleri geniş aralıkta mı? dar, genis: [stack, koltuk]
+        const dar = pushListesi(...(d.dar as [string, string])), genis = new Set(pushListesi(...(d.genis as [string, string])));
+        iddiaDY(dar.every((e) => genis.has(e)));
+        break;
+      }
+      case "equitySirasi": {
+        // Sıralama: el adları rakip aralığına karşı equity'si artan sırada (Monte Carlo). Komşu iki el arasında
+        // en az 3 puan fark aranır; daha yakın eller Monte Carlo hatası içinde kalabileceği için sorulmaz.
+        if (a.tip !== "siralama") throw new Error("equitySirasi yalnızca sıralama sorusunda");
+        const rakip = d.poz ? RANGES.cash[d.poz as string] : d.itme ? pushListesi(...(d.itme as [string, string])) : (d.rakip as string[]);
+        const e = (sec as string[]).map((x) => equityAraliga(x, rakip));
+        if (e.some((v, i) => i > 0 && v - e[i - 1] < 3)) hata(`equity'ler artan sırada ve 3 puan aralıklı değil (${e.map((x) => x.toFixed(1)).join(" / ")})`);
+        break;
+      }
+      case "callShove": {
+        // drills.json'daki s-… spotu (BB'de, all-in'e call ya da fold). Rakip aralığı kimlikteki stack ve koltuğun push
+        // aralığıdır (s10-SB-… → ranges.json push 10 SB). Gereken equity = call / (spot potu + call); kahramanın somut
+        // kartlarıyla Monte Carlo (40.000 deneme). Eşiğe 3,5 puandan yakın spot kullanılmaz; doğru cevap
+        // (call: equity > gereken) ve seçenekler spotla aynı olmalı. Gerekçesi aralığa duyarlı spot yalnızca duyarli: true ile.
+        const h = DRILLS.get(d.spot as string);
+        if (!h || h.topic !== "callshove") throw new Error(`drills.json'da all-in'e call spotu yok: ${d.spot}`);
+        if ((a as { spotKimlik?: string }).spotKimlik !== d.spot) hata("denetimdeki spot, spotKimlik ile aynı olmalı");
+        const [, st, poz] = h.id.match(/^s(\d+)-([A-Z]+)-/) ?? [];
+        const callSec = h.options.find((o) => o.startsWith("Call"));
+        if (!callSec) throw new Error(`${d.spot}: call seçeneği yok`);
+        const call = trSayi(callSec.replace(/^[^(]*\(/, ""));
+        const gereken = (call / (h.potBB + call)) * 100;
+        const kart = (x: string) => cardFromString(x);
+        const eq = equityAraliga([kart(h.hero.slice(0, 2)), kart(h.hero.slice(2, 4))], pushListesi(st, poz));
+        if (Math.abs(eq - gereken) < 3.5) hata(`${d.spot}: equity %${eq.toFixed(1)}, gereken %${gereken.toFixed(1)}; eşiğe 3,5 puandan yakın`);
+        if ((eq > gereken ? 1 : 0) !== h.correct) hata(`${d.spot}: hesaplanan ${eq > gereken ? "call" : "fold"}, spotta ${h.options[h.correct]}`);
+        if (a.tip !== "spot" || JSON.stringify(a.secenekler) !== JSON.stringify(h.options) || dogru !== h.correct) hata(`${d.spot}: seçenek ya da cevap spotla aynı değil`);
+        if (/rakibin aralığı belirliyor/.test(h.reasoning) && d.duyarli !== true) hata(`${d.spot}: cevap aralık varsayımına duyarlı; duyarli: true olmadan kullanılmaz`);
+        if (d.gereken !== undefined && Math.abs(gereken - Number(d.gereken)) > 0.06) hata(`${d.spot}: gereken equity %${gereken.toFixed(2)}, metinde %${d.gereken}`);
+        if (d.yaklasik !== undefined && Math.abs(eq - Number(d.yaklasik)) > 1.5) hata(`${d.spot}: equity yaklaşık %${eq.toFixed(1)}, metinde %${d.yaklasik}`);
         break;
       }
       default:
