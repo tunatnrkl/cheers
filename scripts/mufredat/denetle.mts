@@ -71,11 +71,13 @@ function nutsDegeri(board: number[]): number {
   for (const el of kombinasyon(kalan, 2)) en = Math.max(en, deger([...el, ...board]));
   return en;
 }
-const sayiOku = (s: unknown) => {
+/** Seçenekteki ilk sayı, Türkçe yazımla (src/lib/ogren/alistirma.ts `sayiCoz` ile aynı kural):
+ *  virgül ondalık; nokta yalnızca gruplar tam üçer haneliyse binlik ("20.000", "1.250,5"). */
+export const sayiOku = (s: unknown) => {
   if (typeof s === "number") return s;
-  const m = String(s).match(/-?\d+(,\d+)?/);
+  const m = String(s).match(/-?\d{1,3}(?:\.\d{3})+(?:,\d+)?(?!\d)|-?\d+(?:,\d+)?/);
   if (!m) throw new Error(`seçenekte sayı yok: "${s}"`);
-  return Number(m[0].replace(",", "."));
+  return Number(m[0].replace(/\./g, "").replace(",", "."));
 };
 const esit = (a: number, b: number) => Math.abs(a - b) < 1e-9;
 

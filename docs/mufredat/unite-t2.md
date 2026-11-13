@@ -25,7 +25,7 @@ Kaynak: `scripts/mufredat/icerik/t2.json`. 8 ders (5 normal + kontrol + tekrar +
 - **Ortalama stack (`ortalamaStack`, 7):** başlangıç × giriş / kalan; isteğe bağlı BB'ye çevirme ya da stack'in ortalamaya oranı (%).
 - **Ödül (`odul`, 3):** t1'deki gibi; tablo toplamı ve sırası da denetlenir.
 - Test sorularındaki o1–o3 tekrarları mevcut türlerle denetlenir: el çeşidi ve kazanan (el değerlendirici), koltuk ve konuşma sırası (6-max modeli).
-- Elle girilen değerler: `t2-d4/a2` ve `a3`'te seçeneklerin değerleri `degerler` ile verildi (eski `bolum`/`carpim` okuyucusu "20.000"i 20 okuduğu için). `t2-d1/a8`'de iddia "iki stack aynı BB" → fark 0 mı diye denetlenir.
+- `t2-d4/a2` ve `a3`'te seçeneklerdeki binlik yazımlı sayılar ("20.000") betikçe Türkçe kuralla okunur. `t2-d1/a8`'de iddia "iki stack aynı BB" → fark 0 mı diye denetlenir.
 
 ## Betikle denetlenmeyenler
 

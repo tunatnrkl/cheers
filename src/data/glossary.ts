@@ -192,7 +192,7 @@ export const GLOSSARY: Term[] = [
   t("turnuva", "pay-jump", "Ödül sıçraması", "Bir oyuncu elendiğinde bir üst sıranın ödülüne geçiş farkı.", ["pay jump"]),
   t("turnuva", "bounty", "Bounty", "Bir oyuncuyu eleyene verilen ek ödül. Call aralıklarını genişletir.", ["knockout", "PKO"]),
   t("turnuva", "satellite", "Satellite", "Ödülü para değil, daha büyük bir turnuvaya bilet olan turnuva. ICM en uç haliyle geçerlidir."),
-  t("turnuva", "rebuy", "Rebuy / re-entry", "Chip'i biten oyuncunun yeniden giriş yapabilmesi. Rebuy'da oyuncu turnuvadan çıkmadan yeniden chip alır (çoğunlukla chip'i bittiğinde ya da kurala göre azaldığında); re-entry'de elendikten sonra yeniden kayıt olup başlangıç stack'iyle tekrar girer. İkisi de her turnuvada yoktur ve belirli bir süreyle sınırlıdır.", ["re-entry", "reentry"]),
+  t("turnuva", "rebuy", "Rebuy / re-entry", "Turnuvada ek chip alma (rebuy) ya da elendikten sonra yeniden girme (re-entry) hakkı. Rebuy'da oyuncu turnuvadan çıkmadan yeniden chip alır (çoğunlukla chip'i bittiğinde ya da kurala göre azaldığında); re-entry'de elendikten sonra yeniden kayıt olup başlangıç stack'iyle tekrar girer. İkisi de her turnuvada yoktur ve belirli bir süreyle sınırlıdır.", ["re-entry", "reentry"]),
   t("turnuva", "late-reg", "Geç kayıt", "Turnuva başladıktan sonra belirli bir seviyeye kadar kayıt olabilme süresi.", ["late registration", "late reg"]),
   t("turnuva", "chip-ev", "Chip EV (cEV)", "Kararı yalnızca kazanılan/kaybedilen chip'e göre değerlendirmek. Turnuvanın başında ICM'e yakındır, sonlarda ayrışır.", ["cEV", "$EV"]),
   t("turnuva", "freezeout", "Freezeout", "Her oyuncunun yalnızca bir kez girebildiği turnuva: chip'i biten oyuncu elenir, yeniden giriş ya da chip alma yoktur."),

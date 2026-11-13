@@ -821,7 +821,7 @@
   "anlatim": [
    "Turnuvada ödülü üst sıralar alır. Hangi sıraların ödül alacağını ve her sıranın payını gösteren tabloya ödül yapısı denir. Genellikle katılımcıların yaklaşık %10–20'si ödül alır; oran turnuvaya göre değişir ve turnuva başlamadan duyurulur.",
    "Ödül alan sıralara girmeye ITM (in the money) denir. Ödül sıralarına girmeden hemen önceki aşamaya bubble (balon) denir: bir oyuncu daha elenince kalan herkes ödül alacaktır.",
-   "Ödül kademelidir: paylar üst sıralara doğru büyür ve toplamları %100'dür. Örnek: 9 kişilik bir sit & go'da ilk üç sıra ödül alıyor, paylar %50, %30 ve %20. Bir sıra yukarı çıkmanın getirdiği fark ödül sıçraması diye anılır: 3.'lükten 2.'liğe 30 − 20 = 10 puan.",
+   "Ödül kademelidir: paylar üst sıralara doğru büyür ve toplamları %100'dür. Örnek: 9 kişilik bir sit & go'da ilk üç sıra ödül alıyor, paylar %50, %30 ve %20. Bir sıra yukarı çıkmanın getirdiği fark ödül sıçraması diye anılır: 3.'lükten 2.'liğe 30 − 20 = 10 yüzde puanı (kısaca puan).",
    "Büyük çok masalı turnuvalarda en alt ödül sıralarının payları genellikle küçüktür ve birbirine yakındır; büyük sıçramalar çoğunlukla final masasındadır. Bu müfredat ödülleri yalnızca yüzde ya da pay olarak anlatır."
   ],
   "terimler": [

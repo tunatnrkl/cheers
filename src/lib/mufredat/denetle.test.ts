@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import veri from "@/data/mufredat.json";
 import { HANDS } from "@/data/hands";
-import { acilisDurumu, alistirmaDenetle, denetle } from "../../../scripts/mufredat/denetle.mts";
+import { acilisDurumu, alistirmaDenetle, denetle, sayiOku } from "../../../scripts/mufredat/denetle.mts";
 
 type Al = Parameters<typeof alistirmaDenetle>[0];
 const m = veri as unknown as Parameters<typeof denetle>[0];
@@ -24,6 +24,18 @@ describe("müfredat olgu denetimi (scripts/mufredat/denetle.mts)", () => {
 
   const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
   const s = (soru: string, secenekler: string[], dogru: number, denetim: Al["denetim"]): Al => ({ ...temel, tip: "secmeli", soru, secenekler, dogru, denetim });
+
+  it("seçenek sayılarını Türkçe yazımla okur (nokta binlik, virgül ondalık)", () => {
+    expect(sayiOku("20.000")).toBe(20000);
+    expect(sayiOku("1.000.000 chip")).toBe(1000000);
+    expect(sayiOku("%27,3")).toBe(27.3);
+    expect(sayiOku("1.250,5 BB")).toBe(1250.5);
+    expect(sayiOku("5,5 BB")).toBe(5.5);
+    // Eski okuma "20.000"i 20 sanıyordu: bölüm sorusunda yanlış seçeneği kabul etmemeli.
+    const a = s("600.000 / 30?", ["2.000", "20", "20.000"], 2, { tur: "bolum", terimler: [600000, 30] });
+    expect(alistirmaDenetle(a)).toEqual([]);
+    expect(alistirmaDenetle({ ...a, dogru: 1 }).join()).toMatch(/hesaplanan 20000/);
+  });
 
   it("yanlış kazananı yakalar (kicker)", () => {
     const a = s("Board: A♣ 8♦ 5♠ 3♥ 2♦. Ali: A♠ K♥. Berk: A♦ J♣.", ["Ali", "Berk", "Beraberlik"], 0,

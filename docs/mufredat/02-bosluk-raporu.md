@@ -48,6 +48,6 @@ Freezeout, Sit & go, MTT (çok masalı turnuva), BB ante, Ortalama stack, Kapsam
 
 t1–t2'de spot kullanılmadı. Sitedeki turnuva spotları (t01–t26) push/fold, all-in'e call, bubble ve ICM kararlarıdır; seçenekleri ve gerekçeleri t3–t8 kavramlarını (push aralığı, ICM baskısı, implied odds) kullanır. Bu ünitelere uygun olacak spot türü "karar" değil "okuma" spotudur (ör. masadaki stack'leri BB'ye ve M'ye çevirmek, kimin kimi kapsadığını bulmak); bunlar için spot yerine sayı soruları yazıldı.
 
-### Öğren ekranı düzeltmesi gerekiyor
+### Öğren ekranı: Türkçe binlik ayırıcı · Uygulandı (d81bfc5)
 
-`src/lib/ogren/alistirma.ts` içindeki `sayiCoz`, yalnızca nokta içeren "20.000" girdisini 20 (ondalık) okuyor; binlik ayırıcıyla yazan kullanıcı doğru cevabında yanlış sayılır. t1–t2'de bu yüzden 1.000 ve üstü chip cevapları seçmeli yazıldı. Öneri: virgül yoksa ve nokta grupları üçer haneliyse ("20.000", "1.000.000") noktayı binlik say. Ayrıca `denetle.mts`'teki eski `sayiOku` ("bolum/carpim/toplam" seçmelileri) aynı yazımı 20 okuyor; yeni turnuva türleri Türkçe yazımı doğru okuyan `trSayi` kullanır.
+`src/lib/ogren/alistirma.ts` içindeki `sayiCoz` artık "20.000" girdisini 20.000 okuyor (nokta yalnızca ve gruplar üçer haneliyse binlik; virgül ondalık). `denetle.mts`'teki `sayiOku` da aynı kurala getirildi ve testle sabitlendi; açık not kalmadı. t1–t2'de 1.000 ve üstü chip cevapları seçmeli yazılmıştı; bu hâliyle kalıyor.

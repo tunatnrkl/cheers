@@ -3,7 +3,7 @@
   "anlatim": [
    "o3'te stack'i BB'ye çevirmeyi öğrendin: stack (BB) = stack (chip) / büyük blind. Turnuvada chip sayısı tek başına bir şey söylemez: 20.000 chip, büyük blind 100 iken 200 BB, büyük blind 1.000 iken 20 BB'dir. Kararların çoğu BB cinsinden derinliğe göre değişir.",
    "Bu müfredat turnuva stack'lerini üç bölgeye ayırır: derin stack 40 BB ve üstü, orta stack 20 BB ve üstü ama 40 BB'nin altı, kısa stack 20 BB'nin altı. Sınırlar kaynağa göre değişir; bunlar çalışma için seçilmiş yaklaşık sınırlardır.",
-   "Bölgeler ileride göreceğin oyun planlarına karşılık gelir: derin stack'te el oynamaya daha çok yer vardır (t3), orta stack'te seçenekler daralır (t4), kısa stack'te kararlar çoğunlukla all-in ya da fold'a iner (t5). All-in, önündeki bütün chip'leri ortaya koymaktır.",
+   "Bölgeler ileride göreceğin oyun planlarına karşılık gelir: derin stack'te el oynamaya daha çok yer vardır (t3), orta stack'te seçenekler daralır (t4), kısa stack'te seçenekler en çok daralır; stack küçüldükçe kararlar all-in ya da fold'a yaklaşır, en kısa stack'lerde (kabaca 10–12 BB altı) çoğunlukla bu ikisine iner (t5). All-in, önündeki bütün chip'leri ortaya koymaktır.",
    "Ante'li masada da stack'i büyük blind'e bölerek BB'ye çevirirsin; ante bu hesaba girmez. Ante'nin etkisini bir sonraki derste M oranıyla göreceksin."
   ],
   "terimler": [
@@ -677,12 +677,6 @@
      "terimler": [
       600000,
       30
-     ],
-     "degerler": [
-      2000,
-      18000,
-      20000,
-      200000
      ]
     }
    },
@@ -706,12 +700,6 @@
      "terimler": [
       100,
       10000
-     ],
-     "degerler": [
-      100000,
-      1000000,
-      10000000,
-      110000
      ]
     }
    },
@@ -948,7 +936,7 @@
     "zorluk": 3,
     "soru": "Aynı masada chip'lerini iki katına çıkarırsan beklediğin ödül payı ne olur?",
     "secenekler": [
-     "Büyür ama iki katına çıkmaz; birincilik payı %50 ile sınırlıdır",
+     "Büyür ama iki katına çıkmaz: herkes en az %20'yi garantilemiştir, birincilik de %50 ile sınırlıdır.",
      "Tam iki katına çıkar",
      "Hiç değişmez",
      "Yarıya iner"
@@ -972,7 +960,7 @@
     "kimlik": "a7",
     "tip": "secmeli",
     "zorluk": 3,
-    "soru": "Bu etki ne zaman genellikle en küçüktür?",
+    "soru": "Kaybedilen chip'in kazanılan chip'ten daha değerli olması etkisi ne zaman genellikle en küçüktür?",
     "secenekler": [
      "Turnuvanın başında, ödül sıraları henüz uzaktayken",
      "Bubble'da",
