@@ -1,12 +1,21 @@
 import Link from "next/link";
 import { ActionStrip } from "@/components/ActionStrip";
+import { CizimKarar, CizimKoc, CizimMasa } from "@/components/anasayfa/Cizimler";
+import { KaldiginYer } from "@/components/anasayfa/KaldiginYer";
+import { inceMufredat } from "@/components/anasayfa/ogrenOzeti";
+import { TokusanIsaret } from "@/components/brand/Kutlama";
 import { PokerTable } from "@/components/PokerTable";
 import { GLOSSARY } from "@/data/glossary";
 import { HAND_BY_ID, HANDS, type Topic } from "@/data/hands";
+import mufredat from "@/data/mufredat.json";
+import type { Mufredat } from "@/lib/mufredat/tipler";
 import { replay } from "@/lib/poker/replay";
 
 const count = (f: (t: Topic) => boolean) => HANDS.filter((h) => f(h.topic)).length;
 const TOTAL = `${Math.floor(HANDS.length / 50) * 50}+`;
+
+// Ana sayfaya yalnızca yol hesabı için gereken hafif müfredat gider (sunucuda, derleme anında).
+const YOL = inceMufredat(mufredat as unknown as Mufredat);
 
 const MODES = [
   {
@@ -40,9 +49,9 @@ const MODES = [
 ];
 
 const STEPS = [
-  ["Masaya otur", "Aksiyonlar üstte, kartların ve stack'ler masada. Spot gerçek bir el gibi önüne gelir."],
-  ["Kararını ver", "Fold, call ya da raise. Cevap anında gelir; açıklama sen istemedikçe çıkmaz."],
-  ["Koça sor", "“Neden?”e dokun ya da aklındakini yaz. Yapay zeka koç birkaç cümleyle, sade anlatır."],
+  { t: "Masaya otur", d: "Aksiyonlar üstte, kartların ve stack'ler masada. Spot gerçek bir el gibi önüne gelir.", Cizim: CizimMasa },
+  { t: "Kararını ver", d: "Fold, call ya da raise. Cevap anında gelir; açıklama sen istemedikçe çıkmaz.", Cizim: CizimKarar },
+  { t: "Koça sor", d: "“Neden?”e dokun ya da aklındakini yaz. Yapay zeka koç birkaç cümleyle, sade anlatır.", Cizim: CizimKoc },
 ];
 
 export default function Home() {
@@ -50,47 +59,125 @@ export default function Home() {
   const r = replay(demo);
 
   return (
-    <div className="flex flex-col gap-16 sm:gap-24">
-      {/* ── Giriş ── */}
-      <section className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+    <div className="flex flex-col gap-14 sm:gap-20">
+      <div className="flex flex-col gap-8 sm:gap-12">
+        {/* ── Kaldığın yer: Öğren yolundaki ders ve günlük seri (tarayıcıda) ── */}
+        <KaldiginYer mufredat={YOL} />
+
+        {/* ── Giriş ── */}
+        <section aria-labelledby="giris-baslik" className="grid items-center gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12">
+          <div className="lg:order-2 lg:justify-self-center">
+            {/* Bira altlığı: sayfa açılışında bardaklar bir kez yaklaşır ve tokuşur, sonra durur */}
+            <div className="grid size-[148px] place-items-center rounded-full border border-line bg-felt-deep sm:size-[220px] lg:size-[340px]">
+              <TokusanIsaret className="w-[74%]" sure="2.4s" gecikme="0.35s" />
+            </div>
+          </div>
+          <div className="lg:order-1">
+            <h1 id="giris-baslik" className="text-[40px] leading-[1.04] font-bold tracking-[-0.02em] text-balance sm:text-[60px] lg:text-[68px]">
+              Poker kararlarını masada çalış.
+            </h1>
+            <p className="lead mt-5 max-w-xl">
+              {TOTAL} gerçekçi spot. Aksiyonu gör, kararını ver, sonucu hemen öğren. Takıldığın yeri yanındaki yapay zeka
+              koçuna sor; kısa ve sade anlatsın.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <Link href="/alistirma" className="btn btn-primary btn-lg">
+                Alıştırmaya başla
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/ogren" className="link inline-flex min-h-11 items-center text-base">
+                Öğrenme yolu
+              </Link>
+            </div>
+            <p className="mt-6 text-sm text-muted">
+              {TOTAL} spot · {GLOSSARY.length} terimlik sözlük · hesap gerekmez
+            </p>
+          </div>
+        </section>
+      </div>
+
+      {/* ── Üç adım ── */}
+      <section aria-labelledby="adimlar-baslik">
+        <h2 id="adimlar-baslik" className="text-[28px] leading-tight font-bold sm:text-[34px]">
+          Üç adım, her el bir ders
+        </h2>
+        <ol className="mt-6 grid gap-4 md:grid-cols-3">
+          {STEPS.map(({ t, d, Cizim }, i) => (
+            <li key={t} className="card flex flex-col">
+              <div className="flex items-start justify-between gap-4">
+                <span className="font-display text-[34px] leading-none font-semibold text-accent-text tabular-nums" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <Cizim className="h-14 w-auto text-accent-text sm:h-16" />
+              </div>
+              <h3 className="mt-5 text-xl font-semibold">
+                <span className="sr-only">{i + 1}. adım: </span>
+                {t}
+              </h3>
+              <p className="mt-1 text-muted">{d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ── Spot türleri ── */}
+      <section aria-labelledby="spot-baslik">
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
+          <h2 id="spot-baslik" className="text-[28px] leading-tight font-bold sm:text-[34px]">
+            Bir spot seç, hemen başla
+          </h2>
+          <Link href="/alistirma" className="link inline-flex min-h-11 items-center">
+            Karışık çalış →
+          </Link>
+        </div>
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {MODES.map((m) => (
+            <li key={m.href}>
+              <Link
+                href={m.href}
+                className="card group flex h-full flex-col transition duration-200 hover:border-accent/60 motion-safe:hover:-translate-y-1"
+              >
+                <span className="text-sm font-semibold text-muted">{m.eyebrow}</span>
+                <span className="mt-1.5 text-lg font-bold">{m.title}</span>
+                <span className="mt-1 flex-1 text-sm text-muted">{m.desc}</span>
+                <span className="mt-5 flex items-center justify-between text-sm font-bold">
+                  <span className="tag">{m.n} spot</span>
+                  <span className="text-accent-text" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ── Masadan bir an: gerçek masa bileşeniyle önizleme ── */}
+      <section aria-labelledby="onizleme-baslik" className="grid items-center gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
         <div>
-          <p className="eyebrow">Texas Hold'em alıştırma masası</p>
-          <h1 className="mt-3 text-4xl leading-[1.08] font-extrabold tracking-tight text-balance sm:text-[56px]">
-            Poker kararlarını <span className="text-accent-text">masada</span> çalış.
-          </h1>
-          <p className="lead mt-5 max-w-xl">
-            {TOTAL} gerçekçi spot. Aksiyonu gör, hamleni seç, anında sonucu öğren. Takıldığın yeri yanındaki
-            yapay zeka koçuna sor; kısa ve sade cevap versin.
+          <h2 id="onizleme-baslik" className="text-[28px] leading-tight font-bold sm:text-[34px]">
+            Masada böyle görünür
+          </h2>
+          <p className="mt-3 max-w-md text-muted">
+            Rakipler sırayla oynar, sıra sana gelince karar butonları açılır. Eli sonuna kadar oynarsın; koç penceresi
+            masanın yanında durur.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/alistirma" className="btn btn-primary btn-lg">
-              Alıştırmaya başla
-              <span aria-hidden="true">→</span>
-            </Link>
-            <Link href="/range" className="btn btn-lg">
+          <p className="mt-4 flex flex-wrap gap-x-5">
+            <Link href="/range" className="link inline-flex min-h-11 items-center">
               Range matrisi
             </Link>
-          </div>
-          <dl className="mt-10 grid max-w-md grid-cols-3 gap-6">
-            {[
-              [TOTAL, "spot"],
-              [String(GLOSSARY.length), "terimlik sözlük"],
-              ["Ücretsiz", "hesapsız da çalışır"],
-            ].map(([v, k]) => (
-              <div key={k}>
-                <dt className="sr-only">{k}</dt>
-                <dd className="text-2xl font-extrabold tracking-tight">{v}</dd>
-                <dd className="text-sm text-muted">{k}</dd>
-              </div>
-            ))}
-          </dl>
+            <Link href="/araclar" className="link inline-flex min-h-11 items-center">
+              Hesap makineleri
+            </Link>
+            <Link href="/sozluk" className="link inline-flex min-h-11 items-center">
+              Sözlük
+            </Link>
+          </p>
         </div>
-
-        {/* Gerçek masa bileşeniyle önizleme */}
         <Link
           href="/alistirma"
           aria-label="Örnek spot: alıştırma masasını aç"
-          className="trainer group block overflow-hidden rounded-3xl border border-t-line bg-t-bg shadow-[0_30px_80px_-20px_rgb(0_0_0/0.45)] transition hover:-translate-y-0.5"
+          className="trainer block overflow-hidden rounded-3xl border border-t-line bg-t-bg shadow-[0_30px_80px_-20px_rgb(0_0_0/0.45)]"
         >
           <div className="pointer-events-none border-b border-t-line" aria-hidden="true">
             <ActionStrip r={r} heroPos={demo.heroPos} />
@@ -110,65 +197,6 @@ export default function Home() {
             </div>
           </div>
         </Link>
-      </section>
-
-      {/* ── Nasıl çalışır ── */}
-      <section>
-        <p className="eyebrow">Nasıl çalışır</p>
-        <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">Üç adım, her el bir ders</h2>
-        <ol className="mt-8 grid gap-4 md:grid-cols-3">
-          {STEPS.map(([t, d], i) => (
-            <li key={t} className="card">
-              <span className="grid size-10 place-items-center rounded-xl bg-soft text-lg font-extrabold text-accent-text">{i + 1}</span>
-              <h3 className="mt-4 text-lg font-bold">{t}</h3>
-              <p className="mt-1 text-muted">{d}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* ── Spot türleri ── */}
-      <section>
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow">Ne çalışmak istersin?</p>
-            <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">Bir spot seç, hemen başla</h2>
-          </div>
-          <Link href="/alistirma" className="link">
-            Karışık çalış →
-          </Link>
-        </div>
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {MODES.map((m) => (
-            <li key={m.href}>
-              <Link href={m.href} className="card group flex h-full flex-col transition hover:-translate-y-0.5 hover:border-accent/50">
-                <span className="text-xs font-bold text-muted">{m.eyebrow}</span>
-                <span className="mt-2 text-lg font-bold">{m.title}</span>
-                <span className="mt-1 flex-1 text-sm text-muted">{m.desc}</span>
-                <span className="mt-5 flex items-center justify-between text-sm font-bold">
-                  <span className="tag">{m.n} spot</span>
-                  <span className="text-accent-text transition group-hover:translate-x-0.5" aria-hidden="true">
-                    →
-                  </span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ── Araçlar ── */}
-      <section className="grid gap-4 md:grid-cols-3">
-        {[
-          ["/range", "Range matrisi", "Pozisyona göre açılış ve push aralıkları. Kendi range'ini çiz, karşılaştır."],
-          ["/araclar", "Hesap makineleri", "Pot odds, outs, SPR ve ICM. Her sonucun ne anlama geldiği yanında."],
-          ["/ogren", "Öğren", `Cash ve turnuva rehberleri, blog yazıları ve ${GLOSSARY.length} terimlik sözlük.`],
-        ].map(([href, t, d]) => (
-          <Link key={href} href={href} className="card flex flex-col transition hover:border-accent/50">
-            <span className="text-lg font-bold">{t}</span>
-            <span className="mt-1 text-muted">{d}</span>
-          </Link>
-        ))}
       </section>
 
       <p className="rounded-2xl border border-line bg-surface-2 px-5 py-4 text-sm text-muted">

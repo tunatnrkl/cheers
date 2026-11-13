@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { CheersMark } from "@/components/brand/CheersMark";
+import { DersSonuIsareti } from "@/components/brand/Kutlama";
 import { GLOSSARY } from "@/data/glossary";
 import { type Cevap, degerlendir, dogruMetni } from "@/lib/ogren/alistirma";
 import { type DepoDurumu, ogrenGuncelle } from "@/lib/ogren/depo";
@@ -22,6 +22,7 @@ import {
   eksikOnkosullar,
   oturumSorulari,
   oturumUygula,
+  uniteOzeti,
 } from "@/lib/ogren/ilerleme";
 import { type Kaynak, ogrenAdresi } from "@/lib/ogren/veri";
 import { type PistKimlik, dersinPisti } from "@/lib/ogren/yol";
@@ -89,6 +90,7 @@ function Oturum({ k, depo, kimlik, mod, donus }: { k: Kaynak; depo: DepoDurumu; 
   const [sonuc, setSonuc] = useState<Sonuc | null>(null);
   const [ilk, setIlk] = useState<OturumCevabi[]>([]);
   const [ozet, setOzet] = useState<OturumOzeti | null>(null);
+  const [uniteBitti, setUniteBitti] = useState<string | null>(null);
   const [cikis, setCikis] = useState(false);
   const [duyuru, setDuyuru] = useState("");
   const baslik = useRef<HTMLHeadingElement>(null);
@@ -160,12 +162,19 @@ function Oturum({ k, depo, kimlik, mod, donus }: { k: Kaynak; depo: DepoDurumu; 
     }
     const simdi = new Date();
     let o: OturumOzeti | null = null;
+    let unite: string | null = null;
     ogrenGuncelle(k.anahtar, (x) => {
       const r = oturumUygula(dz, x, { kimlik, mod, cevaplar: ilk }, simdi);
       o = r.ozet;
+      // Ünite bu oturumla bitti mi? (önce eksik, şimdi tam) → sakin "Şerefe!"
+      const uk = dz.dersUnite.get(kimlik) ?? "";
+      const once = uniteOzeti(dz, x, uk);
+      const sonra = uniteOzeti(dz, r.durum, uk);
+      if (sonra.toplam > 0 && once.tamam < once.toplam && sonra.tamam === sonra.toplam) unite = dz.uniteler.get(uk)?.baslik ?? null;
       return r.durum;
     });
     setOzet(o);
+    setUniteBitti(unite);
     setAsama("sonu");
   }
 
@@ -248,7 +257,7 @@ function Oturum({ k, depo, kimlik, mod, donus }: { k: Kaynak; depo: DepoDurumu; 
         </form>
       )}
 
-      {asama === "sonu" && ozet && <Sonu ozet={ozet} tur={d.tur} baslikRef={baslik} devam={cik} mod={mod} oran={d.ustalik.oran} />}
+      {asama === "sonu" && ozet && <Sonu ozet={ozet} tur={d.tur} baslikRef={baslik} devam={cik} mod={mod} oran={d.ustalik.oran} unite={uniteBitti} />}
     </div>
   );
   return createPortal(ekran, document.body);
@@ -403,6 +412,7 @@ function Sonu({
   devam,
   mod,
   oran,
+  unite,
 }: {
   ozet: OturumOzeti;
   tur: string;
@@ -410,6 +420,7 @@ function Sonu({
   devam: () => void;
   mod: OturumModu;
   oran: number;
+  unite: string | null;
 }) {
   const kaldi = ozet.testGecti === false;
   const baslik = kaldi ? "Test bitti" : ozet.testGecti ? "Test geçildi" : mod === "tekrar" || tur === "tekrar" ? "Tekrar tamam" : tur === "kontrol" ? "Ünite kontrolü tamam" : "Ders tamam";
@@ -417,7 +428,7 @@ function Sonu({
     <>
       <div className="og-ders-govde">
         <div className="mx-auto flex max-w-md flex-col items-center gap-5 px-4 py-8 text-center">
-          <CheersMark className={`size-28 ${kaldi ? "" : "og-kutlama"}`} />
+          <DersSonuIsareti seviye={unite ? "unite" : !kaldi && (ozet.ilkTamamlama || ozet.testGecti) ? "ders" : "sabit"} />
           <h2 ref={baslikRef} tabIndex={-1} className="h1">
             {baslik}
           </h2>
@@ -436,6 +447,7 @@ function Sonu({
             </div>
           </dl>
           <ul className="flex flex-col gap-1 text-sm text-muted">
+            {unite && <li className="font-semibold text-ink">Ünite tamam: {unite}</li>}
             <li>
               {ozet.dogru} doğru × {XP_DOGRU} XP + bitirme {XP_DERS} XP
               {ozet.kabul > 0 && ` · ${ozet.kabul} kabul edilebilir cevap (hata sayılmadı)`}

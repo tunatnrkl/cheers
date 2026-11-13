@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AiPanel } from "@/components/AiPanel";
+import { useSeriKutlamasi } from "@/components/brand/Kutlama";
 import { CoachChat } from "@/components/CoachChat";
 import { AksiyonCubugu } from "@/components/masa/AksiyonCubugu";
 import { AksiyonGecmisi } from "@/components/masa/AksiyonGecmisi";
@@ -51,7 +52,7 @@ const IKON_BTN = "grid size-11 shrink-0 place-items-center rounded-xl text-t-mut
 
 /**
  * Alıştırma masası: kurulum ekranı ve el motoruyla oynanan antrenman.
- * `onStreak(n)`: o anki doğru serisi değiştiğinde çağrılır (kutlama ayrı iş kolunda bağlanacak).
+ * `onStreak(n)`: o anki doğru serisi değiştiğinde çağrılır; "Şerefe!" kutlaması da buradan beslenir (5 ve 10).
  */
 export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
   const params = useSearchParams();
@@ -61,6 +62,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
   const aksiyonRef = useRef<HTMLDivElement>(null);
   const ustRef = useRef<HTMLDivElement>(null);
   useSayfaKilidi(kokRef);
+  const [kutlama, seriKutla] = useSeriKutlamasi();
 
   const baglanti = ["el", "oyun", "konu", "sokak", "pf"].some((k) => params.has(k));
   const [mod, setMod] = useState<"kurulum" | "masa">(baglanti ? "masa" : "kurulum");
@@ -259,6 +261,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
       const yeni = i === hand.correct ? seri + 1 : 0;
       setSeri(yeni);
       onStreak?.(yeni);
+      seriKutla(yeni);
     } else if (ilk) {
       setIlkSecim(secenekSirasi(hand, a, karar, legal));
     }
@@ -417,6 +420,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
 
   return (
     <div ref={kokRef} className="trainer antrenman-kok bg-t-bg text-t-ink">
+      {kutlama}
       {mod === "kurulum" ? (
         <>
           <div ref={ustRef} className="flex min-h-12 items-center gap-2 border-b border-t-line px-3">
