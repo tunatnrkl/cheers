@@ -561,7 +561,7 @@ export function Trainer({ onStreak }: { onStreak?: (n: number) => void } = {}) {
 
             {/* Sağ panel: aksiyon geçmişi ya da el özeti. Geniş ekranda sütun, dar ekranda masanın üstünde katman. */}
             {sagPanel && hand && r && (
-              <div className="absolute inset-y-0 right-0 z-20 min-h-0 w-[min(360px,92%)] border-l border-t-line shadow-[-12px_0_30px_rgb(0_0_0/0.35)] lg:static lg:w-[340px] lg:shadow-none">
+              <div className="absolute inset-y-0 right-0 z-20 min-h-0 w-full sm:w-[min(360px,92%)] sm:border-l border-t-line shadow-[-12px_0_30px_rgb(0_0_0/0.35)] lg:static lg:w-[340px] lg:shadow-none">
                 {sagPanel === "gecmis" ? (
                   <AksiyonGecmisi r={r} heroPos={hand.heroPos} olaylar={olaylar.slice(0, gosterilen)} onKapat={() => setPanel(null)} />
                 ) : (

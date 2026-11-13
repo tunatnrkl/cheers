@@ -3,55 +3,32 @@ import { ActionStrip } from "@/components/ActionStrip";
 import { CizimKarar, CizimKoc, CizimMasa } from "@/components/anasayfa/Cizimler";
 import { KaldiginYer } from "@/components/anasayfa/KaldiginYer";
 import { inceMufredat } from "@/components/anasayfa/ogrenOzeti";
+import { SPOT_KARTLARI } from "@/components/anasayfa/spotlar";
 import { TokusanIsaret } from "@/components/brand/Kutlama";
 import { PokerTable } from "@/components/PokerTable";
 import { GLOSSARY } from "@/data/glossary";
-import { HAND_BY_ID, HANDS, type Topic } from "@/data/hands";
+import { HAND_BY_ID, HANDS } from "@/data/hands";
 import mufredat from "@/data/mufredat.json";
+import { STATIC_SITE } from "@/lib/client/env";
 import type { Mufredat } from "@/lib/mufredat/tipler";
 import { replay } from "@/lib/poker/replay";
 
-const count = (f: (t: Topic) => boolean) => HANDS.filter((h) => f(h.topic)).length;
 const TOTAL = `${Math.floor(HANDS.length / 50) * 50}+`;
 
 // Ana sayfaya yalnızca yol hesabı için gereken hafif müfredat gider (sunucuda, derleme anında).
 const YOL = inceMufredat(mufredat as unknown as Mufredat);
 
-const MODES = [
-  {
-    href: "/alistirma?oyun=cash&konu=acilis",
-    eyebrow: "Cash · Preflop",
-    title: "Açılış kararları",
-    desc: "Pozisyona göre hangi ellerle açılır, hangileri bırakılır?",
-    n: count((t) => t === "acilis"),
-  },
-  {
-    href: "/alistirma?oyun=turnuva&konu=pushfold",
-    eyebrow: "Turnuva · Kısa stack",
-    title: "Push / fold",
-    desc: "6–15 BB ile all-in mi, fold mu? Pozisyon her şeyi değiştirir.",
-    n: count((t) => t === "pushfold"),
-  },
-  {
-    href: "/alistirma?oyun=turnuva&konu=callshove",
-    eyebrow: "Turnuva · BB",
-    title: "All-in'e call",
-    desc: "Rakip itti. Elin, onun aralığına karşı yeterli mi?",
-    n: count((t) => t === "callshove"),
-  },
-  {
-    href: "/alistirma?oyun=cash",
-    eyebrow: "Cash · Postflop",
-    title: "Flop, turn, river",
-    desc: "C-bet, value bet, blöf, pot odds ve SPR kararları.",
-    n: count((t) => ["cbet", "value", "blof", "odds", "spr", "3bet", "savunma"].includes(t)),
-  },
-];
-
 const STEPS = [
   { t: "Masaya otur", d: "Aksiyonlar üstte, kartların ve stack'ler masada. Spot gerçek bir el gibi önüne gelir.", Cizim: CizimMasa },
   { t: "Kararını ver", d: "Fold, call ya da raise. Cevap anında gelir; açıklama sen istemedikçe çıkmaz.", Cizim: CizimKarar },
-  { t: "Koça sor", d: "“Neden?”e dokun ya da aklındakini yaz. Yapay zeka koç birkaç cümleyle, sade anlatır.", Cizim: CizimKoc },
+  {
+    t: "Koça sor",
+    // GitHub Pages sürümünde sunucu ve yapay zeka yok: koç hazır sorularla, kural tabanlı çalışır.
+    d: STATIC_SITE
+      ? "“Neden?”e dokun; koç kararın gerekçesini birkaç cümleyle anlatır."
+      : "“Neden?”e dokun ya da aklındakini yaz. Yapay zeka koç birkaç cümleyle, sade anlatır.",
+    Cizim: CizimKoc,
+  },
 ];
 
 export default function Home() {
@@ -77,8 +54,10 @@ export default function Home() {
               Poker kararlarını masada çalış.
             </h1>
             <p className="lead mt-5 max-w-xl">
-              {TOTAL} gerçekçi spot. Aksiyonu gör, kararını ver, sonucu hemen öğren. Takıldığın yeri yanındaki yapay zeka
-              koçuna sor; kısa ve sade anlatsın.
+              {TOTAL} gerçekçi spot. Aksiyonu gör, kararını ver, sonucu hemen öğren.{" "}
+              {STATIC_SITE
+                ? "Takıldığın yerde koça sor; hazır sorularla kısa ve sade açıklama alırsın."
+                : "Takıldığın yeri yanındaki yapay zeka koçuna sor; kısa ve sade anlatsın."}
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
               <Link href="/alistirma" className="btn btn-primary btn-lg">
@@ -131,7 +110,7 @@ export default function Home() {
           </Link>
         </div>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {MODES.map((m) => (
+          {SPOT_KARTLARI.map((m) => (
             <li key={m.href}>
               <Link
                 href={m.href}

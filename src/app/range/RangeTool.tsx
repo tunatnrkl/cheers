@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { AiPanel } from "@/components/AiPanel";
 import ranges from "@/data/ranges.json";
+import { STATIC_SITE } from "@/lib/client/env";
 import { MATRIX_RANKS, matrixLabel, rangePercent } from "@/lib/poker/cards";
 
 const POS = ["UTG", "HJ", "CO", "BTN", "SB"] as const;
@@ -204,7 +205,7 @@ export function RangeTool() {
             setEvalId(Date.now());
           }}
         >
-          Range'imi yapay zekaya değerlendir
+          {STATIC_SITE ? "Range'imi referansla karşılaştır" : "Range'imi yapay zekaya değerlendir"}
         </button>
         {mine.size === 0 && (
           <p className="text-sm text-muted">Önce “Kendi range'im” görünümünde ellerini işaretle.</p>
