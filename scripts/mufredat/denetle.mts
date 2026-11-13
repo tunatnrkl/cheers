@@ -4,7 +4,8 @@
 // 6-max koltuk modeliyle, başlangıç eli soruları (yazım, kombinasyon, matris, aralık yüzdesi) 52 kartlık
 // destenin bütün iki kartlık ellerini sayarak denetlenir. Açılış soruları src/data/ranges.json'daki yaklaşık
 // çalışma aralıklarına göre (solver çıktısı değil), kenar payı bırakılarak denetlenir; gereken equity
-// formülle, aralığa karşı equity sabit tohumlu Monte Carlo ile yeniden hesaplanır.
+// formülle, aralığa karşı equity sabit tohumlu Monte Carlo ile yeniden hesaplanır. Turnuva hesapları (ante'li pot,
+// M oranı, blind artışında BB erimesi, ortalama stack, ödül payları) girdileri senaryodan elle girilerek yeniden yapılır.
 // Alıştırmadaki `denetim` alanı neyin hesaplanacağını söyler; cevap `dogru` ile karşılaştırılır.
 //
 // Çalıştırma: node scripts/mufredat/denetle.mts   (hata varsa 1 ile çıkar)
@@ -239,6 +240,18 @@ export function equityAraliga(el: string, rakip: string[], deneme = 40000, tohum
   return (puan / deneme) * 100;
 }
 
+/**
+ * Bir eldeki toplam ante. anteTuru "bb" (varsayılan): BB oyuncusu masanın tamamı için TEK bir ante öder.
+ * "klasik": masadaki her oyuncu ante öder (ante × oyuncu).
+ */
+function toplamAnte(d: Record<string, unknown>): number {
+  const ante = Number(d.ante ?? 0), tur = (d.anteTuru as string | undefined) ?? "bb";
+  if (tur === "bb") return ante;
+  if (tur !== "klasik") throw new Error(`bilinmeyen ante türü "${tur}"`);
+  if (!(Number.isInteger(d.oyuncu) && (d.oyuncu as number) >= 2)) throw new Error("klasik ante için oyuncu sayısı gerekli");
+  return ante * (d.oyuncu as number);
+}
+
 /** Bir alıştırmanın denetimi; hata yoksa boş dizi. */
 export function alistirmaDenetle(a: Al): string[] {
   const d = a.denetim;
@@ -255,6 +268,23 @@ export function alistirmaDenetle(a: Al): string[] {
   const iddiaDY = (gercek: boolean) => {
     if (a.tip !== "dogruYanlis") return hata("iddia yalnızca doğru/yanlış sorusunda kullanılır");
     if (dogru !== gercek) hata(`hesaplanan cevap ${gercek}, veride ${dogru}`);
+  };
+  /**
+   * Hesaplanan sayıyı cevapla karşılaştırır. pay: yuvarlama payı (sayı sorusunda tolerans bundan büyük olamaz).
+   * iddia: doğru/yanlış ("iddia" sayısı hesaplanana eşit mi). sayi: |dogru − r| ≤ pay.
+   * secmeli: `degerler` (yoksa seçeneklerdeki ilk sayı, Türkçe yazımla) içinde r'ye pay kadar yakın TEK seçenek.
+   */
+  const sayiKarsila = (r: number, ne: string, pay: number) => {
+    const yakin = (x: number) => Math.abs(x - r) <= pay + 1e-9;
+    if ("iddia" in d!) return iddiaDY(yakin(d!.iddia as number));
+    if (a.tip === "sayi") {
+      const tol = (a as { tolerans?: number }).tolerans ?? 0;
+      if (!yakin(dogru as number) || tol > Math.max(pay, 0.1)) hata(`${ne}: hesaplanan ${r}, veride ${dogru} (tolerans ${tol})`);
+      return;
+    }
+    const degerler = (d!.degerler as number[] | undefined) ?? sec.map(trSayi);
+    if (degerler.length !== sec.length) return hata("degerler seçeneklerle aynı uzunlukta olmalı");
+    tekCevap((i) => yakin(degerler[i]), `${ne} ${r}`);
   };
   try {
     switch (d.tur) {
@@ -602,6 +632,60 @@ export function alistirmaDenetle(a: Al): string[] {
           const tol = (a as { tolerans?: number }).tolerans ?? 0;
           if (Math.abs((dogru as number) - r) > tol || tol > 3) hata(`gerekli pay %${r.toFixed(1)}, veride ${dogru} (tolerans ${tol})`);
         } else tekCevap((i) => Math.abs(trSayi(sec[i]) - r) < 4, `gerekli pay %${r.toFixed(1)}`);
+        break;
+      }
+      // ── Turnuva hesapları (t1–t2). Girdiler senaryodan elle girilir; betik işlemi ve ante kuralını uygular. ──
+      case "antePot": {
+        // El başındaki pot: SB + BB + toplam ante (+ sonradan konanlar). BB ante: tek ante; klasik: oyuncu başına ante.
+        sayiKarsila(Number(d.sb) + Number(d.bb) + toplamAnte(d) + ((d.ekler as number[] | undefined) ?? []).reduce((x, y) => x + y, 0), "pot", 0);
+        break;
+      }
+      case "mOrani": {
+        // M = stack / (SB + BB + bir eldeki toplam ante)
+        sayiKarsila(trSayi(d.stack) / (Number(d.sb) + Number(d.bb) + toplamAnte(d)), "M", 0.05);
+        break;
+      }
+      case "bbErime": {
+        // Aynı stack, büyüyen BB: yeni = stack / yeniBb; kayip = stack / eskiBb − stack / yeniBb
+        const st = trSayi(d.stack), eski = st / Number(d.eskiBb), yeni = st / Number(d.yeniBb);
+        if (d.sonuc !== "yeni" && d.sonuc !== "kayip") throw new Error(`bbErime sonucu "yeni" ya da "kayip" olmalı`);
+        sayiKarsila(d.sonuc === "yeni" ? yeni : eski - yeni, "BB", 0.05);
+        break;
+      }
+      case "ortalamaStack": {
+        // Ortalama stack = başlangıç stack'i × giriş sayısı / kalan oyuncu (BB verilirse BB cinsinden).
+        // `stack` verilirse cevap, o stack'in ortalamanın yüzde kaçı olduğudur.
+        const ort = (trSayi(d.baslangic) * Number(d.giris)) / Number(d.kalan);
+        const r = d.stack !== undefined ? (trSayi(d.stack) / ort) * 100 : ort / ((d.bb as number | undefined) ?? 1);
+        sayiKarsila(r, "ortalama stack", 0.05);
+        break;
+      }
+      case "bolge": {
+        // Müfredatın turnuva stack bölgeleri (yaklaşık, kaynağa göre değişir): derin ≥ 40 BB, orta 20–40 BB, kısa < 20 BB.
+        const r = trSayi(d.stack) / Number(d.bb);
+        const b = r >= 40 ? "Derin" : r >= 20 ? "Orta" : "Kısa";
+        if ("iddia" in d) iddiaDY(b === d.iddia);
+        else tekCevap((i) => String(sec[i]).startsWith(b), `${r} BB: ${b}`);
+        break;
+      }
+      case "odul": {
+        // Ödül payları (%): toplamı 100 olmalı ve sıra büyüdükçe pay artmamalı (kademeli yapı).
+        const p = d.paylar as number[];
+        if (Math.abs(p.reduce((x, y) => x + y, 0) - 100) > 1e-6) throw new Error(`ödül payları toplamı 100 değil (${p.reduce((x, y) => x + y, 0)})`);
+        if (p.some((v, i) => i > 0 && v > p[i - 1])) throw new Error("ödül payları sıra büyüdükçe artıyor");
+        const sira = (n: unknown) => {
+          const v = p[Number(n) - 1];
+          if (v === undefined) throw new Error(`${n}. sıra ödül almıyor`);
+          return v;
+        };
+        const r = d.soru === "itm" ? p.length
+          : d.soru === "pay" ? sira(d.sira)
+          : d.soru === "fark" ? sira((d.siralar as number[])[0]) - sira((d.siralar as number[])[1])
+          : d.soru === "toplam" ? (d.siralar as number[]).reduce((x, n) => x + sira(n), 0)
+          : d.soru === "itmOrani" ? (p.length / Number(d.katilimci)) * 100
+          : NaN;
+        if (Number.isNaN(r)) throw new Error(`bilinmeyen ödül sorusu "${d.soru}"`);
+        sayiKarsila(r, "ödül", d.soru === "itmOrani" ? 0.05 : 0);
         break;
       }
       default:

@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 46 ders, 510 alıştırma.
+**Dolu:** 53 ders, 585 alıştırma.
 
 ## Cash pisti
 
@@ -256,13 +256,13 @@ Formatlar, blind seviyeleri, ante ve ödül yapısı.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t1-d1` Turnuva ile cash farkı | ders | Chip'lerin geri alınamadığını, elenmenin kalıcı olduğunu ve blind'lerin arttığını açıklar. | o2-k |
-| `t1-d2` Formatlar | ders | Freezeout, re-entry, sit & go ve çok masalı turnuvayı ayırt eder. | t1-d1 |
-| `t1-d3` Blind seviyeleri | ders | Seviye süresini ve blind artışının stack'i BB cinsinden nasıl erittiğini hesaplar. | t1-d2, o2-d1 |
-| `t1-d4` Ante ve BB ante | ders | Ante'nin potu nasıl büyüttüğünü hesaplar. | t1-d3, o2-d5 |
-| `t1-d5` Ödül yapısı | ders | Paraya girmenin (ITM) ve kademeli ödül dağılımının ne olduğunu açıklar. | t1-d4 |
-| `t1-k` Kontrol: Turnuva nedir | kontrol | "Turnuva nedir" ünitesinin kazanımlarını karışık sorularda uygular. | t1-d5 |
-| `t1-r` Tekrar: Turnuva nedir | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t1-k |
+| `t1-d1` Turnuva ile cash farkı (11 alıştırma) | ders | Chip'lerin geri alınamadığını, elenmenin kalıcı olduğunu ve blind'lerin arttığını açıklar. | o2-k |
+| `t1-d2` Formatlar (11 alıştırma) | ders | Freezeout, re-entry, sit & go ve çok masalı turnuvayı ayırt eder. | t1-d1 |
+| `t1-d3` Blind seviyeleri (11 alıştırma) | ders | Seviye süresini ve blind artışının stack'i BB cinsinden nasıl erittiğini hesaplar. | t1-d2, o2-d1 |
+| `t1-d4` Ante ve BB ante (11 alıştırma) | ders | Ante'nin potu nasıl büyüttüğünü hesaplar. | t1-d3, o2-d5 |
+| `t1-d5` Ödül yapısı (11 alıştırma) | ders | Paraya girmenin (ITM) ve kademeli ödül dağılımının ne olduğunu açıklar. | t1-d4 |
+| `t1-k` Kontrol: Turnuva nedir (12 alıştırma) | kontrol | "Turnuva nedir" ünitesinin kazanımlarını karışık sorularda uygular. | t1-d5 |
+| `t1-r` Tekrar: Turnuva nedir (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t1-k |
 
 ### t2 · Stack'i ölçmek (seviye 2)
 
