@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 77 ders, 861 alıştırma.
+**Dolu:** 96 ders, 1075 alıştırma.
 
 ## Cash pisti
 
@@ -147,16 +147,16 @@ Açılışa karşı BB ve SB'de fiyat, aralık ve equity realization.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c7-d1` 3-bet nedir, neden yapılır | ders | 3-bet'in iki amacını ayırır: value ve fold equity. | c6-k, c5-d3, c6-d4 |
-| `c7-d2` Value 3-bet ve blöf 3-bet | ders | Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır; value ve blöf 3-bet'in birbirine oranının neden önemli olduğunu açıklar. | c7-d1 |
-| `c7-d3` Blokerler | ders | Elindeki bir asın rakibin AA ve AK kombinasyonlarını nasıl azalttığını sayar. | c7-d2, o4-d1 |
-| `c7-d4` 3-bet boyutları | ders | Pozisyonda ve pozisyonsuz 3-bet boyutunun neden farklı olduğunu açıklar. | c7-d3, o3-d2 |
-| `c7-d5` 3-bet'e karşı oynamak | ders | Açtığı ele 3-bet gelince call, 4-bet ve fold arasında seçim yapar. | c7-d4 |
-| `c7-d6` 4-bet ve 5-bet | ders | 100 BB'de 4-bet ve 5-bet all-in aralıklarının neden dar olduğunu açıklar. | c7-d5 |
-| `c7-d7` Squeeze | ders | Açılış ve call sonrası squeeze'in neden daha büyük boyut ve fazladan fold equity taşıdığını açıklar. | c7-d6 |
-| `c7-d8` Iso-raise | ders | Limp eden oyuncuyu izole etmenin amacını ve boyutunu belirler. | c7-d7, o4-d5 |
-| `c7-k` Kontrol: 3-bet ve ötesi | kontrol | "3-bet ve ötesi" ünitesinin kazanımlarını karışık sorularda uygular. | c7-d8 |
-| `c7-r` Tekrar: 3-bet ve ötesi | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c7-k |
+| `c7-d1` 3-bet nedir, neden yapılır (11 alıştırma) | ders | 3-bet'in iki amacını ayırır: value ve fold equity. | c6-k, c5-d3, c6-d4 |
+| `c7-d2` Value 3-bet ve blöf 3-bet (11 alıştırma) | ders | Güçlü ellerle value, uygun zayıf ellerle blöf 3-bet seçer; ortadaki elleri call'a ayırır; value ve blöf 3-bet'in birbirine oranının neden önemli olduğunu açıklar. | c7-d1 |
+| `c7-d3` Blokerler (11 alıştırma) | ders | Elindeki bir asın rakibin AA ve AK kombinasyonlarını nasıl azalttığını sayar. | c7-d2, o4-d1 |
+| `c7-d4` 3-bet boyutları (11 alıştırma) | ders | Pozisyonda ve pozisyonsuz 3-bet boyutunun neden farklı olduğunu açıklar. | c7-d3, o3-d2 |
+| `c7-d5` 3-bet'e karşı oynamak (10 alıştırma) | ders | Açtığı ele 3-bet gelince call, 4-bet ve fold arasında seçim yapar. | c7-d4 |
+| `c7-d6` 4-bet ve 5-bet (11 alıştırma) | ders | 100 BB'de 4-bet ve 5-bet all-in aralıklarının neden dar olduğunu açıklar. | c7-d5 |
+| `c7-d7` Squeeze (11 alıştırma) | ders | Açılış ve call sonrası squeeze'in neden daha büyük boyut ve fazladan fold equity taşıdığını açıklar. | c7-d6 |
+| `c7-d8` Iso-raise (11 alıştırma) | ders | Limp eden oyuncuyu izole etmenin amacını ve boyutunu belirler. | c7-d7, o4-d5 |
+| `c7-k` Kontrol: 3-bet ve ötesi (12 alıştırma) | kontrol | "3-bet ve ötesi" ünitesinin kazanımlarını karışık sorularda uygular. | c7-d8 |
+| `c7-r` Tekrar: 3-bet ve ötesi (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c7-k |
 
 ### c8 · Postflop matematiği (seviye 5)
 
@@ -164,15 +164,15 @@ Equity, outs, 2 ve 4 kuralı, pot odds, implied odds ve SPR.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `c8-d1` Equity nedir | ders | Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k, c6-d1 |
-| `c8-d2` Outs saymak | ders | Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar. | c8-d1, o1-d5 |
-| `c8-d3` 2 ve 4 kuralı | ders | Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir. | c8-d2 |
-| `c8-d4` Pot odds | ders | Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır. | c8-d3, c6-d1 |
-| `c8-d5` Implied ve reverse implied odds | ders | Sonradan kazanılacak ya da kaybedilecek chip'lerin kararı nasıl değiştirdiğini açıklar. | c8-d4 |
-| `c8-d6` SPR | ders | SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar. | c8-d5, o3-d5 |
-| `c8-k` Kontrol: Postflop matematiği | kontrol | "Postflop matematiği" ünitesinin kazanımlarını karışık sorularda uygular. | c8-d6 |
-| `c8-r` Tekrar: Postflop matematiği | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c8-k |
-| `c8-t` Seviye 5 testi | test | bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c8-k |
+| `c8-d1` Equity nedir (11 alıştırma) | ders | Equity kavramını derinleştirir: ele karşı ve aralığa karşı equity'yi ayırır; tipik karşılaşmaların yaklaşık equity'sini bilir. | c7-k, c6-d1 |
+| `c8-d2` Outs saymak (11 alıştırma) | ders | Floş ve kent çekişlerinde outs sayar; çifte sayımı ve kirli outs'u ayıklar. | c8-d1, o1-d5 |
+| `c8-d3` 2 ve 4 kuralı (11 alıştırma) | ders | Outs'tan yaklaşık yüzdeyi hesaplar; 4 kuralının yalnızca iki kart garantiyken geçerli olduğunu bilir. | c8-d2 |
+| `c8-d4` Pot odds (11 alıştırma) | ders | Bir bahse call için gereken equity'yi hesaplar ve çekişin equity'siyle karşılaştırır. | c8-d3, c6-d1 |
+| `c8-d5` Implied ve reverse implied odds (12 alıştırma) | ders | Sonradan kazanılacak ya da kaybedilecek chip'lerin kararı nasıl değiştirdiğini açıklar. | c8-d4 |
+| `c8-d6` SPR (11 alıştırma) | ders | SPR'yi hesaplar; düşük ve yüksek SPR'de el gücü gereksiniminin nasıl değiştiğini açıklar. | c8-d5, o3-d5 |
+| `c8-k` Kontrol: Postflop matematiği (12 alıştırma) | kontrol | "Postflop matematiği" ünitesinin kazanımlarını karışık sorularda uygular. | c8-d6 |
+| `c8-r` Tekrar: Postflop matematiği (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | c8-k |
+| `c8-t` Seviye 5 testi (20 alıştırma) | test | bu pistte seviye 5 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | c8-k |
 
 ### c9 · Flop: board ve c-bet (seviye 6)
 

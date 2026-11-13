@@ -1,0 +1,1998 @@
+{
+  "c8-d1": {
+    "anlatim": [
+      "Equity'yi c6-d1'de tanıdın: kartlar sonuna kadar açılsa potun ortalama ne kadarını alacağın. İki türlü hesaplanır. Ele karşı equity, iki somut elin birbirine karşı payıdır. Masada rakibin kartlarını göremezsin; bu yüzden ele karşı örnekler burada yalnızca öğretim örneği olarak, kavramı göstermek için kullanılır.",
+      "Öğretim örneği (preflop, yaklaşık): büyük çift küçük çifte karşı yaklaşık %80'in üstünde (A♠ A♥ – K♣ K♦ ≈ %81). Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif önde (Q♠ Q♥ – A♣ K♦ ≈ %57). Aynı ası paylaşıp kicker'ı kötü olan el domine durumda (A♠ K♣ – A♦ J♥: AK ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+      "Gerçek kararlarda rakibin tek bir eli değil, bir aralığı vardır. Aralığa karşı equity, elinin bu aralıktaki bütün kombinasyonlara karşı ortalama payıdır; kombinasyonu çok olan eller ortalamayı daha çok etkiler. Sitedeki pot odds spotlarında rakibin kartlarını görmezsin; equity'n, notta yazan aralık varsayımına karşı hesaplanır.",
+      "Flop'tan sonra equity çok değişebilir. Öğretim örneği: board K♥ 9♥ 3♣, elinde A♥ 5♥, rakipte K♠ Q♦ (top pair: board'daki en yüksek kartla yapılan per). Kalan iki kartın bütün ihtimalleri sayıldığında equity'n yaklaşık %45,9'dur: henüz hiçbir şey yapmamış bir çekiş, top pair'e karşı neredeyse yazı-tura durumundadır."
+    ],
+    "terimler": [
+      "Equity",
+      "Range (aralık)",
+      "Monte Carlo",
+      "Dominasyon"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Ele karşı equity ile aralığa karşı equity arasındaki fark nedir?",
+        "secenekler": [
+          "Ele karşı: tek bir somut ele karşı pay; aralığa karşı: rakibin olası bütün ellerine karşı ortalama pay",
+          "İkisi aynı şeydir",
+          "Ele karşı equity yalnızca preflop'ta, aralığa karşı yalnızca river'da hesaplanır",
+          "Aralığa karşı equity potun büyüklüğüdür"
+        ],
+        "dogru": 0,
+        "neden": "Ele karşı equity iki somut eli karşılaştırır; aralığa karşı equity, rakibin aralığındaki bütün kombinasyonların ortalamasıdır.",
+        "yanilgi": "Rakibin tek bir eli varmış gibi düşünmek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Masada rakibinin kartlarını göremediğin için gerçek kararlarda equity'ni bir aralığa karşı düşünürsün.",
+        "dogru": true,
+        "neden": "Rakibin kartları görünmez; yalnızca hangi elleri olabileceğini (aralığını) tahmin edebilirsin.",
+        "yanilgi": "Rakibin elini bilir gibi karar vermek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Öğretim örneği: preflop'ta A♠ A♥, K♣ K♦'ye karşı yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%50",
+          "%65",
+          "%81",
+          "%97"
+        ],
+        "dogru": 2,
+        "neden": "Büyük çift küçük çifte karşı yaklaşık %80'in üstündedir (≈ %81). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+        "yanilgi": "Büyük çifti yenilmez sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityEle",
+          "el": "A♠ A♥",
+          "rakip": "K♣ K♦",
+          "yaklasik": 81
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Öğretim örneği: preflop'ta Q♠ Q♥, A♣ K♦'ye karşı yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%30",
+          "%43",
+          "%57",
+          "%80"
+        ],
+        "dogru": 2,
+        "neden": "Çift, kendisinden yüksek iki karta karşı yazı-tura civarında hafif öndedir (≈ %57). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+        "yanilgi": "AK'yı çifte karşı favori sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityEle",
+          "el": "Q♠ Q♥",
+          "rakip": "A♣ K♦",
+          "yaklasik": 57
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "eslestirme",
+        "zorluk": 3,
+        "soru": "Tipik karşılaşmaları yaklaşık equity'leriyle eşleştir (preflop, öğretim örneği).",
+        "secenekler": [
+          [
+            "Büyük çift – küçük çift (A♠ A♥ – K♣ K♦)",
+            "Yaklaşık %80'e %20"
+          ],
+          [
+            "Çift – ondan yüksek iki kart (Q♠ Q♥ – A♣ K♦)",
+            "Yazı-tura civarı; çift biraz önde"
+          ],
+          [
+            "Domine eden – domine edilen (A♠ K♣ – A♦ J♥)",
+            "Yaklaşık %74'e %26"
+          ]
+        ],
+        "neden": "Bu üç kalıp betikle hesaplanan değerlere dayanır (≈ %81, ≈ %57, ≈ %74). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+        "yanilgi": "Her karşılaşmayı yazı-tura sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Öğretim örneği: preflop'ta A♠ K♣, A♦ J♥'ye karşı yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%50",
+          "%60",
+          "%74",
+          "%92"
+        ],
+        "dogru": 2,
+        "neden": "Aynı ası paylaşan ve kicker'ı kötü olan el domine durumdadır; AK yaklaşık %74. Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+        "yanilgi": "İki asın birbirine eşit olduğunu sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityEle",
+          "el": "A♠ K♣",
+          "rakip": "A♦ J♥",
+          "yaklasik": 74
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Öğretim örneği: Board: K♥ 9♥ 3♣. Elin A♥ 5♥, rakibin K♠ Q♦. Turn ve river bütün ihtimalleriyle sayıldığında equity'n yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 45.9,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Kalan 45 karttan 990 turn–river ikilisi tek tek sayılır: ≈ %45,9. Nut floş çekişi, top pair'e karşı neredeyse yazı-tura durumundadır.",
+        "yanilgi": "Çekişi 'hâlâ hiçbir şey' diye sıfır saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityEle",
+          "el": "A♥ 5♥",
+          "rakip": "K♠ Q♦",
+          "board": "K♥ 9♥ 3♣"
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "J4o, BTN'nin çalışma aralığına (yaklaşık %43) karşı preflop'ta yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%20",
+          "%35",
+          "%50",
+          "%65"
+        ],
+        "dogru": 1,
+        "neden": "Yaklaşık %34,8 (c6-d2). Aralık sitenin yaklaşık çalışma aralığıdır, solver çıktısı değildir.",
+        "yanilgi": "Zayıf eli aralığa karşı sıfır saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityAraliga",
+          "el": "J4o",
+          "poz": "BTN",
+          "yaklasik": 35
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Bir aralığa karşı equity hesaplanırken kombinasyonu çok olan eller sonucu daha çok etkiler.",
+        "dogru": true,
+        "neden": "Aralığa karşı equity, her kombinasyonun eşit ağırlıkla ortalamasıdır; 12 kombinasyonlu bir offsuit el, 6 kombinasyonlu bir çiftten iki kat ağırdır.",
+        "yanilgi": "Her el adını eşit ağırlıklı saymak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "secmeli",
+        "zorluk": 5,
+        "soru": "QQ'nun yalnızca AA, KK ve AK'dan (suited ve offsuit) oluşan bir aralığa karşı preflop equity'si yaklaşık kaçtır? (Tek başına AK'ya karşı ≈ %57.)",
+        "secenekler": [
+          "%20",
+          "%40",
+          "%57",
+          "%70"
+        ],
+        "dogru": 1,
+        "neden": "28 kombinasyonun 12'si (AA, KK) QQ'yu çok geride bırakır, 16'sı (AK) hafif geride kalır; ortalama ≈ %39,7. Tek bir ele karşı equity, aralığa karşı equity'yi yanıltıcı gösterebilir.",
+        "yanilgi": "Tek bir ele karşı sayıyı bütün aralığa taşımak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityAraliga",
+          "el": "QQ",
+          "rakip": [
+            "AA",
+            "KK",
+            "AKs",
+            "AKo"
+          ],
+          "yaklasik": 40
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "Turn'de BTN all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (54,75 BB)"
+        ],
+        "dogru": 0,
+        "neden": "Gereken equity yaklaşık %45,4 (54,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %27 (spotun kendi hesabı). Equity'n fiyattan düşük: fold. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Floş çekişini her fiyata call edilecek bir el sanmak.",
+        "spotKimlik": "o-Qc4c-3cTh7h8c",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-Qc4c-3cTh7h8c",
+          "gereken": 45.4
+        }
+      }
+    ]
+  },
+  "c8-d2": {
+    "anlatim": [
+      "Çekiş (draw), henüz tamamlanmamış ama gelecek kartla güçlenebilecek eldir. Outs, elini muhtemelen kazanan ele çevirecek, henüz görmediğin kartların sayısıdır. Flop'ta 52 − 2 (elin) − 3 (board) = 47, turn'de 46 kart görmezsin. Rakiplerin kartları da bunların içindedir, çünkü onları bilmezsin.",
+      "Tipik sayılar: floş çekişi (aynı renkten dört kart) 13 − 4 = 9 out. Çift uçlu kent çekişi (OESD; ör. 9-8 ile T-7 board'unda J ya da 6) 4 + 4 = 8 out. Gutshot (yalnızca ortadaki tek bir değerle tamamlanan kent çekişi) 4 out. İkisi birden varsa (combo draw) çifte sayma: hem floşu hem kenti tamamlayan kartlar bir kez sayılır, 9 + 8 − 2 = 15.",
+      "Bazı outs kirlidir (kirli out): elini tamamlar ama rakibe daha iyi bir el verebilir. Öğretim örneği: board T♥ 7♥ 2♠ K♦, elinde 9♣ 8♣ (8 out). Rakipte K♥ Q♥ olsaydı J♥ ve 6♥ kentini tamamlar ama ona floş verirdi; temiz out 6 kalırdı. Masada rakibin kartlarını bilmediğin için kirli outs'u kesin bilemezsin; board'da aynı renkten iki kart ya da bir çift gibi işaretlere bakıp outs'u biraz azaltırsın."
+    ],
+    "terimler": [
+      "Outs",
+      "Draw (çekiş)",
+      "Floş çekişi",
+      "Çift uçlu kent çekişi (OESD)",
+      "Gutshot",
+      "Combo draw",
+      "Kirli out"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Outs nedir?",
+        "secenekler": [
+          "Elini muhtemelen kazanan ele çevirecek, henüz görmediğin kart sayısı",
+          "Destede kalan bütün kartlar",
+          "Rakibin fold etme ihtimali",
+          "Board'daki kart sayısı"
+        ],
+        "dogru": 0,
+        "neden": "Outs, yardım eden ve henüz görülmemiş kartlardır.",
+        "yanilgi": "Görmediğin bütün kartları outs saymak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 1,
+        "soru": "Flop'ta kendi iki kartını ve board'daki üç kartı gördün. Kaç kartı görmedin?",
+        "dogru": 47,
+        "tolerans": 0,
+        "birim": "kart",
+        "neden": "52 − 2 − 3 = 47. Rakiplerin kartları da bunların içindedir; onları bilmezsin.",
+        "yanilgi": "Rakiplerin kartlarını desteden düşmek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            52,
+            -2,
+            -3
+          ]
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Board: K♥ 9♥ 3♣. Elin A♥ 5♥. Floş yapmak için kaç out'un var?",
+        "dogru": 9,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "13 kupadan 4'ü görünüyor (2 elde, 2 board'da): 13 − 4 = 9.",
+        "yanilgi": "Board'daki kupaları düşmemek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "A♥ 5♥",
+          "board": "K♥ 9♥ 3♣",
+          "hedef": "Floş"
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Board: T♥ 7♥ 2♠. Elin 9♣ 8♣. Kent yapmak için kaç out'un var?",
+        "dogru": 8,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "Çift uçlu kent çekişi (OESD): J ya da 6, 4 + 4 = 8.",
+        "yanilgi": "Tek ucu saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "9♣ 8♣",
+          "board": "T♥ 7♥ 2♠",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Board: J♠ 8♦ 3♣. Elin T♥ 7♥. Kent yapmak için kaç out'un var?",
+        "dogru": 4,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "J-T-8-7 için ortadaki 9 gerekir: gutshot, 4 out.",
+        "yanilgi": "Gutshot'ı çift uçlu sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "T♥ 7♥",
+          "board": "J♠ 8♦ 3♣",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "eslestirme",
+        "zorluk": 3,
+        "soru": "Çekişleri tipik out sayılarıyla eşleştir.",
+        "secenekler": [
+          [
+            "Floş çekişi",
+            "9 out"
+          ],
+          [
+            "Çift uçlu kent çekişi (OESD)",
+            "8 out"
+          ],
+          [
+            "Gutshot",
+            "4 out"
+          ]
+        ],
+        "neden": "13 − 4 = 9; iki uç × 4 = 8; tek değer × 4 = 4.",
+        "yanilgi": "Gutshot ile OESD'yi karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Board: T♥ 7♥ 2♠. Elin 9♥ 8♥. Kent ya da floş yapan kaç kart var? (Bir kartı iki kez sayma.)",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "9 kupa + 8 kent kartı − iki kez sayılan J♥ ve 6♥ = 15.",
+        "yanilgi": "9 + 8 = 17 deyip çifte saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "9♥ 8♥",
+          "board": "T♥ 7♥ 2♠",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Combo draw'da hem floşu hem kenti tamamlayan kart iki kez sayılır.",
+        "dogru": false,
+        "neden": "Her kart bir kez gelir; iki çekişi birden tamamlayan kart bir kez sayılır.",
+        "yanilgi": "Çekişlerin out'larını düz toplamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Öğretim örneği (rakibin eli yalnızca kavram için açık): Board: T♥ 7♥ 2♠ K♦. Elin 9♣ 8♣, rakibin K♥ Q♥. River'da kaç kart seni rakibin önüne geçirir?",
+        "dogru": 6,
+        "tolerans": 0,
+        "birim": "kart",
+        "neden": "8 kent kartından J♥ ve 6♥ kentini tamamlar ama rakibe floş verir; bunlar kirli outs'tur. Temiz out: 8 − 2 = 6.",
+        "yanilgi": "Rakibe daha iyi el veren kartları da saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kazandiranKart",
+          "el": "9♣ 8♣",
+          "rakip": "K♥ Q♥",
+          "board": "T♥ 7♥ 2♠ K♦"
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Masada kirli outs'u neden kesin bilemezsin?",
+        "secenekler": [
+          "Rakibin kartlarını görmediğin için hangi kartın ona yardım ettiğini yalnızca tahmin edebilirsin",
+          "Kirli outs kurala göre gizlidir",
+          "Board'daki kartlar değişir",
+          "Outs yalnızca river'da sayılır"
+        ],
+        "dogru": 0,
+        "neden": "Board'daki işaretlere (aynı renkten iki kart, board'da çift) bakıp outs'u biraz azaltırsın; kesin sayı rakibin eline bağlıdır.",
+        "yanilgi": "Kirli outs'u her zaman kesin saymaya çalışmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "secmeli",
+        "zorluk": 5,
+        "soru": "Board: Q♠ 9♠ 4♦ 2♥. Elin K♠ J♠. Floş ya da kent yapan kaç kart var?",
+        "secenekler": [
+          "9",
+          "12",
+          "13",
+          "17"
+        ],
+        "dogru": 1,
+        "neden": "9 maça + K-Q-J-T-9 için 4 onlu, T♠ iki kez sayılmaz: 9 + 3 = 12.",
+        "yanilgi": "T♠'yi iki kez saymak (13).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "K♠ J♠",
+          "board": "Q♠ 9♠ 4♦ 2♥",
+          "hedef": "Kent"
+        }
+      }
+    ]
+  },
+  "c8-d3": {
+    "anlatim": [
+      "Outs'u yüzdeye çevirmenin hızlı yolu 2 ve 4 kuralıdır: tek kart için outs × 2, iki kart için outs × 4. Turn'de 9 out ile river'da tutma yaklaşık %18; flop'ta 9 out ile river'a kadar yaklaşık %36.",
+      "Gerçek oranlar şöyle hesaplanır. Tek kart: outs / görmediğin kart (flop'ta 47, turn'de 46); 9 / 46 ≈ %19,6. İki kart: 1 − C(47 − outs, 2) / C(47, 2), yani iki kartın da out olmama ihtimalini birden çıkarırsın; 9 out ile 1 − 703 / 1081 ≈ %35,0. Kural az out'ta yakındır; outs arttıkça × 4 gerçeği aşar: 15 out'ta kural %60, gerçek ≈ %54,1.",
+      "× 4 yalnızca turn ve river'ı ikisini de göreceksen geçerlidir: ör. flop'ta all-in olduysan (bütün chip'ler ortada) ve ödeyeceğin başka bahis kalmadıysa. Flop'ta bir bahsi call ettiğinde turn'de genellikle yeni bir bahisle karşılaşırsın; o zaman yalnızca bir sonraki kartı garanti görürsün ve × 2 (gerçekte outs / 47) ile düşünmelisin."
+    ],
+    "terimler": [
+      "2 ve 4 kuralı",
+      "Outs",
+      "All-in"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "2 ve 4 kuralında, flop'tan river'a iki kartın ikisini de göreceksen outs hangi sayıyla çarpılır?",
+        "secenekler": [
+          "2",
+          "4",
+          "8",
+          "47"
+        ],
+        "dogru": 1,
+        "neden": "İki kart için outs × 4, tek kart için outs × 2.",
+        "yanilgi": "İki kartta da × 2 kullanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 1,
+        "soru": "Turn'de 8 out'un var. 2 kuralıyla river'da tutma ihtimali yaklaşık yüzde kaçtır?",
+        "dogru": 16,
+        "tolerans": 0,
+        "birim": "%",
+        "neden": "8 × 2 = 16.",
+        "yanilgi": "Turn'de × 4 kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 8,
+          "sokak": "turn",
+          "sonuc": "kural"
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Flop'ta 9 out'un var ve turn ile river'ı ödeme yapmadan göreceksin. 4 kuralıyla tutma ihtimali yaklaşık yüzde kaçtır?",
+        "dogru": 36,
+        "tolerans": 0,
+        "birim": "%",
+        "neden": "9 × 4 = 36.",
+        "yanilgi": "Tek kart oranını kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 9,
+          "sokak": "flop",
+          "kart": 2,
+          "sonuc": "kural"
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Turn'de 9 out'un var. River'da tutmanın gerçek ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 19.6,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "9 / 46 ≈ %19,6 (turn'de 46 kart görmezsin). Kural %18 der.",
+        "yanilgi": "Payda olarak 52 ya da 47 almak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 9,
+          "sokak": "turn",
+          "sonuc": "gercek"
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Flop'ta 9 out'un var; turn ve river'ı ikisini de göreceksin. Gerçek tutma ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 35.0,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "1 − C(38, 2) / C(47, 2) = 1 − 703 / 1081 ≈ %35,0. Kural %36 der.",
+        "yanilgi": "İki kartın ihtimallerini düz toplamak (9/47 + 9/46).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 9,
+          "sokak": "flop",
+          "kart": 2,
+          "sonuc": "gercek"
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Flop'ta bir bahsi call ettiğinde turn'de yeni bir bahis gelebileceği için 4 kuralı tutma şansını olduğundan büyük gösterebilir.",
+        "dogru": true,
+        "neden": "4 kuralı iki kartı da bedava görmeyi varsayar. Turn'de yeni bahis gelirse yalnızca bir sonraki kart garantidir.",
+        "yanilgi": "4 kuralını her flop call'unda kullanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Board: K♥ 9♥ 3♣. Elin A♥ 5♥. Turn ve river'ın bütün 1081 ikilisi sayıldığında river'a kadar floş yapma ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 35.0,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Kartlar tek tek sayıldığında da ≈ %35,0 çıkar; formülle aynıdır.",
+        "yanilgi": "4 kuralının sonucunu (36) kesin sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutmaKart",
+          "el": "A♥ 5♥",
+          "board": "K♥ 9♥ 3♣",
+          "hedef": "Floş"
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "15 out'la flop'tan river'a 4 kuralı gerçek ihtimalden kaç puan fazla verir? (bir ondalık basamak)",
+        "dogru": 5.9,
+        "tolerans": 0.1,
+        "birim": "puan",
+        "neden": "Kural 60; gerçek 1 − C(32, 2) / C(47, 2) = 1 − 496 / 1081 ≈ %54,1. Fark ≈ 5,9 puan.",
+        "yanilgi": "Kuralı çok out'ta da kesin sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 15,
+          "sokak": "flop",
+          "kart": 2,
+          "sonuc": "fark"
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "Hangi durumda 4 kuralı uygundur?",
+        "secenekler": [
+          "Flop'ta all-in oldun; turn ve river'ı ödeme yapmadan göreceksin",
+          "Flop'ta bir bahsi call ediyorsun ve turn'de yeni bahis gelebilir",
+          "Turn'de tek kart kaldı",
+          "River'dasın"
+        ],
+        "dogru": 0,
+        "neden": "× 4, iki kartın ikisini de göreceğin durumlar içindir.",
+        "yanilgi": "4 kuralını tek kartta kullanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "Flop'ta 9 out'un var. Yalnızca turn kartında tutma ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 19.1,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "9 / 47 ≈ %19,1.",
+        "yanilgi": "Turn'deki gibi 46'ya bölmek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 9,
+          "sokak": "flop",
+          "kart": 1,
+          "sonuc": "gercek"
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "dogruYanlis",
+        "zorluk": 5,
+        "soru": "Outs sayısı arttıkça 4 kuralı gerçek ihtimali olduğundan büyük gösterme eğilimindedir.",
+        "dogru": true,
+        "neden": "9 out'ta fark 1 puan, 15 out'ta yaklaşık 5,9 puandır; turn ve river'ın ikisinin de out olduğu durumlar kuralda iki kez sayılır.",
+        "yanilgi": "Kuralın hatasının sabit olduğunu sanmak.",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c8-d4": {
+    "anlatim": [
+      "c6-d1'de preflop için gereken equity'yi hesapladın; postflop'ta da aynıdır: gereken equity = ödeyeceğin / (call öncesi pot + ödeyeceğin). Call öncesi pot, rakibin bahsini de içerir. Pot 6 BB'ydi, rakip 3 BB bahis yaptı: pot 9 BB, call 3 BB, gereken 3 / 12 = %25. Aynı fiyat oranla da söylenir: 9'a 3, yani 3'e 1. Bu orana pot odds denir.",
+      "Çekişle kararda equity'ni fiyatla karşılaştırırsın. Turn'de 9 out ile river'da tutma ≈ %19,6. Rakip 10 BB'lik pota 5 BB bahis yaparsa gereken 5 / 20 = %25: fiyat tek başına yetmez. 2,5 BB bahis yaparsa 2,5 / 15 ≈ %16,7: yeter.",
+      "Flop'ta call ediyorsan turn'de yeni bir bahis gelebilir; bu yüzden çoğunlukla yalnızca bir sonraki kartın oranıyla (outs / 47) karşılaştırırsın. Çekişin tutmadığında da bazen kazanabilirsin, tuttuğunda bazen kaybedebilirsin (kirli outs). Sitedeki pot odds spotlarında rakibin kartlarını görmezsin: equity'n, notta yazan aralık varsayımına karşı hesaplanır."
+    ],
+    "terimler": [
+      "Pot odds",
+      "Equity",
+      "Outs",
+      "Range (aralık)"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Gereken equity hesaplanırken rakibin bahsi de call öncesi pota dahildir.",
+        "dogru": true,
+        "neden": "Call öncesi pot = önceki pot + rakibin bahsi.",
+        "yanilgi": "Rakibin bahsini pota katmamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Pot 6 BB'ydi, rakip 3 BB bahis yaptı. Call için gereken equity yüzde kaçtır?",
+        "dogru": 25,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Call öncesi pot 9 BB, call 3 BB: 3 / 12 = %25.",
+        "yanilgi": "Rakibin bahsini pota katmamak (3 / 9).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 3,
+          "pot": 9
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Aynı fiyat oran olarak nasıl söylenir?",
+        "secenekler": [
+          "3'e 1",
+          "2'ye 1",
+          "4'e 1",
+          "1'e 1"
+        ],
+        "dogru": 0,
+        "neden": "Call öncesi pot 9 BB, call 3 BB: 9'a 3, yani 3'e 1. 3'e 1 oran, %25 gereken equity'ye karşılık gelir.",
+        "yanilgi": "Oranı gereken equity ile karıştırmak (4'e 1).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "bolum",
+          "terimler": [
+            9,
+            3
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Pot 10 BB'ydi, rakip pot kadar (10 BB) bahis yaptı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 33.3,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "10 / 30 ≈ %33,3.",
+        "yanilgi": "Pot kadar bahiste %50 gerektiğini sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 10,
+          "pot": 20
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Pot 10 BB'ydi, rakip yarım pot (5 BB) bahis yaptı. Gereken equity yüzde kaçtır?",
+        "dogru": 25,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "5 / 20 = %25.",
+        "yanilgi": "Bahsi pota katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 5,
+          "pot": 15
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Pot 10 BB'ydi, rakip çeyrek pot (2,5 BB) bahis yaptı. Gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 16.7,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "2,5 / 15 ≈ %16,7. Bahis küçüldükçe fiyat iyileşir.",
+        "yanilgi": "Küçük bahsin fiyatını büyük bahisle aynı sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 2.5,
+          "pot": 12.5
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Turn'de 9 out'lu floş çekişin var (river'da tutma ≈ %19,6). Pot 10 BB'ydi, rakip 5 BB bahis yaptı. Yalnızca bu bahsi ve pottaki chip'leri hesaba katarsan fiyat yetiyor mu?",
+        "secenekler": [
+          "Hayır: %25 gerekiyor, çekiş ≈ %19,6",
+          "Evet: 4 kuralıyla %36",
+          "Evet: çekiş her fiyata call edilir",
+          "Hayır: %50 gerekiyor"
+        ],
+        "dogru": 0,
+        "neden": "Gereken 5 / 20 = %25; tek kart kaldığı için çekişin ≈ %19,6. Yalnızca pot odds'la call yetmez; sonradan kazanılacak chip'ler c8-d5'in konusu.",
+        "yanilgi": "Turn'de 4 kuralı kullanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "Turn'de pot 12 BB'ydi; BTN 12 BB bahis yaptı. Elinde yalnızca gutshot var. BB'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (12 BB)",
+          "Raise"
+        ],
+        "dogru": 0,
+        "neden": "Gereken 12 / 36 ≈ %33,3. Gutshot 4 out: river'da 4 / 46 ≈ %8,7. Fark çok büyük: fold.",
+        "yanilgi": "Çekişi fiyata bakmadan call etmek.",
+        "spotKimlik": "c18",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "Turn'de BTN all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (19,75 BB)"
+        ],
+        "dogru": 0,
+        "neden": "Gereken equity yaklaşık %39,1 (19,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %11 (spotun kendi hesabı). Equity'n fiyattan düşük: fold. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Çekiş var diye all-in'e call etmek.",
+        "spotKimlik": "o-7hAc-QsTc9c8d",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-7hAc-QsTc9c8d",
+          "gereken": 39.1
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "dogruYanlis",
+        "zorluk": 5,
+        "soru": "Rakip all-in yaptığında ve ödeyecek başka bahis kalmadığında, aralığa karşı equity'n gereken equity'den yüksekse call uzun vadede kâr eder.",
+        "dogru": true,
+        "neden": "Sonrasında bahis olmadığı için karar yalnızca equity ile fiyatın karşılaştırmasıdır.",
+        "yanilgi": "All-in'e karşı da implied odds hesaba katmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "Turn'de BB all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (14,75 BB)"
+        ],
+        "dogru": 1,
+        "neden": "Gereken equity yaklaşık %36,4 (14,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %51 (spotun kendi hesabı). Equity'n fiyattan yüksek: call. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Hazır el yok diye fold etmek.",
+        "spotKimlik": "o-AsKs-ThTsJs2c",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-AsKs-ThTsJs2c",
+          "gereken": 36.4
+        }
+      }
+    ]
+  },
+  "c8-d5": {
+    "anlatim": [
+      "Pot odds yalnızca şu anki potu hesaba katar. Çekişin tutarsa sonraki sokaklarda rakipten ek chip kazanabilirsin; bu beklenen ek kazanca implied odds denir. Tersine, elin tuttuğunda bile daha iyi bir ele karşı kaybedeceğin ek chip'lere ters (reverse) implied odds denir.",
+      "Başabaş hesabı: tuttuğunda hep kazandığını, tutmadığında eli bıraktığını varsay. eq tutma ihtimali, call ödeyeceğin miktar, pot call öncesi pot (bahis dahil), X tuttuğunda sonradan kazanacağın ek miktar olsun. Call'un başabaş olması için eq × (pot + X) = (1 − eq) × call; yani X = call × (1 / eq − 1) − pot. Örnek: flop'ta pot 9,2 BB, call 3,7 BB, 9 out ile turn'de tutma 9 / 47: X = 3,7 × (47 / 9 − 1) − 9,2 ≈ 6,4 BB.",
+      "Bu bir aritmetik eşiktir; rakibin gerçekte ne kadar ödeyeceğini bilemezsin. Implied odds genellikle stack'ler derinse, elin gizliyse (ör. küçük çiftle set; set, cep çiftinin board'daki bir kartla yaptığı üçlüdür) ve rakip ödemeye yatkınsa yüksektir. Rakibin stack'i kısaysa ya da tutman herkese belli oluyorsa düşüktür.",
+      "Ters implied odds en çok domine edilen ellerde görülür: KJo ile sıkı bir açılışa karşı papaz yaptığında rakipte sık sık daha iyi kicker olur ve büyük bir pot kaybedersin. Küçük floş çekişleri de, daha büyük floşa karşı aynı sorunu taşır."
+    ],
+    "terimler": [
+      "Implied odds",
+      "Ters implied odds",
+      "Pot odds",
+      "Set",
+      "Dominasyon"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Implied odds nedir?",
+        "secenekler": [
+          "Elin tutarsa sonraki sokaklarda kazanmayı beklediğin ek chip'ler",
+          "Şu anki potun call'a oranı",
+          "Rakibin fold etme ihtimali",
+          "Elin preflop equity'si"
+        ],
+        "dogru": 0,
+        "neden": "Pot odds yalnızca şu anki potu, implied odds sonradan kazanılacak chip'leri de hesaba katar.",
+        "yanilgi": "Implied odds'u pot odds ile aynı sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Ters implied odds, elin tuttuğunda bile daha iyi bir ele karşı kaybedebileceğin ek chip'lerdir.",
+        "dogru": true,
+        "neden": "Tuttuğunda kaybettiğin büyük potlar ters implied odds'tur.",
+        "yanilgi": "Tutan elin her zaman kazandığını sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Flop'ta pot 5,5 BB'ydi; rakip 3,7 BB bahis yaptı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 28.7,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Call öncesi pot 9,2 BB: 3,7 / 12,9 ≈ %28,7.",
+        "yanilgi": "Bahsi pota katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 3.7,
+          "pot": 9.2
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı durumda 9 out'la turn'de tutma 9 / 47. Tuttuğunda hep kazandığını, tutmadığında eli bıraktığını varsayarsan, call'un başabaş olması için tuttuğunda sonradan en az kaç BB daha kazanman gerekir? (bir ondalık basamak)",
+        "dogru": 6.4,
+        "tolerans": 0.1,
+        "birim": "BB",
+        "neden": "X = call × (1 / eq − 1) − pot = 3,7 × (47 / 9 − 1) − 9,2 ≈ 6,4 BB.",
+        "yanilgi": "Pottaki chip'leri hesaptan düşmeyi unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "impliedBasabas",
+          "call": 3.7,
+          "pot": 9.2,
+          "outs": 9,
+          "sokak": "flop"
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Hangisi implied odds'u genellikle artırır?",
+        "secenekler": [
+          "Derin stack'ler ve gizli kalan el (ör. küçük çiftle set)",
+          "Rakibin stack'inin çok kısa olması",
+          "Tuttuğunda board'un herkese belli olması",
+          "Rakibin hiç ödeme yapmayan biri olması"
+        ],
+        "dogru": 0,
+        "neden": "Kazanılacak chip olmalı (derin stack) ve rakip ödemeye razı olmalı (gizli el).",
+        "yanilgi": "Kısa stack'e karşı da implied odds aramak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Hangi el ters implied odds'a daha yatkındır?",
+        "secenekler": [
+          "Sıkı bir UTG açılışına karşı KJo",
+          "Sıkı bir UTG açılışına karşı 77",
+          "BTN'nin açılışına karşı AA",
+          "BTN'nin açılışına karşı 98s"
+        ],
+        "dogru": 0,
+        "neden": "KJo, tuttuğu per'de sık sık daha iyi kicker'a karşı domine durumdadır; büyük potları kaybeder.",
+        "yanilgi": "Domine olan eli implied odds eli sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "UTG 2,5 BB açtı, sana kadar herkes fold etti; blind'lerin de fold edeceğini varsay. 44 ile call: 2,5 BB ödeyip 4 BB'lik pot için oynuyorsun. Flop'ta set ya da daha iyisi ihtimali ≈ %11,8 (c6'da sayıldı). Set yapınca hep kazandığını, yapamayınca eli bıraktığını varsayarsan, başabaş için set yaptığında sonradan en az kaç BB kazanman gerekir? (bir ondalık basamak)",
+        "dogru": 14.8,
+        "tolerans": 0.1,
+        "birim": "BB",
+        "neden": "X = 2,5 × (1 / 0,1176 − 1) − 4 ≈ 14,8 BB. Set: cep çiftinin board'daki bir kartla yaptığı üçlü.",
+        "yanilgi": "Pottaki 4 BB'yi düşmeyi unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "impliedBasabas",
+          "call": 2.5,
+          "pot": 4,
+          "eq": 11.7551
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "Implied odds başabaş hesabındaki X, rakibin gerçekten ödeyeceği miktarı gösterir.",
+        "dogru": false,
+        "neden": "X yalnızca bir eşiktir: 'en az bu kadar kazanman gerekir'. Rakibin ne ödeyeceği bilinmez; bunu tahmin edersin.",
+        "yanilgi": "Eşiği kesin kazanç sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a9",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "Stack'ler 200 BB. UTG 2,5 BB açtı, diğerleri sana kadar fold etti. BTN'desin, elin 44. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "3-bet 8 BB"
+        ],
+        "dogru": 1,
+        "neden": "Set ihtimali ≈ %11,8; tek başına pot odds yetmez. Ama stack'ler 200 BB ve UTG'nin aralığı güçlü: set yaptığında gereken ≈ 15 BB'nin çok üstünde kazanma fırsatı olabilir. Pozisyonda olman da işi kolaylaştırır.",
+        "yanilgi": "Küçük çifti derin stack'te de fold etmek.",
+        "spotKimlik": "c13",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "CO'dasın, elin 33. UTG 3 BB açtı (UTG'nin masada 20 BB'si vardı), HJ fold etti. Call 3 BB, pot 4,5 BB. Set ihtimali ≈ %11,8. Başabaş için set yaptığında sonradan en az kaç BB kazanman gerekir? (bir ondalık basamak)",
+        "dogru": 18.0,
+        "tolerans": 0.1,
+        "birim": "BB",
+        "neden": "X = 3 × (1 / 0,1176 − 1) − 4,5 ≈ 18,0 BB. UTG'nin önünde açılıştan sonra yalnızca 17 BB kalır; set yapınca her şeyini alsan bile eşiğe ulaşamazsın.",
+        "yanilgi": "Rakibin stack'ini hesaba katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "impliedBasabas",
+          "call": 3,
+          "pot": 4.5,
+          "eq": 11.7551
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "UTG 3 BB açtı (UTG'nin masada yalnızca 20 BB'si var), HJ fold etti. CO'dasın, elin 33. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (3 BB)",
+          "3-bet 9 BB"
+        ],
+        "dogru": 0,
+        "neden": "Başabaş için set yapınca sonradan ≈ 18 BB kazanman gerekir; UTG'nin geriye 17 BB'si kalır. Arkanda üç oyuncu da var. Implied odds yetmiyor: fold.",
+        "yanilgi": "Her küçük çifti set için call etmek.",
+        "spotKimlik": "c38",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a12",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "BTN 2,5 BB açtı, SB fold etti, BB'den call ettin. Flop'ta check ettin, BTN 3,7 BB bahis yaptı; elinde nut floş çekişi var. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (3,7 BB)",
+          "All-in"
+        ],
+        "dogru": 1,
+        "neden": "Gereken ≈ %28,7. 9 out river'a kadar ≈ %35 eder, ama turn'de yeni bahis gelebilir; tek kartta ≈ %19,1. Farkı, floş tuttuğunda kazanacağın ek chip'ler (implied odds; başabaş ≈ 6,4 BB) ve as gelirse bazı ellere karşı öne geçmen kapatır: call.",
+        "yanilgi": "4 kuralıyla %36 deyip turn bahsini unutmak.",
+        "spotKimlik": "c17",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c8-d6": {
+    "anlatim": [
+      "SPR (stack-to-pot ratio): flop başında kalan efektif stack'in flop'taki pota oranı. BTN 2,5 BB açtı, BB call etti: flop'ta pot 5,5 BB (SB'nin 0,5'i dahil), kalan stack 97,5 BB, SPR ≈ 17,7. 3-bet potunda (CO 2,5 açtı, BTN 8'e 3-bet, CO call) pot 17,5 BB, kalan 92 BB: SPR ≈ 5,3. 4-bet potunda (20 BB'ye 4-bet ve call) pot 41,5, kalan 80: SPR ≈ 1,9.",
+      "SPR, hangi elle bütün stack'i koymaya razı olacağını önceden düşünmeni sağlar. Düşük SPR'de (kabaca 3 ve altı) top pair ya da overpair (board'daki bütün kartlardan yüksek cep çifti) ile all-in'e gitmek çoğunlukla doğaldır: pot zaten büyük, kalan chip azdır. Yüksek SPR'de (ör. 10 ve üstü) tek per büyük potları genellikle kazanamaz; stack'in tamamını koymak için iki per, set gibi daha güçlü eller gerekir.",
+      "SPR'yi preflop kararlarınla da yönetirsin: 3-bet ve 4-bet potu büyütüp SPR'yi düşürür. Bu yüzden 3-bet potlarında el değerleri değişir; ayrıntısı c11-d4'te. Eşikler (3, 10) yön bildirir, kesin sınır değildir."
+    ],
+    "terimler": [
+      "SPR",
+      "Efektif stack",
+      "Top pair",
+      "Overpair",
+      "3-bet"
+    ],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "SPR nasıl hesaplanır?",
+        "secenekler": [
+          "Flop başında kalan efektif stack / flop'taki pot",
+          "Pot / call",
+          "Stack / BB",
+          "Rakibin bahsi / pot"
+        ],
+        "dogru": 0,
+        "neden": "SPR (stack-to-pot ratio): kalan efektif stack'in flop'taki pota oranı.",
+        "yanilgi": "SPR'yi pot odds ile karıştırmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Stack'ler 100 BB. BTN 2,5 BB açtı, SB fold etti, BB call etti. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 17.7,
+        "tolerans": 0.1,
+        "neden": "Pot 0,5 + 2,5 + 2,5 = 5,5 BB; kalan 97,5 BB: 97,5 / 5,5 ≈ 17,7.",
+        "yanilgi": "Kalan stack yerine başlangıç stack'ini kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            97.5,
+            97.5
+          ],
+          "pot": 5.5
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Stack'ler 100 BB. CO 2,5 BB açtı, BTN 8 BB'ye 3-bet yaptı, SB ve BB fold etti, CO call etti. Flop'ta pot kaç BB?",
+        "dogru": 17.5,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "0,5 + 1 + 8 + 8 = 17,5 BB.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            0.5,
+            1,
+            8,
+            8
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Aynı elde flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 5.3,
+        "tolerans": 0.1,
+        "neden": "Kalan 92 BB / 17,5 ≈ 5,3. 3-bet potu SPR'yi düşürür.",
+        "yanilgi": "Kalan stack'i 100 almak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            92,
+            92
+          ],
+          "pot": 17.5
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Düşük SPR'de (kabaca 3 ve altı) top pair ya da overpair ile bütün stack'i koymak çoğunlukla doğaldır.",
+        "dogru": true,
+        "neden": "Pot zaten büyük, kalan chip azdır; bu ellerle fold etmek çoğu zaman çok pahalıdır.",
+        "yanilgi": "Düşük SPR'de de yüksek SPR'deki gibi temkinli oynamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a6",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "CO 2,5 BB açtı, BTN 8 BB'ye 3-bet, CO 20 BB'ye 4-bet yaptı, BTN call etti (blind'ler fold). Stack'ler 100 BB. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 1.9,
+        "tolerans": 0.1,
+        "neden": "Pot 0,5 + 1 + 20 + 20 = 41,5 BB; kalan 80 BB: 80 / 41,5 ≈ 1,9.",
+        "yanilgi": "4-bet potunu küçük saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            80,
+            80
+          ],
+          "pot": 41.5
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "SPR 15 olan bir potta top pair'in var; rakip büyük bahislerle bütün stack'leri ortaya getirmeye çalışıyor. Genel ilke nedir?",
+        "secenekler": [
+          "Yüksek SPR'de tek per büyük potları genellikle kazanamaz; dikkatli olmak gerekir",
+          "Top pair her SPR'de all-in için yeterlidir",
+          "Yüksek SPR'de fold her zaman doğrudur",
+          "SPR yalnızca preflop'ta önemlidir"
+        ],
+        "dogru": 0,
+        "neden": "Stack'in tamamını koymak için yüksek SPR'de genellikle iki per, set gibi daha güçlü eller gerekir.",
+        "yanilgi": "Top pair'i her derinlikte nuts gibi oynamak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Senin 100 BB'n, BB'nin 60 BB'si var. BTN'den 2,5 BB açtın, SB fold etti, BB call etti. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 10.5,
+        "tolerans": 0.1,
+        "neden": "Efektif stack küçük olan: 60 − 2,5 = 57,5 BB; pot 5,5 BB: 57,5 / 5,5 ≈ 10,5.",
+        "yanilgi": "Büyük stack'i kullanmak (97,5 / 5,5).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            97.5,
+            57.5
+          ],
+          "pot": 5.5
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "eslestirme",
+        "zorluk": 4,
+        "soru": "Eşleştir.",
+        "secenekler": [
+          [
+            "Düşük SPR (kabaca 3 ve altı)",
+            "Top pair ve overpair ile stack koymak çoğunlukla doğal"
+          ],
+          [
+            "Yüksek SPR (ör. 10 ve üstü)",
+            "Stack koymak için genellikle iki per, set gibi daha güçlü el gerekir"
+          ],
+          [
+            "3-bet ve 4-bet",
+            "Potu büyütüp SPR'yi düşürür"
+          ]
+        ],
+        "neden": "SPR, hangi elle bütün stack'i koymaya razı olacağını önceden düşünmeni sağlar.",
+        "yanilgi": "SPR'yi yalnızca bir sayı olarak görüp el gücüyle ilişkilendirmemek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a10",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "BTN 2,5 BB açtı, SB 11 BB'ye 3-bet yaptı, BB fold etti, BTN 22 BB'ye 4-bet yaptı, SB call etti. Stack'ler 100 BB. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 1.7,
+        "tolerans": 0.1,
+        "neden": "Pot 1 + 22 + 22 = 45 BB; kalan 78 BB: 78 / 45 ≈ 1,7.",
+        "yanilgi": "BB'nin 1 BB'sini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            78,
+            78
+          ],
+          "pot": 45
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "Aynı elde SB'desin ve elin AA. Flop'ta check ettin, BTN 36 BB bahis yaptı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "All-in (78 BB)"
+        ],
+        "dogru": 2,
+        "neden": "Flop'ta SPR ≈ 1,7: pot kalan stack'e göre çok büyük. Bu kadar düşük SPR'de overpair ile eli bırakmak neredeyse hiç doğru olmaz; rakibin aralığında geride olan çok el var. All-in, bu ellerin equity'sini bedava görmesini de engeller.",
+        "yanilgi": "Büyük bahis gördü diye overpair'i bırakmak.",
+        "spotKimlik": "c24",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c8-k": {
+    "anlatim": [
+      "Bu kontrol, ünitenin altı dersinden karışık sorular içerir. Ele karşı equity örnekleri yalnızca öğretim örneğidir; spotlarda rakibin kartları görünmez ve equity notta yazan aralık varsayımına karşı hesaplanır."
+    ],
+    "terimler": [],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "sayi",
+        "zorluk": 1,
+        "soru": "Turn'de kendi iki kartını ve board'daki dört kartı gördün. Kaç kartı görmedin?",
+        "dogru": 46,
+        "tolerans": 0,
+        "birim": "kart",
+        "neden": "52 − 2 − 4 = 46.",
+        "yanilgi": "47 demek (flop sayısı).",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "toplam",
+          "terimler": [
+            52,
+            -2,
+            -4
+          ]
+        }
+      },
+      {
+        "kimlik": "a2",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Gereken equity = ödeyeceğin / (call öncesi pot + ödeyeceğin).",
+        "dogru": true,
+        "neden": "c6-d1 ve c8-d4'teki formül.",
+        "yanilgi": "Paydaya yalnızca potu yazmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Board: A♣ 8♦ 7♠. Elin T♥ 9♥. Kent yapmak için kaç out'un var?",
+        "dogru": 8,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "J ya da 6: 8 out (çift uçlu).",
+        "yanilgi": "Gutshot sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "T♥ 9♥",
+          "board": "A♣ 8♦ 7♠",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Flop'ta 8 out'un var; turn ve river'ı ödeme yapmadan göreceksin. 4 kuralıyla tutma ihtimali yaklaşık yüzde kaçtır?",
+        "dogru": 32,
+        "tolerans": 0,
+        "birim": "%",
+        "neden": "8 × 4 = 32 (gerçek ≈ %31,5).",
+        "yanilgi": "× 2 kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 8,
+          "sokak": "flop",
+          "kart": 2,
+          "sonuc": "kural"
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Pot 12 BB'ydi, rakip 8 BB bahis yaptı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 28.6,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "8 / (20 + 8) ≈ %28,6.",
+        "yanilgi": "Bahsi pota katmamak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 8,
+          "pot": 20
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Öğretim örneği: preflop'ta 8♠ 8♥, A♣ K♦'ye karşı yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%35",
+          "%55",
+          "%70",
+          "%85"
+        ],
+        "dogru": 1,
+        "neden": "Çift, yüksek iki karta karşı hafif önde (≈ %56). Öğretim örneğindeki preflop equity'leri projenin el değerlendiricisiyle Monte Carlo yöntemiyle hesaplandı ve yaklaşıktır.",
+        "yanilgi": "AK'yı favori sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityEle",
+          "el": "8♠ 8♥",
+          "rakip": "A♣ K♦",
+          "yaklasik": 56
+        }
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Turn'de 15 out'un var. River'da tutmanın gerçek ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 32.6,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "15 / 46 ≈ %32,6.",
+        "yanilgi": "Turn'de 4 kuralıyla %60 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 15,
+          "sokak": "turn",
+          "sonuc": "gercek"
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Turn'de pot 20 BB (rakibin bahsi dahil), call 5 BB, 8 out'un var (8 / 46). Başabaş için tuttuğunda sonradan en az kaç BB kazanman gerekir? (bir ondalık basamak)",
+        "dogru": 3.8,
+        "tolerans": 0.1,
+        "birim": "BB",
+        "neden": "X = 5 × (46 / 8 − 1) − 20 = 23,75 − 20 ≈ 3,8 BB.",
+        "yanilgi": "Formülde potu düşmeyi unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "impliedBasabas",
+          "call": 5,
+          "pot": 20,
+          "outs": 8,
+          "sokak": "turn"
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Stack'ler 100 BB. UTG 2,5 BB açtı, BB 10 BB'ye 3-bet yaptı, UTG call etti (diğerleri fold). Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 4.4,
+        "tolerans": 0.1,
+        "neden": "Pot 0,5 + 10 + 10 = 20,5 BB; kalan 90 BB: 90 / 20,5 ≈ 4,4.",
+        "yanilgi": "SB'nin 0,5 BB'sini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            90,
+            90
+          ],
+          "pot": 20.5
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "Turn'de BTN all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (34,75 BB)"
+        ],
+        "dogru": 1,
+        "neden": "Gereken equity yaklaşık %43,2 (34,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %58 (spotun kendi hesabı). Equity'n fiyattan yüksek: call. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Büyük all-in'e top pair ile refleksle fold etmek.",
+        "spotKimlik": "o-5cTh-KdJc4d8h",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-5cTh-KdJc4d8h",
+          "gereken": 43.2
+        }
+      },
+      {
+        "kimlik": "a11",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "Board: J♥ T♥ 4♣ 2♦. Elin Q♥ 9♥. Kent ya da floş yapan kaç kart var?",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "9 kupa + K ve 8 (8 kart) − iki kez sayılan K♥ ve 8♥ = 15.",
+        "yanilgi": "17 deyip çifte saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "Q♥ 9♥",
+          "board": "J♥ T♥ 4♣ 2♦",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a12",
+        "tip": "dogruYanlis",
+        "zorluk": 5,
+        "soru": "Flop'ta call ettiğin bir çekişin şansını 4 kuralıyla hesaplamak, turn'de yeni bahis gelebileceği için şansını olduğundan yüksek gösterebilir.",
+        "dogru": true,
+        "neden": "Yalnızca bir sonraki kart garantidir; × 2 (outs / 47) daha güvenli bir karşılaştırmadır.",
+        "yanilgi": "Her flop call'unda 4 kuralı kullanmak.",
+        "dogrulamaGerekli": false
+      }
+    ]
+  },
+  "c8-r": {
+    "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer: 4 kuralının yanlış yerde kullanımı, çifte sayılan outs, fiyat ve SPR hesabı."
+    ],
+    "terimler": [],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 2,
+        "soru": "4 kuralı, turn'de tek kart kalmışken de kullanılabilir.",
+        "dogru": false,
+        "neden": "Tek kart için × 2 kullanılır.",
+        "yanilgi": "Her durumda × 4 kullanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a2",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "Board: K♦ Q♣ 5♠. Elin J♥ 9♥. Kent yapmak için kaç out'un var?",
+        "dogru": 4,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "K-Q-J-T-9 için yalnızca T: gutshot, 4 out.",
+        "yanilgi": "Çift uçlu sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "J♥ 9♥",
+          "board": "K♦ Q♣ 5♠",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Board: 9♠ 8♠ 2♦. Elin J♠ T♠. Kent ya da floş yapan kaç kart var?",
+        "secenekler": [
+          "8",
+          "9",
+          "15",
+          "17"
+        ],
+        "dogru": 2,
+        "neden": "9 maça + Q ve 7 (8 kart) − Q♠ ve 7♠ = 15.",
+        "yanilgi": "Çifte sayıp 17 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "J♠ T♠",
+          "board": "9♠ 8♠ 2♦",
+          "hedef": "Kent"
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Pot 8 BB'ydi, rakip 4 BB bahis yaptı. Gereken equity yüzde kaçtır?",
+        "dogru": 25,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "4 / 16 = %25.",
+        "yanilgi": "4 / 8 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 4,
+          "pot": 12
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Flop'ta 8 out'un var; turn ve river'ı ikisini de göreceksin. Gerçek tutma ihtimali yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 31.5,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "1 − C(39, 2) / C(47, 2) = 1 − 741 / 1081 ≈ %31,5.",
+        "yanilgi": "8 × 4 = 32'yi kesin sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 8,
+          "sokak": "flop",
+          "kart": 2,
+          "sonuc": "gercek"
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "dogruYanlis",
+        "zorluk": 4,
+        "soru": "SPR yükseldikçe tek per ile bütün stack'i koymak genellikle daha az caziptir.",
+        "dogru": true,
+        "neden": "Yüksek SPR'de stack koymak için daha güçlü el gerekir.",
+        "yanilgi": "SPR'yi el gücünden bağımsız düşünmek.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Stack'ler 100 BB. HJ 2,5 BB açtı, BTN call etti, SB ve BB fold etti. Flop'ta SPR kaçtır?",
+        "dogru": 15,
+        "tolerans": 0.1,
+        "neden": "Pot 0,5 + 1 + 2,5 + 2,5 = 6,5 BB; kalan 97,5: 97,5 / 6,5 = 15.",
+        "yanilgi": "Blind'leri unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            97.5,
+            97.5
+          ],
+          "pot": 6.5
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "Turn'de BB all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (14,75 BB)"
+        ],
+        "dogru": 1,
+        "neden": "Gereken equity yaklaşık %36,4 (14,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %46 (spotun kendi hesabı). Equity'n fiyattan yüksek: call. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Floş çekişini otomatik fold etmek.",
+        "spotKimlik": "o-6c3c-8c2d7d8h",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-6c3c-8c2d7d8h",
+          "gereken": 36.4
+        }
+      }
+    ]
+  },
+  "c8-t": {
+    "anlatim": [
+      "Bu test, cash pistinde buraya kadar olan bütün üniteleri birlikte yoklar: temel üniteler (o1–o4), açılış aralıkları, blind savunması, 3-bet ve ötesi, postflop matematiği. 20 soru. Aralıklar sitenin yaklaşık çalışma aralıklarıdır, solver çıktısı değildir; equity değerleri projenin el değerlendiricisiyle hesaplandı ve yaklaşıktır."
+    ],
+    "terimler": [],
+    "alistirmalar": [
+      {
+        "kimlik": "a1",
+        "tip": "dogruYanlis",
+        "zorluk": 1,
+        "soru": "Kent, üçlüyü yener.",
+        "dogru": true,
+        "neden": "Kent sıralamada üçlünün üstündedir.",
+        "yanilgi": "Üçlüyü daha güçlü sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kazanan",
+          "eller": {
+            "kent": "9♠ 8♦ 7♣ 6♥ 5♠",
+            "üçlü": "A♠ A♦ A♣ K♥ Q♠"
+          },
+          "iddia": "kent",
+          "ornek": true
+        }
+      },
+      {
+        "kimlik": "a2",
+        "tip": "secmeli",
+        "zorluk": 1,
+        "soru": "Flop'u CO ve BB görüyor. Kim pozisyonda?",
+        "secenekler": [
+          "CO",
+          "BB"
+        ],
+        "dogru": 0,
+        "neden": "Postflop'ta BB önce, CO sonra konuşur.",
+        "yanilgi": "Preflop sırasını postflop'a taşımak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "konusmaSirasi",
+          "sokak": "postflop",
+          "oyuncular": [
+            "CO",
+            "BB"
+          ],
+          "soru": "son"
+        }
+      },
+      {
+        "kimlik": "a3",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "AKo kaç kombinasyondur?",
+        "dogru": 12,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "4 × 4 = 16, bunun 4'ü suited: 12.",
+        "yanilgi": "16 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "kombo",
+          "eller": [
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a4",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "Bu müfredatın çalışma aralıklarında BTN ellerin yaklaşık yüzde kaçıyla açar?",
+        "secenekler": [
+          "%15",
+          "%27",
+          "%43",
+          "%70"
+        ],
+        "dogru": 2,
+        "neden": "BTN aralığı yaklaşık %43'tür (ranges.json; solver çıktısı değil).",
+        "yanilgi": "Butonu UTG kadar sıkı sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "aralikYuzde",
+          "poz": "BTN"
+        }
+      },
+      {
+        "kimlik": "a5",
+        "tip": "sayi",
+        "zorluk": 2,
+        "soru": "BTN 2,5 BB açtı, SB fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 27.3,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "1,5 / 5,5 ≈ %27,3.",
+        "yanilgi": "Blind'i ödenecek miktara katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 1.5,
+          "pot": 4
+        }
+      },
+      {
+        "kimlik": "a6",
+        "tip": "secmeli",
+        "zorluk": 2,
+        "soru": "3-bet nedir?",
+        "secenekler": [
+          "Preflop'ta bir açılışın üzerine yapılan yeniden raise",
+          "3 BB'lik açılış",
+          "Flop'taki üçüncü bahis",
+          "Üç oyunculu pot"
+        ],
+        "dogru": 0,
+        "neden": "Blind 1., açılış 2., üstündeki raise 3. bahistir.",
+        "yanilgi": "3-bet'i 3 BB'lik açılış sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a7",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "HJ 3 BB açtı. BTN'desin; açılışın 3 katı bir 3-bet toplam kaç BB'dir?",
+        "dogru": 9,
+        "tolerans": 0,
+        "birim": "BB",
+        "neden": "3 × 3 = 9.",
+        "yanilgi": "Açılışa 3 BB eklemek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "carpim",
+          "terimler": [
+            3,
+            3
+          ]
+        }
+      },
+      {
+        "kimlik": "a8",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Board: Q♦ 7♦ 3♠. Elin A♦ T♦. Floş yapmak için kaç out'un var?",
+        "dogru": 9,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "13 − 4 = 9.",
+        "yanilgi": "Board'daki karoları düşmemek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "A♦ T♦",
+          "board": "Q♦ 7♦ 3♠",
+          "hedef": "Floş"
+        }
+      },
+      {
+        "kimlik": "a9",
+        "tip": "sayi",
+        "zorluk": 3,
+        "soru": "Turn'de 9 out'un var. 2 kuralıyla river'da tutma yaklaşık yüzde kaçtır?",
+        "dogru": 18,
+        "tolerans": 0,
+        "birim": "%",
+        "neden": "9 × 2 = 18 (gerçek ≈ %19,6).",
+        "yanilgi": "× 4 kullanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "tutma",
+          "outs": 9,
+          "sokak": "turn",
+          "sonuc": "kural"
+        }
+      },
+      {
+        "kimlik": "a10",
+        "tip": "secmeli",
+        "zorluk": 3,
+        "soru": "Hangisi bir squeeze'dir?",
+        "secenekler": [
+          "CO açtı, BTN call etti, BB 3-bet yaptı",
+          "CO açtı, BB 3-bet yaptı",
+          "UTG limp etti, BTN raise yaptı",
+          "BTN açtı, BB call etti"
+        ],
+        "dogru": 0,
+        "neden": "Açılış ve en az bir call'dan sonra yapılan 3-bet squeeze'dir. Limp'e raise izolasyondur.",
+        "yanilgi": "İzolasyonu squeeze sanmak.",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a11",
+        "tip": "dogruYanlis",
+        "zorluk": 3,
+        "soru": "Elinde A♠ 6♣ varken rakibin 3 AA kombinasyonu olabilir.",
+        "dogru": true,
+        "neden": "Kalan üç astan ikisi: 3.",
+        "yanilgi": "6 saymak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♠ 6♣",
+          "eller": [
+            "AA"
+          ],
+          "iddia": 3
+        }
+      },
+      {
+        "kimlik": "a12",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Elinde A♦ K♠ var. Rakibin AA, KK ve AK kombinasyonlarının toplamı kaçtır?",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "kombinasyon",
+        "neden": "AA 3 + KK 3 + AK 9 = 15.",
+        "yanilgi": "Bloker etkisini unutup 28 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "blokerKombo",
+          "kartlar": "A♦ K♠",
+          "eller": [
+            "AA",
+            "KK",
+            "AKs",
+            "AKo"
+          ]
+        }
+      },
+      {
+        "kimlik": "a13",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "UTG 2,5 BB açtı, HJ ve CO fold etti, BTN call etti. SB'den 12 BB'ye squeeze yapıyorsun (0,5 BB'n potta). Görülürse hiç kazanamayacağını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 63.9,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Pot 0,5 + 1 + 2,5 + 2,5 = 6,5 BB; ek risk 11,5 BB: 11,5 / 18 ≈ %63,9.",
+        "yanilgi": "SB'nin 0,5 BB'sini riske katmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "basabasFold",
+          "risk": 11.5,
+          "pot": 6.5
+        }
+      },
+      {
+        "kimlik": "a14",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "CO'dan 2,5 BB açtın, BTN fold etti, SB 11 BB'ye 3-bet yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+        "dogru": 37.0,
+        "tolerans": 0.1,
+        "birim": "%",
+        "neden": "Pot 11 + 1 + 2,5 = 14,5 BB, call 8,5 BB: 8,5 / 23 ≈ %37,0.",
+        "yanilgi": "Call miktarını 11 BB almak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "gerekenEquity",
+          "call": 8.5,
+          "pot": 14.5
+        }
+      },
+      {
+        "kimlik": "a15",
+        "tip": "spot",
+        "zorluk": 4,
+        "soru": "CO 2,5 BB açtı. BTN'desin. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call",
+          "3-bet 7,5 BB"
+        ],
+        "dogru": 2,
+        "neden": "AQs CO'nun açılış aralığının çoğundan önde; pozisyonda yaklaşık 3 katı (7,5 BB) 3-bet ile value alırsın.",
+        "yanilgi": "Pozisyonda büyük 3-bet ya da yalnızca call.",
+        "spotKimlik": "c07",
+        "dogrulamaGerekli": false
+      },
+      {
+        "kimlik": "a16",
+        "tip": "sayi",
+        "zorluk": 4,
+        "soru": "Turn'de pot 30 BB (rakibin bahsi dahil), call 10 BB, 9 out'un var (9 / 46). Başabaş için tuttuğunda sonradan en az kaç BB kazanman gerekir? (bir ondalık basamak)",
+        "dogru": 11.1,
+        "tolerans": 0.1,
+        "birim": "BB",
+        "neden": "X = 10 × (46 / 9 − 1) − 30 ≈ 11,1 BB.",
+        "yanilgi": "Pottaki chip'leri düşmeyi unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "impliedBasabas",
+          "call": 10,
+          "pot": 30,
+          "outs": 9,
+          "sokak": "turn"
+        }
+      },
+      {
+        "kimlik": "a17",
+        "tip": "secmeli",
+        "zorluk": 4,
+        "soru": "T8s, BTN'nin çalışma aralığına karşı preflop'ta yaklaşık ne kadar equity taşır?",
+        "secenekler": [
+          "%25",
+          "%41",
+          "%55",
+          "%70"
+        ],
+        "dogru": 1,
+        "neden": "Yaklaşık %40,8 (Monte Carlo; aralık solver çıktısı değil).",
+        "yanilgi": "Suited eli çok güçlü ya da çok zayıf sanmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "equityAraliga",
+          "el": "T8s",
+          "poz": "BTN",
+          "yaklasik": 41
+        }
+      },
+      {
+        "kimlik": "a18",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "Stack'ler 100 BB. BTN 2,5 BB açtı, SB 11 BB'ye 3-bet yaptı, BB fold etti, BTN call etti. Flop'ta SPR kaçtır? (bir ondalık basamak)",
+        "dogru": 3.9,
+        "tolerans": 0.1,
+        "neden": "Pot 11 + 11 + 1 = 23 BB; kalan 89 BB: 89 / 23 ≈ 3,9.",
+        "yanilgi": "BB'nin 1 BB'sini unutmak.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spr",
+          "stackler": [
+            89,
+            89
+          ],
+          "pot": 23
+        }
+      },
+      {
+        "kimlik": "a19",
+        "tip": "spot",
+        "zorluk": 5,
+        "soru": "Turn'de BB all-in yaptı; kartlarını görmüyorsun. Onun hangi ellerle all-in yaptığı spotun notunda varsayım olarak yazılı. Hamlen?",
+        "secenekler": [
+          "Fold",
+          "Call (34,75 BB)"
+        ],
+        "dogru": 1,
+        "neden": "Gereken equity yaklaşık %43,2 (34,75 BB / call sonrası pot). Spotun notundaki aralık varsayımına karşı equity'n yaklaşık %62 (spotun kendi hesabı). Equity'n fiyattan yüksek: call. All-in olduğu için sonradan kazanılacak ek chip yoktur; karar yalnızca bu karşılaştırmadır.",
+        "yanilgi": "Büyük all-in'e güçlü elle fold etmek.",
+        "spotKimlik": "o-2h3c-Ad9dAsJh",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "spotFiyat",
+          "spot": "o-2h3c-Ad9dAsJh",
+          "gereken": 43.2
+        }
+      },
+      {
+        "kimlik": "a20",
+        "tip": "sayi",
+        "zorluk": 5,
+        "soru": "Board: 8♣ 7♣ 2♥ K♦. Elin T♣ 9♣. Kent ya da floş yapan kaç kart var?",
+        "dogru": 15,
+        "tolerans": 0,
+        "birim": "out",
+        "neden": "9 sinek + J ve 6 (8 kart) − J♣ ve 6♣ = 15.",
+        "yanilgi": "Çifte sayıp 17 demek.",
+        "dogrulamaGerekli": false,
+        "denetim": {
+          "tur": "outs",
+          "el": "T♣ 9♣",
+          "board": "8♣ 7♣ 2♥ K♦",
+          "hedef": "Kent"
+        }
+      }
+    ]
+  }
+}

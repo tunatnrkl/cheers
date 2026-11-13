@@ -247,3 +247,75 @@ describe("turnuva strateji hesapları (başabaş fold, oran, SPR, flop'ta set)",
     expect(alistirmaDenetle(n(11.8, { tur: "flopTutma", cep: "A7" }, 0.1)).join()).toMatch(/cep çifti/);
   });
 });
+
+describe("cash c7–c8 hesapları (bloker, outs, 2 ve 4 kuralı, equity, implied odds, spot fiyatı)", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  const n = (dogru: number, denetim: Al["denetim"], tolerans = 0, soru = ""): Al => ({ ...temel, soru, tip: "sayi", dogru, tolerans, denetim }) as Al;
+
+  it("bloker: elinde A varken AA 3, AK 12; A ve K varken AK 9 kombinasyon", () => {
+    expect(alistirmaDenetle(n(3, { tur: "blokerKombo", kartlar: "A♠", eller: ["AA"] }, 0, "A♠"))).toEqual([]);
+    expect(alistirmaDenetle(n(12, { tur: "blokerKombo", kartlar: "A♠", eller: ["AKs", "AKo"] }, 0, "A♠"))).toEqual([]);
+    expect(alistirmaDenetle(n(9, { tur: "blokerKombo", kartlar: "A♠ K♦", eller: ["AKs", "AKo"] }, 0, "A♠ K♦"))).toEqual([]);
+    // Bloker etkisini unutan cevaplar (6, 16) yakalanır.
+    expect(alistirmaDenetle(n(6, { tur: "blokerKombo", kartlar: "A♠", eller: ["AA"] }, 0, "A♠")).join()).toMatch(/hesaplanan 3/);
+    expect(alistirmaDenetle(n(16, { tur: "blokerKombo", kartlar: "A♠", eller: ["AKs", "AKo"] }, 0, "A♠")).join()).toMatch(/hesaplanan 12/);
+    expect(alistirmaDenetle(n(3, { tur: "blokerKombo", kartlar: "A♠", eller: ["AA"] }, 0, "elinde as")).join()).toMatch(/görünmüyor/);
+  });
+
+  it("outs kartlar tek tek denenerek sayılır; çifte sayım ve kirli out yakalanır", () => {
+    const s = "9♥ 8♥ / T♥ 7♥ 2♠";
+    expect(alistirmaDenetle(n(15, { tur: "outs", el: "9♥ 8♥", board: "T♥ 7♥ 2♠", hedef: "Kent" }, 0, s))).toEqual([]);
+    expect(alistirmaDenetle(n(17, { tur: "outs", el: "9♥ 8♥", board: "T♥ 7♥ 2♠", hedef: "Kent" }, 0, s)).join()).toMatch(/outs: hesaplanan 15/);
+    expect(alistirmaDenetle(n(9, { tur: "outs", el: "A♥ 5♥", board: "K♥ 9♥ 3♣", hedef: "Floş" }, 0, "A♥ 5♥ K♥ 9♥ 3♣"))).toEqual([]);
+    // Eli zaten hedefte olan soru reddedilir.
+    expect(alistirmaDenetle(n(0, { tur: "outs", el: "A♥ 5♥", board: "K♥ 9♥ 3♥", hedef: "Floş" }, 0, "A♥ 5♥ K♥ 9♥ 3♥")).join()).toMatch(/zaten/);
+    // Öğretim örneği: 8 kent kartından ikisi rakibe floş verir → 6.
+    const k = { tur: "kazandiranKart", el: "9♣ 8♣", rakip: "K♥ Q♥", board: "T♥ 7♥ 2♠ K♦" };
+    const ks = "9♣ 8♣ K♥ Q♥ T♥ 7♥ 2♠ K♦";
+    expect(alistirmaDenetle(n(6, k, 0, ks))).toEqual([]);
+    expect(alistirmaDenetle(n(8, k, 0, ks)).join()).toMatch(/hesaplanan 6/);
+  });
+
+  it("2 ve 4 kuralı ile kesin ihtimal: 1 − C(47−outs, 2) / C(47, 2)", () => {
+    expect(alistirmaDenetle(n(35.0, { tur: "tutma", outs: 9, sokak: "flop", kart: 2, sonuc: "gercek" }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(36, { tur: "tutma", outs: 9, sokak: "flop", kart: 2, sonuc: "gercek" }, 0.1)).join()).toMatch(/hesaplanan 34\.96/);
+    expect(alistirmaDenetle(n(19.6, { tur: "tutma", outs: 9, sokak: "turn", sonuc: "gercek" }, 0.1))).toEqual([]);
+    // Turn'de 47'ye bölmek (19,1) yakalanır.
+    expect(alistirmaDenetle(n(19.1, { tur: "tutma", outs: 9, sokak: "turn", sonuc: "gercek" }, 0.1)).join()).toMatch(/hesaplanan 19\.56/);
+    expect(alistirmaDenetle(n(5.9, { tur: "tutma", outs: 15, sokak: "flop", kart: 2, sonuc: "fark" }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(36, { tur: "tutma", outs: 9, sokak: "turn", kart: 2, sonuc: "kural" })).join()).toMatch(/sokak/);
+    // Kartlar tek tek sayıldığında formülle aynı sonuç.
+    const t = n(35.0, { tur: "tutmaKart", el: "A♥ 5♥", board: "K♥ 9♥ 3♣", hedef: "Floş" }, 0.1, "A♥ 5♥ K♥ 9♥ 3♣");
+    expect(alistirmaDenetle(t)).toEqual([]);
+    expect(alistirmaDenetle({ ...t, dogru: 36 } as Al).join()).toMatch(/tutma yüzdesi/);
+  });
+
+  it("el ele equity: flop'ta kesin sayım, preflop'ta Monte Carlo yalnızca seçmeli", () => {
+    const e = n(45.9, { tur: "equityEle", el: "A♥ 5♥", rakip: "K♠ Q♦", board: "K♥ 9♥ 3♣" }, 0.1, "A♥ 5♥ K♠ Q♦ K♥ 9♥ 3♣");
+    expect(alistirmaDenetle(e)).toEqual([]);
+    expect(alistirmaDenetle({ ...e, dogru: 35 } as Al).join()).toMatch(/equity: hesaplanan 45\.8/);
+    const s: Al = { ...temel, tip: "secmeli", soru: "A♠ A♥ K♣ K♦", secenekler: ["%50", "%82"], dogru: 1, denetim: { tur: "equityEle", el: "A♠ A♥", rakip: "K♣ K♦", yaklasik: 82 } };
+    expect(alistirmaDenetle(s)).toEqual([]);
+    expect(alistirmaDenetle({ ...s, denetim: { ...s.denetim!, yaklasik: 70 } }).join()).toMatch(/metinde %70/);
+    expect(alistirmaDenetle(n(82, s.denetim, 1, s.soru)).join()).toMatch(/seçmeli yaz/);
+  });
+
+  it("implied odds başabaşı: X = call × (1/eq − 1) − pot", () => {
+    // 3,7 × (47/9 − 1) − 9,2 ≈ 6,42
+    expect(alistirmaDenetle(n(6.4, { tur: "impliedBasabas", call: 3.7, pot: 9.2, outs: 9, sokak: "flop" }, 0.1))).toEqual([]);
+    // Potu düşmeyi unutmak (15,6) yakalanır.
+    expect(alistirmaDenetle(n(15.6, { tur: "impliedBasabas", call: 3.7, pot: 9.2, outs: 9, sokak: "flop" }, 0.1)).join()).toMatch(/hesaplanan 6\.42/);
+    expect(alistirmaDenetle(n(14.8, { tur: "impliedBasabas", call: 2.5, pot: 4, eq: 11.7551 }, 0.1))).toEqual([]);
+    expect(alistirmaDenetle(n(1, { tur: "impliedBasabas", call: 2.5, pot: 4 })).join()).toMatch(/eq ya da outs/);
+  });
+
+  it("o-… spotlarının fiyatı drills.json'dan okunur", () => {
+    const a: Al = { ...temel, tip: "spot", soru: "", denetim: { tur: "spotFiyat", spot: "o-Qc4c-3cTh7h8c", gereken: 45.4 } };
+    expect(alistirmaDenetle(a)).toEqual([]);
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 54.8 } }).join()).toMatch(/gereken equity %45\.4/);
+    // Gevşek tolerans yok: %45,44 yerine %45,6 (ya da yuvarlanmış %45) yakalanır.
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45.6 } }).join()).toMatch(/gereken equity %45\.4/);
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, gereken: 45 } }).join()).toMatch(/gereken equity %45\.4/);
+    expect(alistirmaDenetle({ ...a, denetim: { ...a.denetim!, spot: "o-yok" } }).join()).toMatch(/spot yok/);
+  });
+});

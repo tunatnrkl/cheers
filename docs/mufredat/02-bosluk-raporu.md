@@ -68,3 +68,24 @@ Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistin
 - t3–t4'te 10 spot bağlantısı kullanıldı (t11, t12, t13, t14, t20, t24, t25, t26). Turnuvada **herkes fold ettiğinde açılış** spotu yalnızca iki tane (t12 boyut, t24 çalma); r-… açılış spotları cash ve 100 BB olduğu için turnuva pistine bağlanmadı. Derin stack'te pozisyona göre açılış (ör. UTG'de AQo, HJ'de KQo, CO'da A9o; seçenekler "Fold / 2,2 BB aç", BB ante 1 BB) için turnuva spotları faydalı olur.
 - **Turnuvaya özgü açılış aralığı yok:** ranges.json yalnızca cash açılış ve push (6/10/15 BB) aralıkları içeriyor. Ante'li ve 20–40 BB için ayrı aralıklar üretilirse t3-d2 ve t4-d1 sayısal hâle getirilebilir.
 - **Resteal / 3-bet all-in spotları:** yalnızca t11 var. 20–25 BB'de BB'den ve CO'dan resteal spotları (rakip açılış aralığı yazılı, rakip eli yok) t4-d3 için faydalı olur.
+
+## c7 ve c8 (2026-11-13)
+
+### Sözlüğe eklenenler (165 → 167)
+
+- **5-bet** (aksiyon): "4-bet'in üzerine yapılan yeniden artırma. 100 BB'lik stack'lerle çoğunlukla all-in olur ve dar bir aralıkla yapılır." c7-d6'ya bağlandı.
+- **Kirli out** (matematik; takma adlar "kirli outs", "dirty outs"): elini tamamlayan ama rakibe daha iyi bir el verebilecek kart. c8-d2'ye bağlandı.
+
+"Iso-raise" sözlükte zaten "İzolasyon" teriminin takma adıydı; ayrı terim eklenmedi. "Overcard", "value 3-bet", "blöf 3-bet" ve "temiz out" metinde açıklandı, sözlüğe eklenmedi.
+
+### Tanım notları (uygulanmadı)
+
+- **2 ve 4 kuralı** tanımı koşulsuz "flop'ta out × 4" diyordu. **Uygulandı (Onay Ajanı):** tanım artık "turn ve river'ı ödeme yapmadan göreceksen (ör. flop'ta all-in) out × 4, yalnızca bir sonraki kartı göreceksen out × 2" diyor; c8-d3 ile uyumlu.
+- **Lineer aralık** tanımındaki "(blöf içermez)" c7-d2 ile uyumlu.
+
+### Spot ihtiyaçları
+
+- c7'de 11 spot bağlantısı (c05, c07, c08, c09, c10, c11, c12); c8'de 12 (c07, c13, c17, c18, c24, c38 ve altı o-… spotu). Cash pistinde **squeeze** (c12), **4-bet** (c09) ve **iso-raise** (c11) için birer spot var. 4-bet blöfü, 5-bet all-in'e karşı karar, IP squeeze ve 3-bet'e pozisyonda call (ör. BTN'de 99, CO'nun 3-bet'ine karşı) spotları faydalı olur.
+- c8 için **flop'ta çekişle karar** spotu az (c17, c26); o-… spotlarının hepsi turn all-in'i. Flop'ta yarım pot bahse karşı OESD/gutshot spotları (rakip aralığı notta, rakip eli yok) c8-d3/d4'ü güçlendirir.
+- `c19` gerekçesindeki "8 / 44" → 8 / 46 (%17,4): **düzeltildi (31593ed).**
+- `c11` gerekçesi iso-raise boyutunu "normal açılışa limp başına yaklaşık 1 BB" diye anlatıyor (2,5 + 1 = 3,5), spotun boyutu 4 BB. c7-d8 "yaklaşık 3 BB + limp başına 1 BB" diye anlatır (= 4 BB). **Düzeltildi (31593ed):** c11 gerekçesi c7-d8'deki kuralla aynı.
