@@ -209,6 +209,9 @@ export const GLOSSARY: Term[] = [
   t("turnuva", "kapsamak", "Kapsamak (cover)", "Bir oyuncunun stack'inin rakibininkine eşit ya da ondan büyük olması. Seni kapsayan rakibe bütün chip'lerini kaybedersen elenirsin.", ["cover"]),
   t("turnuva", "odul-yapisi", "Ödül yapısı", "Turnuvada ödülün hangi sıralara ve hangi paylarla dağıtılacağını gösteren tablo. Genellikle katılımcıların küçük bir kısmı ödül alır ve paylar üst sıralara doğru büyür; oranlar turnuvaya göre değişir.", ["payout structure"]),
   t("turnuva", "derin-stack", "Derin stack", "BB cinsinden çok chip'i olan stack. Turnuvada kabaca 40 BB ve üstü sayılır; sınır kaynağa göre değişir.", ["deep stack"]),
+  t("turnuva", "push-araligi", "Push aralığı", "Belirli bir koltuk ve stack'te all-in yaptığın ellerin tamamı (itme aralığı). Tek bir el değil, ellerin kümesidir.", ["itme aralığı", "shove aralığı", "shove range"]),
+  t("turnuva", "call-araligi", "Call aralığı", "Rakibin all-in'ine call ettiğin ellerin tamamı. Fiyata ve rakibin push aralığına göre belirlenir.", ["call range"]),
+  t("strateji", "nash", "Nash dengesi", "İki tarafın da yalnızca kendi stratejisini değiştirerek daha fazla kazanamadığı strateji çifti. Push/fold tabloları bu dengeyi chip EV varsayımıyla (ödül yapısı olmadan) listeler; en çok kazandıran strateji demek değildir.", ["Nash", "denge", "sömürülemezlik"]),
   t("turnuva", "stall", "Risk primi", "ICM yüzünden bir all-in'i görmek için chip EV'nin gerektirdiğinden fazla equity'ye ihtiyaç duyman.", ["risk premium"]),
 ];
 

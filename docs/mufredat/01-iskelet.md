@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 112 ders, 1247 alıştırma.
+**Dolu:** 121 ders, 1344 alıştırma.
 
 ## Cash pisti
 
@@ -315,15 +315,15 @@ Kısa stack: all-in ya da fold, pozisyona göre push aralıkları.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t5-d1` Neden all-in ya da fold | ders | Kısa stack'te küçük açılışın sakıncalarını açıklar. | t4-k, t4-d1 |
-| `t5-d2` Fold equity | ders | All-in'in iki kazanma yolunu ayırır; stack kısaldıkça fold equity'nin azaldığını açıklar. | t5-d1 |
-| `t5-d3` 10 BB: pozisyona göre push | ders | 10 BB ile pozisyona göre push aralığının genişliğini sıralar ve örnek elleri sınıflar. | t5-d2, o4-d2 |
-| `t5-d4` 6 BB ve altı | ders | Çok kısa stack'te aralığın neden iyice genişlediğini açıklar. | t5-d3 |
-| `t5-d5` 15 BB: push mu, açılış mı | ders | 15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır. | t5-d4 |
-| `t5-d6` SB'den BB'ye karşı | ders | Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar. | t5-d5 |
-| `t5-d7` Nash mantığı | ders | Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar. | t5-d6 |
-| `t5-k` Kontrol: Push/fold | kontrol | "Push/fold" ünitesinin kazanımlarını karışık sorularda uygular. | t5-d7 |
-| `t5-r` Tekrar: Push/fold | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t5-k |
+| `t5-d1` Neden all-in ya da fold (11 alıştırma) | ders | Kısa stack'te küçük açılışın sakıncalarını açıklar. | t4-k, t4-d1 |
+| `t5-d2` Fold equity (11 alıştırma) | ders | All-in'in iki kazanma yolunu ayırır; stack kısaldıkça fold equity'nin azaldığını açıklar. | t5-d1 |
+| `t5-d3` 10 BB: pozisyona göre push (11 alıştırma) | ders | 10 BB ile pozisyona göre push aralığının genişliğini sıralar ve örnek elleri sınıflar. | t5-d2, o4-d2 |
+| `t5-d4` 6 BB ve altı (11 alıştırma) | ders | Çok kısa stack'te aralığın neden iyice genişlediğini açıklar. | t5-d3 |
+| `t5-d5` 15 BB: push mu, açılış mı (11 alıştırma) | ders | 15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır. | t5-d4 |
+| `t5-d6` SB'den BB'ye karşı (11 alıştırma) | ders | Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar. | t5-d5 |
+| `t5-d7` Nash mantığı (11 alıştırma) | ders | Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar. | t5-d6 |
+| `t5-k` Kontrol: Push/fold (12 alıştırma) | kontrol | "Push/fold" ünitesinin kazanımlarını karışık sorularda uygular. | t5-d7 |
+| `t5-r` Tekrar: Push/fold (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t5-k |
 
 ### t6 · All-in'e call (seviye 6)
 

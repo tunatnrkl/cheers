@@ -989,7 +989,11 @@ export function alistirmaDenetle(a: Al): string[] {
       case "push": {
         // Herkes fold ettiğinde: stack (6, 10, 15 BB), koltuk, el → push ya da fold. Sınırdaki el yalnızca
         // sinir: true ile ve dogrulamaGerekli ya da kabulEdilebilir taşıyan soruda kullanılabilir.
-        const durum = pushDurumu(d.stack, d.poz as string, d.el as string);
+        // stack bir dizi olabilir (ör. 8 BB'lik spot için [6, 10]): bütün stack'lerde aynı karar çıkmalı.
+        const stackler = Array.isArray(d.stack) ? (d.stack as unknown[]) : [d.stack];
+        const durumlar = stackler.map((st) => pushDurumu(st, d.poz as string, d.el as string));
+        const durum = durumlar.includes("sinir") ? "sinir" : durumlar[0];
+        if (durum !== "sinir" && durumlar.some((x) => x !== durum)) throw new Error(`${d.poz} ${d.el}: ${stackler.join(" ve ")} BB'de karar farklı (${durumlar.join(", ")}); ara stack'te sorulamaz`);
         const yumusak = (a as { dogrulamaGerekli?: boolean }).dogrulamaGerekli === true || ((a as { kabulEdilebilir?: number[] }).kabulEdilebilir ?? []).length > 0;
         const ne = `${d.stack} BB ${d.poz} ${d.el}`;
         if (durum === "sinir") {
@@ -1067,6 +1071,15 @@ export function alistirmaDenetle(a: Al): string[] {
         const rakip = d.poz ? RANGES.cash[d.poz as string] : d.itme ? pushListesi(...(d.itme as [string, string])) : (d.rakip as string[]);
         const e = (sec as string[]).map((x) => equityAraliga(x, rakip));
         if (e.some((v, i) => i > 0 && v - e[i - 1] < 3)) hata(`equity'ler artan sırada ve 3 puan aralıklı değil (${e.map((x) => x.toFixed(1)).join(" / ")})`);
+        break;
+      }
+      case "equityEnIyi": {
+        // Seçmeli: seçenekler el adı; rakip aralığına karşı en yüksek equity'li TEK el doğru. İkinciyle en az 3 puan fark aranır.
+        const rakip = d.poz ? RANGES.cash[d.poz as string] : d.itme ? pushListesi(...(d.itme as [string, string])) : (d.rakip as string[]);
+        const e = sec.map((x) => equityAraliga(String(x), rakip));
+        const sirali = [...e].sort((x, y) => y - x);
+        if (sirali[0] - sirali[1] < 3) hata(`en yüksek iki equity birbirine çok yakın (${e.map((x) => x.toFixed(1)).join(" / ")})`);
+        tekCevap((i) => e[i] === sirali[0], `en yüksek equity ${String(sec[e.indexOf(sirali[0])])} %${sirali[0].toFixed(1)}`);
         break;
       }
       case "callShove": {

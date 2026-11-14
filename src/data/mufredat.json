@@ -26318,15 +26318,201 @@
       "Kısa stack'te küçük açılışın sakıncalarını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Stack'in kabaca 10–12 BB'nin altına indiğinde çoğu çalışma kaynağı, ilk giren oyuncu için yalnızca iki seçenek önerir: all-in ya da fold. Buna push/fold denir. Push (shove), bütün stack'ini tek hamlede ortaya koymaktır. Bu ünitede herkes sana kadar fold ettiği, yani ilk giren oyuncunun sen olduğu durumlara bakıyoruz. Aksi yazılmadıkça BB ante 1 BB'dir; el başında potta 2,5 BB vardır.",
+      "Küçük açılışın sorunu stack'in ne kadarını bağladığıdır. 10 BB ile 2 BB'ye açarsan stack'inin beşte birini koymuş olursun. Arkadan all-in gelirse ya zayıf kalan bir elle bütün stack'ini koyarsın ya da 2 BB'yi bırakıp 8 BB ile kalırsın; buna \"açıp fold etmek\" denir ve kısa stack'te pahalıdır. Yalnızca call gelirse de flop'ta SPR (t4-d5) çok düşüktür: kalan stack potun kabaca bir katıdır, el çoğunlukla zaten all-in'e gider.",
+      "All-in ise kararı rakiplere bırakır. Rakipler ya fold eder ve potu hemen alırsın ya da call eder ve elin equity'si devreye girer. Flop sonrasında yapılacak bir hata da kalmaz, çünkü başka karar yoktur.",
+      "Bu bir başlangıç ilkesidir, kural değildir. 10–15 BB arasında bazı ellerle küçük açılış da kullanılır (t5-d5); çok güçlü ellerle limp ya da küçük açılış gibi tuzak seçenekler de vardır. Bu ünite ilk girişte push ya da fold kararına odaklanır."
+     ],
+     "terimler": [
+      "Push/fold",
+      "Shove (push)",
+      "All-in",
+      "Kısa stack",
+      "Min-raise",
+      "SPR"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Push (shove), bütün stack'ini tek hamlede ortaya koymaktır.",
+       "dogru": true,
+       "neden": "Push ile all-in aynı hamledir: stack'in tamamı ortaya konur.",
+       "yanilgi": "Push'u büyük ama stack'in tamamı olmayan bir raise sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "Stack'in 10 BB. 2 BB'ye açarsan stack'inin yüzde kaçını koymuş olursun?",
+       "dogru": 20,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "2 / 10 = 0,2, yani %20: stack'inin beşte biri.",
+       "yanilgi": "Açılışı küçük görüp stack'e oranını hesaplamamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2,
+         10
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. Herkes sana kadar fold etti. El başında potta kaç BB var?",
+       "dogru": 2.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "SB 0,5 + BB 1 + BB ante 1 = 2,5 BB.",
+       "yanilgi": "BB ante'yi unutup 1,5 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "10 BB'lik stack'le ilk girişte push/fold'un en çok önerilmesinin gerekçesi hangisidir?",
+       "secenekler": [
+        "Küçük açılış stack'in büyük kısmını bağlar; arkadan all-in gelince açıp fold etmek pahalıdır",
+        "Kurallar 10 BB'de küçük açılışa izin vermez",
+        "All-in her zaman kazanır"
+       ],
+       "dogru": 0,
+       "neden": "Sorun stack'in oranıdır: 2 BB'lik açılış 10 BB'nin beşte biridir. Bu bir strateji tercihidir, kural değildir.",
+       "yanilgi": "Strateji tercihini kural sanmak ya da all-in'in kazanmayı garanti ettiğini düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. Stack'in 10 BB, herkes fold etti. All-in yaparsın ve herkes fold eder. Aldığın 2,5 BB'lik pot stack'inin yüzde kaçıdır?",
+       "dogru": 25,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "2,5 / 10 = %25. Kısa stack'te potu hemen almak stack'i belirgin biçimde büyütür.",
+       "yanilgi": "Potu küçük sanıp önemsememek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2.5,
+         10
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "10 BB ile 2 BB'ye açtın, arkadan biri all-in yaptı ve elin devam etmek için zayıf. Fold edersen ne olur?",
+       "secenekler": [
+        "2 BB'yi kaybedip 8 BB ile kalırsın",
+        "Hiç chip kaybetmezsin",
+        "Açılışın sana geri verilir"
+       ],
+       "dogru": 0,
+       "neden": "Pota koyduğun chip fold edince geri alınmaz: stack'inin beşte biri gider.",
+       "yanilgi": "Açılışın fold edince geri döndüğünü sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2 BB'ye açtı, yalnızca BB call etti. Flop'ta potta 5,5 BB var (SB'nin 0,5'i, ante 1 ve ikisinin 2'şer BB'si); BTN'nin 8 BB'si, BB'nin 7 BB'si kaldı (BB ante de ödedi). Efektif stack'e göre SPR kaçtır? (bir ondalık basamak)",
+       "dogru": 1.3,
+       "tolerans": 0.1,
+       "birim": "",
+       "neden": "Efektif stack küçük olandır: 7 / 5,5 ≈ 1,27, yani yaklaşık 1,3. Kalan stack potun kabaca bir katı: el çoğunlukla all-in'e gider.",
+       "yanilgi": "Başlangıç stack'ini (10 BB) kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "spr",
+        "stackler": [
+         8,
+         7
+        ],
+        "pot": 5.5
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Kısa stack'te all-in iki yolla kâr edebilir: rakipler fold eder ya da görüldüğünde showdown'da kazanırsın.",
+       "dogru": true,
+       "neden": "İki yol birlikte değerlendirilir; t5-d2 bunu ayrıntılı işler.",
+       "yanilgi": "All-in'i yalnızca fold ettirme aracı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. 10 BB ile BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Min-raise (2 BB)",
+        "All-in (10 BB)"
+       ],
+       "dogru": 2,
+       "neden": "A7o, sitenin 10 BB çalışma aralığında BTN'den itilen bir el. Min-raise stack'inin beşte birini koyar ve arkadan all-in gelirse zor kararla kalırsın; all-in kararı blind'lere bırakır.",
+       "yanilgi": "Kısa stack'te min-raise yapıp all-in gelince fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t01",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "BTN",
+        "el": "A7o"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Push/fold için hangisi doğrudur?",
+       "secenekler": [
+        "Kısa stack için sade bir başlangıç stratejisidir; bazı ellerle küçük açılış ya da tuzak seçenekleri de kullanılır",
+        "Kısa stack'te her elle all-in yapmak demektir",
+        "Yalnızca derin stack'te kullanılır"
+       ],
+       "dogru": 0,
+       "neden": "Push/fold bir başlangıç ilkesidir; fold da stratejinin parçasıdır ve hangi ellerin itileceği pozisyona bağlıdır.",
+       "yanilgi": "Push/fold'u \"her eli it\" diye anlamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Push/fold, kısa stack'te elin ne olursa olsun all-in yapmak demektir.",
+       "dogru": false,
+       "neden": "Fold da stratejinin yarısıdır: hangi ellerin itileceği koltuğa ve stack'e göre değişir (t5-d3).",
+       "yanilgi": "Kısa stack'i her eli itmek için gerekçe saymak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d2",
@@ -26339,15 +26525,185 @@
       "All-in'in iki kazanma yolunu ayırır; stack kısaldıkça fold equity'nin azaldığını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "All-in iki yolla kazandırır. Birincisi: herkes fold eder ve potu hemen alırsın. Rakiplerin fold etmesinin sana kazandırdığı bu paya fold equity denir. İkincisi: biri call eder, kartlar sonuna kadar açılır ve elin kazanır; burada elinin equity'si (t3-d5) işe yarar. İyi bir push ikisini birleştirir.",
+      "Fold equity'yi ölçmenin en sade yolu başabaş fold oranıdır (t3-d4): risk / (risk + mevcut pot). Örnek: BB ante 1 BB, pot 2,5 BB, UTG'den 10 BB push: 10 / 12,5 = %80. Bu hesap call edildiğinde hiç kazanmadığını varsayar; görüldüğünde de bir equity payın olduğu için gerçekte daha az fold yeter.",
+      "Stack kısaldıkça fold equity azalır, çünkü rakibin call fiyatı ucuzlar. SB 10 BB ile itince BB 9 BB ödeyip 21 BB'lik pota girer: gereken equity 9 / 21 ≈ %42,9. SB 6 BB ile itince 5 / 13 ≈ %38,5 yeter. Daha az equity yettiği için BB daha çok elle call eder. Bu yüzden çok kısa stack'te push'un kazancı daha çok görüldüğündeki equity'den gelir.",
+      "Fold equity'yi başka şeyler de etkiler: arkanda kaç oyuncu olduğu (her biri fold etmeli), rakiplerin eğilimleri ve stack'leri. Stack'in 1–2 BB'ye inerse fold equity'n neredeyse kalmaz."
+     ],
+     "terimler": [
+      "Fold equity",
+      "Equity",
+      "Başabaş noktası",
+      "Pot odds",
+      "Kısa stack"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Fold equity, rakiplerin fold etmesiyle potu alman sayesinde kazandığın paydır.",
+       "dogru": true,
+       "neden": "All-in'in iki kazanma yolundan biridir.",
+       "yanilgi": "Fold equity'yi elin showdown'daki kazanma payıyla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "All-in'in iki kazanma yolu hangisidir?",
+       "secenekler": [
+        "Herkes fold eder ya da görülür ve showdown'da kazanırsın",
+        "Yalnızca herkes fold ederse",
+        "Yalnızca görülüp kazanırsan"
+       ],
+       "dogru": 0,
+       "neden": "İkisi birlikte değerlendirilir: fold equity ve görüldüğündeki equity.",
+       "yanilgi": "Yalnızca birine bakıp kararı vermek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. UTG'den 10 BB push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan, push'un başabaş olması için rakiplerin en az yüzde kaç sıklıkla fold etmesi gerekir?",
+       "dogru": 80,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "10 / (10 + 2,5) = 10 / 12,5 = %80.",
+       "yanilgi": "Paydaya yalnızca potu koyup 10 / 2,5 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 10,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Aynı durumda stack'in 6 BB. Başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 70.6,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "6 / (6 + 2,5) = 6 / 8,5 ≈ %70,6. Risk küçüldükçe daha az fold yeter.",
+       "yanilgi": "Stack küçüldüğünde başabaşın değişmediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 6,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Başabaş fold oranı %80 çıktıysa, push ancak rakipler %80'den sık fold ederse kârlıdır.",
+       "dogru": false,
+       "neden": "Bu hesap call edildiğinde hiç kazanmadığını varsayar. Görüldüğünde de equity'n olduğu için gerçekte daha az fold yeter.",
+       "yanilgi": "En kötü durum varsayımını kesin eşik sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin; blind'ın (1 BB) ve ante potta. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 10 + 1 + 1 = 12 BB; 9 BB ödersin: 9 / 21 ≈ %42,9.",
+       "yanilgi": "Blind'ını ödenecek miktara yeniden ekleyip 10 / 22 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı durumda SB 6 BB ile all-in yaptı. BB'nin call için gereken equity'si yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 38.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 6 + 1 + 1 = 8 BB; 5 BB ödersin: 5 / 13 ≈ %38,5.",
+       "yanilgi": "Ante'yi pottan unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 5,
+        "pot": 8
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "SB 6 BB ile itince BB'nin call için gereken equity'si 10 BB'ye göre düşer. Bu, SB'nin fold equity'sini nasıl etkiler?",
+       "secenekler": [
+        "Azaltır: BB daha geniş call edebilir",
+        "Artırır: BB daha çok fold eder",
+        "Etkilemez"
+       ],
+       "dogru": 0,
+       "neden": "Daha ucuz fiyat, daha geniş call aralığı demektir; fold eden ellerin payı küçülür.",
+       "yanilgi": "Kısa stack'in all-in'inin daha korkutucu olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Aynı stack'le (10 BB) herkes fold ettiğinde push'un fold equity'si genellikle en yüksek hangi koltuktadır?",
+       "secenekler": [
+        "SB: yalnızca BB'nin fold etmesi gerekir",
+        "UTG: beş oyuncunun fold etmesi gerekir",
+        "Koltuk fark etmez"
+       ],
+       "dogru": 0,
+       "neden": "Arkadaki her oyuncu güçlü bir elle seni görebilir; geçmen gereken oyuncu azaldıkça herkesin fold etme ihtimali artar.",
+       "yanilgi": "Koltuğun fold equity'yi etkilemediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Stack'in 2 BB'ye inerse fold equity'n neredeyse kalmaz; push'un değeri çoğunlukla görüldüğündeki equity'den gelir.",
+       "dogru": true,
+       "neden": "Pot stack'ine göre çok büyüktür ve rakip çok ucuza call edebilir; çoğu el call eder.",
+       "yanilgi": "Çok kısa stack'te de rakiplerin sık fold edeceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Hangisi push'un fold equity'sini genellikle azaltır?",
+       "secenekler": [
+        "Arkanda konuşacak oyuncu sayısının artması",
+        "Rakiplerin sık fold eden oyuncular olması",
+        "Rakiplerin call için daha kötü fiyat alması"
+       ],
+       "dogru": 0,
+       "neden": "Her ek oyuncu fold etmesi gereken bir kişi daha demektir. Sık fold eden rakip ve kötü fiyat fold equity'yi artırır.",
+       "yanilgi": "Fold equity'nin yalnızca elinle ilgili olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d3",
@@ -26361,15 +26717,262 @@
       "10 BB ile pozisyona göre push aralığının genişliğini sıralar ve örnek elleri sınıflar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Push aralığı (itme aralığı), belirli bir koltuktan, belirli bir stack'le all-in yaptığın ellerin tamamıdır. Sitenin push aralıkları (src/data/ranges.json) kendi hesabımızla üretildi: 169 el, rastgele bir ele karşı Monte Carlo equity'si ve küçük bir oynanabilirlik düzeltmesiyle sıralanır, her koltuk bir hedef yüzdeye kadar el alır. Bunlar temkinli, yaklaşık çalışma aralıklarıdır; Nash tablosu ya da solver çıktısı değildir.",
+      "10 BB, BB ante 1 BB, herkes fold etti: sitenin aralıklarında UTG ellerin yaklaşık %13'ünü, HJ %17'sini, CO %24'ünü, BTN %36'sını, SB %54'ünü iter. Arkanda ne kadar az oyuncu varsa aralık o kadar geniştir, çünkü arkadaki her oyuncu güçlü bir elle seni görebilir.",
+      "Örnekler: 77 ve AJs her koltuktan itilir. A7o UTG'den itilmez, BTN ve SB'den itilir. K7o SB'den itilir (BTN'de kenardadır). Suited connector'lar push'ta açılıştakinden daha az değerlidir: all-in'den sonra flop'ta oynanacak bir karar yoktur, el yalnızca equity'siyle yarışır. 76s yalnızca SB'den itilir, 54s SB'de bile aralığın dışındadır.",
+      "Aralığın son birkaç yüzdesindeki ellerde karar yakındır ve rakiplere, ante yapısına göre değişebilir. Bu ünitede kenardaki eller kesin cevaplı sorulmaz; ör. 10 BB'de KQo UTG'de kenardadır, HJ'den itilir."
+     ],
+     "terimler": [
+      "Push aralığı",
+      "Range (aralık)",
+      "Range matrisi",
+      "Erken pozisyon",
+      "Geç pozisyon",
+      "Connector"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Push aralığı, belirli bir koltuk ve stack'te all-in yaptığın ellerin tamamıdır.",
+       "dogru": true,
+       "neden": "Tek bir el değil, ellerin kümesidir.",
+       "yanilgi": "Push aralığını tek bir el sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "10 BB, BB ante 1 BB, herkes fold etti. Koltukları push aralığı dardan genişe doğru sırala.",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB"
+       ],
+       "neden": "Arkadaki oyuncu sayısı azaldıkça aralık genişler: UTG ~%13, HJ ~%17, CO ~%24, BTN ~%36, SB ~%54.",
+       "yanilgi": "SB'yi blind'de olduğu için en sıkı koltuk sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "stack": 10
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Sitenin çalışma aralıklarında 10 BB'de SB'nin push aralığı ellerin yaklaşık yüzde kaçıdır?",
+       "secenekler": [
+        "%13",
+        "%24",
+        "%36",
+        "%54"
+       ],
+       "dogru": 3,
+       "neden": "Kombinasyonlar sayıldığında yaklaşık %54. SB'de yalnızca BB'yi geçmen gerekir.",
+       "yanilgi": "UTG'nin sıkı aralığını SB'ye taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushYuzde",
+        "stack": 10,
+        "poz": "SB"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "spot",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. UTG'desin, sıra sende. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "77, 10 BB'de UTG'den bile itilen bir el: orta bir çift, görüldüğünde de çoğunlukla yazı-tura civarında ya da öndedir.",
+       "yanilgi": "Erken pozisyonda orta çiftleri fazla zayıf sanmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-UTG-77",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "UTG",
+        "el": "77"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. UTG'desin, sıra sende. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 0,
+       "neden": "J8o, UTG'nin dar aralığının çok dışında. Arkanda beş oyuncu varken görülürsen çoğunlukla geride kalırsın.",
+       "yanilgi": "Kısa stack'i her eli itmek için yeterli saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-UTG-J8o",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "UTG",
+        "el": "J8o"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "A5o, BTN'nin 10 BB aralığında: yalnızca iki blind'i geçmen gerekir ve as'lı el görüldüğünde de makul equity taşır.",
+       "yanilgi": "Zayıf kicker'lı as'ları her koltukta fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-BTN-A5o",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "BTN",
+        "el": "A5o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "range",
+       "zorluk": 3,
+       "soru": "10 BB, BB ante 1 BB, BTN'desin ve herkes fold etti. Bu ellerden sitenin push aralığında olanları işaretle.",
+       "secenekler": [
+        "A5o",
+        "K9o",
+        "QTo",
+        "Q9o",
+        "87s",
+        "54s",
+        "T8o",
+        "72o"
+       ],
+       "dogru": [
+        "A5o",
+        "K9o",
+        "QTo",
+        "Q9o"
+       ],
+       "neden": "BTN aralığı as'lı ve papazlı offsuit elleri, QTo ve Q9o'yu içerir; 87s, 54s, T8o ve 72o dışarıda.",
+       "yanilgi": "Suited connector'ları push'ta da açılıştaki kadar değerli saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushAraligi",
+        "stack": 10,
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "10 BB, BB ante 1 BB, herkes fold etti. Koltuk ve eli, sitenin aralığına göre kararla eşleştir.",
+       "secenekler": [
+        [
+         "UTG: 77",
+         "All-in"
+        ],
+        [
+         "UTG: K9o",
+         "Fold"
+        ],
+        [
+         "SB: K7o",
+         "All-in"
+        ],
+        [
+         "BTN: 54s",
+         "Fold"
+        ]
+       ],
+       "neden": "77 her koltuktan itilir; K9o UTG'den itilmez; K7o SB'den itilir; 54s BTN'de aralık dışı.",
+       "yanilgi": "Aynı eli her koltukta aynı oynamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushEsleme",
+        "stack": 10,
+        "etiketler": {
+         "All-in": "push",
+         "Fold": "fold"
+        }
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "10 BB'de hangi el BTN'den itilir ama UTG'den itilmez?",
+       "secenekler": [
+        "A7o",
+        "AA",
+        "72o"
+       ],
+       "dogru": 0,
+       "neden": "AA her koltuktan itilir, 72o hiçbirinden. A7o arkada beş oyuncu varken fazla zayıf, yalnızca iki blind kalınca yeterli.",
+       "yanilgi": "Elin gücünü koltuktan bağımsız düşünmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKosul",
+        "kosul": [
+         [
+          10,
+          "BTN",
+          "push"
+         ],
+         [
+          10,
+          "UTG",
+          "fold"
+         ]
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Push'ta suited connector'lar (ör. 76s) açılıştakinden daha değerlidir, çünkü flop sonrası oynanabilirlikleri öne çıkar.",
+       "dogru": false,
+       "neden": "All-in'den sonra flop'ta karar kalmaz; oynanabilirlik işe yaramaz, yalnızca equity sayılır. Bu yüzden push'ta yüksek kartlar ve çiftler öne çıkar.",
+       "yanilgi": "Açılıştaki el değerlerini push'a aynen taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Sitenin push aralıkları için hangisi doğrudur?",
+       "secenekler": [
+        "Kendi hesabımızla üretilmiş temkinli, yaklaşık çalışma aralıklarıdır; Nash tablosu değildir",
+        "Solver'ın hesapladığı kesin dengedir",
+        "Her masada aynen uygulanması gereken kurallardır"
+       ],
+       "dogru": 0,
+       "neden": "Aralıklar rastgele ele karşı equity ve küçük bir düzeltmeyle sıralanıp hedef yüzdeye kadar alınır; yaklaşık ve temkinlidir.",
+       "yanilgi": "Çalışma aralığını kesin bir tablo sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d4",
@@ -26382,15 +26985,238 @@
       "Çok kısa stack'te aralığın neden iyice genişlediğini açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "6 BB ve altında el başındaki pot (BB ante 1 BB ile 2,5 BB) stack'inin %40'ından fazlasıdır. Beklemenin bedeli de büyüktür: 6 kişilik masada bir tur (SB, BB ve BB ante) 2,5 BB tutar; 6 BB'de M oranın 2,4'tür (t2-d2), yani kabaca iki tur sonra stack'in tükenir.",
+      "Push'un fiyatı da değişir: risk küçük, pot görece büyük. Başabaş fold oranı 15 BB'de 15 / 17,5 ≈ %85,7, 10 BB'de %80, 6 BB'de 6 / 8,5 ≈ %70,6. Daha az fold yeterli olduğu için daha çok el kârlı hâle gelir.",
+      "Öte yandan rakipler daha ucuza call ettiği için daha geniş call eder (t5-d2); kazanç daha çok görüldüğündeki equity'den gelir. Bu yüzden genişleyen aralığa önce rastgele ele karşı iyi duran eller girer: as'lı ve papazlı eller, çiftler, iki yüksek kartlı eller. Sitenin aralıklarında 6 BB'de UTG ~%20, HJ ~%25, CO ~%33, BTN ~%48, SB ~%68 iter.",
+      "Genişlemek her eli itmek demek değildir: 6 BB'de bile UTG'den J6o gibi eller aralığın dışında kalır. Aynı koltukta 15 BB'den 6 BB'ye inerken aralık adım adım genişler; 10 BB'de itilen her el 6 BB'de de itilir."
+     ],
+     "terimler": [
+      "Kısa stack",
+      "M oranı",
+      "Fold equity",
+      "Başabaş noktası"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "BB ante 1 BB. Stack'in 6 BB. El başındaki 2,5 BB'lik pot stack'inin yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 41.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,5 / 6 ≈ %41,7.",
+       "yanilgi": "Potu stack'e oranlamadan küçük saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2.5,
+         6
+        ]
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB'li 6 kişilik masada stack'in 6 BB. M oranın kaçtır? (bir ondalık basamak)",
+       "dogru": 2.4,
+       "tolerans": 0,
+       "birim": "",
+       "neden": "Bir tur 0,5 + 1 + 1 = 2,5 BB; 6 / 2,5 = 2,4.",
+       "yanilgi": "Ante'yi unutup 6 / 1,5 = 4 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 6,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. 6 BB ile push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 70.6,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "6 / 8,5 ≈ %70,6. 10 BB'de %80'di.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 6,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "BTN'desin, herkes fold etti. Sitenin aralıklarında BTN'nin push aralığını dardan genişe sırala.",
+       "secenekler": [
+        "15 BB",
+        "10 BB",
+        "6 BB"
+       ],
+       "neden": "Stack kısaldıkça aralık genişler: 15 BB ~%26, 10 BB ~%36, 6 BB ~%48.",
+       "yanilgi": "Stack kısaldıkça daha sıkı oynamak gerektiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "poz": "BTN"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Sitenin aralıklarında BTN'nin 10 BB push aralığındaki her el, 6 BB push aralığında da var.",
+       "dogru": true,
+       "neden": "Stack kısalınca aralık yalnızca genişler; 10 BB'de itilen el 6 BB'de de itilir.",
+       "yanilgi": "Kısa stack'te bazı güçlü elleri bırakmak gerektiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKapsar",
+        "dar": [
+         10,
+         "BTN"
+        ],
+        "genis": [
+         6,
+         "BTN"
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 6 BB'si var. BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (6 BB)"
+       ],
+       "dogru": 1,
+       "neden": "T9o, 6 BB'de BTN'nin aralığında. Pot stack'ine göre büyük ve yalnızca iki blind'i geçmen gerekir.",
+       "yanilgi": "Offsuit orta kartları çok kısa stack'te de fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p6-BTN-T9o",
+       "denetim": {
+        "tur": "push",
+        "stack": 6,
+        "poz": "BTN",
+        "el": "T9o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 6 BB'si var. UTG'desin, sıra sende. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (6 BB)"
+       ],
+       "dogru": 1,
+       "neden": "ATo 6 BB'de UTG'den itilir: as'lı yüksek el, görüldüğünde de çoğu call aralığına karşı makul equity taşır.",
+       "yanilgi": "UTG'de kısa stack'le de 10 BB'deki kadar sıkı oynamak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p6-UTG-ATo",
+       "denetim": {
+        "tur": "push",
+        "stack": 6,
+        "poz": "UTG",
+        "el": "ATo"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 6 BB'si var. UTG'desin, sıra sende. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (6 BB)"
+       ],
+       "dogru": 0,
+       "neden": "J6o, 6 BB'de bile UTG'nin aralığı dışında: arkada beş oyuncu var ve görülürse çoğunlukla geride kalırsın.",
+       "yanilgi": "Çok kısa stack'i her eli itmek için gerekçe saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p6-UTG-J6o",
+       "denetim": {
+        "tur": "push",
+        "stack": 6,
+        "poz": "UTG",
+        "el": "J6o"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Sitenin aralıklarında hangi el 6 BB'de BTN'den itilir ama 10 BB'de BTN'den itilmez?",
+       "secenekler": [
+        "87s",
+        "AA",
+        "72o"
+       ],
+       "dogru": 0,
+       "neden": "AA iki stack'te de itilir, 72o hiçbirinde. 87s, aralık 6 BB'ye inince genişlediğinde girer.",
+       "yanilgi": "Aralığın stack'le değişmediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKosul",
+        "kosul": [
+         [
+          6,
+          "BTN",
+          "push"
+         ],
+         [
+          10,
+          "BTN",
+          "fold"
+         ]
+        ]
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "6 BB'de push aralığının 10 BB'ye göre genişlemesinin nedeni hangisidir?",
+       "secenekler": [
+        "Pot stack'ine göre büyük, push daha az fold'la kârlı ve beklemek blind'lerle hızla eritir",
+        "6 BB'de rakipler all-in'e hiç call etmez",
+        "Kısa stack'te kartların değeri önemsizdir"
+       ],
+       "dogru": 0,
+       "neden": "Fiyat ve beklemenin bedeli birlikte genişlemeyi gerektirir. Rakipler aslında daha geniş call eder; bu yüzden genişleme rastgele ele karşı iyi duran ellerle olur.",
+       "yanilgi": "Genişlemeyi rakiplerin hiç call etmeyeceğine bağlamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Çok kısa stack'te push aralığı genişlerken önce suited connector'lar, sonra as'lı offsuit eller eklenir.",
+       "dogru": false,
+       "neden": "Rakipler daha geniş call ettiği için görüldüğündeki equity önemlidir; rastgele ele karşı iyi duran as'lı, papazlı ve iki yüksek kartlı eller öne çıkar.",
+       "yanilgi": "Push'ta oynanabilirliği equity'den önemli saymak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d5",
@@ -26403,15 +27229,210 @@
       "15 BB'de iki seçeneğin hangi ellerde öne çıktığını ayırır."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "15 BB, sözlükteki push/fold sınırının (kabaca 10–12 BB) biraz üstündedir. Burada ilk girişte iki makul seçenek vardır: küçük açılış (2–2,2 BB) ya da doğrudan all-in. Sitenin aralıkları 15 BB için de bir push aralığı verir (UTG ~%9, HJ ~%12, CO ~%17, BTN ~%26, SB ~%40). Hangi ellerin küçük açılışla oynanacağına dair bir verimiz yok; aşağıdakiler genel kabul gören yönlerdir.",
+      "Push'un öne çıktığı eller: görüldüğünde makul equity taşıyan ama küçük açılıştan sonra gelen resteal'e (t4-d3) karşı rahat devam edemeyeceğin eller. Küçük ve orta çiftler, AJo ve ATo gibi as'lı eller tipik örneklerdir. Bu elleri 2,2 BB'ye açıp arkadan gelen all-in'e fold etmek stack'inin yaklaşık %15'ini kaybettirir; all-in ise fold equity'yi tam kullanır.",
+      "Küçük açılışın öne çıktığı eller: çok güçlü eller (ör. AA, KK). All-in'e call etmekten memnunsun; küçük açılış daha zayıf ellerin devam etmesine ya da all-in yapmasına izin verir. Bazı oyuncular geç pozisyonda all-in gelirse fold edecekleri ellerle de küçük açar; risk 2,2 BB ile sınırlı kalır.",
+      "Bu kesin bir tablo değil, bir yöndür. Masada sık resteal yapan oyuncular varsa orta güçteki eller için push daha çekicidir; blind'ler çok sık fold ediyorsa küçük açılış aynı işi daha ucuza yapar. 25 BB'de ise all-in çoğunlukla fazla risklidir; orada küçük açılış standarttır (t3-d3)."
+     ],
+     "terimler": [
+      "Open (açılış)",
+      "Resteal",
+      "Push/fold",
+      "Fold equity",
+      "3-bet"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "15 BB'de ilk girişte hem küçük açılış hem all-in makul seçeneklerdir.",
+       "dogru": true,
+       "neden": "15 BB push/fold sınırının biraz üstündedir; iki seçenek de kullanılır.",
+       "yanilgi": "15 BB'de yalnızca birinin doğru olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Stack'in 15 BB. 2,2 BB'ye açarsan stack'inin yüzde kaçını koyarsın? (bir ondalık basamak)",
+       "dogru": 14.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / 15 ≈ %14,7.",
+       "yanilgi": "Açılışı stack'e oranlamamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "oranYuzde",
+        "terimler": [
+         2.2,
+         15
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. CO'dan 15 BB push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 85.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "15 / 17,5 ≈ %85,7.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 15,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı durumda 2,2 BB'lik açılışın başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 46.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / 4,7 ≈ %46,8. Açılış çok daha az fold'la kârlı, ama all-in gelirse devam edip edemeyeceğin ayrı bir sorudur.",
+       "yanilgi": "Açılış ile push'un başabaşını aynı sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.2,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "15 BB'de 66 gibi orta bir çiftle push'un küçük açılışa göre avantajı nedir?",
+       "secenekler": [
+        "Resteal'e karşı açıp fold etme sorununu ortadan kaldırır ve fold equity'yi tam kullanır",
+        "66 görüldüğünde her ele karşı öndedir",
+        "Küçük açılış kurallara aykırıdır"
+       ],
+       "dogru": 0,
+       "neden": "Orta çift açılıştan sonra gelen all-in'e karşı zor kararda kalır; push bu kararı rakibe bırakır.",
+       "yanilgi": "Çiftin görüldüğünde hep önde olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. 15 BB ile CO'dasın, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Min-raise",
+        "All-in (15 BB)"
+       ],
+       "dogru": 2,
+       "neden": "55, 15 BB'de CO'nun aralığında. Küçük çift flop sonrası zor oynanır; all-in bu sorunu ortadan kaldırır ve görüldüğünde iki yüksek karta karşı yazı-tura civarı bir durum yaratır.",
+       "yanilgi": "Küçük çifti min-raise edip arkadan gelen all-in'e zor karar vermek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t04",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "CO",
+        "el": "55"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 15 BB'si var. BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (15 BB)"
+       ],
+       "dogru": 1,
+       "neden": "A9o, 15 BB'de BTN'nin aralığında: as'lı el, görüldüğünde de makul equity taşır ve yalnızca iki blind'i geçmen gerekir.",
+       "yanilgi": "15 BB'de push'u yalnızca premium ellere ayırmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p15-BTN-A9o",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "BTN",
+        "el": "A9o"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 15 BB'si var. CO'dasın, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (15 BB)"
+       ],
+       "dogru": 0,
+       "neden": "K6o, 15 BB'de CO için fazla zayıf: arkada üç oyuncu var ve görüldüğünde çoğunlukla domine ya da gerideydin.",
+       "yanilgi": "Papazlı her eli itilebilir saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p15-CO-K6o",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "CO",
+        "el": "K6o"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "15 BB'de AA ile bazı oyuncular neden all-in yerine küçük açılışı seçer?",
+       "secenekler": [
+        "Daha zayıf ellerin devam etmesine izin verir; all-in'e call etmekten zaten memnunsun",
+        "AA all-in'de çoğunlukla geride kalır",
+        "Küçük açılış AA'yı kaybetmekten korur"
+       ],
+       "dogru": 0,
+       "neden": "All-in güçlü bir eli \"ilan eder\" ve çoğunlukla yalnızca blind'leri kazanır; küçük açılış rakiplere hata yapacak alan bırakır.",
+       "yanilgi": "Güçlü elle her zaman en büyük hamleyi seçmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "spot",
+       "zorluk": 5,
+       "soru": "Kıyas için daha derin bir stack: BB ante 1 BB, 25 BB ile BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "2,2 BB'ye aç",
+        "3,5 BB'ye aç",
+        "All-in (25 BB)"
+       ],
+       "dogru": 0,
+       "neden": "25 BB all-in için fazla derin: 2,5 BB kazanmak için 25 BB riske girersin ve yalnızca seni yenen eller görür. Küçük açılış aynı çalma işini daha az chip'le yapar.",
+       "yanilgi": "Orta stack'te push/fold'u erken başlatmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t12"
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Masada sık resteal yapan oyuncular varsa, 15 BB'de orta güçteki ellerle doğrudan push genellikle daha çekici hâle gelir.",
+       "dogru": true,
+       "neden": "Sık resteal, küçük açılıştan sonra açıp fold etme sıklığını artırır; push bu bedeli ortadan kaldırır.",
+       "yanilgi": "Rakiplerin eğilimini 15 BB kararına katmamak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d6",
@@ -26424,15 +27445,228 @@
       "Tek rakibe karşı push aralığının neden en geniş olduğunu açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Herkes SB'ye kadar fold ettiyse yalnızca BB'yi geçmen gerekir. UTG'den itince beş oyuncunun hepsi fold etmeliydi; SB'de tek bir oyuncu kaldı. Bu yüzden SB'nin push aralığı en geniştir: sitenin aralıklarında 15 BB'de ellerin ~%40'ı, 10 BB'de ~%54'ü, 6 BB'de ~%68'i.",
+      "Fiyat da yardımcı olur: SB'de 0,5 BB'n zaten potta. BB ante 1 BB ile 10 BB push için 9,5 BB daha koyarsın; pot 2,5 BB. Call edildiğinde hiç kazanmama varsayımıyla başabaş fold oranı 9,5 / 12 ≈ %79,2'dir. BB'nin call için gereken equity'si ise 9 / 21 ≈ %42,9: rastgele bir elin önemli bir kısmı bu all-in'e call edecek kadar güçlü değildir.",
+      "SB postflop'ta BB'ye karşı pozisyon dışındadır (OOP). Küçük açılış ya da limp ile flop'a gidersen bütün sokakları önce konuşarak oynarsın; push bu dezavantajı ortadan kaldırır. Limp de bazı stratejilerde kullanılır; bu ünite push ya da fold kararına odaklanır.",
+      "Geniş aralığın zayıf elleri (ör. 6 BB'de Q7o) görüldüğünde çoğunlukla geride kalır. Push'u kârlı yapan, BB'nin sık fold etmesiyle görüldüğündeki equity'nin birleşimidir. BB çok sık call eden biriyse aralık daralır (t5-d7)."
+     ],
+     "terimler": [
+      "SB (Small Blind)",
+      "BB (Big Blind)",
+      "OOP (pozisyon dışı)",
+      "Fold equity",
+      "Push aralığı"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Herkes SB'ye kadar fold ettiyse SB'nin push'unu yalnızca BB görebilir.",
+       "dogru": true,
+       "neden": "SB'den sonra yalnızca BB konuşur.",
+       "yanilgi": "Fold etmiş oyuncuların hâlâ eli olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Sitenin çalışma aralıklarında 6 BB'de SB'nin push aralığı ellerin yaklaşık yüzde kaçıdır?",
+       "secenekler": [
+        "%20",
+        "%33",
+        "%48",
+        "%68"
+       ],
+       "dogru": 3,
+       "neden": "Kombinasyonlar sayıldığında yaklaşık %68: SB'de tek rakip kaldı ve stack çok kısa.",
+       "yanilgi": "UTG'nin aralığını SB'ye taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushYuzde",
+        "stack": 6,
+        "poz": "SB"
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. SB'desin (0,5 BB'n potta) ve 10 BB ile push yaptın (9,5 BB daha koydun). Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 79.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "9,5 / (9,5 + 2,5) = 9,5 / 12 ≈ %79,2.",
+       "yanilgi": "SB'de koyduğun 0,5 BB'yi riske ayrıca katmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 9.5,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB, herkes fold etti. Stack, koltuk ve eli sitenin aralığına göre kararla eşleştir.",
+       "secenekler": [
+        [
+         "10 BB UTG: K7o",
+         "Fold"
+        ],
+        [
+         "10 BB BTN: Q9o",
+         "All-in"
+        ],
+        [
+         "10 BB SB: K7o",
+         "All-in"
+        ],
+        [
+         "10 BB SB: 54s",
+         "Fold"
+        ]
+       ],
+       "neden": "K7o UTG'den itilmez ama SB'den itilir; Q9o BTN'den itilir; 54s SB'de bile aralık dışı.",
+       "yanilgi": "SB'de her eli itilebilir saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushEsleme",
+        "etiketler": {
+         "All-in": "push",
+         "Fold": "fold"
+        }
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. SB'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "K4o, 10 BB'de SB'nin geniş aralığında: yalnızca BB'yi geçmen gerekir ve papaz yüksek el görüldüğünde tamamen geride değildir.",
+       "yanilgi": "Zayıf kicker'lı papazı SB'de de fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-SB-K4o",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "SB",
+        "el": "K4o"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. 8 BB ile SB'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Limp",
+        "All-in (8 BB)"
+       ],
+       "dogru": 2,
+       "neden": "K6o, sitenin SB aralığında hem 6 hem 10 BB'de itilir; 8 BB ikisinin arasında. BB 8 BB'lik all-in'i her elle göremez ve limp seni pozisyon dışında flop oynamaya bırakır.",
+       "yanilgi": "Fold edip stack'in erirken daha iyi bir spot beklemek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t02",
+       "denetim": {
+        "tur": "push",
+        "stack": [
+         6,
+         10
+        ],
+        "poz": "SB",
+        "el": "K6o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 15 BB'si var. SB'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (15 BB)"
+       ],
+       "dogru": 0,
+       "neden": "52o, SB'nin 15 BB aralığında bile yok: SB'nin geniş aralığı da bir sınırı olan aralıktır.",
+       "yanilgi": "SB'de her eli itilebilir saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p15-SB-52o",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "SB",
+        "el": "52o"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "SB'nin push aralığının UTG'ninkinden geniş olmasının ana nedeni nedir?",
+       "secenekler": [
+        "Yalnızca bir oyuncunun fold etmesi gerekir; güçlü bir elle karşılaşma ihtimali düşer",
+        "SB'ye daha güçlü kartlar dağıtılır",
+        "SB postflop'ta pozisyondadır"
+       ],
+       "dogru": 0,
+       "neden": "Geçilecek oyuncu sayısı aralığı belirler. SB postflop'ta pozisyon dışındadır.",
+       "yanilgi": "SB'nin postflop'ta pozisyonda olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "SB'nin postflop'ta BB'ye karşı pozisyon dışında kalması, kısa stack'te küçük açılış yerine push'u çekici kılan nedenlerden biridir.",
+       "dogru": true,
+       "neden": "Push ile flop'ta karar vermek zorunda kalmazsın; pozisyon dezavantajı ortadan kalkar.",
+       "yanilgi": "SB'de limp ya da küçük açılışın pozisyon sorunu yaratmadığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı. BB'desin; blind'ın (1 BB) ve ante potta. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 45.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 15 + 1 + 1 = 17 BB; 14 BB ödersin: 14 / 31 ≈ %45,2.",
+       "yanilgi": "Blind'ını ödenecek miktara eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 14,
+        "pot": 17
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "SB'nin geniş aralığındaki zayıf eller (ör. 6 BB'de Q7o) görüldüğünde çoğunlukla geride kalır; push'u kârlı yapan, BB'nin sık fold etmesiyle görüldüğündeki equity'nin birleşimidir.",
+       "dogru": true,
+       "neden": "Fold equity ve equity birlikte değerlendirilir; zayıf eller tek başına equity'leriyle değil, fold'larla da kazanır.",
+       "yanilgi": "Push'un yalnızca görüldüğünde önde olan ellerle kârlı olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-d7",
@@ -26445,15 +27679,181 @@
       "Denge push/fold tablolarının varsayımlarını ve sınırlarını sayar: ödül yapısını hesaba katmaz (ayrıntısı ICM ünitesinde), rakibin de dengede oynadığını varsayar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Push/fold'da oyun iki aralığa iner: kısa stack'in push aralığı ve rakibin call aralığı (all-in'e call ettiği ellerin tamamı). Nash dengesi, iki tarafın da yalnızca kendi stratejisini değiştirerek daha fazla kazanamadığı strateji çiftidir: push eden, call edenin aralığına karşı en iyisini yapıyordur; call eden de push edenin aralığına karşı. \"Nash push/fold tabloları\" bu dengeyi stack'e ve koltuğa göre listeler.",
+      "Dengenin önemli bir özelliği sömürülemezliktir: denge aralığıyla itersen rakip call aralığını nasıl değiştirirse değiştirsin, modelin içinde ortalamada senden daha fazla chip kazanamaz. Bu, en çok kazanmak demek değildir. Rakip çok sık fold ediyorsa daha geniş, çok sık call ediyorsa daha dar itmek daha kârlı olabilir; dengeden bilinçli sapmaya exploit (sömürü) denir.",
+      "Tablolar varsayımlara dayanır: (1) Yalnızca chip sayılır (chip EV); ödül yapısını hesaba katmaz, yani bubble ve final masası baskısı yoktur. Ayrıntısı ICM ünitesindedir (t7). (2) Rakip de dengede oynar. (3) Belirli bir ante yapısı, oyuncu sayısı ve çoğunlukla herkesin aynı efektif stack'i. (4) Yalnızca all-in ya da fold vardır; küçük açılış ve limp yoktur.",
+      "Bu yüzden tablolar kaynağa ve varsayıma göre değişir; tek bir \"doğru yüzde\" yoktur. Bu müfredat Nash yüzdesi vermez. Sitenin push aralıkları da Nash tablosu değildir: kendi hesabımızla üretilmiş temkinli, yaklaşık çalışma aralıklarıdır."
+     ],
+     "terimler": [
+      "Nash dengesi",
+      "Call aralığı",
+      "Push aralığı",
+      "GTO",
+      "Exploit (sömürü)",
+      "Chip EV (cEV)",
+      "ICM"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Nash dengesinde iki taraf da yalnızca kendi stratejisini değiştirerek daha fazla kazanamaz.",
+       "dogru": true,
+       "neden": "Dengenin tanımı budur: tek taraflı sapma kazandırmaz.",
+       "yanilgi": "Dengeyi \"iki tarafın eşit kazandığı durum\" sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Push/fold'da dengeyi oluşturan iki aralık hangisidir?",
+       "secenekler": [
+        "Push edenin push aralığı ve rakibin call aralığı",
+        "İki oyuncunun açılış aralıkları",
+        "Flop ve turn aralıkları"
+       ],
+       "dogru": 0,
+       "neden": "Push/fold'da tek karar noktası vardır: itmek ya da itilene call etmek.",
+       "yanilgi": "Push/fold'u postflop oyunuyla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Nash push/fold tabloları ödül yapısını (ICM) hesaba katar.",
+       "dogru": false,
+       "neden": "Tablolar yalnızca chip sayar (chip EV); ödül baskısı ICM ünitesinde (t7) ele alınır.",
+       "yanilgi": "Tabloyu bubble'da olduğu gibi kullanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "\"Sömürülemez\" strateji ne demektir?",
+       "secenekler": [
+        "Rakip ne yaparsa yapsın, modelin içinde ortalamada senden daha fazla kazanamaz",
+        "Her elde kazanır",
+        "Rakibi her zaman fold ettirir"
+       ],
+       "dogru": 0,
+       "neden": "Sömürülemezlik uzun vadeli ortalamayla ilgilidir; tek tek elleri kazanmakla değil.",
+       "yanilgi": "Dengeyi her eli kazanan strateji sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Nash push/fold tablolarının varsayımını, varsayımın bozulduğu durumla eşleştir.",
+       "secenekler": [
+        [
+         "Ödül yapısı yok (chip EV)",
+         "Bubble'da ödüle girme baskısı"
+        ],
+        [
+         "Rakip de dengede oynar",
+         "Rakip neredeyse hiç call etmiyor"
+        ],
+        [
+         "Belirli bir ante yapısı",
+         "Ante'siz ya da klasik ante'li masa"
+        ],
+        [
+         "Yalnızca all-in ya da fold",
+         "Rakipler küçük açılış ve limp de kullanıyor"
+        ]
+       ],
+       "neden": "Her varsayım gerçek masada bozulabilir; bozulunca tablo yaklaşık bir başlangıç noktası olur.",
+       "yanilgi": "Tabloyu her koşulda geçerli saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Nash dengesi her rakibe karşı en çok chip kazandıran stratejidir.",
+       "dogru": false,
+       "neden": "Denge kaybetmemeyi garanti eder (modelin içinde); hata yapan rakibe karşı sapmak daha kârlı olabilir.",
+       "yanilgi": "Sömürülemezliği en yüksek kazançla karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "BB, SB'nin push'larına çok sık fold ediyor. Dengeden hangi yönde sapmak genellikle daha kârlıdır?",
+       "secenekler": [
+        "Daha geniş itmek",
+        "Daha dar itmek",
+        "Hiç sapmamak"
+       ],
+       "dogru": 0,
+       "neden": "Fold equity arttıkça daha zayıf eller de kârlı push olur.",
+       "yanilgi": "Rakibin eğilimini görmezden gelmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Rakip all-in'lere çok geniş call ediyor. Push aralığını genellikle nasıl ayarlarsın?",
+       "secenekler": [
+        "Daraltırsın; görüldüğünde iyi duran ellere ağırlık verirsin",
+        "Genişletirsin",
+        "Değiştirmezsin"
+       ],
+       "dogru": 0,
+       "neden": "Fold equity azaldıkça kazanç görüldüğündeki equity'ye kalır; zayıf eller değer kaybeder.",
+       "yanilgi": "Çok call eden rakibe blöf push'u artırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Sitenin push aralıkları bir Nash tablosudur.",
+       "dogru": false,
+       "neden": "Kendi hesabımızla üretilmiş temkinli, yaklaşık çalışma aralıklarıdır; dengeyle karşılaştırılmadılar.",
+       "yanilgi": "Çalışma aralığını denge tablosu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Bubble'da kısa stack'sin. Nash push/fold tablosunu olduğu gibi kullanmanın sakıncası nedir?",
+       "secenekler": [
+        "Tablo ödül yapısını hesaba katmaz; ICM baskısı aralıkları değiştirir (t7)",
+        "Tablo bubble için ayrıca hesaplanmıştır",
+        "Hiçbir sakıncası yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Denge tabloları chip EV ile hesaplanır; ödül baskısı ayrı bir hesap gerektirir.",
+       "yanilgi": "Chip hesabını ödül hesabıyla aynı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Ante yapısı ya da masadaki oyuncu sayısı değişse bile denge push aralıkları aynı kalır.",
+       "dogru": false,
+       "neden": "Ante potu büyütür ve oyuncu sayısı fold etmesi gerekenleri değiştirir; ikisi de dengeyi değiştirir.",
+       "yanilgi": "Tek bir tabloyu her masaya taşımak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-k",
@@ -26466,15 +27866,231 @@
       "\"Push/fold\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin yedi dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB'dir ve herkes sana kadar fold etmiştir. Push aralıkları sitenin temkinli, yaklaşık çalışma aralıklarıdır; Nash tablosu değildir."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Push/fold stratejisinde ilk girişte yalnızca all-in ya da fold seçilir.",
+       "dogru": true,
+       "neden": "Küçük açılış ve limp bu stratejinin dışında kalır.",
+       "yanilgi": "Push/fold'u yalnızca all-in sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. 8 BB ile push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 76.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "8 / 10,5 ≈ %76,2.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 8,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "15 BB, herkes fold etti. Sitenin aralıklarına göre koltukları push aralığı dardan genişe sırala.",
+       "secenekler": [
+        "HJ",
+        "BTN",
+        "SB"
+       ],
+       "neden": "15 BB'de HJ ~%12, BTN ~%26, SB ~%40.",
+       "yanilgi": "Koltuk sırasını ters çevirmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "stack": 15
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Push'un fold equity'si genellikle ne zaman azalır?",
+       "secenekler": [
+        "Stack'in çok kısaldığında",
+        "Arkanda daha az oyuncu kaldığında",
+        "Rakipler sık fold ettiğinde"
+       ],
+       "dogru": 0,
+       "neden": "Çok kısa stack'e rakipler ucuza ve geniş call eder.",
+       "yanilgi": "Kısa stack'in all-in'inin daha korkutucu olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. HJ'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "66, 10 BB'de HJ'nin aralığında: orta çift, görüldüğünde çoğunlukla yazı-tura civarında ya da önde.",
+       "yanilgi": "Küçük ve orta çiftleri erken koltukta fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-HJ-66",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "HJ",
+        "el": "66"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. CO'dasın, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 0,
+       "neden": "K2o, CO'nun 10 BB aralığı dışında: arkada üç oyuncu var ve görüldüğünde çoğunlukla domine olursun.",
+       "yanilgi": "Papaz yüksek her eli itilebilir saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-CO-K2o",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "CO",
+        "el": "K2o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 6 BB'si var. HJ'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (6 BB)"
+       ],
+       "dogru": 1,
+       "neden": "QJo, 6 BB'de HJ'nin aralığında: iki yüksek kart, aralık çok kısa stack'te genişler.",
+       "yanilgi": "6 BB'de de 10 BB'deki kadar sıkı oynamak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p6-HJ-QJo",
+       "denetim": {
+        "tur": "push",
+        "stack": 6,
+        "poz": "HJ",
+        "el": "QJo"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "range",
+       "zorluk": 4,
+       "soru": "6 BB, BB ante 1 BB, SB'desin ve herkes fold etti. Bu ellerden sitenin push aralığında olanları işaretle.",
+       "secenekler": [
+        "K2o",
+        "Q5o",
+        "T6o",
+        "87o",
+        "94o",
+        "83o",
+        "72o"
+       ],
+       "dogru": [
+        "K2o",
+        "Q5o",
+        "T6o",
+        "87o"
+       ],
+       "neden": "6 BB'de SB ellerin ~%68'ini iter: K2o, Q5o, T6o ve 87o içeride; 94o, 83o ve 72o dışarıda.",
+       "yanilgi": "SB'de 6 BB ile her elin itildiğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushAraligi",
+        "stack": 6,
+        "poz": "SB"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "15 BB'de hangi el için all-in yerine küçük açılış genellikle daha sık düşünülür?",
+       "secenekler": [
+        "AA",
+        "66",
+        "A9s"
+       ],
+       "dogru": 0,
+       "neden": "Çok güçlü elle all-in'e call etmekten memnunsun; küçük açılış zayıf ellerin devam etmesine izin verir. 66 ve A9s gibi eller için push daha sade.",
+       "yanilgi": "Güçlü ellerle hep en büyük hamleyi seçmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Sitenin aralıklarında UTG'nin 15 BB push aralığındaki her el, SB'nin 15 BB push aralığında da var.",
+       "dogru": true,
+       "neden": "SB'nin aralığı en geniş olanıdır ve UTG'nin dar aralığını kapsar.",
+       "yanilgi": "Koltuklar arasında ilişki olmadığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKapsar",
+        "dar": [
+         15,
+         "UTG"
+        ],
+        "genis": [
+         15,
+         "SB"
+        ]
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Nash push/fold tabloları bubble'daki ödül baskısını hesaba katar.",
+       "dogru": false,
+       "neden": "Tablolar chip EV ile hesaplanır; ödül baskısı t7'de.",
+       "yanilgi": "Denge tablosunu her aşamada aynen kullanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BB çok sık call ediyor. SB'den 10 BB'lik push aralığını genellikle nasıl ayarlarsın?",
+       "secenekler": [
+        "Daraltırsın; görüldüğünde iyi duran ellere ağırlık verirsin",
+        "Genişletirsin",
+        "Değiştirmezsin"
+       ],
+       "dogru": 0,
+       "neden": "Fold equity azalınca zayıf eller değer kaybeder.",
+       "yanilgi": "Çok call eden rakibe daha çok zayıf elle itmek.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t5-r",
@@ -26488,15 +28104,157 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB, pot 2,5 BB. 15 BB ile push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 85.7,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "15 / 17,5 ≈ %85,7.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 15,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Başabaş fold oranı hesabı, call edildiğinde hiç kazanmadığını varsayar.",
+       "dogru": true,
+       "neden": "Bu en kötü durum varsayımıdır; gerçekte daha az fold yeter.",
+       "yanilgi": "Başabaşı kesin eşik sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Sitenin aralıklarında hangi el 10 BB'de SB'den itilir ama BTN'den itilmez?",
+       "secenekler": [
+        "76s",
+        "AA",
+        "32o"
+       ],
+       "dogru": 0,
+       "neden": "AA iki koltukta da itilir, 32o hiçbirinde; 76s yalnızca SB'nin geniş aralığına girer.",
+       "yanilgi": "Aralıkların koltukla değişmediğini sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKosul",
+        "kosul": [
+         [
+          10,
+          "SB",
+          "push"
+         ],
+         [
+          10,
+          "BTN",
+          "fold"
+         ]
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 15 BB'si var. HJ'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (15 BB)"
+       ],
+       "dogru": 1,
+       "neden": "99, 15 BB'de HJ'den itilir.",
+       "yanilgi": "Orta çiftleri küçük açılışla zor karara sokmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p15-HJ-99",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "HJ",
+        "el": "99"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Herkesin 15 BB'si var. UTG'desin, sıra sende. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (15 BB)"
+       ],
+       "dogru": 0,
+       "neden": "A3o, UTG'nin 15 BB'lik dar aralığının dışında; görüldüğünde çoğunlukla domine olursun.",
+       "yanilgi": "Her as'lı eli itilebilir saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p15-UTG-A3o",
+       "denetim": {
+        "tur": "push",
+        "stack": 15,
+        "poz": "UTG",
+        "el": "A3o"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Push'ta suited connector'lar offsuit broadway'lerden daha değerlidir.",
+       "dogru": false,
+       "neden": "All-in'den sonra oynanabilirlik işe yaramaz; yüksek kartlar ve çiftler öne çıkar.",
+       "yanilgi": "Açılıştaki el değerlerini push'a taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Hangisi Nash push/fold tablolarının varsayımlarından biri DEĞİLDİR?",
+       "secenekler": [
+        "Ödül yapısının (ICM) hesaba katılması",
+        "Rakibin de dengede oynaması",
+        "Yalnızca all-in ya da fold"
+       ],
+       "dogru": 0,
+       "neden": "Tablolar ödül yapısını hesaba katmaz; bu yüzden bubble'da ayrıca düşünmek gerekir (t7).",
+       "yanilgi": "Tabloyu ICM'li sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "6 BB'de push aralığının 10 BB'ye göre genişlemesinin nedeni nedir?",
+       "secenekler": [
+        "Pot stack'e göre büyük; push daha az fold'la kârlı ve beklemek pahalı",
+        "Rakipler 6 BB'ye hiç call etmez",
+        "Kartların değeri azalır"
+       ],
+       "dogru": 0,
+       "neden": "Fiyat ve blind'lerin eritmesi birlikte genişlemeyi gerektirir.",
+       "yanilgi": "Rakiplerin hiç call etmeyeceğini sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     }
    ]
   },
