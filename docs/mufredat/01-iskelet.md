@@ -4,7 +4,7 @@ Bu dosya `scripts/mufredat/iskelet.py` tarafından `src/data/mufredat.json` ile 
 
 **Toplam:** 23 ünite (4 ortak), 187 ders, hedef 1980 alıştırma.
 
-**Dolu:** 121 ders, 1344 alıştırma.
+**Dolu:** 130 ders, 1450 alıştırma.
 
 ## Cash pisti
 
@@ -331,15 +331,15 @@ Fiyat, rakibin itme aralığı ve aralığa karşı equity.
 
 | Ders | Tür | Kazanım | Önkoşul |
 |---|---|---|---|
-| `t6-d1` Fiyat: gereken equity | ders | All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar. | t5-k, t3-d5 |
-| `t6-d2` Rakibin itme aralığı | ders | Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder. | t6-d1, t5-d3 |
-| `t6-d3` Aralığa karşı equity | ders | Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar. | t6-d2 |
-| `t6-d4` BB'den call | ders | Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir. | t6-d3 |
-| `t6-d5` Arkanda oyuncu varken | ders | Arkada konuşacak oyuncu varken call aralığının neden daraldığını açıklar. | t6-d4 |
-| `t6-d6` Açılışına all-in gelirse | ders | Açtıktan sonra gelen all-in'e fiyat ve aralıkla karar verir. | t6-d5, t4-d3 |
-| `t6-k` Kontrol: All-in'e call | kontrol | "All-in'e call" ünitesinin kazanımlarını karışık sorularda uygular. | t6-d6 |
-| `t6-r` Tekrar: All-in'e call | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t6-k |
-| `t6-t` Turnuva seviye 5-6 testi | test | bu pistte seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t6-k |
+| `t6-d1` Fiyat: gereken equity (11 alıştırma) | ders | All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar. | t5-k, t3-d5 |
+| `t6-d2` Rakibin itme aralığı (11 alıştırma) | ders | Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder. | t6-d1, t5-d3 |
+| `t6-d3` Aralığa karşı equity (11 alıştırma) | ders | Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar. | t6-d2 |
+| `t6-d4` BB'den call (11 alıştırma) | ders | Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir. | t6-d3 |
+| `t6-d5` Arkanda oyuncu varken (11 alıştırma) | ders | Arkada konuşacak oyuncu varken call aralığının neden daraldığını açıklar. | t6-d4 |
+| `t6-d6` Açılışına all-in gelirse (11 alıştırma) | ders | Açtıktan sonra gelen all-in'e fiyat ve aralıkla karar verir. | t6-d5, t4-d3 |
+| `t6-k` Kontrol: All-in'e call (12 alıştırma) | kontrol | "All-in'e call" ünitesinin kazanımlarını karışık sorularda uygular. | t6-d6 |
+| `t6-r` Tekrar: All-in'e call (8 alıştırma) | tekrar | Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir. | t6-k |
+| `t6-t` Turnuva seviye 5-6 testi (20 alıştırma) | test | bu pistte seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır. | t6-k |
 
 ### t7 · ICM temeli (seviye 7)
 

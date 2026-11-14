@@ -309,3 +309,33 @@ Bütün alıştırmalar `dogrulamaGerekli: false`. Strateji iddiaları bu ünite
 - **Board sınıflandırıcısının sınırı:** betik board'un derste verilen tanıma göre hangi aileye girdiğini doğrular; o board'da hangi stratejinin doğru olduğunu doğrulamaz.
 - Pot, bahis ve stack girdileri senaryodan elle girilir: **betik işlemi doğrular, senaryonun sayılara çevrilmesi elle kontrol edildi.**
 - Kalan 106 alıştırma ilke ve tanım sorusudur; yukarıdaki listeyle elle karşılaştırıldı.
+
+
+## t5 · Push/fold, t6 · All-in'e call
+
+Bütün alıştırmalar `dogrulamaGerekli: false`. Uydurma solver sonucu, Nash yüzdesi ya da kaynak yoktur.
+
+### Kesin olan (aritmetik)
+
+- Pot toplamı, ödenecek miktar ve gereken equity = call / (pot + call). BB ante tek ante: el başında pot 2,5 BB (SB 0,5 + BB 1 + ante 1). Örnekler: SB 6/10/15 BB all-in'ine BB'den %38,5 / %42,9 / %45,2; BTN 10 BB all-in'ine (SB fold) %41,9; BTN'den CO'nun 10 BB all-in'ine %44,4; açılışına all-in gelince %39,3 ve %41,6.
+- Başabaş fold oranı = risk / (risk + pot): 6 BB %70,6; 8 BB %76,2; 10 BB %80; 15 BB %85,7; SB'den 9,5 BB risk %79,2. Hepsi "call edildiğinde hiç kazanmadığını varsayar" kaydıyla yazıldı.
+- Push aralıklarının yüzdeleri ranges.json listelerindeki kombinasyonlar sayılarak bulundu (10 BB: UTG %13,3, HJ %17,3, CO %24,1, BTN %36,2, SB %54,1; 15 BB: %9,4 / 12,4 / 17,3 / 26,4 / 40,3; 6 BB: %20,4 / 25,3 / 33,2 / 48,1 / 68,3).
+
+### Yaklaşık (kendi hesabımız; solver çıktısı değil)
+
+- **Push aralıkları.** ranges.json: 169 elin rastgele ele karşı Monte Carlo equity'si (60.000 deneme) ve push için yarıya indirilmiş oynanabilirlik düzeltmesiyle sıralanır; pozisyon başına hedef yüzdeye kadar el alınır. Aralıklar temkinli ve yaklaşık çalışma aralıklarıdır; **Nash tablosu ya da solver çıktısı değildir** ve bununla karşılaştırılmadı (docs/ekip/2026-11-11/04-callshove-duyarlilik.md). Bu t5-d3, d7, t6-d2, d3 ve test girişinde söyleniyor. Sınırdaki eller (aralığın son ~%4'ü) soru olarak kullanılmadı.
+- **Aralığa karşı equity.** Projenin el değerlendiricisiyle Monte Carlo, 40.000 deneme, sabit tohum; metindeki değerler en fazla 1,5 puan sapabilir ve yalnızca seçmeli sorularda kullanıldı. Örnekler (SB 10 BB aralığına karşı): 72o ~%30, 54s ~%39, JTs ~%49, 22 ~%48, A5o ~%52, AKo ~%65; UTG 10 BB aralığına karşı 22 ~%39, AJo ~%47.
+- **callshove spotları.** Spot kimliğindeki stack ve koltuğun push aralığına karşı kahramanın kartlarıyla Monte Carlo; eşiğe 3,5 puandan yakın olan ve gerekçesi aralığa duyarlı olarak işaretli spotlar kullanılmadı. Rakip aralığının gerçek rakiple aynı olduğu iddia edilmedi.
+
+### Genel kabul görmüş ilkeler (yumuşatılmış dille)
+
+- Kısa stack'te push/fold'un sade bir başlangıç stratejisi olması; 15 BB'de iki seçeneğin de kullanılması (hangi ellerin hangisiyle oynandığına sayısal liste verilmedi).
+- Push aralığının koltuk ve stack'le değişimi; fold equity'nin stack kısaldıkça azalması.
+- Arkanda oyuncu varken call aralığının çoğunlukla daha dar olması: **çok oyunculu all-in equity'si hesaplanmadı**, yalnızca yön ve fiyat farkı verildi.
+- Nash: kavramsal (denge, sömürülemezlik, varsayımlar, sınırlar); tablolar kaynağa göre değişir.
+
+### Emin olunmayan noktalar
+
+- t13 spotunun notundaki "yaklaşık %16" resteal aralığı yüzdesi 02 raporunda (sayım %17,0); t6-d6'da %17 yazıldı.
+- t5-d3'teki "sınır" ellerinin kenarı betiğin açılıştaki kenar payı (53 kombinasyon) kuralıyla belirlendi; push için aynı pay varsayımdır.
+- t6-d3 ve d5'te "dar aralıkta as'lı eller daha çok kaybeder" ve "arkada oyuncu varken daha dar" yönleri tek tek MC değerleriyle ve ilkelerle desteklidir, kesin bir oran iddiası yoktur.

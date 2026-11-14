@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import veri from "@/data/mufredat.json";
 import { HANDS } from "@/data/hands";
-import { acilisDurumu, alistirmaDenetle, boardDokusu, denetle, sayiOku } from "../../../scripts/mufredat/denetle.mts";
+import { acilisDurumu, alistirmaDenetle, boardDokusu, denetle, pushDurumu, sayiOku } from "../../../scripts/mufredat/denetle.mts";
 
 type Al = Parameters<typeof alistirmaDenetle>[0];
 const m = veri as unknown as Parameters<typeof denetle>[0];
@@ -374,5 +374,51 @@ describe("cash c9 hesapları (board dokusu, bahis boyutu)", () => {
     // Aynı değerler gereken equity formülüyle tutmaz (1/3 pot → %20).
     expect(alistirmaDenetle({ ...e, denetim: { tur: "boyutEsleme", formul: "gereken" } }).join()).toMatch(/1\/3 pot: hesaplanan %20/);
     expect(alistirmaDenetle({ ...e, secenekler: [["1/2 pot", "%33"]] } as Al).join()).toMatch(/hesaplanan %33\.33/);
+  });
+});
+
+describe("turnuva t5–t6: push aralıkları ve all-in'e call", () => {
+  const temel = { kimlik: "a1", soru: "", neden: "", yanilgi: "" };
+  const sec = (dogru: number, denetim: Al["denetim"], ek: Record<string, unknown> = {}): Al =>
+    ({ ...temel, tip: "secmeli", secenekler: ["Fold", "All-in (10 BB)"], dogru, dogrulamaGerekli: false, denetim, ...ek }) as Al;
+
+  it("push aralığı: aralıktaki el push, uzak el fold, kenar el sınır", () => {
+    expect(pushDurumu(10, "UTG", "77")).toBe("push");
+    expect(pushDurumu(10, "UTG", "J8o")).toBe("fold");
+    expect(pushDurumu(10, "BTN", "A5o")).toBe("push");
+    expect(alistirmaDenetle(sec(1, { tur: "push", stack: 10, poz: "UTG", el: "77" }))).toEqual([]);
+    expect(alistirmaDenetle(sec(0, { tur: "push", stack: 10, poz: "UTG", el: "77" })).join()).toMatch(/push aralığına göre push/);
+    expect(alistirmaDenetle(sec(1, { tur: "push", stack: 10, poz: "UTG", el: "KQo" })).join()).toMatch(/kenarında/);
+    expect(alistirmaDenetle(sec(1, { tur: "push", stack: 12, poz: "UTG", el: "77" })).join()).toMatch(/push aralığı yok/);
+    // Ara stack: iki tablo stack'inde aynı karar çıkmalı.
+    expect(alistirmaDenetle(sec(1, { tur: "push", stack: [6, 10], poz: "SB", el: "K6o" }))).toEqual([]);
+  });
+
+  it("push yüzdesi ve genişlik sırası", () => {
+    const y: Al = { ...temel, tip: "sayi", soru: "", dogru: 54.1, tolerans: 0.1, denetim: { tur: "pushYuzde", stack: 10, poz: "SB" } } as Al;
+    expect(alistirmaDenetle(y)).toEqual([]);
+    expect(alistirmaDenetle({ ...y, dogru: 40 } as Al).join()).toMatch(/54\.1/);
+    const s: Al = { ...temel, tip: "siralama", soru: "", secenekler: ["UTG", "CO", "SB"], denetim: { tur: "pushSirasi", stack: 10 } };
+    expect(alistirmaDenetle(s)).toEqual([]);
+    expect(alistirmaDenetle({ ...s, secenekler: ["SB", "CO", "UTG"] }).join()).toMatch(/dardan genişe değil/);
+  });
+
+  it("aralığa karşı equity push aralığıyla; sayı sorusunda Monte Carlo reddedilir", () => {
+    const e = (yaklasik: number, tip = "secmeli"): Al =>
+      ({ ...temel, tip, soru: "", secenekler: ["%20", "%30", "%40"], dogru: 1, tolerans: 1, denetim: { tur: "equityAraliga", el: "72o", itme: ["10", "SB"], yaklasik } }) as Al;
+    expect(alistirmaDenetle(e(30))).toEqual([]);
+    expect(alistirmaDenetle(e(40)).join()).toMatch(/72o equity'si/);
+    expect(alistirmaDenetle(e(30, "sayi")).join()).toMatch(/seçmeli yaz/);
+  });
+
+  it("callShove: spotla aynı seçenek, cevap ve eşikten 3,5 puan uzaklık; aralığa duyarlı spot reddedilir", () => {
+    const hand = HANDS.find((h) => h.id === "s10-SB-QJo")!;
+    const a = { ...temel, tip: "spot", soru: "", secenekler: hand.options, dogru: hand.correct, spotKimlik: hand.id, denetim: { tur: "callShove", spot: hand.id } } as unknown as Al;
+    expect(alistirmaDenetle(a)).toEqual([]);
+    expect(alistirmaDenetle({ ...a, dogru: 0 } as Al).join()).toMatch(/seçenek ya da cevap spotla aynı değil/);
+    const duyarli = HANDS.find((h) => h.id === "s10-SB-K7o")!;
+    const d = { ...a, spotKimlik: duyarli.id, secenekler: duyarli.options, dogru: duyarli.correct, denetim: { tur: "callShove", spot: duyarli.id } } as unknown as Al;
+    expect(alistirmaDenetle(d).join()).toMatch(/duyarli: true/);
+    expect(alistirmaDenetle({ ...a, denetim: { tur: "callShove", spot: "p10-UTG-77" } } as unknown as Al).join()).toMatch(/call spotu yok/);
   });
 });

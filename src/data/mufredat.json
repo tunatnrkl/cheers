@@ -28277,15 +28277,198 @@
       "All-in'e call için gereken equity'yi ante ve blind'lerle hesaplar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Rakip all-in yaptığında karar iki sayıya iner: call için ödeyeceğin miktar ve kazanırsan alacağın pot. Gereken equity = call / (call öncesi pot + call). Pota ante, blind'ler ve rakibin all-in'i dahildir. Bu müfredatta aksi yazılmadıkça ante, BB ante'dir: masanın tamamı için büyük blind'ı koyan oyuncu 1 BB öder.",
+      "Örnek: BB ante 1 BB. SB 10 BB ile all-in yaptı, sen BB'desin. Potta SB'nin 10 BB'si, senin blind'ın (1 BB) ve ante (1 BB) var: 12 BB. Blind'ın zaten potta olduğu için call etmek için 9 BB daha koyarsın. Gereken equity 9 / (12 + 9) = 9 / 21 ≈ %42,9.",
+      "Aynı hesap rakibin stack'ine göre değişir: SB 6 BB'de 5 / 13 ≈ %38,5, 15 BB'de 14 / 31 ≈ %45,2. Buton all-in yaptıysa SB fold ederken bıraktığı 0,5 BB de potta kalır; ölü para denilen bu chip'ler fiyatı biraz ucuzlatır. Eşiğin üstünde equity'n varsa chip EV hesabında call kârlıdır; ICM yani ödül baskısı bu hesaba girmez (t7).",
+      "Gereken equity yalnızca fiyatı söyler; elinin bu all-in'e karşı gerçekten ne kadar equity taşıdığı ise rakibin aralığına bağlıdır (sonraki dersler)."
+     ],
+     "terimler": [
+      "Equity",
+      "Pot odds",
+      "BB ante",
+      "All-in",
+      "Başabaş noktası"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Gereken equity = call için ödeyeceğin miktar / (call öncesi pot + ödeyeceğin miktar).",
+       "dogru": true,
+       "neden": "Ödeyeceğin miktar hem payda hem payın içindedir: yatırdığın chip'in toplam pota oranı.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 1,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı, BB'desin. Call etmeden önce potta kaç BB var?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "SB'nin 10 BB'si, senin blind'ın 1 BB ve ante 1 BB: 12 BB.",
+       "yanilgi": "Ante'yi unutup 11 BB demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         10,
+         1,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 6 BB ile all-in yaptı, BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 38.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 6 + 1 + 1 = 8 BB; 5 BB daha ödersin: 5 / 13 ≈ %38,5.",
+       "yanilgi": "Blind'ını ödenecek miktara ayrıca eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 5,
+        "pot": 8
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı, BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "9 / (12 + 9) = 9 / 21 ≈ %42,9.",
+       "yanilgi": "Ödeyeceğin miktarı payda dışında bırakıp 9 / 12 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı, BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 45.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 15 + 1 + 1 = 17 BB; 14 BB ödersin: 14 / 31 ≈ %45,2.",
+       "yanilgi": "Ante'yi pottan düşmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 14,
+        "pot": 17
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "SB all-in stack'i 6 BB'den 15 BB'ye çıktıkça BB'nin call için gereken equity'si ne olur?",
+       "secenekler": [
+        "Artar (%38,5'ten %45,2'ye)",
+        "Azalır",
+        "Değişmez"
+       ],
+       "dogru": 0,
+       "neden": "Daha çok chip riske ettiğin için fiyat kötüleşir: gereken equity yükselir.",
+       "yanilgi": "Büyük all-in'in daha iyi fiyat verdiğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 10 BB ile all-in yaptı, SB fold etti. BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 41.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "SB'nin bıraktığı 0,5 BB potta: 10 + 0,5 + 1 + 1 = 12,5 BB. 9 / 21,5 ≈ %41,9.",
+       "yanilgi": "SB'nin ölü parasını potta saymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Ante'yi pota katmazsan gereken equity'yi olduğundan yüksek bulursun.",
+       "dogru": true,
+       "neden": "Ör. SB 10 BB'de ante'siz pot 11 BB olur: 9 / 20 = %45; doğrusu %42,9. Ante fiyatı ucuzlatır.",
+       "yanilgi": "Ante'nin yalnızca açılışları etkilediğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. SB 6 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (5 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity %38,5. 33, SB'nin geniş 6 BB aralığına karşı bunun belirgin üzerinde bir equity taşır.",
+       "yanilgi": "Küçük çifti all-in karşısında hep fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s6-SB-33",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s6-SB-33"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "spot",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. BTN 10 BB ile all-in yaptı, SB fold etti. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken equity %41,9; bu el BTN'nin 10 BB aralığına karşı bunun belirgin altında kalır. Fiyat cazip görünse de equity yetmez.",
+       "yanilgi": "Fiyat ucuz olduğu için her eli savunmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-BTN-J7o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-BTN-J7o"
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Equity gereken equity'den yüksekse, ICM yokken call chip EV'de kârlıdır.",
+       "dogru": true,
+       "neden": "Gereken equity başabaş noktasıdır; üstünde call, altında fold. Ödül baskısı ayrıca t7'de.",
+       "yanilgi": "Eşiği kesin bir ödül hesabı sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-d2",
@@ -28299,15 +28482,219 @@
       "Pozisyon ve stack'ten rakibin push aralığının genişliğini tahmin eder."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Call kararı iki yüzün buluşmasıdır: fiyat (d1) ve rakibin all-in aralığı. Call aralığı, rakibin all-in'ine call ettiğin ellerin tamamıdır. Aynı el bir rakibe karşı rahat call, başkasına karşı fold olabilir; çünkü rakibin push aralığı değişir. Sitenin push aralıkları temkinli, yaklaşık çalışma aralıklarıdır; Nash tablosu ya da solver çıktısı değildir.",
+      "Aralığı tahmin etmek için üç şeye bakarsın: rakibin koltuğu, stack'i ve ne kadar sık fold ettiği. 10 BB'de sitenin aralıklarında UTG ellerin ~%13'ünü, HJ ~%17'sini, CO ~%24'ünü, BTN ~%36'sını, SB ~%54'ünü iter. Aynı koltukta stack kısaldıkça aralık genişler: SB 15 BB'de ~%40, 10 BB'de ~%54, 6 BB'de ~%68.",
+      "Bu yüzdeler seni yalnızca başlangıç tahminine götürür. Gerçek bir rakip bu aralıktan sapabilir: çok sıkı ya da çok sık all-in yapan oyuncular vardır. Elinde bilgi yoksa koltuk ve stack ile başla; bilgi geldikçe ayarla."
+     ],
+     "terimler": [
+      "Push aralığı",
+      "Call aralığı",
+      "Range (aralık)",
+      "Kısa stack"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Rakibin push aralığı koltuğuna ve stack'ine göre değişir.",
+       "dogru": true,
+       "neden": "Arkada geçilecek oyuncu sayısı ve stack, aralığın genişliğini belirler.",
+       "yanilgi": "Her rakibin aynı aralıkla itmesini beklemek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "10 BB, herkes fold etmişken. Koltukları push aralığı dardan genişe doğru sırala.",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "CO",
+        "BTN",
+        "SB"
+       ],
+       "neden": "Arkadaki oyuncu azaldıkça aralık genişler: ~%13, %17, %24, %36, %54.",
+       "yanilgi": "SB'yi en sıkı koltuk sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "stack": 10
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "Sitenin çalışma aralıklarında UTG, 10 BB'de ellerin yaklaşık yüzde kaçını iter? (tam sayıya yuvarla)",
+       "dogru": 13,
+       "tolerans": 0.5,
+       "birim": "%",
+       "neden": "Kombinasyonlar sayıldığında yaklaşık %13,3.",
+       "yanilgi": "UTG'nin aralığını BTN gibi geniş sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushYuzde",
+        "stack": 10,
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "SB'nin 10 BB'de ellerin yaklaşık yüzde kaçıyla all-in yaptığını varsayarsın?",
+       "secenekler": [
+        "%13",
+        "%24",
+        "%36",
+        "%54"
+       ],
+       "dogru": 3,
+       "neden": "Yalnızca BB'yi geçmesi gerektiği için aralık çok geniştir: yaklaşık %54.",
+       "yanilgi": "UTG'nin sıkı aralığını SB'ye taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushYuzde",
+        "stack": 10,
+        "poz": "SB"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Sitenin aralıklarında BTN'nin 10 BB push aralığındaki her el, 6 BB push aralığında da var.",
+       "dogru": true,
+       "neden": "Stack kısalınca aralık yalnızca genişler.",
+       "yanilgi": "Aralığın stack'le daralacağını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushKapsar",
+        "dar": [
+         10,
+         "BTN"
+        ],
+        "genis": [
+         6,
+         "BTN"
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "eslestirme",
+       "zorluk": 3,
+       "soru": "Stack ve koltuğu, sitenin aralıklarındaki yaklaşık push yüzdesiyle eşleştir.",
+       "secenekler": [
+        [
+         "15 BB UTG",
+         "%9"
+        ],
+        [
+         "10 BB UTG",
+         "%13"
+        ],
+        [
+         "10 BB SB",
+         "%54"
+        ],
+        [
+         "6 BB SB",
+         "%68"
+        ]
+       ],
+       "neden": "Aynı koltukta stack kısaldıkça, aynı stack'te arkadaki oyuncu azaldıkça aralık genişler.",
+       "yanilgi": "Stack ile koltuğun etkisini karıştırmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Rakibin push aralığı daraldıkça, elindeki ellerin çoğunun o aralığa karşı equity'si genellikle ne olur?",
+       "secenekler": [
+        "Azalır, çünkü dar aralık güçlü ellerden oluşur",
+        "Artar",
+        "Değişmez"
+       ],
+       "dogru": 0,
+       "neden": "Dar aralık, domine eden ve çiftlerden oluşur; zayıf eller bu aralığa karşı geride kalır.",
+       "yanilgi": "Dar aralığın zayıf olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı (ellerin yaklaşık %54'ü). BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 1,
+       "neden": "SB'nin çok geniş aralığına karşı A3s gereken equity'nin (%42,9) belirgin üzerinde kalır.",
+       "yanilgi": "Zayıf kicker'lı suited as'ı fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-SB-A3s",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-SB-A3s"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı (ellerin yaklaşık %40'ı). BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (14 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken equity %45,2; K3o bu aralığa karşı bunun belirgin altında kalır.",
+       "yanilgi": "Papaz yüksek eli geniş aralığa karşı yeterli saymak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s15-SB-K3o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s15-SB-K3o"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Sitenin yüzdeleri gerçek bir rakibin aralığını kesin biçimde tanımlar.",
+       "dogru": false,
+       "neden": "Bunlar yaklaşık çalışma aralıklarıdır; gerçek rakip sıkı ya da gevşek oynayabilir. Bilgi geldikçe tahmin ayarlanır.",
+       "yanilgi": "Çalışma aralığını rakibin gerçek aralığı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Masada belirli bir oyuncunun çok sık all-in yaptığını gözlemledin. Call aralığını genellikle nasıl ayarlarsın?",
+       "secenekler": [
+        "Genişletirsin; rakibin aralığı daha zayıf ellerle dolu olabilir",
+        "Daraltırsın",
+        "Değiştirmezsin"
+       ],
+       "dogru": 0,
+       "neden": "Rakip zayıf ellerle de iterse, orta güçteki ellerin equity'si artar.",
+       "yanilgi": "Rakibin sıklığını hiç hesaba katmamak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-d3",
@@ -28320,15 +28707,240 @@
       "Çiftlerin, as'lı ellerin ve bağlantılı ellerin geniş ve dar aralığa karşı durumunu sıralar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Bir elin equity'si tek bir ele karşı değil, rakibin push aralığına karşı hesaplanır (t3-d5). Aşağıdaki değerler sabit tohumlu bir Monte Carlo hesabından gelir (rastgele dağıtılmış çok sayıda elle yapılan simülasyon); birkaç puan sapabilir, yani \"yaklaşık\"tır. SB'nin 10 BB push aralığına (ellerin ~%54'ü) karşı: 72o ~%30, 54s ~%39, JTs ~%49, 22 ~%48, AKo ~%65, AA ~%85.",
+      "Çiftler geniş aralığa karşı güçlüdür: 22 bile SB'nin geniş aralığına karşı yaklaşık yazı-tura civarındadır, çünkü geniş aralıktaki ellerin çoğu çiftten zayıftır. Aralık daraldıkça durum değişir: aynı 22, UTG'nin 10 BB aralığına (~%13) karşı ~%39'a düşer.",
+      "As'lı eller dar aralıkta daha çok kaybeder: AJo SB'nin geniş aralığına karşı ~%61, UTG'ye karşı ~%47. Dar aralıkta rakibin elinde çoğunlukla daha yüksek kickerlı as'lar ve çiftler vardır; AJo domine olur (Dominasyon). Bağlantılı eller (JTs, 54s) geniş aralıkta çiftlerden ve as'lılardan daha düşük equity taşır; fakat all-in'den sonra oynanabilirliğin faydası kalmaz, yalnızca equity sayılır."
+     ],
+     "terimler": [
+      "Equity",
+      "Monte Carlo",
+      "Dominasyon",
+      "Range (aralık)",
+      "Push aralığı"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Bir elin push aralığına karşı equity'si, rakibin her elini eşit sıklıkla alıp hesaplanan ortalama kazanma payıdır.",
+       "dogru": true,
+       "neden": "Aralığa karşı equity, aralıktaki ellerin ortalamasıdır; bu müfredatta her kombinasyon eşit ağırlıkla sayılır.",
+       "yanilgi": "Aralığa karşı equity'yi tek bir elle hesaplamak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "SB'nin 10 BB push aralığına (ellerin yaklaşık %54'ü) karşı 72o'nun equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%20",
+        "%30",
+        "%40",
+        "%50"
+       ],
+       "dogru": 1,
+       "neden": "72o en zayıf başlangıç ellerinden biridir; yaklaşık %30.",
+       "yanilgi": "Geniş aralığa karşı her elin ~%50 olduğunu sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "72o",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 30
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "Aynı aralığa karşı AKo'nun equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%50",
+        "%55",
+        "%65",
+        "%75"
+       ],
+       "dogru": 2,
+       "neden": "AKo geniş aralığa karşı önde: yaklaşık %65.",
+       "yanilgi": "Premium el için equity'yi olduğundan düşük ya da yüksek tahmin etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "AKo",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 65
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "SB'nin 10 BB push aralığına karşı bu elleri equity'si küçükten büyüğe sırala.",
+       "secenekler": [
+        "72o",
+        "54s",
+        "JTs",
+        "AKo"
+       ],
+       "neden": "Yaklaşık %30, %39, %49, %65. Ardışık eller en az 3 puan arayla seçildi.",
+       "yanilgi": "Suited eli offsuit eli her zaman geçiyor sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equitySirasi",
+        "itme": [
+         "10",
+         "SB"
+        ]
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "SB'nin 10 BB push aralığına karşı hangi elin equity'si en yüksektir?",
+       "secenekler": [
+        "55",
+        "JTs",
+        "54s"
+       ],
+       "dogru": 0,
+       "neden": "55 yaklaşık %54, JTs yaklaşık %49, 54s yaklaşık %39.",
+       "yanilgi": "Bağlantılı suited elleri küçük çiftin önüne koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityEnIyi",
+        "itme": [
+         "10",
+         "SB"
+        ]
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "UTG'nin 10 BB push aralığına (ellerin yaklaşık %13'ü) karşı 22'nin equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%30",
+        "%39",
+        "%48",
+        "%57"
+       ],
+       "dogru": 1,
+       "neden": "Dar aralık daha çok çift ve yüksek kart içerir; 22 yaklaşık %39'a düşer. SB'ye karşı ~%48'di.",
+       "yanilgi": "Küçük çiftin aralıktan bağımsız aynı equity taşıdığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "22",
+        "itme": [
+         "10",
+         "UTG"
+        ],
+        "yaklasik": 39
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Aynı UTG aralığına karşı AJo'nun equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%37",
+        "%47",
+        "%57",
+        "%67"
+       ],
+       "dogru": 1,
+       "neden": "AJo, SB'ye karşı ~%61'di; dar aralıkta domine olduğu için ~%47.",
+       "yanilgi": "As'lı elin her aralıkta güçlü kaldığını sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "AJo",
+        "itme": [
+         "10",
+         "UTG"
+        ],
+        "yaklasik": 47
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Rakibin aralığı daraldığında as'lı zayıf kicker'lı eller (ör. A5o) çiftlerden daha çok equity kaybeder.",
+       "dogru": true,
+       "neden": "A5o SB'ye karşı ~%52, UTG'ye karşı ~%37 (15 puan); 22 ~%48'den ~%39'a (9 puan). Dar aralıkta as'lı eller domine olur.",
+       "yanilgi": "As'lı eller her koşulda aynı değerde sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Dar bir push aralığına karşı offsuit zayıf as'lı eller neden değer kaybeder?",
+       "secenekler": [
+        "Rakibin as'ları genellikle daha yüksek kickerlıdır; el domine edilir",
+        "Rakibin çiftleri daha az bulunur",
+        "Asın değeri aralık daraldıkça düşer"
+       ],
+       "dogru": 0,
+       "neden": "Domine edilmek: aynı aslı rakip eli, kicker'da öndedir.",
+       "yanilgi": "Domine olmayı yalnızca çiftlerde sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Çiftler geniş push aralıklarına karşı yazı-tura civarında ya da önde, çok dar aralıklara karşı ise geride kalabilir.",
+       "dogru": true,
+       "neden": "22: SB'ye karşı ~%48, UTG'ye karşı ~%39. Aralık daraldıkça rakipte çift ve daha yüksek çift oranı artar.",
+       "yanilgi": "Çiftleri her koşulda önde sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BB'de A5o, SB'nin 10 BB push aralığına karşı kaçtır?",
+       "secenekler": [
+        "%37",
+        "%45",
+        "%52",
+        "%60"
+       ],
+       "dogru": 2,
+       "neden": "A5o geniş aralığa karşı ~%52 (UTG aralığına karşı ~%37).",
+       "yanilgi": "Dar aralık değerini geniş aralığa taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "A5o",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 52
+       }
+      }
+     ]
     },
     {
      "kimlik": "t6-d4",
@@ -28341,15 +28953,206 @@
       "Fiyat ile equity'yi karşılaştırarak BB'de call ya da fold kararı verir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "BB'den call kararı iki adımdır: (1) fiyat: gereken equity'yi hesapla (d1); (2) elinin rakibin push aralığına karşı equity'sine bak (d3). Equity gerekenden yüksekse call, düşükse fold; ikisi birbirine yakınsa karar yakındır. ICM yokken (t7) kararı chip EV belirler.",
+      "Örnek: BB ante 1 BB. SB 10 BB'de all-in yaptı (ellerin ~%54'ü), gereken equity %42,9. QJo bu aralığa karşı yaklaşık %50 taşır: call. 54s ise yaklaşık %39: yetmez, fold. İki el de \"ucuz fiyat\" ve \"bağlantılı\" görünür; fark equity'dedir.",
+      "Blind'ın zaten potta olması, call etmek için bir neden değildir. Koyduğun 1 BB geri gelmez, ama call etmek için yeni 9 BB koyarsın; karar yalnızca bu 9 BB'nin kazandıracağına bakar. Çok kısa stack'te (6 BB) fiyat daha ucuz olduğu için aralık daha geniştir.",
+      "Hesap rakibin aralığını bildiğini varsayar. Aralık tahminden ayrılırsa, eşiğe yakın kararlar da değişir (t6-d2)."
+     ],
+     "terimler": [
+      "Pot odds",
+      "Equity",
+      "BB (Big Blind)",
+      "Chip EV (cEV)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "ICM yokken, elinin equity'si gereken equity'den yüksekse call chip EV'de kârlıdır.",
+       "dogru": true,
+       "neden": "Gereken equity başabaş noktasıdır.",
+       "yanilgi": "Kararı yalnızca eline bakarak vermek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 8 BB ile all-in yaptı, BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 41.2,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 8 + 1 + 1 = 10 BB; 7 BB ödersin: 7 / 17 ≈ %41,2.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 7,
+        "pot": 10
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "BB'desin; SB 10 BB ile all-in yaptı ve gereken equity %42,9. Elinin equity'si yaklaşık %50. Karar nedir?",
+       "secenekler": [
+        "Call",
+        "Fold"
+       ],
+       "dogru": 0,
+       "neden": "Equity eşiğin üstünde; chip EV'de call.",
+       "yanilgi": "Blind'ını savunmanın zorunlu olduğunu düşünmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a4",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken %42,9; QJo bu geniş aralığa karşı bunun belirgin üzerinde.",
+       "yanilgi": "İki yüksek kartı fiyat ne olursa olsun fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-SB-QJo",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-SB-QJo"
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken %42,9; 54s bu aralığa karşı bunun altında kalır. Suited bağlantılı eller all-in'den sonra oynanabilirlik avantajını kullanamaz.",
+       "yanilgi": "Bağlantılı suited eli ucuz fiyatla her zaman call etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-SB-54s",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-SB-54s"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 6 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (5 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Çok kısa stack'te fiyat ucuz (gereken %38,5) ve SB'nin aralığı çok geniş; T9o bunu geçer.",
+       "yanilgi": "Offsuit orta kartları 6 BB'de fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s6-SB-T9o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s6-SB-T9o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. BTN 10 BB ile all-in yaptı, SB fold etti. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity %41,9; A7o BTN'nin aralığına karşı bunun üzerinde.",
+       "yanilgi": "Zayıf kicker'lı as'ı fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-BTN-A7o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-BTN-A7o"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 10 BB ile all-in yaptı, BTN ve SB fold etti. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken %41,9; 98o CO'nun aralığına karşı bunun altında kalır.",
+       "yanilgi": "Bağlantılı offsuit eli fiyata güvenerek call etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-CO-98o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-CO-98o"
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (14 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken %45,2; 55 SB'nin ~%40'lık aralığına karşı bunun üzerinde.",
+       "yanilgi": "Orta çifti 15 BB'lik all-in karşısında fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s15-SB-55",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s15-SB-55"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BB'de \"blind'ımı savunmalıyım, zaten 1 BB koydum\" düşüncesi neden hatalıdır?",
+       "secenekler": [
+        "Koyduğun blind geri gelmez; karar yalnızca call için koyacağın yeni chip'lerin kazandıracağına bağlıdır",
+        "Blind'lar fold edilince iade edilir",
+        "BB'nin savunması her zaman zorunludur"
+       ],
+       "dogru": 0,
+       "neden": "Batık maliyet: önceki chip'ler kararı değiştirmez.",
+       "yanilgi": "Blind'ı geri alınabilir sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Gereken equity ile elin equity'si birbirine çok yakınsa, karar hata payı içinde kalabilir ve rakibin aralığı tahmini belirleyicidir.",
+       "dogru": true,
+       "neden": "Aralık tahmini birkaç puan sapınca yakın kararlar yön değiştirir; bu yüzden eşiğe çok yakın spotlar kesin cevapla sorulmaz.",
+       "yanilgi": "Eşiğe çok yakın kararlarda kesin bir cevap olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-d5",
@@ -28362,15 +29165,196 @@
       "Arkada konuşacak oyuncu varken call aralığının neden daraldığını açıklar."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "BB'de arkanda konuşacak oyuncu yoktur: call edince el biter ya da heads-up gider. Diğer koltuklardan call edersen arkandaki oyuncular da konuşur ve call ya da raise edebilir. Bu iki şeyi değiştirir: fiyat ve call sonrası ne olabileceği.",
+      "Fiyat: BTN'de CO'nun 10 BB all-in'ine call ederken blind koymamışsındır. Pot 10 + 0,5 + 1 + 1 = 12,5 BB, call 10 BB: gereken equity 10 / 22,5 ≈ %44,4. BB'nin aynı spotta 9 / 21,5 ≈ %41,9'u daha ucuzdur, çünkü blind'ı zaten potta.",
+      "Arkadaki oyuncular: onlar da call ederse (ya da sen call ettikten sonra biri raise ederse) birden fazla rakibe karşı oynarsın (multiway). Bu müfredat çok oyunculu all-in equity'si vermez; yön şudur: arkada oyuncu varken, ne kadar çok varsa, call aralığı çoğunlukla daha dardır. Bu da yalnızca fiyata bakılırsa gözden kaçar.",
+      "Bu bir yöndür; bilgi (ör. arkadaki oyuncuların çok kısa stack'li olduğu) kararı etkileyebilir. ICM ayrıca t7'de."
+     ],
+     "terimler": [
+      "Multiway",
+      "Dominasyon",
+      "Call aralığı",
+      "BB (Big Blind)"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "BB'de all-in'e call ettiğinde arkanda konuşacak oyuncu yoktur.",
+       "dogru": true,
+       "neden": "BB preflop'ta en son konuşur.",
+       "yanilgi": "BB'nin hâlâ arkada oyuncu bıraktığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. CO 10 BB ile all-in yaptı. BTN'desin; SB ve BB henüz konuşmadı. Potta call etmeden önce kaç BB var?",
+       "dogru": 12.5,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "10 + 0,5 + 1 + 1 = 12,5 BB.",
+       "yanilgi": "SB'nin 0,5 BB'sini unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         10,
+         0.5,
+         1,
+         1
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Aynı durumda BTN'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 44.4,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Blind koymadığın için 10 BB'nin hepsini ödersin: 10 / 22,5 ≈ %44,4.",
+       "yanilgi": "BB'deki fiyatı (%41,9) BTN'ye taşımak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 10,
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Aynı all-in'e (CO 10 BB) BB'de call etmek BTN'den neden daha ucuzdur?",
+       "secenekler": [
+        "BB blind'ını zaten koydu, daha az chip ekler (9 BB)",
+        "BB'nin eli daha güçlüdür",
+        "BB'de ante yoktur"
+       ],
+       "dogru": 0,
+       "neden": "Fiyat farkı koyulmuş blind'dan gelir; eller farklı değildir.",
+       "yanilgi": "Eli koltuğa göre değiştirmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Arkanda oyuncu varken call ettikten sonra bir başkası da call edebilir; bu durumda birden fazla rakibe karşı oynarsın.",
+       "dogru": true,
+       "neden": "Multiway durumda elin tek bir rakiple karşılaştırıldığından daha zor kazanır.",
+       "yanilgi": "Call'un hep heads-up kaldığını sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Bu spotta hangi koltuktan call etmek aynı el için genellikle en rahat olur?",
+       "secenekler": [
+        "BB: en ucuz fiyat, arkada kimse yok",
+        "UTG: ilk konuşan",
+        "BTN: pozisyonda"
+       ],
+       "dogru": 0,
+       "neden": "BB, fiyatı en ucuz ve arkada oyuncu bırakmayan koltuktur.",
+       "yanilgi": "Pozisyon avantajını all-in'e call için ölçüt sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Arkanda oyuncu varken call aralığının çoğunlukla daha dar olmasının sebeplerinden biri hangisidir?",
+       "secenekler": [
+        "Arkadakiler de call edip seni domine edebilir ve equity'n daha çok rakibe bölünür",
+        "All-in'e call etmek yasaktır",
+        "Fiyat kesinlikle kötüleşir"
+       ],
+       "dogru": 0,
+       "neden": "Fiyat bazı durumlarda ucuzlar ama çok oyunculu equity genellikle düşer.",
+       "yanilgi": "Yalnızca fiyata bakarak karar vermek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "eslestirme",
+       "zorluk": 4,
+       "soru": "Koltuğu, call sonrası durumuyla eşleştir.",
+       "secenekler": [
+        [
+         "BB'de call",
+         "Arkada oyuncu yok; blind potta"
+        ],
+        [
+         "BTN'de call",
+         "Arkada SB ve BB var"
+        ],
+        [
+         "CO'da call",
+         "Arkada BTN, SB ve BB var"
+        ]
+       ],
+       "neden": "Koltuk arkandaki oyuncu sayısını belirler.",
+       "yanilgi": "Koltuk adını call aralığıyla ilgisiz görmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 10 BB ile all-in yaptı, BTN ve SB fold etti. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Arkanda kimse yok, gereken %41,9; KQs CO'nun aralığına karşı bunun üzerinde.",
+       "yanilgi": "İki yüksek kartı fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-CO-KQs",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-CO-KQs"
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Arkanda oyuncu varken yalnızca çiftler ve AK ile call edilir.",
+       "dogru": false,
+       "neden": "Bu bir yöndür, kesin liste değil: fiyat, rakibin aralığı ve stack'ler karar verir; call aralığı çoğunlukla BB'ye göre daha dardır.",
+       "yanilgi": "Yönü kesin kurala çevirmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "BTN'de CO'nun 10 BB all-in'ine karşı eşiğe yakın bir elin var ve SB fold etti; arkanda yalnızca BB kaldı. Ne değişir?",
+       "secenekler": [
+        "Arkada yalnızca BB kaldı; yine de BB call ederse multiway olursun",
+        "Hiçbir şey değişmez",
+        "Artık heads-up garantidir"
+       ],
+       "dogru": 0,
+       "neden": "SB fold edince geride yalnızca BB kalır, ama BB'nin call etme ihtimali hâlâ vardır.",
+       "yanilgi": "Bir oyuncunun fold'unun heads-up'ı garanti ettiğini sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-d6",
@@ -28384,15 +29368,266 @@
       "Açtıktan sonra gelen all-in'e fiyat ve aralıkla karar verir."
      ],
      "sureDk": 5,
-     "anlatim": [],
-     "terimler": [],
+     "anlatim": [
+      "Açtın, arkandan biri all-in yaptı. Açılış için koyduğun chip'ler pottadır ve geri gelmez (batık maliyet); karar yalnızca call için koyacağın yeni chip'lere ve elinin aralığa karşı equity'sine bağlıdır. Gereken equity yine ödenecek / (pot + ödenecek)'tir; pot artık senin açılışını da içerir.",
+      "Örnek: BB ante 1 BB. HJ'de 2,2 BB'ye açtın, SB 14 BB ile all-in yaptı, BB fold etti. Potta 2,2 + 14 + 1 + 1 = 18,2 BB. Açılışın zaten potta olduğu için call için 11,8 BB daha koyarsın: gereken equity 11,8 / 30 ≈ %39,3. 88'in SB'nin geniş resteal aralığına (notta yazan: 22+, A2s+, A8o+, KTs+, KQo, QJs, ellerin yaklaşık %17'si) karşı equity'si yaklaşık %55'tir: call.",
+      "Rakibin aralığı ne kadar dar olursa karar o kadar zorlaşır: aynı 88, çok dar bir aralığa karşı eşiğe yaklaşır. Sık resteal yapan bir rakibe karşı call aralığın genişler; nadir resteal yapana karşı daralır (t4-d3)."
+     ],
+     "terimler": [
+      "Resteal",
+      "Pot odds",
+      "Equity",
+      "Call aralığı"
+     ],
      "ustalik": {
       "son": 10,
       "oran": 0.8
      },
      "hedefAlistirma": 10,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Açılışın için koyduğun chip'ler fold edince geri alınmaz.",
+       "dogru": true,
+       "neden": "Pota giren chip'ler pottadır; karar yeni chip'lere ve equity'ye bağlıdır.",
+       "yanilgi": "Açılışın geri döneceğini sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "HJ'de 2,2 BB'ye açtın, SB 14 BB'lik all-in yaptı (BB ante 1 BB). Call için kaç BB daha koyarsın?",
+       "secenekler": [
+        "14 BB",
+        "11,8 BB",
+        "16,2 BB"
+       ],
+       "dogru": 1,
+       "neden": "14 − 2,2 = 11,8 BB: açılışın zaten potta.",
+       "yanilgi": "Açılışı ödenecek miktara ayrıca eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "toplam",
+        "terimler": [
+         11.8
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. HJ'de 2,2 BB'ye açtın, SB 14 BB ile all-in yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 39.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 18,2 BB; call 11,8 BB: 11,8 / 30 ≈ %39,3.",
+       "yanilgi": "Pottan açılışı düşmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 11.8,
+        "pot": 18.2
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN'de 2,2 BB'ye açtın, SB 18 BB ile all-in yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 41.6,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 2,2 + 18 + 1 + 1 = 22,2 BB; call 15,8 BB: 15,8 / 38 ≈ %41,6.",
+       "yanilgi": "SB'nin ölü parasını ve ante'yi pottan unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 15.8,
+        "pot": 22.2
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "dogruYanlis",
+       "zorluk": 3,
+       "soru": "Açılış için 2,2 BB koyduğun için, 15 BB'lik bir resteal'e call ederken kararı bu 2,2 BB'yi geri almaya çalışmak belirlemelidir.",
+       "dogru": false,
+       "neden": "Batık maliyet: koyulan chip kararı değiştirmez; yalnızca yeni chip ve equity.",
+       "yanilgi": "Koyulan chip'i kaybetmemek için call etmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a6",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "Sık resteal yapan bir rakibin all-in'ine karşı call aralığın genellikle nasıl değişir?",
+       "secenekler": [
+        "Genişler; rakibin aralığı daha geniştir",
+        "Daralır",
+        "Değişmez"
+       ],
+       "dogru": 0,
+       "neden": "Geniş aralığa karşı orta güçteki eller daha çok equity taşır.",
+       "yanilgi": "Rakibin sıklığını göz ardı etmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. HJ'de 2,2 BB'ye açtın, SB 14 BB ile all-in yaptı, BB fold etti. Varsayım: SB'nin resteal aralığı 22+, A2s+, A8o+, KTs+, KQo, QJs (~%17). Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (11,8 BB daha)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken equity %39,3; 88 nottaki aralığa karşı yaklaşık %55 taşır. Aralık 55+, A9s+, ATo+ ve KQs kadar daralsa bile yaklaşık %48'de kalır.",
+       "yanilgi": "Açılışı çöpe atmamak için ya da korkudan fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "t13",
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "88",
+        "rakip": [
+         "AA",
+         "KK",
+         "QQ",
+         "JJ",
+         "TT",
+         "99",
+         "88",
+         "77",
+         "66",
+         "55",
+         "44",
+         "33",
+         "22",
+         "AKs",
+         "AQs",
+         "AJs",
+         "ATs",
+         "A9s",
+         "A8s",
+         "A7s",
+         "A6s",
+         "A5s",
+         "A4s",
+         "A3s",
+         "A2s",
+         "AKo",
+         "AQo",
+         "AJo",
+         "ATo",
+         "A9o",
+         "A8o",
+         "KQs",
+         "KJs",
+         "KTs",
+         "KQo",
+         "QJs"
+        ],
+        "yaklasik": 55
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "Notta yazan resteal aralığı (22+, A2s+, A8o+, KTs+, KQo, QJs) ellerin yaklaşık yüzde kaçıdır? (bir ondalık basamak)",
+       "dogru": 17.0,
+       "tolerans": 0.05,
+       "birim": "%",
+       "neden": "226 kombinasyon: 78 çift + 48 suited as + 72 offsuit as (A8o–AKo, 6 el) + 12 (KTs, KJs, KQs) + 12 KQo + 4 QJs; 226 / 1326 ≈ %17,0.",
+       "yanilgi": "Kombinasyon yerine el adı sayısını kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yuzde",
+        "eller": [
+         "AA",
+         "KK",
+         "QQ",
+         "JJ",
+         "TT",
+         "99",
+         "88",
+         "77",
+         "66",
+         "55",
+         "44",
+         "33",
+         "22",
+         "AKs",
+         "AQs",
+         "AJs",
+         "ATs",
+         "A9s",
+         "A8s",
+         "A7s",
+         "A6s",
+         "A5s",
+         "A4s",
+         "A3s",
+         "A2s",
+         "AKo",
+         "AQo",
+         "AJo",
+         "ATo",
+         "A9o",
+         "A8o",
+         "KQs",
+         "KJs",
+         "KTs",
+         "KQo",
+         "QJs"
+        ]
+       }
+      },
+      {
+       "kimlik": "a9",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Açılışına all-in geldiğinde call etmek için hangi iki şeye bakarsın?",
+       "secenekler": [
+        "Ödenecek yeni chip / yeni pot ve elinin rakibin aralığına karşı equity'si",
+        "Açılışına koyduğun chip miktarı",
+        "Yalnızca elinin gücü"
+       ],
+       "dogru": 0,
+       "neden": "Fiyat ve equity: batık maliyet hesaba girmez.",
+       "yanilgi": "Elin gücüne tek başına bakmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a10",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Rakibin resteal aralığı bilinmiyorsa, call kararının eşikten uzak olması gerekir; yakın kararlarda sonuç varsayıma bağlıdır.",
+       "dogru": true,
+       "neden": "Aralık tahmini birkaç puan değişince yakın kararlar yön değiştirebilir.",
+       "yanilgi": "Tahmin edilen aralığı kesin saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Çok dar bir aralıktan (yalnızca güçlü eller) gelen all-in'e karşı 88'in durumu için en doğru ifade hangisidir?",
+       "secenekler": [
+        "Eşiğe yaklaşır; call aralığı daralır",
+        "Her zaman call",
+        "Hiçbir zaman fold etmez"
+       ],
+       "dogru": 0,
+       "neden": "Dar aralıkta rakibin elinde yüksek çiftler ve AK ağırlıktadır; 88'in equity'si düşer.",
+       "yanilgi": "Aynı eli her rakibe karşı aynı oynamak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-k",
@@ -28405,15 +29640,213 @@
       "\"All-in'e call\" ünitesinin kazanımlarını karışık sorularda uygular."
      ],
      "sureDk": 6,
-     "anlatim": [],
+     "anlatim": [
+      "Bu kontrol, ünitenin altı dersinden karışık sorular içerir. Aksi yazılmadıkça BB ante 1 BB'dir; ICM yoktur. Push aralıkları sitenin temkinli, yaklaşık çalışma aralıklarıdır; Nash tablosu değildir."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 12,
       "oran": 0.8
      },
      "hedefAlistirma": 12,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "dogruYanlis",
+       "zorluk": 1,
+       "soru": "Gereken equity hesabında pota ante, blind'ler ve rakibin all-in'i dahildir.",
+       "dogru": true,
+       "neden": "Call etmeden önceki toplam pot kullanılır.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "9 / (12 + 9) ≈ %42,9.",
+       "yanilgi": "Ödenecek miktarı payda dışında bırakmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. BTN 10 BB ile all-in yaptı, SB fold etti. BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 41.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "9 / (12,5 + 9) ≈ %41,9.",
+       "yanilgi": "SB'nin ölü parasını saymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "siralama",
+       "zorluk": 2,
+       "soru": "10 BB'de koltukları push aralığı dardan genişe sırala.",
+       "secenekler": [
+        "UTG",
+        "CO",
+        "BTN",
+        "SB"
+       ],
+       "neden": "~%13, %24, %36, %54.",
+       "yanilgi": "SB'yi en dar sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "stack": 10
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "SB'nin 10 BB push aralığına karşı JTs'in equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%29",
+        "%39",
+        "%49",
+        "%59"
+       ],
+       "dogru": 2,
+       "neden": "JTs ~%49.",
+       "yanilgi": "Suited bağlantılı eli çok güçlü ya da çok zayıf saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "JTs",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 49
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken %42,9; 82o aralığa karşı yaklaşık %31.",
+       "yanilgi": "Ucuz fiyatla her eli call etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-SB-82o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-SB-82o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (14 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken %45,2; 55 yaklaşık %52.",
+       "yanilgi": "Orta çifti fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s15-SB-55",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s15-SB-55"
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Arkanda oyuncu varken call etmek çoğunlukla BB'den call etmekten daha dar bir aralıkla yapılır.",
+       "dogru": true,
+       "neden": "BB en ucuz fiyatı ve arkada oyuncu bırakmayan koltuktur.",
+       "yanilgi": "Koltuk farkını yok saymak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. CO 10 BB ile all-in yaptı. BTN'desin, SB ve BB henüz konuşmadı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 44.4,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "10 / (12,5 + 10) ≈ %44,4.",
+       "yanilgi": "BB'deki fiyatı kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 10,
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. HJ'de 2,2 BB'ye açtın, SB 14 BB ile all-in yaptı, BB fold etti. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 39.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "11,8 / (18,2 + 11,8) ≈ %39,3.",
+       "yanilgi": "Açılışı ödenecek miktara eklemek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 11.8,
+        "pot": 18.2
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Açılışına all-in gelince, açılışında koyduğun 2,2 BB'yi kaybetmemek call için bir gerekçedir.",
+       "dogru": false,
+       "neden": "Batık maliyet; yalnızca yeni chip ve equity.",
+       "yanilgi": "Koyulan chip'i geri almaya çalışmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Rakibin push aralığı sıkılaştıkça aynı elle call kararı genellikle nasıl değişir?",
+       "secenekler": [
+        "Zorlaşır, eşiğe yaklaşır ya da fold'a döner",
+        "Kolaylaşır",
+        "Değişmez"
+       ],
+       "dogru": 0,
+       "neden": "Dar aralık güçlü ellerden oluşur; zayıf ve orta eller değer kaybeder.",
+       "yanilgi": "Dar aralığın zayıf olduğunu sanmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-r",
@@ -28427,15 +29860,154 @@
       "Ünitede zayıf kalan kazanımları yeniden çalışır; sorular geçmiş hatalardan seçilir."
      ],
      "sureDk": 4,
-     "anlatim": [],
+     "anlatim": [
+      "Bu tekrar, ünitede en sık yapılan hataların üzerinden geçer."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 8,
       "oran": 0.75
      },
      "hedefAlistirma": 8,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. SB 6 BB ile all-in yaptı. BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 38.5,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "5 / 13 ≈ %38,5.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 5,
+        "pot": 8
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "dogruYanlis",
+       "zorluk": 2,
+       "soru": "Ante'yi pota katmamak gereken equity'yi olduğundan yüksek gösterir.",
+       "dogru": true,
+       "neden": "Pot küçük kalır, fiyat kötü görünür.",
+       "yanilgi": "Ante'yi göz ardı etmek.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a3",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "Sitenin aralıklarında UTG, 10 BB'de ellerin yaklaşık yüzde kaçını iter?",
+       "secenekler": [
+        "%13",
+        "%24",
+        "%36",
+        "%54"
+       ],
+       "dogru": 0,
+       "neden": "~%13.",
+       "yanilgi": "Aralığı BTN gibi geniş sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushYuzde",
+        "stack": 10,
+        "poz": "UTG"
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "SB'nin 10 BB push aralığına karşı 72o'nun equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%20",
+        "%30",
+        "%40",
+        "%50"
+       ],
+       "dogru": 1,
+       "neden": "~%30.",
+       "yanilgi": "Her eli geniş aralığa karşı ~%50 sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "72o",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 30
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "spot",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 10 BB ile all-in yaptı, SB fold etti. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken %41,9; J7o aralığın altında.",
+       "yanilgi": "Fiyat cazip diye call etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-BTN-J7o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-BTN-J7o"
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. SB 15 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (14 BB)"
+       ],
+       "dogru": 0,
+       "neden": "Gereken %45,2; K3o yaklaşık %39.",
+       "yanilgi": "Papaz yüksek eli savunmak.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s15-SB-K3o",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s15-SB-K3o"
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Blind'ın zaten potta olması BB'de call etmek için başlı başına bir gerekçedir.",
+       "dogru": false,
+       "neden": "Blind geri gelmez; karar yeni chip ve equity'ye bağlı.",
+       "yanilgi": "Batık maliyet.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 5,
+       "soru": "Açılışına all-in gelince kararın neye bağlı olduğunu en iyi hangisi söyler?",
+       "secenekler": [
+        "Ödenecek yeni chip, pot ve elinin rakibin aralığına karşı equity'si",
+        "Açılışına ne kadar koyduğun",
+        "Yalnızca elinin gücü"
+       ],
+       "dogru": 0,
+       "neden": "Batık maliyet hesaba girmez.",
+       "yanilgi": "Açılışı koruma dürtüsü.",
+       "dogrulamaGerekli": false
+      }
+     ]
     },
     {
      "kimlik": "t6-t",
@@ -28450,15 +30022,363 @@
       "bu pistte seviye 6 ve altındaki ünitelerin kazanımlarını karışık sorularda gösterir; geçilirse bu pistte bu üniteye kadar olan dersler açılır."
      ],
      "sureDk": 10,
-     "anlatim": [],
+     "anlatim": [
+      "Bu test, turnuva pistinde buraya kadar olan bütün üniteleri birlikte yoklar: temel üniteler (o1–o4), turnuva nedir, stack'i ölçmek, derin ve orta stack, push/fold ve all-in'e call. 20 soru. Aksi yazılmadıkça BB ante 1 BB, açılış 2,2 BB'dir ve ICM yoktur. Push aralıkları sitenin yaklaşık çalışma aralıklarıdır; equity değerleri Monte Carlo ile hesaplandı ve yaklaşıktır."
+     ],
      "terimler": [],
      "ustalik": {
       "son": 20,
       "oran": 0.85
      },
      "hedefAlistirma": 20,
-     "durum": "iskelet",
-     "alistirmalar": []
+     "durum": "dolu",
+     "alistirmalar": [
+      {
+       "kimlik": "a1",
+       "tip": "secmeli",
+       "zorluk": 1,
+       "soru": "A♠ K♦ hangi el adıyla yazılır?",
+       "secenekler": [
+        "AKs",
+        "AKo",
+        "KAo"
+       ],
+       "dogru": 1,
+       "neden": "Farklı renk: offsuit, büyük değer önce yazılır: AKo.",
+       "yanilgi": "Renkleri karıştırmak ya da küçük değeri önce yazmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "yazim",
+        "kartlar": "A♠ K♦"
+       }
+      },
+      {
+       "kimlik": "a2",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "AKo kaç kombinasyondan oluşur?",
+       "dogru": 12,
+       "tolerans": 0,
+       "birim": "kombinasyon",
+       "neden": "4 × 4 = 16 renk eşleşmesinden 4'ü suited: 16 − 4 = 12.",
+       "yanilgi": "Suited kombinasyonları da sayıp 16 demek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "kombo",
+        "eller": [
+         "AKo"
+        ]
+       }
+      },
+      {
+       "kimlik": "a3",
+       "tip": "sayi",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, blind'ler henüz konuşmadı. Potta kaç BB var?",
+       "dogru": 4.7,
+       "tolerans": 0.1,
+       "birim": "BB",
+       "neden": "0,5 + 1 + 1 + 2,2 = 4,7 BB.",
+       "yanilgi": "Ante'yi unutmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "antePot",
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1,
+        "ekler": [
+         2.2
+        ]
+       }
+      },
+      {
+       "kimlik": "a4",
+       "tip": "secmeli",
+       "zorluk": 2,
+       "soru": "BB ante 1 BB'li masada stack'in 30 BB. M'n kaçtır?",
+       "secenekler": [
+        "M = 12",
+        "M = 20",
+        "M = 30"
+       ],
+       "dogru": 0,
+       "neden": "Bir masa turu 2,5 BB tutar: 30 / 2,5 = 12.",
+       "yanilgi": "Ante'siz formülle 20 bulmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "mOrani",
+        "stack": 30,
+        "sb": 0.5,
+        "bb": 1,
+        "ante": 1
+       }
+      },
+      {
+       "kimlik": "a5",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. BTN 2,2 BB açtı, SB fold etti. BB'de call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 20.3,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "Pot 4,7 BB; 1,2 BB ödersin: 1,2 / 5,9 ≈ %20,3.",
+       "yanilgi": "Paydaya ödeyeceğin miktarı koymamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 1.2,
+        "pot": 4.7
+       }
+      },
+      {
+       "kimlik": "a6",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. 2,2 BB'lik çalma için başabaş fold oranı yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 46.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "2,2 / (2,2 + 2,5) ≈ %46,8.",
+       "yanilgi": "Ante'siz potla hesaplamak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 2.2,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a7",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "Büyük blind 400. Sen 12.000 chip, rakibin 8.800 chip. Efektif stack kaç BB?",
+       "dogru": 22,
+       "tolerans": 0,
+       "birim": "BB",
+       "neden": "Küçük stack 8.800; 8.800 / 400 = 22 BB.",
+       "yanilgi": "Büyük stack'i kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "efektif",
+        "stackler": [
+         "12.000",
+         "8.800"
+        ],
+        "bb": 400
+       }
+      },
+      {
+       "kimlik": "a8",
+       "tip": "secmeli",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB, herkes sana kadar fold etti. Push/fold için hangisi doğrudur?",
+       "secenekler": [
+        "Kısa stack'te ilk girişte yalnızca all-in ya da fold düşünülür",
+        "Her elle all-in yapılır",
+        "Yalnızca derin stack'te kullanılır"
+       ],
+       "dogru": 0,
+       "neden": "Push/fold kısa stack için bir başlangıç ilkesidir; fold da stratejinin parçasıdır.",
+       "yanilgi": "Push/fold'u her eli itmek sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a9",
+       "tip": "sayi",
+       "zorluk": 3,
+       "soru": "BB ante 1 BB. Pot 2,5 BB. 10 BB ile push yaptın. Call edildiğinde hiç kazanmadığını varsayarsan başabaş fold oranı yüzde kaçtır?",
+       "dogru": 80,
+       "tolerans": 0,
+       "birim": "%",
+       "neden": "10 / 12,5 = %80.",
+       "yanilgi": "Paydaya yalnızca potu koymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "basabasFold",
+        "risk": 10,
+        "pot": 2.5
+       }
+      },
+      {
+       "kimlik": "a10",
+       "tip": "siralama",
+       "zorluk": 3,
+       "soru": "10 BB'de koltukları push aralığı dardan genişe sırala.",
+       "secenekler": [
+        "UTG",
+        "HJ",
+        "BTN",
+        "SB"
+       ],
+       "neden": "~%13, %17, %36, %54.",
+       "yanilgi": "SB'yi en dar sanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "pushSirasi",
+        "stack": 10
+       }
+      },
+      {
+       "kimlik": "a11",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "15–25 BB'de geç pozisyon açılışına resteal çoğunlukla nasıl yapılır?",
+       "secenekler": [
+        "All-in",
+        "Min-raise ile küçük bir 3-bet",
+        "Limp"
+       ],
+       "dogru": 0,
+       "neden": "Küçük bir 3-bet zaten stack'in büyük kısmıdır; sonra fold etmek pahalıdır.",
+       "yanilgi": "Derin stack'teki küçük 3-bet'i kısa stack'e taşımak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a12",
+       "tip": "spot",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. Herkesin 10 BB'si var. BTN'desin, herkes sana kadar fold etti. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "All-in (10 BB)"
+       ],
+       "dogru": 1,
+       "neden": "A5o, BTN'nin 10 BB aralığında.",
+       "yanilgi": "As'lı zayıf kicker'ı fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "p10-BTN-A5o",
+       "denetim": {
+        "tur": "push",
+        "stack": 10,
+        "poz": "BTN",
+        "el": "A5o"
+       }
+      },
+      {
+       "kimlik": "a13",
+       "tip": "dogruYanlis",
+       "zorluk": 4,
+       "soru": "Nash push/fold tabloları ödül yapısını (ICM) hesaba katmaz.",
+       "dogru": true,
+       "neden": "Yalnızca chip EV; ICM t7'de.",
+       "yanilgi": "Tabloyu bubble'da aynen kullanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a14",
+       "tip": "sayi",
+       "zorluk": 4,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 42.9,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "9 / 21 ≈ %42,9.",
+       "yanilgi": "Ödenecek miktarı payda dışında bırakmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 9,
+        "pot": 12
+       }
+      },
+      {
+       "kimlik": "a15",
+       "tip": "secmeli",
+       "zorluk": 4,
+       "soru": "SB'nin 10 BB push aralığına karşı AKo'nun equity'si yaklaşık kaçtır?",
+       "secenekler": [
+        "%50",
+        "%55",
+        "%65",
+        "%75"
+       ],
+       "dogru": 2,
+       "neden": "~%65.",
+       "yanilgi": "Premium eli olduğundan düşük saymak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "equityAraliga",
+        "el": "AKo",
+        "itme": [
+         "10",
+         "SB"
+        ],
+        "yaklasik": 65
+       }
+      },
+      {
+       "kimlik": "a16",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "Cep çiftiyle flop'ta set ya da daha iyisini yapma ihtimali yaklaşık yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 11.8,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "19.600 flop'un 2.304'ü: yaklaşık %11,8.",
+       "yanilgi": "İhtimali büyük tahmin etmek.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "flopTutma",
+        "cep": "99"
+       }
+      },
+      {
+       "kimlik": "a17",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Bubble'da chip'lerini iki katına çıkarmak ödül payını da iki katına çıkarır.",
+       "dogru": false,
+       "neden": "Ödül sıraya göre dağıtılır; chip ile ödül payı orantılı değildir (t2-d5).",
+       "yanilgi": "Chip'i doğrudan ödül payı sanmak.",
+       "dogrulamaGerekli": false
+      },
+      {
+       "kimlik": "a18",
+       "tip": "spot",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. SB 10 BB ile all-in yaptı. BB'desin. Hamlen?",
+       "secenekler": [
+        "Fold",
+        "Call (9 BB)"
+       ],
+       "dogru": 1,
+       "neden": "Gereken %42,9; QJo yaklaşık %50.",
+       "yanilgi": "İki yüksek kartı fold etmek.",
+       "dogrulamaGerekli": false,
+       "spotKimlik": "s10-SB-QJo",
+       "denetim": {
+        "tur": "callShove",
+        "spot": "s10-SB-QJo"
+       }
+      },
+      {
+       "kimlik": "a19",
+       "tip": "sayi",
+       "zorluk": 5,
+       "soru": "BB ante 1 BB. CO 10 BB ile all-in yaptı. BTN'desin, SB ve BB henüz konuşmadı. Call için gereken equity yüzde kaçtır? (bir ondalık basamak)",
+       "dogru": 44.4,
+       "tolerans": 0.1,
+       "birim": "%",
+       "neden": "10 / 22,5 ≈ %44,4.",
+       "yanilgi": "BB'deki fiyatı kullanmak.",
+       "dogrulamaGerekli": false,
+       "denetim": {
+        "tur": "gerekenEquity",
+        "call": 10,
+        "pot": 12.5
+       }
+      },
+      {
+       "kimlik": "a20",
+       "tip": "dogruYanlis",
+       "zorluk": 5,
+       "soru": "Açılışına all-in gelince, açılışa koyduğun chip'ler call kararında hesaba girmez; yalnızca yeni chip ve equity.",
+       "dogru": true,
+       "neden": "Batık maliyet.",
+       "yanilgi": "Koyulan chip'i geri almaya çalışmak.",
+       "dogrulamaGerekli": false
+      }
+     ]
     }
    ]
   },

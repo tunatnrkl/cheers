@@ -130,3 +130,21 @@ Yeni terim eklenmedi; gereken bütün terimler sözlükte vardı. Turnuva pistin
 - **Calling station:** "Blöf yapılmaz; bol value bet yapılır." → "Ona karşı blöf nadiren işe yarar; value bet'ler daha çok kazandırır."
 - **Slow play:** "işe yarar" → "daha çok düşünülür".
 - **Kuru board:** sona "Müfredattaki tanım: çift yok, üç farklı renk, kent çekişi yok." eklendi.
+
+## t5 ve t6 (2026-11-14)
+
+### Sözlüğe eklenenler (171 → 174)
+
+- **Push aralığı** (turnuva; takma adlar itme aralığı, shove range): belirli koltuk ve stack'te all-in yaptığın ellerin tamamı. t5-d3'e bağlandı.
+- **Call aralığı** (turnuva): rakibin all-in'ine call ettiğin ellerin tamamı. t5-d7 ve t6'ya bağlandı.
+- **Nash dengesi** (strateji; takma adlar Nash, denge, sömürülemezlik): iki tarafın da kendi stratejisini değiştirerek daha fazla kazanamadığı çift; push/fold tabloları chip EV varsayımıyla; en çok kazandıran strateji demek değildir. t5-d7'ye bağlandı.
+
+"Ölü para" metinde açıklandı, sözlüğe eklenmedi. "Efektif stack" ve "equity" önceki ünitelerden bağlı.
+
+### Spot ihtiyaçları ve notlar
+
+- **t13 notu ile aralık yüzdesi:** t13'ün notu SB'nin resteal aralığını (22+, A2s+, A8o+, KTs+, KQo, QJs) "ellerin yaklaşık %16'sı" diye yazıyor; kombinasyonlar sayıldığında 226 / 1326 = %17,0. Doğru cevap ve gerekçedeki equity (%55) etkilenmez; metin "yaklaşık %17" olmalı. (Dosyaya dokunulmadı: src/data/hands.ts bu işin dışında.)
+- **Arkada oyuncu olan all-in'e call spotu yok:** callshove spotlarının hepsi BB'de (arkada kimse yok). t6-d5 (arkanda oyuncu varken) yalnızca BB spotuyla karşılaştırma ve fiyat hesabıyla kuruldu; BTN'de CO'nun 10 BB all-in'ine, SB ve BB arkadayken call spotu (rakip aralığı notta) eklenirse ders güçlenir.
+- **Açılışına all-in gelirse:** yalnızca t13 var. HJ/CO/BTN açılışına SB ya da BB'den 15–25 BB all-in gelen ek spotlar t6-d6'yı güçlendirir.
+- **Aralığa duyarlı callshove spotları:** gerekçesi "rakibin aralığı belirliyor" diyen 19 spot kullanılmadı; bu spotlar aralık duyarlılığı için ayrı bir ders (ileri/ICM) olarak uygun olur.
+- **Sınırdaki push spotları:** p6-CO-A4o ve p15-HJ-A8s betiğin sınır tanımında; kullanılmadı.
