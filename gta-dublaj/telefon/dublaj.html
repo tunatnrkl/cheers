@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Canlı Dublaj</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0d1020; --panel: #161a30; --line: #262b4a;
+  --fg: #eef0fa; --muted: #8d93b8; --accent: #ff5e8a; --accent-2: #ffb35c;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--fg); font: 16px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.app {
+  max-width: 560px; margin: 0 auto; min-height: 100%;
+  display: flex; flex-direction: column; gap: 20px;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 32px max(16px, env(safe-area-inset-left));
+}
+header { display: flex; align-items: baseline; justify-content: space-between; }
+h1 { margin: 0; font-size: 1.5rem; font-weight: 800; }
+h1 span { color: var(--accent); }
+.lang { font-size: .75rem; letter-spacing: .08em; color: var(--muted); }
+.stage { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+#mic {
+  width: 168px; height: 168px; border-radius: 50%; border: 0; cursor: pointer;
+  background: radial-gradient(circle at 35% 30%, var(--accent-2), var(--accent) 70%);
+  color: var(--bg); font-weight: 800; font-size: 1.15rem; line-height: 1.15;
+  -webkit-tap-highlight-color: transparent;
+}
+#mic.on { background: var(--panel); color: var(--accent); animation: pulse 1.6s ease-out infinite; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 3px var(--accent), 0 0 0 0 rgba(255,94,138,.45); }
+  100% { box-shadow: 0 0 0 3px var(--accent), 0 0 0 28px rgba(255,94,138,0); }
+}
+#status { font-size: .9rem; color: var(--muted); text-align: center; min-height: 1.3em; }
+#status.err { color: var(--accent-2); }
+#partial { font-size: .9rem; color: var(--muted); font-style: italic; text-align: center; min-height: 1.3em; overflow-wrap: anywhere; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chip { display: inline-flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: .85rem; }
+.chip input { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; }
+.feed h2 { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+#list { display: flex; flex-direction: column; gap: 10px; }
+.line { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.line .tr { font-size: 1.1rem; font-weight: 600; overflow-wrap: anywhere; }
+.line .en { font-size: .82rem; color: var(--muted); overflow-wrap: anywhere; }
+.line.skip { background: transparent; border-style: dashed; }
+.line.skip .tr { font-size: .82rem; color: var(--muted); font-weight: 500; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header><h1>Canlı <span>Dublaj</span></h1><div class="lang">EN → TR</div></header>
+  <section class="stage">
+    <button id="mic" type="button">Dinlemeye<br>başla</button>
+    <div id="status">Telefonu TV'ye yakın koy, tuşa bas.</div>
+    <div id="partial"></div>
+    <div class="controls">
+      <label class="chip"><input type="checkbox" id="speak" checked> Sesli oku</label>
+      <label class="chip"><input type="checkbox" id="showSkips"> Atlananları göster</label>
+    </div>
+  </section>
+  <section class="feed"><h2>Çeviriler</h2><div id="list"></div></section>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const micBtn = $("mic"), statusEl = $("status"), partialEl = $("partial"), listEl = $("list");
+const speakBox = $("speak"), skipBox = $("showSkips");
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+let rec = null, wanted = false, speaking = false, wakeLock = null, trVoice = null;
+const queue = []; let busy = false;
+
+function setStatus(t, err) { statusEl.textContent = t; statusEl.classList.toggle("err", !!err); }
+
+// ---------- İngilizce mi? (Türkçe konuşma en-US tanıyıcıda anlamsız kelimelere dönüşür)
+const EN = new Set(("a about after again all alright am an and any anything are around as ask at away back bad be because been before better big boss bro brother but by call can can't car cash cause come cops could damn day dead did didn't do does doesn't don't done down drive drop dude easy else even ever every everything fine for fuck fucking from gang get gets gettin getting give go god going gon gonna good got gotta guy guys had has have he hear hell help her here hey him his hold home how i i'll i'm i've if in is isn't it it's job just keep kill know last leave let let's life like listen little look lot love make man maybe me mean money more motherfucker move much my need never new nice no not nothing now of off oh ok okay on one only or other our out over people place please police pull put real really right run said say see shit should shut so some something stay still stop sure take talk tell than thank thanks that that's the their them then there they they're thing think this those time to told too trust try uh up us very wait wanna want was we we're well were what what's when where who why will with without work would yeah yes yo you you're your").split(" "));
+function looksEnglish(text, conf) {
+  if (conf > 0 && conf < 0.45) return false;
+  const words = text.toLowerCase().replace(/[^a-z' ]/g, " ").split(/\s+/).filter(Boolean);
+  if (words.length < 2) return false;
+  const hits = words.filter(w => EN.has(w)).length;
+  return hits / words.length >= 0.4;
+}
+
+// ---------- Çeviri (ücretsiz Google Çeviri, olmazsa MyMemory)
+async function translate(text) {
+  try {
+    const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=tr&dt=t&q=" + encodeURIComponent(text));
+    const j = await r.json();
+    const out = j[0].map(p => p[0]).join("").trim();
+    if (out) return out;
+  } catch {}
+  const r = await fetch("https://api.mymemory.translated.net/get?langpair=en|tr&q=" + encodeURIComponent(text));
+  const j = await r.json();
+  return (j.responseData && j.responseData.translatedText || "").trim();
+}
+
+// ---------- Türkçe ses
+function pickVoice() {
+  const vs = speechSynthesis.getVoices();
+  trVoice = vs.find(v => /^tr/i.test(v.lang)) || null;
+}
+if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+function speakTr(text) {
+  return new Promise((done) => {
+    if (!speakBox.checked || !("speechSynthesis" in window)) return done();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "tr-TR"; if (trVoice) u.voice = trVoice; u.rate = 1.1;
+    u.onend = u.onerror = done;
+    speaking = true;
+    try { rec && rec.abort(); } catch {}   // okurken dinleme: kendi sesini duymasın
+    speechSynthesis.speak(u);
+  }).then(() => { speaking = false; restart(); });
+}
+
+// ---------- Liste
+function addLine(en, tr, skip) {
+  const el = document.createElement("div");
+  el.className = "line" + (skip ? " skip" : "");
+  el.innerHTML = '<div class="tr"></div><div class="en"></div>';
+  el.querySelector(".tr").textContent = tr;
+  el.querySelector(".en").textContent = en;
+  if (skip) el.hidden = !skipBox.checked;
+  listEl.prepend(el);
+  while (listEl.children.length > 40) listEl.lastChild.remove();
+}
+skipBox.onchange = () => document.querySelectorAll(".line.skip").forEach(e => e.hidden = !skipBox.checked);
+
+async function work() {
+  if (busy || !queue.length) return;
+  busy = true;
+  const en = queue.shift();
+  try {
+    const tr = await translate(en);
+    if (tr) { addLine(en, tr); await speakTr(tr); }
+  } catch {
+    addLine(en, "Çeviri yapılamadı (internet?)", true);
+  }
+  busy = false;
+  while (queue.length > 3) queue.shift();   // gecikme birikmesin
+  work();
+}
+
+// ---------- Dinleme
+function restart() {
+  if (!wanted || speaking) return;
+  try { rec.start(); } catch {}
+}
+
+function setup() {
+  rec = new SR();
+  rec.lang = "en-US";
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.onstart = () => { micBtn.classList.add("on"); micBtn.innerHTML = "Dinliyor<br>(durdur)"; setStatus("Dinliyor. İngilizce duyduğunu çevirir."); };
+  rec.onresult = (e) => {
+    let interim = "";
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const r = e.results[i];
+      if (r.isFinal) {
+        const t = r[0].transcript.trim();
+        if (looksEnglish(t, r[0].confidence)) { queue.push(t); work(); }
+        else if (t) addLine(t, "Atlandı (Türkçe veya anlamsız)", true);
+      } else interim += r[0].transcript;
+    }
+    partialEl.textContent = interim;
+  };
+  rec.onerror = (e) => {
+    if (e.error === "not-allowed" || e.error === "service-not-allowed") {
+      wanted = false;
+      setStatus("Mikrofon izni yok. Chrome'da adres çubuğundaki kilit simgesinden mikrofona izin ver.", true);
+    }
+  };
+  rec.onend = () => {
+    partialEl.textContent = "";
+    if (wanted) { setTimeout(restart, 250); return; }   // Android sessizlikte kapatır, tekrar aç
+    micBtn.classList.remove("on"); micBtn.innerHTML = "Dinlemeye<br>başla";
+    setStatus("Durdu. Tekrar başlatmak için tuşa bas.");
+  };
+}
+
+micBtn.onclick = async () => {
+  if (!SR) { setStatus("Bu tarayıcı ses tanımayı desteklemiyor. Android'de Chrome ile aç.", true); return; }
+  if (!rec) setup();
+  if (wanted) { wanted = false; try { rec.stop(); } catch {} try { wakeLock && wakeLock.release(); } catch {} return; }
+  wanted = true;
+  if ("speechSynthesis" in window) speechSynthesis.speak(new SpeechSynthesisUtterance(""));  // ses motorunu aç
+  restart();
+  try { wakeLock = await navigator.wakeLock.request("screen"); } catch {}
+};
+document.addEventListener("visibilitychange", async () => {
+  if (document.visibilityState === "visible" && wanted) {
+    try { wakeLock = await navigator.wakeLock.request("screen"); } catch {}
+    restart();
+  }
+});
+if (!SR) setStatus("Bu tarayıcı ses tanımayı desteklemiyor. Android'de Chrome ile aç.", true);
+</script>
+</body>
+</html>
