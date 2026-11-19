@@ -149,7 +149,7 @@ async function work() {
 // ---------- Dinleme
 function restart() {
   if (!wanted || speaking) return;
-  try { rec.start(); } catch {}
+  try { rec.start(); } catch (err) { if (err.name !== "InvalidStateError") setStatus("Başlatılamadı: " + err.message, true); }
 }
 
 function setup() {
@@ -170,11 +170,19 @@ function setup() {
     }
     partialEl.textContent = interim;
   };
+  rec.onaudiostart = () => setStatus("Mikrofon açık, ses bekleniyor...");
+  rec.onspeechstart = () => setStatus("Konuşma duyuluyor...");
   rec.onerror = (e) => {
-    if (e.error === "not-allowed" || e.error === "service-not-allowed") {
-      wanted = false;
-      setStatus("Mikrofon izni yok. Chrome'da adres çubuğundaki kilit simgesinden mikrofona izin ver.", true);
-    }
+    if (e.error === "no-speech" || e.error === "aborted") return;
+    const msg = {
+      "not-allowed": "Chrome mikrofonu engelledi. Dosyadan açtıysan bu normal: sayfayı https linkinden açman gerekiyor.",
+      "service-not-allowed": "Telefonun ses tanıma servisi kapalı. Ayarlar > Google > Ses (veya Konuşma Hizmetleri) bölümünü kontrol et.",
+      "audio-capture": "Mikrofona ulaşılamadı. Başka bir uygulama (Discord vb.) mikrofonu kullanıyor olabilir.",
+      "network": "Ses tanıma için internet gerekiyor, bağlantıyı kontrol et.",
+      "language-not-supported": "Telefonda İngilizce ses tanıma yok. Google uygulamasından İngilizce dil paketini indir.",
+    }[e.error] || ("Hata: " + e.error);
+    setStatus(msg, true);
+    if (e.error !== "network") wanted = false;
   };
   rec.onend = () => {
     partialEl.textContent = "";
@@ -200,6 +208,7 @@ document.addEventListener("visibilitychange", async () => {
   }
 });
 if (!SR) setStatus("Bu tarayıcı ses tanımayı desteklemiyor. Android'de Chrome ile aç.", true);
+else if (!window.isSecureContext) setStatus("Sayfa dosyadan açıldı. Chrome bu durumda mikrofonu çoğu zaman engeller; https linkinden aç.", true);
 </script>
 </body>
 </html>
