@@ -1,0 +1,13 @@
+numpy
+scipy
+torch
+faster-whisper>=1.1
+silero-vad>=5.1
+speechbrain>=1.0
+transformers
+sentencepiece
+sacremoses
+edge-tts>=7.0
+miniaudio
+sounddevice
+PyAudioWPatch; sys_platform == "win32"

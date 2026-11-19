@@ -1,0 +1,5 @@
+.venv/
+modeller/
+__pycache__/
+.pytest_cache/
+*.wav

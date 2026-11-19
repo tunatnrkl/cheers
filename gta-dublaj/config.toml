@@ -1,0 +1,82 @@
+# GTA Dublaj ayarları. Değiştirdikten sonra programı yeniden başlatın.
+# Cihaz adlarını görmek için:  python -m dublaj --cihazlar
+
+[ses_girisi]
+# "loopback": bir çıkış cihazına giden sesi dinler (PC oyunu, oyun sesini ayrı cihaza yönlendirerek)
+# "giris":    bir giriş cihazını dinler (konsol + capture card, Line-In, VB-Cable Output)
+mod = "loopback"
+# Cihaz adının bir parçası. Boş bırakılırsa varsayılan cihaz kullanılır.
+# Örnek: "CABLE Input" (loopback modunda), "Elgato" veya "CABLE Output" (giris modunda)
+cihaz = ""
+
+[ses_cikisi]
+# Türkçe dublajın çalınacağı cihaz (kulaklığınız). Boş = varsayılan çıkış.
+# Dinlenen cihazdan FARKLI olmalı, yoksa dublaj tekrar dinlenir (Türkçe olduğu için yine de atlanır).
+cihaz = ""
+ses_seviyesi = 1.0
+# Kuyrukta bu kadardan fazla replik birikirse en eskiler atlanır (gecikme birikmesin diye)
+max_bekleyen = 3
+
+[konusma_algilama]
+esik = 0.5            # Silero VAD konuşma olasılığı eşiği
+min_sessizlik_ms = 450 # Bu kadar sessizlik olunca cümle bitti sayılır
+min_konusma_ms = 400   # Bundan kısa sesler yok sayılır
+max_konusma_s = 12     # Daha uzun konuşmalar parçalanır
+on_dolgu_ms = 200      # Kelimenin başı kesilmesin diye öne eklenen ses
+
+[tanima]
+# tiny / base / small / medium / large-v3 / large-v3-turbo / distil-large-v3
+# NVIDIA ekran kartı varsa "large-v3-turbo" önerilir. Sadece işlemciyle "small".
+model = "small"
+cihaz = "auto"          # auto / cuda / cpu
+hesap_tipi = "default"  # default / float16 / int8 / int8_float16
+beam_size = 3
+
+[dil_filtresi]
+# Sadece İngilizce olduğundan emin olunan konuşmalar çevrilir.
+# Arkadaşınızla Türkçe konuşmalarınız bu filtreye takılır ve dublajlanmaz.
+min_ingilizce_olasiligi = 0.6
+max_turkce_olasiligi = 0.15
+# Metinde Türkçe'ye özgü harf (ç ğ ı ş ö ü İ) varsa atla
+turkce_harf_kontrolu = true
+
+[konusmaci]
+# Konuşmacı ayırt etme (farklı karakterlere farklı ses)
+benzerlik_esigi = 0.45   # Yükseltirseniz daha çok "yeni konuşmacı" açılır
+max_konusmaci = 12
+# Bundan kısa konuşmalarda ses izi güvenilmez; en yakın/son konuşmacıya verilir
+min_sure_s = 1.0
+# Ortalama ses perdesi bu değerin altındaysa erkek sesi verilir (Hz)
+erkek_perde_siniri = 165
+
+[ceviri]
+# Çevrimdışı İngilizce→Türkçe çeviri modeli (HuggingFace)
+model = "Helsinki-NLP/opus-mt-tc-big-en-tr"
+cihaz = "auto"
+
+[dublaj]
+# Microsoft Edge sesleri (internet gerekir, ücretsiz).
+# Türkçe'ye özel sadece 2 ses var (Ahmet, Emel). "Multilingual" sesler de Türkçe okuyabilir
+# (hafif yabancı aksanlı), bu yüzden karakter çeşitliliği için havuza eklendi.
+# Her satır: [ses, perde, hız]. Havuz bitince sesler perde değiştirilerek tekrar kullanılır.
+erkek_sesleri = [
+  ["tr-TR-AhmetNeural", "+0Hz", "+0%"],
+  ["tr-TR-AhmetNeural", "-12Hz", "-6%"],
+  ["en-US-AndrewMultilingualNeural", "+0Hz", "+0%"],
+  ["en-US-BrianMultilingualNeural", "+0Hz", "+0%"],
+  ["tr-TR-AhmetNeural", "+10Hz", "+8%"],
+  ["de-DE-FlorianMultilingualNeural", "+0Hz", "+0%"],
+  ["fr-FR-RemyMultilingualNeural", "+0Hz", "+0%"],
+]
+kadin_sesleri = [
+  ["tr-TR-EmelNeural", "+0Hz", "+0%"],
+  ["tr-TR-EmelNeural", "-10Hz", "-5%"],
+  ["en-US-AvaMultilingualNeural", "+0Hz", "+0%"],
+  ["en-US-EmmaMultilingualNeural", "+0Hz", "+0%"],
+  ["tr-TR-EmelNeural", "+12Hz", "+8%"],
+  ["de-DE-SeraphinaMultilingualNeural", "+0Hz", "+0%"],
+  ["fr-FR-VivienneMultilingualNeural", "+0Hz", "+0%"],
+]
+# Bir ses hata verirse kullanılacak yedekler
+yedek_erkek = "tr-TR-AhmetNeural"
+yedek_kadin = "tr-TR-EmelNeural"
