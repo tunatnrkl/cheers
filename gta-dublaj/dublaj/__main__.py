@@ -181,13 +181,34 @@ def main() -> None:
             t_isle.join()
         else:
             g = ayar["ses_girisi"]
-            yakalayici = Yakalayici(g["mod"], g["cihaz"], ham.put)
+            son_ses = [time.monotonic()]
+
+            def gelen(veri):
+                son_ses[0] = time.monotonic()
+                ham.put(veri)
+
+            yakalayici = Yakalayici(g["mod"], g["cihaz"], gelen)
             yakalayici.baslat()
             print(f"\nDinleniyor → {yakalayici.aciklama}")
-            print("Sadece İngilizce konuşmalar dublajlanır. Çıkmak için Ctrl+C.\n")
+            print("Sürekli açık. Sadece İngilizce konuşmalar Türkçe'ye çevrilir. Çıkmak için Ctrl+C.\n")
             try:
                 while t_isle.is_alive():
-                    time.sleep(0.5)
+                    time.sleep(1)
+                    # Cihaz koparsa / ses akışı durursa kendini yeniden başlatsın
+                    if time.monotonic() - son_ses[0] > 5:
+                        print(f"{SOLUK}[ses gelmiyor, dinleme yeniden başlatılıyor]{SIFIRLA}")
+                        try:
+                            yakalayici.durdur()
+                        except Exception:
+                            pass
+                        try:
+                            yakalayici = Yakalayici(g["mod"], g["cihaz"], gelen)
+                            yakalayici.baslat()
+                        except BaseException as e:
+                            if isinstance(e, KeyboardInterrupt):
+                                raise
+                            print(f"{SOLUK}[cihaz bulunamadı, tekrar denenecek]{SIFIRLA}")
+                        son_ses[0] = time.monotonic()
             finally:
                 yakalayici.durdur()
     except KeyboardInterrupt:

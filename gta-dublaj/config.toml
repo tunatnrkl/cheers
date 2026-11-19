@@ -2,16 +2,15 @@
 # Cihaz adlarını görmek için:  python -m dublaj --cihazlar
 
 [ses_girisi]
-# "loopback": bir çıkış cihazına giden sesi dinler (PC oyunu, oyun sesini ayrı cihaza yönlendirerek)
-# "giris":    bir giriş cihazını dinler (konsol + capture card, Line-In, VB-Cable Output)
-mod = "loopback"
-# Cihaz adının bir parçası. Boş bırakılırsa varsayılan cihaz kullanılır.
-# Örnek: "CABLE Input" (loopback modunda), "Elgato" veya "CABLE Output" (giris modunda)
+# "mikrofon": varsayılan mikrofondan ortamı direkt dinler (varsayılan, ayar gerekmez)
+# "loopback": bilgisayardan çıkan sesi dinler (sadece Windows, oyun PC'deyse)
+mod = "mikrofon"
+# Cihaz adının bir parçası. Boş = Windows'un varsayılan cihazı.
 cihaz = ""
 
 [ses_cikisi]
 # Türkçe dublajın çalınacağı cihaz (kulaklığınız). Boş = varsayılan çıkış.
-# Dinlenen cihazdan FARKLI olmalı, yoksa dublaj tekrar dinlenir (Türkçe olduğu için yine de atlanır).
+# Dublaj mikrofona geri gelse bile Türkçe olduğu için atlanır; yine de kulaklık daha temiz sonuç verir.
 cihaz = ""
 ses_seviyesi = 1.0
 # Kuyrukta bu kadardan fazla replik birikirse en eskiler atlanır (gecikme birikmesin diye)

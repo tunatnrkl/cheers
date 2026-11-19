@@ -40,7 +40,7 @@ def cihazlari_yazdir() -> None:
     for i, d in enumerate(sd.query_devices()):
         if d["max_output_channels"] > 0:
             print(f"  [{i}] {d['name']}")
-    print("\n=== Giriş cihazları ([ses_girisi] mod = \"giris\") ===")
+    print("\n=== Mikrofonlar / giriş cihazları ([ses_girisi] mod = \"mikrofon\") ===")
     for i, d in enumerate(sd.query_devices()):
         if d["max_input_channels"] > 0:
             print(f"  [{i}] {d['name']}")
@@ -73,14 +73,13 @@ class Yakalayici:
         if self.mod == "loopback":
             if not WINDOWS:
                 raise SystemExit(
-                    "Loopback modu sadece Windows'ta çalışır. Linux'ta PulseAudio 'Monitor of ...' "
-                    "kaynağını mod = \"giris\" ile seçin."
+                    "Loopback modu sadece Windows'ta çalışır. config.toml'da mod = \"mikrofon\" kullanın."
                 )
             self._loopback_baslat()
-        elif self.mod == "giris":
+        elif self.mod in ("mikrofon", "giris"):
             self._giris_baslat()
         else:
-            raise SystemExit(f"Bilinmeyen ses_girisi.mod: {self.mod!r} (loopback veya giris olmalı)")
+            raise SystemExit(f"Bilinmeyen ses_girisi.mod: {self.mod!r} (mikrofon veya loopback olmalı)")
 
     def _loopback_baslat(self) -> None:
         import pyaudiowpatch as pyaudio

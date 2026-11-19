@@ -16,10 +16,14 @@ Oyun sesi ──► Konuşma algılama ──► Whisper (dil tespiti + yazıya 
                             Edge TTS (Türkçe ses) ─► kulaklığınız
 ```
 
-## Türkçe sohbetiniz neden dublajlanmaz? (iki katmanlı koruma)
+## Nasıl çalışır?
 
-1. **Sadece oyun sesi dinlenir.** Mikrofonunuz hiç dinlenmez. Oyun sesi ile Discord/sohbet sesi farklı cihazlara yönlendirilir (aşağıdaki kurulum). Böylece arkadaşınızın sesi programa hiç ulaşmaz.
-2. **Dil filtresi.** Sohbet sesi bir şekilde karışsa bile her cümlenin dili Whisper ile tespit edilir. Sadece İngilizce olduğundan emin olunan cümleler çevrilir. Türkçe olasılığı %15'i geçen her şey atlanır. Programın kendi Türkçe dublajı tekrar duyulursa o da aynı filtreyle atlanır.
+Ayar ya da kablo gerekmez. Program **varsayılan mikrofondan ortamı sürekli dinler**. Konsol veya TV hoparlöründen gelen oyun sesini duyar.
+
+- Duyduğu her cümlenin dilini tespit eder. **Sadece İngilizce cümleleri** Türkçe'ye çevirip seslendirir.
+- Arkadaşınızla Türkçe konuşmalarınız **atlanır** (Türkçe olma ihtimali %15'i geçen her şey).
+- Programın kendi Türkçe dublajı mikrofona geri gelse de Türkçe olduğu için atlanır.
+- Hep açık kalır. Mikrofon koparsa ya da ses kesilirse dinlemeyi kendisi yeniden başlatır.
 
 ## Farklı karakterler nasıl farklı seslendirilir?
 
@@ -39,45 +43,15 @@ Oyun sesi ──► Konuşma algılama ──► Whisper (dil tespiti + yazıya 
      Ardından `config.toml` içinde `model = "large-v3-turbo"` yapın.
 3. İlk çalıştırmada modeller indirilir (yaklaşık 1-3 GB). Bu yüzden internet gerekir. Dublaj sesleri (Edge TTS) de internet ister.
 
-## Ses yönlendirme
+## İsteğe bağlı: mikrofon yerine bilgisayar sesini dinlemek
 
-Hedef: **oyun sesi** program tarafından dinlenen bir cihaza gitsin, **Discord ve dublaj** ise kulaklığınıza gitsin.
-
-### A) Oyunu PC'de oynuyorsanız
-
-1. **VB-Audio Virtual Cable** kurun (ücretsiz): https://vb-audio.com/Cable/
-2. Windows → *Ayarlar → Sistem → Ses → Uygulama ses düzeyi ve cihaz tercihleri*
-   - Oyunun **Çıkış** cihazı: `CABLE Input`
-   - Discord: kulaklığınız (Discord'un kendi ayarlarında da kulaklığı seçin)
-3. Orijinal oyun sesini de duymak isterseniz: *Ses denetim masası → Kayıt → CABLE Output → Özellikler → Dinle → "Bu cihazı dinle"* seçeneğini işaretleyin, çalma cihazı olarak kulaklığınızı seçin. Orijinal İngilizce sesi kısık duymak için CABLE Output'un seviyesini düşürün.
-4. `config.toml` dosyasında:
-   ```toml
-   [ses_girisi]
-   mod = "loopback"
-   cihaz = "CABLE Input"
-   [ses_cikisi]
-   cihaz = "Kulaklığınızın adı"   # python -m dublaj --cihazlar ile görün
-   ```
-
-### B) Oyunu PS5 veya Xbox'ta oynuyorsanız
-
-Oyun sesini bilgisayara almanız gerekir:
-
-- **Capture card** (Elgato, AVerMedia vb.) veya **HDMI ses ayırıcı + PC Line-In** kullanabilirsiniz.
-- `config.toml` dosyasında:
-  ```toml
-  [ses_girisi]
-  mod = "giris"
-  cihaz = "Elgato"     # capture card'ın ses girişinin adından bir parça
-  ```
-- Konsol parti sohbeti HDMI sesine karışıyorsa sorun olmaz: Türkçe konuşmalar dil filtresine takılır. En temiz yöntem sohbet için PC'de Discord kullanmaktır. O zaman sohbet sesi capture card'dan hiç geçmez.
+Oyun PC'deyse ve mikrofon yerine doğrudan bilgisayarın sesini dinlemek isterseniz `config.toml` içinde `mod = "loopback"` yapın.
 
 ## Çalıştırma
 
-```
-baslat.bat
-```
-veya
+`baslat.bat` dosyasına çift tıklayın. O kadar.
+
+Gelişmiş kullanım:
 ```
 .venv\Scripts\python -m dublaj              # canlı dublaj
 .venv\Scripts\python -m dublaj --cihazlar   # ses cihazlarını listele
