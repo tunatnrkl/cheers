@@ -4,12 +4,12 @@
 
 Zamanlanmış "CEO Agent" çalışmalarının ortak hafızası. Her çalışma önce bu dosyayı okur, sonunda günceller. Ürünün teknik dokümantasyonu `README.md`'de. Çalışma çıktıları `docs/ekip/<tarih>/`, analiz betikleri `docs/ekip/arac/`, spot denetimleri `docs/denetim/` altında.
 
-Son güncelleme: **2026-11-22, 9. çalışma**
+Son güncelleme: **2026-11-22, 10. çalışma**
 
 ## Kullanıcıdan beklenenler (önemli)
 
 1. **Görev metnindeki `[HAFIZA_DOSYASI_ADI]` doldurulmalı** (9. çalışmada hâlâ yer tutucuydu). Öneri: `HAFIZA.md` (depo kökü).
-2. **Yeniden tasarım 2026-11-13'ten beri durmuş görünüyor** (son commit `8bb0faf`, PR #9). Müfredatta 187 dersin 96'sı dolu. Uygulayıcı ajan (Claude Code) yeniden başlatılmazsa zamanlanmış çalışmalar geçici kural yüzünden yalnızca `docs/` taslağı üretebilir.
+2. **`claude/wizardly-meitner-ch8abk` dalı varsayılan dala alınmadı (10 commit, son 2026-11-14).** İçinde c9–c10 (kapı J geçti), t5–t6 (kapı K **yapılmadı**), UI bileşen kütüphanesi ve K-C1/K-G1/K-G2/K-G3/K-E1 düzeltmeleri var. Testler bu dalda yeşil (808/808, 10. çalışma). Birleştirmeden önce kapı K ve T6-1, T6-2, T5-3, T5-4 düzeltmeleri gerekir. (9. çalışmanın "yeniden tasarım durdu, t5 boş" tespiti yanlıştı.)
 3. Yayın ortamı ve gerçek `ANTHROPIC_API_KEY` ile asistan testi.
 4. Kullanıcı verisi (VPIP/PFR/3-Bet ya da alıştırma geçmişi dökümü). Gelmezse Data Analyst çalışmaz.
 
@@ -21,10 +21,19 @@ Kapanan: P-1 (dallar PR #5–#9 ile varsayılan dala alındı), P-3 ("Cheers" ma
 - Bitenler: el motoru (A), rakip eli gizliliği ve 70 pot odds spotu (B), alıştırma ekranı ve koç (C), Öğren bölümü (E), "Şerefe!" kutlaması ve ana sayfa (G); müfredat o1–o4, c5–c8, t1–t4.
 - **Müfredat:** 23 ünite, 187 ders; **96 ders dolu** (1075 alıştırma). Boş: c9–c13 (Flop, Value/blöf, Turn, River, İleri), t5–t10 (Push/fold, All-in'e call, ICM, Balon/final masası, Özel formatlar, Heads-up). İçerik `scripts/mufredat/icerik/<ünite>.json`, rapor `docs/mufredat/unite-<ünite>.md`, denetim `scripts/mufredat/denetle.mts`.
 - 577 spot, 167 sözlük terimi, 8 blog yazısı.
-- Sağlık (9. çalışma): `npm test` **800/800**, `npm run typecheck` temiz. Statik derleme bu çalışmada çalıştırılmadı.
+- **`ch8abk` dalında ek olarak:** c9, c10, t5, t6 dolu → 130 ders, 1450 alıştırma (806'sı betikle denetleniyor); sözlük 171+. Sağlık (10. çalışma, o dalda): `npm test` **808/808**, typecheck temiz, `denetle.mts` temiz.
+- Sağlık (9. çalışma, varsayılan dal): `npm test` **800/800**, `npm run typecheck` temiz. Statik derleme bu çalışmada çalıştırılmadı.
 - Görünen metinde ondalık ayırıcı virgül; yüzde ekleri `src/lib/trSuffix.ts`.
 
 ## Tamamlananlar
+
+### 10. çalışma — rapor: [`docs/ekip/2026-11-22/05-calisma-10-kapanis.md`](docs/ekip/2026-11-22/05-calisma-10-kapanis.md)
+
+| Çıktı | Rol | Durum |
+|---|---|---|
+| Dal durumu düzeltmesi: `ch8abk`'de birleştirilmemiş c9–c10, t5–t6 ve UI düzeltmeleri; test 808/808 | CEO, QA | ✅ |
+| t5 içeriği bağımsız denetimi (`03-t5-icerik-denetimi.md`): aritmetik hatasız; T5-3, T5-4 (orta), T5-5, T5-6 | Poker Uzmanı, QA | ✅ denetim; düzeltme devredildi |
+| t6 içeriği bağımsız denetimi (`04-t6-icerik-denetimi.md`): 68 soru hatasız; T6-1 (yüksek), T6-2 (orta), 5 düşük | Poker Uzmanı, QA | ✅ denetim; düzeltme devredildi |
 
 ### 9. çalışma — rapor: [`docs/ekip/2026-11-22/02-calisma-9-kapanis.md`](docs/ekip/2026-11-22/02-calisma-9-kapanis.md)
 
@@ -105,7 +114,8 @@ Kapılar ve kararlar: [`docs/ekip/KARARLAR.md`](docs/ekip/KARARLAR.md). Ünite r
 
 ## Devam eden / açık işler
 
-0. **9. çalışmanın açık bulguları** (rapor 02'deki tablo): T5-1, K-C1, K-G1, K-G2, K-G3, K-B1, T5-2, K-A1, S-1, K-E1. Hepsi kod işi, Claude Code'a devredildi.
+0. **10. çalışma (kapı K öncesi, Claude Code'a):** T6-1, T6-2, T5-3, T5-4 düzeltilmeden `ch8abk` birleştirilmemeli; düşükler T5-5, T5-6, T6-3…T6-8. Raporlar `docs/ekip/2026-11-22/03`, `04`.
+0b. **9. çalışmanın açık bulguları** (K-C1, K-G1, K-G2, K-G3, K-E1 `ch8abk`'de düzeltilmiş, birleşince kapanır) (rapor 02'deki tablo): T5-1, K-C1, K-G1, K-G2, K-G3, K-B1, T5-2, K-A1, S-1, K-E1. Hepsi kod işi, Claude Code'a devredildi.
 1. **G-2** (yeniden tasarımdan sonra hâlâ geçerli mi kontrol edilmedi): konu tablosu, çalışma önerisi ve CSV/JSON dışa aktarma hâlâ son 5000 cevapla sınırlı ve bunu söylemiyor. Dışa aktarma için sayfalı uç nokta önerildi (KVKK veri taşınabilirliği).
 2. **c39 (value raise):** tek bekleyen spot taslağı; B-1'e bağlı. `value` konusu hâlâ 3 spot.
 3. **`acceptable?: number[]` alanı** (B-1): c09, c23, c24, c35 (sınırda) ve c39. Ürün kararı da gerekiyor.
@@ -162,10 +172,17 @@ Kapılar ve kararlar: [`docs/ekip/KARARLAR.md`](docs/ekip/KARARLAR.md). Ünite r
 | G-2 | Konu tablosu ve CSV/JSON dışa aktarma son 5000 cevapla sınırlı, söylemiyor | Düşük | Açık |
 | G-3 | `POST /api/attempts` istemcinin `at` zamanını kabul ediyor (yalnızca kendi istatistiğini etkiler) | Bilgi | Bilinçli; sıralama özelliği eklenmeyeceği için risk yok |
 | P-3 | "Cheers" yeniden markalaması | Bilgi | Kapandı: uygulandı |
-| T5-1 | `t5-d4` kazanımı "aralık iyice genişler" ante'li modelde desteklenmiyor | Orta | Açık, içerik yazılmadan düzeltilmeli |
+| T5-1 | `t5-d4` kazanımı "aralık iyice genişler" ante'li modelde desteklenmiyor | Orta | Büyük ölçüde karşılandı (`ch8abk` t5-d4 3. paragraf); kalan metin notu T5-5 |
+| T5-3 | `t5-d6` a4 (ve d3 3. paragraf): 10 BB SB 54s "fold"; modelde ante 1 ile +0,87, ante'siz +0,25 BB | Orta | Açık (10), `ch8abk` |
+| T5-4 | `t5-d6` a7: 15 BB SB 52o "fold", senaryo ante 1 BB; modelde +0,38 (ante'siz −0,19) | Orta | Açık (10) |
+| T5-5 | `t5-d4` "daha çok el kârlı", "10 BB'de itilen her el 6 BB'de de itilir" genellemesi | Düşük | Açık (10) |
+| T5-6 | Çok oyunculu "fold" cevapları ante'siz aralığa dayanıyor | Düşük | Doğrulanamadı (10) |
+| T6-1 | `t6-d5` a11: BTN karar verirken "SB fold etti" (konuşma sırası imkânsız) | Yüksek | Açık (10) |
+| T6-2 | `t6-d3` 3. paragraf: "JTs çiftlerden düşük equity" kendi sayılarıyla çelişiyor | Orta | Açık (10) |
+| T6-3…T6-8 | 88 "eşiğe yaklaşır", güvenlik payı kural gibi, "Nash tabloları ICM katmaz" genellemesi, 3-bet/stack oranı, tanımsız "bu spot", kapsama varsayımı yazılmamış | Düşük/Bilgi | Açık (10) |
 | T5-2 | `ranges.json` push aralıkları ante'siz; turnuva pisti BB ante 1 BB | Düşük | Açık, devredildi |
 | S-1 | Sözlükte "Risk primi" kimliği `stall` (`glossary.ts:208`) | Düşük | Açık, devredildi |
-| K-C1, K-G1, K-G2 | Koç penceresi 360x640'ta kartları ve 18+ satırını örtüyor; statik `/gizlilik` yapay zeka anlatıyor; pasif butonda odak BODY'ye düşüyor | Orta | Açık (kapı C ve G notları), devredildi |
+| K-C1, K-G1, K-G2 | Koç penceresi 360x640'ta kartları ve 18+ satırını örtüyor; statik `/gizlilik` yapay zeka anlatıyor; pasif butonda odak BODY'ye düşüyor | Orta | `ch8abk`'de düzeltilmiş (`0e5a515`); birleşince kapanır |
 
 ## Doğrulanamayan konular
 
@@ -182,6 +199,7 @@ Kapılar ve kararlar: [`docs/ekip/KARARLAR.md`](docs/ekip/KARARLAR.md). Ünite r
 
 ## Atlanan roller
 
+- **10. çalışma:** Data Analyst (veri yok), Davranış Bilimleri (yeni mekanik yok), Poker Eğitim ve Content (yeni içerik yerine yazılmış içeriğin denetimi), UI/UX, Frontend, Backend (geçici kural).
 - **9. çalışma:** Data Analyst (veri yok), Davranış Bilimleri (yeni mekanik yok), Content (ünite paketi öncelikli), UI/UX, Frontend, Backend (yeni ekran yok; geçici kural).
 - **Data Analyst** (1–8): kullanıcı verisi yok. Uydurma veriyle analiz yapılmaz.
 - **Davranış Bilimleri** (2–6): yeni mekanik önerilmedi. 7'de gelişim kartı için çalıştı.
@@ -191,10 +209,11 @@ Kapılar ve kararlar: [`docs/ekip/KARARLAR.md`](docs/ekip/KARARLAR.md). Ünite r
 
 ## Sonraki öncelikler
 
-1. **t5 içeriği (Claude Code, uygulayıcı ajan):** `docs/ekip/2026-11-22/01-t5-pushfold-dogruluk-paketi.md`'ye göre; önce T5-1 kararı Onay Ajanı'na.
-2. **K-C1, K-G1, K-G2 (Claude Code):** 18+ görünürlüğü, statik gizlilik metni, odak.
-3. **CEO çalışması:** c9 (Flop: board ve c-bet) doğruluk paketi; range/nut avantajı iddialarında önce projenin değerlendiricisiyle neyin sayıyla gösterilebileceği listelenir.
-4. Geçici kural kalktığında: G-2, T5-2 (ante'li push aralıkları), S-1, B-1 (`acceptable`) ve c39.
+0. **Her çalışmanın ilk adımı:** `git fetch` + her uzak dalın son commit tarihi (`for b in $(git branch -r); do git log -1 --format='%ci %h' $b; done | sort`). Varsayılan dalda olmayan içerik dalı var mı bak; 9. çalışma `ch8abk`'yi gözden kaçırdı.
+1. **Claude Code / Onay Ajanı:** `ch8abk` için kapı K: önce T6-1, T6-2, T5-3, T5-4 düzeltmeleri (raporlar 03, 04); sonra dal varsayılana alınsın.
+2. **Claude Code:** T5-2 (ante'li push aralıkları), S-1 (`stall` kimliği), ardından c11 (Turn) ve kalan üniteler.
+3. **CEO çalışması:** c9–c10 örneklem denetimi (`ch8abk` üzerinde) ya da c11 için içerik öncesi doğruluk paketi.
+4. Geçici kural kalktığında: G-2, B-1 (`acceptable`) ve c39.
 
 **Yerel PostgreSQL ile deneme (8'de çalıştı):** `initdb` ile `/var/lib/postgresql/<dizin>` (scratchpad'e postgres kullanıcısı erişemiyor), `pg_ctl -o '-k /tmp -p 5432' start`, `createdb pokerdefteri`, `.env.local`'a `DATABASE_URL`, `npm run db:migrate`, `npm run build && npm start`. İş bitince `.env.local` silinmeli.
 

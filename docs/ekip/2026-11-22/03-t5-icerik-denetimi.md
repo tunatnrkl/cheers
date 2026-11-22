@@ -1,7 +1,7 @@
 # t5 (Push/fold) içeriğinin bağımsız denetimi (kapı K öncesi)
 
 **10. CEO çalışması, 2026-11-22.** Roller: Poker Uzmanı, QA.
-**Denetlenen:** `origin/claude/wizardly-meitner-ch8abk` dalındaki `scripts/mufredat/icerik/t5.json` (9 ders, 97 alıştırma). Bu dal varsayılan dala alınmamış (bkz. [04 kapanış](04-calisma-10-kapanis.md)). Kapı K'nin (t5–t6) Onay Ajanı kararı `KARARLAR.md`'de yok.
+**Denetlenen:** `origin/claude/wizardly-meitner-ch8abk` dalındaki `scripts/mufredat/icerik/t5.json` (9 ders, 97 alıştırma). Bu dal varsayılan dala alınmamış (bkz. [05 kapanış](05-calisma-10-kapanis.md)). Kapı K'nin (t5–t6) Onay Ajanı kararı `KARARLAR.md`'de yok.
 **Referans:** 9. çalışmanın paketi [`01-t5-pushfold-dogruluk-paketi.md`](01-t5-pushfold-dogruluk-paketi.md) ve betiği. Bu denetimde betik SB'nin 8 BB'si ve dört el (52o, K6o, 54s, Q7o) için yeniden çalıştırıldı.
 
 > Eğitim amaçlıdır. "EV" turnuva chip'idir, para değildir; hiçbir sonuç gerçek para oyununda kazanç garantisi değildir.
